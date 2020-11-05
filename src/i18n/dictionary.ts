@@ -1,0 +1,91 @@
+export const dictionary = {
+	title: {
+		fr: 'Outils de gestion des annuaires',
+		en: 'Directory Management',
+	},
+	home_desc: {
+		fr:
+			"Rechercher permet de faire une recherche sur les contacts d'un domaine, et si vous en avez le droit de le modifier, modifier son mot de passe et supprimer les contacts retenus. Créer permet de créer un nouveau contact sur un domaine de gestion sur lequel vous êtes gestionnaire",
+		en: 'traduce',
+	},
+	home_access_right: {
+		fr: 'Vous etes connecté en tant que :',
+		en: ' Connected as :',
+	},
+	formular_card_title: {
+		fr: 'Votre recherche:',
+		en: 'Your search:',
+	},
+	formular_button_validate: {
+		fr: 'Valider',
+		en: 'Validate',
+	},
+	formular_button_reset: {
+		fr: 'Réinitialiser:',
+		en: 'Reset',
+	},
+	formular_button_expand: {
+		fr: 'Voir plus',
+		en: 'See more',
+	},
+	formular_button_reduce: {
+		fr: 'Voir moins',
+		en: 'See less',
+	},
+	formular_domaine_field: { fr: 'Domaine', en: 'Domain' },
+	formular_domaine_field_desc: {
+		fr: 'Choisissez un domaine',
+		en: 'Choose a domain',
+	},
+	formular_type_search_field: { fr: 'Rechercher dans', en: 'Search in' },
+	formular_type_search_field_desc: {
+		fr: 'Choisissez un domaine',
+		en: 'Choose a domain',
+	},
+
+	search_button: {
+		fr: 'Rechercher',
+		en: 'Search',
+	},
+	create_button: {
+		fr: 'Créer',
+		en: 'Create',
+	},
+	sider_home: {
+		fr: 'Accueil',
+		en: 'Home',
+	},
+	sider_create: {
+		fr: 'Créer',
+		en: 'Create',
+	},
+	sider_search: {
+		fr: 'Rechercher',
+		en: 'Search',
+	},
+	sider_search_user: { fr: 'Rechercher un contact', en: 'Search an user' },
+	sider_search_organization: {
+		fr: 'Recherche une organization',
+		en: 'Search an organization',
+	},
+	sider_create_user: { fr: 'Créer un contact', en: 'Create an user' },
+	sider_create_organization: {
+		fr: 'Créer une organization',
+		en: 'Create an organization',
+	},
+	sider_admin: { fr: 'Paramètres', en: 'Settings' },
+	search_alert_limit: {
+		fr: 'Recherche limitée au 1000 premiers resultats',
+		en: 'Search limited to the 100 first results',
+	},
+	login: { fr: 'Se connecter', en: 'Login' },
+	logout: { fr: 'Se déconnecter', en: 'Logout' },
+	settings_title: {
+		fr: 'Configuration des realms',
+		en: 'Realms configuration',
+	},
+	create_title: {
+		fr: 'Créer',
+		en: 'Create',
+	},
+};
