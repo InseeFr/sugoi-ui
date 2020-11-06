@@ -1,6 +1,5 @@
 import { Box, Divider, Link, Typography } from '@material-ui/core';
 import React from 'react';
-import './footer.scss';
 
 const Footer = () => (
 	<Box pt={4}>
