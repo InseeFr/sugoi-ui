@@ -1,11 +1,12 @@
 import { FormControlLabel, Switch } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useLocalStorage } from '../../configuration/utils';
-
+import { changeTheme } from '../../redux/actions/app';
 export const ThemeButton = () => {
-	const [check, setCheck] = useState(false);
-
+	const dispatch = useDispatch();
 	const [darkMode, setDarkMode] = useLocalStorage('darkMode', false);
+	const [check, setCheck] = useState(darkMode);
 
 	return (
 		<FormControlLabel
@@ -17,17 +18,19 @@ export const ThemeButton = () => {
 						if (check) {
 							setCheck(false);
 							setDarkMode(false);
+							dispatch(changeTheme('light'));
 						}
 						if (!check) {
 							setDarkMode(true);
 							setCheck(true);
+							dispatch(changeTheme('dark'));
 						}
 					}}
 					name="checkedB"
 					color="primary"
 				/>
 			}
-			label="Theme sombre"
+			label="Thème sombre"
 		/>
 	);
 };

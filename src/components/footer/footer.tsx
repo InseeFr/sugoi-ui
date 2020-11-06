@@ -8,7 +8,6 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import './footer.scss';
-import { ThemeButton } from './theme-button';
 
 const Footer = () => (
 	<Box pt={4}>
@@ -26,7 +25,6 @@ const Footer = () => (
 				{new Date().getFullYear()}
 			</Typography>
 		</Box>
-		<ThemeButton />
 	</Box>
 );
 

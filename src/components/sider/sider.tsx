@@ -23,6 +23,7 @@ import CreateIcon from '@material-ui/icons/Create';
 import D from './../../i18n';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { useKeycloak } from '@react-keycloak/web';
+import { ThemeButton } from './theme-button';
 
 const drawerWidth = 240;
 
@@ -163,6 +164,15 @@ const MySider = () => {
 					<ListItemText primary={D.sider_admin} />
 				</ListItem>
 			</List>
+			<Divider />
+			<Box
+				alignItems="center"
+				display="flex"
+				flexDirection="column"
+				p={2}
+			>
+				<ThemeButton />
+			</Box>
 		</Drawer>
 	);
 };

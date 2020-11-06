@@ -15,6 +15,9 @@ import Root from './root';
 import Sider from './sider/sider';
 import { DarkTheme, LightTheme } from './../material-ui-theme';
 import { useLocalStorage } from '../configuration/utils';
+import { useDispatch, useSelector, useStore } from 'react-redux';
+import { RootState } from './../configuration/store-configuration';
+import { changeTheme } from '../redux/actions/app';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -47,14 +50,17 @@ const App = () => {
 	const {
 		keycloak: { authenticated },
 	} = useKeycloak();
-	const darkMode = useLocalStorage('darkMode', false)[0];
-
-	useEffect(() => {
-		console.log(darkMode);
-	}, [darkMode]);
+	const dispatch = useDispatch();
+	const appStore = useSelector((store: RootState) => store.app);
 
 	return (
-		<MuiThemeProvider theme={DarkTheme}>
+		<MuiThemeProvider
+			theme={
+				appStore.config.theme === 'dark'
+					? DarkTheme
+					: LightTheme
+			}
+		>
 			<div className={classes.root}>
 				<CssBaseline />
 				<Header />

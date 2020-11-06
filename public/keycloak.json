@@ -1,8 +1,8 @@
 {
 	"realm": "dev",
-	"auth-server-url": "http://localhost:8080/auth/",
+	"auth-server-url": "https://keycloak.dev.insee.io/auth/",
 	"ssl-required": "none",
-	"resource": "sugoi-js",
+	"resource": "onboarding",
 	"public-client": true,
 	"verify-token-audience": true,
 	"use-resource-role-mappings": true,
