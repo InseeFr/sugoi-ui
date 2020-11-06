@@ -33,8 +33,6 @@ const Search = () => {
 		}
 	}, [values, realm]);
 
-	console.log(users);
-
 	return (
 		<>
 			<Typography variant="h2" component="h2">
