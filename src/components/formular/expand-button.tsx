@@ -15,7 +15,7 @@ const ExpandButton = (props: props) => {
 	return (
 		<Button
 			variant="contained"
-			color="secondary"
+			color="default"
 			endIcon={expand ? <ExpandLessIcon /> : <ExpandMoreIcon />}
 			onClick={() => setExpand(!expand)}
 		>

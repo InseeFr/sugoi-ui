@@ -157,7 +157,13 @@ const MySider = () => {
 			</List>
 			<Divider />
 			<List>
-				<ListItem button key={D.sider_search}>
+				<ListItem
+					button
+					key={D.sider_search}
+					onClick={() => {
+						push('/settings');
+					}}
+				>
 					<ListItemIcon>
 						<SettingsIcon />
 					</ListItemIcon>

@@ -1,11 +1,4 @@
-import {
-	Box,
-	Divider,
-	FormControlLabel,
-	Link,
-	Switch,
-	Typography,
-} from '@material-ui/core';
+import { Box, Divider, Link, Typography } from '@material-ui/core';
 import React from 'react';
 import './footer.scss';
 

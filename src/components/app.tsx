@@ -8,16 +8,14 @@ import {
 	Theme,
 } from '@material-ui/core/styles';
 import { useKeycloak } from '@react-keycloak/web';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from './../configuration/store-configuration';
+import { DarkTheme, LightTheme } from './../material-ui-theme';
 import Footer from './footer/footer';
 import Header from './header/header';
 import Root from './root';
 import Sider from './sider/sider';
-import { DarkTheme, LightTheme } from './../material-ui-theme';
-import { useLocalStorage } from '../configuration/utils';
-import { useDispatch, useSelector, useStore } from 'react-redux';
-import { RootState } from './../configuration/store-configuration';
-import { changeTheme } from '../redux/actions/app';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -50,7 +48,6 @@ const App = () => {
 	const {
 		keycloak: { authenticated },
 	} = useKeycloak();
-	const dispatch = useDispatch();
 	const appStore = useSelector((store: RootState) => store.app);
 
 	return (

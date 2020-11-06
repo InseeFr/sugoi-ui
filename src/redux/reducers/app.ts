@@ -1,5 +1,3 @@
-import { changeTheme } from '../actions/app';
-
 const initialState = {
 	config: {
 		theme: window.localStorage.getItem('darkMode') ? 'dark' : 'light',

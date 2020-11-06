@@ -24,7 +24,7 @@ const LoginButton = () => {
 	return (
 		<Button
 			variant="contained"
-			color="secondary"
+			color="default"
 			startIcon={<PowerSettingsNewIcon />}
 			onClick={action}
 		>

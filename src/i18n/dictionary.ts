@@ -63,15 +63,11 @@ export const dictionary = {
 		fr: 'Rechercher',
 		en: 'Search',
 	},
-	sider_search_user: { fr: 'Rechercher un contact', en: 'Search an user' },
-	sider_search_organization: {
-		fr: 'Recherche une organization',
-		en: 'Search an organization',
-	},
-	sider_create_user: { fr: 'Créer un contact', en: 'Create an user' },
-	sider_create_organization: {
-		fr: 'Créer une organization',
-		en: 'Create an organization',
+	formular_radio_button_choose: { fr: 'Rechercher un:', en: 'Search a:' },
+	formular_radio_button_user: { fr: 'contact', en: 'user' },
+	formular_radio_button_organization: {
+		fr: 'organisation',
+		en: 'organization',
 	},
 	sider_admin: { fr: 'Paramètres', en: 'Settings' },
 	search_alert_limit: {
