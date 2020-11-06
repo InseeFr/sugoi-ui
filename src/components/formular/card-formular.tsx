@@ -29,14 +29,10 @@ const AdvancedSearchForm = (props: props) => {
 	const { setValues } = props;
 	const [expand, setExpand] = useState(false);
 	const [formValues, setFormValues] = useState(initialFValues);
-	console.log(formValues);
-	const onFinish = (values: any) => {
-		setValues(formValues);
-	};
 
-	const reset = () => {
-		setFormValues(initialFValues);
-	};
+	const onFinish = () => setValues(formValues);
+
+	const reset = () => setFormValues(initialFValues);
 
 	const handleInputChange = (e: any) => {
 		const { name, value } = e.target;

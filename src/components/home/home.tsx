@@ -14,7 +14,6 @@ const Home = () => {
 	const {
 		keycloak: { tokenParsed, authenticated },
 	} = useKeycloak();
-	console.log(process.env);
 
 	return (
 		<Grid container direction="column" justify="center" spacing={5}>

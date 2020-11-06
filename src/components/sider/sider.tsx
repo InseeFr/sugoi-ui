@@ -60,7 +60,6 @@ const MySider = () => {
 		keycloak: { tokenParsed },
 	} = useKeycloak();
 
-	console.log(tokenParsed);
 	const { name, email } = tokenParsed as any;
 	useEffect(() => {
 		getRealms()

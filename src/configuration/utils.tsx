@@ -58,9 +58,7 @@ export const useLocalStorage = (key: string, initialValue: any) => {
 			} else {
 				window.localStorage.removeItem(key);
 			}
-		} catch (error) {
-			console.log(error);
-		}
+		} catch (error) {}
 	};
 
 	return [storedValue, setValue];
