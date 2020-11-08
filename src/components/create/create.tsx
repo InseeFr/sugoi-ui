@@ -7,7 +7,6 @@ interface Props {
 }
 
 const Create = (props: Props) => {
-	console.log(props);
 	return (
 		<Grid container spacing={3}>
 			<Grid item xs={12}>

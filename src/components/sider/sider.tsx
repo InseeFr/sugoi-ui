@@ -23,6 +23,7 @@ import CreateIcon from '@material-ui/icons/Create';
 import D from './../../i18n';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { useKeycloak } from '@react-keycloak/web';
+import { ThemeButton } from './theme-button';
 
 const drawerWidth = 240;
 
@@ -59,7 +60,6 @@ const MySider = () => {
 		keycloak: { tokenParsed },
 	} = useKeycloak();
 
-	console.log(tokenParsed);
 	const { name, email } = tokenParsed as any;
 	useEffect(() => {
 		getRealms()
@@ -156,13 +156,28 @@ const MySider = () => {
 			</List>
 			<Divider />
 			<List>
-				<ListItem button key={D.sider_search}>
+				<ListItem
+					button
+					key={D.sider_search}
+					onClick={() => {
+						push('/settings');
+					}}
+				>
 					<ListItemIcon>
 						<SettingsIcon />
 					</ListItemIcon>
 					<ListItemText primary={D.sider_admin} />
 				</ListItem>
 			</List>
+			<Divider />
+			<Box
+				alignItems="center"
+				display="flex"
+				flexDirection="column"
+				p={2}
+			>
+				<ThemeButton />
+			</Box>
 		</Drawer>
 	);
 };

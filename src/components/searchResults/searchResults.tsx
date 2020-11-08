@@ -1,6 +1,5 @@
+import MaterialTable from 'material-table';
 import React from 'react';
-import { Link } from 'react-router-dom';
-
 interface props {
 	datasource: any;
 }
@@ -8,35 +7,37 @@ interface props {
 const columns = [
 	{
 		title: 'username',
-		dataIndex: 'username',
-		key: 'username',
+		field: 'username',
 	},
 	{
 		title: 'mail',
-		dataIndex: 'mail',
-		key: 'mail',
+		field: 'mail',
 	},
 	{
 		title: 'NomCommun',
-		dataIndex: 'address',
-		key: 'address',
-	},
-	{
-		title: 'Action',
-		key: 'action',
-		render: (__: any, record: any) => (
-			<Link
-				to={{
-					pathname: '/detail/' + record.name,
-				}}
-			>
-				voir plus
-			</Link>
-		),
+		field: 'communName',
 	},
 ];
 
 export const SearchResults = (props: props) => {
 	const { datasource } = props;
-	return <div>Table</div>;
+	return (
+		<MaterialTable
+			columns={columns}
+			data={datasource}
+			title="Résultat"
+			actions={[
+				{
+					icon: 'visibility',
+					tooltip: 'View user',
+					onClick: (event, rowData) => {
+						// Do save operation
+					},
+				},
+			]}
+			options={{
+				actionsColumnIndex: -1,
+			}}
+		/>
+	);
 };

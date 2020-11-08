@@ -11,25 +11,21 @@ import keycloak, {
 	onKeycloackLoad,
 } from './configuration/keycloak-configuration';
 import { BrowserRouter } from 'react-router-dom';
-import { MuiThemeProvider } from '@material-ui/core';
-import Theme from './material-ui-theme';
 
 ReactDOM.render(
-	<MuiThemeProvider theme={Theme}>
-		<ReactKeycloakProvider
-			authClient={keycloak}
-			initOptions={initOptions}
-			autoRefreshToken={true}
-			onEvent={onKeycloakEvent}
-			onTokens={onKeycloakTokens}
-			LoadingComponent={onKeycloackLoad()}
-		>
-			<Provider store={Store}>
-				<BrowserRouter>
-					<App />
-				</BrowserRouter>
-			</Provider>
-		</ReactKeycloakProvider>
-	</MuiThemeProvider>,
+	<ReactKeycloakProvider
+		authClient={keycloak}
+		initOptions={initOptions}
+		autoRefreshToken={true}
+		onEvent={onKeycloakEvent}
+		onTokens={onKeycloakTokens}
+		LoadingComponent={onKeycloackLoad()}
+	>
+		<Provider store={Store}>
+			<BrowserRouter>
+				<App />
+			</BrowserRouter>
+		</Provider>
+	</ReactKeycloakProvider>,
 	document.getElementById('root'),
 );

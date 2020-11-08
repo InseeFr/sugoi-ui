@@ -1,5 +1,7 @@
 const initialState = {
-	config: {},
+	config: {
+		theme: window.localStorage.getItem('darkMode') ? 'dark' : 'light',
+	},
 };
 
 const AppReducer = (state = initialState, action: any) => {
@@ -8,7 +10,12 @@ const AppReducer = (state = initialState, action: any) => {
 		case 'appConfig':
 			nextState = { ...state, ...action };
 			return nextState;
-
+		case 'changeTheme':
+			nextState = {
+				...state,
+				config: { theme: action.payload.nameTheme },
+			};
+			return nextState;
 		default:
 			return state;
 	}

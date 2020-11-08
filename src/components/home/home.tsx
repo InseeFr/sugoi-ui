@@ -16,7 +16,7 @@ const Home = () => {
 	} = useKeycloak();
 
 	return (
-		<Grid container direction="column" justify="center" spacing={3}>
+		<Grid container direction="column" justify="center" spacing={5}>
 			<Grid item>
 				<Card>
 					<CardHeader title="C'est quoi ? " />
