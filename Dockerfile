@@ -1,7 +1,7 @@
 FROM nginx
 COPY build /usr/share/nginx/html
-RUN rm etc/nginx/conf.d/html/keycloak.json
-RUN rm etc/nginx/conf.d/html/configuration.json
+RUN rm /usr/share/nginx/html/keycloak.json
+RUN rm /usr/share/nginx/html/configuration.json
 RUN rm etc/nginx/conf.d/default.conf
 COPY nginx.conf etc/nginx/conf.d/
 
