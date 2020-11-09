@@ -27,6 +27,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14
+      - run: yarn
       - run: yarn lint
   build:
     runs-on: ubuntu-latest
@@ -36,6 +37,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14
+      - run: yarn
       - run: yarn build
       - name: Upload build
         uses: actions/upload-artifact@v2
