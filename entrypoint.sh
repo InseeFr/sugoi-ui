@@ -1,5 +1,5 @@
 #!/bin/sh
-cat <<EOF > etc/nginx/conf.d/html/keycloak.json
+cat <<EOF > /usr/share/nginx/html/keycloak.json
 {
 	"realm": "$KEYCLOAK_REALM",
 	"auth-server-url": "$KEYCLOAK_URL",
@@ -10,7 +10,7 @@ cat <<EOF > etc/nginx/conf.d/html/keycloak.json
 }
 EOF
 
-cat <<EOF > etc/nginx/conf.d/html/configuration.json
+cat <<EOF > /usr/share/nginx/html/configuration.json
 {
 	"api": "${API_URL_CI}"
 }
