@@ -8,14 +8,14 @@ import {
 	Theme,
 } from '@material-ui/core/styles';
 import { useKeycloak } from '@react-keycloak/web';
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from './../configuration/store-configuration';
 import { DarkTheme, LightTheme } from './../material-ui-theme';
 import Footer from './footer/footer';
 import Header from './header/header';
 import Root from './root';
-import Sider from './sider/sider';
+import Sider from './sider';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -49,7 +49,10 @@ const App = () => {
 		keycloak: { authenticated },
 	} = useKeycloak();
 	const appStore = useSelector((store: RootState) => store.app);
-
+	const [drawerOpen, setDrawerOpen] = useState(false);
+	const handleDrawerToggle = () => {
+		setDrawerOpen(!drawerOpen);
+	};
 	return (
 		<MuiThemeProvider
 			theme={
@@ -60,8 +63,13 @@ const App = () => {
 		>
 			<div className={classes.root}>
 				<CssBaseline />
-				<Header />
-				{authenticated ? <Sider /> : null}
+				<Header handleDrawerToggle={handleDrawerToggle} />
+				{authenticated ? (
+					<Sider
+						drawerOpen={drawerOpen}
+						handleDrawerToggle={handleDrawerToggle}
+					/>
+				) : null}
 				<main className={classes.content}>
 					<div className={classes.toolbar} />
 					<Container

@@ -2,6 +2,7 @@ const initialState = {
 	config: {
 		theme: window.localStorage.getItem('darkMode') ? 'dark' : 'light',
 	},
+	realms: [],
 };
 
 const AppReducer = (state = initialState, action: any) => {
@@ -16,6 +17,13 @@ const AppReducer = (state = initialState, action: any) => {
 				config: { theme: action.payload.nameTheme },
 			};
 			return nextState;
+		case 'saveRealms': {
+			nextState = {
+				...state,
+				realms: action.payload.realms,
+			};
+			return nextState;
+		}
 		default:
 			return state;
 	}

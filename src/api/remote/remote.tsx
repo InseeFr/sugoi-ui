@@ -10,5 +10,5 @@ export const getRemoteUsers = (domain: string) =>
 	getClient().then((client: AxiosInstance) =>
 		client
 			.get('/' + domain + '/users', { params: { size: 500 } })
-			.then((r: any) => r.data),
+			.then((r: any) => r.data.results),
 	);

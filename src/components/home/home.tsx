@@ -2,6 +2,7 @@ import {
 	Card,
 	CardContent,
 	CardHeader,
+	Divider,
 	Grid,
 	Typography,
 } from '@material-ui/core';
@@ -20,6 +21,7 @@ const Home = () => {
 			<Grid item>
 				<Card>
 					<CardHeader title="C'est quoi ? " />
+					<Divider />
 					<CardContent>
 						<Typography variant="body1" component="p">
 							{D.home_desc}
@@ -31,6 +33,7 @@ const Home = () => {
 				<Grid item>
 					<Card>
 						<CardHeader title="Vos droits: " />
+						<Divider />
 						<CardContent>
 							<Typography
 								variant="body1"

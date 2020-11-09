@@ -15,7 +15,7 @@ const Search = () => {
 	const [users, setUsers] = useState<any[]>([]);
 	const [, setLoading] = useState(false);
 	const { realm } = useParams<any>();
-
+	console.log(users);
 	useEffect(() => {
 		if (values) {
 			setLoading(true);
@@ -47,16 +47,7 @@ const Search = () => {
 				spacing={3}
 			>
 				<Grid item xs={12}>
-					<Grid
-						container
-						direction="row"
-						justify="center"
-						alignItems="stretch"
-					>
-						<Grid item xs={12}>
-							<SearchForm setValues={setValues} />
-						</Grid>
-					</Grid>
+					<SearchForm setValues={setValues} />
 				</Grid>
 				<Grid item>
 					<SearchResults datasource={users} />
