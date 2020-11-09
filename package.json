@@ -34,7 +34,8 @@
 	},
 	"scripts": {
 		"start": "react-scripts start",
-		"build": "react-scripts build && copy-and-watch .ci/configuration/*.json build",
+		"build": "react-scripts build",
+		"build-prod": "react-scripts build && copy-and-watch .ci/configuration/*.json build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"lint": "eslint --ext js,jsx,ts,tsx  src/**",
