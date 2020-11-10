@@ -4,8 +4,9 @@ import {
 	Grid,
 	IconButton,
 	CardHeader,
-	Collapse,
 	CardActions,
+	Collapse,
+	Box,
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -20,7 +21,6 @@ const Settings = () => {
 	const realms: Realm[] = useSelector(
 		(store: RootState) => store.app.realms,
 	);
-
 	const [expand, setExpand] = useState(false);
 
 	return (
@@ -50,15 +50,29 @@ const Settings = () => {
 										realm={realm}
 									/>
 								</Grid>
-							) : (
-								<Collapse in={expand}>
-									<RealmCard
-										realm={realm}
-									/>
-								</Collapse>
-							),
+							) : null,
 						)}
 					</Grid>
+					<Box p={1} />
+					<Collapse in={expand}>
+						<Grid
+							container
+							direction="row"
+							justify="center"
+							alignItems="center"
+							spacing={2}
+						>
+							{realms.map((realm, i) =>
+								i > 3 ? (
+									<Grid item xs={12} sm={3}>
+										<RealmCard
+											realm={realm}
+										/>
+									</Grid>
+								) : null,
+							)}
+						</Grid>
+					</Collapse>
 				</CardContent>
 				<CardActions>
 					<Grid
