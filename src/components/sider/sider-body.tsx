@@ -22,9 +22,9 @@ import { useHistory } from 'react-router-dom';
 import { getRealms } from '../../api/api';
 import D from '../../i18n';
 import { Realm } from '../../model/interface';
-import Notification from '../notification/notification';
 import { ThemeButton } from './theme-button';
 import { saveRealms } from './../../redux/actions/app';
+
 const SiderBody = () => {
 	const dispatch = useDispatch();
 	const { push } = useHistory();
@@ -41,12 +41,7 @@ const SiderBody = () => {
 				setRealms(r);
 				dispatch(saveRealms(r));
 			})
-			.catch((err) => {
-				return Notification(
-					'Erreur ',
-					'Erreur lors de la récupération des realms',
-				);
-			});
+			.catch((err) => {});
 	}, [dispatch]);
 
 	return (

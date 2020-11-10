@@ -1,4 +1,4 @@
-import { Container } from '@material-ui/core';
+import { Box, Container } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import {
@@ -15,7 +15,9 @@ import { DarkTheme, LightTheme } from './../material-ui-theme';
 import Footer from './footer/footer';
 import Header from './header/header';
 import Root from './root';
+import ScrollTop from './scroll-top/scroll-top';
 import Sider from './sider';
+import BreadCrumbs from './breadcrumbs/breadcrumbs';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -37,8 +39,8 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		container: {
 			paddingTop: theme.spacing(4),
-			paddingBottom: theme.spacing(4),
-			minHeight: '100%',
+			paddingBottom: theme.spacing(1),
+			minHeight: '90%',
 		},
 	}),
 );
@@ -71,15 +73,20 @@ const App = () => {
 					/>
 				) : null}
 				<main className={classes.content}>
+					<div id="back-to-top-anchor" />
 					<div className={classes.toolbar} />
 					<Container
 						maxWidth="xl"
 						className={classes.container}
 					>
+						<Box>
+							<BreadCrumbs />
+						</Box>
 						<Root />
 					</Container>
 					<Divider />
 					<Footer />
+					<ScrollTop />
 				</main>
 			</div>
 		</MuiThemeProvider>
