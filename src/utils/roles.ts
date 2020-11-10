@@ -1,26 +1,29 @@
-export const isConsultant = (
+export const isReader = (
+	readerRegexName: string,
 	tokenParsed: Keycloak.KeycloakTokenParsed | undefined,
 ) => {
-	const regex = new RegExp('/Consultant_(.*)_Ouganext/');
+	const regex = new RegExp(readerRegexName);
 	let t = tokenParsed?.realm_access?.roles.filter((role) =>
 		role.match(regex),
 	).length;
 	return t ? t > 0 : false;
 };
 
-export const isAdministrateur = (
+export const isAdministrator = (
+	adminName: string,
 	tokenParsed: Keycloak.KeycloakTokenParsed | undefined,
 ) => {
 	let t = tokenParsed?.realm_access?.roles.filter((role) =>
-		role.includes('Administrateurs_Ouganext'),
+		role.includes(adminName),
 	).length;
 	return t ? t > 0 : false;
 };
 
-export const isGestionnaire = (
+export const isWriter = (
+	writerRegexName: string,
 	tokenParsed: Keycloak.KeycloakTokenParsed | undefined,
 ) => {
-	const regex = new RegExp('/Consultant_(.*)_Ouganext/');
+	const regex = new RegExp(writerRegexName);
 	let t = tokenParsed?.realm_access?.roles.filter((role) =>
 		role.match(regex),
 	).length;

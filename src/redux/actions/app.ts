@@ -7,3 +7,8 @@ export const changeTheme = (nameTheme: string) => ({
 	type: 'changeTheme',
 	payload: { nameTheme },
 });
+
+export const tokenChanged = (text: any) => ({
+	type: 'appConfig/tokenChanged',
+	payload: text,
+});

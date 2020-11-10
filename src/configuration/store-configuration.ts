@@ -1,16 +1,16 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { combineReducers } from 'redux';
 import AppReducer from '../redux/reducers/app';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { roleReducer } from '../redux/reducers/app';
+import { configureStore } from '@reduxjs/toolkit';
 
 const rootReducer = combineReducers({
 	app: AppReducer,
+	role: roleReducer,
 });
 
-const Store = createStore(
-	rootReducer,
-	composeWithDevTools(applyMiddleware(thunk)),
-);
+const Store = configureStore({
+	reducer: rootReducer,
+});
 
 export type RootState = ReturnType<typeof rootReducer>;
 
