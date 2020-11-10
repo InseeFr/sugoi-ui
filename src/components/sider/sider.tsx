@@ -24,6 +24,8 @@ import D from './../../i18n';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { useKeycloak } from '@react-keycloak/web';
 import { ThemeButton } from './theme-button';
+import { RootState } from '../../configuration/store-configuration';
+import { useSelector } from 'react-redux';
 
 const drawerWidth = 240;
 
@@ -61,6 +63,9 @@ const MySider = () => {
 	} = useKeycloak();
 
 	const { name, email } = tokenParsed as any;
+
+	const roles = useSelector((state: RootState) => state.role);
+
 	useEffect(() => {
 		getRealms()
 			.then((r) => {
@@ -123,51 +128,57 @@ const MySider = () => {
 				/>
 			</ListItem>
 			<List>
-				<ListItem
-					button
-					key={D.sider_search}
-					disabled={realmSelected ? false : true}
-					onClick={() =>
-						push('/realm/' + realmSelected?.name)
-					}
-				>
-					<ListItemIcon>
-						<SearchIcon />
-					</ListItemIcon>
-					<ListItemText primary={D.sider_search} />
-				</ListItem>
-				<ListItem
-					button
-					key={D.sider_create}
-					disabled={realmSelected ? false : true}
-					onClick={() => {
-						push(
-							'/realm/' +
-								realmSelected?.name +
-								'/create',
-						);
-					}}
-				>
-					<ListItemIcon>
-						<CreateIcon />
-					</ListItemIcon>
-					<ListItemText primary={D.sider_create} />
-				</ListItem>
+				{roles.isAdmin || roles.isReader || roles.isWriter ? (
+					<ListItem
+						button
+						key={D.sider_search}
+						disabled={realmSelected ? false : true}
+						onClick={() =>
+							push('/realm/' + realmSelected?.name)
+						}
+					>
+						<ListItemIcon>
+							<SearchIcon />
+						</ListItemIcon>
+						<ListItemText primary={D.sider_search} />
+					</ListItem>
+				) : null}
+				{roles.isAdmin || roles.isWriter ? (
+					<ListItem
+						button
+						key={D.sider_create}
+						disabled={realmSelected ? false : true}
+						onClick={() => {
+							push(
+								'/realm/' +
+									realmSelected?.name +
+									'/create',
+							);
+						}}
+					>
+						<ListItemIcon>
+							<CreateIcon />
+						</ListItemIcon>
+						<ListItemText primary={D.sider_create} />
+					</ListItem>
+				) : null}
 			</List>
 			<Divider />
 			<List>
-				<ListItem
-					button
-					key={D.sider_search}
-					onClick={() => {
-						push('/settings');
-					}}
-				>
-					<ListItemIcon>
-						<SettingsIcon />
-					</ListItemIcon>
-					<ListItemText primary={D.sider_admin} />
-				</ListItem>
+				{roles.isAdmin ? (
+					<ListItem
+						button
+						key={D.sider_search}
+						onClick={() => {
+							push('/settings');
+						}}
+					>
+						<ListItemIcon>
+							<SettingsIcon />
+						</ListItemIcon>
+						<ListItemText primary={D.sider_admin} />
+					</ListItem>
+				) : null}
 			</List>
 			<Divider />
 			<Box
