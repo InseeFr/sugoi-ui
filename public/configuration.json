@@ -1,3 +1,6 @@
 {
-	"api": "http://localhost:8080/"
+	"api": "http://localhost:8080/",
+	"adminName": "Administrateurs_Ouganext",
+	"writerRegexName": "Gestionnaires_(.*)_Ouganext",
+	"readerRegexName": "Consultants_(.*)_Ouganext"
 }

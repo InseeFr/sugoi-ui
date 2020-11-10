@@ -17,13 +17,14 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import Autocomplete from '@material-ui/lab/Autocomplete/Autocomplete';
 import { useKeycloak } from '@react-keycloak/web';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getRealms } from '../../api/api';
 import D from '../../i18n';
 import { Realm } from '../../model/interface';
 import { ThemeButton } from './theme-button';
 import { saveRealms } from './../../redux/actions/app';
+import { RootState } from '../../configuration/store-configuration';
 
 const SiderBody = () => {
 	const dispatch = useDispatch();
@@ -33,6 +34,8 @@ const SiderBody = () => {
 	const {
 		keycloak: { tokenParsed },
 	} = useKeycloak();
+
+	const roles = useSelector((state: RootState) => state.role);
 
 	const { name, email } = tokenParsed as any;
 	useEffect(() => {
@@ -62,31 +65,32 @@ const SiderBody = () => {
 				</Typography>
 			</Box>
 			<Divider />
-
-			<ListItem>
-				<Autocomplete
-					id="realm choice"
-					options={realms}
-					getOptionLabel={(realm) => realm.name}
-					style={{ width: 300 }}
-					onChange={(
-						event: any,
-						newValue: Realm | null,
-					) => {
-						if (newValue) {
-							setRealmSelected(newValue);
-							push('/realm/' + newValue.name);
-						}
-					}}
-					renderInput={(params) => (
-						<TextField
-							{...params}
-							label="Realm"
-							variant="standard"
-						/>
-					)}
-				/>
-			</ListItem>
+			{roles.isAdmin || roles.isReader || roles.isWriter ? (
+				<ListItem>
+					<Autocomplete
+						id="realm choice"
+						options={realms}
+						getOptionLabel={(realm) => realm.name}
+						style={{ width: 300 }}
+						onChange={(
+							event: any,
+							newValue: Realm | null,
+						) => {
+							if (newValue) {
+								setRealmSelected(newValue);
+								push('/realm/' + newValue.name);
+							}
+						}}
+						renderInput={(params) => (
+							<TextField
+								{...params}
+								label="Realm"
+								variant="standard"
+							/>
+						)}
+					/>
+				</ListItem>
+			) : null}
 			<List>
 				<ListItem
 					button
@@ -98,52 +102,58 @@ const SiderBody = () => {
 					</ListItemIcon>
 					<ListItemText primary={D.sider_home} />
 				</ListItem>
-				<ListItem
-					button
-					key={D.sider_search}
-					disabled={realmSelected ? false : true}
-					onClick={() =>
-						push('/realm/' + realmSelected?.name)
-					}
-				>
-					<ListItemIcon>
-						<SearchIcon />
-					</ListItemIcon>
-					<ListItemText primary={D.sider_search} />
-				</ListItem>
-				<ListItem
-					button
-					key={D.sider_create}
-					disabled={realmSelected ? false : true}
-					onClick={() => {
-						push(
-							'/realm/' +
-								realmSelected?.name +
-								'/create',
-						);
-					}}
-				>
-					<ListItemIcon>
-						<CreateIcon />
-					</ListItemIcon>
-					<ListItemText primary={D.sider_create} />
-				</ListItem>
+				{roles.isAdmin || roles.isReader || roles.isWriter ? (
+					<ListItem
+						button
+						key={D.sider_search}
+						disabled={realmSelected ? false : true}
+						onClick={() =>
+							push('/realm/' + realmSelected?.name)
+						}
+					>
+						<ListItemIcon>
+							<SearchIcon />
+						</ListItemIcon>
+						<ListItemText primary={D.sider_search} />
+					</ListItem>
+				) : null}
+				{roles.isAdmin || roles.isWriter ? (
+					<ListItem
+						button
+						key={D.sider_create}
+						disabled={realmSelected ? false : true}
+						onClick={() => {
+							push(
+								'/realm/' +
+									realmSelected?.name +
+									'/create',
+							);
+						}}
+					>
+						<ListItemIcon>
+							<CreateIcon />
+						</ListItemIcon>
+						<ListItemText primary={D.sider_create} />
+					</ListItem>
+				) : null}
 			</List>
 			<Divider />
-			<List>
-				<ListItem
-					button
-					key={D.sider_search}
-					onClick={() => {
-						push('/settings');
-					}}
-				>
-					<ListItemIcon>
-						<SettingsIcon />
-					</ListItemIcon>
-					<ListItemText primary={D.sider_admin} />
-				</ListItem>
-			</List>
+			{roles.isAdmin ? (
+				<List>
+					<ListItem
+						button
+						key={D.sider_search}
+						onClick={() => {
+							push('/settings');
+						}}
+					>
+						<ListItemIcon>
+							<SettingsIcon />
+						</ListItemIcon>
+						<ListItemText primary={D.sider_admin} />
+					</ListItem>
+				</List>
+			) : null}
 			<Divider />
 			<Box
 				alignItems="center"

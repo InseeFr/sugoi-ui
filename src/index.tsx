@@ -12,6 +12,9 @@ import keycloak, {
 } from './configuration/keycloak-configuration';
 import { BrowserRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
+import { fetchConfig } from './redux/reducers/app';
+
+Store.dispatch(fetchConfig());
 
 ReactDOM.render(
 	<ReactKeycloakProvider
