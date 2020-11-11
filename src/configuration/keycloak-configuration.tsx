@@ -5,7 +5,10 @@ import Store from './store-configuration';
 import jwt_decode from 'jwt-decode';
 import { tokenChanged } from '../redux/actions/app';
 
-export const onKeycloakEvent = (event: any, error: any) => {};
+export const onKeycloakEvent = (event: any, error: any) => {
+	console.log(event);
+	return <div>erreur</div>;
+};
 
 export const onKeycloakTokens = (tokens: any) => {
 	const payload = {
@@ -16,7 +19,6 @@ export const onKeycloakTokens = (tokens: any) => {
 };
 
 export const onKeycloackLoad = () => <KeycloakLoader />;
-
 export const initOptions: KeycloakInitOptions = {
 	onLoad: 'check-sso',
 };
