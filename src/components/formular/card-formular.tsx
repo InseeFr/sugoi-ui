@@ -5,6 +5,7 @@ import {
 	CardContent,
 	CardHeader,
 	Collapse,
+	Divider,
 	Grid,
 	TextField,
 } from '@material-ui/core';
@@ -45,6 +46,7 @@ const AdvancedSearchForm = (props: props) => {
 	return (
 		<Card>
 			<CardHeader title={D.formular_card_title} />
+			<Divider />
 			<CardContent>
 				<Grid
 					container

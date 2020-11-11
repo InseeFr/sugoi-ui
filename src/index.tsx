@@ -11,6 +11,7 @@ import keycloak, {
 	onKeycloackLoad,
 } from './configuration/keycloak-configuration';
 import { BrowserRouter } from 'react-router-dom';
+import { SnackbarProvider } from 'notistack';
 import { fetchConfig } from './redux/reducers/app';
 
 Store.dispatch(fetchConfig());
@@ -26,7 +27,16 @@ ReactDOM.render(
 	>
 		<Provider store={Store}>
 			<BrowserRouter>
-				<App />
+				<SnackbarProvider
+					maxSnack={3}
+					anchorOrigin={{
+						vertical: 'top',
+						horizontal: 'right',
+					}}
+					hideIconVariant={false}
+				>
+					<App />
+				</SnackbarProvider>
 			</BrowserRouter>
 		</Provider>
 	</ReactKeycloakProvider>,

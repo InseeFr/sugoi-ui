@@ -84,4 +84,8 @@ export const dictionary = {
 		fr: 'Créer',
 		en: 'Create',
 	},
+	loader_loading: {
+		fr: 'Chargement...',
+		en: 'Loading...',
+	},
 };

@@ -1,21 +1,22 @@
-import { Grid, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getUsers } from '../../api/api';
+import Title from '../commons/title/title';
 import SearchForm from '../formular/card-formular';
 import { SearchResults } from '../searchResults/searchResults';
-import Notification from './../notification/notification';
 
 interface formValues {
 	Domaine: string;
 }
 
 const Search = () => {
+	const { enqueueSnackbar } = useSnackbar();
+	const { realm } = useParams<any>();
 	const [values, setValues] = useState<formValues | null>(null);
 	const [users, setUsers] = useState<any[]>([]);
 	const [, setLoading] = useState(false);
-	const { realm } = useParams<any>();
-
 	useEffect(() => {
 		if (values) {
 			setLoading(true);
@@ -26,19 +27,17 @@ const Search = () => {
 				})
 				.catch((err) => {
 					setLoading(false);
-					return Notification(
-						'Erreur lors de la récupération des realms',
-						err,
-					);
+					enqueueSnackbar('Api indisponible', {
+						variant: 'error',
+						persist: true,
+					});
 				});
 		}
-	}, [values, realm]);
+	}, [values, realm, enqueueSnackbar]);
 
 	return (
 		<>
-			<Typography variant="h2" component="h2">
-				Realm {realm}
-			</Typography>
+			<Title title={'Rechercher dans le realm ' + realm} />
 			<Grid
 				container
 				direction="column"
@@ -47,18 +46,9 @@ const Search = () => {
 				spacing={3}
 			>
 				<Grid item xs={12}>
-					<Grid
-						container
-						direction="row"
-						justify="center"
-						alignItems="stretch"
-					>
-						<Grid item xs={12}>
-							<SearchForm setValues={setValues} />
-						</Grid>
-					</Grid>
+					<SearchForm setValues={setValues} />
 				</Grid>
-				<Grid item>
+				<Grid item xs={12}>
 					<SearchResults datasource={users} />
 				</Grid>
 			</Grid>

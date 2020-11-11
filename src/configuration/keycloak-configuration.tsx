@@ -5,7 +5,10 @@ import Store from './store-configuration';
 import jwt_decode from 'jwt-decode';
 import { tokenChanged } from '../redux/actions/app';
 
-export const onKeycloakEvent = (event: any, error: any) => {};
+export const onKeycloakEvent = (event: any, error: any) => {
+	console.log(event);
+	return <div>erreur</div>;
+};
 
 export const onKeycloakTokens = (tokens: any) => {
 	const payload = {
@@ -16,12 +19,14 @@ export const onKeycloakTokens = (tokens: any) => {
 };
 
 export const onKeycloackLoad = () => <KeycloakLoader />;
-
 export const initOptions: KeycloakInitOptions = {
 	onLoad: 'check-sso',
 };
 
-const kcConfig = `${window.location.origin}/keycloak.json`;
+const nameKeycloakConfigFile = process.env.REACT_APP_NAME_KEYCLOAK_CONFIG_FILE
+	? process.env.REACT_APP_NAME_KEYCLOAK_CONFIG_FILE
+	: 'keycloak.json';
+const kcConfig = `${window.location.origin}/` + nameKeycloakConfigFile;
 const keycloak = Keycloak(kcConfig);
 
 export default keycloak;

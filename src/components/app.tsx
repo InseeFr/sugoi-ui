@@ -1,4 +1,4 @@
-import { Container } from '@material-ui/core';
+import { Box, Container } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import {
@@ -8,14 +8,16 @@ import {
 	Theme,
 } from '@material-ui/core/styles';
 import { useKeycloak } from '@react-keycloak/web';
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from './../configuration/store-configuration';
 import { DarkTheme, LightTheme } from './../material-ui-theme';
 import Footer from './footer/footer';
 import Header from './header/header';
 import Root from './root';
-import Sider from './sider/sider';
+import ScrollTop from './scroll-top/scroll-top';
+import Sider from './sider';
+import BreadCrumbs from './breadcrumbs/breadcrumbs';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -37,8 +39,8 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		container: {
 			paddingTop: theme.spacing(4),
-			paddingBottom: theme.spacing(4),
-			minHeight: '100%',
+			paddingBottom: theme.spacing(1),
+			minHeight: '90%',
 		},
 	}),
 );
@@ -49,29 +51,38 @@ const App = () => {
 		keycloak: { authenticated },
 	} = useKeycloak();
 	const appStore = useSelector((store: RootState) => store.app);
-
+	const [drawerOpen, setDrawerOpen] = useState(false);
+	const handleDrawerToggle = () => {
+		setDrawerOpen(!drawerOpen);
+	};
 	return (
 		<MuiThemeProvider
-			theme={
-				appStore.config.theme === 'dark'
-					? DarkTheme
-					: LightTheme
-			}
+			theme={appStore.theme === 'dark' ? DarkTheme : LightTheme}
 		>
 			<div className={classes.root}>
 				<CssBaseline />
-				<Header />
-				{authenticated ? <Sider /> : null}
+				<Header handleDrawerToggle={handleDrawerToggle} />
+				{authenticated ? (
+					<Sider
+						drawerOpen={drawerOpen}
+						handleDrawerToggle={handleDrawerToggle}
+					/>
+				) : null}
 				<main className={classes.content}>
+					<div id="back-to-top-anchor" />
 					<div className={classes.toolbar} />
 					<Container
 						maxWidth="xl"
 						className={classes.container}
 					>
+						<Box>
+							<BreadCrumbs />
+						</Box>
 						<Root />
 					</Container>
 					<Divider />
 					<Footer />
+					<ScrollTop />
 				</main>
 			</div>
 		</MuiThemeProvider>

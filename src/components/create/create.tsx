@@ -1,20 +1,19 @@
-import { Grid, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import React from 'react';
 import D from './../../i18n';
-
+import Title from '../commons/title/title';
 interface Props {
 	type_Recherche: String;
 }
 
 const Create = (props: Props) => {
 	return (
-		<Grid container spacing={3}>
-			<Grid item xs={12}>
-				<Typography variant="h1" component="h2" gutterBottom>
-					{D.create_title}
-				</Typography>
+		<>
+			<Title title={D.create_title} />
+			<Grid container spacing={3}>
+				<Grid item xs={12}></Grid>
 			</Grid>
-		</Grid>
+		</>
 	);
 };
 
