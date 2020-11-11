@@ -48,7 +48,7 @@ const Search = () => {
 				<Grid item xs={12}>
 					<SearchForm setValues={setValues} />
 				</Grid>
-				<Grid item>
+				<Grid item xs={12}>
 					<SearchResults datasource={users} />
 				</Grid>
 			</Grid>

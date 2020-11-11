@@ -57,11 +57,7 @@ const App = () => {
 	};
 	return (
 		<MuiThemeProvider
-			theme={
-				appStore.config.theme === 'dark'
-					? DarkTheme
-					: LightTheme
-			}
+			theme={appStore.theme === 'dark' ? DarkTheme : LightTheme}
 		>
 			<div className={classes.root}>
 				<CssBaseline />

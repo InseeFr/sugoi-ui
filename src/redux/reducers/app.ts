@@ -3,8 +3,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getConfigFile } from '../../configuration/utils';
 
 const initialConfigState = {
+	theme: window.localStorage.getItem('darkMode') ? 'dark' : 'light',
 	config: {
-		theme: window.localStorage.getItem('darkMode') ? 'dark' : 'light',
 		api: '',
 		adminName: '',
 		writerRegexName: '',
@@ -28,7 +28,7 @@ const AppReducer = (state = initialConfigState, action: any) => {
 		case 'changeTheme':
 			nextState = {
 				...state,
-				config: { ...state, theme: action.payload.nameTheme },
+				theme: action.payload.nameTheme,
 			};
 			return nextState;
 		case 'saveRealms': {
