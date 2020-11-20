@@ -1,3 +1,4 @@
+import React from 'react';
 import {
 	createStyles,
 	Fab,
@@ -6,7 +7,6 @@ import {
 	useScrollTrigger,
 	Zoom,
 } from '@material-ui/core';
-import React from 'react';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 interface props {

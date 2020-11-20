@@ -1,12 +1,12 @@
+import React from 'react';
 import { Button } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { useKeycloak } from '@react-keycloak/web';
-import React from 'react';
 import { useHistory } from 'react-router-dom';
 import D from '../../../i18n';
+import { useReactOidc } from '@axa-fr/react-oidc-context';
 
 const useStyles = makeStyles((theme) => ({
 	mainFeaturedPost: {
@@ -38,13 +38,10 @@ const useStyles = makeStyles((theme) => ({
 const MainFeaturedPost = () => {
 	const classes = useStyles();
 	const { push } = useHistory();
-
-	const {
-		keycloak: { authenticated, login },
-	} = useKeycloak();
+	const { oidcUser, login } = useReactOidc();
 
 	const action: any = () => {
-		if (!authenticated) {
+		if (!oidcUser) {
 			login();
 			push('/');
 		}
@@ -77,7 +74,7 @@ const MainFeaturedPost = () => {
 						>
 							{D.home_desc}
 						</Typography>
-						{authenticated ? null : (
+						{oidcUser ? null : (
 							<Button
 								variant="contained"
 								color="primary"

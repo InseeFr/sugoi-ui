@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import D from './../../i18n';
+import D from '../../../i18n';
 
 interface props {
 	expand: Boolean;

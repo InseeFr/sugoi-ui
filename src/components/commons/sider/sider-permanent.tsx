@@ -1,6 +1,6 @@
+import React from 'react';
 import { Drawer } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import React from 'react';
 import SiderBody from './sider-body';
 
 const drawerWidth = 240;

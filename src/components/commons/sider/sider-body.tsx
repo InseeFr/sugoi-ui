@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import {
 	Avatar,
 	Box,
@@ -15,29 +16,24 @@ import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Autocomplete from '@material-ui/lab/Autocomplete/Autocomplete';
-import { useKeycloak } from '@react-keycloak/web';
-import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { getRealms } from '../../api/api';
-import D from '../../i18n';
-import { Realm } from '../../model/interface';
+import { getRealms } from '../../../api/api';
+import D from '../../../i18n';
+import { Realm } from '../../../model/interface';
 import { ThemeButton } from './theme-button';
-import { saveRealms } from './../../redux/actions/app';
-import { RootState } from '../../configuration/store-configuration';
+import { saveRealms } from '../../../redux/actions/app';
+import { RootState } from '../../../configuration/store-configuration';
+import { useReactOidc } from '@axa-fr/react-oidc-context';
 
 const SiderBody = () => {
 	const dispatch = useDispatch();
 	const { push } = useHistory();
 	const [realms, setRealms] = useState<Realm[]>([]);
 	const [realmSelected, setRealmSelected] = useState<Realm | null>(null);
-	const {
-		keycloak: { tokenParsed },
-	} = useKeycloak();
+	const { oidcUser } = useReactOidc();
+	const user = useSelector((state: RootState) => state.user);
 
-	const roles = useSelector((state: RootState) => state.role);
-
-	const { name, email } = tokenParsed as any;
 	useEffect(() => {
 		getRealms()
 			.then((r) => {
@@ -57,15 +53,17 @@ const SiderBody = () => {
 				p={2}
 			>
 				<Avatar src="/static/images/avatars/avatar_6.png" />
-				<Typography color="textPrimary" variant="h5">
-					{name}
+				<Typography color="textPrimary" variant="h6">
+					{oidcUser.profile.name}
 				</Typography>
 				<Typography color="textSecondary" variant="body2">
-					{email}
+					{oidcUser.profile.email}
 				</Typography>
 			</Box>
 			<Divider />
-			{roles.isAdmin || roles.isReader || roles.isWriter ? (
+			{user.role.isAdmin ||
+			user.role.isReader ||
+			user.role.isWriter ? (
 				<ListItem>
 					<Autocomplete
 						id="realm choice"
@@ -102,7 +100,9 @@ const SiderBody = () => {
 					</ListItemIcon>
 					<ListItemText primary={D.sider_home} />
 				</ListItem>
-				{roles.isAdmin || roles.isReader || roles.isWriter ? (
+				{user.role.isAdmin ||
+				user.role.isReader ||
+				user.role.isWriter ? (
 					<ListItem
 						button
 						key={D.sider_search}
@@ -117,7 +117,7 @@ const SiderBody = () => {
 						<ListItemText primary={D.sider_search} />
 					</ListItem>
 				) : null}
-				{roles.isAdmin || roles.isWriter ? (
+				{user.role.isAdmin || user.role.isWriter ? (
 					<ListItem
 						button
 						key={D.sider_create}
@@ -138,7 +138,7 @@ const SiderBody = () => {
 				) : null}
 			</List>
 			<Divider />
-			{roles.isAdmin ? (
+			{user.role.isAdmin ? (
 				<List>
 					<ListItem
 						button

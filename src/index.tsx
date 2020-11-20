@@ -1,31 +1,66 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import Store from './configuration/store-configuration';
-import App from './components/app';
-import { ReactKeycloakProvider } from '@react-keycloak/web';
-import keycloak, {
-	initOptions,
-	onKeycloakEvent,
-	onKeycloakTokens,
-	onKeycloackLoad,
-} from './configuration/keycloak-configuration';
+import { Provider, useDispatch } from 'react-redux';
+import store from './configuration/store-configuration';
 import { BrowserRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
-import { fetchConfig } from './redux/reducers/app';
+import { saveConfig } from './redux/actions/app';
+import { loadUser } from './redux/actions/user';
+import {
+	AuthenticationProvider,
+	InMemoryWebStorage,
+	oidcLog,
+} from '@axa-fr/react-oidc-context';
+import { UserManagerSettings } from 'oidc-client';
+import { getConfigFile } from './configuration/utils';
+import { Loader } from './components/commons/loader/loader';
+import App from './components/app';
 
-Store.dispatch(fetchConfig());
+const Start = () => {
+	const [authConfiguration, setAuthConfiguration] = useState<
+		UserManagerSettings | undefined
+	>(undefined);
+	const [loading, setLoading] = useState(true);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		getConfigFile().then((config) => {
+			setAuthConfiguration(config.auth);
+			dispatch(saveConfig(config));
+			setLoading(false);
+		});
+	}, [dispatch]);
 
-ReactDOM.render(
-	<ReactKeycloakProvider
-		authClient={keycloak}
-		initOptions={initOptions}
-		autoRefreshToken={true}
-		onEvent={onKeycloakEvent}
-		onTokens={onKeycloakTokens}
-		LoadingComponent={onKeycloackLoad()}
-	>
-		<Provider store={Store}>
+	return loading ? (
+		<Loader />
+	) : (
+		<AuthenticationProvider
+			configuration={authConfiguration}
+			loggerLevel={oidcLog.DEBUG}
+			isEnabled={true}
+			callbackComponentOverride={Loader}
+			UserStore={InMemoryWebStorage}
+			authenticating={Loader}
+			sessionLostComponent={Loader}
+			customEvents={{
+				onUserLoaded: (user) =>
+					dispatch(
+						loadUser({
+							access_token: user.access_token,
+							profile: user.profile,
+						}),
+					),
+				onUserUnloaded: () => console.log('onUserUnloaded'),
+				onSilentRenewError: (error) =>
+					console.log('onSilentRenewError', error),
+				onUserSignedOut: () => console.log('onUserSignedOut'),
+				onUserSessionChanged: () =>
+					console.log('onUserSessionChanged'),
+				onAccessTokenExpiring: () =>
+					console.log('onAccessTokenExpiring'),
+				onAccessTokenExpired: () =>
+					console.log('onAccessTokenExpired'),
+			}}
+		>
 			<BrowserRouter>
 				<SnackbarProvider
 					maxSnack={3}
@@ -38,7 +73,12 @@ ReactDOM.render(
 					<App />
 				</SnackbarProvider>
 			</BrowserRouter>
-		</Provider>
-	</ReactKeycloakProvider>,
+		</AuthenticationProvider>
+	);
+};
+ReactDOM.render(
+	<Provider store={store}>
+		<Start />
+	</Provider>,
 	document.getElementById('root'),
 );

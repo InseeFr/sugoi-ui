@@ -1,11 +1,11 @@
+import React, { useEffect, useState } from 'react';
 import { Grid } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
-import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getUsers } from '../../api/api';
 import Title from '../commons/title/title';
-import SearchForm from '../formular/card-formular';
-import { SearchResults } from '../searchResults/searchResults';
+import SearchForm from './formular/card-formular';
+import { SearchResults } from './searchResults/searchResults';
 
 interface formValues {
 	Domaine: string;

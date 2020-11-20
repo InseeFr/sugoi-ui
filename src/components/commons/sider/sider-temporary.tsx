@@ -1,3 +1,4 @@
+import React from 'react';
 import {
 	createStyles,
 	Drawer,
@@ -5,7 +6,6 @@ import {
 	Theme,
 	useTheme,
 } from '@material-ui/core';
-import React from 'react';
 import SiderBody from './sider-body';
 
 interface props {
