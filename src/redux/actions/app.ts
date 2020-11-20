@@ -1,7 +1,7 @@
 import { Realm } from '../../model/interface';
 
-export const setAppConfig = (config: any) => ({
-	type: 'appConfig',
+export const saveConfig = (config: any) => ({
+	type: 'saveConfig',
 	payload: { ...config },
 });
 
@@ -13,9 +13,4 @@ export const changeTheme = (nameTheme: string) => ({
 export const saveRealms = (realms: Realm[]) => ({
 	type: 'saveRealms',
 	payload: { realms },
-});
-
-export const tokenChanged = (text: any) => ({
-	type: 'appConfig/tokenChanged',
-	payload: text,
 });

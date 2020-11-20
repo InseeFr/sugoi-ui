@@ -1,36 +1,32 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import { configWrapper } from './utils';
+import Store from './store-configuration';
 
-const clientConfig = (config: any) => {
-	return {
-		...config,
-		'Content-Type': 'application/json',
-		Accept: 'application/json',
-		'Access-Control-Allow-Origin': '*',
-	};
-};
-
-const getClient = () =>
-	configWrapper((resp: any) => {
+export const getAuthClient = () => {
+	return configWrapper((resp: any) => {
 		const client = axios.create({
 			baseURL: resp.api,
 		});
 		client.interceptors.request.use(
-			async (config) => {
-				try {
-					return Promise.resolve(clientConfig(config));
-				} catch (e) {}
+			async (config: AxiosRequestConfig) => {
+				config.headers.Authorization =
+					'Bearer ' + Store.getState().user.access_token;
+				return config;
 			},
 			(err) => {
 				return Promise.reject(err);
 			},
 		);
 
-		client.interceptors.response.use(
-			(response) => response,
-			(error) => Promise.reject(error),
-		);
 		return client;
 	});
+};
 
-export default getClient;
+export const getClient = () => {
+	return configWrapper((resp: any) => {
+		const client = axios.create({
+			baseURL: resp.api,
+		});
+		return client;
+	});
+};

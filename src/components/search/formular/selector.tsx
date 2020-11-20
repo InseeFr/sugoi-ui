@@ -1,3 +1,4 @@
+import React from 'react';
 import {
 	FormControl,
 	FormControlLabel,
@@ -5,8 +6,7 @@ import {
 	Radio,
 	RadioGroup,
 } from '@material-ui/core';
-import React from 'react';
-import D from './../../i18n';
+import D from '../../../i18n';
 
 interface props {
 	value: string;

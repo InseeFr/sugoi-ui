@@ -1,5 +1,5 @@
-import { Hidden } from '@material-ui/core';
 import React from 'react';
+import { Hidden } from '@material-ui/core';
 import SiderPermanent from './sider-permanent';
 import SiderTemporary from './sider-temporary';
 

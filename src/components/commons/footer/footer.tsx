@@ -1,3 +1,4 @@
+import React from 'react';
 import {
 	Box,
 	createStyles,
@@ -7,9 +8,8 @@ import {
 	Typography,
 	Grid,
 } from '@material-ui/core';
-import React from 'react';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import { useConfig } from '../../configuration/utils';
+import { useConfig } from '../../../configuration/utils';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -26,45 +26,46 @@ const Footer = () => {
 	const classes = useStyles();
 	const api = useConfig('api');
 	return (
-		<Box pt={2} className={classes.footer}>
-			<Typography
-				variant="body2"
-				color="textSecondary"
-				align="center"
+		<>
+			<Box pt={2} className={classes.footer} />
+			<Grid
+				container
+				direction="row"
+				justify="center"
+				alignItems="center"
 			>
-				<Grid
-					container
-					direction="row"
-					justify="center"
-					alignItems="center"
+				<GitHubIcon color="primary" />
+				<Typography
+					variant="body2"
+					color="textSecondary"
+					align="center"
 				>
-					<GitHubIcon color="primary" />
 					<Link
 						color="inherit"
 						href="https://github.com/InseeFrLab/sugoi-ui"
 					>
 						Contribuer au projet
 					</Link>
-				</Grid>
-			</Typography>
-			<Typography
-				variant="body2"
-				color="textSecondary"
-				align="center"
+				</Typography>
+			</Grid>
+			<Grid
+				container
+				direction="row"
+				justify="center"
+				alignItems="center"
 			>
-				<Grid
-					container
-					direction="row"
-					justify="center"
-					alignItems="center"
+				<AccountCircleIcon color="primary" />
+				<Typography
+					variant="body2"
+					color="textSecondary"
+					align="center"
 				>
-					<AccountCircleIcon color="primary" />
 					<Link color="inherit" href={api ? api : '/'}>
 						Notre api
 					</Link>
-				</Grid>
-			</Typography>
-		</Box>
+				</Typography>
+			</Grid>
+		</>
 	);
 };
 

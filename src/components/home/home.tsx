@@ -1,25 +1,12 @@
-import {
-	Card,
-	CardContent,
-	CardHeader,
-	Divider,
-	Grid,
-	Typography,
-} from '@material-ui/core';
-import { useKeycloak } from '@react-keycloak/web';
 import React from 'react';
+import { useReactOidc } from '@axa-fr/react-oidc-context';
+import { Grid } from '@material-ui/core';
 import Title from '../commons/title/title';
 import MainFeaturedPost from './landingpage/landingpage';
+import CardRights from './right-card';
 
 const Home = () => {
-	const {
-		keycloak: { tokenParsed, authenticated },
-	} = useKeycloak();
-	let roles = tokenParsed?.realm_access?.roles.filter(
-		(role) =>
-			role.includes('_Ouganext') ||
-			role.includes('Administrateurs_Ouganext'),
-	);
+	const { oidcUser } = useReactOidc();
 	return (
 		<>
 			<Title
@@ -28,48 +15,18 @@ const Home = () => {
 				}
 			/>
 			<MainFeaturedPost />
-			<Grid
-				container
-				direction="column"
-				justify="center"
-				spacing={5}
-			>
-				{authenticated ? (
+			{oidcUser ? (
+				<Grid
+					container
+					direction="column"
+					justify="center"
+					spacing={5}
+				>
 					<Grid item>
-						<Card>
-							<CardHeader title="Vos droits: " />
-							<Divider />
-							<CardContent>
-								<Typography
-									variant="body1"
-									component="p"
-								>
-									{roles &&
-									roles?.length > 0
-										? roles?.map(
-												(
-													role,
-													i,
-												) => (
-													<ul
-														key={
-															'role' +
-															i
-														}
-													>
-														{
-															role
-														}
-													</ul>
-												),
-										  )
-										: "Vous n'avez aucun droits"}
-								</Typography>
-							</CardContent>
-						</Card>
+						<CardRights />
 					</Grid>
-				) : null}
-			</Grid>
+				</Grid>
+			) : null}
 		</>
 	);
 };

@@ -1,4 +1,5 @@
-import { Box, Container } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Container } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import {
@@ -7,17 +8,16 @@ import {
 	MuiThemeProvider,
 	Theme,
 } from '@material-ui/core/styles';
-import { useKeycloak } from '@react-keycloak/web';
-import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from './../configuration/store-configuration';
 import { DarkTheme, LightTheme } from './../material-ui-theme';
-import Footer from './footer/footer';
-import Header from './header/header';
-import Root from './root';
-import ScrollTop from './scroll-top/scroll-top';
-import Sider from './sider';
-import BreadCrumbs from './breadcrumbs/breadcrumbs';
+import Footer from './commons/footer/footer';
+import Header from './commons/header/header';
+import Routes from './routes/routes';
+import ScrollTop from './commons/scroll-top/scroll-top';
+import Sider from './commons/sider';
+import BreadCrumbs from './commons/breadcrumbs/breadcrumbs';
+import { useReactOidc } from '@axa-fr/react-oidc-context';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			flexGrow: 1,
 			padding: theme.spacing(3),
 		},
+
 		container: {
 			paddingTop: theme.spacing(4),
 			paddingBottom: theme.spacing(1),
@@ -47,14 +48,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const App = () => {
 	const classes = useStyles();
-	const {
-		keycloak: { authenticated },
-	} = useKeycloak();
+	const { oidcUser } = useReactOidc();
 	const appStore = useSelector((store: RootState) => store.app);
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const handleDrawerToggle = () => {
 		setDrawerOpen(!drawerOpen);
 	};
+
 	return (
 		<MuiThemeProvider
 			theme={appStore.theme === 'dark' ? DarkTheme : LightTheme}
@@ -62,7 +62,7 @@ const App = () => {
 			<div className={classes.root}>
 				<CssBaseline />
 				<Header handleDrawerToggle={handleDrawerToggle} />
-				{authenticated ? (
+				{oidcUser ? (
 					<Sider
 						drawerOpen={drawerOpen}
 						handleDrawerToggle={handleDrawerToggle}
@@ -75,10 +75,8 @@ const App = () => {
 						maxWidth="xl"
 						className={classes.container}
 					>
-						<Box>
-							<BreadCrumbs />
-						</Box>
-						<Root />
+						<BreadCrumbs />
+						<Routes />
 					</Container>
 					<Divider />
 					<Footer />

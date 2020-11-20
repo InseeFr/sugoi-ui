@@ -1,10 +1,10 @@
+import React from 'react';
 import { Fab, makeStyles } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
-import { useKeycloak } from '@react-keycloak/web';
-import React from 'react';
 import { useHistory } from 'react-router-dom';
-import D from './../../i18n';
+import D from './../../../i18n';
+import { useReactOidc } from '@axa-fr/react-oidc-context';
 
 const useStyles = makeStyles((theme) => ({
 	buttonShort: {
@@ -22,19 +22,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LoginButton = () => {
-	const {
-		keycloak: { authenticated, logout, login },
-	} = useKeycloak();
+	const { login, logout, oidcUser } = useReactOidc();
 	const { push } = useHistory();
 	const classes = useStyles();
 
 	const action: any = () => {
-		if (authenticated) {
+		if (oidcUser) {
 			push('/');
 			logout();
 		} else {
 			login();
-			push('/');
 		}
 	};
 
@@ -49,12 +46,12 @@ const LoginButton = () => {
 				className={classes.buttonExpanded}
 				color="default"
 			>
-				{!authenticated ? (
+				{!oidcUser ? (
 					<PowerSettingsNewIcon />
 				) : (
 					<ExitToAppIcon />
 				)}
-				{authenticated ? D.logout : D.login}
+				{oidcUser ? D.logout : D.login}
 			</Fab>
 			<Fab
 				id="bouton-login"
@@ -64,7 +61,7 @@ const LoginButton = () => {
 				color="default"
 				size="small"
 			>
-				{!authenticated ? (
+				{!oidcUser ? (
 					<PowerSettingsNewIcon />
 				) : (
 					<ExitToAppIcon />

@@ -1,3 +1,17 @@
 {
-	"api": "${API_URL_CI}"
+	"api": "http://localhost:8080",
+	"auth": {
+		"client_id": "sugoi-ui",
+		"redirect_uri": "http://localhost:3000/authentication/callback",
+		"response_type": "code",
+		"post_logout_redirect_uri": "http://localhost:3000/",
+		"scope": "openid profile email",
+		"authority": "http://my-authority-url.com",
+		"silent_redirect_uri": "http://localhost:3000/authentication/silent_callback",
+		"automaticSilentRenew": true,
+		"loadUserInfo": true
+	},
+	"adminName": "Admin_Sugoi",
+	"writerRegexName": "Writer_(.*)_Sugoi",
+	"readerRegexName": "Reader_(.*)_Sugoi"
 }

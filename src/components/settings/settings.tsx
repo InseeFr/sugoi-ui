@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
 	Card,
 	CardContent,
@@ -8,13 +9,12 @@ import {
 	Collapse,
 	Box,
 } from '@material-ui/core';
-import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../configuration/store-configuration';
 import { Realm } from '../../model/interface';
 import RealmCard from './realm-card';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import ExpandButton from '../formular/expand-button';
+import ExpandButton from '../search/formular/expand-button';
 import Title from '../commons/title/title';
 
 const Settings = () => {

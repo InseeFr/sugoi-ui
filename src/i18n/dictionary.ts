@@ -88,4 +88,24 @@ export const dictionary = {
 		fr: 'Chargement...',
 		en: 'Loading...',
 	},
+	right_card_title: {
+		fr: 'Vos droits:',
+		en: 'Your rights:',
+	},
+	right_card_administrator: {
+		fr: 'Administrateur Sugoi',
+		en: 'Administrator Sugoi',
+	},
+	right_card_writer: {
+		fr: 'Gestionnaire dans le domaine ',
+		en: 'Manager in the field ',
+	},
+	right_card_reader: {
+		fr: 'Consultant dans le domaine ',
+		en: 'Reader in the field',
+	},
+	right_card_norights: {
+		fr: "Vous n'avez aucun droit",
+		en: 'No rights',
+	},
 };
