@@ -4,6 +4,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import D from '../../../i18n';
 import LoginButton from './login-button';
 import MenuIcon from '@material-ui/icons/Menu';
+import AccountButton from './account-button';
 interface props {
 	handleDrawerToggle: any;
 }
@@ -53,6 +54,7 @@ const MyHeader = (props: props) => {
 				>
 					{D.title}
 				</Typography>
+				<AccountButton />
 				<LoginButton />
 			</Toolbar>
 		</AppBar>
