@@ -1,10 +1,9 @@
-import React from 'react';
 import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import D from '../../../i18n';
-import LoginButton from './login-button';
 import MenuIcon from '@material-ui/icons/Menu';
-import AccountButton from './account-button';
+import React from 'react';
+import D from '../../../i18n';
+import GroupedIcons from './all-icon-button/grouped-buttons';
 interface props {
 	handleDrawerToggle: any;
 }
@@ -54,8 +53,7 @@ const MyHeader = (props: props) => {
 				>
 					{D.title}
 				</Typography>
-				<AccountButton />
-				<LoginButton />
+				<GroupedIcons />
 			</Toolbar>
 		</AppBar>
 	);
