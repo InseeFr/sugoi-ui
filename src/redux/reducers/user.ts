@@ -8,15 +8,24 @@ const userReducer = (state = initialRoleState, action: any) => {
 	switch (action.type) {
 		case 'loadUser':
 			let readerDomains: string[] = getRegexDomains(
-				getRolesFromToken(action.payload.user.access_token),
+				getRolesFromToken(
+					action.payload.user.access_token,
+					action.payload.config.auth.json_path_to_roles,
+				),
 				action.payload.config.readerRegexName,
 			);
 			let writerDomains: string[] = getRegexDomains(
-				getRolesFromToken(action.payload.user.access_token),
+				getRolesFromToken(
+					action.payload.user.access_token,
+					action.payload.config.auth.json_path_to_roles,
+				),
 				action.payload.config.writerRegexName,
 			);
 			let admin: boolean = isAdministrator(
-				getRolesFromToken(action.payload.user.access_token),
+				getRolesFromToken(
+					action.payload.user.access_token,
+					action.payload.config.auth.json_path_to_roles,
+				),
 				action.payload.config.adminName,
 			);
 			nextState = {
