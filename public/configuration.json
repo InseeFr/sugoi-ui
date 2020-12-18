@@ -9,7 +9,8 @@
 		"authority": "http://my-authority-url.com",
 		"silent_redirect_uri": "http://localhost:3000/authentication/silent_callback",
 		"automaticSilentRenew": true,
-		"loadUserInfo": true
+		"loadUserInfo": true,
+		"json_path_to_roles": "realm_access/roles"
 	},
 	"adminName": "Admin_Sugoi",
 	"writerRegexName": "Writer_(.*)_Sugoi",
