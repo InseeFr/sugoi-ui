@@ -25,6 +25,7 @@ const LoginButton = () => {
 				size="medium"
 				aria-label="show account information"
 				onClick={action}
+				title={oidcUser ? 'logout' : 'login'}
 			>
 				{oidcUser ? (
 					<ExitToAppIcon />

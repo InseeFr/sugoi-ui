@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
+import { useReactOidc } from '@axa-fr/react-oidc-context';
 import { Container } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
 import {
 	createStyles,
 	makeStyles,
 	MuiThemeProvider,
 	Theme,
 } from '@material-ui/core/styles';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from './../configuration/store-configuration';
 import { DarkTheme, LightTheme } from './../material-ui-theme';
-import Footer from './commons/footer/footer';
+import BreadCrumbs from './commons/breadcrumbs/breadcrumbs';
 import Header from './commons/header/header';
-import Routes from './routes/routes';
 import ScrollTop from './commons/scroll-top/scroll-top';
 import Sider from './commons/sider';
-import BreadCrumbs from './commons/breadcrumbs/breadcrumbs';
-import { useReactOidc } from '@axa-fr/react-oidc-context';
+import Routes from './routes/routes';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -78,8 +76,6 @@ const App = () => {
 						<BreadCrumbs />
 						<Routes />
 					</Container>
-					<Divider />
-					<Footer />
 					<ScrollTop />
 				</main>
 			</div>

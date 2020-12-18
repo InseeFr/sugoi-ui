@@ -1,3 +1,4 @@
+
 /**
  * Based on the locale passed as a paremeter, this function will return
  * the corresponding dictionary.
@@ -27,7 +28,15 @@ export const createDictionary: any = (lang: any) => (dict: any) =>
  * If the lang is not fr, will return en
  * @param {string} lang the lang of the user
  */
-export const getLang = (defaultLang?: string) =>
-	(defaultLang || navigator.language)?.split('-')[0] === 'fr' ? 'fr' : 'en';
+export const getLang = (defaultLang?: string) => {
+	const defaultLanguage =
+		(defaultLang || navigator.language)?.split('-')[0] === 'fr'
+			? 'fr'
+			: 'en';
+	document.documentElement.lang = defaultLanguage;
+	return defaultLanguage;
+};
 
-export default createDictionary(getLang());
+export default createDictionary(
+	getLang(window.localStorage.getItem('lang') === '"fr"' ? 'fr' : 'en'),
+);

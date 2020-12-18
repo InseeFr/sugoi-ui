@@ -1,5 +1,4 @@
-import React from 'react';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { useReactOidc } from '@axa-fr/react-oidc-context';
 import {
 	Avatar,
 	Box,
@@ -7,8 +6,8 @@ import {
 	Popover,
 	Typography,
 } from '@material-ui/core';
-import { useReactOidc } from '@axa-fr/react-oidc-context';
-import { ThemeButton } from './theme-button';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import React from 'react';
 
 const AccountButton = () => {
 	const { oidcUser } = useReactOidc();
@@ -70,9 +69,7 @@ const AccountButton = () => {
 					display="flex"
 					flexDirection="column"
 					p={2}
-				>
-					<ThemeButton />
-				</Box>
+				></Box>
 			</Popover>
 		</>
 	) : null;
