@@ -1,4 +1,5 @@
 import { isAdministrator, isReader, isWriter } from '../../utils/roles';
+import { getRolesFromToken } from '../../utils/token';
 
 const initialRoleState = {};
 
@@ -7,20 +8,20 @@ const userReducer = (state = initialRoleState, action: any) => {
 	switch (action.type) {
 		case 'loadUser':
 			let reader = isReader(
-				action.payload.user.profile?.roles,
+				getRolesFromToken(action.payload.user.access_token),
 				action.payload.config.readerRegexName,
 			);
 			let writer = isWriter(
-				action.payload.user.profile?.roles,
+				getRolesFromToken(action.payload.user.access_token),
 				action.payload.config.writerRegexName,
 			);
 			let admin = isAdministrator(
-				action.payload.user.profile?.roles,
+				getRolesFromToken(action.payload.user.access_token),
 				action.payload.config.adminName,
 			);
 			nextState = {
 				...state,
-				...action.payload.user,
+				...action.payload.user.profile,
 				role: {
 					isAdmin: admin,
 					isReader: reader[0],

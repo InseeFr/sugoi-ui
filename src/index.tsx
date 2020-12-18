@@ -42,15 +42,7 @@ const Start = () => {
 			authenticating={Loader}
 			sessionLostComponent={Loader}
 			customEvents={{
-				onUserLoaded: (user) => {
-					console.log(user);
-					dispatch(
-						loadUser({
-							access_token: user.access_token,
-							profile: user.profile,
-						}),
-					);
-				},
+				onUserLoaded: (user) => dispatch(loadUser(user)),
 				onUserUnloaded: () => console.log('onUserUnloaded'),
 				onSilentRenewError: (error) =>
 					console.log('onSilentRenewError', error),
