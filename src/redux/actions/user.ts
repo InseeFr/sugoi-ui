@@ -1,6 +1,8 @@
 import Store from './../../configuration/store-configuration';
 
-export const loadUser = (user: any) => ({
+import { User } from 'oidc-client';
+
+export const loadUser = (user: User) => ({
 	type: 'loadUser',
 	payload: { user: user, config: Store.getState().app.config },
 });
