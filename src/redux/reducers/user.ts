@@ -30,7 +30,7 @@ const userReducer = (state = initialRoleState, action: any) => {
 			);
 			nextState = {
 				...state,
-				...action.payload.user.profile,
+				...action.payload.user,
 				role: {
 					isAdmin: admin,
 					isReader: readerDomains.length > 0,
