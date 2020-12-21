@@ -9,6 +9,6 @@ export const getRemoteRealms = () =>
 export const getRemoteUsers = (domain: string) =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.get('/' + domain + '/users', { params: { size: 500 } })
+			.get('/' + domain + '/Users', { params: { size: 500 } })
 			.then((r: any) => r.data.results),
 	);
