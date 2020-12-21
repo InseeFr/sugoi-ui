@@ -3,7 +3,7 @@ import { getAuthClient } from '../../configuration/axios-configuration';
 
 export const getRemoteRealms = () =>
 	getAuthClient().then((client: AxiosInstance) =>
-		client.get('/config/realms').then((r: any) => r.data),
+		client.get('/realms').then((r: any) => r.data),
 	);
 
 export const getRemoteUsers = (domain: string) =>
