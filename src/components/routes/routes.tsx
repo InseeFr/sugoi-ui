@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { withOidcSecure } from '@axa-fr/react-oidc-context';
 import Create from '../create/create';
-import { Details } from '../details/details';
+import DetailsContainer from '../details/details.container';
 import Settings from '../settings/settings';
 import Search from '../search/search';
 import Home from '../home/home';
@@ -18,7 +18,7 @@ const Routes = () => {
 			<Route
 				exact
 				path="/detail/:id"
-				component={withOidcSecure(Details)}
+				component={withOidcSecure(DetailsContainer)}
 			/>
 			<Route
 				exact
@@ -28,7 +28,7 @@ const Routes = () => {
 			<Route
 				exact
 				path="/realm/:realm"
-				component={withOidcSecure(Search)}
+				component={withOidcSecure(DetailsContainer)}
 			/>
 			<Route exact path="/" component={Home} />
 			<Redirect to="/" />

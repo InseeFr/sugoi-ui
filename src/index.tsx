@@ -35,7 +35,7 @@ const Start = () => {
 	) : (
 		<AuthenticationProvider
 			configuration={authConfiguration}
-			loggerLevel={oidcLog.DEBUG}
+			loggerLevel={oidcLog.INFO}
 			isEnabled={true}
 			callbackComponentOverride={Loader}
 			UserStore={InMemoryWebStorage}
