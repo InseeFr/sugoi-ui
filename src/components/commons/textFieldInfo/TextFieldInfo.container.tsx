@@ -1,25 +1,29 @@
 import React from 'react';
 import TextFieldInfo from './textFieldInfo';
+import * as utils from '../utils';
 
 interface props {
 	name: string;
 	object: any;
-	helpTextTitle: string;
+	helpTextTitle?: string;
 	helpText?: string;
 	disabled?: boolean;
-	getFunctionName: string;
+	getFunctionName?: string;
 	setFunctionName?: string;
-	setFunction?: any;
+	dispatch?: React.Dispatch<any>;
 	varName?: string;
 }
 
-const getFunction = (functionName: string) => {
+const getFunction = (functionName: string | undefined) => {
 	switch (functionName) {
-		case 'value':
-			break;
-
+		case 'GetElementFromRoot':
+			return utils.getElementFromRoot;
+		case 'GetElementFromAddress':
+			return utils.getElementFromAddress;
+		case 'GetElementFromAttributes':
+			return utils.getElementFromAttributes;
 		default:
-			break;
+			return utils.getElementFromAttributes;
 	}
 };
 
@@ -31,18 +35,17 @@ export default ({
 	helpTextTitle,
 	setFunctionName,
 	getFunctionName,
-	setFunction,
+	dispatch,
 	varName,
 }: props) => {
 	return (
 		<TextFieldInfo
 			name={name}
-			object={object}
 			disabled={disabled}
 			helpText={helpText}
 			helpTextTitle={helpTextTitle}
-			getFunction={getFunction(getFunctionName)}
-			setFunction={setFunction}
+			value={getFunction(getFunctionName)(object, varName)}
+			dispatch={dispatch}
 			setFunctionName={setFunctionName}
 			varName={varName}
 		/>

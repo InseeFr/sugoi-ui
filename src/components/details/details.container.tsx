@@ -1,35 +1,47 @@
-import { useSnackbar } from 'notistack';
 import React, { useEffect, useReducer, useState } from 'react';
 import Detail from './details';
 import { useParams } from 'react-router-dom';
 import { getUserByIdAndDomain } from '../../api/api';
-import FieldsToDisplay from './commons/fieldToDisplay/FieldToDisplayConfig';
-import reducer from './details.reducer';
+import FieldsToDisplay from '../commons/dataViewer/fieldToDisplay/FieldToDisplayConfig';
+import reducer from '../commons/dataViewer/dataviewer.reducer';
+import { Loader } from '../commons/loader/loader';
 
 const DetailsContainer = () => {
 	const { realmName, id } = useParams<any>();
-	const [user, setUser] = useState<any>();
-	const { enqueueSnackbar } = useSnackbar();
-	const [state, dispatch] = useReducer(reducer, { data: { name: 'toto' } });
+	const [state, dispatch] = useReducer(reducer, {
+		data: {},
+		initialData: {},
+	});
+	const [error, setError] = useState<any>();
+	const [loading, setLoading] = useState<any>(true);
 
 	useEffect(() => {
 		getUserByIdAndDomain(id, realmName)
-			.then((r: any) => setUser(r))
-			.catch((err) =>
-				enqueueSnackbar("Erreur lors de la requête à l'api", {
-					variant: 'error',
-					persist: false,
-				}),
-			);
-	}, [id, realmName, enqueueSnackbar]);
+			.then((r: any) => {
+				// dispatch({ type: 'UpdateData', payload: r });
+			})
+			.catch((err) => {
+				setError(err);
+			})
+			.finally(() => setLoading(false));
+		setLoading(false);
+	}, [id, realmName]);
+
 	console.log(state);
-	return (
-		<Detail
-			data={state.data}
-			fieldToDisplay={FieldsToDisplay}
-			id={'toto'}
-			dispatch={dispatch}
-		/>
+
+	if (error) throw new Error(error);
+
+	return loading ? (
+		<Loader />
+	) : (
+		<>
+			<Detail
+				data={state.data}
+				fieldToDisplay={FieldsToDisplay}
+				id={'toto'}
+				dispatch={dispatch}
+			/>
+		</>
 	);
 };
 

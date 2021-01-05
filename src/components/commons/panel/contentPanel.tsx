@@ -1,6 +1,6 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
-import TextFieldInfoContainer from './textFieldInfo/TextFieldInfo.container';
+import TextFieldInfoContainer from '../textFieldInfo/TextFieldInfo.container';
 
 interface props {
 	data: any;
@@ -22,12 +22,12 @@ export default ({ data, toDisplay, dispatch }: props) => {
 					<TextFieldInfoContainer
 						name={field.name}
 						object={data}
-						disabled={field.modifiable ? true : false}
+						disabled={field.modifiable ? false : true}
 						helpText={field.helpText}
 						helpTextTitle={field.helpTextTitle}
-						getFunctionName={field.getFunction}
-						setFunction={dispatch}
-						setFunctionName={field.setFunction}
+						getFunctionName={field.getFunctionName}
+						dispatch={dispatch}
+						setFunctionName={field.setFunctionName}
 						varName={field.varName}
 					/>
 				</Grid>

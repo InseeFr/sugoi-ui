@@ -3,7 +3,6 @@ import {
 	createStyles,
 	makeStyles,
 	Theme,
-	TextField,
 	IconButton,
 	Typography,
 	Box,
@@ -12,15 +11,8 @@ import {
 import InfoIcon from '@material-ui/icons/Info';
 
 interface props {
-	name: string;
-	object: any;
-	helpTextTitle: string;
+	helpTextTitle?: string;
 	helpText?: string;
-	disabled?: boolean;
-	getFunction?: any;
-	setFunction?: any;
-	setFunctionName?: string;
-	varName?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -37,17 +29,8 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 	}),
 );
-const TextFieldInfo = ({
-	name,
-	object,
-	disabled,
-	helpTextTitle,
-	helpText,
-	getFunction,
-	setFunction,
-	setFunctionName,
-	varName,
-}: props) => {
+
+const PopIcon = ({ helpTextTitle, helpText }: props) => {
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
 		null,
@@ -61,26 +44,8 @@ const TextFieldInfo = ({
 		setAnchorEl(null);
 	};
 	const open = Boolean(anchorEl);
-
 	return (
-		<div className={classes.root}>
-			<TextField
-				variant="outlined"
-				label={name}
-				name={name}
-				disabled={!disabled}
-				value={getFunction(object, varName)}
-				fullWidth
-				onChange={(e) =>
-					setFunction({
-						type: 'SetElementToAddress',
-						payload: {
-							name: varName,
-							value: e.target.value,
-						},
-					})
-				}
-			/>
+		<>
 			<IconButton
 				aria-label="info"
 				className={classes.margin}
@@ -121,8 +86,8 @@ const TextFieldInfo = ({
 					<Box>{helpText}</Box>
 				</Typography>
 			</Popover>
-		</div>
+		</>
 	);
 };
 
-export default TextFieldInfo;
+export default PopIcon;

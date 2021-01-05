@@ -65,7 +65,7 @@ const Panel = ({ title, children, collapsible }: props) => {
 						</IconButton>
 					) : null}
 				</Grid>
-				<Grid item xs={12}>
+				<Grid item xs={12} style={{ padding: '9px' }}>
 					<Divider />
 				</Grid>
 				<Grid item xs={12}>

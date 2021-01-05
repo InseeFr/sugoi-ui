@@ -1,3 +1,3 @@
 export default interface Attributes {
-	description: string;
+	description?: string;
 }
