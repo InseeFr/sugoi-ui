@@ -1,12 +1,12 @@
 import { Button, Grid } from '@material-ui/core';
-import React, { useEffect, useReducer } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
+import { useForms } from '../../hooks/technics/useForms';
 import { useDeleteUser } from '../../hooks/user/useDeleteUser';
 import useGetUser from '../../hooks/user/useGetUser';
 import useUpdateUser from '../../hooks/user/useUpdateUser';
 import User from '../../model/user';
 import DataViewer from '../commons/dataViewer/dataviewer';
-import reducer from '../commons/dataViewer/dataviewer.reducer';
 import FieldsToDisplay from '../commons/dataViewer/fieldToDisplay/FieldToDisplayConfig';
 import { Loader } from '../commons/loader/loader';
 import { ResetPasswordPopup } from '../commons/resetPasswordPopup/resetPasswordPopup';
@@ -22,29 +22,32 @@ interface props {
 
 const DetailUser = () => {
 	const { realm, id } = useParams<any>();
-	const [state, dispatch] = useReducer(reducer, {
-		data: {},
-		initialData: {},
-	});
 	const { loading, user } = useGetUser(id, realm);
 	const { execute: executeUpdate } = useUpdateUser();
 	const { execute: executeDelete } = useDeleteUser();
+	const {
+		formValues,
+		updateIFormValues,
+		handleChange,
+		handleReset,
+	} = useForms({ username: 'toto' });
 
-	useEffect(() => {
-		if (user) {
-			dispatch({ type: 'UpdateData', payload: user });
-		}
-	}, [user]);
-
+	// useEffect(() => {
+	// 	if (user) {
+	// 		updateIFormValues(user);
+	// 	}
+	// }, [user, updateIFormValues]);
+	console.log(user);
+	console.log(formValues);
 	return loading ? (
 		<Loader />
 	) : (
 		<>
 			<Title title={'Détail du contact ' + id} />
 			<DataViewer
-				data={state.data || user}
+				data={formValues}
 				fieldToDisplay={FieldsToDisplay}
-				dispatch={dispatch}
+				handleChange={handleChange}
 				type="user"
 			/>
 			<Grid item xs={12}>
@@ -93,11 +96,7 @@ const DetailUser = () => {
 						<Button
 							variant="contained"
 							color="default"
-							onClick={() =>
-								dispatch({
-									type: 'Reset',
-								})
-							}
+							onClick={handleReset}
 						>
 							Restaurer formulaire
 						</Button>

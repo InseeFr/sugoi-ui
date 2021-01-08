@@ -1,14 +1,14 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
-import TextFieldInfoContainer from '../textFieldInfo/TextFieldInfo.container';
-
+import TextFieldInfo from './../dataViewer/fields/textFieldInfo';
+import { field } from './../dataViewer/interface/interface';
 interface props {
 	data: any;
-	toDisplay: any;
-	dispatch: React.Dispatch<any>;
+	fields: field[];
+	handleChange: () => void;
 }
 
-export default ({ data, toDisplay, dispatch }: props) => {
+export default ({ data, fields, handleChange }: props) => {
 	return (
 		<Grid
 			container
@@ -17,21 +17,36 @@ export default ({ data, toDisplay, dispatch }: props) => {
 			alignItems="stretch"
 			spacing={2}
 		>
-			{toDisplay.map((field: any) => (
-				<Grid item xs={12}>
-					<TextFieldInfoContainer
-						name={field.name}
-						object={data}
-						disabled={field.modifiable ? false : true}
-						helpText={field.helpText}
-						helpTextTitle={field.helpTextTitle}
-						getFunctionName={field.getFunctionName}
-						dispatch={dispatch}
-						setFunctionName={field.setFunctionName}
-						varName={field.varName}
-					/>
-				</Grid>
-			))}
+			{fields.map((field: field) => {
+				switch (field.type) {
+					case 'string':
+						return (
+							<Grid item xs={12}>
+								<TextFieldInfo
+									name={field.name}
+									helpTextTitle={
+										field.helpTextTitle
+									}
+									helpText={field.helpText}
+									handleChange={
+										handleChange
+									}
+									path={field.path}
+									value={
+										data[field.path] ||
+										''
+									}
+									modifiable={
+										field.modifiable
+									}
+								/>
+							</Grid>
+						);
+
+					default:
+						return null;
+				}
+			})}
 		</Grid>
 	);
 };

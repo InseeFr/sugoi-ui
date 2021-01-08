@@ -39,12 +39,7 @@ const DetailOrganization = () => {
 	) : (
 		<>
 			<Title title={"Détail de l'organisation " + id} />
-			<DataViewer
-				data={state.data || organization}
-				fieldToDisplay={FieldsToDisplay}
-				dispatch={dispatch}
-				type="organization"
-			/>
+
 			<Grid item xs={12}>
 				<Grid
 					container

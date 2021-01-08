@@ -1,16 +1,15 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme, TextField } from '@material-ui/core';
-import PopIcon from '../popIcon/popIcon';
+import PopIcon from '../../popIcon/popIcon';
 
 interface props {
 	name: string;
 	helpTextTitle?: string;
 	helpText?: string;
-	disabled?: boolean;
-	value?: string;
-	dispatch: any;
-	setFunctionName?: string;
-	varName?: string;
+	modifiable?: boolean;
+	value: string;
+	handleChange: any;
+	path: string;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -23,13 +22,12 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 const TextFieldInfo = ({
 	name,
-	disabled,
+	modifiable,
 	helpTextTitle,
 	helpText,
 	value,
-	dispatch,
-	setFunctionName,
-	varName,
+	handleChange,
+	path,
 }: props) => {
 	const classes = useStyles();
 
@@ -39,17 +37,11 @@ const TextFieldInfo = ({
 				variant="outlined"
 				label={name}
 				name={name}
-				disabled={disabled}
+				disabled={!modifiable}
 				value={value || ''}
 				fullWidth
 				onChange={(e) =>
-					dispatch({
-						type: setFunctionName,
-						payload: {
-							name: varName,
-							value: e.target.value,
-						},
-					})
+					handleChange(path, 'string', e.target.value)
 				}
 			/>
 			<PopIcon helpTextTitle={helpTextTitle} helpText={helpText} />
