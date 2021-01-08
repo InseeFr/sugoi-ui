@@ -1,37 +1,35 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import set from 'lodash.set';
+
+const addProps = (obj: any, path: any, value: any) => set(obj, path, value);
 
 export const useForms = (initialValues: any) => {
-	const [iFormValues, setIFormValues] = useState(initialValues);
-	const [formValues, setFormValues] = useState(initialValues);
+	const [iFormValues, setIFormValues] = useState(initialValues || {});
+	const [formValues, setFormValues] = useState(initialValues || {});
+	const [todo, setTodo] = useState<any>(undefined);
+
+	useEffect(() => {
+		if (todo) {
+			console.log(todo);
+			const newFormValues = addProps(
+				formValues,
+				todo.path,
+				todo.value,
+			);
+			console.log('new form values:');
+			console.log(formValues);
+			setFormValues(newFormValues);
+			setTodo(undefined);
+		}
+	}, [todo, formValues]);
 
 	useEffect(() => {
 		setFormValues(iFormValues);
 	}, [iFormValues]);
 
-	const addProps = (
-		obj: any,
-		path: any,
-		type: 'string' | 'list',
-		value: any,
-	) => {
-		if (typeof path === 'string') {
-			path = path.split('.');
-		}
-		obj[path[0]] = obj[path[0]] || {};
-		var tmpObj = obj[path[0]];
-		if (path.length > 1) {
-			path.shift();
-			addProps(tmpObj, path, type, value);
-		} else {
-			obj[path[0]] = value;
-		}
-		return obj;
-	};
-
-	const handleChange = (path: any, type: 'string' | 'list', value: any) => {
-		const temp = addProps(formValues, path, type, value);
-		setFormValues(temp);
-	};
+	const handleChange = useCallback((path: any, value: any) => {
+		setTodo({ path: path, value: value });
+	}, []);
 
 	const handleReset = () => {
 		setFormValues(iFormValues);

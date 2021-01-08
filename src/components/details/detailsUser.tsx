@@ -1,5 +1,5 @@
 import { Button, Grid } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useForms } from '../../hooks/technics/useForms';
 import { useDeleteUser } from '../../hooks/user/useDeleteUser';
@@ -30,15 +30,13 @@ const DetailUser = () => {
 		updateIFormValues,
 		handleChange,
 		handleReset,
-	} = useForms({ username: 'toto' });
+	} = useForms({});
 
-	// useEffect(() => {
-	// 	if (user) {
-	// 		updateIFormValues(user);
-	// 	}
-	// }, [user, updateIFormValues]);
-	console.log(user);
-	console.log(formValues);
+	useEffect(() => {
+		if (user) {
+			updateIFormValues(user);
+		}
+	}, [user, updateIFormValues]);
 	return loading ? (
 		<Loader />
 	) : (

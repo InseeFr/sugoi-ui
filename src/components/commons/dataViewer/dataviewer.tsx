@@ -1,11 +1,9 @@
-import React from 'react';
 import { Grid } from '@material-ui/core';
-import Panel from '../panel/panel';
-import ContentPanel from '../panel/contentPanel';
-import Rights from './../rights/rights';
-import Proprietes from '../propriete/propriete';
-import User from '../../../model/user';
+import React from 'react';
 import Organization from '../../../model/organization';
+import User from '../../../model/user';
+import ContentPanel from '../panel/contentPanel';
+import Panel from '../panel/panel';
 import { panel } from './interface/interface';
 interface props {
 	data: User | Organization | any;
@@ -35,9 +33,9 @@ const DataViewer = ({ data, fieldToDisplay, handleChange, type }: props) => {
 							);
 						})
 				: null}
-			{leftSide
-				? Object.keys(leftSide)
-						.map((key) => leftSide[key])
+			{rightSide
+				? Object.keys(rightSide)
+						.map((key) => rightSide[key])
 						.map((panel: panel) => {
 							return (
 								<Grid item xs={12} md={6}>
@@ -60,7 +58,7 @@ const generateComponent = (panel: panel, values: any, handleChange: any) => {
 			return (
 				<Panel
 					title={panel.title}
-					collapsible={false}
+					collapsible={panel.collapsible}
 					children={
 						<ContentPanel
 							data={values}

@@ -11,38 +11,31 @@ import {
 	Typography,
 } from '@material-ui/core';
 import React from 'react';
-import Organization from '../../../model/organization';
-import User from './../../../model/user';
-import * as Actions from './../dataViewer/actions';
+import Organization from '../../../../model/organization';
+import User from '../../../../model/user';
+import * as Actions from '../actions';
 import DeleteIcon from '@material-ui/icons/Delete';
-import PopIcon from '../popIcon/popIcon';
+import PopIcon from '../../popIcon/popIcon';
+import get from 'lodash.get';
 
 interface props {
 	data: User | Organization;
-	dispatch: React.Dispatch<any>;
-	fieldToDisplay?: any[];
+	title?: string;
+	helpTextTitle?: string;
+	helpText?: string;
+	path: string;
+	handleChange: any;
 }
 
-const Proprietes = ({ data, dispatch }: props) => {
-	const [propriete, setPropriete] = React.useState<string | null>(null);
-	const handleClickAdd = () => {
-		if (propriete) {
-			dispatch({
-				type: Actions.AddElementToPropriete,
-				payload: {
-					value: propriete,
-				},
-			});
-		}
+const ListFieldInfo = ({ data, path, handleChange }: props) => {
+	const [newValue, setNewValue] = React.useState<string | null>(null);
+
+	const add = () => {
+		handleChange(path, get(data, path, []).push(newValue));
 	};
 
-	const handleClickDelete = (id: any) => {
-		dispatch({
-			type: Actions.DeleteElementInPropriete,
-			payload: {
-				value: id,
-			},
-		});
+	const delet = (pos: number) => {
+		get(data, path).splice(pos, 1);
 	};
 
 	return (
@@ -77,10 +70,10 @@ const Proprietes = ({ data, dispatch }: props) => {
 								variant="outlined"
 								label="Propriété"
 								name="Propriété"
-								value={propriete || ''}
+								value={newValue || ''}
 								fullWidth
 								onChange={(e) =>
-									setPropriete(
+									setNewValue(
 										e.target.value,
 									)
 								}
@@ -100,7 +93,7 @@ const Proprietes = ({ data, dispatch }: props) => {
 							variant="contained"
 							color="primary"
 							style={{ float: 'right' }}
-							onClick={handleClickAdd}
+							onClick={add}
 						>
 							Ajouter
 						</Button>
@@ -128,7 +121,7 @@ const Proprietes = ({ data, dispatch }: props) => {
 					</Grid>
 					<Grid item>
 						<List dense={true}>
-							{data?.attributes?.proprietes?.map(
+							{get(data, path)?.map(
 								(role: string, pos: any) => (
 									<ListItem
 										key={
@@ -144,7 +137,7 @@ const Proprietes = ({ data, dispatch }: props) => {
 												edge="end"
 												aria-label="delete"
 												onClick={() =>
-													handleClickDelete(
+													delet(
 														pos,
 													)
 												}
@@ -163,4 +156,4 @@ const Proprietes = ({ data, dispatch }: props) => {
 	);
 };
 
-export default Proprietes;
+export default ListFieldInfo;

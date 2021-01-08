@@ -38,7 +38,7 @@ const TextFieldInfo = ({
 				label={name}
 				name={name}
 				disabled={!modifiable}
-				value={value || ''}
+				value={value}
 				fullWidth
 				onChange={(e) =>
 					handleChange(path, 'string', e.target.value)
