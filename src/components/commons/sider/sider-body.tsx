@@ -14,28 +14,41 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import Autocomplete from '@material-ui/lab/Autocomplete/Autocomplete';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { getRealms } from '../../../api/api';
+import { matchPath, useHistory, useLocation } from 'react-router-dom';
 import { RootState } from '../../../configuration/store-configuration';
+import { useGetRealms } from '../../../hooks/realm/useGetRealms';
 import D from '../../../i18n';
-import { Realm } from '../../../model/interface';
 import { saveRealms } from '../../../redux/actions/app';
 
 const SiderBody = () => {
 	const dispatch = useDispatch();
 	const { push } = useHistory();
-	const [realms, setRealms] = useState<Realm[]>([]);
-	const [realmSelected, setRealmSelected] = useState<Realm | null>(null);
+	const location = useLocation();
+	const [realms, setRealms] = useState<string[]>([]);
 	const user = useSelector((state: RootState) => state.user);
+	const [realmSelected, setRealmSelected] = useState<string | null>();
+	const { realms: data } = useGetRealms();
 
 	useEffect(() => {
-		getRealms()
-			.then((r) => {
-				setRealms(r);
-				dispatch(saveRealms(r));
-			})
-			.catch((err) => {});
-	}, [dispatch]);
+		setRealms(data.map((realm) => realm.name));
+	}, [data, setRealms]);
+
+	useEffect(() => {
+		dispatch(saveRealms(data));
+	}, [dispatch, data]);
+
+	useEffect(() => {
+		const match = matchPath(location.pathname, {
+			path: '/realm/:realm',
+		});
+		if (realms.length > 0 && match) {
+			if (realms.includes((match?.params as any)?.realm)) {
+				setRealmSelected((match?.params as any)?.realm);
+			} else {
+				push('/');
+			}
+		}
+	}, [location.pathname, realms, push]);
 
 	return (
 		<>
@@ -47,15 +60,14 @@ const SiderBody = () => {
 					<Autocomplete
 						id="realm choice"
 						options={realms}
-						getOptionLabel={(realm) => realm.name}
 						style={{ width: 300 }}
+						value={realmSelected || null}
 						onChange={(
 							event: any,
-							newValue: Realm | null,
+							newValue: string | null,
 						) => {
 							if (newValue) {
-								setRealmSelected(newValue);
-								push('/realm/' + newValue.name);
+								push('/realm/' + newValue);
 							}
 						}}
 						renderInput={(params) => (
@@ -87,7 +99,7 @@ const SiderBody = () => {
 						key={D.sider_search}
 						disabled={realmSelected ? false : true}
 						onClick={() =>
-							push('/realm/' + realmSelected?.name)
+							push('/realm/' + realmSelected)
 						}
 					>
 						<ListItemIcon>
@@ -104,7 +116,7 @@ const SiderBody = () => {
 						onClick={() => {
 							push(
 								'/realm/' +
-									realmSelected?.name +
+									realmSelected +
 									'/create',
 							);
 						}}

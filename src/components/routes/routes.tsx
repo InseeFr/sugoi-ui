@@ -1,24 +1,29 @@
-import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-
 import { withOidcSecure } from '@axa-fr/react-oidc-context';
+import React from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import Create from '../create/create';
-import Settings from '../settings/settings';
-import Search from '../search/search';
+import DetailsUser from '../details/detailsUser';
+import DetailsOrganization from '../details/detailsOrganization';
 import Home from '../home/home';
-import DetailsContainer from '../details/details.container';
+import Search from '../search/search';
+import Settings from '../settings/settings';
 const Routes = () => {
 	return (
 		<Switch>
 			<Route
 				exact
-				path="/realm/:id/create"
+				path="/realm/:realm/create"
 				component={withOidcSecure(Create)}
 			/>
 			<Route
 				exact
-				path="/detail/:id"
-				component={withOidcSecure(DetailsContainer)}
+				path="/realm/:realm/user/:id"
+				component={withOidcSecure(DetailsUser)}
+			/>
+			<Route
+				exact
+				path="/realm/:realm/organization/:id"
+				component={withOidcSecure(DetailsOrganization)}
 			/>
 			<Route
 				exact

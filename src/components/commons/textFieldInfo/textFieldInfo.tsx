@@ -40,7 +40,7 @@ const TextFieldInfo = ({
 				label={name}
 				name={name}
 				disabled={disabled}
-				value={value}
+				value={value || ''}
 				fullWidth
 				onChange={(e) =>
 					dispatch({
@@ -52,12 +52,7 @@ const TextFieldInfo = ({
 					})
 				}
 			/>
-			{!helpText && !helpTextTitle ? null : (
-				<PopIcon
-					helpTextTitle={helpTextTitle}
-					helpText={helpText}
-				/>
-			)}
+			<PopIcon helpTextTitle={helpTextTitle} helpText={helpText} />
 		</div>
 	);
 };

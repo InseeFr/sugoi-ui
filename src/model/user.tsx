@@ -8,5 +8,7 @@ export default interface User {
 	username: string;
 	attributes: Attributes;
 	address: Address;
-	habilitation: string[];
+	habilitations: string[];
+	groups: string[];
+	metadatas: string[];
 }

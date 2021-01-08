@@ -1,65 +1,152 @@
 import User from './../../model/user';
+import Organization from './../../model/organization';
 
-export const getElementFromAttributes = (user: User, name: any) => {
-	if (user?.attributes) {
-		return (user?.attributes as any)[name];
+export const getElementFromAttributes = (
+	data: User | Organization,
+	name: any,
+) => {
+	if (data?.attributes) {
+		return (data?.attributes as any)[name];
 	} else return '';
 };
 
 export const addElementToHabilitation = (user: User, element: string) => {
 	let habilitations: string[] = [];
-	if (user?.habilitation === undefined) {
-		user = { ...user, habilitation: habilitations };
+	if (user?.habilitations === undefined) {
+		user = { ...user, habilitations: habilitations };
 	}
-	habilitations = user.habilitation;
+	habilitations = user.habilitations;
 	habilitations.push(element);
-	user.habilitation = habilitations;
+	user.habilitations = habilitations;
 	return user;
 };
 
-export const DeleteElementToHabilitation = (user: User, pos: number) => {
-	user.habilitation.splice(pos, 1);
+export const DeleteElementInHabilitation = (user: User, pos: number) => {
+	user.habilitations.splice(pos, 1);
+	return user;
+};
+
+export const addElementToMetadatas = (
+	data: User | Organization,
+	element: string,
+) => {
+	let metadatas: string[] = [];
+	if (data?.metadatas === undefined) {
+		data = { ...data, metadatas: metadatas };
+	}
+	metadatas = data.metadatas;
+	metadatas.push(element);
+	data.metadatas = metadatas;
+	return data;
+};
+
+export const DeleteElementInMetadats = (
+	data: User | Organization,
+	pos: number,
+) => {
+	data.metadatas.splice(pos, 1);
+	return data;
+};
+
+export const addElementToRoles = (user: User, element: string) => {
+	let roles: string[] = [];
+	if (user?.attributes?.roles === undefined) {
+		user = { ...user, attributes: { ...user.attributes, roles: [] } };
+	}
+	roles = user.attributes.roles as string[];
+	roles.push(element);
+	user.attributes.roles = roles;
+	return user;
+};
+
+export const DeleteElementInRoles = (user: User, pos: number) => {
+	(user.attributes.roles as string[]).splice(pos, 1);
+	return user;
+};
+
+export const addElementToPropriete = (
+	data: User | Organization,
+	element: string,
+) => {
+	let proprietes: string[] = [];
+	if (data?.attributes?.proprietes === undefined) {
+		data = {
+			...data,
+			attributes: { ...data.attributes, proprietes: [] },
+		};
+	}
+	proprietes = data.attributes.proprietes as string[];
+	proprietes.push(element);
+	data.attributes.proprietes = proprietes;
+	return data;
+};
+
+export const DeleteElementInPropriete = (
+	data: User | Organization,
+	pos: number,
+) => {
+	(data.attributes.proprietes as string[]).splice(pos, 1);
+	return data;
+};
+
+export const addElementToGroups = (user: User, element: string) => {
+	let groups: string[] = [];
+	if (user?.groups === undefined) {
+		user = { ...user, groups: groups };
+	}
+	groups = user.groups;
+	groups.push(element);
+	user.groups = groups;
+	return user;
+};
+
+export const DeleteElementInGroups = (user: User, pos: number) => {
+	user.groups.splice(pos, 1);
 	return user;
 };
 
 export const setElementToAttributes = (
-	user: User,
+	data: User | Organization,
 	name: string,
 	value: string,
 ) => {
-	if (user?.attributes === undefined) {
+	if (data?.attributes === undefined) {
 		let attributes = {};
-		user = { ...user, attributes: attributes };
+		data = { ...data, attributes: attributes };
 	}
-	(user?.attributes as any)[name] = value;
-	return user;
+	(data?.attributes as any)[name] = value;
+	return data;
 };
 
-export const getElementFromRoot = (user: User, name: any) => {
-	if ((user as any)[name]) {
-		return (user as any)[name];
+export const getElementFromRoot = (data: User | Organization, name: any) => {
+	if ((data as any)[name]) {
+		return (data as any)[name];
 	} else return '';
 };
-export const setElementToRoot = (user: User, name: string, value: any) => {
-	(user as any)[name] = value;
-	return user;
+export const setElementToRoot = (
+	data: User | Organization,
+	name: string,
+	value: any,
+) => {
+	(data as any)[name] = value;
+	return data;
 };
 
-export const getElementFromAddress = (user: User, name: any) => {
-	if (user?.address) {
-		return (user?.address as any)[name];
+export const getElementFromAddress = (data: User | Organization, name: any) => {
+	if (data?.address) {
+		return (data?.address as any)[name];
 	} else return '';
 };
 
 export const setElementToAddress = (
-	user: User,
+	data: User | Organization,
 	name: string,
 	value: string,
 ) => {
-	if (user?.address === undefined) {
+	if (data?.address === undefined) {
 		let address = {};
-		user = { ...user, address: address };
+		data = { ...data, address: address };
 	}
-	(user?.address as any)[name] = value;
-	return user;
+	(data?.address as any)[name] = value;
+	return data;
 };

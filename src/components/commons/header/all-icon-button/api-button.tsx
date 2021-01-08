@@ -1,7 +1,7 @@
 import { IconButton } from '@material-ui/core';
 import WebIcon from '@material-ui/icons/Web';
 import React from 'react';
-import { useConfig } from '../../../../configuration/utils';
+import { useConfig } from '../../../../hooks/technics/useConfigFile';
 
 const ApiButton = () => {
 	const api = useConfig('api');

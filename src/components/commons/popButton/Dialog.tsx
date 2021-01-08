@@ -24,6 +24,7 @@ const SimpleDialog = ({
 			aria-labelledby="simple-dialog-title"
 			open={open}
 			maxWidth="xl"
+			fullWidth
 		>
 			<DialogTitle title={title} onClose={onClose} />
 			<DialogContent dividers>{body}</DialogContent>

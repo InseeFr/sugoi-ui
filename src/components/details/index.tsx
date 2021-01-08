@@ -1,1 +1,2 @@
-export * from './details.container';
+export * from './detailsUser';
+export * from './detailsOrganization';

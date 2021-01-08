@@ -9,6 +9,7 @@ import { SearchResults } from './searchResults/searchResults';
 
 interface formValues {
 	Domaine: string;
+	type: 'user' | 'organization';
 }
 
 const Search = () => {
@@ -49,7 +50,12 @@ const Search = () => {
 					<SearchForm setValues={setValues} />
 				</Grid>
 				<Grid item xs={12}>
-					<SearchResults datasource={users} />
+					<SearchResults
+						datasource={users}
+						type={
+							(values as formValues)?.type || 'user'
+						}
+					/>
 				</Grid>
 			</Grid>
 		</>

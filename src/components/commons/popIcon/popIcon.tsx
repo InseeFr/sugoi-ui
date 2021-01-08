@@ -55,37 +55,43 @@ const PopIcon = ({ helpTextTitle, helpText }: props) => {
 			>
 				<InfoIcon fontSize="inherit" />
 			</IconButton>
-			<Popover
-				id="popover-help"
-				open={open}
-				anchorEl={anchorEl}
-				onClose={handleClose}
-				anchorOrigin={{
-					vertical: 'bottom',
-					horizontal: 'center',
-				}}
-				transformOrigin={{
-					vertical: 'top',
-					horizontal: 'center',
-				}}
-			>
-				<Typography
-					component="div"
-					variant="body1"
-					className={classes.typography}
+			{helpText || helpTextTitle ? (
+				<Popover
+					id="popover-help"
+					open={open}
+					anchorEl={anchorEl}
+					onClose={handleClose}
+					anchorOrigin={{
+						vertical: 'bottom',
+						horizontal: 'center',
+					}}
+					transformOrigin={{
+						vertical: 'top',
+						horizontal: 'center',
+					}}
 				>
-					<Box fontWeight="fontWeightBold">
-						{helpTextTitle}
-					</Box>
-				</Typography>
-				<Typography
-					component="div"
-					variant="caption"
-					className={classes.typography}
-				>
-					<Box>{helpText}</Box>
-				</Typography>
-			</Popover>
+					{helpTextTitle ? (
+						<Typography
+							component="div"
+							variant="body1"
+							className={classes.typography}
+						>
+							<Box fontWeight="fontWeightBold">
+								{helpTextTitle}
+							</Box>
+						</Typography>
+					) : null}
+					{helpText ? (
+						<Typography
+							component="div"
+							variant="caption"
+							className={classes.typography}
+						>
+							<Box>{helpText}</Box>
+						</Typography>
+					) : null}
+				</Popover>
+			) : null}
 		</>
 	);
 };

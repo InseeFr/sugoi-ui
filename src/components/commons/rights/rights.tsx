@@ -1,11 +1,14 @@
 import { Typography, List, ListItem, ListItemText } from '@material-ui/core';
 import React from 'react';
+import User from '../../../model/user';
 import PopButton from '../../commons/popButton/popButton';
 import PopIcon from '../../commons/popIcon/popIcon';
+import Groupes from './groupes/groupes';
 import Habilitations from './habilitations/habilitations';
+import Roles from './roles/roles';
 
 interface props {
-	data: any;
+	data: User | any;
 	dispatch: any;
 	fieldToDisplay: any;
 }
@@ -24,7 +27,7 @@ export default ({ data, dispatch, fieldToDisplay }: props) => {
 				/>
 			</div>
 			<List dense={true}>
-				{data?.habilitation?.map((habilitation: string) => (
+				{data?.habilitations?.map((habilitation: string) => (
 					<ListItem>
 						<ListItemText primary={habilitation} />
 					</ListItem>
@@ -47,10 +50,17 @@ export default ({ data, dispatch, fieldToDisplay }: props) => {
 					}
 				/>
 			</div>
+			<List dense={true}>
+				{data?.groups?.map((group: string) => (
+					<ListItem>
+						<ListItemText primary={group} />
+					</ListItem>
+				))}
+			</List>
 			<PopButton
 				text="Gerer les groupes"
-				title=" Gestion Habilitation"
-				body={<h1>trololollllllllllllllllllll</h1>}
+				title=" Gestion des groupes"
+				body={<Groupes data={data} dispatch={dispatch} />}
 				color="primary"
 				variant="contained"
 			/>
@@ -64,10 +74,17 @@ export default ({ data, dispatch, fieldToDisplay }: props) => {
 					}
 				/>
 			</div>
+			<List dense={true}>
+				{data?.attributes?.roles?.map((role: string) => (
+					<ListItem>
+						<ListItemText primary={role} />
+					</ListItem>
+				))}
+			</List>
 			<PopButton
 				text="Gerer les roles applicatifs"
-				title=" Gestion Habilitation"
-				body={<h1>trololollllllllllllllllllll</h1>}
+				title=" Gestion des roles applicatifs"
+				body={<Roles data={data} dispatch={dispatch} />}
 				color="primary"
 				variant="contained"
 			/>

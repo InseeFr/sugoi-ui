@@ -8,7 +8,7 @@ export default {
 			getFunctionName: 'GetElementFromRoot',
 			setFunctionName: 'SetElementToRoot',
 			varName: 'username',
-			modifiable: true,
+			modifiable: false,
 		},
 		{
 			name: 'Nom commun',
@@ -204,4 +204,5 @@ export default {
 			modifiable: true,
 		},
 	],
+	rights: [],
 };

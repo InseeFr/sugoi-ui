@@ -1,4 +1,5 @@
-import { getFakeRealms, getFakeUsers } from './fake/fake';
+import User from '../model/user';
+import { getFakeRealms, getFakeUsers, getFakeUser } from './fake/fake';
 import {
 	getRemoteRealms,
 	getRemoteUsers,
@@ -17,14 +18,17 @@ export const getUsers = (domain: string) => {
 	if (process.env.REACT_APP_FAKE_API) {
 		return getFakeUsers(domain);
 	} else {
-		return getRemoteUsers(domain);
+		return getFakeUsers(domain);
 	}
 };
 
 export const getUserByIdAndDomain = (id: string, domain: string) => {
 	if (process.env.REACT_APP_FAKE_API) {
-		return getFakeUsers(domain);
+		return getFakeUser(domain, id);
 	} else {
-		return getRemoteUser(id, domain);
+		return getFakeUser(domain, id);
 	}
+};
+export const updateUserByIdAndDomain = async (realm: string, user: User) => {
+	console.log(user);
 };

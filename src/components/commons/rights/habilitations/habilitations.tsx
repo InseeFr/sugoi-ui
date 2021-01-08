@@ -12,9 +12,13 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import DeleteIcon from '@material-ui/icons/Delete';
-
+import {
+	AddElementToHabilitations,
+	DeleteElementInHabilitations,
+} from './../../dataViewer/actions';
+import User from '../../../../model/user';
 interface props {
-	data?: any;
+	data?: User | any;
 	dispatch?: any;
 }
 
@@ -35,7 +39,7 @@ export default function Habilitations({ data, dispatch }: props) {
 					? '_' + role + (propriete ? '_' + propriete : '')
 					: '');
 			dispatch({
-				type: 'AddElementToHabilitations',
+				type: AddElementToHabilitations,
 				payload: {
 					value: prop,
 				},
@@ -44,7 +48,7 @@ export default function Habilitations({ data, dispatch }: props) {
 	};
 	const handleClickDelete = (id: any) => {
 		dispatch({
-			type: 'DeleteElementInHabilitations',
+			type: DeleteElementInHabilitations,
 			payload: {
 				value: id,
 			},
@@ -141,7 +145,7 @@ export default function Habilitations({ data, dispatch }: props) {
 					</Grid>
 					<Grid item>
 						<List dense={true}>
-							{data?.habilitation?.map(
+							{data?.habilitations?.map(
 								(
 									habilitation: string,
 									pos: any,

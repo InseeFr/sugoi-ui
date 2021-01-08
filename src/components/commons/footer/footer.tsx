@@ -9,7 +9,7 @@ import {
 	Grid,
 } from '@material-ui/core';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import { useConfig } from '../../../configuration/utils';
+import { useConfig } from '../../../hooks/technics/useConfigFile';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles((theme: Theme) =>

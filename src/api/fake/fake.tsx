@@ -9,3 +9,6 @@ export const getFakeRealms = () => {
 export const getFakeUsers = (domain: string) => {
 	return get(users);
 };
+export const getFakeUser = (domain: string, id: string) => {
+	return get(users[0]);
+};

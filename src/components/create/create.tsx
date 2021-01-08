@@ -1,49 +1,124 @@
+import { Grid } from '@material-ui/core';
 import React, { useReducer } from 'react';
-import Title from '../commons/title/title';
-import DataViewer from '../commons/dataViewer/dataviewer';
+import { useHistory, useParams } from 'react-router-dom';
 import reducer from '../commons/dataViewer/dataviewer.reducer';
-import { useParams } from 'react-router-dom';
 import FieldsToDisplay from '../commons/dataViewer/fieldToDisplay/FieldToDisplayConfig';
-import { Button, Grid } from '@material-ui/core';
-
-interface props {
-	data: any;
-	fieldToDisplay: any;
-	id: string;
-	dispatch: React.Dispatch<any>;
-}
+import Title from '../commons/title/title';
+import ContentPanel from './../commons/panel/contentPanel';
+import Panel from './../commons/panel/panel';
+import Proprietes from './../commons/propriete/propriete';
+import Rights from './../commons/rights/rights';
+import MyStepper from './stepper';
 
 const Create = () => {
-	const { id } = useParams<any>();
+	const { realm } = useParams<any>();
 
 	const [state, dispatch] = useReducer(reducer, {
 		data: {},
 		initialData: {},
 	});
 
+	const { push } = useHistory();
+
+	const create = () => {
+		console.log(state.data);
+		push('/realm/BRP');
+	};
+
+	const mySteps = () => [
+		{ title: 'Choix type Entité', component: <>Choix entité</> },
+		{
+			title: 'Information Principales',
+			component: (
+				<Panel
+					title="Informations principale"
+					collapsible={false}
+					children={
+						<ContentPanel
+							data={state.data}
+							toDisplay={FieldsToDisplay.basic}
+							dispatch={dispatch}
+						/>
+					}
+				/>
+			),
+		},
+		{
+			title: 'Information complémentaire',
+			component: (
+				<Panel
+					title="Informations Complémentaire"
+					collapsible={false}
+					children={
+						<ContentPanel
+							data={state.data}
+							toDisplay={FieldsToDisplay.advanced}
+							dispatch={dispatch}
+						/>
+					}
+				/>
+			),
+		},
+		{
+			title: 'Adresse',
+			component: (
+				<Panel
+					title="Adresse"
+					collapsible={false}
+					children={
+						<ContentPanel
+							data={state.data}
+							toDisplay={FieldsToDisplay.address}
+							dispatch={dispatch}
+						/>
+					}
+				/>
+			),
+		},
+		{
+			title: 'Droits',
+			component: (
+				<Panel
+					title="Droits applicatifs"
+					collapsible={false}
+					children={
+						<Rights
+							data={state.data}
+							dispatch={dispatch}
+							fieldToDisplay={FieldsToDisplay}
+						/>
+					}
+				/>
+			),
+		},
+		{
+			title: 'Propriété',
+			component: (
+				<Panel
+					title="Propriété"
+					collapsible={false}
+					children={
+						<Proprietes
+							data={state.data}
+							dispatch={dispatch}
+						/>
+					}
+				/>
+			),
+		},
+	];
+
 	return (
-		<>
-			<Title title={'Créer un contact dans le realm: ' + id} />
-			<DataViewer
-				data={state.data}
-				fieldToDisplay={FieldsToDisplay}
-				dispatch={dispatch}
-			/>
-			<Grid item xs={12}>
-				<Grid
-					container
-					direction="row"
-					justify="center"
-					spacing={3}
-				>
-					<Grid item>
-						<Button variant="contained" color="primary">
-							Créer
-						</Button>
-					</Grid>
-				</Grid>
+		<Grid container spacing={2} direction="column">
+			<Grid item>
+				<Title
+					title={'Créer une entité dans le realm: ' + realm}
+				/>
 			</Grid>
-		</>
+			<Grid item>
+				<MyStepper steps={mySteps()} functionCreate={create} />
+			</Grid>
+		</Grid>
 	);
 };
 

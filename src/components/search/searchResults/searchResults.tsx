@@ -1,8 +1,9 @@
 import React from 'react';
 import MaterialTable from 'material-table';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 interface props {
 	datasource: any;
+	type: 'user' | 'organization';
 }
 
 const columns = [
@@ -21,7 +22,8 @@ const columns = [
 ];
 
 export const SearchResults = (props: props) => {
-	const { datasource } = props;
+	const { realm } = useParams<any>();
+	const { datasource, type } = props;
 	const { push } = useHistory();
 	return (
 		<MaterialTable
@@ -33,7 +35,14 @@ export const SearchResults = (props: props) => {
 					icon: 'visibility',
 					tooltip: 'View user',
 					onClick: (event, rowData: any) => {
-						push('/detail/' + rowData.username);
+						push(
+							'/realm/' +
+								realm +
+								'/' +
+								type +
+								'/' +
+								rowData.username,
+						);
 					},
 				},
 			]}
