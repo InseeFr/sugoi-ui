@@ -18,36 +18,44 @@ const DataViewer = ({ data, fieldToDisplay, handleChange, type }: props) => {
 
 	return (
 		<Grid container spacing={3}>
-			{leftSide
-				? Object.keys(leftSide)
-						.map((key) => leftSide[key])
-						.map((panel: panel) => {
-							return (
-								<Grid item xs={12} md={6}>
-									{generateComponent(
-										panel,
-										data,
-										handleChange,
-									)}
-								</Grid>
-							);
-						})
-				: null}
-			{rightSide
-				? Object.keys(rightSide)
-						.map((key) => rightSide[key])
-						.map((panel: panel) => {
-							return (
-								<Grid item xs={12} md={6}>
-									{generateComponent(
-										panel,
-										data,
-										handleChange,
-									)}
-								</Grid>
-							);
-						})
-				: null}
+			<Grid item xs={12} md={6}>
+				<Grid container direction="column" spacing={2}>
+					{leftSide
+						? Object.keys(leftSide)
+								.map((key) => leftSide[key])
+								.map((panel: panel) => {
+									return (
+										<Grid item xs={12}>
+											{generateComponent(
+												panel,
+												data,
+												handleChange,
+											)}
+										</Grid>
+									);
+								})
+						: null}
+				</Grid>
+			</Grid>
+			<Grid item xs={12} md={6}>
+				<Grid container direction="column" spacing={2}>
+					{rightSide
+						? Object.keys(rightSide)
+								.map((key) => rightSide[key])
+								.map((panel: panel) => {
+									return (
+										<Grid item xs={12}>
+											{generateComponent(
+												panel,
+												data,
+												handleChange,
+											)}
+										</Grid>
+									);
+								})
+						: null}
+				</Grid>
+			</Grid>
 		</Grid>
 	);
 };
@@ -68,8 +76,6 @@ const generateComponent = (panel: panel, values: any, handleChange: any) => {
 					}
 				/>
 			);
-			break;
-
 		default:
 			break;
 	}

@@ -3,7 +3,6 @@ import Title from '../commons/title/title';
 import DataViewer from '../commons/dataViewer/dataviewer';
 import { Button, Grid } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
-import reducer from '../commons/dataViewer/dataviewer.reducer';
 import FieldsToDisplay from '../commons/dataViewer/fieldToDisplay/FieldToDisplayConfig';
 import organization from '../../model/organization';
 import useGetOrganization from '../../hooks/organization/useGetOrganization';
@@ -20,19 +19,10 @@ interface props {
 
 const DetailOrganization = () => {
 	const { realm, id } = useParams<any>();
-	const [state, dispatch] = useReducer(reducer, {
-		data: {},
-		initialData: {},
-	});
+
 	const { loading, organization } = useGetOrganization(id, realm);
 	const { execute: executeUpdate } = useUpdateOrganization();
 	const { execute: executeDelete } = useDeleteOrganization();
-
-	useEffect(() => {
-		if (organization) {
-			dispatch({ type: 'UpdateData', payload: organization });
-		}
-	}, [organization]);
 
 	return loading ? (
 		<Loader />
@@ -77,15 +67,7 @@ const DetailOrganization = () => {
 						</Button>
 					</Grid>
 					<Grid item>
-						<Button
-							variant="contained"
-							color="default"
-							onClick={() =>
-								dispatch({
-									type: 'Reset',
-								})
-							}
-						>
+						<Button variant="contained" color="default">
 							Restaurer formulaire
 						</Button>
 					</Grid>

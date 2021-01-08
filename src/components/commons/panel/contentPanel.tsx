@@ -48,12 +48,39 @@ export default ({ data, fields, handleChange }: props) => {
 						return (
 							<Grid item xs={12}>
 								<ListFieldInfo
+									name={field.name}
+									helpText={field.helpText}
+									helpTextTitle={
+										field.helpTextTitle
+									}
+									modifiable={
+										field.modifiable
+									}
 									data={data}
 									handleChange={
 										handleChange
 									}
 									path={field.path}
+									textButton={
+										field.textButton
+									}
+									addTitle={field.addTitle}
+									deleteTitle={
+										field.deleteTitle
+									}
 								/>
+							</Grid>
+						);
+					case 'habilitation':
+						return (
+							<Grid item xs={12}>
+								Habilitation
+							</Grid>
+						);
+					case 'role':
+						return (
+							<Grid item xs={12}>
+								Role
 							</Grid>
 						);
 					default:

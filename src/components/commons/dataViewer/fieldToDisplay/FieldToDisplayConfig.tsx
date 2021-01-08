@@ -17,21 +17,55 @@ export default {
 					modifiable: false,
 				},
 				{
-					name: 'mail',
-					helpTextTitle: 'Identifiant unique du contact',
+					name: 'Nom commun',
+					helpTextTitle: ' Nom commun du contact ',
 					helpText:
-						"Il servira pour le rechercher à travers l'annuaire.",
-					path: 'attributes.mail',
+						" Il servira pour le rechercher à travers l'annuaire. Caractères autorisés : alphabétiques chiffres apostrophes espaces tirets",
+					path: 'attributes.commun_name',
 					type: 'string',
 					modifiable: true,
 				},
 				{
-					name: 'truc',
-					helpTextTitle: 'Identifiant unique du contact',
+					name: 'Nom',
+					helpTextTitle: ' Nom du contact ',
 					helpText:
-						"Il servira pour le rechercher à travers l'annuaire.",
-					path: 'truc',
-					type: 'list',
+						'Caractères autorisés : alphabétiques chiffres apostrophes espaces tirets',
+					path: 'lastname',
+					type: 'string',
+					modifiable: true,
+				},
+				{
+					name: 'Prenom',
+					helpTextTitle: ' Prénom du contact ',
+					helpText:
+						'Caractères autorisés : alphabétiques chiffres apostrophes espaces tirets',
+					path: 'name',
+					type: 'string',
+					modifiable: true,
+				},
+				{
+					name: 'Adresse e-mail',
+					helpTextTitle:
+						' Adresse de messagerie du contact ',
+					helpText:
+						" Elle servira pour la rechercher à travers l'annuaire. ",
+					path: 'username',
+					type: 'string',
+					modifiable: true,
+				},
+				{
+					name: 'Numéro de téléphone',
+					helpTextTitle: ' Numéro de téléphone du contact ',
+					helpText:
+						'Entre 1 et 25 caractères numériques, points, tirets, parenthèses, signe plus, et espaces uniquement. ',
+					path: 'attributes.phone_number',
+					type: 'string',
+					modifiable: true,
+				},
+				{
+					name: 'Description',
+					path: 'username',
+					type: 'string',
 					modifiable: true,
 				},
 			],
@@ -109,6 +143,48 @@ export default {
 				},
 			],
 		},
-		propriete: {},
+		role: {
+			title: 'Droits applicatifs',
+			description: 'trololol',
+			collapsible: false,
+			type: 'panel',
+			fields: [
+				{
+					name: 'Roles Applicatifs',
+					helpTextTitle: ' Propriétés du contact',
+					helpText:
+						'Correspond aux attributs inseeRoleApplicatif',
+					path: 'roles',
+					type: 'list',
+					addTitle: 'Ajouter un rôle',
+					deleteTitle: 'Supprimer un rôle',
+					textButton: 'Gérer les rôles',
+					modifiable: true,
+				},
+				,
+				{ type: 'habilitation' },
+				{ type: 'role' },
+			],
+		},
+		propriete: {
+			title: 'Propriété',
+			description: 'trololol',
+			collapsible: false,
+			type: 'panel',
+			fields: [
+				{
+					name: 'Propriété',
+					helpTextTitle: ' Propriétés du contact',
+					helpText:
+						'Ajouter une propriété à saisir en cliquant sur "Ajouter un champ". Supprimer une propriété saisie en vidant le champ ou en cliquant sur la croix rouge à droite du champ. Aucune limite d\'ajout.',
+					path: 'attributes.propriété',
+					type: 'list',
+					addTitle: 'Ajouter une propriété',
+					deleteTitle: 'Supprimer une propriété',
+					textButton: 'Gérer les propriétés',
+					modifiable: true,
+				},
+			],
+		},
 	},
 };

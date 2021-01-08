@@ -7,21 +7,26 @@ export const useForms = (initialValues: any) => {
 	const [iFormValues, setIFormValues] = useState(initialValues || {});
 	const [formValues, setFormValues] = useState(initialValues || {});
 	const [todo, setTodo] = useState<any>(undefined);
+	const [reset, setReset] = useState(false);
 
 	useEffect(() => {
 		if (todo) {
-			console.log(todo);
 			const newFormValues = addProps(
 				formValues,
 				todo.path,
 				todo.value,
 			);
-			console.log('new form values:');
-			console.log(formValues);
 			setFormValues(newFormValues);
 			setTodo(undefined);
 		}
 	}, [todo, formValues]);
+
+	useEffect(() => {
+		if (reset) {
+			setFormValues(iFormValues);
+			setReset(false);
+		}
+	}, [reset, iFormValues]);
 
 	useEffect(() => {
 		setFormValues(iFormValues);
@@ -32,7 +37,7 @@ export const useForms = (initialValues: any) => {
 	}, []);
 
 	const handleReset = () => {
-		setFormValues(iFormValues);
+		setReset(true);
 	};
 
 	return {

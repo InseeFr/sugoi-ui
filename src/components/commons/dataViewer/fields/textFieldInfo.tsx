@@ -38,11 +38,9 @@ const TextFieldInfo = ({
 				label={name}
 				name={name}
 				disabled={!modifiable}
-				value={value}
+				value={value || ''}
 				fullWidth
-				onChange={(e) =>
-					handleChange(path, 'string', e.target.value)
-				}
+				onChange={(e) => handleChange(path, e.target.value)}
 			/>
 			<PopIcon helpTextTitle={helpTextTitle} helpText={helpText} />
 		</div>

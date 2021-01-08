@@ -11,12 +11,9 @@ import {
 	TextField,
 } from '@material-ui/core';
 import React from 'react';
-import {
-	AddElementToRole,
-	DeleteElementInRole,
-} from '../../dataViewer/actions';
-import User from '../../../../model/user';
+
 import DeleteIcon from '@material-ui/icons/Delete';
+import User from '../../../../model/user';
 
 interface props {
 	data?: User | any;
@@ -27,22 +24,9 @@ export default function Roles({ data, dispatch }: props) {
 	const [role, setRole] = React.useState<any>(null);
 	const handleClickAdd = () => {
 		if (role) {
-			dispatch({
-				type: AddElementToRole,
-				payload: {
-					value: role,
-				},
-			});
 		}
 	};
-	const handleClickDelete = (id: any) => {
-		dispatch({
-			type: DeleteElementInRole,
-			payload: {
-				value: id,
-			},
-		});
-	};
+	const handleClickDelete = (id: any) => {};
 
 	return (
 		<Grid container spacing={3}>

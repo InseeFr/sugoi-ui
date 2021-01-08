@@ -11,10 +11,7 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import React from 'react';
 import AddIcon from '@material-ui/icons/Add';
-import {
-	AddElementToGroups,
-	DeleteElementInGroups,
-} from './../../dataViewer/actions';
+
 import User from '../../../../model/user';
 
 interface props {
@@ -39,23 +36,9 @@ export default function Groupes({ data, dispatch }: props) {
 		}
 	}, [data]);
 
-	const handleClickAdd = (pos: number) => {
-		dispatch({
-			type: AddElementToGroups,
-			payload: {
-				value: availableGroup[pos],
-			},
-		});
-	};
+	const handleClickAdd = (pos: number) => {};
 
-	const handleClickDelete = (id: number) => {
-		dispatch({
-			type: DeleteElementInGroups,
-			payload: {
-				value: id,
-			},
-		});
-	};
+	const handleClickDelete = (id: number) => {};
 
 	return (
 		<Grid container spacing={3} style={{ minWidth: '80%' }}>

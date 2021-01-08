@@ -27,16 +27,22 @@ const DetailUser = () => {
 	const { execute: executeDelete } = useDeleteUser();
 	const {
 		formValues,
+		iFormValues,
 		updateIFormValues,
 		handleChange,
 		handleReset,
 	} = useForms({});
 
 	useEffect(() => {
-		if (user) {
+		if (user !== iFormValues) {
 			updateIFormValues(user);
 		}
 	}, [user, updateIFormValues]);
+
+	console.log(user);
+	console.log(iFormValues);
+	console.log(formValues);
+
 	return loading ? (
 		<Loader />
 	) : (

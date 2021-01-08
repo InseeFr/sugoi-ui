@@ -67,9 +67,6 @@ export default function HorizontalLinearStepper({
 								<StepLabel {...labelProps}>
 									{step.title}
 								</StepLabel>
-								{/* <StepContent>
-								{steps[activeStep].component}
-							</StepContent> */}
 							</Step>
 						);
 					})}

@@ -10,6 +10,9 @@ export interface field {
 	helpText: string;
 	helpTextTitle: string;
 	path: string;
-	type: 'string' | 'list';
+	type: 'string' | 'list' | 'habilitation' | 'role';
 	modifiable: boolean;
+	deleteTitle: string;
+	addTitle: string;
+	textButton: string;
 }
