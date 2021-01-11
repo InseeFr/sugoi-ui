@@ -12,19 +12,38 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import DeleteIcon from '@material-ui/icons/Delete';
+import get from 'lodash.get';
+import User from '../../../../model/api/user';
 
-import User from '../../../../model/user';
 interface props {
-	data?: User | any;
-	dispatch?: any;
+	data: User;
+	textButton?: string;
+	helpTextTitle?: string;
+	helpText?: string;
+	path: string;
+	name?: string;
+	handleChange: any;
+	addTitle?: string;
+	deleteTitle?: string;
+	modifiable: boolean;
 }
 
-export default function Habilitations({ data, dispatch }: props) {
-	const [application, setApplication] = React.useState<any>(null);
-	const [role, setRole] = React.useState<any>(null);
-	const [propriete, setPropriete] = React.useState<any>(null);
+const HabilitationsPopup = ({
+	name,
+	helpTextTitle,
+	helpText,
+	data,
+	path,
+	handleChange,
+	modifiable,
+	addTitle,
+	deleteTitle,
+}: props) => {
+	const [application, setApplication] = React.useState<any>(undefined);
+	const [role, setRole] = React.useState<any>(undefined);
+	const [propriete, setPropriete] = React.useState<any>(undefined);
+
 	const handleClickAdd = () => {
-		console.log(application, role, propriete);
 		if (
 			application ||
 			(application && role) ||
@@ -35,9 +54,20 @@ export default function Habilitations({ data, dispatch }: props) {
 				(role
 					? '_' + role + (propriete ? '_' + propriete : '')
 					: '');
+			const value = get(data, path, []);
+			value.push(prop);
+			handleChange(path, value);
+			setApplication(undefined);
+			setPropriete(undefined);
+			setRole(undefined);
 		}
 	};
-	const handleClickDelete = (id: any) => {};
+
+	const handleClickDelete = (pos: number) => {
+		const value = get(data, path, []);
+		value.splice(pos, 1);
+		handleChange(path, value);
+	};
 
 	return (
 		<Grid container spacing={3} style={{ minWidth: '80%' }}>
@@ -54,7 +84,7 @@ export default function Habilitations({ data, dispatch }: props) {
 							align="left"
 							variant="subtitle1"
 						>
-							Ajouter une habilitation
+							{name}
 						</Typography>
 					</Grid>
 					<Grid item>
@@ -65,7 +95,7 @@ export default function Habilitations({ data, dispatch }: props) {
 							variant="outlined"
 							label="Application"
 							name="Application"
-							value={application}
+							value={application || ''}
 							fullWidth
 							onChange={(e) =>
 								setApplication(e.target.value)
@@ -77,7 +107,7 @@ export default function Habilitations({ data, dispatch }: props) {
 							variant="outlined"
 							label="Role"
 							name="Role"
-							value={role}
+							value={role || ''}
 							fullWidth
 							onChange={(e) =>
 								setRole(e.target.value)
@@ -89,7 +119,7 @@ export default function Habilitations({ data, dispatch }: props) {
 							variant="outlined"
 							label="Propriété"
 							name="Propriété"
-							value={propriete}
+							value={propriete || ''}
 							fullWidth
 							onChange={(e) =>
 								setPropriete(e.target.value)
@@ -162,4 +192,6 @@ export default function Habilitations({ data, dispatch }: props) {
 			</Grid>
 		</Grid>
 	);
-}
+};
+
+export default HabilitationsPopup;

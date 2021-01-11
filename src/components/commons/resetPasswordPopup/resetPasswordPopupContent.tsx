@@ -8,7 +8,7 @@ import {
 	Grid,
 	Box,
 } from '@material-ui/core';
-import User from '../../../model/user';
+import User from '../../../model/api/user';
 
 interface props {
 	user?: User;

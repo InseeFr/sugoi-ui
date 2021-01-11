@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../configuration/store-configuration';
-import { Realm } from '../../model/realm';
+import { Realm } from '../../model/api/realm';
 import RealmCard from './realm-card';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ExpandButton from '../search/formular/expand-button';

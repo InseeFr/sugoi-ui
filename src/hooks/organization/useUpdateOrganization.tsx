@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Organization from '../../model/organization';
+import Organization from '../../model/api/organization';
 
 interface execute {
 	realm: string;

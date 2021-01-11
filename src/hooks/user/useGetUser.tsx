@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getUserByIdAndDomain } from '../../api/api';
-import User from '../../model/user';
+import { getUsers } from '../../api';
+import User from '../../model/api/user';
 
 const useGetUser = (id: string, realm: string) => {
 	const [result, setResult] = useState<User>();
@@ -9,9 +9,9 @@ const useGetUser = (id: string, realm: string) => {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		getUserByIdAndDomain(search.realmId, search.userId)
-			.then((r: any) => {
-				setResult(r);
+		getUsers(search.realmId, { identifiant: search.userId })
+			.then((r: User[]) => {
+				setResult(r[0]);
 			})
 			.catch((err) => {
 				setError(err);

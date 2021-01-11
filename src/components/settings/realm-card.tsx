@@ -9,7 +9,7 @@ import {
 	TextField,
 	Grid,
 } from '@material-ui/core';
-import { Realm } from '../../model/realm';
+import { Realm } from '../../model/api/realm';
 import UserStorageCard from './userStorage-card';
 
 interface props {

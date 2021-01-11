@@ -23,22 +23,22 @@ export const useForms = (initialValues: any) => {
 
 	useEffect(() => {
 		if (reset) {
-			setFormValues(iFormValues);
+			setFormValues({ ...iFormValues });
 			setReset(false);
 		}
 	}, [reset, iFormValues]);
 
 	useEffect(() => {
-		setFormValues(iFormValues);
+		setFormValues({ ...iFormValues });
 	}, [iFormValues]);
 
 	const handleChange = useCallback((path: any, value: any) => {
 		setTodo({ path: path, value: value });
 	}, []);
 
-	const handleReset = () => {
+	const handleReset = useCallback(() => {
 		setReset(true);
-	};
+	}, []);
 
 	return {
 		iFormValues,

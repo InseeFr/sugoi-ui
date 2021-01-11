@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme, TextField } from '@material-ui/core';
-import PopIcon from '../../popIcon/popIcon';
+import PopIcon from '../../commons/popIcon/popIcon';
 
 interface props {
 	name: string;

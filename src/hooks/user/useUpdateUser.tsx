@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import User from '../../model/user';
+import User from '../../model/api/user';
 interface execute {
 	realm: string;
 	user: User;

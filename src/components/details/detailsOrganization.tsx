@@ -3,8 +3,8 @@ import Title from '../commons/title/title';
 import DataViewer from '../commons/dataViewer/dataviewer';
 import { Button, Grid } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
-import FieldsToDisplay from '../commons/dataViewer/fieldToDisplay/FieldToDisplayConfig';
-import organization from '../../model/organization';
+import FieldsToDisplay from '../formular/fieldToDisplay/FieldToDisplayConfig';
+import organization from '../../model/api/organization';
 import useGetOrganization from '../../hooks/organization/useGetOrganization';
 import useUpdateOrganization from '../../hooks/organization/useUpdateOrganization';
 import { useDeleteOrganization } from '../../hooks/organization/useDeleteOrganization';
@@ -24,7 +24,7 @@ const DetailOrganization = () => {
 	const { execute: executeUpdate } = useUpdateOrganization();
 	const { execute: executeDelete } = useDeleteOrganization();
 
-	return loading ? (
+	return loading && organization ? (
 		<Loader />
 	) : (
 		<>
@@ -58,8 +58,8 @@ const DetailOrganization = () => {
 							onClick={() =>
 								executeDelete(
 									realm,
-									(organization as organization)
-										.identifiant,
+									((organization as unknown) as organization)
+										?.identifiant || '',
 								)
 							}
 						>

@@ -13,10 +13,9 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import get from 'lodash.get';
 import React from 'react';
-import Organization from '../../../../model/organization';
-import User from '../../../../model/user';
-import PopButton from '../../popButton/popButton';
-import PopIcon from '../../popIcon/popIcon';
+import Organization from '../../../../model/api/organization';
+import User from '../../../../model/api/user';
+import PopIcon from '../../../commons/popIcon/popIcon';
 
 interface props {
 	data: User | Organization;
@@ -31,7 +30,7 @@ interface props {
 	modifiable: boolean;
 }
 
-const ListFieldInfo = ({
+const ListFieldInfoPopup = ({
 	name,
 	helpTextTitle,
 	helpText,
@@ -43,7 +42,6 @@ const ListFieldInfo = ({
 	deleteTitle,
 }: props) => {
 	const [newValue, setNewValue] = React.useState<any>();
-	console.log(get(data, path, []));
 	const add = () => {
 		if (newValue) {
 			const value = get(data, path, []);
@@ -75,7 +73,7 @@ const ListFieldInfo = ({
 								align="left"
 								variant="subtitle1"
 							>
-								Ajouter
+								{addTitle}
 							</Typography>
 						</Grid>
 						<Grid item>
@@ -137,7 +135,7 @@ const ListFieldInfo = ({
 									align="left"
 									variant="subtitle1"
 								>
-									Supprimer
+									{deleteTitle}
 								</Typography>
 							</Grid>
 							<Grid item>
@@ -184,55 +182,4 @@ const ListFieldInfo = ({
 	);
 };
 
-export const ListFieldButton = ({
-	name,
-	helpTextTitle,
-	helpText,
-	textButton,
-	data,
-	path,
-	handleChange,
-	modifiable,
-}: props) => {
-	return (
-		<>
-			<div style={{ display: 'flex', alignItems: 'center' }}>
-				<Typography component="div" variant="body1">
-					{name}
-				</Typography>
-				<PopIcon
-					helpTextTitle={helpTextTitle}
-					helpText={helpText}
-				/>
-				<div style={{ float: 'right' }}>
-					<PopButton
-						text={textButton || ''}
-						title="Gestion habilitations"
-						body={
-							<ListFieldInfo
-								name={name}
-								helpText={helpText}
-								helpTextTitle={helpTextTitle}
-								modifiable={modifiable}
-								data={data}
-								handleChange={handleChange}
-								path={path}
-							/>
-						}
-						color="primary"
-						variant="contained"
-					/>
-				</div>
-			</div>
-			<List dense={true}>
-				{get(data, path, []).map((value: string) => (
-					<ListItem disableGutters>
-						<ListItemText primary={value} />
-					</ListItem>
-				))}
-			</List>
-		</>
-	);
-};
-
-export default ListFieldButton;
+export default ListFieldInfoPopup;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getUserByIdAndDomain } from '../../api/api';
-import Organization from '../../model/organization';
+import { getOrganization } from '../../api';
+import Organization from '../../model/api/organization';
 
 const useGetOrganization = (id: string, realm: string) => {
 	const [result, setResult] = useState<Organization>();
@@ -12,9 +12,9 @@ const useGetOrganization = (id: string, realm: string) => {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		getUserByIdAndDomain(search.realmId, search.OrganizationId)
-			.then((r: any) => {
-				setResult(r);
+		getOrganization(search.realmId, search.OrganizationId)
+			.then((r: Organization[]) => {
+				setResult(r[0]);
 			})
 			.catch((err) => {
 				setError(err);

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Grid } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 import { useParams } from 'react-router-dom';
-import { getUsers } from '../../api/api';
+import { getUsers } from '../../api';
 import Title from '../commons/title/title';
 import SearchForm from './formular/card-formular';
 import { SearchResults } from './searchResults/searchResults';

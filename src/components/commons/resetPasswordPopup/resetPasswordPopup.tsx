@@ -1,6 +1,6 @@
 import { Button } from '@material-ui/core';
 import React, { useState } from 'react';
-import User from '../../../model/user';
+import User from '../../../model/api/user';
 import PopButton from '../popButton/popButton';
 import { ResetPasswordPopupContent } from './resetPasswordPopupContent';
 

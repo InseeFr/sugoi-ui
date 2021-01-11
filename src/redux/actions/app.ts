@@ -1,4 +1,4 @@
-import { Realm } from '../../model/realm';
+import { Realm } from '../../model/api/realm';
 
 export const saveConfig = (config: any) => ({
 	type: 'saveConfig',

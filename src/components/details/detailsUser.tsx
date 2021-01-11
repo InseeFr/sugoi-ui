@@ -5,9 +5,9 @@ import { useForms } from '../../hooks/technics/useForms';
 import { useDeleteUser } from '../../hooks/user/useDeleteUser';
 import useGetUser from '../../hooks/user/useGetUser';
 import useUpdateUser from '../../hooks/user/useUpdateUser';
-import User from '../../model/user';
+import User from '../../model/api/user';
 import DataViewer from '../commons/dataViewer/dataviewer';
-import FieldsToDisplay from '../commons/dataViewer/fieldToDisplay/FieldToDisplayConfig';
+import FieldsToDisplay from '../formular/fieldToDisplay/FieldToDisplayConfig';
 import { Loader } from '../commons/loader/loader';
 import { ResetPasswordPopup } from '../commons/resetPasswordPopup/resetPasswordPopup';
 import { SendPopupButton } from '../commons/sendPasswordPopup/sendPopup';
@@ -34,14 +34,10 @@ const DetailUser = () => {
 	} = useForms({});
 
 	useEffect(() => {
-		if (user !== iFormValues) {
+		if (user) {
 			updateIFormValues(user);
 		}
 	}, [user, updateIFormValues]);
-
-	console.log(user);
-	console.log(iFormValues);
-	console.log(formValues);
 
 	return loading ? (
 		<Loader />
@@ -89,7 +85,8 @@ const DetailUser = () => {
 							onClick={() =>
 								executeDelete(
 									realm,
-									(user as User).username,
+									(user as User).username ||
+										'',
 								)
 							}
 						>

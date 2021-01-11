@@ -1,10 +1,10 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
-import Organization from '../../../model/organization';
-import User from '../../../model/user';
-import ContentPanel from '../panel/contentPanel';
+import Organization from '../../../model/api/organization';
+import { section } from '../../../model/panel';
+import User from '../../../model/api/user';
+import Formular from '../../formular';
 import Panel from '../panel/panel';
-import { panel } from './interface/interface';
 interface props {
 	data: User | Organization | any;
 	fieldToDisplay: any;
@@ -12,7 +12,7 @@ interface props {
 	type: 'user' | 'organization';
 }
 
-const DataViewer = ({ data, fieldToDisplay, handleChange, type }: props) => {
+const DataViewer = ({ data, fieldToDisplay, handleChange }: props) => {
 	const leftSide = fieldToDisplay?.left;
 	const rightSide = fieldToDisplay?.right;
 
@@ -23,7 +23,7 @@ const DataViewer = ({ data, fieldToDisplay, handleChange, type }: props) => {
 					{leftSide
 						? Object.keys(leftSide)
 								.map((key) => leftSide[key])
-								.map((panel: panel) => {
+								.map((panel: section) => {
 									return (
 										<Grid item xs={12}>
 											{generateComponent(
@@ -42,7 +42,7 @@ const DataViewer = ({ data, fieldToDisplay, handleChange, type }: props) => {
 					{rightSide
 						? Object.keys(rightSide)
 								.map((key) => rightSide[key])
-								.map((panel: panel) => {
+								.map((panel: section) => {
 									return (
 										<Grid item xs={12}>
 											{generateComponent(
@@ -60,7 +60,7 @@ const DataViewer = ({ data, fieldToDisplay, handleChange, type }: props) => {
 	);
 };
 
-const generateComponent = (panel: panel, values: any, handleChange: any) => {
+const generateComponent = (panel: section, values: any, handleChange: any) => {
 	switch (panel.type) {
 		case 'panel':
 			return (
@@ -68,7 +68,7 @@ const generateComponent = (panel: panel, values: any, handleChange: any) => {
 					title={panel.title}
 					collapsible={panel.collapsible}
 					children={
-						<ContentPanel
+						<Formular
 							data={values}
 							handleChange={handleChange}
 							fields={panel.fields}

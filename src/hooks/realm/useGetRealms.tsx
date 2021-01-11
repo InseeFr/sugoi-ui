@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { getRealms } from '../../api/api';
-import { Realm } from '../../model/realm';
+import { getRealms } from '../../api';
+import { Realm } from '../../model/api/realm';
 
 export const useGetRealms = () => {
 	const [realms, setRealms] = useState<Realm[]>([]);

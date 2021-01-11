@@ -7,8 +7,8 @@ import {
 	Grid,
 	TextField,
 } from '@material-ui/core';
-import { Realm } from '../../model/realm';
-import { UserStorage } from '../../model/userStorage';
+import { Realm } from '../../model/api/realm';
+import { UserStorage } from '../../model/api/userStorage';
 
 interface props {
 	userStorage: UserStorage;
