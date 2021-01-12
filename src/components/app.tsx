@@ -15,7 +15,7 @@ import BreadCrumbs from './commons/breadcrumbs/breadcrumbs';
 import Header from './commons/header/header';
 import ScrollTop from './commons/scroll-top/scroll-top';
 import Sider from './commons/sider';
-import ErrorBoundary from './error/Error';
+import ErrorBoundary from './commons/error/Error';
 import Routes from './routes/routes';
 
 const useStyles = makeStyles((theme: Theme) =>

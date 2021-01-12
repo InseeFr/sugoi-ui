@@ -10,6 +10,7 @@ const usePostUser = () => {
 	const [loading, setLoading] = useState(true);
 	const [data, setdata] = useState<execute | undefined>(undefined);
 	const [result, setResult] = useState<User | undefined>(undefined);
+
 	useEffect(() => {
 		if (data) {
 			setLoading(true);

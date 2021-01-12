@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme, TextField } from '@material-ui/core';
-import PopIcon from '../../commons/popIcon/popIcon';
+import PopIcon from '../../../commons/popIcon/popIcon';
 
 interface props {
 	name: string;
@@ -8,8 +8,8 @@ interface props {
 	helpText?: string;
 	modifiable?: boolean;
 	value: string;
-	handleChange: any;
-	path: string;
+	handleChange?: any;
+	path?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) =>

@@ -5,7 +5,7 @@ import Create from '../create/create';
 import DetailsUser from '../details/detailsUser';
 import DetailsOrganization from '../details/detailsOrganization';
 import Home from '../home/home';
-import Search from '../search/search';
+import Search from '../search';
 import Settings from '../settings/settings';
 const Routes = () => {
 	return (

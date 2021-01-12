@@ -12,7 +12,7 @@ export const SendPopupButton = ({ user }: props) => {
 	const [values, setValues] = useState({ signature: 'Assistance Insee' });
 
 	const onFinish = () => {
-		console.log({ user: user.username, ...values });
+		console.log({ user: user?.username, ...values });
 	};
 
 	const handleInputChange = (e: any) => {
@@ -25,7 +25,7 @@ export const SendPopupButton = ({ user }: props) => {
 
 	return (
 		<PopButton
-			title={'Envoyer le login à ' + user.username}
+			title={'Envoyer le login à ' + user?.username}
 			body={
 				<SendPopupContent
 					user={user}

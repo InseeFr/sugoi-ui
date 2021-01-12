@@ -13,9 +13,9 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import get from 'lodash.get';
 import React from 'react';
-import Organization from '../../../../model/api/organization';
-import User from '../../../../model/api/user';
-import PopIcon from '../../../commons/popIcon/popIcon';
+import Organization from '../../../../../model/api/organization';
+import User from '../../../../../model/api/user';
+import PopIcon from '../../../../commons/popIcon/popIcon';
 
 interface props {
 	data: User | Organization;

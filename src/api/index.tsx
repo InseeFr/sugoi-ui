@@ -1,4 +1,5 @@
 import Organization from '../model/api/organization';
+import { Pageable } from '../model/api/pageable';
 import { Realm } from '../model/api/realm';
 import User from '../model/api/user';
 import searchRequestOrganization from '../model/js/searchRequestOrganization';
@@ -9,7 +10,7 @@ import * as remote from './remote/';
 // Realm function
 export const getRealms = (id?: string): Promise<Realm[]> => {
 	if (process.env.REACT_APP_FAKE_API) {
-		return fake.getRealms(id);
+		return remote.getRealms(id);
 	} else {
 		return remote.getRealms(id);
 	}
@@ -19,7 +20,7 @@ export const getRealms = (id?: string): Promise<Realm[]> => {
 export const getUsers = (
 	realm: string,
 	searchRequest?: searchRequestUser,
-): Promise<User[]> => {
+): Promise<Pageable> => {
 	if (process.env.REACT_APP_FAKE_API) {
 		return fake.getUsers(realm, searchRequest || {});
 	} else {

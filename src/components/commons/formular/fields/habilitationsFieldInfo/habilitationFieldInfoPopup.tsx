@@ -13,7 +13,7 @@ import {
 import React from 'react';
 import DeleteIcon from '@material-ui/icons/Delete';
 import get from 'lodash.get';
-import User from '../../../../model/api/user';
+import User from '../../../../../model/api/user';
 
 interface props {
 	data: User;

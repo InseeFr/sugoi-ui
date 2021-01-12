@@ -14,8 +14,7 @@ const useUpdateUser = () => {
 	const execute = (realm: string, user: User) => setdata({ realm, user });
 	useEffect(() => {
 		if (data) {
-			let executed = (data as unknown) as execute;
-			console.log(executed);
+			console.log(data);
 			// updateUserByIdAndDomain(executed.realm, executed.user)
 			// 	.then((r: any) => {
 			// 		setResult(r);

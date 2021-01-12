@@ -1,10 +1,9 @@
 import { List, ListItem, ListItemText, Typography } from '@material-ui/core';
 import get from 'lodash.get';
 import React from 'react';
-import Organization from '../../../../model/api/organization';
-import User from '../../../../model/api/user';
-import PopButton from '../../../commons/popButton/popButton';
-import PopIcon from '../../../commons/popIcon/popIcon';
+import User from '../../../../../model/api/user';
+import PopButton from '../../../../commons/popButton/popButton';
+import PopIcon from '../../../../commons/popIcon/popIcon';
 import HabilitationFieldPopup from './habilitationFieldInfoPopup';
 
 interface props {

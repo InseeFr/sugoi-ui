@@ -1,103 +1,75 @@
 import React from 'react';
-import MaterialTable from 'material-table';
 import { useHistory, useParams } from 'react-router-dom';
+import { Paper } from '@material-ui/core';
+import MUIDataTable from 'mui-datatables';
+
 interface props {
-	datasource: any;
-	type: 'user' | 'organization';
+	data: any;
+	realm: string;
+	type: 'Users' | 'Organizations';
 }
 
-const columns = [
-	{
-		title: 'username',
-		field: 'username',
-	},
-	{
-		title: 'mail',
-		field: 'mail',
-	},
-	{
-		title: 'NomCommun',
-		field: 'communName',
-	},
-];
-
-export const SearchResults = (props: props) => {
-	const { realm } = useParams<any>();
-	const { datasource, type } = props;
+export const SearchResults = ({ data, realm, type }: props) => {
 	const { push } = useHistory();
+
+	const columns = [
+		{
+			name: 'username',
+		},
+		{
+			name: 'mail',
+		},
+		{
+			name: 'communName',
+		},
+		{
+			name: 'Voir plus',
+			options: {
+				filter: false,
+				sort: false,
+				empty: true,
+				customBodyRenderLite: (dataIndex: any) => {
+					return (
+						<button
+							onClick={() => {
+								const link =
+									type === 'Users'
+										? '/realm/' +
+										  realm +
+										  '/' +
+										  'user/' +
+										  data[dataIndex]
+												.username
+										: '/realm/' +
+										  realm +
+										  '/' +
+										  'organization/' +
+										  data[dataIndex]
+												.username;
+								push(link);
+							}}
+						>
+							Delete
+						</button>
+					);
+				},
+			},
+		},
+	];
+
+	const options = {
+		responsive: 'simple' as any,
+		selectableRowsHideCheckboxes: true,
+	};
+
 	return (
-		<MaterialTable
-			columns={columns}
-			data={datasource}
-			title="Résultat"
-			actions={[
-				{
-					icon: 'visibility',
-					tooltip: 'View user',
-					onClick: (event, rowData: any) => {
-						push(
-							'/realm/' +
-								realm +
-								'/' +
-								type +
-								'/' +
-								rowData.username,
-						);
-					},
-				},
-			]}
-			options={{
-				actionsColumnIndex: -1,
-			}}
-			localization={{
-				body: {
-					emptyDataSourceMessage:
-						"Pas d'enregistreent à afficher",
-					addTooltip: 'Ajouter',
-					deleteTooltip: 'Supprimer',
-					editTooltip: 'Editer',
-					filterRow: {
-						filterTooltip: 'Filtrer',
-					},
-					editRow: {
-						deleteText:
-							'Voulez-vous supprimer cette ligne?',
-						cancelTooltip: 'Annuler',
-						saveTooltip: 'Enregistrer',
-					},
-				},
-				grouping: {
-					placeholder: "Tirer l'entête ...",
-					groupedBy: 'Grouper par:',
-				},
-				header: {
-					actions: 'Actions',
-				},
-				pagination: {
-					labelDisplayedRows: '{from}-{to} de {count}',
-					labelRowsSelect: 'lignes',
-					labelRowsPerPage: 'lignes par page:',
-					firstAriaLabel: 'Première page',
-					firstTooltip: 'Première page',
-					previousAriaLabel: 'Page précédente',
-					previousTooltip: 'Page précédente',
-					nextAriaLabel: 'Page suivante',
-					nextTooltip: 'Page suivante',
-					lastAriaLabel: 'Dernière page',
-					lastTooltip: 'Dernière page',
-				},
-				toolbar: {
-					addRemoveColumns:
-						'Ajouter ou supprimer des colonnes',
-					nRowsSelected: '{0} ligne(s) sélectionée(s)',
-					showColumnsTitle: 'Voir les colonnes',
-					showColumnsAriaLabel: 'Voir les colonnes',
-					exportTitle: 'Exporter',
-					exportAriaLabel: 'Exporter',
-					searchTooltip: 'Chercher',
-					searchPlaceholder: 'Chercher',
-				},
-			}}
-		/>
+		<Paper>
+			<MUIDataTable
+				title={'Résultat de la recherche:'}
+				data={data}
+				columns={columns}
+				options={options}
+			/>
+		</Paper>
 	);
 };

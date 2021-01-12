@@ -12,8 +12,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import React, { useState, useEffect } from 'react';
 import AddIcon from '@material-ui/icons/Add';
 
-import User from '../../../../model/api/user';
-import { useGetGroups } from '../../../../hooks/group/useGetGroups';
+import User from '../../../../../model/api/user';
+import { useGetGroups } from '../../../../../hooks/group/useGetGroups';
 import get from 'lodash.get';
 
 interface props {
@@ -48,6 +48,7 @@ export default function GroupsField({
 	const [currentGroups, setCurrentGroups] = useState<string[]>([]);
 	const [possibleGroups, setPossibleGroups] = useState<string[]>([]);
 	const [state, setstate] = useState(1);
+
 	useEffect(() => {
 		if (state) {
 			setCurrentGroups(get(data, path, []));

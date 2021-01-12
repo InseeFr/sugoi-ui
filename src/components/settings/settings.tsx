@@ -14,7 +14,7 @@ import { RootState } from '../../configuration/store-configuration';
 import { Realm } from '../../model/api/realm';
 import RealmCard from './realm-card';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import ExpandButton from '../search/formular/expand-button';
+import ExpandButton from '../commons/expandButton/expand-button';
 import Title from '../commons/title/title';
 
 const Settings = () => {

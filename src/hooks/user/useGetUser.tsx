@@ -1,15 +1,14 @@
-import { useEffect, useState } from 'react';
-import { getUsers } from '../../api';
+import React, { useEffect, useState } from 'react';
+import { getUser } from '../../api';
 import User from '../../model/api/user';
 
 const useGetUser = (id: string, realm: string) => {
-	const [result, setResult] = useState<User>();
+	const [result, setResult] = useState<User>({} as User);
 	const [search, setSearch] = useState({ userId: id, realmId: realm });
 	const [error, setError] = useState(undefined);
 	const [loading, setLoading] = useState(true);
-
 	useEffect(() => {
-		getUsers(search.realmId, { identifiant: search.userId })
+		getUser(search.realmId, search.userId)
 			.then((r: User[]) => {
 				setResult(r[0]);
 			})

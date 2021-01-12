@@ -13,12 +13,13 @@ const useUpdateOrganization = () => {
 	const [error, setError] = useState(undefined);
 	const [loading, setLoading] = useState(true);
 	const [data, setdata] = useState<execute | undefined>(undefined);
+
 	const execute = (realm: string, organization: Organization) =>
 		setdata({ realm, organization });
+
 	useEffect(() => {
 		if (data) {
-			let executed = (data as unknown) as execute;
-			console.log(executed);
+			console.log(data);
 			// updateOrganizationByIdAndDomain(executed.realm, executed.Organization)
 			// 	.then((r: any) => {
 			// 		setResult(r);

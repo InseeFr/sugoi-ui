@@ -9,9 +9,7 @@ interface props {
 	setExpand: any;
 }
 
-const ExpandButton = (props: props) => {
-	const { expand, setExpand } = props;
-
+const ExpandButton = ({ expand, setExpand }: props) => {
 	return (
 		<Button
 			variant="contained"

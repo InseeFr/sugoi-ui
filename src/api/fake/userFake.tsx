@@ -1,6 +1,7 @@
+import { Pageable } from '../../model/api/pageable';
 import User from '../../model/api/user';
 import searchRequestUser from '../../model/js/searchRequestUser';
-
+import Users from './data/users.json';
 export const getUsers = (
 	realm: string,
 	{
@@ -15,10 +16,22 @@ export const getUsers = (
 		habilitations,
 		application,
 	}: searchRequestUser,
-): Promise<User[]> => Promise.resolve([{ username: 'toto' }]);
+): Promise<Pageable> =>
+	Promise.resolve({
+		results: Users,
+		totalElements: 20,
+		nextStart: 0,
+		hasMoreResult: true,
+		pageSize: 20,
+	});
 
-export const getUser = (realm: string, identifiant: string): Promise<User[]> =>
-	getUsers(realm, { identifiant });
+export const getUser = async (
+	realm: string,
+	identifiant: string,
+): Promise<User[]> => {
+	const pageable = await getUsers(realm, { identifiant });
+	return pageable.results[0];
+};
 
 export const deleteUser = (realm: string, id: string): Promise<string> =>
 	Promise.resolve('');

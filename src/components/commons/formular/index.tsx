@@ -2,12 +2,12 @@ import { Grid } from '@material-ui/core';
 import React from 'react';
 import TextFieldInfo from './fields/textFieldInfo';
 import get from 'lodash.get';
-import ListFieldInfoButton from './fields/listGenericFieldInfo/';
+import ListFieldInfoButton from './fields/listGenericFieldInfo';
 import ListFieldInfo from './fields/listGenericFieldInfo/listFieldInfo';
 
-import { field } from '../../model/field';
+import { field } from '../../../model/field';
 import HabilitationFieldInfo from './fields/habilitationsFieldInfo';
-import Groups from './fields/groupsFieldInfo/';
+import Groups from './fields/groupsFieldInfo';
 
 interface props {
 	data: any;

@@ -3,13 +3,12 @@ import React from 'react';
 import Organization from '../../../model/api/organization';
 import { section } from '../../../model/panel';
 import User from '../../../model/api/user';
-import Formular from '../../formular';
+import Formular from '../../commons/formular';
 import Panel from '../panel/panel';
 interface props {
 	data: User | Organization | any;
 	fieldToDisplay: any;
 	handleChange: any;
-	type: 'user' | 'organization';
 }
 
 const DataViewer = ({ data, fieldToDisplay, handleChange }: props) => {

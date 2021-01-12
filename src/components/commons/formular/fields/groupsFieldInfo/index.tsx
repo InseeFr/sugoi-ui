@@ -1,14 +1,13 @@
 import { List, ListItem, ListItemText, Typography } from '@material-ui/core';
 import get from 'lodash.get';
 import React from 'react';
-import Organization from '../../../../model/api/organization';
-import User from '../../../../model/api/user';
-import PopButton from '../../../commons/popButton/popButton';
-import PopIcon from '../../../commons/popIcon/popIcon';
-import ListFieldInfoPopup from './listFieldInfo';
+import User from '../../../../../model/api/user';
+import PopButton from '../../../../commons/popButton/popButton';
+import PopIcon from '../../../../commons/popIcon/popIcon';
+import GroupsField from './groupesFIeldPopup';
 
 interface props {
-	data: User | Organization;
+	data: User;
 	textButton?: string;
 	helpTextTitle?: string;
 	helpText?: string;
@@ -20,7 +19,7 @@ interface props {
 	modifiable: boolean;
 }
 
-export const ListFieldButton = ({
+export const groupsFieldButton = ({
 	name,
 	helpTextTitle,
 	helpText,
@@ -45,7 +44,7 @@ export const ListFieldButton = ({
 						text={textButton || ''}
 						title="Gestion habilitations"
 						body={
-							<ListFieldInfoPopup
+							<GroupsField
 								name={name}
 								helpText={helpText}
 								helpTextTitle={helpTextTitle}
@@ -71,4 +70,4 @@ export const ListFieldButton = ({
 	);
 };
 
-export default ListFieldButton;
+export default groupsFieldButton;
