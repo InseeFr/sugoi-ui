@@ -43,6 +43,7 @@ export const useForms = (initialValues: any) => {
 	return {
 		iFormValues,
 		updateIFormValues: setIFormValues,
+		updateFormValues: setFormValues,
 		formValues,
 		handleChange,
 		handleReset,

@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core';
+import { Grid, Paper } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -12,7 +12,7 @@ interface Step {
 
 interface props {
 	steps: Step[];
-	functionCreate: () => void;
+	functionCreate: any;
 }
 
 export default function HorizontalLinearStepper({
@@ -39,10 +39,6 @@ export default function HorizontalLinearStepper({
 
 	const handleBack = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep - 1);
-	};
-
-	const handleFinish = () => {
-		functionCreate();
 	};
 
 	return (
@@ -73,7 +69,9 @@ export default function HorizontalLinearStepper({
 				</Stepper>
 			</Grid>
 
-			<Grid item>{steps[activeStep].component}</Grid>
+			<Grid item>
+				<Paper>{steps[activeStep].component}</Paper>
+			</Grid>
 			<Grid item>
 				<div style={{ float: 'right' }}>
 					<Button
@@ -95,7 +93,7 @@ export default function HorizontalLinearStepper({
 						<Button
 							variant="contained"
 							color="primary"
-							onClick={handleFinish}
+							onClick={() => functionCreate()}
 						>
 							Créer
 						</Button>

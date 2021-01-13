@@ -45,13 +45,11 @@ export default function GroupsField({
 	deleteTitle,
 }: props) {
 	const { groups: availableGroupsForRealm } = useGetGroups('RP');
-	const [currentGroups, setCurrentGroups] = useState<string[]>([]);
 	const [possibleGroups, setPossibleGroups] = useState<string[]>([]);
 	const [state, setstate] = useState(1);
 
 	useEffect(() => {
 		if (state) {
-			setCurrentGroups(get(data, path, []));
 			setPossibleGroups(
 				not(availableGroupsForRealm, get(data, path, [])),
 			);

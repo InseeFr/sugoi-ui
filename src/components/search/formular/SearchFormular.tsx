@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import {
 	Button,
 	Card,
@@ -13,14 +12,14 @@ import {
 	Grid,
 	Radio,
 	RadioGroup,
-	TextField,
 } from '@material-ui/core';
-import D from '../../../i18n';
-import ExpandButton from '../../commons/expandButton/expand-button';
-import TextFieldInfo from '../../commons/formular/fields/textFieldInfo';
-import Formular from '../../commons/formular';
-import { field } from '../../../model/field';
+import React, { useState } from 'react';
 import { useForms } from '../../../hooks/technics/useForms';
+import D from '../../../i18n';
+import { field } from '../../../model/field';
+import ExpandButton from '../../commons/expandButton/expand-button';
+import Formular from '../../commons/formular';
+import TextFieldInfo from '../../commons/formular/fields/textFieldInfo';
 interface props {
 	realm: string;
 	onSubmit: any;
@@ -29,30 +28,93 @@ interface props {
 const LeftfieldsUser: field[] = [
 	{
 		name: 'Identifiant',
-		helpTextTitle: 'Identifiant unique du contact',
-		helpText: "Il servira pour le rechercher à travers l'annuaire.",
-		path: 'username',
+		helpTextTitle: 'Identifiant',
+		helpText:
+			"Il n'est pas obligatoire de le saisir entièrement. Le champ saisi peut être le début, le milieu ou la fin de l'identifiant recherché. L'identifiant d'un contact/d'une organisation est unique dans l'annuaire. La recherche sera plus précise.",
+		path: 'identifiant',
 		type: 'string',
-		modifiable: false,
+		modifiable: true,
+	},
+	{
+		name: 'Description',
+		helpTextTitle: 'Description',
+		helpText:
+			"Il n'est pas obligatoire de le saisir entièrement. Le champ saisi peut être le début, le milieu ou la fin du nom commun recherché. Caractères autorisés : alphabétiques, chiffres, apostrophes, espaces, tirets",
+		path: 'description',
+		type: 'string',
+		modifiable: true,
+	},
+	{
+		name: "Organisation d'appartenance",
+		helpTextTitle: " Identifiant de l'organisation d'appartenance ",
+		helpText:
+			"Il n'est pas obligatoire de le saisir entièrement.  Le champ saisi doit être le début de l'identifiant recherché.",
+		type: 'string',
+		modifiable: true,
+		path: 'organization',
 	},
 ];
 const RightfieldsUser: field[] = [
 	{
-		name: 'Identifiant',
-		helpTextTitle: 'Identifiant unique du contact',
-		helpText: "Il servira pour le rechercher à travers l'annuaire.",
-		path: 'username',
+		name: 'Nom commun',
+		helpTextTitle: ' Nom commun',
+		helpText:
+			"Il n'est pas obligatoire de le saisir entièrement. Le champ saisi peut être le début, le milieu ou la fin du nom commun recherché. Caractères autorisés : alphabétiques, chiffres, apostrophes, espaces, tirets",
+		path: 'nomCommun',
 		type: 'string',
-		modifiable: false,
+		modifiable: true,
+	},
+	{
+		name: 'Adresse e-mail',
+		helpTextTitle: ' Adresse e-mail ',
+		helpText:
+			"Le champ saisi peut être une portion de l'adresse mail recherchée.",
+		path: 'description',
+		type: 'string',
+		modifiable: true,
+	},
+	{
+		name: 'Certificat associé',
+		helpTextTitle: 'Certificat associé',
+		path: 'certificate',
+		type: 'string',
+		modifiable: true,
+	},
+];
+
+const RightfieldsOrganization: field[] = [
+	{
+		name: 'Nom commun',
+		helpTextTitle: ' Nom commun',
+		helpText:
+			"Il n'est pas obligatoire de le saisir entièrement. Le champ saisi peut être le début, le milieu ou la fin du nom commun recherché. Caractères autorisés : alphabétiques, chiffres, apostrophes, espaces, tirets",
+		path: 'nomCommun',
+		type: 'string',
+		modifiable: true,
+	},
+	{
+		name: 'Adresse e-mail',
+		helpTextTitle: ' Adresse e-mail ',
+		helpText:
+			"Le champ saisi peut être une portion de l'adresse mail recherchée.",
+		path: 'description',
+		type: 'string',
+		modifiable: true,
 	},
 ];
 
 const SearchFormular = ({ realm, onSubmit }: props) => {
 	const [type, setType] = useState<any>('Users');
 	const [expand, setExpand] = useState(false);
-	const { formValues, handleChange, handleReset } = useForms({
+	const {
+		formValues,
+		handleChange,
+		handleReset,
+		updateFormValues,
+	} = useForms({
 		type: 'user',
 	});
+
 	return (
 		<Card>
 			<CardHeader title={D.formular_card_title} />
@@ -60,40 +122,62 @@ const SearchFormular = ({ realm, onSubmit }: props) => {
 			<CardContent>
 				<Grid container direction="row" spacing={2}>
 					<Grid item xs={12} md={6}>
-						<FormControl
-							component="fieldset"
-							style={{ display: 'flex' }}
+						<Grid
+							container
+							direction="row"
+							justify="center"
 						>
-							<FormLabel component="legend">
-								{D.formular_radio_button_choose}
-							</FormLabel>
-							<RadioGroup
-								row
-								aria-label={
-									D.formular_radio_button_choose
-								}
-								name="type"
-								value={type}
-								onChange={(e) =>
-									setType(e.target.value)
-								}
-							>
-								<FormControlLabel
-									value="Users"
-									control={<Radio />}
-									label={
-										D.formular_radio_button_user
-									}
-								/>
-								<FormControlLabel
-									value="Organizations"
-									control={<Radio />}
-									label={
-										D.formular_radio_button_organization
-									}
-								/>
-							</RadioGroup>
-						</FormControl>
+							<FormControl component="fieldset">
+								<div
+									style={{
+										display: 'flex',
+										alignItems:
+											'center',
+									}}
+								>
+									<div
+										style={{
+											paddingRight:
+												'10px',
+										}}
+									>
+										<FormLabel>
+											Rechercher un
+											:
+										</FormLabel>
+									</div>
+									<RadioGroup
+										row
+										name="type"
+										value={type}
+										onChange={(e) => {
+											setType(
+												e.target
+													.value,
+											);
+											updateFormValues(
+												{},
+											);
+										}}
+									>
+										<FormControlLabel
+											value="Users"
+											control={
+												<Radio />
+											}
+											label="contact"
+										/>
+										<FormControlLabel
+											value="Organizations"
+											control={
+												<Radio />
+											}
+											label="organisation"
+										/>
+									</RadioGroup>
+								</div>
+							</FormControl>
+						</Grid>
 					</Grid>
 					<Grid item xs={12} md={6}>
 						<TextFieldInfo
@@ -110,10 +194,7 @@ const SearchFormular = ({ realm, onSubmit }: props) => {
 									<Formular
 										data={formValues}
 										fields={
-											type ===
-											'Users'
-												? LeftfieldsUser
-												: []
+											LeftfieldsUser
 										}
 										handleChange={
 											handleChange as any
@@ -126,8 +207,8 @@ const SearchFormular = ({ realm, onSubmit }: props) => {
 										fields={
 											type ===
 											'Users'
-												? LeftfieldsUser
-												: []
+												? RightfieldsUser
+												: RightfieldsOrganization
 										}
 										handleChange={
 											handleChange as any

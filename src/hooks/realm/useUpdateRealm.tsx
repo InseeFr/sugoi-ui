@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react';
-import { postOrganization } from '../../api';
+import { deleteRealm, updateOrganization, updateRealm } from '../../api';
 import Organization from '../../model/api/organization';
+import { Realm } from '../../model/api/realm';
 
-const usePostOrganization = () => {
+const useUpdateRealm = () => {
 	const [error, setError] = useState(undefined);
 	const [loading, setLoading] = useState(true);
 	const [data, setdata] = useState<any>(undefined);
-	const execute = (realm: string, organization: Organization) =>
-		setdata({ realm, organization });
+
+	const execute = (id: string, realm: Realm) => setdata({ id, realm });
 
 	useEffect(() => {
 		if (data) {
 			setLoading(true);
-			postOrganization(data.realm, data.organization)
+			updateRealm(data.id, data.realm)
 				.catch((err) => setError(err))
 				.finally(() => {
 					setLoading(false);
@@ -24,4 +25,4 @@ const usePostOrganization = () => {
 	return { execute, loading, error };
 };
 
-export default usePostOrganization;
+export default useUpdateRealm;

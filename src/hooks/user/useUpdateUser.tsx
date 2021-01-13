@@ -1,28 +1,24 @@
 import { useEffect, useState } from 'react';
+import { updateUser } from '../../api';
 import User from '../../model/api/user';
-interface execute {
-	realm: string;
-	user: User;
-}
+
 const useUpdateUser = () => {
-	const [updatedUser, setUserUpdated] = useState<User | undefined>(
-		undefined,
-	);
 	const [error, setError] = useState(undefined);
 	const [loading, setLoading] = useState(true);
-	const [data, setdata] = useState<execute | undefined>(undefined);
-	const execute = (realm: string, user: User) => setdata({ realm, user });
+	const [data, setdata] = useState<any>(undefined);
+
+	const execute = (realm: string, id: string, user: User) =>
+		setdata({ realm, id, user });
+
 	useEffect(() => {
 		if (data) {
-			console.log(data);
-			// updateUserByIdAndDomain(executed.realm, executed.user)
-			// 	.then((r: any) => {
-			// 		setResult(r);
-			// 	})
-			// 	.catch((err) => {
-			// 		setError(err);
-			// 	})
-			// 	.finally(() => setLoading(false));
+			setLoading(true);
+			updateUser(data.realm, data.id, data.user)
+				.catch((err) => setError(err))
+				.finally(() => {
+					setLoading(false);
+					setdata({});
+				});
 		}
 	}, [data]);
 

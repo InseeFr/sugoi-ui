@@ -1,8 +1,7 @@
-import React from 'react';
-import { Route } from 'react-router';
-import { Breadcrumbs, makeStyles, Link, Box } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
+import { Box, Breadcrumbs, Link, makeStyles } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
+import React from 'react';
+import { matchPath, useHistory, useLocation } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -23,67 +22,76 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+interface Path {
+	text: string;
+	link: string;
+	icon?: any;
+}
+const generateBreadCrumbs = (location: any): Path[] => {
+	const currentPath: Path[] = [
+		{ text: 'Accueil', link: '/', icon: <HomeIcon /> },
+	];
+	let match = matchPath(location.pathname, {
+		path: '/realm/:realm',
+	});
+	if (match) {
+		currentPath.push({
+			text: 'Realm ' + (match.params as any)?.realm,
+			link: '/realm/' + (match.params as any)?.realm,
+		});
+	}
+	match = matchPath(location.pathname, {
+		path: '/realm/:realm/user/:id',
+	});
+	if (match) {
+		currentPath.push({
+			text: 'User: ' + (match.params as any)?.id,
+			link: '/user/' + (match.params as any)?.id,
+		});
+	}
+	match = matchPath(location.pathname, {
+		path: '/realm/:realm/organization/:id',
+	});
+	if (match) {
+		currentPath.push({
+			text: 'Organization: ' + (match.params as any)?.id,
+			link: '/organization/' + (match.params as any)?.id,
+		});
+	}
+	match = matchPath(location.pathname, {
+		path: '/settings',
+	});
+	if (match) {
+		currentPath.push({
+			text: 'Paramètres',
+			link: '/settings',
+		});
+	}
+	return currentPath;
+};
+
 const MyBreadcrumbs = () => {
 	const classes = useStyles();
 	const history = useHistory();
-
+	const location = useLocation();
+	const paths: Path[] = generateBreadCrumbs(location);
 	return (
 		<Box>
 			<div className={classes.root}>
-				<Route>
-					{({ location }) => {
-						const pathnames = location.pathname
-							.split('/')
-							.filter((x) => x);
-						return (
-							<Breadcrumbs
-								separator="›"
-								color="primary"
-							>
-								<Link
-									onClick={() =>
-										history.push('/')
-									}
-									color="primary"
-									className={classes.link}
-								>
-									<HomeIcon
-										className={
-											classes.icon
-										}
-									/>
-									Accueil
-								</Link>
-								{pathnames.map((path) => {
-									return (
-										<Link
-											key={
-												'breacrumbs-' +
-												path
-											}
-											onClick={() =>
-												history.push(
-													'/' +
-														path,
-												)
-											}
-											color="primary"
-										>
-											{path
-												.charAt(
-													0,
-												)
-												.toLocaleUpperCase() +
-												path.slice(
-													1,
-												)}
-										</Link>
-									);
-								})}
-							</Breadcrumbs>
-						);
-					}}
-				</Route>
+				<Breadcrumbs separator="›" color="primary">
+					{paths.map((path) => (
+						<Link
+							onClick={() =>
+								history.push(path.link)
+							}
+							color="primary"
+							className={classes.link}
+						>
+							{path?.icon}
+							{path.text}
+						</Link>
+					))}
+				</Breadcrumbs>
 			</div>
 		</Box>
 	);

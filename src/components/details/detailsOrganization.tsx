@@ -1,15 +1,15 @@
-import React, { useEffect, useReducer } from 'react';
-import Title from '../commons/title/title';
-import DataViewer from '../commons/dataViewer/dataviewer';
 import { Button, Grid } from '@material-ui/core';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import organization from '../../model/api/organization';
+import { useDeleteOrganization } from '../../hooks/organization/useDeleteOrganization';
 import useGetOrganization from '../../hooks/organization/useGetOrganization';
 import useUpdateOrganization from '../../hooks/organization/useUpdateOrganization';
-import { useDeleteOrganization } from '../../hooks/organization/useDeleteOrganization';
-import { Loader } from '../commons/loader/loader';
-import { useForms } from '../../hooks/technics/useForms';
 import useRealmConfig from '../../hooks/realm/useRealmConfig/useRealmConfig';
+import { useForms } from '../../hooks/technics/useForms';
+import organization from '../../model/api/organization';
+import DataViewer from '../commons/dataViewer/dataviewer';
+import { Loader } from '../commons/loader/loader';
+import Title from '../commons/title/title';
 
 interface props {
 	data: organization;
@@ -62,6 +62,7 @@ const DetailOrganization = () => {
 								onClick={() =>
 									executeUpdate(
 										realm,
+										id,
 										formValues,
 									)
 								}

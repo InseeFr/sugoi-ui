@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { postUser } from '../../api';
 import User from '../../model/api/user';
 interface execute {
@@ -20,7 +20,8 @@ const usePostUser = () => {
 					setError(err);
 				})
 				.finally(() => {
-					setLoading(false), setdata(undefined);
+					setLoading(false);
+					setdata(undefined);
 				});
 		}
 	}, [data]);

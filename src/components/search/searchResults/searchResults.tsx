@@ -1,8 +1,8 @@
-import React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import { Paper } from '@material-ui/core';
+import { IconButton, Paper } from '@material-ui/core';
 import MUIDataTable from 'mui-datatables';
-
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 interface props {
 	data: any;
 	realm: string;
@@ -11,7 +11,6 @@ interface props {
 
 export const SearchResults = ({ data, realm, type }: props) => {
 	const { push } = useHistory();
-
 	const columns = [
 		{
 			name: 'username',
@@ -30,7 +29,9 @@ export const SearchResults = ({ data, realm, type }: props) => {
 				empty: true,
 				customBodyRenderLite: (dataIndex: any) => {
 					return (
-						<button
+						<IconButton
+							color="primary"
+							aria-label="add to shopping cart"
 							onClick={() => {
 								const link =
 									type === 'Users'
@@ -49,8 +50,8 @@ export const SearchResults = ({ data, realm, type }: props) => {
 								push(link);
 							}}
 						>
-							Delete
-						</button>
+							<VisibilityIcon />
+						</IconButton>
 					);
 				},
 			},

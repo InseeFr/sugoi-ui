@@ -1,16 +1,10 @@
-import { useEffect, useState } from 'react';
-import { Realm } from '../../../model/api/realm';
-import FieldToDisplayConfigUser from './fieldToDisplay/FieldToDisplayConfigUser';
 import FieldToDisplayConfigOrganization from './fieldToDisplay/FieldToDisplayConfigOrganization';
+import FieldToDisplayConfigUser from './fieldToDisplay/FieldToDisplayConfigUser';
 
 export const useRealmConfig = (realmName: string) => {
-	const [realm, setRealm] = useState<Realm | undefined>();
-	const [loading, setLoading] = useState(true);
-
 	return {
 		userConfig: FieldToDisplayConfigUser,
 		organizationConfig: FieldToDisplayConfigOrganization,
-		loading,
 	};
 };
 

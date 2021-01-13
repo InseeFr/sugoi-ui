@@ -1,4 +1,10 @@
-import { List, ListItem, ListItemText, Typography } from '@material-ui/core';
+import {
+	Grid,
+	List,
+	ListItem,
+	ListItemText,
+	Typography,
+} from '@material-ui/core';
 import get from 'lodash.get';
 import React from 'react';
 import User from '../../../../../model/api/user';
@@ -31,34 +37,34 @@ export const groupsFieldButton = ({
 }: props) => {
 	return (
 		<>
-			<div style={{ display: 'flex', alignItems: 'center' }}>
-				<Typography component="div" variant="body1">
-					{name}
-				</Typography>
-				<PopIcon
-					helpTextTitle={helpTextTitle}
-					helpText={helpText}
-				/>
-				<div style={{ float: 'right' }}>
-					<PopButton
-						text={textButton || ''}
-						title="Gestion habilitations"
-						body={
-							<GroupsField
-								name={name}
-								helpText={helpText}
-								helpTextTitle={helpTextTitle}
-								modifiable={modifiable}
-								data={data}
-								handleChange={handleChange}
-								path={path}
-							/>
-						}
-						color="primary"
-						variant="contained"
+			<Grid container direction="row" justify="center">
+				<div style={{ display: 'flex', alignItems: 'center' }}>
+					<Typography component="div" variant="body1">
+						{name}
+					</Typography>
+					<PopIcon
+						helpTextTitle={helpTextTitle}
+						helpText={helpText}
 					/>
 				</div>
-			</div>
+				<PopButton
+					text={textButton || ''}
+					title="Gestion habilitations"
+					body={
+						<GroupsField
+							name={name}
+							helpText={helpText}
+							helpTextTitle={helpTextTitle}
+							modifiable={modifiable}
+							data={data}
+							handleChange={handleChange}
+							path={path}
+						/>
+					}
+					color="primary"
+					variant="contained"
+				/>
+			</Grid>
 			<List dense={true}>
 				{get(data, path, []).map((value: string) => (
 					<ListItem disableGutters>

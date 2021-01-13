@@ -28,13 +28,13 @@ export const getUsers = (
 export const getUser = async (
 	realm: string,
 	identifiant: string,
-): Promise<User[]> => {
+): Promise<User> => {
 	const pageable = await getUsers(realm, { identifiant });
 	return pageable.results[0];
 };
 
 export const deleteUser = (realm: string, id: string): Promise<string> =>
-	Promise.resolve('');
+	Promise.resolve(id);
 
 export const postUser = (realm: string, user: User): Promise<User> =>
 	Promise.resolve(user);

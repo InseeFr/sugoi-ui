@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
 import { Grid } from '@material-ui/core';
-import { useSnackbar } from 'notistack';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getUsers } from '../../api';
+import useGetOrganizations from '../../hooks/organization/useGetOrganizations';
+import useGetUsers from '../../hooks/user/useGetUsers';
 import Title from '../commons/title/title';
 import SearchForm from './formular/SearchFormular';
 import { SearchResults } from './searchResults/searchResults';
-import useGetUsers from '../../hooks/user/useGetUsers';
-import { useForms } from '../../hooks/technics/useForms';
-import useGetOrganizations from '../../hooks/organization/useGetOrganizations';
 
 interface formValues {
 	realm: string;
@@ -16,25 +13,21 @@ interface formValues {
 }
 
 const Search = () => {
-	const { enqueueSnackbar } = useSnackbar();
 	const { realm } = useParams<any>();
-	const [values, setValues] = useState<formValues>({} as formValues);
-	const { loading, users, error, execute } = useGetUsers(realm);
+	const { users, execute: searchUsers } = useGetUsers(realm);
 	const [type, setType] = useState<'Users' | 'Organizations'>('Users');
 	const {
-		loading: loadingOrga,
-		organization,
-		error: errorOrga,
-		execute: executeOrga,
+		organizations,
+		execute: searchOrganizations,
 	} = useGetOrganizations();
 
 	const submit = (type: 'Users' | 'Organizations', values: any) => {
 		setType(type);
 		if (type === 'Users') {
-			execute(realm, { ...values });
+			searchUsers(realm, { ...values });
 		}
 		if (type === 'Organizations') {
-			executeOrga(realm, { ...values });
+			searchOrganizations(realm, { ...values });
 		}
 	};
 
@@ -53,7 +46,11 @@ const Search = () => {
 				</Grid>
 				<Grid item xs={12}>
 					<SearchResults
-						data={users}
+						data={
+							type === 'Users'
+								? users
+								: organizations
+						}
 						realm={realm}
 						type={type}
 					/>

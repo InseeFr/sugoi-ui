@@ -68,6 +68,7 @@ const DetailUser = () => {
 									onClick={() =>
 										executeUpdate(
 											realm,
+											id,
 											formValues,
 										)
 									}

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { getUsers } from '../../api';
 import User from '../../model/api/user';
 import searchRequestUser from '../../model/js/searchRequestUser';
-
 const useGetUsers = (realm?: string) => {
 	const [result, setResult] = useState<User[]>([]);
 	const [error, setError] = useState(undefined);
@@ -13,9 +12,8 @@ const useGetUsers = (realm?: string) => {
 	useEffect(() => {
 		if (todo) {
 			setLoading(true);
-			getUsers(todo.realm, { ...todo.searchRequest })
+			getUsers(todo.realm, todo.searchRequest)
 				.then((r: any) => {
-					console.log(r);
 					setResult(r.results);
 				})
 				.catch((err) => {

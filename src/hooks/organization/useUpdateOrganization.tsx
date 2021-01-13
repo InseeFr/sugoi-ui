@@ -1,33 +1,24 @@
 import { useEffect, useState } from 'react';
+import { updateOrganization } from '../../api';
 import Organization from '../../model/api/organization';
 
-interface execute {
-	realm: string;
-	organization: Organization;
-}
-
 const useUpdateOrganization = () => {
-	const [updatedOrganization, setOrganizationUpdated] = useState<
-		Organization | undefined
-	>(undefined);
 	const [error, setError] = useState(undefined);
 	const [loading, setLoading] = useState(true);
-	const [data, setdata] = useState<execute | undefined>(undefined);
+	const [data, setdata] = useState<any>(undefined);
 
-	const execute = (realm: string, organization: Organization) =>
-		setdata({ realm, organization });
+	const execute = (realm: string, id: string, organization: Organization) =>
+		setdata({ realm, id, organization });
 
 	useEffect(() => {
 		if (data) {
-			console.log(data);
-			// updateOrganizationByIdAndDomain(executed.realm, executed.Organization)
-			// 	.then((r: any) => {
-			// 		setResult(r);
-			// 	})
-			// 	.catch((err) => {
-			// 		setError(err);
-			// 	})
-			// 	.finally(() => setLoading(false));
+			setLoading(true);
+			updateOrganization(data.realm, data.id, data.organization)
+				.catch((err) => setError(err))
+				.finally(() => {
+					setLoading(false);
+					setdata(undefined);
+				});
 		}
 	}, [data]);
 

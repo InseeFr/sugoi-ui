@@ -10,18 +10,18 @@ export const getRealms = (id?: string): Promise<Realm[]> =>
 export const updateRealm = (id: string, realm: Realm): Promise<Realm> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.get('/realms/' + id, { data: { ...realm } })
+			.put('/realms/' + id, { data: { ...realm } })
 			.then((r: any) => r.data),
 	);
 
 export const deleteRealm = (id?: string): Promise<string> =>
 	getAuthClient().then((client: AxiosInstance) =>
-		client.get('/realms/' + id).then((r: any) => r.data),
+		client.delete('/realms/' + id).then((r: any) => r.data),
 	);
 
 export const postRealm = (realm: Realm): Promise<Realm> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.get('/realms/', { data: { ...realm } })
+			.post('/realms/', { data: { ...realm } })
 			.then((r: any) => r.data),
 	);

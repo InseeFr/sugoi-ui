@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react';
-import { getOrganization, getOrganizations } from '../../api';
+import { getOrganizations } from '../../api';
 import Organization from '../../model/api/organization';
 import searchRequestOrganization from '../../model/js/searchRequestOrganization';
 
-const useGetOrganizations = () => {
+const useGetOrganizations = (realm?: string) => {
 	const [result, setResult] = useState<Organization>();
-	const [todo, setTodo] = useState<any>(undefined);
+	const [todo, setTodo] = useState<any>(
+		realm ? { realm: realm, searchRequest: {} } : undefined,
+	);
 	const [error, setError] = useState(undefined);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		if (todo) {
-			getOrganizations(todo.realmId)
-				.then((r: Organization[]) => {
-					setResult(r[0]);
+			getOrganizations(todo.realm, todo.searchRequest)
+				.then((r: any) => {
+					setResult(r.results);
 				})
 				.catch((err) => {
 					setError(err);
@@ -39,7 +41,7 @@ const useGetOrganizations = () => {
 	return {
 		execute,
 		loading,
-		organization: result,
+		organizations: result,
 		error,
 	};
 };

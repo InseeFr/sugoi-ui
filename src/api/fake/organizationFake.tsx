@@ -1,15 +1,27 @@
 import Organization from '../../model/api/organization';
+import { Pageable } from '../../model/api/pageable';
 import SearchRequestOrganization from '../../model/js/searchRequestOrganization';
+import Users from './data/users.json';
 
 export const getOrganizations = (
 	realm: string,
 	{ identifiant, application, role, property }: SearchRequestOrganization,
-): Promise<Organization[]> => Promise.resolve([{}]);
+): Promise<Pageable> =>
+	Promise.resolve({
+		results: Users,
+		totalElements: 20,
+		nextStart: 0,
+		hasMoreResult: true,
+		pageSize: 20,
+	});
 
-export const getOrganization = (
+export const getOrganization = async (
 	realm: string,
 	id: string,
-): Promise<Organization[]> => getOrganizations(realm, { identifiant: id });
+): Promise<Organization> => {
+	const pageable = await getOrganizations(realm, { identifiant: id });
+	return pageable.results[0];
+};
 
 export const deleteOrganization = (
 	realm: string,

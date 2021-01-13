@@ -1,24 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getUser } from '../../api';
 import User from '../../model/api/user';
 
-const useGetUser = (id: string, realm: string) => {
+const useGetUser = (id?: string, realm?: string) => {
 	const [result, setResult] = useState<User>({} as User);
-	const [search, setSearch] = useState({ userId: id, realmId: realm });
+	const [search, setSearch] = useState<any>(
+		id && realm ? { realm, id } : undefined,
+	);
 	const [error, setError] = useState(undefined);
 	const [loading, setLoading] = useState(true);
+
+	const execute = (realm: string, id: string) => setSearch({ realm, id });
+
 	useEffect(() => {
-		getUser(search.realmId, search.userId)
-			.then((r: User[]) => {
-				setResult(r[0]);
-			})
-			.catch((err) => {
-				setError(err);
-			})
-			.finally(() => setLoading(false));
+		if (search) {
+			setLoading(true);
+			getUser(search.realm, search.id)
+				.then((r: User) => {
+					setResult(r);
+				})
+				.catch((err) => {
+					setError(err);
+				})
+				.finally(() => {
+					setLoading(false);
+					setSearch(undefined);
+				});
+		}
 	}, [id, realm, search]);
 
-	return { updateSearchUser: setSearch, loading, user: result, error };
+	return { execute, loading, user: result, error };
 };
 
 export default useGetUser;

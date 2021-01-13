@@ -143,49 +143,6 @@ export default {
 				},
 			],
 		},
-		role: {
-			title: 'Droits applicatifs',
-			description: 'trololol',
-			collapsible: false,
-			type: 'panel',
-			fields: [
-				{
-					name: 'Roles Applicatifs',
-					helpTextTitle: ' Propriétés du contact',
-					helpText:
-						'Correspond aux attributs inseeRoleApplicatif',
-					path: 'attributes.roles',
-					type: 'list-with-button',
-					addTitle: 'Ajouter un rôle',
-					deleteTitle: 'Supprimer un rôle',
-					textButton: 'Gérer les rôles',
-					modifiable: true,
-				},
-				{
-					name: 'Habilitations',
-					helpTextTitle: ' Propriétés du contact',
-					helpText:
-						'Correspond aux attributs inseeGroupeDefaut du contact',
-					path: 'habilitations',
-					type: 'habilitations',
-					addTitle: 'Ajouter une habilitation',
-					deleteTitle: 'Supprimer une habilitation',
-					textButton: 'Gérer les habilitations',
-					modifiable: true,
-				},
-				{
-					name: 'Groupes applicatifs',
-					helpText:
-						'Correspond aux groupes auxquels le contact appartient',
-					path: 'groups',
-					type: 'groups',
-					addTitle: 'Ajouter un groupe applicatif',
-					deleteTitle: 'Supprimer un groupe applicatif',
-					textButton: 'Gérer les groupes applicatifs',
-					modifiable: true,
-				},
-			],
-		},
 		propriete: {
 			title: 'Propriété',
 			description: 'trololol',
