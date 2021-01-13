@@ -20,9 +20,16 @@ export const getOrganization = async (
 	realm: string,
 	id: string,
 ): Promise<Organization> => {
-	const pageable: Pageable = await getOrganizations(realm, {
-		identifiant: id,
-	});
+	const pageable: Pageable = await getAuthClient().then(
+		(client: AxiosInstance) =>
+			client
+				.get('/' + realm + '/organizations', {
+					params: {
+						identifiant: id,
+					},
+				})
+				.then((r: any) => r.data),
+	);
 	return pageable.results[0];
 };
 

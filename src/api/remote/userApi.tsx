@@ -39,7 +39,15 @@ export const getUsers = (
 	);
 
 export const getUser = async (realm: string, id: string): Promise<User> => {
-	const pageable = await getUsers(realm, { identifiant: id });
+	const pageable = await getAuthClient().then((client: AxiosInstance) =>
+		client
+			.get('/' + realm + '/users', {
+				params: {
+					identifiant: id,
+				},
+			})
+			.then((r: any) => r.data),
+	);
 	return pageable.results[0];
 };
 

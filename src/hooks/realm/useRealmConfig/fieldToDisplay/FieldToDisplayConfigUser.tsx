@@ -21,7 +21,7 @@ export default {
 					helpTextTitle: ' Nom commun du contact ',
 					helpText:
 						" Il servira pour le rechercher à travers l'annuaire. Caractères autorisés : alphabétiques chiffres apostrophes espaces tirets",
-					path: 'attributes.commun_name',
+					path: 'attributes.common_name',
 					type: 'string',
 					modifiable: true,
 				},
@@ -30,7 +30,7 @@ export default {
 					helpTextTitle: ' Nom du contact ',
 					helpText:
 						'Caractères autorisés : alphabétiques chiffres apostrophes espaces tirets',
-					path: 'lastname',
+					path: 'lastName',
 					type: 'string',
 					modifiable: true,
 				},
@@ -39,7 +39,7 @@ export default {
 					helpTextTitle: ' Prénom du contact ',
 					helpText:
 						'Caractères autorisés : alphabétiques chiffres apostrophes espaces tirets',
-					path: 'name',
+					path: 'firstName',
 					type: 'string',
 					modifiable: true,
 				},
@@ -49,7 +49,7 @@ export default {
 						' Adresse de messagerie du contact ',
 					helpText:
 						" Elle servira pour la rechercher à travers l'annuaire. ",
-					path: 'username',
+					path: 'mail',
 					type: 'string',
 					modifiable: true,
 				},
@@ -64,7 +64,7 @@ export default {
 				},
 				{
 					name: 'Description',
-					path: 'username',
+					path: 'attributes.description',
 					type: 'string',
 					modifiable: true,
 				},
