@@ -8,7 +8,7 @@ import {
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import TranslateIcon from '@material-ui/icons/Translate';
 import React from 'react';
-import { useLocalStorage } from '../../../../configuration/utils';
+import { useLocalStorage } from '../../../../hooks/technics/useLocalStorage';
 
 const LanguageButton = () => {
 	const [lang, setLang] = useLocalStorage('lang', 'fr');

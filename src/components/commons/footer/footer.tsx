@@ -1,69 +1,34 @@
+import { Grid, Typography } from '@material-ui/core';
 import React from 'react';
-import {
-	Box,
-	createStyles,
-	Link,
-	makeStyles,
-	Theme,
-	Typography,
-	Grid,
-} from '@material-ui/core';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import { useConfig } from '../../../configuration/utils';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		footer: {
-			paddingTop: theme.spacing(3),
-			paddingBottom: theme.spacing(3),
-			minHeight: '10%',
-		},
-	}),
-);
 
 const Footer = () => {
-	const classes = useStyles();
-	const api = useConfig('api');
 	return (
 		<>
-			<Box pt={2} className={classes.footer} />
 			<Grid
 				container
-				direction="row"
+				direction="column"
 				justify="center"
 				alignItems="center"
 			>
-				<GitHubIcon color="primary" />
-				<Typography
-					variant="body2"
-					color="textSecondary"
-					align="center"
-				>
-					<Link
-						color="inherit"
-						href="https://github.com/InseeFrLab/sugoi-ui"
+				<Grid item xs={12}>
+					<Typography
+						variant="body2"
+						color="textSecondary"
+						align="center"
 					>
-						Contribuer au projet
-					</Link>
-				</Typography>
-			</Grid>
-			<Grid
-				container
-				direction="row"
-				justify="center"
-				alignItems="center"
-			>
-				<AccountCircleIcon color="primary" />
-				<Typography
-					variant="body2"
-					color="textSecondary"
-					align="center"
-				>
-					<Link color="inherit" href={api ? api : '/'}>
-						Notre api
-					</Link>
-				</Typography>
+						Version: {process.env.REACT_APP_UI_VERSION}
+					</Typography>
+				</Grid>
+				<Grid item xs={12}>
+					<Typography
+						variant="body2"
+						color="textSecondary"
+						align="center"
+					>
+						Commit-SHA:{' '}
+						{process.env.REACT_APP_UI_COMMIT_SHA}
+					</Typography>
+				</Grid>
 			</Grid>
 		</>
 	);

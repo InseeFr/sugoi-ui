@@ -3,7 +3,7 @@ import Brightness4Icon from '@material-ui/icons/Brightness4';
 import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useLocalStorage } from '../../../../configuration/utils';
+import { useLocalStorage } from '../../../../hooks/technics/useLocalStorage';
 import { changeTheme } from '../../../../redux/actions/app';
 export const ThemeButton = () => {
 	const dispatch = useDispatch();
