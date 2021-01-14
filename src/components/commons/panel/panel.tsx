@@ -12,11 +12,14 @@ import React, { useState } from 'react';
 import TitlePanel from './titlePanel';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import PopIcon from '../popIcon/popIcon';
 
 type props = {
 	title: string;
 	collapsible?: boolean;
 	children: React.ReactNode;
+	description?: string;
+	elevation?: number;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -28,12 +31,18 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 	}),
 );
-const Panel = ({ title, children, collapsible }: props) => {
+const Panel = ({
+	title,
+	children,
+	collapsible,
+	description,
+	elevation,
+}: props) => {
 	const classes = useStyles();
 	const [expand, setExpand] = useState(false);
 
 	return (
-		<Paper className={classes.paper}>
+		<Paper className={classes.paper} elevation={elevation}>
 			<Grid
 				container
 				direction="column"
@@ -50,6 +59,9 @@ const Panel = ({ title, children, collapsible }: props) => {
 					}}
 				>
 					<TitlePanel title={title} />
+					{description ? (
+						<PopIcon helpText={description} />
+					) : null}
 					{collapsible ? (
 						<IconButton
 							color="primary"

@@ -30,7 +30,6 @@ const DetailUser = () => {
 			updateIFormValues(user);
 		}
 	}, [user, updateIFormValues]);
-
 	return (
 		<>
 			<Title title={'Détail du contact ' + id} />
@@ -43,65 +42,62 @@ const DetailUser = () => {
 						fieldToDisplay={FieldsToDisplay}
 						handleChange={handleChange}
 					/>
-					<Grid item xs={12}>
-						<Grid
-							container
-							direction="row"
-							justify="center"
-							spacing={3}
-						>
-							<Grid item>
-								<SendPopupButton
-									user={user as User}
-								/>
-							</Grid>
+					<Grid
+						container
+						direction="row"
+						justify="center"
+						spacing={3}
+					>
+						<Grid item>
+							<SendPopupButton
+								user={user as User}
+							/>
+						</Grid>
 
-							<Grid item>
-								<ResetPasswordPopup
-									user={user as User}
-								/>
-							</Grid>
-							<Grid item>
-								<Button
-									variant="contained"
-									color="primary"
-									onClick={() =>
-										executeUpdate(
-											realm,
-											id,
-											formValues,
-										)
-									}
-								>
-									Enregistrer les
-									modifications
-								</Button>
-							</Grid>
-							<Grid item>
-								<Button
-									variant="contained"
-									color="secondary"
-									onClick={() =>
-										executeDelete(
-											realm,
-											(user as User)
-												.username ||
-												'',
-										)
-									}
-								>
-									Supprimer
-								</Button>
-							</Grid>
-							<Grid item>
-								<Button
-									variant="contained"
-									color="default"
-									onClick={handleReset}
-								>
-									Restaurer formulaire
-								</Button>
-							</Grid>
+						<Grid item>
+							<ResetPasswordPopup
+								user={user as User}
+							/>
+						</Grid>
+						<Grid item>
+							<Button
+								variant="contained"
+								color="primary"
+								onClick={() =>
+									executeUpdate(
+										realm,
+										id,
+										formValues,
+									)
+								}
+							>
+								Enregistrer les modifications
+							</Button>
+						</Grid>
+						<Grid item>
+							<Button
+								variant="contained"
+								color="secondary"
+								onClick={() =>
+									executeDelete(
+										realm,
+										(user as User)
+											.username ||
+											'',
+									)
+								}
+							>
+								Supprimer
+							</Button>
+						</Grid>
+						<Grid item>
+							<Button
+								variant="contained"
+								color="default"
+								onClick={handleReset}
+							>
+								Restaurer formulaire
+							</Button>
 						</Grid>
 					</Grid>
 				</>

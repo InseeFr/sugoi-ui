@@ -1,13 +1,19 @@
 import {
+	Collapse,
+	createStyles,
 	Divider,
 	List,
 	ListItem,
 	ListItemIcon,
 	ListItemText,
+	makeStyles,
 	TextField,
+	Theme,
 	Toolbar,
 } from '@material-ui/core';
 import CreateIcon from '@material-ui/icons/Create';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -20,22 +26,71 @@ import { useGetRealms } from '../../../hooks/realm/useGetRealms';
 import D from '../../../i18n';
 import { saveRealms } from '../../../redux/actions/app';
 
+const useStyle = makeStyles((theme: Theme) =>
+	createStyles({
+		nested: {
+			paddingLeft: theme.spacing(4),
+		},
+	}),
+);
+
 const SiderBody = () => {
+	const classes = useStyle();
 	const dispatch = useDispatch();
 	const { push } = useHistory();
 	const location = useLocation();
 	const [realms, setRealms] = useState<string[]>([]);
 	const user = useSelector((state: RootState) => state.user);
-	const [realmSelected, setRealmSelected] = useState<string | null>();
+	const [realmSelected, setRealmSelected] = useState<string | undefined>(
+		undefined,
+	);
+	const [actions, setActions] = useState<String | undefined>(undefined);
+
+	const [openSearch, setOpenSearch] = useState(false);
+	const [openCreate, setOpenCreate] = useState(false);
+
 	const { realms: data } = useGetRealms();
 
 	useEffect(() => {
 		setRealms(data.map((realm) => realm.name));
-	}, [data, setRealms]);
+		dispatch(saveRealms(data));
+	}, [data, setRealms, dispatch]);
 
 	useEffect(() => {
-		dispatch(saveRealms(data));
-	}, [dispatch, data]);
+		if (actions) {
+			switch (actions) {
+				case 'search_user':
+					push('/realm/' + realmSelected + '/search/users');
+					break;
+				case 'search_organization':
+					push(
+						'/realm/' +
+							realmSelected +
+							'/search/organizations',
+					);
+					break;
+				case 'create_user':
+					push('/realm/' + realmSelected + '/create/user');
+					break;
+				case 'create_organization':
+					push(
+						'/realm/' +
+							realmSelected +
+							'/create/organization',
+					);
+					break;
+				case 'home':
+					push('/');
+					break;
+				case 'settings':
+					push('/settings');
+					break;
+				default:
+					push('/');
+					break;
+			}
+		}
+	}, [push, actions, realmSelected]);
 
 	useEffect(() => {
 		const match = matchPath(location.pathname, {
@@ -48,7 +103,7 @@ const SiderBody = () => {
 				push('/');
 			}
 		}
-	}, [location.pathname, realms, push]);
+	}, [location.pathname, push, realms]);
 
 	return (
 		<>
@@ -65,11 +120,11 @@ const SiderBody = () => {
 						onChange={(
 							event: any,
 							newValue: string | null,
-						) => {
-							if (newValue) {
-								push('/realm/' + newValue);
-							}
-						}}
+						) =>
+							setRealmSelected(
+								newValue || undefined,
+							)
+						}
 						renderInput={(params) => (
 							<TextField
 								{...params}
@@ -80,11 +135,11 @@ const SiderBody = () => {
 					/>
 				</ListItem>
 			) : null}
-			<List>
+			<List component="nav">
 				<ListItem
 					button
 					key={D.sider_home}
-					onClick={() => push('/')}
+					onClick={() => setActions('home')}
 				>
 					<ListItemIcon>
 						<HomeIcon />
@@ -94,38 +149,116 @@ const SiderBody = () => {
 				{user.role.isAdmin ||
 				user.role.isReader ||
 				user.role.isWriter ? (
-					<ListItem
-						button
-						key={D.sider_search}
-						disabled={realmSelected ? false : true}
-						onClick={() =>
-							push('/realm/' + realmSelected)
-						}
-					>
-						<ListItemIcon>
-							<SearchIcon />
-						</ListItemIcon>
-						<ListItemText primary={D.sider_search} />
-					</ListItem>
+					<>
+						<ListItem
+							button
+							key={D.sider_search}
+							disabled={
+								realmSelected ? false : true
+							}
+							onClick={() =>
+								setOpenSearch(!openSearch)
+							}
+						>
+							<ListItemIcon>
+								<SearchIcon />
+							</ListItemIcon>
+							<ListItemText
+								primary={D.sider_search}
+							/>
+							{openSearch ? (
+								<ExpandLess />
+							) : (
+								<ExpandMore />
+							)}
+						</ListItem>
+						<Collapse
+							in={openSearch}
+							timeout="auto"
+							unmountOnExit
+						>
+							<List component="div" disablePadding>
+								<ListItem
+									button
+									className={classes.nested}
+									onClick={() =>
+										setActions(
+											'search_user',
+										)
+									}
+								>
+									<ListItemText primary="Rechercher des utilisateurs" />
+								</ListItem>
+								<ListItem
+									button
+									className={classes.nested}
+									onClick={() =>
+										setActions(
+											'search_organization',
+										)
+									}
+								>
+									<ListItemText primary="Rechercher des organisations" />
+								</ListItem>
+							</List>
+						</Collapse>
+					</>
 				) : null}
 				{user.role.isAdmin || user.role.isWriter ? (
-					<ListItem
-						button
-						key={D.sider_create}
-						disabled={realmSelected ? false : true}
-						onClick={() => {
-							push(
-								'/realm/' +
-									realmSelected +
-									'/create',
-							);
-						}}
-					>
-						<ListItemIcon>
-							<CreateIcon />
-						</ListItemIcon>
-						<ListItemText primary={D.sider_create} />
-					</ListItem>
+					<>
+						<ListItem
+							button
+							key={D.sider_create}
+							disabled={
+								realmSelected ? false : true
+							}
+							onClick={() =>
+								setOpenCreate(!openCreate)
+							}
+						>
+							<ListItemIcon>
+								<CreateIcon />
+							</ListItemIcon>
+							<ListItemText
+								primary={D.sider_create}
+							/>
+							{openCreate ? (
+								<ExpandLess />
+							) : (
+								<ExpandMore />
+							)}
+						</ListItem>
+						<Collapse
+							in={openCreate}
+							timeout="auto"
+							unmountOnExit
+						>
+							<List component="div" disablePadding>
+								<ListItem
+									button
+									className={classes.nested}
+									onClick={() =>
+										setActions(
+											'create_user',
+										)
+									}
+								>
+									<ListItemText primary="Créer un utilisateur" />
+								</ListItem>
+								<ListItem
+									button
+									className={classes.nested}
+									onClick={() =>
+										setActions(
+											'create_organization',
+										)
+									}
+								>
+									<ListItemText primary="Créer une organisation" />
+								</ListItem>
+							</List>
+						</Collapse>
+					</>
 				) : null}
 			</List>
 			<Divider />
@@ -134,9 +267,7 @@ const SiderBody = () => {
 					<ListItem
 						button
 						key={D.sider_search}
-						onClick={() => {
-							push('/settings');
-						}}
+						onClick={() => setActions('settings')}
 					>
 						<ListItemIcon>
 							<SettingsIcon />

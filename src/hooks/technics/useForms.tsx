@@ -18,6 +18,7 @@ export const useForms = (initialValues: any) => {
 			);
 			setFormValues(newFormValues);
 			setTodo(undefined);
+			console.log(formValues);
 		}
 	}, [todo, formValues]);
 
@@ -32,9 +33,12 @@ export const useForms = (initialValues: any) => {
 		setFormValues({ ...iFormValues });
 	}, [iFormValues]);
 
-	const handleChange = useCallback((path: any, value: any) => {
-		setTodo({ path: path, value: value });
-	}, []);
+	const handleChange = useCallback(
+		(path: any) => (value: any) => {
+			setTodo({ path: path, value: value });
+		},
+		[],
+	);
 
 	const handleReset = useCallback(() => {
 		setReset(true);

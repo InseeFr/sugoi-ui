@@ -12,6 +12,7 @@ const useGetUsers = (realm?: string) => {
 	useEffect(() => {
 		if (todo) {
 			setLoading(true);
+			setResult([]);
 			getUsers(todo.realm, todo.searchRequest)
 				.then((r: any) => {
 					setResult(r.results);

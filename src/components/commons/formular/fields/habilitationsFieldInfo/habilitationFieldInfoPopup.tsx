@@ -1,26 +1,25 @@
 import {
-	Grid,
-	Typography,
-	Divider,
 	Button,
+	Divider,
+	Grid,
+	IconButton,
 	List,
 	ListItem,
 	ListItemSecondaryAction,
 	ListItemText,
-	IconButton,
 	TextField,
+	Typography,
 } from '@material-ui/core';
-import React from 'react';
 import DeleteIcon from '@material-ui/icons/Delete';
-import get from 'lodash.get';
-import User from '../../../../../model/api/user';
+import React from 'react';
+import PopIcon from '../../../popIcon/popIcon';
+import CreateIcon from '@material-ui/icons/Create';
 
 interface props {
-	data: User;
+	habilitations: string[];
 	textButton?: string;
 	helpTextTitle?: string;
 	helpText?: string;
-	path: string;
 	name?: string;
 	handleChange: any;
 	addTitle?: string;
@@ -32,8 +31,7 @@ const HabilitationsPopup = ({
 	name,
 	helpTextTitle,
 	helpText,
-	data,
-	path,
+	habilitations,
 	handleChange,
 	modifiable,
 	addTitle,
@@ -42,21 +40,17 @@ const HabilitationsPopup = ({
 	const [application, setApplication] = React.useState<any>(undefined);
 	const [role, setRole] = React.useState<any>(undefined);
 	const [propriete, setPropriete] = React.useState<any>(undefined);
+	const [edit, setEdit] = React.useState(false);
 
 	const handleClickAdd = () => {
-		if (
-			application ||
-			(application && role) ||
-			(application && role && propriete)
-		) {
+		if ((application && role) || (application && role && propriete)) {
 			let prop =
 				application +
 				(role
 					? '_' + role + (propriete ? '_' + propriete : '')
 					: '');
-			const value = get(data, path, []);
-			value.push(prop);
-			handleChange(path, value);
+			habilitations.push(prop);
+			handleChange(habilitations);
 			setApplication(undefined);
 			setPropriete(undefined);
 			setRole(undefined);
@@ -64,132 +58,167 @@ const HabilitationsPopup = ({
 	};
 
 	const handleClickDelete = (pos: number) => {
-		const value = get(data, path, []);
-		value.splice(pos, 1);
-		handleChange(path, value);
+		habilitations.splice(pos, 1);
+		handleChange(habilitations);
 	};
 
 	return (
-		<Grid container spacing={3} style={{ minWidth: '80%' }}>
-			<Grid item xs={12} md={6} spacing={4}>
-				<Grid
-					container
-					direction="column"
-					justify="center"
-					alignItems="stretch"
-					spacing={2}
-				>
-					<Grid item>
-						<Typography
-							align="left"
-							variant="subtitle1"
-						>
-							{name}
-						</Typography>
-					</Grid>
-					<Grid item>
-						<Divider />
-					</Grid>
-					<Grid item>
-						<TextField
-							variant="outlined"
-							label="Application"
-							name="Application"
-							value={application || ''}
-							fullWidth
-							onChange={(e) =>
-								setApplication(e.target.value)
-							}
-						/>
-					</Grid>
-					<Grid item>
-						<TextField
-							variant="outlined"
-							label="Role"
-							name="Role"
-							value={role || ''}
-							fullWidth
-							onChange={(e) =>
-								setRole(e.target.value)
-							}
-						/>
-					</Grid>
-					<Grid item>
-						<TextField
-							variant="outlined"
-							label="Propriété"
-							name="Propriété"
-							value={propriete || ''}
-							fullWidth
-							onChange={(e) =>
-								setPropriete(e.target.value)
-							}
-						/>
-					</Grid>
-					<Grid item>
-						<Button
-							variant="contained"
-							color="primary"
-							style={{ float: 'right' }}
-							onClick={handleClickAdd}
-						>
-							Ajouter
-						</Button>
-					</Grid>
-				</Grid>
+		<Grid container spacing={3} style={{ padding: 10 }}>
+			<Grid item xs={12}>
+				<div style={{ display: 'flex', alignItems: 'center' }}>
+					<Typography variant="subtitle1">
+						{name}
+					</Typography>
+					<PopIcon helpText={helpText} />
+					<IconButton
+						aria-label="info"
+						size="small"
+						onClick={() => setEdit(!edit)}
+						color="primary"
+					>
+						<CreateIcon fontSize="inherit" />
+					</IconButton>
+				</div>
 			</Grid>
-			<Grid item xs={12} md={6}>
-				<Grid
-					container
-					direction="column"
-					justify="center"
-					alignItems="stretch"
-					spacing={2}
-				>
-					<Grid item>
-						<Typography
-							align="left"
-							variant="subtitle1"
-						>
-							Supprimer une habilitation
-						</Typography>
-					</Grid>
-					<Grid item>
-						<Divider />
-					</Grid>
-					<Grid item>
-						<List dense={true}>
-							{data?.habilitations?.map(
-								(
-									habilitation: string,
-									pos: any,
-								) => (
-									<ListItem>
-										<ListItemText
-											primary={
-												habilitation
-											}
-										/>
-										<ListItemSecondaryAction>
-											<IconButton
-												edge="end"
-												aria-label="delete"
-												onClick={() =>
-													handleClickDelete(
-														pos,
-													)
-												}
-											>
-												<DeleteIcon />
-											</IconButton>
-										</ListItemSecondaryAction>
-									</ListItem>
-								),
-							)}
-						</List>
-					</Grid>
+			{!edit && habilitations.length > 0 ? (
+				<Grid item xs={12}>
+					{habilitations.map((habilitation) => (
+						<li>{habilitation}</li>
+					))}
 				</Grid>
-			</Grid>
+			) : null}
+			{modifiable && edit ? (
+				<>
+					<Grid item xs={12} md={6}>
+						<Grid
+							container
+							direction="column"
+							justify="center"
+							alignItems="stretch"
+							spacing={2}
+						>
+							<Grid item>
+								<Typography
+									align="left"
+									variant="subtitle1"
+								>
+									{name}
+								</Typography>
+							</Grid>
+							<Grid item>
+								<Divider />
+							</Grid>
+							<Grid item>
+								<TextField
+									variant="outlined"
+									label="Application"
+									name="Application"
+									value={application || ''}
+									fullWidth
+									onChange={(e) =>
+										setApplication(
+											e.target
+												.value,
+										)
+									}
+								/>
+							</Grid>
+							<Grid item>
+								<TextField
+									variant="outlined"
+									label="Role"
+									name="Role"
+									value={role || ''}
+									fullWidth
+									onChange={(e) =>
+										setRole(
+											e.target
+												.value,
+										)
+									}
+								/>
+							</Grid>
+							<Grid item>
+								<TextField
+									variant="outlined"
+									label="Propriété"
+									name="Propriété"
+									value={propriete || ''}
+									fullWidth
+									onChange={(e) =>
+										setPropriete(
+											e.target
+												.value,
+										)
+									}
+								/>
+							</Grid>
+							<Grid item>
+								<Button
+									variant="contained"
+									color="primary"
+									style={{ float: 'right' }}
+									onClick={handleClickAdd}
+								>
+									Ajouter
+								</Button>
+							</Grid>
+						</Grid>
+					</Grid>
+					<Grid item xs={12} md={6}>
+						<Grid
+							container
+							direction="column"
+							justify="center"
+							alignItems="stretch"
+							spacing={2}
+						>
+							<Grid item>
+								<Typography
+									align="left"
+									variant="subtitle1"
+								>
+									Supprimer une habilitation
+								</Typography>
+							</Grid>
+							<Grid item>
+								<Divider />
+							</Grid>
+							<Grid item>
+								<List dense={true}>
+									{habilitations?.map(
+										(
+											habilitation: string,
+											pos: any,
+										) => (
+											<ListItem>
+												<ListItemText
+													primary={
+														habilitation
+													}
+												/>
+												<ListItemSecondaryAction>
+													<IconButton
+														edge="end"
+														aria-label="delete"
+														onClick={() =>
+															handleClickDelete(
+																pos,
+															)
+														}
+													>
+														<DeleteIcon />
+													</IconButton>
+												</ListItemSecondaryAction>
+											</ListItem>
+										),
+									)}
+								</List>
+							</Grid>
+						</Grid>
+					</Grid>
+				</>
+			) : null}
 		</Grid>
 	);
 };

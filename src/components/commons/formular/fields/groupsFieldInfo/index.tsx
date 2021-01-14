@@ -5,19 +5,16 @@ import {
 	ListItemText,
 	Typography,
 } from '@material-ui/core';
-import get from 'lodash.get';
 import React from 'react';
-import User from '../../../../../model/api/user';
 import PopButton from '../../../../commons/popButton/popButton';
 import PopIcon from '../../../../commons/popIcon/popIcon';
 import GroupsField from './groupesFIeldPopup';
 
 interface props {
-	data: User;
+	groups: any;
 	textButton?: string;
 	helpTextTitle?: string;
 	helpText?: string;
-	path: string;
 	name?: string;
 	handleChange: any;
 	addTitle?: string;
@@ -30,8 +27,7 @@ export const groupsFieldButton = ({
 	helpTextTitle,
 	helpText,
 	textButton,
-	data,
-	path,
+	groups,
 	handleChange,
 	modifiable,
 }: props) => {
@@ -56,9 +52,8 @@ export const groupsFieldButton = ({
 							helpText={helpText}
 							helpTextTitle={helpTextTitle}
 							modifiable={modifiable}
-							data={data}
+							groups={groups}
 							handleChange={handleChange}
-							path={path}
 						/>
 					}
 					color="primary"
@@ -66,9 +61,9 @@ export const groupsFieldButton = ({
 				/>
 			</Grid>
 			<List dense={true}>
-				{get(data, path, []).map((value: string) => (
+				{groups.map((group: string) => (
 					<ListItem disableGutters>
-						<ListItemText primary={value} />
+						<ListItemText primary={group} />
 					</ListItem>
 				))}
 			</List>

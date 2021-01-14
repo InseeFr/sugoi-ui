@@ -17,6 +17,7 @@ import ScrollTop from './commons/scroll-top/scroll-top';
 import Sider from './commons/sider';
 import ErrorBoundary from './commons/error/Error';
 import Routes from './routes/routes';
+import Footer from './commons/footer/footer';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -40,7 +41,6 @@ const useStyles = makeStyles((theme: Theme) =>
 		container: {
 			paddingTop: theme.spacing(4),
 			paddingBottom: theme.spacing(1),
-			minHeight: '90%',
 		},
 	}),
 );
@@ -80,6 +80,7 @@ const App = () => {
 						</ErrorBoundary>
 					</Container>
 					<ScrollTop />
+					<Footer />
 				</main>
 			</div>
 		</MuiThemeProvider>

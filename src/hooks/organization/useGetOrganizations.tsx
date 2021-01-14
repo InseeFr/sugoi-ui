@@ -4,7 +4,7 @@ import Organization from '../../model/api/organization';
 import searchRequestOrganization from '../../model/js/searchRequestOrganization';
 
 const useGetOrganizations = (realm?: string) => {
-	const [result, setResult] = useState<Organization>();
+	const [result, setResult] = useState<Organization[]>([]);
 	const [todo, setTodo] = useState<any>(
 		realm ? { realm: realm, searchRequest: {} } : undefined,
 	);
@@ -13,6 +13,8 @@ const useGetOrganizations = (realm?: string) => {
 
 	useEffect(() => {
 		if (todo) {
+			setLoading(true);
+			setResult([]);
 			getOrganizations(todo.realm, todo.searchRequest)
 				.then((r: any) => {
 					setResult(r.results);

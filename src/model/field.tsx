@@ -3,9 +3,10 @@ export interface field {
 	helpText?: string;
 	helpTextTitle?: string;
 	path: string;
-	type: 'string' | 'list' | 'list-with-button' | 'habilitations' | 'groups';
+	type: any;
 	modifiable: boolean;
 	deleteTitle?: string;
 	addTitle?: string;
 	textButton?: string;
+	tag?: any;
 }
