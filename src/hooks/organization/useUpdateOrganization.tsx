@@ -4,7 +4,7 @@ import Organization from '../../model/api/organization';
 
 const useUpdateOrganization = () => {
 	const [error, setError] = useState(undefined);
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 	const [data, setdata] = useState<any>(undefined);
 
 	const execute = (realm: string, id: string, organization: Organization) =>
@@ -13,6 +13,7 @@ const useUpdateOrganization = () => {
 	useEffect(() => {
 		if (data) {
 			setLoading(true);
+			setError(undefined);
 			updateOrganization(data.realm, data.id, data.organization)
 				.catch((err) => setError(err))
 				.finally(() => {

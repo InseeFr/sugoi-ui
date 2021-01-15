@@ -49,9 +49,7 @@ export const postOrganization = (
 ): Promise<Organization> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.post('/' + realm + '/organizations', {
-				data: { ...organization },
-			})
+			.post('/' + realm + '/organizations', organization)
 			.then((r: any) => r.data),
 	);
 
@@ -62,8 +60,6 @@ export const updateOrganization = (
 ): Promise<Organization> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.put('/' + realm + '/organizations/' + id, {
-				data: { ...organization },
-			})
+			.put('/' + realm + '/organizations/' + id, organization)
 			.then((r: any) => r.data),
 	);

@@ -7,13 +7,14 @@ interface execute {
 }
 const usePostUser = () => {
 	const [error, setError] = useState(undefined);
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 	const [data, setdata] = useState<execute | undefined>(undefined);
 	const [result, setResult] = useState<User | undefined>(undefined);
 
 	useEffect(() => {
 		if (data) {
 			setLoading(true);
+			setError(undefined);
 			postUser(data.realm, data.user)
 				.then((r: User) => setResult(r))
 				.catch((err) => {

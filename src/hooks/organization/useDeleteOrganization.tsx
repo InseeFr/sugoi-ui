@@ -11,6 +11,7 @@ export const useDeleteOrganization = () => {
 	useEffect(() => {
 		if (data) {
 			setloading(true);
+			seterror(undefined);
 			deleteOrganization(data.realm, data.id)
 				.then()
 				.catch((err) => seterror(err))

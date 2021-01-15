@@ -1,4 +1,5 @@
 import { Button, Grid } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDeleteOrganization } from '../../hooks/organization/useDeleteOrganization';
@@ -9,6 +10,7 @@ import { useForms } from '../../hooks/technics/useForms';
 import organization from '../../model/api/organization';
 import DataViewer from '../commons/dataViewer/dataviewer';
 import { Loader } from '../commons/loader/loader';
+import LoadingButton from '../commons/loadingButton';
 import Title from '../commons/title/title';
 
 interface props {
@@ -22,8 +24,17 @@ const DetailOrganization = () => {
 	const { realm, id } = useParams<any>();
 	const { organizationConfig } = useRealmConfig(realm);
 	const { loading, organization } = useGetOrganization(id, realm);
-	const { execute: executeUpdate } = useUpdateOrganization();
-	const { execute: executeDelete } = useDeleteOrganization();
+	const {
+		execute: executeUpdate,
+		loading: loadingUpdate,
+		error: errorUpdate,
+	} = useUpdateOrganization();
+	const {
+		execute: executeDelete,
+		loading: loadingDelete,
+		error: errorDelete,
+	} = useDeleteOrganization();
+	const { enqueueSnackbar } = useSnackbar();
 	const {
 		formValues,
 		updateIFormValues,
@@ -36,6 +47,28 @@ const DetailOrganization = () => {
 			updateIFormValues(organization);
 		}
 	}, [organization, updateIFormValues]);
+
+	useEffect(() => {
+		if (errorDelete) {
+			enqueueSnackbar(
+				"Erreur lors de l'envoi à l'api: " + errorDelete,
+				{
+					variant: 'error',
+				},
+			);
+		}
+	}, [enqueueSnackbar, errorDelete]);
+
+	useEffect(() => {
+		if (errorUpdate) {
+			enqueueSnackbar(
+				"Erreur lors de l'envoi à l'api: " + errorUpdate,
+				{
+					variant: 'error',
+				},
+			);
+		}
+	}, [enqueueSnackbar, errorUpdate]);
 
 	return (
 		<>
@@ -56,10 +89,11 @@ const DetailOrganization = () => {
 						spacing={3}
 					>
 						<Grid item>
-							<Button
+							<LoadingButton
 								variant="contained"
 								color="primary"
-								onClick={() =>
+								loading={loadingUpdate}
+								handleClick={() =>
 									executeUpdate(
 										realm,
 										id,
@@ -68,13 +102,14 @@ const DetailOrganization = () => {
 								}
 							>
 								Enregistrer les modifications
-							</Button>
+							</LoadingButton>
 						</Grid>
 						<Grid item>
-							<Button
+							<LoadingButton
 								variant="contained"
 								color="secondary"
-								onClick={() =>
+								loading={loadingDelete}
+								handleClick={() =>
 									executeDelete(
 										realm,
 										((organization as unknown) as organization)
@@ -84,7 +119,7 @@ const DetailOrganization = () => {
 								}
 							>
 								Supprimer
-							</Button>
+							</LoadingButton>
 						</Grid>
 						<Grid item>
 							<Button
