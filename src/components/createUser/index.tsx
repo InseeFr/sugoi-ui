@@ -1,10 +1,12 @@
 import { Button, Grid } from '@material-ui/core';
-import React from 'react';
+import { useSnackbar } from 'notistack';
+import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import useRealmConfig from '../../hooks/realm/useRealmConfig/useRealmConfig';
 import { useForms } from '../../hooks/technics/useForms';
 import usePostUser from '../../hooks/user/usePostUser';
 import DataViewer from '../commons/dataViewer/dataviewer';
+import LoadingButton from '../commons/loadingButton';
 import Title from '../commons/title/title';
 
 const CreateUsers = () => {
@@ -12,12 +14,26 @@ const CreateUsers = () => {
 	const { push } = useHistory();
 	const { formValues, handleChange, handleReset } = useForms({});
 	const { userConfig } = useRealmConfig(realm);
-	const { execute: createUser } = usePostUser();
+	const { user, execute: createUser, error, loading } = usePostUser();
+	const { enqueueSnackbar } = useSnackbar();
 
 	const handleSubmit = () => {
 		createUser(realm, formValues);
-		push('/realm/' + realm);
 	};
+
+	useEffect(() => {
+		if (error) {
+			enqueueSnackbar("Erreur lors de l'envoi à l'api: " + error, {
+				variant: 'error',
+			});
+		}
+	}, [enqueueSnackbar, error]);
+
+	useEffect(() => {
+		if (user) {
+			push('/realm/' + realm + '/user/' + user.username);
+		}
+	}, [user, realm, push]);
 
 	return (
 		<Grid container spacing={2} direction="column">
@@ -44,13 +60,14 @@ const CreateUsers = () => {
 					spacing={3}
 				>
 					<Grid item>
-						<Button
-							variant="contained"
+						<LoadingButton
+							handleClick={handleSubmit}
+							loading={loading}
 							color="primary"
-							onClick={handleSubmit}
+							variant="contained"
 						>
 							Enregistrer les modifications
-						</Button>
+						</LoadingButton>
 					</Grid>
 					<Grid item>
 						<Button

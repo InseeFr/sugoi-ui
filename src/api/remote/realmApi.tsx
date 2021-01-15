@@ -9,9 +9,7 @@ export const getRealms = (id?: string): Promise<Realm[]> =>
 
 export const updateRealm = (id: string, realm: Realm): Promise<Realm> =>
 	getAuthClient().then((client: AxiosInstance) =>
-		client
-			.put('/realms/' + id, { data: { ...realm } })
-			.then((r: any) => r.data),
+		client.put('/realms/' + id, realm).then((r: any) => r.data),
 	);
 
 export const deleteRealm = (id?: string): Promise<string> =>
@@ -21,7 +19,5 @@ export const deleteRealm = (id?: string): Promise<string> =>
 
 export const postRealm = (realm: Realm): Promise<Realm> =>
 	getAuthClient().then((client: AxiosInstance) =>
-		client
-			.post('/realms/', { data: { ...realm } })
-			.then((r: any) => r.data),
+		client.post('/realms/', realm).then((r: any) => r.data),
 	);

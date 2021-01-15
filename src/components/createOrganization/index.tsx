@@ -1,10 +1,12 @@
 import { Button, Grid } from '@material-ui/core';
-import React from 'react';
+import { useSnackbar } from 'notistack';
+import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import usePostOrganization from '../../hooks/organization/usePostOrganization';
 import useRealmConfig from '../../hooks/realm/useRealmConfig/useRealmConfig';
 import { useForms } from '../../hooks/technics/useForms';
 import DataViewer from '../commons/dataViewer/dataviewer';
+import LoadingButton from '../commons/loadingButton';
 import Title from '../commons/title/title';
 
 const CreateOrganization = () => {
@@ -12,12 +14,36 @@ const CreateOrganization = () => {
 	const { push } = useHistory();
 	const { formValues, handleChange, handleReset } = useForms({});
 	const { organizationConfig } = useRealmConfig(realm);
-	const { execute: createOrganization } = usePostOrganization();
+	const {
+		organization,
+		execute: createOrganization,
+		loading,
+		error,
+	} = usePostOrganization();
+	const { enqueueSnackbar } = useSnackbar();
+
+	useEffect(() => {
+		if (error) {
+			enqueueSnackbar("Erreur lors de l'envoi à l'api: " + error, {
+				variant: 'error',
+			});
+		}
+	}, [enqueueSnackbar, error]);
 
 	const handleSubmit = () => {
 		createOrganization(realm, formValues);
-		push('/realm/' + realm);
 	};
+
+	useEffect(() => {
+		if (organization) {
+			push(
+				'/realm/' +
+					realm +
+					'/organization/' +
+					organization.identifiant,
+			);
+		}
+	}, [organization, realm, push]);
 
 	return (
 		<Grid container spacing={2} direction="column">
@@ -44,14 +70,16 @@ const CreateOrganization = () => {
 					spacing={3}
 				>
 					<Grid item>
-						<Button
-							variant="contained"
+						<LoadingButton
+							handleClick={handleSubmit}
+							loading={loading}
 							color="primary"
-							onClick={handleSubmit}
+							variant="contained"
 						>
 							Enregistrer les modifications
-						</Button>
+						</LoadingButton>
 					</Grid>
+
 					<Grid item>
 						<Button
 							variant="contained"

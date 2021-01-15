@@ -60,16 +60,12 @@ export const deleteUser = (realm: string, id: string) =>
 
 export const postUser = (realm: string, user: User) =>
 	getAuthClient().then((client: AxiosInstance) =>
-		client
-			.post('/' + realm + '/users', {
-				data: { ...user },
-			})
-			.then((r: any) => r.data),
+		client.post('/' + realm + '/users', user).then((r: any) => r.data),
 	);
 
 export const updateUser = (realm: string, id: string, user: User) =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.put('/' + realm + '/users/' + id, { data: { ...user } })
+			.put('/' + realm + '/users/' + id, user)
 			.then((r: any) => r.data),
 	);

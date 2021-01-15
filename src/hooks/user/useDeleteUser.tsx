@@ -11,6 +11,7 @@ export const useDeleteUser = () => {
 	useEffect(() => {
 		if (data) {
 			setloading(true);
+			seterror(undefined);
 			deleteUser(data.realm, data.id)
 				.catch((err) => seterror(err))
 				.finally(() => {

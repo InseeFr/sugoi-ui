@@ -12,12 +12,47 @@ import { Loader } from '../commons/loader/loader';
 import { ResetPasswordPopup } from '../commons/resetPasswordPopup/resetPasswordPopup';
 import { SendPopupButton } from '../commons/sendPasswordPopup/sendPopup';
 import Title from '../commons/title/title';
+import LoadingButton from '../commons/loadingButton';
+import { useSnackbar } from 'notistack';
 
 const DetailUser = () => {
 	const { realm, id } = useParams<any>();
 	const { loading, user } = useGetUser(id, realm);
-	const { execute: executeUpdate } = useUpdateUser();
-	const { execute: executeDelete } = useDeleteUser();
+	const {
+		execute: executeUpdate,
+		loading: loadingUpdate,
+		error: errorUpdate,
+	} = useUpdateUser();
+	const {
+		execute: executeDelete,
+		loading: loadingDelete,
+		error: errorDelete,
+	} = useDeleteUser();
+
+	const { enqueueSnackbar } = useSnackbar();
+
+	useEffect(() => {
+		if (errorDelete) {
+			enqueueSnackbar(
+				"Erreur lors de l'envoi à l'api: " + errorDelete,
+				{
+					variant: 'error',
+				},
+			);
+		}
+	}, [enqueueSnackbar, errorDelete]);
+
+	useEffect(() => {
+		if (errorUpdate) {
+			enqueueSnackbar(
+				"Erreur lors de l'envoi à l'api: " + errorUpdate,
+				{
+					variant: 'error',
+				},
+			);
+		}
+	}, [enqueueSnackbar, errorUpdate]);
+
 	const {
 		formValues,
 		updateIFormValues,
@@ -60,10 +95,11 @@ const DetailUser = () => {
 							/>
 						</Grid>
 						<Grid item>
-							<Button
+							<LoadingButton
 								variant="contained"
 								color="primary"
-								onClick={() =>
+								loading={loadingUpdate}
+								handleClick={() =>
 									executeUpdate(
 										realm,
 										id,
@@ -72,13 +108,14 @@ const DetailUser = () => {
 								}
 							>
 								Enregistrer les modifications
-							</Button>
+							</LoadingButton>
 						</Grid>
 						<Grid item>
-							<Button
+							<LoadingButton
 								variant="contained"
 								color="secondary"
-								onClick={() =>
+								loading={loadingDelete}
+								handleClick={() =>
 									executeDelete(
 										realm,
 										(user as User)
@@ -88,7 +125,7 @@ const DetailUser = () => {
 								}
 							>
 								Supprimer
-							</Button>
+							</LoadingButton>
 						</Grid>
 						<Grid item>
 							<Button
