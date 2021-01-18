@@ -27,7 +27,7 @@ export const getUsers = (
 					nomCommun,
 					description,
 					organisationId,
-					size: 500,
+					size: size ? size : 500,
 					start,
 					searchCookie,
 					typeRecherche,

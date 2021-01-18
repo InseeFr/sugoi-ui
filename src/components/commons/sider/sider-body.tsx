@@ -1,21 +1,19 @@
 import {
-	Collapse,
 	createStyles,
 	Divider,
 	List,
 	ListItem,
 	ListItemIcon,
 	ListItemText,
+	ListSubheader,
 	makeStyles,
 	TextField,
 	Theme,
 	Toolbar,
 } from '@material-ui/core';
-import CreateIcon from '@material-ui/icons/Create';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+import BusinessIcon from '@material-ui/icons/Business';
 import HomeIcon from '@material-ui/icons/Home';
-import SearchIcon from '@material-ui/icons/Search';
+import PersonIcon from '@material-ui/icons/Person';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Autocomplete from '@material-ui/lab/Autocomplete/Autocomplete';
 import React, { useEffect, useState } from 'react';
@@ -25,7 +23,6 @@ import { RootState } from '../../../configuration/store-configuration';
 import { useGetRealms } from '../../../hooks/realm/useGetRealms';
 import D from '../../../i18n';
 import { saveRealms } from '../../../redux/actions/app';
-
 const useStyle = makeStyles((theme: Theme) =>
 	createStyles({
 		nested: {
@@ -44,10 +41,6 @@ const SiderBody = () => {
 	const [realmSelected, setRealmSelected] = useState<string | undefined>(
 		undefined,
 	);
-	const [actions, setActions] = useState<String | undefined>(undefined);
-
-	const [openSearch, setOpenSearch] = useState(false);
-	const [openCreate, setOpenCreate] = useState(false);
 
 	const { realms: data } = useGetRealms();
 
@@ -55,42 +48,6 @@ const SiderBody = () => {
 		setRealms(data.map((realm) => realm.name));
 		dispatch(saveRealms(data));
 	}, [data, setRealms, dispatch]);
-
-	useEffect(() => {
-		if (actions) {
-			switch (actions) {
-				case 'search_user':
-					push('/realm/' + realmSelected + '/search/users');
-					break;
-				case 'search_organization':
-					push(
-						'/realm/' +
-							realmSelected +
-							'/search/organizations',
-					);
-					break;
-				case 'create_user':
-					push('/realm/' + realmSelected + '/create/user');
-					break;
-				case 'create_organization':
-					push(
-						'/realm/' +
-							realmSelected +
-							'/create/organization',
-					);
-					break;
-				case 'home':
-					push('/');
-					break;
-				case 'settings':
-					push('/settings');
-					break;
-				default:
-					push('/');
-					break;
-			}
-		}
-	}, [push, actions, realmSelected]);
 
 	useEffect(() => {
 		const match = matchPath(location.pathname, {
@@ -102,54 +59,70 @@ const SiderBody = () => {
 			} else {
 				push('/');
 			}
+		} else {
+			setRealmSelected(undefined);
 		}
 	}, [location.pathname, push, realms]);
 
 	return (
 		<>
 			<Toolbar />
-			{user.role.isAdmin ||
-			user.role.isReader ||
-			user.role.isWriter ? (
-				<ListItem>
-					<Autocomplete
-						id="realm choice"
-						options={realms}
-						style={{ width: 300 }}
-						value={realmSelected || null}
-						onChange={(
-							event: any,
-							newValue: string | null,
-						) =>
-							setRealmSelected(
-								newValue || undefined,
-							)
-						}
-						renderInput={(params) => (
-							<TextField
-								{...params}
-								label="Realm"
-								variant="standard"
-							/>
-						)}
-					/>
-				</ListItem>
-			) : null}
+
 			<List component="nav">
 				<ListItem
 					button
 					key={D.sider_home}
-					onClick={() => setActions('home')}
+					onClick={() => push('/')}
 				>
 					<ListItemIcon>
 						<HomeIcon />
 					</ListItemIcon>
 					<ListItemText primary={D.sider_home} />
 				</ListItem>
+				<Divider />
 				{user.role.isAdmin ||
 				user.role.isReader ||
 				user.role.isWriter ? (
-					<>
+					<List
+						component="nav"
+						aria-labelledby="nested-list-subheader"
+						subheader={
+							<ListSubheader
+								component="div"
+								id="nested-list-subheader"
+							>
+								Gestion
+							</ListSubheader>
+						}
+					>
+						<ListItem className={classes.nested}>
+							<Autocomplete
+								id="realm choice"
+								options={realms}
+								style={{ width: 300 }}
+								value={realmSelected || null}
+								onChange={(
+									event: any,
+									newValue: string | null,
+								) => {
+									setRealmSelected(
+										newValue ||
+											undefined,
+									);
+									push(
+										'/realm/' +
+											newValue,
+									);
+								}}
+								renderInput={(params) => (
+									<TextField
+										{...params}
+										label="Realm"
+										variant="standard"
+									/>
+								)}
+							/>
+						</ListItem>
 						<ListItem
 							button
 							key={D.sider_search}
@@ -157,55 +130,19 @@ const SiderBody = () => {
 								realmSelected ? false : true
 							}
 							onClick={() =>
-								setOpenSearch(!openSearch)
+								push(
+									'/realm/' +
+										realmSelected +
+										'/users',
+								)
 							}
+							className={classes.nested}
 						>
 							<ListItemIcon>
-								<SearchIcon />
+								<PersonIcon />
 							</ListItemIcon>
-							<ListItemText
-								primary={D.sider_search}
-							/>
-							{openSearch ? (
-								<ExpandLess />
-							) : (
-								<ExpandMore />
-							)}
+							<ListItemText primary="Utilisateurs" />
 						</ListItem>
-						<Collapse
-							in={openSearch}
-							timeout="auto"
-							unmountOnExit
-						>
-							<List component="div" disablePadding>
-								<ListItem
-									button
-									className={classes.nested}
-									onClick={() =>
-										setActions(
-											'search_user',
-										)
-									}
-								>
-									<ListItemText primary="Rechercher des utilisateurs" />
-								</ListItem>
-								<ListItem
-									button
-									className={classes.nested}
-									onClick={() =>
-										setActions(
-											'search_organization',
-										)
-									}
-								>
-									<ListItemText primary="Rechercher des organisations" />
-								</ListItem>
-							</List>
-						</Collapse>
-					</>
-				) : null}
-				{user.role.isAdmin || user.role.isWriter ? (
-					<>
 						<ListItem
 							button
 							key={D.sider_create}
@@ -213,61 +150,41 @@ const SiderBody = () => {
 								realmSelected ? false : true
 							}
 							onClick={() =>
-								setOpenCreate(!openCreate)
+								push(
+									'/realm/' +
+										realmSelected +
+										'/organizations',
+								)
 							}
+							className={classes.nested}
 						>
 							<ListItemIcon>
-								<CreateIcon />
+								<BusinessIcon />
 							</ListItemIcon>
-							<ListItemText
-								primary={D.sider_create}
-							/>
-							{openCreate ? (
-								<ExpandLess />
-							) : (
-								<ExpandMore />
-							)}
+							<ListItemText primary="Organisations" />
 						</ListItem>
-						<Collapse
-							in={openCreate}
-							timeout="auto"
-							unmountOnExit
-						>
-							<List component="div" disablePadding>
-								<ListItem
-									button
-									className={classes.nested}
-									onClick={() =>
-										setActions(
-											'create_user',
-										)
-									}
-								>
-									<ListItemText primary="Créer un utilisateur" />
-								</ListItem>
-								<ListItem
-									button
-									className={classes.nested}
-									onClick={() =>
-										setActions(
-											'create_organization',
-										)
-									}
-								>
-									<ListItemText primary="Créer une organisation" />
-								</ListItem>
-							</List>
-						</Collapse>
-					</>
+					</List>
 				) : null}
 			</List>
 			<Divider />
 			{user.role.isAdmin ? (
-				<List>
+				<List
+					component="nav"
+					aria-labelledby="nested-list-subheader"
+					subheader={
+						<ListSubheader
+							component="div"
+							id="nested-list-subheader"
+						>
+							Configuration
+						</ListSubheader>
+					}
+				>
 					<ListItem
 						button
 						key={D.sider_search}
-						onClick={() => setActions('settings')}
+						onClick={() => push('/settings')}
+						className={classes.nested}
 					>
 						<ListItemIcon>
 							<SettingsIcon />

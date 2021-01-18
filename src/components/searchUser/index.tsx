@@ -1,12 +1,12 @@
-import { Grid, IconButton, LinearProgress } from '@material-ui/core';
-import VisibilityIcon from '@material-ui/icons/Visibility';
+import { Button, Grid, LinearProgress } from '@material-ui/core';
+import CreateIcon from '@material-ui/icons/Create';
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import useGetUsers from '../../hooks/user/useGetUsers';
-import Title from '../commons/title/title';
-import { SearchResults } from '../commons/searchResults';
-import SearchForm from './../commons/searchFormular';
 import { field } from '../../model/field';
+import { SearchResults } from '../commons/searchResults';
+import Title from '../commons/title/title';
+import SearchForm from './../commons/searchFormular';
 
 const formFields: field[] = [
 	{
@@ -67,7 +67,6 @@ const SearchUsers = () => {
 	const { realm } = useParams<any>();
 	const { users, execute: searchUsers, loading } = useGetUsers(realm);
 	const { push } = useHistory();
-
 	const submit = (values: any) => {
 		searchUsers(realm, { ...values });
 	};
@@ -86,29 +85,38 @@ const SearchUsers = () => {
 			label: 'Nom commun',
 		},
 		{
-			name: 'Voir plus',
+			name: 'Actions',
 			options: {
 				filter: false,
 				sort: false,
 				empty: true,
 				customBodyRenderLite: (dataIndex: any) => {
 					return (
-						<IconButton
-							color="primary"
-							aria-label="add to shopping cart"
-							onClick={() => {
-								const link =
-									'/realm/' +
-									realm +
-									'/' +
-									'user/' +
-									users[dataIndex].username;
+						<Grid container direction="row" spacing={2}>
+							<Grid item>
+								<Button
+									disableElevation
+									variant="contained"
+									color="default"
+									startIcon={<CreateIcon />}
+									aria-label="modify user"
+									onClick={() => {
+										const link =
+											'/realm/' +
+											realm +
+											'/' +
+											'users/' +
+											users[
+												dataIndex
+											].username;
 
-								push(link);
-							}}
-						>
-							<VisibilityIcon />
-						</IconButton>
+										push(link);
+									}}
+								>
+									Editer
+								</Button>
+							</Grid>
+						</Grid>
 					);
 				},
 			},
@@ -137,7 +145,17 @@ const SearchUsers = () => {
 					/>
 				</Grid>
 				<Grid item xs={12}>
-					<SearchResults data={users} columns={columns} />
+					<SearchResults
+						data={users}
+						columns={columns}
+						handleClickAdd={() =>
+							push(
+								'/realm/' +
+									realm +
+									'/users/create',
+							)
+						}
+					/>
 					{loading ? <LinearProgress /> : null}
 				</Grid>
 			</Grid>

@@ -1,4 +1,4 @@
-import { useReactOidc } from '@axa-fr/react-oidc-context';
+import { useReactOidc, withOidcSecure } from '@axa-fr/react-oidc-context';
 import { Container } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {
@@ -9,15 +9,16 @@ import {
 } from '@material-ui/core/styles';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { RootState } from './../configuration/store-configuration';
 import { DarkTheme, LightTheme } from './../material-ui-theme';
+import routes from './../routes/routes';
 import BreadCrumbs from './commons/breadcrumbs/breadcrumbs';
+import ErrorBoundary from './commons/error/Error';
+import Footer from './commons/footer/footer';
 import Header from './commons/header/header';
 import ScrollTop from './commons/scroll-top/scroll-top';
 import Sider from './commons/sider';
-import ErrorBoundary from './commons/error/Error';
-import Routes from './routes/routes';
-import Footer from './commons/footer/footer';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -76,7 +77,22 @@ const App = () => {
 					>
 						<BreadCrumbs />
 						<ErrorBoundary>
-							<Routes />
+							<Switch>
+								{routes.map((route) => (
+									<Route
+										exact={route.exact}
+										path={route.path}
+										component={
+											route.secure
+												? withOidcSecure(
+														route.component,
+												  )
+												: route.component
+										}
+									/>
+								))}
+								<Redirect to="/" />
+							</Switch>
 						</ErrorBoundary>
 					</Container>
 					<ScrollTop />
