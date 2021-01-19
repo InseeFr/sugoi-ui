@@ -1,5 +1,5 @@
-import { Grid, IconButton, LinearProgress } from '@material-ui/core';
-import VisibilityIcon from '@material-ui/icons/Visibility';
+import { Button, Grid, LinearProgress } from '@material-ui/core';
+import CreateIcon from '@material-ui/icons/Create';
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import useGetOrganizations from '../../hooks/organization/useGetOrganizations';
@@ -45,16 +45,18 @@ const SearchOrganizations = () => {
 			},
 		},
 		{
-			name: 'Voir plus',
+			name: 'Actions',
 			options: {
 				filter: false,
 				sort: false,
 				empty: true,
 				customBodyRenderLite: (dataIndex: any) => {
 					return (
-						<IconButton
-							color="primary"
-							aria-label="add to shopping cart"
+						<Button
+							variant="contained"
+							color="default"
+							startIcon={<CreateIcon />}
+							aria-label="modify user"
 							onClick={() => {
 								const link =
 									'/realm/' +
@@ -67,8 +69,8 @@ const SearchOrganizations = () => {
 								push(link);
 							}}
 						>
-							<VisibilityIcon />
-						</IconButton>
+							Editer
+						</Button>
 					);
 				},
 			},
@@ -101,6 +103,13 @@ const SearchOrganizations = () => {
 					<SearchResults
 						data={organizations}
 						columns={columns}
+						handleClickAdd={() =>
+							push(
+								'/realm/' +
+									realm +
+									'/organizations/create',
+							)
+						}
 					/>
 					{loading ? <LinearProgress /> : null}
 				</Grid>
