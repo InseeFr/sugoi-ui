@@ -18,7 +18,6 @@ export const useForms = (initialValues: any) => {
 			);
 			setFormValues(newFormValues);
 			setTodo(undefined);
-			console.log(formValues);
 		}
 	}, [todo, formValues]);
 
