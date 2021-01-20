@@ -10,7 +10,6 @@ interface props {
 }
 
 const DataViewer = ({ data, fieldToDisplay, handleChange }: props) => {
-	console.log(fieldToDisplay);
 	const mainsFields = fieldToDisplay.filter(
 		(field) => field.tag === 'main',
 	);

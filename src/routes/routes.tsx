@@ -1,3 +1,5 @@
+import CreateOrganization from '../components/createOrganization';
+import CreateUsers from '../components/createUser';
 import DetailsOrganization from '../components/details/detailsOrganization';
 import DetailsUser from '../components/details/detailsUser';
 import Home from '../components/home/home';
@@ -32,7 +34,7 @@ const routes: Iroutes[] = [
 		path: '/realm/:realm/users/create',
 		exact: true,
 		breadcrumb: 'Création',
-		component: DetailsOrganization,
+		component: CreateUsers,
 		secure: true,
 	},
 	{
@@ -53,7 +55,7 @@ const routes: Iroutes[] = [
 		path: '/realm/:realm/organization/create',
 		exact: true,
 		breadcrumb: 'Création',
-		component: DetailsOrganization,
+		component: CreateOrganization,
 		secure: true,
 	},
 	{

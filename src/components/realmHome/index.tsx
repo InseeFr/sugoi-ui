@@ -17,7 +17,6 @@ export const RealmHome = () => {
 
 	useEffect(() => {
 		if (selected) {
-			console.log(selected);
 			push('/realm/' + realm + '/users/' + selected.username);
 		}
 	}, [selected, push, realm]);
