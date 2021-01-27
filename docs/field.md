@@ -1,6 +1,8 @@
-# Available field in formular
+## Available field in formular
 
-Field's form are generated according to a file. this file let the user to choose which field must be displayed for an entity of a realm.
+the formular generated to view or create an entity is auto-generated. Indeed each realm/userStorage can have diiferent field. We build a way to autogenerate this form according to a json file (send by api).
+
+This file is list of fields represented as the following:
 
 ```json
 {
@@ -14,8 +16,6 @@ Field's form are generated according to a file. this file let the user to choose
 }
 ```
 
-For the moment, fields allowed are:
-
 | attributes    | Optionnal | Description |
 | ------------- | :-------: | ----------: |
 | name          |    no     |       value |
@@ -27,3 +27,5 @@ For the moment, fields allowed are:
 | tag           |    no     |       value |
 | addTitle      |    yes    |       value |
 | deleteTitle   |    yes    |       value |
+
+For the moment, fields can be a string, group, habilitation or a list.
