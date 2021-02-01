@@ -6,12 +6,13 @@ import {
 	Typography,
 } from '@material-ui/core';
 import React from 'react';
+import { Habilitation } from '../../../../../model/api/habilitation';
 import PopButton from '../../../../commons/popButton/popButton';
 import PopIcon from '../../../../commons/popIcon/popIcon';
 import HabilitationFieldPopup from './habilitationFieldInfoPopup';
 
 interface props {
-	habilitations: string[];
+	habilitations: Habilitation[];
 	textButton?: string;
 	helpTextTitle?: string;
 	helpText?: string;
@@ -61,9 +62,17 @@ export const HabilitationFieldInfo = ({
 				/>
 			</Grid>
 			<List dense={true}>
-				{habilitations.map((value: string) => (
+				{habilitations.map((value: Habilitation) => (
 					<ListItem disableGutters>
-						<ListItemText primary={value} />
+						<ListItemText
+							primary={
+								value.application +
+								'_' +
+								value.role +
+								'_' +
+								value.property
+							}
+						/>
 					</ListItem>
 				))}
 			</List>

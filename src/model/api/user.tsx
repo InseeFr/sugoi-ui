@@ -1,5 +1,6 @@
 import Address from './address';
 import Attributes from './attributes';
+import { Habilitation } from './habilitation';
 
 export default interface User {
 	lastName?: string;
@@ -8,7 +9,7 @@ export default interface User {
 	username?: string;
 	attributes?: Attributes;
 	address?: Address;
-	habilitations?: string[];
+	habilitations?: Habilitation[];
 	groups?: string[];
 	metadatas?: string[];
 }
