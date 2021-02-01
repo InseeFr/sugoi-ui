@@ -14,9 +14,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import React from 'react';
 import PopIcon from '../../../popIcon/popIcon';
 import CreateIcon from '@material-ui/icons/Create';
+import { Habilitation } from '../../../../../model/api/habilitation';
 
 interface props {
-	habilitations: string[];
+	habilitations: Habilitation[];
 	textButton?: string;
 	helpTextTitle?: string;
 	helpText?: string;
@@ -44,11 +45,12 @@ const HabilitationsPopup = ({
 
 	const handleClickAdd = () => {
 		if ((application && role) || (application && role && propriete)) {
-			let prop =
-				application +
-				(role
-					? '_' + role + (propriete ? '_' + propriete : '')
-					: '');
+			let prop = {
+				application: application,
+				role: role,
+				property: propriete,
+			};
+
 			habilitations.push(prop);
 			handleChange(habilitations);
 			setApplication(undefined);
@@ -83,7 +85,13 @@ const HabilitationsPopup = ({
 			{!edit && habilitations.length > 0 ? (
 				<Grid item xs={12}>
 					{habilitations.map((habilitation) => (
-						<li>{habilitation}</li>
+						<li>
+							{habilitation.application +
+								'_' +
+								habilitation.role +
+								'_' +
+								habilitation.property}
+						</li>
 					))}
 				</Grid>
 			) : null}
@@ -188,13 +196,17 @@ const HabilitationsPopup = ({
 								<List dense={true}>
 									{habilitations?.map(
 										(
-											habilitation: string,
+											habilitation: Habilitation,
 											pos: any,
 										) => (
 											<ListItem>
 												<ListItemText
 													primary={
-														habilitation
+														habilitation.application +
+														'_' +
+														habilitation.role +
+														'_' +
+														habilitation.property
 													}
 												/>
 												<ListItemSecondaryAction>
