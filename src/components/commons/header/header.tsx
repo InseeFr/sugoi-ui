@@ -2,7 +2,6 @@ import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import React from 'react';
-import D from '../../../i18n';
 import GroupedIcons from './all-icon-button/grouped-buttons';
 interface props {
 	handleDrawerToggle: any;
@@ -51,7 +50,7 @@ const MyHeader = (props: props) => {
 					noWrap
 					className={classes.title}
 				>
-					{D.title}
+					Sugoi
 				</Typography>
 				<GroupedIcons />
 			</Toolbar>

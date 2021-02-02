@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, CircularProgress, Theme, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import D from '../../../i18n';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -22,7 +21,7 @@ export const Loader = () => {
 		<Box className={classes.box}>
 			<CircularProgress size={100} />
 			<Typography color="textSecondary">
-				{D.loader_loading}
+				Chargement en cours...
 			</Typography>
 		</Box>
 	);

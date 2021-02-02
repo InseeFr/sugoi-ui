@@ -21,7 +21,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { matchPath, useHistory, useLocation } from 'react-router-dom';
 import { RootState } from '../../../configuration/store-configuration';
 import { useGetRealms } from '../../../hooks/realm/useGetRealms';
-import D from '../../../i18n';
 import { saveRealms } from '../../../redux/actions/app';
 const useStyle = makeStyles((theme: Theme) =>
 	createStyles({
@@ -71,13 +70,13 @@ const SiderBody = () => {
 			<List component="nav">
 				<ListItem
 					button
-					key={D.sider_home}
+					key="Accueil"
 					onClick={() => push('/')}
 				>
 					<ListItemIcon>
 						<HomeIcon />
 					</ListItemIcon>
-					<ListItemText primary={D.sider_home} />
+					<ListItemText primary="Accueil" />
 				</ListItem>
 				<Divider />
 				{user.role.isAdmin ||
@@ -125,7 +124,7 @@ const SiderBody = () => {
 						</ListItem>
 						<ListItem
 							button
-							key={D.sider_search}
+							key="Rechercher"
 							disabled={
 								realmSelected ? false : true
 							}
@@ -145,7 +144,7 @@ const SiderBody = () => {
 						</ListItem>
 						<ListItem
 							button
-							key={D.sider_create}
+							key="Créer"
 							disabled={
 								realmSelected ? false : true
 							}
@@ -182,14 +181,14 @@ const SiderBody = () => {
 				>
 					<ListItem
 						button
-						key={D.sider_search}
+						key="Paramètres"
 						onClick={() => push('/settings')}
 						className={classes.nested}
 					>
 						<ListItemIcon>
 							<SettingsIcon />
 						</ListItemIcon>
-						<ListItemText primary={D.sider_admin} />
+						<ListItemText primary="Paramètres" />
 					</ListItem>
 				</List>
 			) : null}

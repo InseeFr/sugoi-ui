@@ -10,7 +10,6 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useForms } from '../../../hooks/technics/useForms';
-import D from '../../../i18n';
 import { field } from '../../../model/field';
 import ExpandButton from '../../commons/expandButton/expand-button';
 import TextFieldInfo from '../../commons/formular/fields/textFieldInfo';
@@ -27,7 +26,7 @@ const SearchFormular = ({ realm, onSubmit, formFields }: props) => {
 
 	return (
 		<Card>
-			<CardHeader title={D.formular_card_title} />
+			<CardHeader title="Ma recherche:" />
 			<Divider />
 			<CardContent>
 				<Grid container direction="row" spacing={2}>

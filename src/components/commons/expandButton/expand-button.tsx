@@ -2,7 +2,6 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import D from '../../../i18n';
 
 interface props {
 	expand: Boolean;
@@ -17,7 +16,7 @@ const ExpandButton = ({ expand, setExpand }: props) => {
 			endIcon={expand ? <ExpandLessIcon /> : <ExpandMoreIcon />}
 			onClick={() => setExpand(!expand)}
 		>
-			{expand ? D.formular_button_reduce : D.formular_button_expand}
+			{expand ? 'Voir plus' : 'Voir moins'}
 		</Button>
 	);
 };

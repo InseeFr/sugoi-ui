@@ -8,10 +8,10 @@ import {
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import TranslateIcon from '@material-ui/icons/Translate';
 import React from 'react';
-import { useLocalStorage } from '../../../../hooks/technics/useLocalStorage';
+import { useTranslation } from 'react-i18next';
 
 const LanguageButton = () => {
-	const [lang, setLang] = useLocalStorage('lang', 'fr');
+	const { i18n } = useTranslation();
 
 	const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
 		null,
@@ -29,8 +29,7 @@ const LanguageButton = () => {
 	const id = open ? 'simple-popover' : undefined;
 
 	const changeLanguage = (choice: string) => {
-		setLang(choice);
-		window.location.reload();
+		i18n.changeLanguage(choice);
 	};
 
 	return (
@@ -41,7 +40,7 @@ const LanguageButton = () => {
 				endIcon={<ArrowDropDownIcon />}
 				onClick={handleClick}
 			>
-				{lang === 'fr' ? 'Français' : 'English'}
+				{i18n.language}
 			</Button>
 			<Popover
 				id={id}
