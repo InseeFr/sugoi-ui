@@ -10,13 +10,12 @@ import {
 } from '@material-ui/core';
 import { RootState } from '../../configuration/store-configuration';
 import { useSelector } from 'react-redux';
-import D from './../../i18n';
 
 const CardRights = () => {
 	const user = useSelector((state: RootState) => state.user);
 	return (
 		<Card>
-			<CardHeader title={D.right_card_title} />
+			<CardHeader title="Mes droits" />
 			<Divider />
 			<CardContent>
 				<List>
@@ -26,7 +25,7 @@ const CardRights = () => {
 								key="role-admin-text"
 								inset={true}
 							>
-								{D.right_card_administrator}
+								"Administrateur"
 							</ListItemText>
 						</ListItem>
 					) : null}
@@ -46,7 +45,7 @@ const CardRights = () => {
 											}
 											inset={true}
 										>
-											{D.right_card_reader +
+											{'Consultant dans le domaine ' +
 												role}
 										</ListItemText>
 									</ListItem>
@@ -61,7 +60,7 @@ const CardRights = () => {
 								key={'no-rights-text'}
 								inset={true}
 							>
-								{D.right_card_norights}
+								{'Aucun droit'}
 							</ListItemText>
 						</ListItem>
 					) : null}

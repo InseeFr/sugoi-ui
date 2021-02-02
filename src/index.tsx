@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider, useDispatch } from 'react-redux';
 import store from './configuration/store-configuration';
@@ -15,6 +15,7 @@ import { UserManagerSettings } from 'oidc-client';
 import { getConfigFile } from './configuration/utils';
 import { Loader } from './components/commons/loader/loader';
 import App from './components/app';
+import './i18n';
 
 const Start = () => {
 	const [authConfiguration, setAuthConfiguration] = useState<
@@ -71,8 +72,10 @@ const Start = () => {
 	);
 };
 ReactDOM.render(
-	<Provider store={store}>
-		<Start />
-	</Provider>,
+	<Suspense fallback={<Loader />}>
+		<Provider store={store}>
+			<Start />
+		</Provider>
+	</Suspense>,
 	document.getElementById('root'),
 );
