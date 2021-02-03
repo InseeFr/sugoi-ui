@@ -1,7 +1,9 @@
 import { Grid, Typography } from '@material-ui/core';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+	const { t } = useTranslation();
 	return (
 		<>
 			<Grid
@@ -16,7 +18,8 @@ const Footer = () => {
 						color="textSecondary"
 						align="center"
 					>
-						Version: {process.env.REACT_APP_UI_VERSION}
+						{t('commons.footer.version.text')}:
+						{process.env.REACT_APP_UI_VERSION}
 					</Typography>
 				</Grid>
 				<Grid item xs={12}>
@@ -25,7 +28,7 @@ const Footer = () => {
 						color="textSecondary"
 						align="center"
 					>
-						Commit-SHA:{' '}
+						{t('commons.footer.commit.text')}:
 						{process.env.REACT_APP_UI_COMMIT_SHA}
 					</Typography>
 				</Grid>

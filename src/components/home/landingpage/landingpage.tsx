@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { useHistory } from 'react-router-dom';
 import { useReactOidc } from '@axa-fr/react-oidc-context';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
 	mainFeaturedPost: {
@@ -38,6 +39,7 @@ const MainFeaturedPost = () => {
 	const classes = useStyles();
 	const { push } = useHistory();
 	const { oidcUser, login } = useReactOidc();
+	const { t } = useTranslation();
 
 	const action: any = () => {
 		if (!oidcUser) {
@@ -63,15 +65,14 @@ const MainFeaturedPost = () => {
 							color="inherit"
 							gutterBottom
 						>
-							Service Unifié de Gestion des
-							Openldaps Internes
+							{t('home.landing.title')}
 						</Typography>
 						<Typography
 							variant="h5"
 							color="inherit"
 							paragraph
 						>
-							"blabla"
+							{t('home.landing.description')}
 						</Typography>
 						{oidcUser ? null : (
 							<Button
@@ -79,7 +80,7 @@ const MainFeaturedPost = () => {
 								color="primary"
 								onClick={action}
 							>
-								C'est parti
+								{t('home.landing.go_button')}
 							</Button>
 						)}
 					</div>

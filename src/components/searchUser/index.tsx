@@ -1,67 +1,13 @@
 import { Button, Grid, LinearProgress } from '@material-ui/core';
 import CreateIcon from '@material-ui/icons/Create';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import useGetUsers from '../../hooks/user/useGetUsers';
 import { field } from '../../model/field';
 import { SearchResults } from '../commons/searchResults';
 import Title from '../commons/title/title';
 import SearchForm from './../commons/searchFormular';
-
-const formFields: field[] = [
-	{
-		name: 'Identifiant',
-		helpTextTitle: 'Identifiant',
-		helpText:
-			"Il n'est pas obligatoire de le saisir entièrement. Le champ saisi peut être le début, le milieu ou la fin de l'identifiant recherché. L'identifiant d'un contact/d'une organisation est unique dans l'annuaire. La recherche sera plus précise.",
-		path: 'identifiant',
-		type: 'string',
-		modifiable: true,
-	},
-	{
-		name: 'Description',
-		helpTextTitle: 'Description',
-		helpText:
-			"Il n'est pas obligatoire de le saisir entièrement. Le champ saisi peut être le début, le milieu ou la fin du nom commun recherché. Caractères autorisés : alphabétiques, chiffres, apostrophes, espaces, tirets",
-		path: 'description',
-		type: 'string',
-		modifiable: true,
-	},
-	{
-		name: "Organisation d'appartenance",
-		helpTextTitle: " Identifiant de l'organisation d'appartenance ",
-		helpText:
-			"Il n'est pas obligatoire de le saisir entièrement.  Le champ saisi doit être le début de l'identifiant recherché.",
-		type: 'string',
-		modifiable: true,
-		path: 'organization',
-	},
-	{
-		name: 'Nom commun',
-		helpTextTitle: ' Nom commun',
-		helpText:
-			"Il n'est pas obligatoire de le saisir entièrement. Le champ saisi peut être le début, le milieu ou la fin du nom commun recherché. Caractères autorisés : alphabétiques, chiffres, apostrophes, espaces, tirets",
-		path: 'nomCommun',
-		type: 'string',
-		modifiable: true,
-	},
-	{
-		name: 'Adresse e-mail',
-		helpTextTitle: ' Adresse e-mail ',
-		helpText:
-			"Le champ saisi peut être une portion de l'adresse mail recherchée.",
-		path: 'description',
-		type: 'string',
-		modifiable: true,
-	},
-	{
-		name: 'Certificat associé',
-		helpTextTitle: 'Certificat associé',
-		path: 'certificate',
-		type: 'string',
-		modifiable: true,
-	},
-];
 
 const SearchUsers = () => {
 	const { realm } = useParams<any>();
@@ -70,6 +16,70 @@ const SearchUsers = () => {
 	const submit = (values: any) => {
 		searchUsers(realm, { ...values });
 	};
+
+	const { t } = useTranslation();
+
+	const formFields: field[] = [
+		{
+			name: t('search_user.form.field.identifiant.name'),
+			helpTextTitle: t(
+				'search_user.form.field.identifiant.help_text_title',
+			),
+			helpText: t('search_user.form.field.identifiant.help_text'),
+			path: 'identifiant',
+			type: 'string',
+			modifiable: true,
+		},
+		{
+			name: t('search_user.form.field.description.name'),
+			helpTextTitle: t(
+				'search_user.form.field.description.help_text_title',
+			),
+			helpText: t('search_user.form.field.description.help_text'),
+			path: 'description',
+			type: 'string',
+			modifiable: true,
+		},
+		{
+			name: t('search_user.form.field.organization.name'),
+			helpTextTitle: t(
+				'search_user.form.field.organization.help_text_title',
+			),
+			helpText: t('search_user.form.field.organization.help_text'),
+			type: 'string',
+			modifiable: true,
+			path: 'organization',
+		},
+		{
+			name: t('search_user.form.field.commun_name.name'),
+			helpTextTitle: t(
+				'search_user.form.field.commun_name.help_text_title',
+			),
+			helpText: t('search_user.form.field.commun_name.help_text'),
+			path: 'nomCommun',
+			type: 'string',
+			modifiable: true,
+		},
+		{
+			name: t('search_user.form.field.email.name'),
+			helpTextTitle: t(
+				'search_user.form.field.email.help_text_title',
+			),
+			helpText: t('search_user.form.field.email.help_text'),
+			path: 'description',
+			type: 'string',
+			modifiable: true,
+		},
+		{
+			name: t('search_user.form.field.certificate.name'),
+			helpTextTitle: t(
+				'search_user.form.field.certificate.help_text_title',
+			),
+			path: 'certificate',
+			type: 'string',
+			modifiable: true,
+		},
+	];
 
 	const columns = [
 		{
@@ -113,7 +123,9 @@ const SearchUsers = () => {
 										push(link);
 									}}
 								>
-									Editer
+									{t(
+										'search_user.buttons.edit',
+									)}
 								</Button>
 							</Grid>
 						</Grid>
@@ -125,11 +137,7 @@ const SearchUsers = () => {
 
 	return (
 		<>
-			<Title
-				title={
-					'Rechercher un utilisateur dans le realm ' + realm
-				}
-			/>
+			<Title title={t('search_user.title') + realm} />
 			<Grid
 				container
 				direction="column"

@@ -3,6 +3,8 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import useBreadcrumbs from 'use-react-router-breadcrumbs';
 import routes from '../../../routes/routes';
+import ReactDOMServer from 'react-dom/server';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -23,23 +25,19 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-interface Path {
-	text: string;
-	link: string;
-	icon?: any;
-}
-
 const MyBreadcrumbs = () => {
 	const classes = useStyles();
 	const history = useHistory();
 	const breadcrumbs = useBreadcrumbs(routes, {
 		excludePaths: ['/realm'],
 	});
+	const { t } = useTranslation();
+
 	return (
 		<Box>
 			<div className={classes.root}>
 				<Breadcrumbs separator="›" color="primary">
-					{breadcrumbs.map(({ match, breadcrumb }: any) => (
+					{breadcrumbs.map(({ match, breadcrumb }) => (
 						<Link
 							onClick={() =>
 								history.push(match.url)
@@ -47,7 +45,13 @@ const MyBreadcrumbs = () => {
 							color="primary"
 							className={classes.link}
 						>
-							{breadcrumb}
+							{t(
+								ReactDOMServer.renderToStaticMarkup(
+									breadcrumb as React.ReactElement,
+								)
+									.replace('<span>', '')
+									.replace('</span>', ''),
+							)}
 						</Link>
 					))}
 				</Breadcrumbs>

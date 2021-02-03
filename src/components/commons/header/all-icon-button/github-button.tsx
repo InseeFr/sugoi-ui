@@ -1,8 +1,10 @@
 import React from 'react';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import { IconButton } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
 const GithubButton = () => {
+	const { t } = useTranslation();
 	const handleClick = () => {
 		window.location.href = 'https://github.com/InseeFrLab/sugoi-ui';
 	};
@@ -12,7 +14,7 @@ const GithubButton = () => {
 			size="medium"
 			aria-label="Go to github project"
 			onClick={handleClick}
-			title="Go to github project"
+			title={t('commons.header.buttons.github')}
 		>
 			<GitHubIcon />
 		</IconButton>

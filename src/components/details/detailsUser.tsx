@@ -14,6 +14,7 @@ import { SendPopupButton } from '../commons/sendPasswordPopup/sendPopup';
 import Title from '../commons/title/title';
 import LoadingButton from '../commons/loadingButton';
 import { useSnackbar } from 'notistack';
+import { useTranslation } from 'react-i18next';
 
 const DetailUser = () => {
 	const { realm, id } = useParams<any>();
@@ -31,27 +32,23 @@ const DetailUser = () => {
 
 	const { enqueueSnackbar } = useSnackbar();
 
+	const { t } = useTranslation();
+
 	useEffect(() => {
 		if (errorDelete) {
-			enqueueSnackbar(
-				"Erreur lors de l'envoi à l'api: " + errorDelete,
-				{
-					variant: 'error',
-				},
-			);
+			enqueueSnackbar(t('details_user.error') + errorDelete, {
+				variant: 'error',
+			});
 		}
-	}, [enqueueSnackbar, errorDelete]);
+	}, [enqueueSnackbar, errorDelete, t]);
 
 	useEffect(() => {
 		if (errorUpdate) {
-			enqueueSnackbar(
-				"Erreur lors de l'envoi à l'api: " + errorUpdate,
-				{
-					variant: 'error',
-				},
-			);
+			enqueueSnackbar(t('details_user.error') + errorUpdate, {
+				variant: 'error',
+			});
 		}
-	}, [enqueueSnackbar, errorUpdate]);
+	}, [enqueueSnackbar, errorUpdate, t]);
 
 	const {
 		formValues,
@@ -67,7 +64,7 @@ const DetailUser = () => {
 	}, [user, updateIFormValues]);
 	return (
 		<>
-			<Title title={'Détail du contact ' + id} />
+			<Title title={t('detail_user.title') + id} />
 			{loading ? (
 				<Loader />
 			) : (
@@ -107,7 +104,7 @@ const DetailUser = () => {
 									)
 								}
 							>
-								Enregistrer les modifications
+								{t('detail_user.buttons.save')}
 							</LoadingButton>
 						</Grid>
 						<Grid item>
@@ -124,7 +121,9 @@ const DetailUser = () => {
 									)
 								}
 							>
-								Supprimer
+								{t(
+									'detail_user.buttons.delete',
+								)}
 							</LoadingButton>
 						</Grid>
 						<Grid item>
@@ -133,7 +132,7 @@ const DetailUser = () => {
 								color="default"
 								onClick={handleReset}
 							>
-								Restaurer formulaire
+								{t('detail_user.buttons.reset')}
 							</Button>
 						</Grid>
 					</Grid>

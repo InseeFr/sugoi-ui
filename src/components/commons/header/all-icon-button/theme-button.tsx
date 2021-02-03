@@ -2,6 +2,7 @@ import { IconButton } from '@material-ui/core';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useLocalStorage } from '../../../../hooks/technics/useLocalStorage';
 import { changeTheme } from '../../../../redux/actions/app';
@@ -9,7 +10,7 @@ export const ThemeButton = () => {
 	const dispatch = useDispatch();
 	const [darkMode, setDarkMode] = useLocalStorage('darkMode', false);
 	const [check, setCheck] = useState(darkMode);
-
+	const { t } = useTranslation();
 	return (
 		<IconButton
 			color="inherit"
@@ -28,7 +29,7 @@ export const ThemeButton = () => {
 					dispatch(changeTheme('dark'));
 				}
 			}}
-			title="Change theme"
+			title={t('commons.header.buttons.theme')}
 		>
 			{check ? <Brightness4Icon /> : <BrightnessHighIcon />}
 		</IconButton>

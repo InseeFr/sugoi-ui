@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { useTranslation } from 'react-i18next';
 
 interface props {
 	expand: Boolean;
@@ -9,6 +10,7 @@ interface props {
 }
 
 const ExpandButton = ({ expand, setExpand }: props) => {
+	const { t } = useTranslation();
 	return (
 		<Button
 			variant="contained"
@@ -16,7 +18,9 @@ const ExpandButton = ({ expand, setExpand }: props) => {
 			endIcon={expand ? <ExpandLessIcon /> : <ExpandMoreIcon />}
 			onClick={() => setExpand(!expand)}
 		>
-			{expand ? 'Voir plus' : 'Voir moins'}
+			{expand
+				? t('commons.expand_button.show_less')
+				: t('commons.expand_button.show_more')}
 		</Button>
 	);
 };

@@ -9,6 +9,7 @@ import {
 	Grid,
 } from '@material-ui/core';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useForms } from '../../../hooks/technics/useForms';
 import { field } from '../../../model/field';
 import ExpandButton from '../../commons/expandButton/expand-button';
@@ -21,9 +22,9 @@ interface props {
 }
 
 const SearchFormular = ({ realm, onSubmit, formFields }: props) => {
-	const [expand, setExpand] = useState(false);
+	const [expand, setExpand] = useState(true);
 	const { formValues, handleChange, handleReset } = useForms({});
-
+	const { t } = useTranslation();
 	return (
 		<Card>
 			<CardHeader title="Ma recherche:" />
@@ -35,7 +36,9 @@ const SearchFormular = ({ realm, onSubmit, formFields }: props) => {
 							name="realm"
 							value={realm}
 							modifiable={false}
-							helpText="Realm selectionné"
+							helpText={t(
+								'commons.search_forms.selected_realm',
+							)}
 						/>
 					</Grid>
 					<Grid item xs={12}>
@@ -86,7 +89,7 @@ const SearchFormular = ({ realm, onSubmit, formFields }: props) => {
 								})
 							}
 						>
-							Valider
+							{t('commons.search_forms.validate')}
 						</Button>
 					</Grid>
 					<Grid item>
@@ -95,7 +98,7 @@ const SearchFormular = ({ realm, onSubmit, formFields }: props) => {
 							color="secondary"
 							onClick={() => handleReset()}
 						>
-							reset
+							{t('commons.search_forms.reset')}
 						</Button>
 					</Grid>
 					<Grid item>

@@ -4,16 +4,14 @@ import { Grid } from '@material-ui/core';
 import Title from '../commons/title/title';
 import MainFeaturedPost from './landingpage/landingpage';
 import CardRights from './right-card';
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
 	const { oidcUser } = useReactOidc();
+	const { t } = useTranslation();
 	return (
 		<>
-			<Title
-				title={
-					'Service Unifié de Gestion des Openldaps Internes'
-				}
-			/>
+			<Title title={t('home.title')} />
 			<MainFeaturedPost />
 			{oidcUser ? (
 				<Grid

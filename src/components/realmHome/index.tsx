@@ -4,6 +4,7 @@ import { Autocomplete } from '@material-ui/lab';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import { getUsers } from '../../api';
 import Title from '../commons/title/title';
@@ -14,7 +15,7 @@ export const RealmHome = () => {
 	const { push } = useHistory();
 	const [search, setSearch] = useState<string>('');
 	const [selected, setSelected] = useState<any>();
-
+	const { t } = useTranslation();
 	useEffect(() => {
 		if (selected) {
 			push('/realm/' + realm + '/users/' + selected.username);
@@ -43,7 +44,7 @@ export const RealmHome = () => {
 
 	return (
 		<>
-			<Title title={'Rechercher dans le realm ' + realm} />
+			<Title title={t('global_search.title') + realm} />
 
 			<Grid container direction="row" spacing={2}>
 				<Grid item xs={12}>
@@ -67,7 +68,7 @@ export const RealmHome = () => {
 						renderInput={(params: any) => (
 							<TextField
 								{...params}
-								label="Rechercher dans le realm..."
+								label={t('global_search.label')}
 								variant="outlined"
 								fullWidth
 							/>

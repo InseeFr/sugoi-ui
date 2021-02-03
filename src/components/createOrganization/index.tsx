@@ -1,6 +1,7 @@
 import { Button, Grid } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import usePostOrganization from '../../hooks/organization/usePostOrganization';
 import useRealmConfig from '../../hooks/realm/useRealmConfig/useRealmConfig';
@@ -21,14 +22,14 @@ const CreateOrganization = () => {
 		error,
 	} = usePostOrganization();
 	const { enqueueSnackbar } = useSnackbar();
-
+	const { t } = useTranslation();
 	useEffect(() => {
 		if (error) {
-			enqueueSnackbar("Erreur lors de l'envoi à l'api: " + error, {
+			enqueueSnackbar(t('create_organization.error') + error, {
 				variant: 'error',
 			});
 		}
-	}, [enqueueSnackbar, error]);
+	}, [enqueueSnackbar, error, t]);
 
 	const handleSubmit = () => {
 		createOrganization(realm, formValues);
@@ -48,12 +49,7 @@ const CreateOrganization = () => {
 	return (
 		<Grid container spacing={2} direction="column">
 			<Grid item xs={12}>
-				<Title
-					title={
-						'Créer une organisation dans le realm: ' +
-						realm
-					}
-				/>
+				<Title title={t('create_organization.title') + realm} />
 			</Grid>
 			<Grid item xs={12}>
 				<DataViewer
@@ -76,7 +72,9 @@ const CreateOrganization = () => {
 							color="primary"
 							variant="contained"
 						>
-							Enregistrer les modifications
+							{t(
+								'create_organization.buttons.save',
+							)}
 						</LoadingButton>
 					</Grid>
 
@@ -86,7 +84,9 @@ const CreateOrganization = () => {
 							color="default"
 							onClick={handleReset}
 						>
-							Restaurer formulaire
+							{t(
+								'create_organization.buttons.reset',
+							)}
 						</Button>
 					</Grid>
 				</Grid>

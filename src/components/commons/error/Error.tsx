@@ -1,5 +1,6 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { useSnackbar } from 'notistack';
+import { useTranslation } from 'react-i18next';
 interface Props {
 	children: ReactNode;
 }
@@ -14,12 +15,13 @@ interface props {
 }
 
 const ShowSnackBar = ({ error }: props) => {
+	const { t } = useTranslation();
 	const { enqueueSnackbar } = useSnackbar();
 	enqueueSnackbar(error, {
 		variant: 'error',
 		persist: false,
 	});
-	return <h1>Oops something went wrong :(</h1>;
+	return <h1>{t('commons.error.text')}</h1>;
 };
 
 class ErrorBoundary extends Component<Props, State> {

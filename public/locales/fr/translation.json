@@ -1,0 +1,247 @@
+{
+	"home": {
+		"title": "Service Unifié de Gestion des Openldaps Internes",
+		"landing": {
+			"title": "Service Unifié de Gestion des Openldaps Internes",
+			"description": "Rechercher permet de faire une recherche sur les contacts d'un domaine, et si vous en avez le droit de le modifier, modifier son mot de passe et supprimer les contacts retenus. Créer permet de créer un nouveau contact sur un domaine de gestion sur lequel vous êtes gestionnaire",
+			"go_button": "C'est parti"
+		},
+		"rights": {
+			"title": "Mes droits",
+			"admin": "Administrateur SUGOI",
+			"writer": "Gestionnaire du realm ",
+			"reader": "Consultant du realm ",
+			"no_right": "Aucun droit"
+		}
+	},
+	"sider": {
+		"home": "Accueil",
+		"manage": {
+			"title": "Gestion",
+			"users": "Utilisateurs",
+			"organizations": "Organisations"
+		},
+		"configuration": {
+			"title": "Configuration",
+			"settings": "Paramètres"
+		}
+	},
+	"breadcrumb": {
+		"home": "Accueil",
+		"users": "Utilisateurs",
+		"organizations": "Organisations",
+		"settings": "Paramètres",
+		"create": "Création",
+		"details": "Détails"
+	},
+	"search_user": {
+		"title": "Rechercher un utilisateur dans le realm ",
+		"buttons": {
+			"edit": "Editer"
+		},
+		"form": {
+			"field": {
+				"identifiant": {
+					"name": "Identifiant",
+					"help_text_title": "Identifiant de l'utilisateur",
+					"help_text": "Il n'est pas obligatoire de le saisir entièrement. Le champ saisi peut être le début, le milieu ou la fin de l'identifiant recherché. L'identifiant d'un contact/d'une organisation est unique dans l'annuaire. La recherche sera plus précise."
+				},
+				"description": {
+					"name": "Description",
+					"help_text_title": "Description",
+					"help_text": "Il n'est pas obligatoire de le saisir entièrement. Le champ saisi peut être le début, le milieu ou la fin du nom commun recherché. Caractères autorisés : alphabétiques, chiffres, apostrophes, espaces, tirets"
+				},
+				"organization": {
+					"name": "Organisation d'appartenance",
+					"help_text_title": "Identifiant de l'organisation d'appartenance ",
+					"help_text": "Il n'est pas obligatoire de le saisir entièrement.  Le champ saisi doit être le début de l'identifiant recherché."
+				},
+				"commun_name": {
+					"name": "Nom commun",
+					"help_text_title": "Nom commun",
+					"help_text": "Il n'est pas obligatoire de le saisir entièrement. Le champ saisi peut être le début, le milieu ou la fin du nom commun recherché. Caractères autorisés : alphabétiques, chiffres, apostrophes, espaces, tirets"
+				},
+				"email": {
+					"name": "Adresse e-mail",
+					"help_text_title": "Adresse e-mail",
+					"help_text": "Le champ saisi peut être une portion de l'adresse mail recherchée."
+				},
+				"certificate": {
+					"name": "Certificat associé",
+					"help_text_title": "Certificat associé"
+				}
+			}
+		}
+	},
+	"search_organization": {
+		"title": "Rechercher une organisation dans le realm ",
+		"buttons": {
+			"edit": "Editer"
+		},
+		"form": {
+			"field": {
+				"identifiant": {
+					"name": "Identifiant",
+					"help_text_title": "Identifiant de l'utilisateur",
+					"help_text": "Il n'est pas obligatoire de le saisir entièrement. Le champ saisi peut être le début, le milieu ou la fin de l'identifiant recherché. L'identifiant d'un contact/d'une organisation est unique dans l'annuaire. La recherche sera plus précise."
+				},
+				"description": {
+					"name": "Description",
+					"help_text_title": "Description",
+					"help_text": "Il n'est pas obligatoire de le saisir entièrement. Le champ saisi peut être le début, le milieu ou la fin du nom commun recherché. Caractères autorisés : alphabétiques, chiffres, apostrophes, espaces, tirets"
+				},
+				"organization": {
+					"name": "Organisation d'appartenance",
+					"help_text_title": "Identifiant de l'organisation d'appartenance ",
+					"help_text": "Il n'est pas obligatoire de le saisir entièrement.  Le champ saisi doit être le début de l'identifiant recherché."
+				},
+				"commun_name": {
+					"name": "Nom commun",
+					"help_text_title": "Nom commun",
+					"help_text": "Il n'est pas obligatoire de le saisir entièrement. Le champ saisi peut être le début, le milieu ou la fin du nom commun recherché. Caractères autorisés : alphabétiques, chiffres, apostrophes, espaces, tirets"
+				},
+				"email": {
+					"name": "Adresse e-mail",
+					"help_text_title": "Adresse e-mail",
+					"help_text": "Le champ saisi peut être une portion de l'adresse mail recherchée."
+				},
+				"certificate": {
+					"name": "Certificat associé",
+					"help_text_title": "Certificat associé"
+				}
+			}
+		}
+	},
+	"create_organization": {
+		"title": "Créer une organisation dans le realm ",
+		"buttons": {
+			"save": "Créer",
+			"reset": "Restaurer le formulaire"
+		},
+		"error": "Erreur lors de l'envoi à l'API"
+	},
+	"create_user": {
+		"title": "Créer un utilisateur dans le realm ",
+		"buttons": {
+			"save": "Créer",
+			"reset": "Restaurer le formulaire"
+		},
+		"error": "Erreur lors de l'envoi à l'API"
+	},
+	"detail_user": {
+		"title": "Détail de l'utilisateur ",
+		"error": "Erreur lors de l'envoi a l'API: ",
+		"buttons": {
+			"save": "Enregistrer les modifications",
+			"delete": "Supprimer",
+			"reset": "Annuler les changements"
+		}
+	},
+	"detail_organization": {
+		"title": "Détail de l'organisation ",
+		"error": "Erreur lors de l'envoi a l'API: ",
+		"buttons": {
+			"save": "Enregistrer les modifications",
+			"delete": "Supprimer",
+			"reset": "Annuler les changements"
+		}
+	},
+	"global_search": {
+		"title": "Rechercher dans le realm ",
+		"label": "Votre recherche..."
+	},
+	"settings": {
+		"title": "Paramètres",
+		"card": {
+			"title": "Configuration"
+		}
+	},
+	"commons": {
+		"search_forms": {
+			"title": "Ma recherche",
+			"selected_realm": "Realm selectionné",
+			"validate": "Valider",
+			"reset": "Réinitialiser"
+		},
+		"expand_button": {
+			"show_more": "Voir plus",
+			"show_less": "Voir moins"
+		},
+		"error": {
+			"text": "Une erreur imprévue est survenue"
+		},
+		"header": {
+			"title": "Outils de gestion des annuaires",
+			"buttons": {
+				"account": "Informations personelles",
+				"language": "Changer la langue",
+				"github": "Participer au projet",
+				"api": "Documentation API",
+				"login": "Se connecter",
+				"logout": "Se déconnecter",
+				"more": "Voir plus",
+				"theme": "Changer le thème"
+			}
+		},
+		"footer": {
+			"version": {
+				"text": "Version"
+			},
+			"commit": {
+				"text": "Commit-SHA"
+			}
+		},
+		"back_to_top": {
+			"text": "Haut de page"
+		},
+		"reset_password": {
+			"title": "Réinitialiser le mot de passe de ",
+			"text": "Réinitialiser le mot de passe",
+			"send_button": "Envoyer"
+		},
+		"send_password": {
+			"title": "Envoyer le mot de passe de ",
+			"text": "Envoyer le mot de passe",
+			"send_button": "Envoyer"
+		},
+		"search_result": {
+			"title": "Résultat de la recherche:",
+			"buttons": {
+				"add": "Ajouter"
+			},
+			"textLabels": {
+				"body": {
+					"noMatch": "Aucun résultat pour la recherche",
+					"toolTip": "Trier"
+				},
+				"pagination": {
+					"next": "Page suivante",
+					"previous": "Page précédente",
+					"rowsPerPage": "Ligne par page",
+					"displayRows": "de"
+				},
+				"toolbar": {
+					"search": "Rechercher",
+					"downloadCsv": "Télécharger CSV",
+					"print": "Imprimer",
+					"viewColumns": "Afficher/masquer des colonnes",
+					"filterTable": "Filtrer le tableau"
+				},
+				"filter": {
+					"all": "Tous",
+					"title": "Filtres",
+					"reset": "Réinitialiser"
+				},
+				"viewColumns": {
+					"title": "Colonnes visible",
+					"titleAria": "Afficher/masquer des colonnes"
+				},
+				"selectedRows": {
+					"text": "ligne(s) selectionnée",
+					"delete": "Supprimer",
+					"deleteAria": "Supprimer les lignes selectionnées"
+				}
+			}
+		}
+	}
+}
