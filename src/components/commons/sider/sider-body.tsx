@@ -17,6 +17,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Autocomplete from '@material-ui/lab/Autocomplete/Autocomplete';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { matchPath, useHistory, useLocation } from 'react-router-dom';
 import { RootState } from '../../../configuration/store-configuration';
@@ -35,6 +36,7 @@ const SiderBody = () => {
 	const dispatch = useDispatch();
 	const { push } = useHistory();
 	const location = useLocation();
+	const { t } = useTranslation();
 	const [realms, setRealms] = useState<string[]>([]);
 	const user = useSelector((state: RootState) => state.user);
 	const [realmSelected, setRealmSelected] = useState<string | undefined>(
@@ -68,15 +70,11 @@ const SiderBody = () => {
 			<Toolbar />
 
 			<List component="nav">
-				<ListItem
-					button
-					key="Accueil"
-					onClick={() => push('/')}
-				>
+				<ListItem button key="home" onClick={() => push('/')}>
 					<ListItemIcon>
 						<HomeIcon />
 					</ListItemIcon>
-					<ListItemText primary="Accueil" />
+					<ListItemText primary={t('sider.home')} />
 				</ListItem>
 				<Divider />
 				{user.role.isAdmin ||
@@ -90,7 +88,7 @@ const SiderBody = () => {
 								component="div"
 								id="nested-list-subheader"
 							>
-								Gestion
+								{t('sider.manage.title')}
 							</ListSubheader>
 						}
 					>
@@ -124,7 +122,7 @@ const SiderBody = () => {
 						</ListItem>
 						<ListItem
 							button
-							key="Rechercher"
+							key="search_users"
 							disabled={
 								realmSelected ? false : true
 							}
@@ -140,11 +138,15 @@ const SiderBody = () => {
 							<ListItemIcon>
 								<PersonIcon />
 							</ListItemIcon>
-							<ListItemText primary="Utilisateurs" />
+							<ListItemText
+								primary={t(
+									'sider.manage.users',
+								)}
+							/>
 						</ListItem>
 						<ListItem
 							button
-							key="Créer"
+							key="search_organizations"
 							disabled={
 								realmSelected ? false : true
 							}
@@ -160,7 +162,11 @@ const SiderBody = () => {
 							<ListItemIcon>
 								<BusinessIcon />
 							</ListItemIcon>
-							<ListItemText primary="Organisations" />
+							<ListItemText
+								primary={t(
+									'sider.manage.organizations',
+								)}
+							/>
 						</ListItem>
 					</List>
 				) : null}
@@ -175,20 +181,24 @@ const SiderBody = () => {
 							component="div"
 							id="nested-list-subheader"
 						>
-							Configuration
+							{t('sider.configuration.title')}
 						</ListSubheader>
 					}
 				>
 					<ListItem
 						button
-						key="Paramètres"
+						key="parametres"
 						onClick={() => push('/settings')}
 						className={classes.nested}
 					>
 						<ListItemIcon>
 							<SettingsIcon />
 						</ListItemIcon>
-						<ListItemText primary="Paramètres" />
+						<ListItemText
+							primary={t(
+								'sider.configuration.settings',
+							)}
+						/>
 					</ListItem>
 				</List>
 			) : null}

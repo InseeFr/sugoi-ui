@@ -8,6 +8,7 @@ import {
 	Zoom,
 } from '@material-ui/core';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import { useTranslation } from 'react-i18next';
 
 interface props {
 	/**
@@ -66,12 +67,14 @@ const ScrollTopUtils = (props: props) => {
 	);
 };
 const ScrollTop = () => {
+	const { t } = useTranslation();
 	return (
 		<ScrollTopUtils>
 			<Fab
 				color="secondary"
 				size="small"
 				aria-label="scroll back to top"
+				title={t('commons.back_to_top.text')}
 			>
 				<KeyboardArrowUpIcon />
 			</Fab>

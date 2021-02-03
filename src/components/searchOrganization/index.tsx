@@ -1,6 +1,7 @@
 import { Button, Grid, LinearProgress } from '@material-ui/core';
 import CreateIcon from '@material-ui/icons/Create';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import useGetOrganizations from '../../hooks/organization/useGetOrganizations';
 import { SearchResults } from '../commons/searchResults';
@@ -20,6 +21,8 @@ const SearchOrganizations = () => {
 	const submit = (values: any) => {
 		searchOrganizations(realm, { ...values });
 	};
+
+	const { t } = useTranslation();
 
 	const columns = [
 		{
@@ -69,7 +72,9 @@ const SearchOrganizations = () => {
 								push(link);
 							}}
 						>
-							Editer
+							{t(
+								'search_organization.buttons.edit',
+							)}
 						</Button>
 					);
 				},
@@ -79,12 +84,7 @@ const SearchOrganizations = () => {
 
 	return (
 		<>
-			<Title
-				title={
-					'Rechercher une organisation dans le realm ' +
-					realm
-				}
-			/>
+			<Title title={t('search_organization.title') + realm} />
 			<Grid
 				container
 				direction="column"

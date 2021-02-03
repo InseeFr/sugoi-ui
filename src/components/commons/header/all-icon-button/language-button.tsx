@@ -11,7 +11,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 const LanguageButton = () => {
-	const { i18n } = useTranslation();
+	const { i18n, t } = useTranslation();
 
 	const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
 		null,
@@ -39,6 +39,7 @@ const LanguageButton = () => {
 				startIcon={<TranslateIcon />}
 				endIcon={<ArrowDropDownIcon />}
 				onClick={handleClick}
+				title={t('commons.header.buttons.language')}
 			>
 				{i18n.language}
 			</Button>

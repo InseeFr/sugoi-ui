@@ -1,6 +1,7 @@
 import { Button, Grid } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import useRealmConfig from '../../hooks/realm/useRealmConfig/useRealmConfig';
 import { useForms } from '../../hooks/technics/useForms';
@@ -16,18 +17,18 @@ const CreateUsers = () => {
 	const { userConfig } = useRealmConfig(realm);
 	const { user, execute: createUser, error, loading } = usePostUser();
 	const { enqueueSnackbar } = useSnackbar();
-
+	const { t } = useTranslation();
 	const handleSubmit = () => {
 		createUser(realm, formValues);
 	};
 
 	useEffect(() => {
 		if (error) {
-			enqueueSnackbar("Erreur lors de l'envoi à l'api: " + error, {
+			enqueueSnackbar(t('create_user.error') + error, {
 				variant: 'error',
 			});
 		}
-	}, [enqueueSnackbar, error]);
+	}, [enqueueSnackbar, error, t]);
 
 	useEffect(() => {
 		if (user) {
@@ -38,12 +39,7 @@ const CreateUsers = () => {
 	return (
 		<Grid container spacing={2} direction="column">
 			<Grid item xs={12}>
-				<Title
-					title={
-						'Créer un utilisateur dans le realm: ' +
-						realm
-					}
-				/>
+				<Title title={t('create_user.title') + realm} />
 			</Grid>
 			<Grid item xs={12}>
 				<DataViewer
@@ -66,7 +62,7 @@ const CreateUsers = () => {
 							color="primary"
 							variant="contained"
 						>
-							Enregistrer les modifications
+							{t('create_user.buttons.save')}
 						</LoadingButton>
 					</Grid>
 					<Grid item>
@@ -75,7 +71,7 @@ const CreateUsers = () => {
 							color="default"
 							onClick={handleReset}
 						>
-							Restaurer formulaire
+							{t('create_user.buttons.reset')}
 						</Button>
 					</Grid>
 				</Grid>

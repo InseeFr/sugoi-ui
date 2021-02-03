@@ -1,6 +1,7 @@
 import { Button, Grid } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { useDeleteOrganization } from '../../hooks/organization/useDeleteOrganization';
 import useGetOrganization from '../../hooks/organization/useGetOrganization';
@@ -41,6 +42,7 @@ const DetailOrganization = () => {
 		handleChange,
 		handleReset,
 	} = useForms({});
+	const { t } = useTranslation();
 
 	useEffect(() => {
 		if (organization) {
@@ -51,28 +53,28 @@ const DetailOrganization = () => {
 	useEffect(() => {
 		if (errorDelete) {
 			enqueueSnackbar(
-				"Erreur lors de l'envoi à l'api: " + errorDelete,
+				t('detail_organization.error') + errorDelete,
 				{
 					variant: 'error',
 				},
 			);
 		}
-	}, [enqueueSnackbar, errorDelete]);
+	}, [enqueueSnackbar, errorDelete, t]);
 
 	useEffect(() => {
 		if (errorUpdate) {
 			enqueueSnackbar(
-				"Erreur lors de l'envoi à l'api: " + errorUpdate,
+				t('detail_organization.error') + errorUpdate,
 				{
 					variant: 'error',
 				},
 			);
 		}
-	}, [enqueueSnackbar, errorUpdate]);
+	}, [enqueueSnackbar, errorUpdate, t]);
 
 	return (
 		<>
-			<Title title={"Détail de l'organisation " + id} />
+			<Title title={t('detail_organization.title') + id} />
 			{loading ? (
 				<Loader />
 			) : (
@@ -101,7 +103,9 @@ const DetailOrganization = () => {
 									)
 								}
 							>
-								Enregistrer les modifications
+								{t(
+									'detail_organization.buttons.save',
+								)}
 							</LoadingButton>
 						</Grid>
 						<Grid item>
@@ -118,7 +122,9 @@ const DetailOrganization = () => {
 									)
 								}
 							>
-								Supprimer
+								{t(
+									'detail_organization.buttons.delete',
+								)}
 							</LoadingButton>
 						</Grid>
 						<Grid item>
@@ -127,7 +133,9 @@ const DetailOrganization = () => {
 								color="default"
 								onClick={() => handleReset()}
 							>
-								Restaurer formulaire
+								{t(
+									'detail_organization.buttons.reset',
+								)}
 							</Button>
 						</Grid>
 					</Grid>

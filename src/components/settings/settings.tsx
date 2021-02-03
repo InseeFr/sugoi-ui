@@ -16,16 +16,17 @@ import RealmCard from './realm-card';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ExpandButton from '../commons/expandButton/expand-button';
 import Title from '../commons/title/title';
+import { useTranslation } from 'react-i18next';
 
 const Settings = () => {
 	const realms: Realm[] = useSelector(
 		(store: RootState) => store.app.realms,
 	);
 	const [expand, setExpand] = useState(false);
-
+	const { t } = useTranslation();
 	return (
 		<>
-			<Title title={'Paramètre'} />
+			<Title title={t('settings.title')} />
 			<Card>
 				<CardHeader
 					action={
@@ -33,7 +34,7 @@ const Settings = () => {
 							<MoreVertIcon />
 						</IconButton>
 					}
-					title="Ma configuration"
+					title={t('settings.card.title')}
 				/>
 				<CardContent>
 					<Grid

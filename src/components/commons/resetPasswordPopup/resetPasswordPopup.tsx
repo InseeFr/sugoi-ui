@@ -1,5 +1,6 @@
 import { Button } from '@material-ui/core';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import User from '../../../model/api/user';
 import PopButton from '../popButton/popButton';
 import { ResetPasswordPopupContent } from './resetPasswordPopupContent';
@@ -10,7 +11,7 @@ interface props {
 
 export const ResetPasswordPopup = ({ user }: props) => {
 	const [values, setValues] = useState({ signature: 'Assistance Insee' });
-
+	const { t } = useTranslation();
 	const onFinish = () => {
 		console.log({ user: user.username, ...values });
 	};
@@ -24,7 +25,7 @@ export const ResetPasswordPopup = ({ user }: props) => {
 	};
 	return (
 		<PopButton
-			title={'Réinitialiser le mot de passe de ' + user?.username}
+			title={t('commons.reset_password.title') + user?.username}
 			body={
 				<ResetPasswordPopupContent
 					user={user}
@@ -32,10 +33,14 @@ export const ResetPasswordPopup = ({ user }: props) => {
 					setValues={handleInputChange}
 				/>
 			}
-			text="Réinitialiser le mot de passe"
+			text={t('commons.reset_password.text')}
 			color="default"
 			variant="contained"
-			actions={<Button onClick={onFinish}>Envoyer</Button>}
+			actions={
+				<Button onClick={onFinish}>
+					{t('commons.reset_password.send_button')}
+				</Button>
+			}
 		/>
 	);
 };

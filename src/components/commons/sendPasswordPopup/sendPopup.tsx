@@ -1,5 +1,6 @@
 import { Button } from '@material-ui/core';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import User from '../../../model/api/user';
 import PopButton from '../popButton/popButton';
 import { SendPopupContent } from './sendPopupContent';
@@ -10,7 +11,7 @@ interface props {
 
 export const SendPopupButton = ({ user }: props) => {
 	const [values, setValues] = useState({ signature: 'Assistance Insee' });
-
+	const { t } = useTranslation();
 	const onFinish = () => {
 		console.log({ user: user?.username, ...values });
 	};
@@ -25,7 +26,7 @@ export const SendPopupButton = ({ user }: props) => {
 
 	return (
 		<PopButton
-			title={'Envoyer le login à ' + user?.username}
+			title={t('commons.send_password.title') + user?.username}
 			body={
 				<SendPopupContent
 					user={user}
@@ -33,10 +34,14 @@ export const SendPopupButton = ({ user }: props) => {
 					setValues={handleInputChange}
 				/>
 			}
-			text="Envoyer le login"
+			text={t('commons.send_password.text')}
 			color="default"
 			variant="contained"
-			actions={<Button onClick={onFinish}>Envoyer</Button>}
+			actions={
+				<Button onClick={onFinish}>
+					{t('commons.send_password.send_button')}
+				</Button>
+			}
 		/>
 	);
 };

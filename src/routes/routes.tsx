@@ -7,7 +7,6 @@ import RealmHome from '../components/realmHome';
 import SearchOrganizations from '../components/searchOrganization';
 import SearchUsers from '../components/searchUser';
 import Settings from '../components/settings/settings';
-
 const IdDynamicBreadcrumb = ({ match }: any): string => {
 	return match.params['id'];
 };
@@ -15,6 +14,7 @@ const IdDynamicBreadcrumb = ({ match }: any): string => {
 const RealmDynamicBreadcrumb = ({ match }: any): string => {
 	return 'Realm ' + match.params['realm'];
 };
+
 interface Iroutes {
 	path: string;
 	breadcrumb: any;
@@ -26,14 +26,14 @@ const routes: Iroutes[] = [
 	{
 		path: '/realm/:realm/users',
 		exact: true,
-		breadcrumb: 'Utilisateurs',
+		breadcrumb: 'breadcrumb.users',
 		component: SearchUsers,
 		secure: true,
 	},
 	{
 		path: '/realm/:realm/users/create',
 		exact: true,
-		breadcrumb: 'Création',
+		breadcrumb: 'breadcrumb.create',
 		component: CreateUsers,
 		secure: true,
 	},
@@ -47,14 +47,14 @@ const routes: Iroutes[] = [
 	{
 		path: '/realm/:realm/organizations',
 		exact: true,
-		breadcrumb: 'Organisations',
+		breadcrumb: 'breadcrumb.organizations',
 		component: SearchOrganizations,
 		secure: true,
 	},
 	{
-		path: '/realm/:realm/organization/create',
+		path: '/realm/:realm/organizations/create',
 		exact: true,
-		breadcrumb: 'Création',
+		breadcrumb: 'breadcrumb.create',
 		component: CreateOrganization,
 		secure: true,
 	},
@@ -75,14 +75,14 @@ const routes: Iroutes[] = [
 	{
 		path: '/settings',
 		exact: true,
-		breadcrumb: 'Paramètres',
+		breadcrumb: 'breadcrumb.settings',
 		component: Settings,
 		secure: true,
 	},
 	{
 		path: '/',
 		exact: true,
-		breadcrumb: 'Accueil',
+		breadcrumb: 'breadcrumb.home',
 		component: Home,
 		secure: false,
 	},
