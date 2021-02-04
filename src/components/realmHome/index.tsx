@@ -37,11 +37,6 @@ export const RealmHome = () => {
 		}
 	}, [realm, search]);
 
-	useEffect(() => {
-		console.log(search);
-		console.log(result);
-	});
-
 	return (
 		<>
 			<Title title={t('global_search.title') + realm} />

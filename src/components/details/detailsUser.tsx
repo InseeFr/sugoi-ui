@@ -89,6 +89,7 @@ const DetailUser = () => {
 						<Grid item>
 							<ResetPasswordPopup
 								user={user as User}
+								realm={realm}
 							/>
 						</Grid>
 						<Grid item>

@@ -9,95 +9,6 @@ interface props {
 	handleChange: any;
 }
 
-const DataViewer = ({ data, fieldToDisplay, handleChange }: props) => {
-	const mainsFields = fieldToDisplay.filter(
-		(field) => field.tag === 'main',
-	);
-	const advancedFields = fieldToDisplay.filter(
-		(field) => field.tag === 'advanced',
-	);
-	const addressFields = fieldToDisplay.filter(
-		(field) => field.tag === 'address',
-	);
-	const credentialsFields = fieldToDisplay.filter(
-		(field) => field.tag === 'credentials',
-	);
-	const habilitationsFields = fieldToDisplay.filter(
-		(field) => field.tag === 'habilitations',
-	);
-	const propertiesFields = fieldToDisplay.filter(
-		(field) => field.tag === 'properties',
-	);
-	console.log(
-		fieldToDisplay,
-		mainsFields,
-		credentialsFields,
-		addressFields,
-		habilitationsFields,
-	);
-
-	return (
-		<Grid
-			container
-			spacing={3}
-			direction="row"
-			justify="center"
-			alignItems="stretch"
-		>
-			<Grid item xs={12}>
-				{generatePanel(
-					'Information du profil',
-					<MainPanel
-						values={data}
-						handleChange={handleChange}
-						mainsFields={mainsFields}
-						addressFields={addressFields}
-						advancedFields={advancedFields}
-					/>,
-					false,
-					'Information générale',
-				)}
-			</Grid>
-			<Grid item xs={12}>
-				{generatePanel(
-					'Droits applicatifs',
-					<ContentPanel
-						values={data}
-						handleChange={handleChange}
-						fields={habilitationsFields}
-					/>,
-					true,
-					"Gestion des droits de l'utilisateur",
-				)}
-			</Grid>
-			<Grid item xs={12} md={6}>
-				{generatePanel(
-					'Gestion des credentials',
-					<ContentPanel
-						values={data}
-						handleChange={handleChange}
-						fields={credentialsFields}
-					/>,
-					true,
-					"Gestion des credentials de l'utilisateurs",
-				)}
-			</Grid>
-			<Grid item xs={12} md={6}>
-				{generatePanel(
-					'Propriété',
-					<ContentPanel
-						values={data}
-						handleChange={handleChange}
-						fields={propertiesFields}
-					/>,
-					true,
-					'blabla',
-				)}
-			</Grid>
-		</Grid>
-	);
-};
-
 const generatePanel = (
 	title: string,
 	children: JSX.Element,
@@ -233,6 +144,89 @@ const ContentPanel = ({ values, handleChange, fields }: contentProps) => {
 					</Grid>
 				),
 			)}
+		</Grid>
+	);
+};
+
+const DataViewer = ({ data, fieldToDisplay, handleChange }: props) => {
+	const mainsFields = fieldToDisplay.filter(
+		(field) => field.tag === 'main',
+	);
+	const advancedFields = fieldToDisplay.filter(
+		(field) => field.tag === 'advanced',
+	);
+	const addressFields = fieldToDisplay.filter(
+		(field) => field.tag === 'address',
+	);
+	const credentialsFields = fieldToDisplay.filter(
+		(field) => field.tag === 'credentials',
+	);
+	const habilitationsFields = fieldToDisplay.filter(
+		(field) => field.tag === 'habilitations',
+	);
+	const propertiesFields = fieldToDisplay.filter(
+		(field) => field.tag === 'properties',
+	);
+
+	return (
+		<Grid
+			container
+			spacing={3}
+			direction="row"
+			justify="center"
+			alignItems="stretch"
+			style={{ maxHeight: '70vh', overflow: 'auto' }}
+		>
+			<Grid item xs={12}>
+				{generatePanel(
+					'Information du profil',
+					<MainPanel
+						values={data}
+						handleChange={handleChange}
+						mainsFields={mainsFields}
+						addressFields={addressFields}
+						advancedFields={advancedFields}
+					/>,
+					false,
+					'Information générale',
+				)}
+			</Grid>
+			<Grid item xs={12}>
+				{generatePanel(
+					'Droits applicatifs',
+					<ContentPanel
+						values={data}
+						handleChange={handleChange}
+						fields={habilitationsFields}
+					/>,
+					true,
+					"Gestion des droits de l'utilisateur",
+				)}
+			</Grid>
+			<Grid item xs={12} md={6}>
+				{generatePanel(
+					'Gestion des credentials',
+					<ContentPanel
+						values={data}
+						handleChange={handleChange}
+						fields={credentialsFields}
+					/>,
+					true,
+					"Gestion des credentials de l'utilisateurs",
+				)}
+			</Grid>
+			<Grid item xs={12} md={6}>
+				{generatePanel(
+					'Propriété',
+					<ContentPanel
+						values={data}
+						handleChange={handleChange}
+						fields={propertiesFields}
+					/>,
+					true,
+					'blabla',
+				)}
+			</Grid>
 		</Grid>
 	);
 };

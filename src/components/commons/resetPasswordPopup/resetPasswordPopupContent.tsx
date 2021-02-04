@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
 import {
-	Typography,
-	FormControlLabel,
+	Box,
 	Checkbox,
 	Divider,
-	TextField,
+	FormControlLabel,
 	Grid,
-	Box,
+	TextField,
+	Typography,
 } from '@material-ui/core';
+import React, { useState } from 'react';
 import User from '../../../model/api/user';
 
 interface props {
@@ -16,11 +16,7 @@ interface props {
 	values?: any;
 }
 
-export const ResetPasswordPopupContent = ({
-	user,
-	values,
-	setValues,
-}: props) => {
+export const ResetPasswordPopupContent = ({ values, setValues }: props) => {
 	const [includeNameApp, setincludeNameApp] = useState(false);
 	const [includeAssistMail, setincludeAssistMail] = useState(false);
 	const [changeSenderMail, setChangeSenderMail] = useState(false);
@@ -35,7 +31,7 @@ export const ResetPasswordPopupContent = ({
 			<Grid item>
 				<Typography>
 					Un mail contenant le nouveau mot de passe va être
-					envoyé à l'adresse mail du contact : {user?.mail}
+					envoyé à l'adresse mail suivante :{values?.email}
 				</Typography>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<FormControlLabel
@@ -72,17 +68,17 @@ export const ResetPasswordPopupContent = ({
 										!changeReceiverMail,
 									)
 								}
-								name="changeReceiverMail"
+								name="email"
 								color="primary"
 							/>
 						}
-						label="Inclure un mail d'assistance"
+						label="Envoyer le mail a une autre adresse"
 					/>
 					{changeReceiverMail ? (
 						<TextField
-							label="Mail receveur"
-							name="receiverEmail"
-							value={values.receiverEmail || ''}
+							label="Mail"
+							name="email"
+							value={values.email || ''}
 							onChange={setValues}
 						/>
 					) : null}
@@ -178,7 +174,7 @@ export const ResetPasswordPopupContent = ({
 					{includeAssistMail ? (
 						<Box m={2}>
 							Pour toute demande d'assistance, vous
-							pouvez contacter {values.assistMail}
+							pouvez contacter {values.assistMail}{' '}
 							par courrier electronique.
 						</Box>
 					) : null}
