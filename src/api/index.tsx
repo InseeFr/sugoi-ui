@@ -8,6 +8,7 @@ import * as fake from './fake/';
 import * as remote from './remote/';
 import * as Utils from './../utils/object';
 import { Group } from '../model/api/group';
+import { PasswordChangeRequest } from '../model/api/passwordChangeRequest';
 
 // Realm function
 export const getRealms = (id?: string): Promise<Realm[]> => {
@@ -161,4 +162,15 @@ export const getGroups = (
 // Application function
 export const getApplications = (realm: string): Promise<Pageable> => {
 	return remote.getApplications(realm);
+};
+
+// Credential Management
+export const initPassword = () => {};
+
+export const resetPassword = (
+	realm: string,
+	userId: string,
+	pcr: PasswordChangeRequest,
+): Promise<any> => {
+	return remote.resetPassword(realm, userId, pcr);
 };
