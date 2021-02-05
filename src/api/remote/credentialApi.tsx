@@ -10,7 +10,7 @@ export const resetPassword = (
 	getAuthClient().then((client: AxiosInstance) =>
 		client
 			.post(
-				'/' + realm + '/users/' + userId + '/resetPassword',
+				'/' + realm + '/users/' + userId + '/reinitPassword',
 				pcr,
 			)
 			.then((r) => r.data),
