@@ -200,8 +200,8 @@
 			"send_button": "Envoyer"
 		},
 		"send_password": {
-			"title": "Envoyer le mot de passe de ",
-			"text": "Envoyer le mot de passe",
+			"title": "Envoyer le login de ",
+			"text": "Envoyer le login",
 			"send_button": "Envoyer"
 		},
 		"search_result": {

@@ -12,6 +12,11 @@ export const resetPassword = (
 			.post(
 				'/' + realm + '/users/' + userId + '/reinitPassword',
 				pcr,
+				{
+					params: {
+						sendModes: 'MAIL',
+					},
+				},
 			)
 			.then((r) => r.data),
 	);
