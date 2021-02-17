@@ -9,8 +9,8 @@ import User from '../../model/api/user';
 import DataViewer from '../commons/dataViewer/dataviewer';
 import FieldsToDisplay from '../../hooks/realm/useRealmConfig/fieldToDisplay/FieldToDisplayConfigUser';
 import { Loader } from '../commons/loader/loader';
-import { ResetPasswordPopup } from '../commons/resetPasswordPopup/resetPasswordPopup';
-import { SendPopupButton } from '../commons/sendPasswordPopup/sendPopup';
+import ResetPasswordPopup from '../commons/resetPasswordPopup';
+import SendUsernamePopup from '../commons/sendUsernamePopup';
 import Title from '../commons/title/title';
 import LoadingButton from '../commons/loadingButton';
 import { useSnackbar } from 'notistack';
@@ -62,6 +62,7 @@ const DetailUser = () => {
 			updateIFormValues(user);
 		}
 	}, [user, updateIFormValues]);
+
 	return (
 		<>
 			<Title title={t('detail_user.title') + id} />
@@ -81,7 +82,7 @@ const DetailUser = () => {
 						spacing={3}
 					>
 						<Grid item>
-							<SendPopupButton
+							<SendUsernamePopup
 								user={user as User}
 							/>
 						</Grid>
@@ -116,9 +117,7 @@ const DetailUser = () => {
 								handleClick={() =>
 									executeDelete(
 										realm,
-										(user as User)
-											.username ||
-											'',
+										user.username || '',
 									)
 								}
 							>
