@@ -6,7 +6,7 @@ export default interface searchRequestUser {
 	size?: number;
 	start?: number;
 	searchCookie?: string;
-	typeRecherche?: 'et' | 'ou';
+	typeRecherche?: 'AND' | 'OR';
 	habilitations?: string[];
 	application?: string;
 }

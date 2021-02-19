@@ -9,6 +9,7 @@ import * as remote from './remote/';
 import * as Utils from './../utils/object';
 import { Group } from '../model/api/group';
 import { PasswordChangeRequest } from '../model/api/passwordChangeRequest';
+import Application from '../model/api/application';
 
 // Realm function
 export const getRealms = (id?: string): Promise<Realm[]> => {
@@ -160,8 +161,19 @@ export const getGroups = (
 };
 
 // Application function
-export const getApplications = (realm: string): Promise<Pageable> => {
-	return remote.getApplications(realm);
+export const getApplications = (
+	realm: string,
+	name?: string,
+): Promise<Pageable> => {
+	return remote.getApplications(realm, name);
+};
+
+export const getApplication = (realm: string, name: string) => {
+	return remote.getApplication(realm, name);
+};
+
+export const putApplication = (realm: string, app: Application) => {
+	return remote.putApplication(realm, app);
 };
 
 // Credential Management

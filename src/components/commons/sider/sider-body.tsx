@@ -23,6 +23,7 @@ import { matchPath, useHistory, useLocation } from 'react-router-dom';
 import { RootState } from '../../../configuration/store-configuration';
 import { useGetRealms } from '../../../hooks/realm/useGetRealms';
 import { saveRealms } from '../../../redux/actions/app';
+import GrainIcon from '@material-ui/icons/Grain';
 const useStyle = makeStyles((theme: Theme) =>
 	createStyles({
 		nested: {
@@ -70,7 +71,12 @@ const SiderBody = () => {
 			<Toolbar />
 
 			<List component="nav">
-				<ListItem button key="home" onClick={() => push('/')}>
+				<ListItem
+					button
+					key="home"
+					onClick={() => push('/')}
+					selected={location.pathname === '/'}
+				>
 					<ListItemIcon>
 						<HomeIcon />
 					</ListItemIcon>
@@ -134,6 +140,9 @@ const SiderBody = () => {
 								)
 							}
 							className={classes.nested}
+							selected={location.pathname.includes(
+								'/users',
+							)}
 						>
 							<ListItemIcon>
 								<PersonIcon />
@@ -158,6 +167,9 @@ const SiderBody = () => {
 								)
 							}
 							className={classes.nested}
+							selected={location.pathname.includes(
+								'/organizations',
+							)}
 						>
 							<ListItemIcon>
 								<BusinessIcon />
@@ -165,6 +177,33 @@ const SiderBody = () => {
 							<ListItemText
 								primary={t(
 									'sider.manage.organizations',
+								)}
+							/>
+						</ListItem>
+						<ListItem
+							button
+							key="search_application"
+							disabled={
+								realmSelected ? false : true
+							}
+							onClick={() =>
+								push(
+									'/realm/' +
+										realmSelected +
+										'/applications',
+								)
+							}
+							className={classes.nested}
+							selected={location.pathname.includes(
+								'/applications',
+							)}
+						>
+							<ListItemIcon>
+								<GrainIcon />
+							</ListItemIcon>
+							<ListItemText
+								primary={t(
+									'sider.manage.applications',
 								)}
 							/>
 						</ListItem>
@@ -190,6 +229,9 @@ const SiderBody = () => {
 						key="parametres"
 						onClick={() => push('/settings')}
 						className={classes.nested}
+						selected={location.pathname.includes(
+							'/settings',
+						)}
 					>
 						<ListItemIcon>
 							<SettingsIcon />

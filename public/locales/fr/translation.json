@@ -19,7 +19,8 @@
 		"manage": {
 			"title": "Gestion",
 			"users": "Utilisateurs",
-			"organizations": "Organisations"
+			"organizations": "Organisations",
+			"applications": "Applications"
 		},
 		"configuration": {
 			"title": "Configuration",
@@ -145,6 +146,15 @@
 			"delete": "Supprimer",
 			"reset": "Annuler les changements"
 		}
+	},
+	"search_application": {
+		"title": "Chercher des applications dans le realm ",
+		"search_field": "Votre recherche",
+		"table_header": "Application",
+		"table_no_entry": "Aucune application ne correspond à votre recherche"
+	},
+	"detail_application": {
+		"error": "Erreur lors de l'envoi a l'API: "
 	},
 	"global_search": {
 		"title": "Rechercher dans le realm ",
