@@ -106,10 +106,11 @@ const CustomToolBar = ({ handleClick }: any) => {
 	return (
 		<Tooltip title={'Ajouter'}>
 			<Button
-				variant="outlined"
-				color="primary"
+				disableElevation
+				variant="contained"
+				color="default"
 				startIcon={<AddIcon />}
-				aria-label="modify user"
+				aria-label="create user"
 				onClick={handleClick}
 			>
 				{t('commons.search_result.buttons.add')}

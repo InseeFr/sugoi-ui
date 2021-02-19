@@ -1,3 +1,4 @@
+import { SearchApplications } from '../components/searchApplication';
 import CreateOrganization from '../components/createOrganization';
 import CreateUsers from '../components/createUser';
 import DetailsOrganization from '../components/details/detailsOrganization';
@@ -7,6 +8,7 @@ import RealmHome from '../components/realmHome';
 import SearchOrganizations from '../components/searchOrganization';
 import SearchUsers from '../components/searchUser';
 import Settings from '../components/settings/settings';
+import { DetailsApplication } from '../components/detailsApplication';
 const IdDynamicBreadcrumb = ({ match }: any): string => {
 	return match.params['id'];
 };
@@ -63,6 +65,20 @@ const routes: Iroutes[] = [
 		exact: true,
 		breadcrumb: IdDynamicBreadcrumb,
 		component: DetailsOrganization,
+		secure: true,
+	},
+	{
+		path: '/realm/:realm/applications',
+		exact: true,
+		breadcrumb: 'Application',
+		component: SearchApplications,
+		secure: true,
+	},
+	{
+		path: '/realm/:realm/applications/:id',
+		exact: true,
+		breadcrumb: IdDynamicBreadcrumb,
+		component: DetailsApplication,
 		secure: true,
 	},
 	{

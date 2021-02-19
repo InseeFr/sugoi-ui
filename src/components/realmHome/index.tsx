@@ -25,7 +25,7 @@ export const RealmHome = () => {
 	useEffect(() => {
 		if (search.length > 1) {
 			getUsers(realm, {
-				typeRecherche: 'ou',
+				typeRecherche: 'OR',
 				identifiant: search,
 				size: 6,
 			}).then((r) => {

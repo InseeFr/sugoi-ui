@@ -9,6 +9,8 @@ export interface SimpleDialogProps {
 	title?: string;
 	body?: React.ReactNode;
 	actions?: React.ReactNode;
+	fullwidth?: boolean;
+	maxwidth?: false | 'xl' | 'xs' | 'sm' | 'md' | 'lg' | undefined;
 }
 
 const SimpleDialog = ({
@@ -17,14 +19,16 @@ const SimpleDialog = ({
 	actions,
 	open,
 	onClose,
+	fullwidth,
+	maxwidth,
 }: SimpleDialogProps) => {
 	return (
 		<Dialog
 			onClose={onClose}
 			aria-labelledby="simple-dialog-title"
 			open={open}
-			maxWidth="xl"
-			fullWidth
+			maxWidth={maxwidth !== undefined ? maxwidth : 'xl'}
+			fullWidth={fullwidth !== undefined ? fullwidth : true}
 		>
 			<DialogTitle title={title} onClose={onClose} />
 			<DialogContent dividers>{body}</DialogContent>

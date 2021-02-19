@@ -10,6 +10,11 @@ import TranslateIcon from '@material-ui/icons/Translate';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+const languages: Record<string, string> = {
+	en: 'English',
+	fr: 'Français',
+};
+
 const LanguageButton = () => {
 	const { i18n, t } = useTranslation();
 
@@ -21,6 +26,7 @@ const LanguageButton = () => {
 		setAnchorEl(event.currentTarget);
 	};
 
+	console.log(i18n.language);
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
@@ -41,7 +47,7 @@ const LanguageButton = () => {
 				onClick={handleClick}
 				title={t('commons.header.buttons.language')}
 			>
-				{i18n.language}
+				{languages[i18n.language] as String}
 			</Button>
 			<Popover
 				id={id}
@@ -62,18 +68,18 @@ const LanguageButton = () => {
 					display="flex"
 					flexDirection="column"
 				>
-					<ListItem
-						button
-						onClick={() => changeLanguage('en')}
-					>
-						<ListItemText primary="English" />
-					</ListItem>
-					<ListItem
-						button
-						onClick={() => changeLanguage('fr')}
-					>
-						<ListItemText primary="Français" />
-					</ListItem>
+					{Object.keys(languages).map((language) => (
+						<ListItem
+							button
+							onClick={() =>
+								changeLanguage(language)
+							}
+						>
+							<ListItemText
+								primary={languages[language]}
+							/>
+						</ListItem>
+					))}
 				</Box>
 			</Popover>
 		</>
