@@ -10,6 +10,6 @@ export default interface User {
 	attributes?: Attributes;
 	address?: Address;
 	habilitations?: Habilitation[];
-	groups?: string[];
+	groups: string[];
 	metadatas?: string[];
 }

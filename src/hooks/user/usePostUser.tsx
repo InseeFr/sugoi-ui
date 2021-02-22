@@ -1,33 +1,32 @@
 import { useEffect, useState } from 'react';
 import { postUser } from '../../api';
 import User from '../../model/api/user';
-interface execute {
-	realm: string;
-	user: User;
-}
+
 const usePostUser = () => {
 	const [error, setError] = useState(undefined);
 	const [loading, setLoading] = useState(false);
-	const [data, setdata] = useState<execute | undefined>(undefined);
+	const [todo, setTodo] = useState<any>(undefined);
 	const [result, setResult] = useState<User | undefined>(undefined);
 
 	useEffect(() => {
-		if (data) {
+		if (todo) {
 			setLoading(true);
 			setError(undefined);
-			postUser(data.realm, data.user)
+			postUser(todo.user, todo.realm, todo.userStorage)
 				.then((r: User) => setResult(r))
 				.catch((err) => {
 					setError(err);
 				})
 				.finally(() => {
 					setLoading(false);
-					setdata(undefined);
+					setTodo(undefined);
 				});
 		}
-	}, [data]);
+	}, [todo]);
 
-	const execute = (realm: string, user: User) => setdata({ realm, user });
+	const execute = (user: User, realm: string, userStorage: string) =>
+		setTodo({ realm: realm, user: user, userStorage: userStorage });
+
 	return { execute, user: result, loading, error };
 };
 

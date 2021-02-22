@@ -47,50 +47,85 @@ export const updateRealm = (id: string, realm: Realm): Promise<Realm> => {
 export const getUsers = (
 	realm: string,
 	searchRequest?: searchRequestUser,
+	userStorage?: string,
 ): Promise<Pageable> => {
 	searchRequest = Utils.cleanObjectEntries(searchRequest);
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.getUsers(realm, searchRequest || {});
 	} else {
-		return remote.getUsers(realm, searchRequest || {});
+		return userStorage
+			? remote.getUsersFromUserStorage(
+					realm,
+					userStorage,
+					searchRequest || {},
+			  )
+			: remote.getUsers(realm, searchRequest || {});
 	}
 };
 
-export const getUser = (realm: string, identifiant: string): Promise<User> => {
+export const getUser = (
+	identifiant: string,
+	realm: string,
+	userStorage?: string,
+): Promise<User> => {
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.getUser(realm, identifiant);
 	} else {
-		return remote.getUser(realm, identifiant);
+		return userStorage
+			? remote.getUserFromUserStorage(
+					realm,
+					userStorage,
+					identifiant,
+			  )
+			: remote.getUser(realm, identifiant);
 	}
 };
 
-export const postUser = (realm: string, user: User): Promise<User> => {
+export const postUser = (
+	user: User,
+	realm: string,
+	userStorage: string,
+): Promise<User> => {
 	user = Utils.cleanObjectEntries(user);
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.postUser(realm, user);
 	} else {
-		return remote.postUser(realm, user);
+		return remote.postUserFromUserStorage(realm, userStorage, user);
 	}
 };
 
-export const deleteUser = (realm: string, id: string): Promise<string> => {
+export const deleteUser = (
+	id: string,
+	realm: string,
+	userStorage?: string,
+): Promise<string> => {
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.deleteUser(realm, id);
 	} else {
-		return remote.deleteUser(realm, id);
+		return userStorage
+			? remote.deleteUserFromUserStorage(realm, userStorage, id)
+			: remote.deleteUser(realm, id);
 	}
 };
 
 export const updateUser = (
-	realm: string,
 	id: string,
 	user: User,
+	realm: string,
+	userStorage?: string,
 ): Promise<User> => {
 	user = Utils.cleanObjectEntries(user);
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.updateUser(realm, id, user);
 	} else {
-		return remote.updateUser(realm, id, user);
+		return userStorage
+			? remote.updateUserFromUserStorage(
+					realm,
+					userStorage,
+					id,
+					user,
+			  )
+			: remote.updateUser(realm, id, user);
 	}
 };
 
@@ -98,57 +133,90 @@ export const updateUser = (
 export const getOrganizations = (
 	realm: string,
 	searchRequest?: searchRequestOrganization,
+	userStorage?: string,
 ): Promise<Pageable> => {
 	searchRequest = Utils.cleanObjectEntries(searchRequest);
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.getOrganizations(realm, searchRequest || {});
 	} else {
-		return remote.getOrganizations(realm, searchRequest || {});
+		return userStorage
+			? remote.getOrganizationsFromUserStorage(
+					realm,
+					userStorage,
+					searchRequest || {},
+			  )
+			: remote.getOrganizations(realm, searchRequest || {});
 	}
 };
 
 export const getOrganization = (
-	realm: string,
 	identifiant: string,
+	realm: string,
+	userStorage?: string,
 ): Promise<Organization> => {
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.getOrganization(realm, identifiant);
 	} else {
-		return remote.getOrganization(realm, identifiant);
+		return userStorage
+			? remote.getOrganizationFromUserStorage(
+					realm,
+					userStorage,
+					identifiant,
+			  )
+			: remote.getOrganization(realm, identifiant);
 	}
 };
 
 export const updateOrganization = (
-	realm: string,
 	id: string,
 	organization: Organization,
+	realm: string,
+	userStorage?: string,
 ): Promise<Organization> => {
 	organization = Utils.cleanObjectEntries(organization);
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.updateOrganization(realm, id, organization);
 	} else {
-		return remote.updateOrganization(realm, id, organization);
+		return userStorage
+			? remote.updateOrganizationFromUserStorage(
+					realm,
+					userStorage,
+					id,
+					organization,
+			  )
+			: remote.updateOrganization(realm, id, organization);
 	}
 };
 
 export const postOrganization = (
-	realm: string,
 	organization: Organization,
+	realm: string,
+	userStorage: string,
 ): Promise<Organization> => {
 	organization = Utils.cleanObjectEntries(organization);
 
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.postOrganization(realm, organization);
 	} else {
-		return remote.postOrganization(realm, organization);
+		return remote.postOrganization(realm, userStorage, organization);
 	}
 };
 
-export const deleteOrganization = (realm: string, id: string): Promise<any> => {
+export const deleteOrganization = (
+	id: string,
+	realm: string,
+	userStorage?: string,
+): Promise<any> => {
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.deleteOrganization(realm, id);
 	} else {
-		return remote.deleteOrganization(realm, id);
+		return userStorage
+			? remote.deleteOrganizationFromUserStorage(
+					realm,
+					userStorage,
+					id,
+			  )
+			: remote.deleteOrganization(realm, id);
 	}
 };
 // Group function

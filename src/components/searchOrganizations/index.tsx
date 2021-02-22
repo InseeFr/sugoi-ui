@@ -6,23 +6,58 @@ import { useHistory, useParams } from 'react-router-dom';
 import useGetOrganizations from '../../hooks/organization/useGetOrganizations';
 import { SearchResults } from '../commons/searchResults';
 import Title from '../commons/title/title';
-import SearchForm from './../commons/searchFormular';
+import SearchForm from '../commons/searchFormular';
+import Organization from '../../model/api/organization';
+import { useSnackbar } from 'notistack';
 
 const SearchOrganizations = () => {
-	const { realm } = useParams<any>();
+	const { realm, userStorage } = useParams<any>();
+	const { enqueueSnackbar } = useSnackbar();
+	const { push } = useHistory();
+	const { t } = useTranslation();
+
 	const {
 		organizations,
 		execute: searchOrganizations,
 		loading,
-	} = useGetOrganizations(realm);
+	} = useGetOrganizations(realm, userStorage);
 
-	const { push } = useHistory();
-
-	const submit = (values: any) => {
-		searchOrganizations(realm, { ...values });
+	const handleSearch = (values: any) => {
+		searchOrganizations(realm, { ...values }, userStorage);
 	};
 
-	const { t } = useTranslation();
+	const handleCreate = () => {
+		if (userStorage) {
+			push(
+				'/realm/' +
+					realm +
+					'/us/' +
+					userStorage +
+					'/organizations/create',
+			);
+		} else {
+			enqueueSnackbar(t('search_user.info_create'), {
+				variant: 'info',
+			});
+		}
+	};
+
+	const handleClickOnOrganization = (organization: Organization) => {
+		push(
+			userStorage
+				? '/realm/' +
+						realm +
+						'/us/' +
+						userStorage +
+						'/organization/' +
+						organization.identifiant
+				: '/realm/' +
+						realm +
+						'/' +
+						'organization/' +
+						organization.identifiant,
+		);
+	};
 
 	const columns = [
 		{
@@ -60,17 +95,11 @@ const SearchOrganizations = () => {
 							color="default"
 							startIcon={<CreateIcon />}
 							aria-label="modify user"
-							onClick={() => {
-								const link =
-									'/realm/' +
-									realm +
-									'/' +
-									'organization/' +
-									organizations[dataIndex]
-										.identifiant;
-
-								push(link);
-							}}
+							onClick={() =>
+								handleClickOnOrganization(
+									organizations[dataIndex],
+								)
+							}
 						>
 							{t(
 								'search_organization.buttons.edit',
@@ -95,7 +124,7 @@ const SearchOrganizations = () => {
 				<Grid item xs={12}>
 					<SearchForm
 						realm={realm}
-						onSubmit={submit}
+						onSubmit={handleSearch}
 						formFields={[]}
 					/>
 				</Grid>
@@ -103,13 +132,7 @@ const SearchOrganizations = () => {
 					<SearchResults
 						data={organizations}
 						columns={columns}
-						handleClickAdd={() =>
-							push(
-								'/realm/' +
-									realm +
-									'/organizations/create',
-							)
-						}
+						handleClickAdd={() => handleCreate()}
 					/>
 					{loading ? <LinearProgress /> : null}
 				</Grid>

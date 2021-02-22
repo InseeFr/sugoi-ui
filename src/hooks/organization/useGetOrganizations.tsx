@@ -3,10 +3,16 @@ import { getOrganizations } from '../../api';
 import Organization from '../../model/api/organization';
 import searchRequestOrganization from '../../model/js/searchRequestOrganization';
 
-const useGetOrganizations = (realm?: string) => {
+const useGetOrganizations = (realm?: string, userStorage?: string) => {
 	const [result, setResult] = useState<Organization[]>([]);
 	const [todo, setTodo] = useState<any>(
-		realm ? { realm: realm, searchRequest: {} } : undefined,
+		realm
+			? {
+					realm: realm,
+					userStorage: userStorage,
+					searchRequest: {},
+			  }
+			: undefined,
 	);
 	const [error, setError] = useState(undefined);
 	const [loading, setLoading] = useState(true);
@@ -15,7 +21,11 @@ const useGetOrganizations = (realm?: string) => {
 		if (todo) {
 			setLoading(true);
 			setResult([]);
-			getOrganizations(todo.realm, todo.searchRequest)
+			getOrganizations(
+				todo.realm,
+				todo.searchRequest,
+				todo.userStorage,
+			)
 				.then((r: any) => {
 					setResult(r.results);
 				})
@@ -32,12 +42,14 @@ const useGetOrganizations = (realm?: string) => {
 	const execute = (
 		realm: string,
 		{ identifiant }: searchRequestOrganization,
+		userStorage?: string,
 	) => {
 		setTodo({
 			realm: realm,
 			searchRequest: {
 				identifiant,
 			},
+			userStorage: userStorage,
 		});
 	};
 	return {

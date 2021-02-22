@@ -11,7 +11,7 @@ import LoadingButton from '../commons/loadingButton';
 import Title from '../commons/title/title';
 
 const CreateOrganization = () => {
-	const { realm } = useParams<any>();
+	const { realm, userStorage } = useParams<any>();
 	const { push } = useHistory();
 	const { formValues, handleChange, handleReset } = useForms({});
 	const { organizationConfig } = useRealmConfig(realm);
@@ -32,7 +32,7 @@ const CreateOrganization = () => {
 	}, [enqueueSnackbar, error, t]);
 
 	const handleSubmit = () => {
-		createOrganization(realm, formValues);
+		createOrganization(formValues, realm, userStorage);
 	};
 
 	useEffect(() => {

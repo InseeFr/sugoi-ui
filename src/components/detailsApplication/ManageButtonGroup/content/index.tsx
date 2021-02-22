@@ -2,6 +2,7 @@ import { Collapse, Grid } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import Application from '../../../../model/api/application';
 import { Group } from '../../../../model/api/group';
+import User from '../../../../model/api/user';
 import { AddUsers } from './addUser';
 import { CreateGroup } from './createGroup';
 import { GroupSelector } from './groupSelector';
@@ -98,7 +99,7 @@ export const BodyManagementGroup = ({
 			description: (currentGroup as Group).description,
 			users: [
 				...(currentGroup as Group).users.filter(
-					(user) => user.username !== username,
+					(user: User) => user.username !== username,
 				),
 			],
 		};

@@ -39,16 +39,10 @@ export const getUsers = (
 	);
 
 export const getUser = async (realm: string, id: string): Promise<User> => {
-	const pageable = await getAuthClient().then((client: AxiosInstance) =>
-		client
-			.get('/' + realm + '/users', {
-				params: {
-					identifiant: id,
-				},
-			})
-			.then((r: any) => r.data),
+	const result = await getAuthClient().then((client: AxiosInstance) =>
+		client.get('/' + realm + '/users/' + id).then((r: any) => r.data),
 	);
-	return pageable.results[0];
+	return result;
 };
 
 export const deleteUser = (realm: string, id: string) =>
@@ -67,5 +61,87 @@ export const updateUser = (realm: string, id: string, user: User) =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
 			.put('/' + realm + '/users/' + id, user)
+			.then((r: any) => r.data),
+	);
+
+export const getUsersFromUserStorage = (
+	realm: string,
+	us: string,
+	{
+		identifiant,
+		nomCommun,
+		description,
+		organisationId,
+		size,
+		start,
+		searchCookie,
+		typeRecherche,
+		habilitations,
+		application,
+	}: searchRequestUser,
+): Promise<Pageable> =>
+	getAuthClient().then((client: AxiosInstance) =>
+		client
+			.get('/' + realm + '/' + us + '/users', {
+				params: {
+					identifiant,
+					nomCommun,
+					description,
+					organisationId,
+					size: size ? size : 500,
+					start,
+					searchCookie,
+					typeRecherche,
+					habilitations,
+					application,
+				},
+			})
+			.then((r: any) => r.data),
+	);
+
+export const getUserFromUserStorage = async (
+	realm: string,
+	us: string,
+	id: string,
+): Promise<User> => {
+	const result = await getAuthClient().then((client: AxiosInstance) =>
+		client
+			.get('/' + realm + '/' + us + '/users/' + id)
+			.then((r: any) => r.data),
+	);
+	return result;
+};
+
+export const deleteUserFromUserStorage = (
+	realm: string,
+	us: string,
+	id: string,
+) =>
+	getAuthClient().then((client: AxiosInstance) =>
+		client
+			.delete('/' + realm + '/' + us + '/users/' + id)
+			.then((r: any) => r.data),
+	);
+
+export const postUserFromUserStorage = (
+	realm: string,
+	us: string,
+	user: User,
+) =>
+	getAuthClient().then((client: AxiosInstance) =>
+		client
+			.post('/' + realm + '/' + us + '/users', user)
+			.then((r: any) => r.data),
+	);
+
+export const updateUserFromUserStorage = (
+	realm: string,
+	us: string,
+	id: string,
+	user: User,
+) =>
+	getAuthClient().then((client: AxiosInstance) =>
+		client
+			.put('/' + realm + '/' + us + '/users/' + id, user)
 			.then((r: any) => r.data),
 	);

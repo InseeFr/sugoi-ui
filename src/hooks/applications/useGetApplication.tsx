@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getApplication } from '../../api/remote';
 
-export const useGetApplication = (realm: string, name: string) => {
+export const useGetApplication = (realm?: string, name?: string) => {
 	const [result, setResult] = useState<any>();
 	const [error, setError] = useState<any>(undefined);
 	const [loading, setLoading] = useState<boolean>(true);

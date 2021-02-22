@@ -29,7 +29,7 @@ const MyBreadcrumbs = () => {
 	const classes = useStyles();
 	const history = useHistory();
 	const breadcrumbs = useBreadcrumbs(routes, {
-		excludePaths: ['/realm'],
+		excludePaths: ['/realm', '/realm/:realm/us'],
 	});
 	const { t } = useTranslation();
 

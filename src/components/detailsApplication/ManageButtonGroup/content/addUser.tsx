@@ -46,11 +46,14 @@ export const AddUsers = ({
 	};
 	const handleSearchUser = (e: any) => {
 		setSearch(e.target.value);
-		execute(realm, {
-			identifiant: e.target.value,
-			nomCommun: e.target.value,
-			typeRecherche: 'OR',
-		});
+		execute(
+			{
+				identifiant: e.target.value,
+				nomCommun: e.target.value,
+				typeRecherche: 'OR',
+			},
+			realm,
+		);
 	};
 	return (
 		<Grid
@@ -116,44 +119,47 @@ export const AddUsers = ({
 											scope="row"
 											align="right"
 										>
-											{group?.users.filter(
-												(
-													_user,
-												) =>
-													_user.username ===
-													user.username,
-											).length >
-											0 ? (
-												<IconButton
-													aria-label="Delete"
-													size="small"
-													onClick={() =>
-														handleDeleteUser(
-															user.username,
-														)
-													}
-												>
-													<HighlightOffIcon
-														color="secondary"
-														fontSize="small"
-													/>
-												</IconButton>
-											) : (
-												<IconButton
-													aria-label="Add"
-													size="small"
-													onClick={() =>
-														handleAddUser(
-															user.username,
-														)
-													}
-												>
-													<AddIcon
-														color="primary"
-														fontSize="small"
-													/>
-												</IconButton>
-											)}
+											{group ? (
+												(group.users as User[])?.filter(
+													(
+														_user,
+													) =>
+														_user.username ===
+														user.username,
+												)
+													.length >
+												0 ? (
+													<IconButton
+														aria-label="Delete"
+														size="small"
+														onClick={() =>
+															handleDeleteUser(
+																user.username,
+															)
+														}
+													>
+														<HighlightOffIcon
+															color="secondary"
+															fontSize="small"
+														/>
+													</IconButton>
+												) : (
+													<IconButton
+														aria-label="Add"
+														size="small"
+														onClick={() =>
+															handleAddUser(
+																user.username,
+															)
+														}
+													>
+														<AddIcon
+															color="primary"
+															fontSize="small"
+														/>
+													</IconButton>
+												)
+											) : null}
 										</TableCell>
 									</TableRow>
 								))}

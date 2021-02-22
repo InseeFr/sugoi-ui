@@ -2,18 +2,23 @@ import { useEffect, useState } from 'react';
 import { getOrganization } from '../../api';
 import Organization from '../../model/api/organization';
 
-const useGetOrganization = (realm: string, id: string) => {
+const useGetOrganization = (
+	id?: string,
+	realm?: string,
+	userStorage?: string,
+) => {
 	const [result, setResult] = useState<Organization>();
-	const [search, setSearch] = useState({
+	const [todo, setTodo] = useState<any>({
 		realm: realm,
+		userStorage: userStorage,
 		id: id,
 	});
 	const [error, setError] = useState(undefined);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		if (search) {
-			getOrganization(search.realm, search.id)
+		if (todo) {
+			getOrganization(todo.id, todo.realm, todo.userStorage)
 				.then((r: Organization) => {
 					setResult(r);
 				})
@@ -22,10 +27,10 @@ const useGetOrganization = (realm: string, id: string) => {
 				})
 				.finally(() => setLoading(false));
 		}
-	}, [id, realm, search]);
+	}, [id, realm, todo]);
 
-	const execute = (realm: string, id: string) => {
-		setSearch({ realm: realm, id: id });
+	const execute = (id: string, realm: string, userStorage: string) => {
+		setTodo({ realm: realm, userStorage: userStorage, id: id });
 	};
 
 	return {

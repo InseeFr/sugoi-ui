@@ -2,20 +2,20 @@ import { useEffect, useState } from 'react';
 import { getUser } from '../../api';
 import User from '../../model/api/user';
 
-const useGetUser = (id?: string, realm?: string) => {
+const useGetUser = (id?: string, realm?: string, userStorage?: string) => {
 	const [result, setResult] = useState<User>({} as User);
-	const [search, setSearch] = useState<any>(
-		id && realm ? { realm, id } : undefined,
+	const [todo, setTodo] = useState<any>(
+		id && realm
+			? { realm: realm, userStorage: userStorage, id: id }
+			: undefined,
 	);
 	const [error, setError] = useState(undefined);
 	const [loading, setLoading] = useState(true);
 
-	const execute = (realm: string, id: string) => setSearch({ realm, id });
-
 	useEffect(() => {
-		if (search) {
+		if (todo) {
 			setLoading(true);
-			getUser(search.realm, search.id)
+			getUser(todo.id, todo.realm, todo.userStorage)
 				.then((r: User) => {
 					setResult(r);
 				})
@@ -24,10 +24,13 @@ const useGetUser = (id?: string, realm?: string) => {
 				})
 				.finally(() => {
 					setLoading(false);
-					setSearch(undefined);
+					setTodo(undefined);
 				});
 		}
-	}, [id, realm, search]);
+	}, [id, realm, todo]);
+
+	const execute = (id: string, realm: string, userStorage?: string) =>
+		setTodo({ realm: realm, userStorage: userStorage, id: id });
 
 	return { execute, loading, user: result, error };
 };
