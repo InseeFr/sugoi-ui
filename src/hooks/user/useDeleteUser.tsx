@@ -6,13 +6,11 @@ export const useDeleteUser = () => {
 	const [error, seterror] = useState(undefined);
 	const [data, setdata] = useState<any>(undefined);
 
-	const execute = (realm: string, id: string) => setdata({ realm, id });
-
 	useEffect(() => {
 		if (data) {
 			setloading(true);
 			seterror(undefined);
-			deleteUser(data.realm, data.id)
+			deleteUser(data.id, data.realm, data.userStorage)
 				.catch((err) => seterror(err))
 				.finally(() => {
 					setloading(false);
@@ -20,5 +18,9 @@ export const useDeleteUser = () => {
 				});
 		}
 	}, [data]);
+
+	const execute = (id: string, realm: string, userStorage?: string) =>
+		setdata({ id: id, realm: realm, userStorage: userStorage });
+
 	return { loading, error, execute };
 };

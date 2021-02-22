@@ -5,23 +5,38 @@ import Organization from '../../model/api/organization';
 const useUpdateOrganization = () => {
 	const [error, setError] = useState(undefined);
 	const [loading, setLoading] = useState(false);
-	const [data, setdata] = useState<any>(undefined);
-
-	const execute = (realm: string, id: string, organization: Organization) =>
-		setdata({ realm, id, organization });
+	const [todo, setTodo] = useState<any>(undefined);
 
 	useEffect(() => {
-		if (data) {
+		if (todo) {
 			setLoading(true);
 			setError(undefined);
-			updateOrganization(data.realm, data.id, data.organization)
+			updateOrganization(
+				todo.id,
+				todo.organization,
+				todo.realm,
+				todo.userStorage,
+			)
 				.catch((err) => setError(err))
 				.finally(() => {
 					setLoading(false);
-					setdata(undefined);
+					setTodo(undefined);
 				});
 		}
-	}, [data]);
+	}, [todo]);
+
+	const execute = (
+		id: string,
+		organization: Organization,
+		realm: string,
+		userStorage?: string,
+	) =>
+		setTodo({
+			realm: realm,
+			userStorage: userStorage,
+			id: id,
+			organization: organization,
+		});
 
 	return { execute, loading, error };
 };

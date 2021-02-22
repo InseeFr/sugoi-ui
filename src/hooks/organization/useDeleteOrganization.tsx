@@ -4,22 +4,24 @@ import { deleteOrganization } from '../../api';
 export const useDeleteOrganization = () => {
 	const [loading, setloading] = useState(false);
 	const [error, seterror] = useState(undefined);
-	const [data, setdata] = useState<any>(undefined);
-
-	const execute = (realm: string, id: string) => setdata({ realm, id });
+	const [todo, setTodo] = useState<any>(undefined);
 
 	useEffect(() => {
-		if (data) {
+		if (todo) {
 			setloading(true);
 			seterror(undefined);
-			deleteOrganization(data.realm, data.id)
+			deleteOrganization(todo.id, todo.realm, todo.userStorage)
 				.then()
 				.catch((err) => seterror(err))
 				.finally(() => {
 					setloading(false);
-					setdata(undefined);
+					setTodo(undefined);
 				});
 		}
-	}, [data]);
+	}, [todo]);
+
+	const execute = (id: string, realm: string, userStorage?: string) =>
+		setTodo({ realm: realm, userStorage: userStorage, id: id });
+
 	return { loading, error, execute };
 };

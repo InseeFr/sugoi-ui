@@ -5,23 +5,33 @@ import User from '../../model/api/user';
 const useUpdateUser = () => {
 	const [error, setError] = useState(undefined);
 	const [loading, setLoading] = useState(false);
-	const [data, setdata] = useState<any>(undefined);
-
-	const execute = (realm: string, id: string, user: User) =>
-		setdata({ realm, id, user });
+	const [todo, setTodo] = useState<any>(undefined);
 
 	useEffect(() => {
-		if (data) {
+		if (todo) {
 			setLoading(true);
 			setError(undefined);
-			updateUser(data.realm, data.id, data.user)
+			updateUser(todo.id, todo.user, todo.realm, todo.userStorage)
 				.catch((err) => setError(err))
 				.finally(() => {
 					setLoading(false);
-					setdata(undefined);
+					setTodo(undefined);
 				});
 		}
-	}, [data]);
+	}, [todo]);
+
+	const execute = (
+		id: string,
+		user: User,
+		realm: string,
+		userStorage?: string,
+	) =>
+		setTodo({
+			realm: realm,
+			userStorage: userStorage,
+			id: id,
+			user: user,
+		});
 
 	return { execute, loading, error };
 };

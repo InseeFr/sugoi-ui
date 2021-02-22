@@ -7,17 +7,58 @@ import useGetUsers from '../../hooks/user/useGetUsers';
 import { field } from '../../model/field';
 import { SearchResults } from '../commons/searchResults';
 import Title from '../commons/title/title';
-import SearchForm from './../commons/searchFormular';
+import SearchForm from '../commons/searchFormular';
+import { useSnackbar } from 'notistack';
+import User from '../../model/api/user';
 
 const SearchUsers = () => {
-	const { realm } = useParams<any>();
-	const { users, execute: searchUsers, loading } = useGetUsers(realm);
+	const { realm, userStorage } = useParams<any>();
+	const { enqueueSnackbar } = useSnackbar();
 	const { push } = useHistory();
-	const submit = (values: any) => {
-		searchUsers(realm, { ...values });
-	};
 
 	const { t } = useTranslation();
+
+	const { users, execute: searchUsers, loading } = useGetUsers(
+		realm,
+		userStorage,
+	);
+
+	const handleSearch = (values: any) => {
+		searchUsers({ ...values }, realm, userStorage);
+	};
+
+	const handleClickOnUser = (user: User) => {
+		push(
+			userStorage
+				? '/realm/' +
+						realm +
+						'/us/' +
+						userStorage +
+						'/users/' +
+						(user.username as string)
+				: '/realm/' +
+						realm +
+						'/' +
+						'users/' +
+						(user.username as string),
+		);
+	};
+
+	const handleCreate = () => {
+		if (userStorage) {
+			push(
+				'/realm/' +
+					realm +
+					'/us/' +
+					userStorage +
+					'/users/create',
+			);
+		} else {
+			enqueueSnackbar(t('search_user.info_create'), {
+				variant: 'info',
+			});
+		}
+	};
 
 	const formFields: field[] = [
 		{
@@ -110,18 +151,13 @@ const SearchUsers = () => {
 									color="default"
 									startIcon={<CreateIcon />}
 									aria-label="modify user"
-									onClick={() => {
-										const link =
-											'/realm/' +
-											realm +
-											'/' +
-											'users/' +
+									onClick={() =>
+										handleClickOnUser(
 											users[
 												dataIndex
-											].username;
-
-										push(link);
-									}}
+											],
+										)
+									}
 								>
 									{t(
 										'search_user.buttons.edit',
@@ -148,7 +184,8 @@ const SearchUsers = () => {
 				<Grid item xs={12}>
 					<SearchForm
 						realm={realm}
-						onSubmit={submit}
+						userStorage={userStorage}
+						onSubmit={handleSearch}
 						formFields={formFields}
 					/>
 				</Grid>
@@ -156,13 +193,7 @@ const SearchUsers = () => {
 					<SearchResults
 						data={users}
 						columns={columns}
-						handleClickAdd={() =>
-							push(
-								'/realm/' +
-									realm +
-									'/users/create',
-							)
-						}
+						handleClickAdd={handleCreate}
 					/>
 					{loading ? <LinearProgress /> : null}
 				</Grid>

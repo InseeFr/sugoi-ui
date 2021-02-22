@@ -6,7 +6,7 @@ const addProps = (obj: any, path: any, value: any) => set(obj, path, value);
 export const useForms = (initialValues: any) => {
 	const [iFormValues, setIFormValues] = useState(initialValues || {});
 	const [formValues, setFormValues] = useState(initialValues || {});
-	const [todo, setTodo] = useState<any>(undefined);
+	const [todo, setTodo] = useState<any>();
 	const [reset, setReset] = useState(false);
 
 	useEffect(() => {

@@ -40,6 +40,7 @@
 		"buttons": {
 			"edit": "Editer"
 		},
+		"info_create": "Selectionner un userStorage d'abord",
 		"form": {
 			"field": {
 				"identifiant": {
@@ -170,6 +171,7 @@
 		"search_forms": {
 			"title": "Ma recherche",
 			"selected_realm": "Realm selectionné",
+			"selected_userStorage": "UserStorage selectionné",
 			"validate": "Valider",
 			"reset": "Réinitialiser"
 		},

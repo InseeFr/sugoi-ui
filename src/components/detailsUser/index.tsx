@@ -15,15 +15,23 @@ import Title from '../commons/title/title';
 import LoadingButton from '../commons/loadingButton';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
+import ErrorBoundary from '../commons/error/Error';
 
 const DetailUser = () => {
-	const { realm, id } = useParams<any>();
-	const { loading, user } = useGetUser(id, realm);
+	const { realm, id, userStorage } = useParams<any>();
+
+	const { loading, user, error: errorGet } = useGetUser(
+		id,
+		realm,
+		userStorage,
+	);
+
 	const {
 		execute: executeUpdate,
 		loading: loadingUpdate,
 		error: errorUpdate,
 	} = useUpdateUser();
+
 	const {
 		execute: executeDelete,
 		loading: loadingDelete,
@@ -69,7 +77,7 @@ const DetailUser = () => {
 			{loading ? (
 				<Loader />
 			) : (
-				<>
+				<ErrorBoundary>
 					<DataViewer
 						data={formValues}
 						fieldToDisplay={FieldsToDisplay}
@@ -136,7 +144,7 @@ const DetailUser = () => {
 							</Button>
 						</Grid>
 					</Grid>
-				</>
+				</ErrorBoundary>
 			)}
 		</>
 	);

@@ -17,11 +17,17 @@ import TextFieldInfo from '../../commons/formular/fields/textFieldInfo';
 import GenerateFields from '../../commons/formular/fields/utils';
 interface props {
 	realm: string;
+	userStorage?: string;
 	onSubmit: any;
 	formFields: field[];
 }
 
-const SearchFormular = ({ realm, onSubmit, formFields }: props) => {
+const SearchFormular = ({
+	realm,
+	userStorage,
+	onSubmit,
+	formFields,
+}: props) => {
 	const [expand, setExpand] = useState(true);
 	const { formValues, handleChange, handleReset } = useForms({});
 	const { t } = useTranslation();
@@ -38,6 +44,20 @@ const SearchFormular = ({ realm, onSubmit, formFields }: props) => {
 							modifiable={false}
 							helpText={t(
 								'commons.search_forms.selected_realm',
+							)}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<TextFieldInfo
+							name="UserStorage"
+							value={
+								userStorage
+									? userStorage
+									: 'all'
+							}
+							modifiable={false}
+							helpText={t(
+								'commons.search_forms.selected_userStorage',
 							)}
 						/>
 					</Grid>

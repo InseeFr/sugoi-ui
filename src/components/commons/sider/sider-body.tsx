@@ -29,6 +29,9 @@ const useStyle = makeStyles((theme: Theme) =>
 		nested: {
 			paddingLeft: theme.spacing(4),
 		},
+		nestedUS: {
+			paddingLeft: theme.spacing(6),
+		},
 	}),
 );
 
@@ -38,31 +41,59 @@ const SiderBody = () => {
 	const { push } = useHistory();
 	const location = useLocation();
 	const { t } = useTranslation();
-	const [realms, setRealms] = useState<string[]>([]);
 	const user = useSelector((state: RootState) => state.user);
-	const [realmSelected, setRealmSelected] = useState<string | undefined>(
-		undefined,
-	);
+	const [realmSelected, setRealmSelected] = useState<string | undefined>();
+	const [userStorageSelected, setStorageSelected] = useState<
+		string | undefined
+	>();
 
-	const { realms: data } = useGetRealms();
-
-	useEffect(() => {
-		setRealms(data.map((realm) => realm.name));
-		dispatch(saveRealms(data));
-	}, [data, setRealms, dispatch]);
+	const { realms } = useGetRealms();
 
 	useEffect(() => {
-		const match = matchPath(location.pathname, {
-			path: '/realm/:realm',
-		});
+		dispatch(saveRealms(realms));
+	}, [realms, dispatch]);
+
+	useEffect(() => {
+		const match = matchPath(location.pathname, [
+			'/realm/:realm/us/:userStorage',
+			'/realm/:realm/',
+		]);
 		if (realms.length > 0 && match) {
-			if (realms.includes((match?.params as any)?.realm)) {
+			if (
+				realms
+					.map((realm) => realm.name)
+					.includes((match?.params as any)?.realm)
+			) {
 				setRealmSelected((match?.params as any)?.realm);
+				let possibleUserStorage = realms
+					.filter(
+						(realm) =>
+							realm.name ===
+							(match?.params as any).realm,
+					)[0]
+					.userStorages.map((us) => us.name);
+				if ((match.params as any)?.userStorage) {
+					if (
+						possibleUserStorage.includes(
+							(match?.params as any)?.userStorage,
+						)
+					) {
+						setStorageSelected(
+							(match?.params as any)?.userStorage,
+						);
+					} else {
+						push(
+							'/realm/' +
+								(match?.params as any)?.realm,
+						);
+					}
+				}
 			} else {
 				push('/');
 			}
 		} else {
 			setRealmSelected(undefined);
+			setStorageSelected(undefined);
 		}
 	}, [location.pathname, push, realms]);
 
@@ -101,27 +132,80 @@ const SiderBody = () => {
 						<ListItem className={classes.nested}>
 							<Autocomplete
 								id="realm choice"
-								options={realms}
+								options={realms.map(
+									(realm) => realm.name,
+								)}
 								style={{ width: 300 }}
 								value={realmSelected || null}
 								onChange={(
-									event: any,
-									newValue: string | null,
+									_event: any,
+									newRealm: string | null,
 								) => {
 									setRealmSelected(
-										newValue ||
+										newRealm ||
 											undefined,
+									);
+									setStorageSelected(
+										undefined,
 									);
 									push(
 										'/realm/' +
-											newValue,
+											newRealm,
 									);
 								}}
 								renderInput={(params) => (
 									<TextField
 										{...params}
 										label="Realm"
-										variant="standard"
+										variant="filled"
+									/>
+								)}
+							/>
+						</ListItem>
+						<ListItem className={classes.nestedUS}>
+							<Autocomplete
+								id="userStorage choice"
+								disabled={
+									realmSelected
+										? false
+										: true
+								}
+								options={realms
+									?.filter(
+										(realm) =>
+											realm.name ===
+											realmSelected,
+									)[0]
+									?.userStorages.map(
+										(us) => us.name,
+									)}
+								style={{ width: 300 }}
+								value={
+									userStorageSelected ||
+									null
+								}
+								onChange={(
+									_event: any,
+									newUserStorage:
+										| string
+										| null,
+								) => {
+									setStorageSelected(
+										newUserStorage ||
+											undefined,
+									);
+									push(
+										'/realm/' +
+											realmSelected +
+											'/us/' +
+											newUserStorage,
+									);
+								}}
+								renderInput={(params) => (
+									<TextField
+										{...params}
+										label="User Storage"
+										variant="filled"
 									/>
 								)}
 							/>
@@ -133,13 +217,21 @@ const SiderBody = () => {
 								realmSelected ? false : true
 							}
 							onClick={() =>
-								push(
-									'/realm/' +
-										realmSelected +
-										'/users',
-								)
+								userStorageSelected
+									? push(
+											'/realm/' +
+												realmSelected +
+												'/us/' +
+												userStorageSelected +
+												'/users',
+									  )
+									: push(
+											'/realm/' +
+												realmSelected +
+												'/users',
+									  )
 							}
-							className={classes.nested}
+							className={classes.nestedUS}
 							selected={location.pathname.includes(
 								'/users',
 							)}
@@ -160,13 +252,21 @@ const SiderBody = () => {
 								realmSelected ? false : true
 							}
 							onClick={() =>
-								push(
-									'/realm/' +
-										realmSelected +
-										'/organizations',
-								)
+								userStorageSelected
+									? push(
+											'/realm/' +
+												realmSelected +
+												'/us/' +
+												userStorageSelected +
+												'/organizations',
+									  )
+									: push(
+											'/realm/' +
+												realmSelected +
+												'/organizations',
+									  )
 							}
-							className={classes.nested}
+							className={classes.nestedUS}
 							selected={location.pathname.includes(
 								'/organizations',
 							)}

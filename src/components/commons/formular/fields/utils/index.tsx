@@ -1,7 +1,7 @@
 import get from 'lodash.get';
 import React from 'react';
 import { field } from '../../../../../model/field';
-import GroupsField from '../groupsFieldInfo/groupesFIeldPopup';
+import GroupsField from '../groupsFieldInfo';
 import HabilitationsPopup from '../habilitationsFieldInfo/habilitationFieldInfoPopup';
 import ListFieldInfoButton from './../listGenericFieldInfo';
 import ListFieldInfo from './../listGenericFieldInfo/listFieldInfo';
@@ -82,7 +82,7 @@ export const GenerateFields = (
 						helpText={field.helpText}
 						helpTextTitle={field.helpTextTitle}
 						modifiable={field.modifiable}
-						groups={get(data, field.path, [])}
+						groups={get(data, field.path)}
 						handleChange={handleChange(field.path)}
 						textButton={field.textButton}
 						addTitle={field.addTitle}

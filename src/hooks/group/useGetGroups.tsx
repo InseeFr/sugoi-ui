@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getGroups } from '../../api';
 import { Group } from '../../model/api/group';
 
-export const useGetGroups = (realm: string, application?: string) => {
+export const useGetGroups = (realm?: string, application?: string) => {
 	const [groups, setGroups] = useState<Group[]>([]);
 	const [todo, setTodo] = useState(
 		realm && application ? { realm, application } : undefined,

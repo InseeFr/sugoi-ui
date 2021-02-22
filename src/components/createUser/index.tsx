@@ -11,7 +11,7 @@ import LoadingButton from '../commons/loadingButton';
 import Title from '../commons/title/title';
 
 const CreateUsers = () => {
-	const { realm } = useParams<any>();
+	const { realm, userStorage } = useParams<any>();
 	const { push } = useHistory();
 	const { formValues, handleChange, handleReset } = useForms({});
 	const { userConfig } = useRealmConfig(realm);
@@ -19,7 +19,7 @@ const CreateUsers = () => {
 	const { enqueueSnackbar } = useSnackbar();
 	const { t } = useTranslation();
 	const handleSubmit = () => {
-		createUser(realm, formValues);
+		createUser(formValues, realm, userStorage);
 	};
 
 	useEffect(() => {
@@ -32,9 +32,16 @@ const CreateUsers = () => {
 
 	useEffect(() => {
 		if (user) {
-			push('/realm/' + realm + '/user/' + user.username);
+			push(
+				'/realm/' +
+					realm +
+					'/us/' +
+					userStorage +
+					'/user/' +
+					user.username,
+			);
 		}
-	}, [user, realm, push]);
+	}, [user, realm, userStorage, push]);
 
 	return (
 		<Grid container spacing={2} direction="column">
