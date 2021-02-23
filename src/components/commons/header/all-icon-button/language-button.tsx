@@ -26,7 +26,6 @@ const LanguageButton = () => {
 		setAnchorEl(event.currentTarget);
 	};
 
-	console.log(i18n.language);
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
@@ -73,6 +72,10 @@ const LanguageButton = () => {
 							button
 							onClick={() =>
 								changeLanguage(language)
+							}
+							key={
+								'language-' +
+								languages[language]
 							}
 						>
 							<ListItemText

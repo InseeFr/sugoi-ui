@@ -4,11 +4,10 @@ import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 import React from 'react';
 import { useGetApplications } from '../../../../../hooks/applications/useGetApplications';
-import Application from '../../../../../model/api/application';
 
 interface Props {
 	realm: string;
-	application: Application | undefined;
+	application: String | undefined;
 	handleChangeApplication: any;
 }
 
@@ -25,20 +24,20 @@ export const AutoCompleteApplication = ({
 	return (
 		<Autocomplete
 			id="autocompleteSearchApplication"
-			options={applications}
-			value={application}
-			getOptionLabel={(option: any) => option.name || ''}
+			options={applications.map((application) => application.name)}
+			value={application ?? ''}
+			getOptionLabel={(option: any) => option}
 			onInputChange={(
-				event: object,
+				_event: object,
 				appName: string,
-				reason: string,
+				_reason: string,
 			) => {
 				searchApplications(realm, appName);
 			}}
-			onChange={(event: any, applicationSelected: Application) => {
-				applicationSelected &&
-					handleChangeApplication(applicationSelected.name);
+			onChange={(_event: any, applicationSelected: String) => {
+				handleChangeApplication(applicationSelected);
 			}}
+			getOptionSelected={(option, value) => option === value}
 			renderInput={(params: any) => (
 				<TextField
 					{...params}
@@ -48,8 +47,8 @@ export const AutoCompleteApplication = ({
 				/>
 			)}
 			renderOption={(option, { inputValue }) => {
-				const matches = match(option.name, inputValue);
-				const parts = parse(option.name, matches);
+				const matches = match(option, inputValue);
+				const parts = parse(option, matches);
 
 				return (
 					<div>

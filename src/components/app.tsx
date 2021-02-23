@@ -78,8 +78,9 @@ const App = () => {
 						<BreadCrumbs />
 						<ErrorBoundary>
 							<Switch>
-								{routes.map((route) => (
+								{routes.map((route, i) => (
 									<Route
+										key={'route_' + i}
 										exact={route.exact}
 										path={route.path}
 										component={
