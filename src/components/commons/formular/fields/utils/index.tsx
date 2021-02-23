@@ -5,7 +5,7 @@ import GroupsField from '../groupsFieldInfo';
 import HabilitationsPopup from '../habilitationsFieldInfo';
 import ListFieldInfoButton from './../listGenericFieldInfo';
 import ListFieldInfo from './../listGenericFieldInfo/listFieldInfo';
-import TextFieldInfo from './../textFieldInfo/index copy';
+import TextFieldInfo from '../textFieldInfo';
 
 export const GenerateFields = (
 	data: any,

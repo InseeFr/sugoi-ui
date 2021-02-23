@@ -8,7 +8,7 @@ export const useGetApplications = (realm?: string, name?: string) => {
 	const [todo, setTodo] = useState<any>(
 		realm ? { realm: realm, name: name } : undefined,
 	);
-	const execute = (realm?: string, name?: string) => {
+	const execute = (realm: string, name?: string) => {
 		setTodo({ realm: realm, name: name });
 	};
 

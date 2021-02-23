@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { createStyles, makeStyles, Theme, TextField } from '@material-ui/core';
 import PopIcon from '../../../popIcon/popIcon';
 
@@ -9,7 +9,6 @@ interface props {
 	modifiable?: boolean;
 	value: string;
 	handleChange?: any;
-	path?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -27,10 +26,8 @@ const TextFieldInfo = ({
 	helpText,
 	value,
 	handleChange,
-	path,
 }: props) => {
 	const classes = useStyles();
-
 	return (
 		<div className={classes.root}>
 			<TextField
@@ -40,11 +37,15 @@ const TextFieldInfo = ({
 				disabled={!modifiable}
 				value={value || ''}
 				fullWidth
-				onChange={(e) => handleChange(path, e.target.value)}
+				onChange={(e) => handleChange(e.target.value)}
 			/>
 			<PopIcon helpTextTitle={helpTextTitle} helpText={helpText} />
 		</div>
 	);
 };
 
-export default TextFieldInfo;
+function textFieldPropsAreEqual(prevTextField: props, nextTextField: props) {
+	return prevTextField.value === nextTextField.value;
+}
+
+export default memo(TextFieldInfo, textFieldPropsAreEqual);

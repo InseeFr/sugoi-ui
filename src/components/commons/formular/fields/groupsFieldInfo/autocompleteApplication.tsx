@@ -32,7 +32,7 @@ export const AutoCompleteApplication = ({
 				appName: string,
 				_reason: string,
 			) => {
-				searchApplications(realm, appName);
+				realm && appName && searchApplications(realm, appName);
 			}}
 			onChange={(_event: any, applicationSelected: String) => {
 				handleChangeApplication(applicationSelected);
