@@ -222,9 +222,8 @@ export default function GroupsField({
 									group !== null,
 							)
 							.map((group: Group, i: any) => (
-								<Grid item>
+								<Grid item key={'groups_' + i}>
 									<Chip
-										key={'group_' + i}
 										color="default"
 										size="small"
 										icon={

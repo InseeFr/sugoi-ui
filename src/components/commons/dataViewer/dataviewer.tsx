@@ -167,7 +167,6 @@ const DataViewer = ({ data, fieldToDisplay, handleChange }: props) => {
 	const propertiesFields = fieldToDisplay.filter(
 		(field) => field.tag === 'properties',
 	);
-	console.log(data);
 	return (
 		<Grid
 			container

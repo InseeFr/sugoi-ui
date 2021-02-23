@@ -5,7 +5,9 @@ export const useGetApplication = (realm?: string, name?: string) => {
 	const [result, setResult] = useState<any>();
 	const [error, setError] = useState<any>(undefined);
 	const [loading, setLoading] = useState<boolean>(true);
-	const [todo, setTodo] = useState<any>({ realm: realm, name: name });
+	const [todo, setTodo] = useState<any>(
+		realm && name ? { realm: realm, name: name } : undefined,
+	);
 
 	useEffect(() => {
 		if (todo) {
