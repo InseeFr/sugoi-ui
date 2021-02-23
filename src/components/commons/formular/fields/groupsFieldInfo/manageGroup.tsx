@@ -1,7 +1,6 @@
 import {
 	Grid,
 	IconButton,
-	LinearProgress,
 	MenuItem,
 	Paper,
 	Select,
@@ -12,17 +11,15 @@ import {
 	TableHead,
 	TableRow,
 } from '@material-ui/core';
-import { Pagination } from '@material-ui/lab';
-import React, { useState } from 'react';
-import { useGetGroups } from '../../../../../hooks/group/useGetGroups';
-import { Group } from '../../../../../model/api/group';
-import User from '../../../../../model/api/user';
 import AddIcon from '@material-ui/icons/Add';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import { Pagination } from '@material-ui/lab';
+import React from 'react';
+import { Group } from '../../../../../model/api/group';
 
 interface Props {
 	appGroups: Group[];
-	groups: string[];
+	groups: Group[];
 	handleAdd: any;
 	handleDelete: any;
 }
@@ -92,14 +89,23 @@ export const ManageGroup = ({
 											scope="row"
 											align="right"
 										>
-											{groups?.filter(
-												(
-													_group: string,
-												) =>
-													_group ===
+											{groups
+												.filter(
+													(
+														g,
+													) =>
+														g !==
+														null,
+												)
+												.map(
+													(
+														g: Group,
+													) =>
+														g.name,
+												)
+												.includes(
 													group.name,
-											)?.length >
-											0 ? (
+												) ? (
 												<IconButton
 													aria-label="Delete"
 													size="small"

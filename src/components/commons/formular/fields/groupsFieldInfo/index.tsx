@@ -4,8 +4,6 @@ import PeopleIcon from '@material-ui/icons/People';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetApplication } from '../../../../../hooks/applications/useGetApplication';
-import { useGetGroups } from '../../../../../hooks/group/useGetGroups';
-import Application from '../../../../../model/api/application';
 import { Group } from '../../../../../model/api/group';
 import PopIcon from '../../../popIcon/popIcon';
 import AutoCompleteApplication from './autocompleteApplication';
@@ -42,19 +40,25 @@ export default function GroupsField({
 	>();
 
 	const handleChangeOnApp = (application: string) => {
-		setApplicationName(application);
-		searchApplication(realm, application);
+		if (application) {
+			setApplicationName(application);
+			searchApplication(realm, application);
+		}
 	};
 
 	const [edit, setEdit] = useState(false);
 
 	const handleClickAdd = (group: string) => {
-		groups.push(group);
+		groups.push({ name: group });
 		handleChange(groups);
 	};
 
 	const handleClickDelete = (group: string) => {
-		handleChange(groups.filter((_group: string) => group != _group));
+		handleChange(
+			groups
+				.filter((_group: any) => _group !== null)
+				.filter((_group: any) => group !== _group.name),
+		);
 	};
 
 	return (
@@ -107,7 +111,7 @@ export default function GroupsField({
 									<Grid item xs={12}>
 										<AutoCompleteApplication
 											application={
-												application
+												applicationName
 											}
 											handleChangeApplication={
 												handleChangeOnApp
@@ -138,33 +142,68 @@ export default function GroupsField({
 					<Grid item xs={12} md={6}>
 						<Grid
 							container
-							direction="row"
+							direction="column"
 							justify="center"
 							alignItems="stretch"
 							spacing={2}
 						>
-							{groups
-								?.filter(
-									(group: Group) =>
-										group !== null,
-								)
-								.map((group: Group) => (
-									<Grid item>
-										<Chip
-											color="default"
-											size="small"
-											icon={
-												<PeopleIcon />
-											}
-											clickable={
-												false
-											}
-											label={
-												group.name
-											}
-										/>
-									</Grid>
-								))}
+							<Grid item xs={12}>
+								<Typography
+									align="left"
+									variant="subtitle1"
+								>
+									{addTitle}
+								</Typography>
+							</Grid>
+							<Grid item xs={12}>
+								<Divider />
+							</Grid>
+							<Grid item xs={12}>
+								<Grid
+									container
+									direction="row"
+									justify="flex-start"
+									alignItems="stretch"
+									spacing={2}
+								>
+									{groups
+										?.filter(
+											(
+												group: Group,
+											) =>
+												group !==
+												null,
+										)
+										.map(
+											(
+												group: Group,
+												i: any,
+											) => (
+												<Grid
+													item
+												>
+													<Chip
+														key={
+															'group_' +
+															i
+														}
+														color="default"
+														size="small"
+														icon={
+															<PeopleIcon />
+														}
+														clickable={
+															false
+														}
+														label={
+															group.name
+														}
+													/>
+												</Grid>
+											),
+										)}
+								</Grid>
+							</Grid>
 						</Grid>
 					</Grid>
 				</>
@@ -173,7 +212,7 @@ export default function GroupsField({
 					<Grid
 						container
 						direction="row"
-						justify="center"
+						justify="flex-start"
 						alignItems="stretch"
 						spacing={1}
 					>
@@ -182,9 +221,10 @@ export default function GroupsField({
 								(group: Group) =>
 									group !== null,
 							)
-							.map((group: Group) => (
+							.map((group: Group, i: any) => (
 								<Grid item>
 									<Chip
+										key={'group_' + i}
 										color="default"
 										size="small"
 										icon={

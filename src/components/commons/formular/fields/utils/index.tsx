@@ -2,7 +2,7 @@ import get from 'lodash.get';
 import React from 'react';
 import { field } from '../../../../../model/field';
 import GroupsField from '../groupsFieldInfo';
-import HabilitationsPopup from '../habilitationsFieldInfo/habilitationFieldInfoPopup';
+import HabilitationsPopup from '../habilitationsFieldInfo';
 import ListFieldInfoButton from './../listGenericFieldInfo';
 import ListFieldInfo from './../listGenericFieldInfo/listFieldInfo';
 import TextFieldInfo from './../textFieldInfo/index copy';

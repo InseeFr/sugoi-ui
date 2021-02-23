@@ -37,13 +37,14 @@ const MyBreadcrumbs = () => {
 		<Box>
 			<div className={classes.root}>
 				<Breadcrumbs separator="›" color="primary">
-					{breadcrumbs.map(({ match, breadcrumb }) => (
+					{breadcrumbs.map(({ match, breadcrumb }, i) => (
 						<Link
 							onClick={() =>
 								history.push(match.url)
 							}
 							color="primary"
 							className={classes.link}
+							key={'breadcrumbs_' + i}
 						>
 							{t(
 								ReactDOMServer.renderToStaticMarkup(

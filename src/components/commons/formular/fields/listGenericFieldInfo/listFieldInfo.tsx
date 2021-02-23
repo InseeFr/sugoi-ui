@@ -1,5 +1,6 @@
 import {
 	Button,
+	Chip,
 	Divider,
 	Grid,
 	IconButton,
@@ -71,9 +72,30 @@ const ListFieldInfoPopup = ({
 			</Grid>
 			{!edit && value.length > 0 ? (
 				<Grid item xs={12}>
-					{value.map((val: any) => (
-						<li>{val}</li>
-					))}
+					<Grid
+						container
+						direction="row"
+						justify="flex-start"
+						alignItems="stretch"
+						spacing={1}
+					>
+						{value?.map((val: any, i: any) => (
+							<Grid item>
+								<Chip
+									key={
+										'list_' +
+										{ name } +
+										'_' +
+										i
+									}
+									color="default"
+									size="small"
+									clickable={false}
+									label={val}
+								/>
+							</Grid>
+						))}
+					</Grid>
 				</Grid>
 			) : null}
 			{edit && modifiable ? (

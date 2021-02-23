@@ -20,11 +20,7 @@ import ErrorBoundary from '../commons/error/Error';
 const DetailUser = () => {
 	const { realm, id, userStorage } = useParams<any>();
 
-	const { loading, user, error: errorGet } = useGetUser(
-		id,
-		realm,
-		userStorage,
-	);
+	const { loading, user } = useGetUser(id, realm, userStorage);
 
 	const {
 		execute: executeUpdate,
