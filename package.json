@@ -12,7 +12,7 @@
 		"@material-ui/styles": "^4.10.0",
 		"@testing-library/jest-dom": "^5.11.6",
 		"@testing-library/react": "^9.3.2",
-		"@testing-library/user-event": "^12.2.2",
+		"@testing-library/user-event": "^12.7.2",
 		"@types/autosuggest-highlight": "^3.1.1",
 		"@types/jest": "^26.0.15",
 		"@types/lodash.get": "^4.4.6",
