@@ -28,3 +28,13 @@ export const putApplication = (realm: string, app: Application): Promise<any> =>
 			.put('/' + realm + '/applications/' + app.name, app)
 			.then((r: any) => r.data),
 	);
+
+export const postApplication = (
+	realm: string,
+	app: Application,
+): Promise<any> =>
+	getAuthClient().then((client: AxiosInstance) =>
+		client
+			.post('/' + realm + '/applications', app)
+			.then((r: any) => r.data),
+	);

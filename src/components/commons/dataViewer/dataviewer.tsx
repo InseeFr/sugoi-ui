@@ -34,6 +34,7 @@ interface mainPanelProps {
 	addressFields: field[];
 	advancedFields: field[];
 }
+
 const MainPanel = ({
 	values,
 	handleChange,

@@ -1,10 +1,13 @@
 import { Button, Grid, TextField } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import SimpleDialog from '../commons/popButton/Dialog';
-
-export const CreateApplicationButton = (realm: any, userStorage?: any) => {
+interface Props {
+	handleCreateApp: any;
+}
+export const CreateApplicationButton = ({ handleCreateApp }: Props) => {
 	const [open, setOpen] = React.useState(false);
-
+	const [appName, setAppName] = useState('');
+	const [owner, setOwner] = useState('');
 	const handleOpen = () => {
 		setOpen(true);
 	};
@@ -14,7 +17,10 @@ export const CreateApplicationButton = (realm: any, userStorage?: any) => {
 	};
 
 	const onFinish = () => {
-		handleClose();
+		handleCreateApp(appName, owner);
+		setAppName('');
+		setOwner('');
+		setOpen(false);
 	};
 
 	return (
@@ -44,10 +50,11 @@ export const CreateApplicationButton = (realm: any, userStorage?: any) => {
 								label="Nom de l'application"
 								variant="outlined"
 								onChange={(e) => {
-									console.log(
+									setAppName(
 										e.target.value,
 									);
 								}}
+								value={appName}
 								fullWidth
 							/>
 						</Grid>
@@ -57,10 +64,9 @@ export const CreateApplicationButton = (realm: any, userStorage?: any) => {
 								label="Propriétaire de l'application"
 								variant="outlined"
 								onChange={(e) => {
-									console.log(
-										e.target.value,
-									);
+									setOwner(e.target.value);
 								}}
+								value={owner}
 								fullWidth
 							/>
 						</Grid>

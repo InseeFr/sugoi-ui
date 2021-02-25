@@ -5,27 +5,15 @@ import searchRequestOrganization from '../../model/js/searchRequestOrganization'
 
 const useGetOrganizations = (realm?: string, userStorage?: string) => {
 	const [result, setResult] = useState<Organization[]>([]);
-	const [todo, setTodo] = useState<any>(
-		realm
-			? {
-					realm: realm,
-					userStorage: userStorage,
-					searchRequest: {},
-			  }
-			: undefined,
-	);
-	const [error, setError] = useState(undefined);
-	const [loading, setLoading] = useState(true);
+	const [firstSearch, setFirstSearch] = useState<any>(realm ? true : false);
+	const [error, setError] = useState();
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
-		if (todo) {
+		if (firstSearch) {
 			setLoading(true);
 			setResult([]);
-			getOrganizations(
-				todo.realm,
-				todo.searchRequest,
-				todo.userStorage,
-			)
+			getOrganizations(realm as string, {}, userStorage)
 				.then((r: any) => {
 					setResult(r.results);
 				})
@@ -34,24 +22,35 @@ const useGetOrganizations = (realm?: string, userStorage?: string) => {
 				})
 				.finally(() => {
 					setLoading(false);
-					setTodo(undefined);
+					setFirstSearch(false);
 				});
 		}
-	}, [todo]);
+	}, [firstSearch, realm, userStorage]);
 
-	const execute = (
+	const execute = async (
 		realm: string,
 		{ identifiant }: searchRequestOrganization,
 		userStorage?: string,
 	) => {
-		setTodo({
-			realm: realm,
-			searchRequest: {
-				identifiant,
-			},
-			userStorage: userStorage,
-		});
+		setLoading(true);
+		setResult([]);
+		setError(undefined);
+		await getOrganizations(
+			realm,
+			{ identifiant: identifiant },
+			userStorage,
+		)
+			.then((r: any) => {
+				setResult(r.results);
+			})
+			.catch((err) => {
+				setError(err);
+			})
+			.finally(() => {
+				setLoading(false);
+			});
 	};
+
 	return {
 		execute,
 		loading,

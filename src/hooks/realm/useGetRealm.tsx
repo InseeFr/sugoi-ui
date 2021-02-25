@@ -3,28 +3,42 @@ import { getRealms } from '../../api';
 import { Realm } from '../../model/api/realm';
 
 export const useGetRealm = (id?: string) => {
-	const [realm, setRealm] = useState<Realm | undefined>(undefined);
+	const [result, setResult] = useState<Realm | undefined>(undefined);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(undefined);
-	const [data, setdata] = useState(id ? { id } : undefined);
+	const [firstSearch, setFirstSearch] = useState(id ? true : false);
 
-	const execute = (id: string) => setdata({ id });
+	const execute = async (id: string) => {
+		setLoading(true);
+		setError(undefined);
+		setResult(undefined);
+		await getRealms(id)
+			.then((r) => {
+				setLoading(true);
+				setResult(r[0]);
+			})
+			.catch((err) => setError(err))
+			.finally(() => {
+				setLoading(false);
+			});
+	};
 
 	useEffect(() => {
-		if (data) {
+		if (firstSearch) {
 			setLoading(true);
-			getRealms()
+			setError(undefined);
+			setResult(undefined);
+			getRealms(id)
 				.then((r) => {
-					setLoading(true);
-					setRealm(r[0]);
+					setResult(r[0]);
 				})
 				.catch((err) => setError(err))
 				.finally(() => {
 					setLoading(false);
-					setdata(undefined);
+					setFirstSearch(false);
 				});
 		}
-	}, []);
+	}, [firstSearch, id]);
 
-	return { realm, loading, error, execute };
+	return { result, loading, error, execute };
 };

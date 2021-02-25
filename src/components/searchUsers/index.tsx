@@ -89,7 +89,7 @@ const SearchUsers = () => {
 			helpText: t('search_user.form.field.organization.help_text'),
 			type: 'string',
 			modifiable: true,
-			path: 'organization',
+			path: 'organizationId',
 		},
 		{
 			name: t('search_user.form.field.commun_name.name'),
@@ -98,25 +98,6 @@ const SearchUsers = () => {
 			),
 			helpText: t('search_user.form.field.commun_name.help_text'),
 			path: 'nomCommun',
-			type: 'string',
-			modifiable: true,
-		},
-		{
-			name: t('search_user.form.field.email.name'),
-			helpTextTitle: t(
-				'search_user.form.field.email.help_text_title',
-			),
-			helpText: t('search_user.form.field.email.help_text'),
-			path: 'description',
-			type: 'string',
-			modifiable: true,
-		},
-		{
-			name: t('search_user.form.field.certificate.name'),
-			helpTextTitle: t(
-				'search_user.form.field.certificate.help_text_title',
-			),
-			path: 'certificate',
 			type: 'string',
 			modifiable: true,
 		},

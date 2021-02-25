@@ -1,27 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { postRealm } from '../../api';
 import { Realm } from '../../model/api/realm';
 
 const usePostRealm = () => {
-	const [error, setError] = useState(undefined);
-	const [loading, setLoading] = useState(true);
-	const [data, setdata] = useState<any>(undefined);
+	const [error, setError] = useState();
+	const [loading, setLoading] = useState(false);
+	const [result, setResult] = useState<Realm | undefined>();
 
-	const execute = (realm: Realm) => setdata({ realm });
+	const execute = async (realm: Realm) => {
+		setLoading(true);
+		setError(undefined);
+		setResult(undefined);
+		await postRealm(realm)
+			.then((r) => setResult(r))
+			.catch((err) => setError(err))
+			.finally(() => {
+				setLoading(false);
+			});
+	};
 
-	useEffect(() => {
-		if (data) {
-			setLoading(true);
-			postRealm(data.Realm)
-				.catch((err) => setError(err))
-				.finally(() => {
-					setLoading(false);
-					setdata(undefined);
-				});
-		}
-	}, [data]);
-
-	return { execute, loading, error };
+	return { execute, loading, error, result };
 };
 
 export default usePostRealm;

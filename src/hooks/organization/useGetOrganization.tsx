@@ -8,29 +8,45 @@ const useGetOrganization = (
 	userStorage?: string,
 ) => {
 	const [result, setResult] = useState<Organization>();
-	const [todo, setTodo] = useState<any>({
-		realm: realm,
-		userStorage: userStorage,
-		id: id,
-	});
+	const [firstSearch, setFirstSearch] = useState<any>(
+		id && realm ? true : false,
+	);
 	const [error, setError] = useState(undefined);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		if (todo) {
-			getOrganization(todo.id, todo.realm, todo.userStorage)
+		if (firstSearch) {
+			setLoading(true);
+			getOrganization(id as string, realm as string, userStorage)
 				.then((r: Organization) => {
 					setResult(r);
 				})
 				.catch((err) => {
 					setError(err);
 				})
-				.finally(() => setLoading(false));
+				.finally(() => {
+					setLoading(false);
+					setFirstSearch(false);
+				});
 		}
-	}, [id, realm, todo]);
+	}, [id, realm, userStorage, firstSearch]);
 
-	const execute = (id: string, realm: string, userStorage: string) => {
-		setTodo({ realm: realm, userStorage: userStorage, id: id });
+	const execute = async (
+		id: string,
+		realm: string,
+		userStorage?: string,
+	) => {
+		setLoading(true);
+		setResult(undefined);
+		setError(undefined);
+		await getOrganization(id, realm, userStorage)
+			.then((r: Organization) => {
+				setResult(r);
+			})
+			.catch((err) => {
+				setError(err);
+			})
+			.finally(() => setLoading(false));
 	};
 
 	return {

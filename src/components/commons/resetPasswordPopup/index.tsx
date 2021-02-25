@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useResetPassword } from '../../../hooks/credential/useSendIdentifiant';
+import { useResetPassword } from '../../../hooks/credential';
 import User from '../../../model/api/user';
 import SimpleDialog from '../popButton/Dialog';
 import { ResetPasswordPopupContent } from './resetPasswordPopupContent';

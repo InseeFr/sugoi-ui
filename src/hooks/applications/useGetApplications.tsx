@@ -5,18 +5,28 @@ export const useGetApplications = (realm?: string, name?: string) => {
 	const [result, setResult] = useState<any[]>([]);
 	const [error, setError] = useState(undefined);
 	const [loading, setLoading] = useState(true);
-	const [todo, setTodo] = useState<any>(
-		realm ? { realm: realm, name: name } : undefined,
-	);
-	const execute = (realm: string, name?: string) => {
-		setTodo({ realm: realm, name: name });
+	const [firstSearch, setFirstSearch] = useState<any>(realm ? true : false);
+
+	const execute = async (realm: string, name?: string) => {
+		setLoading(true);
+		setResult([]);
+		setError(undefined);
+		await getApplications(realm, name)
+			.then((r: any) => {
+				setResult(r.results);
+			})
+			.catch((err) => {
+				setError(err);
+			})
+			.finally(() => {
+				setLoading(false);
+			});
 	};
 
 	useEffect(() => {
-		if (todo) {
+		if (firstSearch) {
 			setLoading(true);
-			setResult([]);
-			getApplications(todo.realm, todo.name)
+			getApplications(realm as string, name)
 				.then((r: any) => {
 					setResult(r.results);
 				})
@@ -25,10 +35,10 @@ export const useGetApplications = (realm?: string, name?: string) => {
 				})
 				.finally(() => {
 					setLoading(false);
-					setTodo(undefined);
+					setFirstSearch(false);
 				});
 		}
-	}, [todo]);
+	}, [firstSearch, name, realm]);
 
 	return { applications: result, error, loading, execute };
 };
