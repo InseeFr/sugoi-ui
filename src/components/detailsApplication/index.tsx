@@ -11,45 +11,67 @@ import {
 	TableRow,
 } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
-import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { putApplication } from '../../api';
 import { useGetApplication } from '../../hooks/applications/useGetApplication';
-import Application from '../../model/api/application';
+import {
+	useCreateGroup,
+	useDeleteGroup,
+	useUpdateGroup,
+} from '../../hooks/group';
+import { Group } from '../../model/api/group';
 import Title from '../commons/title/title';
+import ButtonCreateGroup from './ButtonCreateGroup';
+import { ButtonDeleteGroup } from './ButtonDeleteGroup';
+import { ButtonManageGroup } from './ButtonManageGroup';
 import { ChipButton, ChipPerson } from './chip';
-import { ButtonManageGroup } from './ManageButtonGroup';
-import { useTranslation } from 'react-i18next';
 
 export const DetailsApplication = () => {
-	const { realm, id } = useParams<any>();
-	const { application, execute, loading } = useGetApplication(realm, id);
+	const { realm, id: applicationId } = useParams<any>();
+	const { application, execute, loading } = useGetApplication(
+		realm,
+		applicationId,
+	);
+	const { execute: createGroup } = useCreateGroup();
+	const { execute: deleteGroup } = useDeleteGroup();
+	const { execute: updateGroup } = useUpdateGroup();
 	const [rowsPerPage, setRowsPerPage] = React.useState(10);
 	const [page, setPage] = React.useState(1);
-	const { enqueueSnackbar } = useSnackbar();
-	const { t } = useTranslation();
 
 	const handleChange = (
-		event: React.ChangeEvent<unknown>,
+		_event: React.ChangeEvent<unknown>,
 		value: number,
 	) => {
 		setPage(value);
 	};
 
-	const handleSave = (app: Application) => {
-		putApplication(realm, app)
-			.then((r) => execute(realm, id))
-			.catch((err) =>
-				enqueueSnackbar(t('details_application.error') + err, {
-					variant: 'error',
-				}),
-			);
+	const handleCreateGroup = (realm: string, applicationId: string) => (
+		group: Group,
+	) => {
+		createGroup(realm, applicationId, group).then(() =>
+			execute(realm, applicationId),
+		);
+	};
+
+	const handleUpdateGroup = (realm: string, applicationId: string) => (
+		group: Group,
+	) => {
+		updateGroup(realm, applicationId, group).then(() =>
+			execute(realm, applicationId),
+		);
+	};
+
+	const handleDeleteGroup = (realm: string, applicationId: string) => (
+		groupId: string,
+	) => {
+		deleteGroup(realm, applicationId, groupId).then(() =>
+			execute(realm, applicationId),
+		);
 	};
 
 	return (
 		<>
-			<Title title={"Détail de l' application " + id} />
+			<Title title={"Détail de l' application " + applicationId} />
 			{loading ? null : (
 				<Grid
 					container
@@ -66,10 +88,11 @@ export const DetailsApplication = () => {
 							alignItems="center"
 							spacing={3}
 						>
-							<ButtonManageGroup
-								realm={realm}
-								application={application}
-								handleSave={handleSave}
+							<ButtonCreateGroup
+								handleAddGroup={handleCreateGroup(
+									realm,
+									applicationId,
+								)}
 							/>
 						</Grid>
 					</Grid>
@@ -98,6 +121,12 @@ export const DetailsApplication = () => {
 											padding="default"
 										>
 											Utilisateurs
+										</TableCell>
+										<TableCell
+											align="left"
+											padding="default"
+										>
+											Actions
 										</TableCell>
 									</TableRow>
 								</TableHead>
@@ -173,6 +202,29 @@ export const DetailsApplication = () => {
 																	);
 																},
 															)}
+														</TableCell>
+														<TableCell>
+															<ButtonManageGroup
+																realm={
+																	realm
+																}
+																group={
+																	group
+																}
+																handleUpdateGroup={handleUpdateGroup(
+																	realm,
+																	applicationId,
+																)}
+															/>
+															<ButtonDeleteGroup
+																group={
+																	group
+																}
+																handleDeleteGroup={handleDeleteGroup(
+																	realm,
+																	applicationId,
+																)}
+															/>
 														</TableCell>
 													</TableRow>
 												),

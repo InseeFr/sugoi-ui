@@ -17,6 +17,7 @@ import { Pagination } from '@material-ui/lab';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
+import { useCreateApplication } from '../../hooks/applications';
 import { useGetApplications } from '../../hooks/applications/useGetApplications';
 import Title from '../commons/title/title';
 import CreateApplicationButton from './button-create-app';
@@ -28,8 +29,22 @@ export const SearchApplications = () => {
 	const [page, setPage] = React.useState(1);
 	const { applications, execute, loading } = useGetApplications(realm);
 	const { t } = useTranslation();
-
+	const { execute: createApplication } = useCreateApplication();
 	const [search, setSearch] = useState<string>('');
+
+	const handleCreateApp = (appName: string, owner: string) => {
+		createApplication(realm, {
+			name: appName,
+			owner: owner,
+			groups: [],
+		}).then((r) => execute(realm));
+	};
+
+	const handleSearch = (e: any) => {
+		setSearch(e.target.value);
+		setPage(1);
+		execute(realm, e.target.value === '' ? undefined : e.target.value);
+	};
 
 	const handleChange = (
 		event: React.ChangeEvent<unknown>,
@@ -55,7 +70,9 @@ export const SearchApplications = () => {
 						justify="flex-end"
 						alignItems="center"
 					>
-						<CreateApplicationButton realm={realm} />
+						<CreateApplicationButton
+							handleCreateApp={handleCreateApp}
+						/>
 					</Grid>
 				</Grid>
 				<Grid item xs={12}>
@@ -63,16 +80,7 @@ export const SearchApplications = () => {
 						id="application-search-textfield"
 						label={t('search_application.search_field')}
 						variant="outlined"
-						onChange={(e) => {
-							setSearch(e.target.value);
-							setPage(1);
-							execute(
-								realm,
-								e.target.value === ''
-									? undefined
-									: e.target.value,
-							);
-						}}
+						onChange={handleSearch}
 						value={search}
 						fullWidth
 					/>

@@ -1,27 +1,24 @@
-import { useEffect, useState } from 'react';
-import { deleteRealm, updateOrganization } from '../../api';
-import Organization from '../../model/api/organization';
+import { useState } from 'react';
+import { deleteRealm } from '../../api';
 
 const useDeleteRealm = () => {
-	const [error, setError] = useState(undefined);
+	const [error, setError] = useState();
 	const [loading, setLoading] = useState(true);
-	const [data, setdata] = useState<any>(undefined);
+	const [result, setResult] = useState();
 
-	const execute = (id: string) => setdata({ id });
+	const execute = async (id: string) => {
+		setLoading(true);
+		setError(undefined);
+		setResult(undefined);
+		await deleteRealm(id)
+			.then((r) => setResult(r))
+			.catch((err) => setError(err))
+			.finally(() => {
+				setLoading(false);
+			});
+	};
 
-	useEffect(() => {
-		if (data) {
-			setLoading(true);
-			deleteRealm(data.id)
-				.catch((err) => setError(err))
-				.finally(() => {
-					setLoading(false);
-					setdata(undefined);
-				});
-		}
-	}, [data]);
-
-	return { execute, loading, error };
+	return { execute, loading, error, result };
 };
 
 export default useDeleteRealm;

@@ -47,7 +47,7 @@ const SiderBody = () => {
 		string | undefined
 	>();
 
-	const { realms } = useGetRealms();
+	const { result: realms } = useGetRealms();
 
 	useEffect(() => {
 		dispatch(saveRealms(realms));

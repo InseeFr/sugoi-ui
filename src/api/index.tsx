@@ -228,6 +228,30 @@ export const getGroups = (
 	return remote.getGroups(realm, application);
 };
 
+export const createGroup = (
+	realm: string,
+	application: string,
+	group: Group,
+) => {
+	return remote.postGroup(realm, application, group);
+};
+
+export const deleteGroup = (
+	realm: string,
+	application: string,
+	groupId: string,
+) => {
+	return remote.deleteGroup(realm, application, groupId);
+};
+
+export const updateGroup = (
+	realm: string,
+	application: string,
+	group: Group,
+) => {
+	return remote.putGroup(realm, application, group);
+};
+
 // Application function
 export const getApplications = (
 	realm: string,
@@ -244,8 +268,17 @@ export const putApplication = (realm: string, app: Application) => {
 	return remote.putApplication(realm, app);
 };
 
+export const createApplication = (realm: string, app: Application) => {
+	return remote.postApplication(realm, app);
+};
 // Credential Management
-export const initPassword = () => {};
+export const sendIdentifiant = (
+	realm: string,
+	userId: string,
+	pcr: PasswordChangeRequest,
+) => {
+	return remote.sendIdentifiant(realm, userId, pcr);
+};
 
 export const resetPassword = (
 	realm: string,

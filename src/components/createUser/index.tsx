@@ -6,6 +6,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import useRealmConfig from '../../hooks/realm/useRealmConfig/useRealmConfig';
 import { useForms } from '../../hooks/technics/useForms';
 import usePostUser from '../../hooks/user/usePostUser';
+import User from '../../model/api/user';
 import DataViewer from '../commons/dataViewer/dataviewer';
 import LoadingButton from '../commons/loadingButton';
 import Title from '../commons/title/title';
@@ -19,7 +20,16 @@ const CreateUsers = () => {
 	const { enqueueSnackbar } = useSnackbar();
 	const { t } = useTranslation();
 	const handleSubmit = () => {
-		createUser(formValues, realm, userStorage);
+		createUser(formValues, realm, userStorage).then(() =>
+			push(
+				'/realm/' +
+					realm +
+					'/us/' +
+					userStorage +
+					'/user/' +
+					(user as User).username,
+			),
+		);
 	};
 
 	useEffect(() => {
@@ -29,19 +39,6 @@ const CreateUsers = () => {
 			});
 		}
 	}, [enqueueSnackbar, error, t]);
-
-	useEffect(() => {
-		if (user) {
-			push(
-				'/realm/' +
-					realm +
-					'/us/' +
-					userStorage +
-					'/user/' +
-					user.username,
-			);
-		}
-	}, [user, realm, userStorage, push]);
 
 	return (
 		<Grid container spacing={2} direction="column">

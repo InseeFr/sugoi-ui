@@ -6,21 +6,11 @@ const useGetUsers = (realm?: string, userStorage?: string) => {
 	const [result, setResult] = useState<User[]>([]);
 	const [error, setError] = useState(undefined);
 	const [loading, setLoading] = useState(true);
-	const [todo, setTodo] = useState<any>(
-		realm
-			? {
-					realm: realm,
-					userStorage: userStorage,
-					searchRequest: {},
-			  }
-			: undefined,
-	);
+	const [firstSearch, setFirstSearch] = useState<any>(realm ? true : false);
 
 	useEffect(() => {
-		if (todo) {
-			setLoading(true);
-			setResult([]);
-			getUsers(todo.realm, todo.searchRequest, todo.userStorage)
+		if (firstSearch) {
+			getUsers(realm as string, {}, userStorage)
 				.then((r: any) => {
 					setResult(r.results);
 				})
@@ -29,12 +19,12 @@ const useGetUsers = (realm?: string, userStorage?: string) => {
 				})
 				.finally(() => {
 					setLoading(false);
-					setTodo(undefined);
+					setFirstSearch(false);
 				});
 		}
-	}, [todo]);
+	}, [firstSearch, realm, userStorage]);
 
-	const execute = (
+	const execute = async (
 		{
 			identifiant,
 			nomCommun,
@@ -50,9 +40,12 @@ const useGetUsers = (realm?: string, userStorage?: string) => {
 		realm: string,
 		userStorage?: string,
 	) => {
-		setTodo({
-			realm: realm,
-			searchRequest: {
+		setLoading(true);
+		setError(undefined);
+		setResult([]);
+		await getUsers(
+			realm,
+			{
 				identifiant,
 				nomCommun,
 				description,
@@ -64,8 +57,17 @@ const useGetUsers = (realm?: string, userStorage?: string) => {
 				habilitations,
 				application,
 			},
-			userStorage: userStorage,
-		});
+			userStorage,
+		)
+			.then((r: any) => {
+				setResult(r.results);
+			})
+			.catch((err) => {
+				setError(err);
+			})
+			.finally(() => {
+				setLoading(false);
+			});
 	};
 
 	return { execute, loading, users: result, error };

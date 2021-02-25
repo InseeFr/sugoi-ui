@@ -124,6 +124,7 @@ const SearchOrganizations = () => {
 				<Grid item xs={12}>
 					<SearchForm
 						realm={realm}
+						userStorage={userStorage}
 						onSubmit={handleSearch}
 						formFields={[]}
 					/>

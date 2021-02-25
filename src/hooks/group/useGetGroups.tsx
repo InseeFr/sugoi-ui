@@ -4,27 +4,36 @@ import { Group } from '../../model/api/group';
 
 export const useGetGroups = (realm?: string, application?: string) => {
 	const [groups, setGroups] = useState<Group[]>([]);
-	const [todo, setTodo] = useState(
-		realm && application ? { realm, application } : undefined,
+	const [firstSearch, setFirstSearch] = useState(
+		realm && application ? true : false,
 	);
 	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState(undefined);
+	const [error, setError] = useState();
 
-	const execute = (realm: string, application: string) =>
-		setTodo({ realm, application });
+	const execute = async (realm: string, application: string) => {
+		setLoading(true);
+		setError(undefined);
+		await getGroups(realm, application)
+			.then((r) => setGroups(r))
+			.catch((err) => setError(err))
+			.finally(() => {
+				setLoading(false);
+			});
+	};
 
 	useEffect(() => {
-		if (todo) {
+		if (firstSearch) {
 			setLoading(true);
-			getGroups(todo.realm, todo.application)
+			setError(undefined);
+			getGroups(realm as string, application as string)
 				.then((r) => setGroups(r))
 				.catch((err) => setError(err))
 				.finally(() => {
 					setLoading(false);
-					setTodo(undefined);
+					setFirstSearch(false);
 				});
 		}
-	}, [todo]);
+	}, [firstSearch, realm, application]);
 
 	return { groups, loading, error, execute };
 };

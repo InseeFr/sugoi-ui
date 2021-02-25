@@ -17,9 +17,9 @@ import AddIcon from '@material-ui/icons/Add';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import { Pagination } from '@material-ui/lab';
 import React, { useState } from 'react';
-import useGetUsers from '../../../../hooks/user/useGetUsers';
-import { Group } from '../../../../model/api/group';
-import User from '../../../../model/api/user';
+import useGetUsers from '../../../hooks/user/useGetUsers';
+import { Group } from '../../../model/api/group';
+import User from '../../../model/api/user';
 
 interface Props {
 	realm: string;

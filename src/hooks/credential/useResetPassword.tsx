@@ -1,21 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { PasswordChangeRequest } from '../../model/api/passwordChangeRequest';
 import { resetPassword } from './../../api';
 
 export const useResetPassword = () => {
-	const [todo, setTodo] = useState<any>(undefined);
-	useEffect(() => {
-		if (todo) {
-		}
-	}, [todo]);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState();
+	const [result, setResult] = useState();
 
-	const execute = (
+	const execute = async (
 		realm: string,
 		userid: string,
 		pcr: PasswordChangeRequest,
 	) => {
-		setTodo({ realm: realm, userId: userid, pcr: pcr });
+		setLoading(true);
+		setError(undefined);
+		await resetPassword(realm, userid, pcr)
+			.then((r) => setResult(r))
+			.catch((err) => setError(err))
+			.finally(() => setLoading(false));
 	};
 
-	return { execute };
+	return { execute, error, result, loading };
 };

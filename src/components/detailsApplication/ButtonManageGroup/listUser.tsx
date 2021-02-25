@@ -1,8 +1,8 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
-import { Group } from '../../../../model/api/group';
-import User from '../../../../model/api/user';
-import { ChipPerson } from '../../chip';
+import { Group } from '../../../model/api/group';
+import User from '../../../model/api/user';
+import { ChipPerson } from '../chip';
 interface Props {
 	group: Group;
 	realm: string;

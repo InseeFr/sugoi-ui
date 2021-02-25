@@ -1,22 +1,20 @@
 import { useState } from 'react';
-import { updateOrganization } from '../../api';
-import Organization from '../../model/api/organization';
+import { deleteGroup } from '../../api';
 
-const useUpdateOrganization = () => {
+export const useDeleteGroup = () => {
 	const [error, setError] = useState();
-	const [result, setResult] = useState<Organization | undefined>();
 	const [loading, setLoading] = useState(false);
+	const [result, setResult] = useState<string | undefined>();
 
 	const execute = async (
-		id: string,
-		organization: Organization,
 		realm: string,
-		userStorage?: string,
+		application: string,
+		groupId: string,
 	) => {
 		setLoading(true);
 		setError(undefined);
 		setResult(undefined);
-		await updateOrganization(id, organization, realm, userStorage)
+		await deleteGroup(realm, application, groupId)
 			.then((r) => setResult(r))
 			.catch((err) => setError(err))
 			.finally(() => {
@@ -27,4 +25,4 @@ const useUpdateOrganization = () => {
 	return { execute, loading, error, result };
 };
 
-export default useUpdateOrganization;
+export default useDeleteGroup;

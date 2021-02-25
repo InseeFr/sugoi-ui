@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { putApplication } from '../../api';
-import Application from '../../model/api/application';
+import { createApplication } from '../../api';
+import { Application } from '../../model/api/application';
 
-export const usePutApplication = () => {
+export const useCreateApplication = () => {
 	const [result, setResult] = useState<any>();
 	const [error, setError] = useState<any>(undefined);
-	const [loading, setLoading] = useState<boolean>(true);
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const execute = async (realm: string, app: Application) => {
 		setLoading(true);
 		setError(undefined);
-		await putApplication(realm, app)
+		await createApplication(realm, app)
 			.then((r) => setResult(r))
 			.catch((err) => setError(err))
 			.finally(() => {

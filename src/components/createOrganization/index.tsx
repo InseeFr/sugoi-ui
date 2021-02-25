@@ -6,6 +6,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import usePostOrganization from '../../hooks/organization/usePostOrganization';
 import useRealmConfig from '../../hooks/realm/useRealmConfig/useRealmConfig';
 import { useForms } from '../../hooks/technics/useForms';
+import Organization from '../../model/api/organization';
 import DataViewer from '../commons/dataViewer/dataviewer';
 import LoadingButton from '../commons/loadingButton';
 import Title from '../commons/title/title';
@@ -23,6 +24,7 @@ const CreateOrganization = () => {
 	} = usePostOrganization();
 	const { enqueueSnackbar } = useSnackbar();
 	const { t } = useTranslation();
+
 	useEffect(() => {
 		if (error) {
 			enqueueSnackbar(t('create_organization.error') + error, {
@@ -32,19 +34,17 @@ const CreateOrganization = () => {
 	}, [enqueueSnackbar, error, t]);
 
 	const handleSubmit = () => {
-		createOrganization(formValues, realm, userStorage);
-	};
-
-	useEffect(() => {
-		if (organization) {
+		createOrganization(formValues, realm, userStorage).then(() =>
 			push(
 				'/realm/' +
 					realm +
+					'/us/' +
+					userStorage +
 					'/organization/' +
-					organization.identifiant,
-			);
-		}
-	}, [organization, realm, push]);
+					(organization as Organization).identifiant,
+			),
+		);
+	};
 
 	return (
 		<Grid container spacing={2} direction="column">

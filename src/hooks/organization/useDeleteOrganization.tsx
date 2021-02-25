@@ -1,27 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { deleteOrganization } from '../../api';
 
 export const useDeleteOrganization = () => {
 	const [loading, setloading] = useState(false);
-	const [error, seterror] = useState(undefined);
-	const [todo, setTodo] = useState<any>(undefined);
+	const [error, seterror] = useState();
+	const [result, setResult] = useState();
 
-	useEffect(() => {
-		if (todo) {
-			setloading(true);
-			seterror(undefined);
-			deleteOrganization(todo.id, todo.realm, todo.userStorage)
-				.then()
-				.catch((err) => seterror(err))
-				.finally(() => {
-					setloading(false);
-					setTodo(undefined);
-				});
-		}
-	}, [todo]);
+	const execute = async (
+		id: string,
+		realm: string,
+		userStorage?: string,
+	) => {
+		setloading(true);
+		setResult(undefined);
+		seterror(undefined);
+		await deleteOrganization(id, realm, userStorage)
+			.then((r) => setResult(r))
+			.catch((err) => seterror(err))
+			.finally(() => {
+				setloading(false);
+			});
+	};
 
-	const execute = (id: string, realm: string, userStorage?: string) =>
-		setTodo({ realm: realm, userStorage: userStorage, id: id });
-
-	return { loading, error, execute };
+	return { loading, error, execute, result };
 };
