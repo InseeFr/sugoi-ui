@@ -3,6 +3,10 @@ import { getAuthClient } from '../../configuration/axios-configuration';
 import { Pageable } from '../../model/api/pageable';
 import User from '../../model/api/user';
 import searchRequestUser from '../../model/js/searchRequestUser';
+import axios from 'axios';
+
+//cancel previous request if new one is send before receive previous request
+let cancelToken: any = undefined;
 
 export const getUsers = (
 	realm: string,
@@ -18,9 +22,16 @@ export const getUsers = (
 		habilitations,
 		application,
 	}: searchRequestUser,
-): Promise<Pageable> =>
-	getAuthClient().then((client: AxiosInstance) =>
-		client
+): Promise<Pageable> => {
+	return getAuthClient().then((client: AxiosInstance) => {
+		//Check if there are any previous pending requests
+		if (typeof cancelToken != typeof undefined) {
+			cancelToken.cancel('Operation canceled due to new request.');
+		}
+		console.log(cancelToken);
+		//Save the cancel token for the current request
+		cancelToken = axios.CancelToken.source();
+		return client
 			.get('/' + realm + '/users', {
 				params: {
 					identifiant,
@@ -34,9 +45,11 @@ export const getUsers = (
 					habilitations,
 					application,
 				},
+				cancelToken: cancelToken.token,
 			})
-			.then((r: any) => r.data),
-	);
+			.then((r: any) => r.data);
+	});
+};
 
 export const getUser = async (realm: string, id: string): Promise<User> => {
 	const result = await getAuthClient().then((client: AxiosInstance) =>

@@ -42,7 +42,7 @@ const SearchOrganizations = () => {
 		}
 	};
 
-	const handleClickOnOrganization = (organization: Organization) => {
+	const handleClickOnOrganization = (organizationId: string) => {
 		push(
 			userStorage
 				? '/realm/' +
@@ -50,12 +50,12 @@ const SearchOrganizations = () => {
 						'/us/' +
 						userStorage +
 						'/organizations/' +
-						organization.identifiant
+						organizationId
 				: '/realm/' +
 						realm +
 						'/' +
 						'organizations/' +
-						organization.identifiant,
+						organizationId,
 		);
 	};
 
@@ -68,8 +68,6 @@ const SearchOrganizations = () => {
 			name: 'attributes',
 			label: 'Email',
 			options: {
-				filter: true,
-				sort: true,
 				customBodyRender: (value: any) => value.mail,
 			},
 		},
@@ -77,36 +75,7 @@ const SearchOrganizations = () => {
 			name: 'attributes',
 			label: 'Description',
 			options: {
-				filter: true,
-				sort: true,
 				customBodyRender: (value: any) => value.description,
-			},
-		},
-		{
-			name: 'Actions',
-			options: {
-				filter: false,
-				sort: false,
-				empty: true,
-				customBodyRenderLite: (dataIndex: any) => {
-					return (
-						<Button
-							variant="contained"
-							color="default"
-							startIcon={<CreateIcon />}
-							aria-label="modify user"
-							onClick={() =>
-								handleClickOnOrganization(
-									organizations[dataIndex],
-								)
-							}
-						>
-							{t(
-								'search_organization.buttons.edit',
-							)}
-						</Button>
-					);
-				},
 			},
 		},
 	];
@@ -133,7 +102,8 @@ const SearchOrganizations = () => {
 					<SearchResults
 						data={organizations}
 						columns={columns}
-						handleClickAdd={() => handleCreate()}
+						handleClickAdd={handleCreate}
+						handleCLickOnRow={handleClickOnOrganization}
 					/>
 					{loading ? <LinearProgress /> : null}
 				</Grid>
