@@ -49,12 +49,12 @@ const SearchOrganizations = () => {
 						realm +
 						'/us/' +
 						userStorage +
-						'/organization/' +
+						'/organizations/' +
 						organization.identifiant
 				: '/realm/' +
 						realm +
 						'/' +
-						'organization/' +
+						'organizations/' +
 						organization.identifiant,
 		);
 	};
