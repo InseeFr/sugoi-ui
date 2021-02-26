@@ -21,7 +21,11 @@ const CreateUsers = () => {
 	const { t } = useTranslation();
 
 	const handleSubmit = () => {
-		createUser(formValues, realm, userStorage).then(() =>
+		createUser(formValues, realm, userStorage);
+	};
+
+	useEffect(() => {
+		user &&
 			push(
 				'/realm/' +
 					realm +
@@ -29,9 +33,8 @@ const CreateUsers = () => {
 					userStorage +
 					'/users/' +
 					(user as User).username,
-			),
-		);
-	};
+			);
+	}, [user]);
 
 	useEffect(() => {
 		if (error) {

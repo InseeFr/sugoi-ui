@@ -35,7 +35,11 @@ const CreateOrganization = () => {
 	}, [enqueueSnackbar, error, t]);
 
 	const handleSubmit = () => {
-		createOrganization(formValues, realm, userStorage).then(() =>
+		createOrganization(formValues, realm, userStorage);
+	};
+
+	useEffect(() => {
+		organization &&
 			push(
 				'/realm/' +
 					realm +
@@ -43,9 +47,8 @@ const CreateOrganization = () => {
 					userStorage +
 					'/organizations/' +
 					(organization as Organization).identifiant,
-			),
-		);
-	};
+			);
+	}, [organization]);
 
 	return (
 		<Grid container spacing={2} direction="column">

@@ -75,7 +75,7 @@ export const getOrganizationFromUserStorage = async (
 	const pageable: Pageable = await getAuthClient().then(
 		(client: AxiosInstance) =>
 			client
-				.get('/' + realm + '/us/' + us + '/organizations', {
+				.get('/' + realm + '/' + us + '/organizations', {
 					params: {
 						identifiant: id,
 					},
@@ -103,10 +103,7 @@ export const postOrganization = (
 ): Promise<Organization> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.post(
-				'/' + realm + '/us/' + us + '/organizations',
-				organization,
-			)
+			.post('/' + realm + '/' + us + '/organizations', organization)
 			.then((r: any) => r.data),
 	);
 
@@ -119,7 +116,7 @@ export const updateOrganizationFromUserStorage = (
 	getAuthClient().then((client: AxiosInstance) =>
 		client
 			.put(
-				'/' + realm + '/us/' + us + '/organizations/' + id,
+				'/' + realm + '/' + us + '/organizations/' + id,
 				organization,
 			)
 			.then((r: any) => r.data),

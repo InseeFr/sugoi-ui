@@ -7,7 +7,7 @@ const userDisplayField: field[] = [
 		helpText: "Il servira pour le rechercher à travers l'annuaire.",
 		path: 'username',
 		type: 'string',
-		modifiable: false,
+		modifiable: true,
 		tag: 'main',
 	},
 	{
