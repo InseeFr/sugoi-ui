@@ -109,7 +109,7 @@ const DetailOrganization = () => {
 	};
 
 	const handleUpdate = () => {
-		executeUpdate(realm, id, formValues, userStorage).then(() =>
+		executeUpdate(id, formValues, realm, userStorage).then(() =>
 			execute(id, realm, userStorage),
 		);
 	};

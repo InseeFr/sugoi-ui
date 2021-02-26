@@ -191,42 +191,56 @@ const DataViewer = ({ data, fieldToDisplay, handleChange }: props) => {
 					'Information générale',
 				)}
 			</Grid>
-			<Grid item xs={12}>
-				{generatePanel(
-					'Droits applicatifs',
-					<ContentPanel
-						values={data}
-						handleChange={handleChange}
-						fields={habilitationsFields}
-					/>,
-					true,
-					"Gestion des droits de l'utilisateur",
-				)}
-			</Grid>
-			<Grid item xs={12} md={6}>
-				{generatePanel(
-					'Gestion des credentials',
-					<ContentPanel
-						values={data}
-						handleChange={handleChange}
-						fields={credentialsFields}
-					/>,
-					true,
-					"Gestion des credentials de l'utilisateurs",
-				)}
-			</Grid>
-			<Grid item xs={12} md={6}>
-				{generatePanel(
-					'Propriété',
-					<ContentPanel
-						values={data}
-						handleChange={handleChange}
-						fields={propertiesFields}
-					/>,
-					true,
-					'blabla',
-				)}
-			</Grid>
+			{habilitationsFields.length > 0 ? (
+				<Grid item xs={12}>
+					{generatePanel(
+						'Droits applicatifs',
+						<ContentPanel
+							values={data}
+							handleChange={handleChange}
+							fields={habilitationsFields}
+						/>,
+						true,
+						"Gestion des droits de l'utilisateur",
+					)}
+				</Grid>
+			) : null}
+			{credentialsFields.length > 0 ? (
+				<Grid
+					item
+					xs={12}
+					md={propertiesFields.length > 0 ? 6 : 12}
+				>
+					{generatePanel(
+						'Gestion des credentials',
+						<ContentPanel
+							values={data}
+							handleChange={handleChange}
+							fields={credentialsFields}
+						/>,
+						true,
+						"Gestion des credentials de l'utilisateurs",
+					)}
+				</Grid>
+			) : null}
+			{propertiesFields.length > 0 ? (
+				<Grid
+					item
+					xs={12}
+					md={credentialsFields.length > 0 ? 6 : 12}
+				>
+					{generatePanel(
+						'Propriété',
+						<ContentPanel
+							values={data}
+							handleChange={handleChange}
+							fields={propertiesFields}
+						/>,
+						true,
+						'blabla',
+					)}
+				</Grid>
+			) : null}
 		</Grid>
 	);
 };
