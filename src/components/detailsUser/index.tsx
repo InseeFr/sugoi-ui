@@ -1,9 +1,9 @@
-import { Button, Grid } from '@material-ui/core';
+import { Button, Grid, Typography } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
-import FieldsToDisplay from '../../hooks/realm/useRealmConfig/fieldToDisplay/FieldToDisplayConfigUser';
+import useRealmConfig from '../../hooks/realm/useRealmConfig/useRealmConfig';
 import { useForms } from '../../hooks/technics/useForms';
 import { useDeleteUser } from '../../hooks/user/useDeleteUser';
 import useGetUser from '../../hooks/user/useGetUser';
@@ -22,7 +22,13 @@ const DetailUser = () => {
 
 	const { push } = useHistory();
 
-	const { loading, user } = useGetUser(id, realm, userStorage);
+	const { userConfig } = useRealmConfig(realm);
+
+	const { loading, user, error: errorGetUser, execute } = useGetUser(
+		id,
+		realm,
+		userStorage,
+	);
 
 	const {
 		execute: executeUpdate,
@@ -49,6 +55,14 @@ const DetailUser = () => {
 	}, [enqueueSnackbar, errorDelete, t]);
 
 	useEffect(() => {
+		if (errorGetUser) {
+			enqueueSnackbar(t('details_user.error') + errorGetUser, {
+				variant: 'error',
+			});
+		}
+	}, [enqueueSnackbar, errorGetUser, t]);
+
+	useEffect(() => {
 		if (errorUpdate) {
 			enqueueSnackbar(t('details_user.error') + errorUpdate, {
 				variant: 'error',
@@ -69,90 +83,117 @@ const DetailUser = () => {
 		}
 	}, [user, updateIFormValues]);
 
+	const handleDelete = () =>
+		executeDelete(
+			user?.username as string,
+			realm,
+			userStorage,
+		).then(() =>
+			push(
+				'/realm/' +
+					realm +
+					(userStorage
+						? '/us/' + userStorage + '/users'
+						: '/users'),
+			),
+		);
+
+	const handleUpdate = () =>
+		executeUpdate(id, formValues, realm, userStorage).then(() =>
+			execute(id, realm, userStorage),
+		);
+
 	return (
 		<>
 			<Title title={t('detail_user.title') + id} />
-			{loading || user === undefined ? (
+			{loading ? (
 				<Loader />
 			) : (
 				<ErrorBoundary>
-					<DataViewer
-						data={formValues}
-						fieldToDisplay={FieldsToDisplay}
-						handleChange={handleChange}
-					/>
-					<Grid
-						container
-						direction="row"
-						justify="center"
-						spacing={3}
-					>
-						<Grid item>
-							<SendUsernamePopup
-								user={user as User}
+					{user ? (
+						<>
+							<DataViewer
+								data={formValues}
+								fieldToDisplay={userConfig}
+								handleChange={handleChange}
 							/>
-						</Grid>
+							<Grid
+								container
+								direction="row"
+								justify="center"
+								spacing={3}
+							>
+								<Grid item>
+									<SendUsernamePopup
+										realm={realm}
+										userStorage={
+											userStorage
+										}
+										user={user as User}
+									/>
+								</Grid>
 
-						<Grid item>
-							<ResetPasswordPopup
-								user={user as User}
-								realm={realm}
-							/>
-						</Grid>
-						<Grid item>
-							<LoadingButton
-								variant="contained"
-								color="primary"
-								loading={loadingUpdate}
-								handleClick={() =>
-									executeUpdate(
-										id,
-										formValues,
-										realm,
-									)
-								}
-							>
-								{t('detail_user.buttons.save')}
-							</LoadingButton>
-						</Grid>
-						<Grid item>
-							<LoadingButton
-								variant="contained"
-								color="secondary"
-								loading={loadingDelete}
-								handleClick={() => {
-									executeDelete(
-										user?.username as string,
-										realm,
-										userStorage,
-									).then(() =>
-										push(
-											'/realm/' +
-												realm +
-												(userStorage
-													? '/us/' +
-													  userStorage +
-													  '/users'
-													: '/users'),
-										),
-									);
-								}}
-							>
-								{t(
-									'detail_user.buttons.delete',
-								)}
-							</LoadingButton>
-						</Grid>
-						<Grid item>
-							<Button
-								variant="contained"
-								color="default"
-								onClick={handleReset}
-							>
-								{t('detail_user.buttons.reset')}
-							</Button>
-						</Grid>
-					</Grid>
+								<Grid item>
+									<ResetPasswordPopup
+										user={user as User}
+										realm={realm}
+										userStorage={
+											userStorage
+										}
+									/>
+								</Grid>
+								<Grid item>
+									<LoadingButton
+										variant="contained"
+										color="primary"
+										loading={
+											loadingUpdate
+										}
+										handleClick={
+											handleUpdate
+										}
+									>
+										{t(
+											'detail_user.buttons.save',
+										)}
+									</LoadingButton>
+								</Grid>
+								<Grid item>
+									<LoadingButton
+										variant="contained"
+										color="secondary"
+										loading={
+											loadingDelete
+										}
+										handleClick={
+											handleDelete
+										}
+									>
+										{t(
+											'detail_user.buttons.delete',
+										)}
+									</LoadingButton>
+								</Grid>
+								<Grid item>
+									<Button
+										variant="contained"
+										color="default"
+										onClick={
+											handleReset
+										}
+									>
+										{t(
+											'detail_user.buttons.reset',
+										)}
+									</Button>
+								</Grid>
+							</Grid>
+						</>
+					) : (
+						<Typography variant="h6" gutterBottom>
+							{t('detail_user.user_not_found')}
+						</Typography>
+					)}
 				</ErrorBoundary>
 			)}
 		</>

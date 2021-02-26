@@ -133,6 +133,7 @@
 	"detail_user": {
 		"title": "Détail de l'utilisateur ",
 		"error": "Erreur lors de l'envoi a l'API: ",
+		"user_not_found": "L'utilisateur demandé n'a pas été trouvé :(",
 		"buttons": {
 			"save": "Enregistrer les modifications",
 			"delete": "Supprimer",
@@ -142,6 +143,7 @@
 	"detail_organization": {
 		"title": "Détail de l'organisation ",
 		"error": "Erreur lors de l'envoi a l'API: ",
+		"organization_not_found": "L'utilisateur demandé n'a pas été trouvé :(",
 		"buttons": {
 			"save": "Enregistrer les modifications",
 			"delete": "Supprimer",

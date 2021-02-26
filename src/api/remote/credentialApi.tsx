@@ -21,6 +21,32 @@ export const resetPassword = (
 			.then((r) => r.data),
 	);
 
+export const resetPasswordUs = (
+	realm: string,
+	userId: string,
+	pcr: PasswordChangeRequest,
+	userStorage?: string,
+) =>
+	getAuthClient().then((client: AxiosInstance) =>
+		client
+			.post(
+				'/' +
+					realm +
+					'/' +
+					userStorage +
+					'/users/' +
+					userId +
+					'/reinitPassword',
+				pcr,
+				{
+					params: {
+						sendModes: 'MAIL',
+					},
+				},
+			)
+			.then((r) => r.data),
+	);
+
 export const sendIdentifiant = (
 	realm: string,
 	userId: string,
@@ -30,6 +56,32 @@ export const sendIdentifiant = (
 		client
 			.post(
 				'/' + realm + '/users/' + userId + '/reinitPassword',
+				pcr,
+				{
+					params: {
+						sendModes: 'MAIL',
+					},
+				},
+			)
+			.then((r) => r.data),
+	);
+
+export const sendIdentifiantUs = (
+	realm: string,
+	userId: string,
+	pcr: PasswordChangeRequest,
+	userStorage: string,
+) =>
+	getAuthClient().then((client: AxiosInstance) =>
+		client
+			.post(
+				'/' +
+					realm +
+					'/' +
+					userStorage +
+					'/users/' +
+					userId +
+					'/reinitPassword',
 				pcr,
 				{
 					params: {

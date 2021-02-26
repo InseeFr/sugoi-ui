@@ -1,17 +1,25 @@
 import { Button } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSendIdentifiant } from '../../../hooks/credential';
 import User from '../../../model/api/user';
+import LoadingButton from '../loadingButton';
 import SimpleDialog from '../popButton/Dialog';
 import { SendPopupContent } from './sendPopupContent';
 
 interface props {
 	user: User;
+	realm: string;
+	userStorage?: string;
 }
 
-export const SendUsernameButton = ({ user }: props) => {
-	const [values, setValues] = useState({ signature: 'Assistance Insee' });
+export const SendUsernameButton = ({ user, realm, userStorage }: props) => {
+	const [values, setValues] = useState<any>({
+		signature: 'Assistance Insee',
+	});
 	const { t } = useTranslation();
+
+	const { execute, loading } = useSendIdentifiant();
 
 	const handleInputChange = (e: any) => {
 		const { name, value } = e.target;
@@ -31,8 +39,18 @@ export const SendUsernameButton = ({ user }: props) => {
 	};
 
 	const onFinish = () => {
-		console.log({ user: user?.username, ...values });
-		handleClose();
+		const pcr = {
+			mail: values.email,
+			properties: {
+				signature: values.signature,
+				senderEmail: values.senderEmail,
+				application: values.nameApp,
+				assistMail: values.assistMail,
+			},
+		};
+		execute(realm, user.username || '', pcr, userStorage).then(
+			handleClose,
+		);
 	};
 
 	return (
@@ -58,9 +76,12 @@ export const SendUsernameButton = ({ user }: props) => {
 					/>
 				}
 				actions={
-					<Button onClick={onFinish}>
+					<LoadingButton
+						handleClick={onFinish}
+						loading={loading}
+					>
 						{t('commons.send_password.send_button')}
-					</Button>
+					</LoadingButton>
 				}
 			/>
 		</>

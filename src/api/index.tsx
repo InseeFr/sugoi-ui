@@ -276,14 +276,20 @@ export const sendIdentifiant = (
 	realm: string,
 	userId: string,
 	pcr: PasswordChangeRequest,
+	userStorage?: string,
 ) => {
-	return remote.sendIdentifiant(realm, userId, pcr);
+	return userStorage
+		? remote.sendIdentifiantUs(realm, userId, pcr, userStorage)
+		: remote.sendIdentifiant(realm, userId, pcr);
 };
 
 export const resetPassword = (
 	realm: string,
 	userId: string,
 	pcr: PasswordChangeRequest,
+	userStorage?: string,
 ): Promise<any> => {
-	return remote.resetPassword(realm, userId, pcr);
+	return userStorage
+		? remote.resetPasswordUs(realm, userId, pcr, userStorage)
+		: remote.resetPassword(realm, userId, pcr);
 };
