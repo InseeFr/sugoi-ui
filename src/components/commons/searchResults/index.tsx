@@ -10,6 +10,24 @@ interface props {
 	handleClickAdd: () => void;
 }
 
+const CustomToolBar = ({ handleClick }: any) => {
+	const { t } = useTranslation();
+	return (
+		<Tooltip title={'Ajouter'}>
+			<Button
+				disableElevation
+				variant="contained"
+				color="default"
+				startIcon={<AddIcon />}
+				aria-label="create user"
+				onClick={handleClick}
+			>
+				{t('commons.search_result.buttons.add')}
+			</Button>
+		</Tooltip>
+	);
+};
+
 export const SearchResults = ({ data, columns, handleClickAdd }: props) => {
 	const { t } = useTranslation();
 	const options = {
@@ -98,23 +116,5 @@ export const SearchResults = ({ data, columns, handleClickAdd }: props) => {
 				options={options}
 			/>
 		</Paper>
-	);
-};
-
-const CustomToolBar = ({ handleClick }: any) => {
-	const { t } = useTranslation();
-	return (
-		<Tooltip title={'Ajouter'}>
-			<Button
-				disableElevation
-				variant="contained"
-				color="default"
-				startIcon={<AddIcon />}
-				aria-label="create user"
-				onClick={handleClick}
-			>
-				{t('commons.search_result.buttons.add')}
-			</Button>
-		</Tooltip>
 	);
 };
