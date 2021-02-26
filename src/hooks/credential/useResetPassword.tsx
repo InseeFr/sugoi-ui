@@ -11,10 +11,11 @@ export const useResetPassword = () => {
 		realm: string,
 		userid: string,
 		pcr: PasswordChangeRequest,
+		userStorage?: string,
 	) => {
 		setLoading(true);
 		setError(undefined);
-		await resetPassword(realm, userid, pcr)
+		await resetPassword(realm, userid, pcr, userStorage)
 			.then((r) => setResult(r))
 			.catch((err) => setError(err))
 			.finally(() => setLoading(false));

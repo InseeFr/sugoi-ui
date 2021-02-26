@@ -3,15 +3,17 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useResetPassword } from '../../../hooks/credential';
 import User from '../../../model/api/user';
+import LoadingButton from '../loadingButton';
 import SimpleDialog from '../popButton/Dialog';
 import { ResetPasswordPopupContent } from './resetPasswordPopupContent';
 
 interface props {
 	user: User;
 	realm: string;
+	userStorage?: string;
 }
 
-export const ResetPasswordPopup = ({ user, realm }: props) => {
+export const ResetPasswordPopup = ({ user, realm, userStorage }: props) => {
 	const [values, setValues] = useState({
 		email: user.mail,
 		senderEmail: undefined,
@@ -20,7 +22,7 @@ export const ResetPasswordPopup = ({ user, realm }: props) => {
 		assistMail: undefined,
 	});
 	const { t } = useTranslation();
-	const { execute } = useResetPassword();
+	const { execute, loading } = useResetPassword();
 
 	const handleInputChange = (e: any) => {
 		const { name, value } = e.target;
@@ -50,8 +52,9 @@ export const ResetPasswordPopup = ({ user, realm }: props) => {
 				assistMail: values.assistMail,
 			},
 		};
-		execute(realm, user.username as string, pcr);
-		handleClose();
+		execute(realm, user.username as string, pcr, userStorage).then(
+			handleClose,
+		);
 	};
 
 	return (
@@ -76,9 +79,12 @@ export const ResetPasswordPopup = ({ user, realm }: props) => {
 					/>
 				}
 				actions={
-					<Button onClick={onFinish}>
+					<LoadingButton
+						handleClick={onFinish}
+						loading={loading}
+					>
 						{t('commons.reset_password.send_button')}
-					</Button>
+					</LoadingButton>
 				}
 			/>
 		</>

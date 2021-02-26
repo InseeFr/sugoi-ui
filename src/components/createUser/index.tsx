@@ -19,6 +19,7 @@ const CreateUsers = () => {
 	const { user, execute: createUser, error, loading } = usePostUser();
 	const { enqueueSnackbar } = useSnackbar();
 	const { t } = useTranslation();
+
 	const handleSubmit = () => {
 		createUser(formValues, realm, userStorage).then(() =>
 			push(
@@ -26,7 +27,7 @@ const CreateUsers = () => {
 					realm +
 					'/us/' +
 					userStorage +
-					'/user/' +
+					'/users/' +
 					(user as User).username,
 			),
 		);

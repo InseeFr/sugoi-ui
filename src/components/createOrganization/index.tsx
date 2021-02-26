@@ -22,6 +22,7 @@ const CreateOrganization = () => {
 		loading,
 		error,
 	} = usePostOrganization();
+
 	const { enqueueSnackbar } = useSnackbar();
 	const { t } = useTranslation();
 
@@ -40,7 +41,7 @@ const CreateOrganization = () => {
 					realm +
 					'/us/' +
 					userStorage +
-					'/organization/' +
+					'/organizations/' +
 					(organization as Organization).identifiant,
 			),
 		);
