@@ -10,7 +10,7 @@ export const getOrganizations = (
 ): Promise<Pageable> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.get('/' + realm + '/organizations', {
+			.get('/realms/' + realm + '/organizations', {
 				params: { identifiant, application, role, property },
 			})
 			.then((r: any) => r.data),
@@ -23,7 +23,7 @@ export const getOrganization = async (
 	const pageable: Pageable = await getAuthClient().then(
 		(client: AxiosInstance) =>
 			client
-				.get('/' + realm + '/organizations', {
+				.get('/realms/' + realm + '/organizations', {
 					params: {
 						identifiant: id,
 					},
@@ -39,7 +39,7 @@ export const deleteOrganization = (
 ): Promise<string> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.delete('/' + realm + '/organizations/' + id)
+			.delete('/realms/' + realm + '/organizations/' + id)
 			.then((r: any) => r.data),
 	);
 
@@ -50,7 +50,10 @@ export const updateOrganization = (
 ): Promise<Organization> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.put('/' + realm + '/organizations/' + id, organization)
+			.put(
+				'/realms/' + realm + '/organizations/' + id,
+				organization,
+			)
 			.then((r: any) => r.data),
 	);
 
@@ -61,9 +64,21 @@ export const getOrganizationsFromUserStorage = (
 ): Promise<Pageable> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.get('/' + realm + '/' + us + '/organizations', {
-				params: { identifiant, application, role, property },
-			})
+			.get(
+				'/realms/' +
+					realm +
+					'/storages/' +
+					us +
+					'/organizations',
+				{
+					params: {
+						identifiant,
+						application,
+						role,
+						property,
+					},
+				},
+			)
 			.then((r: any) => r.data),
 	);
 
@@ -75,11 +90,18 @@ export const getOrganizationFromUserStorage = async (
 	const pageable: Pageable = await getAuthClient().then(
 		(client: AxiosInstance) =>
 			client
-				.get('/' + realm + '/' + us + '/organizations', {
-					params: {
-						identifiant: id,
+				.get(
+					'/realms/' +
+						realm +
+						'/storages/' +
+						us +
+						'/organizations',
+					{
+						params: {
+							identifiant: id,
+						},
 					},
-				})
+				)
 				.then((r: any) => r.data),
 	);
 	return pageable.results[0];
@@ -92,7 +114,14 @@ export const deleteOrganizationFromUserStorage = (
 ): Promise<string> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.delete('/' + realm + '/' + us + '/organizations/' + id)
+			.delete(
+				'/realms/' +
+					realm +
+					'/storages/' +
+					us +
+					'/organizations/' +
+					id,
+			)
 			.then((r: any) => r.data),
 	);
 
@@ -103,7 +132,14 @@ export const postOrganization = (
 ): Promise<Organization> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.post('/' + realm + '/' + us + '/organizations', organization)
+			.post(
+				'/realms/' +
+					realm +
+					'/storages/' +
+					us +
+					'/organizations',
+				organization,
+			)
 			.then((r: any) => r.data),
 	);
 
@@ -116,7 +152,12 @@ export const updateOrganizationFromUserStorage = (
 	getAuthClient().then((client: AxiosInstance) =>
 		client
 			.put(
-				'/' + realm + '/' + us + '/organizations/' + id,
+				'/realms/' +
+					realm +
+					'/storages/' +
+					us +
+					'/organizations/' +
+					id,
 				organization,
 			)
 			.then((r: any) => r.data),

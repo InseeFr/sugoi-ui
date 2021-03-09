@@ -8,7 +8,7 @@ export const getGroups = (
 ): Promise<Group[]> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.get('/' + realm + '/groups', {
+			.get('/realms/' + realm + '/groups', {
 				params: { application },
 			})
 			.then((r: any) => r.data),
@@ -21,7 +21,7 @@ export const postGroup = (
 ): Promise<Group> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.post('/' + realm + '/groups', group, {
+			.post('/realms/' + realm + '/groups', group, {
 				params: { application },
 			})
 			.then((r: any) => r.data),
@@ -34,7 +34,7 @@ export const putGroup = (
 ): Promise<Group> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.put('/' + realm + '/groups/' + group.name, group, {
+			.put('/realms/' + realm + '/groups/' + group.name, group, {
 				params: { application },
 			})
 			.then((r: any) => r.data),
@@ -47,7 +47,7 @@ export const deleteGroup = (
 ): Promise<string> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.delete('/' + realm + '/groups/' + groupId, {
+			.delete('/realms/' + realm + '/groups/' + groupId, {
 				params: { application },
 			})
 			.then((r: any) => r.data),

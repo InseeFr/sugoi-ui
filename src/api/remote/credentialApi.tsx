@@ -10,7 +10,11 @@ export const resetPassword = (
 	getAuthClient().then((client: AxiosInstance) =>
 		client
 			.post(
-				'/' + realm + '/users/' + userId + '/reinitPassword',
+				'/realms/' +
+					realm +
+					'/users/' +
+					userId +
+					'/reinitPassword',
 				pcr,
 				{
 					params: {
@@ -30,9 +34,9 @@ export const resetPasswordUs = (
 	getAuthClient().then((client: AxiosInstance) =>
 		client
 			.post(
-				'/' +
+				'/realms/' +
 					realm +
-					'/' +
+					'/storages/' +
 					userStorage +
 					'/users/' +
 					userId +
@@ -55,7 +59,11 @@ export const sendIdentifiant = (
 	getAuthClient().then((client: AxiosInstance) =>
 		client
 			.post(
-				'/' + realm + '/users/' + userId + '/reinitPassword',
+				'/realms/' +
+					realm +
+					'/users/' +
+					userId +
+					'/reinitPassword',
 				pcr,
 				{
 					params: {
@@ -75,9 +83,9 @@ export const sendIdentifiantUs = (
 	getAuthClient().then((client: AxiosInstance) =>
 		client
 			.post(
-				'/' +
+				'/realms/' +
 					realm +
-					'/' +
+					'/storages/' +
 					userStorage +
 					'/users/' +
 					userId +
