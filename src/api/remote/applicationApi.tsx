@@ -9,7 +9,7 @@ export const getApplications = (
 ): Promise<Pageable> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.get('/' + realm + '/applications', {
+			.get('/realms/' + realm + '/applications', {
 				params: { size: 500, name: name },
 			})
 			.then((r: any) => r.data),
@@ -18,14 +18,14 @@ export const getApplications = (
 export const getApplication = (realm: string, name?: string): Promise<any> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.get('/' + realm + '/applications/' + name)
+			.get('/realms/' + realm + '/applications/' + name)
 			.then((r: any) => r.data),
 	);
 
 export const putApplication = (realm: string, app: Application): Promise<any> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.put('/' + realm + '/applications/' + app.name, app)
+			.put('/realms/' + realm + '/applications/' + app.name, app)
 			.then((r: any) => r.data),
 	);
 
@@ -35,6 +35,6 @@ export const postApplication = (
 ): Promise<any> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.post('/' + realm + '/applications', app)
+			.post('/realms/' + realm + '/applications', app)
 			.then((r: any) => r.data),
 	);
