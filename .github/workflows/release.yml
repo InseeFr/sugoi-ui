@@ -1,0 +1,64 @@
+name: Release sugoi-ui
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+   
+
+jobs:
+  releases:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - id: get_version
+        name: Get version from package.json
+        run: echo ::set-output name=VERSION::$(node -p "require('./package.json').version")
+      - name: Use Node.js 14
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Install dependencies 
+        run: yarn
+      - run: yarn build
+        name: Create build
+      - uses: papeloto/action-zip@v1
+        name: Zip build
+        with:
+          files: build/
+          dest: sugoi-ui-${{ steps.get_version.outputs.VERSION }}-distribution.zip
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.get_version.outputs.VERSION }}
+          release_name: v${{ steps.get_version.outputs.VERSION }}
+          draft: false
+          prerelease: false
+      - name: Add build to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: sugoi-ui-${{ steps.get_version.outputs.VERSION }}-distribution.zip
+          asset_name: sugoi-ui-${{ steps.get_version.outputs.VERSION }}-distribution.zip
+          asset_content_type: zip
+
+
+  prepare_next_version:
+    runs-on: ubuntu-latest
+    needs: releases
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - run: git config user.email "ts-ci@github.com" && git config user.name "ts-ci@github.com"
+      - name: Set next version
+        run: npm version --no-git-tag-version major 
+      - run: git add . && git commit -m "prepare next version" && git push
+        name: Push change for future release
