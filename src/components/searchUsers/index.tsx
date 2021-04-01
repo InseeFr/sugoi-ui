@@ -27,7 +27,7 @@ const SearchUsers = () => {
 		searchUsers({ ...values }, realm, userStorage);
 	};
 
-	const handleClickOnUser = (user: User) => {
+	const handleClickOnUser = (username: string) => {
 		push(
 			userStorage
 				? '/realm/' +
@@ -35,12 +35,8 @@ const SearchUsers = () => {
 						'/us/' +
 						userStorage +
 						'/users/' +
-						(user.username as string)
-				: '/realm/' +
-						realm +
-						'/' +
-						'users/' +
-						(user.username as string),
+						username
+				: '/realm/' + realm + '/' + 'users/' + username,
 		);
 	};
 
@@ -116,40 +112,6 @@ const SearchUsers = () => {
 			name: 'lastName',
 			label: 'Nom commun',
 		},
-		{
-			name: 'Actions',
-			options: {
-				filter: false,
-				sort: false,
-				empty: true,
-				customBodyRenderLite: (dataIndex: any) => {
-					return (
-						<Grid container direction="row" spacing={2}>
-							<Grid item>
-								<Button
-									disableElevation
-									variant="contained"
-									color="default"
-									startIcon={<CreateIcon />}
-									aria-label="modify user"
-									onClick={() =>
-										handleClickOnUser(
-											users[
-												dataIndex
-											],
-										)
-									}
-								>
-									{t(
-										'search_user.buttons.edit',
-									)}
-								</Button>
-							</Grid>
-						</Grid>
-					);
-				},
-			},
-		},
 	];
 
 	return (
@@ -175,6 +137,7 @@ const SearchUsers = () => {
 						data={users}
 						columns={columns}
 						handleClickAdd={handleCreate}
+						handleClickOnRow={handleClickOnUser}
 					/>
 					{loading ? <LinearProgress /> : null}
 				</Grid>
