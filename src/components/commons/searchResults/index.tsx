@@ -8,6 +8,7 @@ interface props {
 	data: any;
 	columns: any;
 	handleClickAdd: () => void;
+	handleClickOnRow: any;
 }
 
 const CustomToolBar = ({ handleClick }: any) => {
@@ -28,7 +29,12 @@ const CustomToolBar = ({ handleClick }: any) => {
 	);
 };
 
-export const SearchResults = ({ data, columns, handleClickAdd }: props) => {
+export const SearchResults = ({
+	data,
+	columns,
+	handleClickAdd,
+	handleClickOnRow,
+}: props) => {
 	const { t } = useTranslation();
 	const options = {
 		responsive: 'simple' as any,
@@ -36,6 +42,7 @@ export const SearchResults = ({ data, columns, handleClickAdd }: props) => {
 		customToolbar: () => {
 			return <CustomToolBar handleClick={handleClickAdd} />;
 		},
+		onRowClick: (rowData: any) => handleClickOnRow(rowData[0]),
 		textLabels: {
 			body: {
 				noMatch: t(
