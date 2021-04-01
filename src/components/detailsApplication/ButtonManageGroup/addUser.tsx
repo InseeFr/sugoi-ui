@@ -38,12 +38,14 @@ export const AddUsers = ({
 	const [page, setPage] = React.useState(1);
 	const { execute, loading, users } = useGetUsers(realm);
 	const [search, setSearch] = useState('');
+
 	const handlePageChange = (
 		event: React.ChangeEvent<unknown>,
 		value: number,
 	) => {
 		setPage(value);
 	};
+
 	const handleSearchUser = (e: any) => {
 		setSearch(e.target.value);
 		execute(
@@ -55,6 +57,7 @@ export const AddUsers = ({
 			realm,
 		);
 	};
+
 	return (
 		<Grid
 			container
@@ -92,7 +95,6 @@ export const AddUsers = ({
 								</TableCell>
 							</TableRow>
 						</TableHead>
-						{loading && <LinearProgress />}
 						<TableBody>
 							{users
 								.slice(
@@ -165,6 +167,7 @@ export const AddUsers = ({
 								))}
 						</TableBody>
 					</Table>
+					{loading && <LinearProgress />}
 				</TableContainer>
 			</Grid>
 			<Grid item xs={12}>
