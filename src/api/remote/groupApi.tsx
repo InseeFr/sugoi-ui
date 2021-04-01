@@ -14,6 +14,19 @@ export const getGroups = (
 			.then((r: any) => r.data),
 	);
 
+export const getGroup = (
+	realm: string,
+	application: string,
+	group: string,
+): Promise<Group> =>
+	getAuthClient().then((client: AxiosInstance) =>
+		client
+			.get('/realms/' + realm + '/groups/' + group, {
+				params: { application },
+			})
+			.then((r: any) => r.data),
+	);
+
 export const postGroup = (
 	realm: string,
 	application: string,
@@ -50,5 +63,50 @@ export const deleteGroup = (
 			.delete('/realms/' + realm + '/groups/' + groupId, {
 				params: { application },
 			})
+			.then((r: any) => r.data),
+	);
+
+export const addUserToGroup = (
+	realm: string,
+	application: string,
+	groupId: string,
+	userId: string,
+): Promise<string> => {
+	return getAuthClient().then((client: AxiosInstance) =>
+		client
+			.put(
+				'/realms/' +
+					realm +
+					'/groups/' +
+					groupId +
+					'/members/' +
+					userId,
+				null,
+				{
+					params: { application },
+				},
+			)
+			.then((r: any) => r.data),
+	);
+};
+export const deleteUserFromGroup = (
+	realm: string,
+	application: string,
+	groupId: string,
+	userId: string,
+): Promise<string> =>
+	getAuthClient().then((client: AxiosInstance) =>
+		client
+			.delete(
+				'/realms/' +
+					realm +
+					'/groups/' +
+					groupId +
+					'/members/' +
+					userId,
+				{
+					params: { application },
+				},
+			)
 			.then((r: any) => r.data),
 	);

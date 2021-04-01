@@ -1,60 +1,65 @@
-import { Button, Grid, IconButton } from '@material-ui/core';
-import React, { useState } from 'react';
+import { Grid, IconButton } from '@material-ui/core';
 import SettingsIcon from '@material-ui/icons/Settings';
-import SimpleDialog from '../../commons/popButton/Dialog';
+import React, { useState } from 'react';
+import useAddUserToGroup from '../../../hooks/group/useAddUserToGroup';
+import useDeleteUserFromGroup from '../../../hooks/group/useDeleteUserFromGroup';
+import { useGetGroup } from '../../../hooks/group/useGetGroup';
 import { Group } from '../../../model/api/group';
-import { GroupListUsers } from './listUser';
+import SimpleDialog from '../../commons/popButton/Dialog';
 import { AddUsers } from './addUser';
-import User from '../../../model/api/user';
+import { GroupListUsers } from './listUser';
 
 interface Props {
 	realm: string;
-	group: Group;
-	handleUpdateGroup: any;
+	groupId: string;
+	application: string;
+	onClose: any;
 }
 
 export const ButtonManageGroup = ({
 	realm,
-	group,
-	handleUpdateGroup,
+	groupId,
+	application,
+	onClose,
 }: Props) => {
-	const [tempGroup, setTempGroup] = useState<Group>({
-		name: group.name,
-		description: group.description,
-		users: group.users !== null ? group.users : [],
-	});
-
 	const [open, setOpen] = useState(false);
-
+	const { execute: addUserToGroup } = useAddUserToGroup();
+	const { execute: deleteUserFromGroup } = useDeleteUserFromGroup();
+	const { execute: getGroup, group } = useGetGroup(
+		realm,
+		application,
+		groupId,
+	);
 	const handleOpen = () => {
 		setOpen(true);
 	};
 
 	const handleClose = () => {
 		setOpen(false);
+		onClose(realm, application);
 	};
 
-	const handleAddUser = (username: string) => {
-		setTempGroup({
-			name: tempGroup.name,
-			description: tempGroup.description,
-			users: [...tempGroup?.users, { username: username }],
-		});
+	const handleAddUserToGroup = (
+		realm: string,
+		applicationId: string,
+		groupId: string,
+	) => (userId: string) => {
+		addUserToGroup(realm, applicationId, groupId, userId).then(() =>
+			getGroup(realm, applicationId, groupId),
+		);
 	};
 
-	const handleDeleteUser = (username: string) => {
-		setTempGroup({
-			name: tempGroup.name,
-			description: tempGroup.description,
-			users: tempGroup.users.filter(
-				(user: User) => user.username !== username,
-			),
-		});
-	};
-
-	const onSubmit = () => {
-		handleUpdateGroup(tempGroup);
-		setOpen(false);
+	const handleDeleteUserFromGroup = (
+		realm: string,
+		applicationId: string,
+		groupId: string,
+	) => (userId: string) => {
+		deleteUserFromGroup(
+			realm,
+			applicationId,
+			groupId,
+			userId,
+		).then(() => getGroup(realm, applicationId, groupId));
 	};
 
 	return (
@@ -75,25 +80,26 @@ export const ButtonManageGroup = ({
 						<Grid item xs={12} md={6}>
 							<AddUsers
 								realm={realm}
-								group={tempGroup}
-								handleAddUser={handleAddUser}
-								handleDeleteUser={
-									handleDeleteUser
-								}
+								group={group as Group}
+								handleAddUser={handleAddUserToGroup(
+									realm,
+									application,
+									groupId,
+								)}
+								handleDeleteUser={handleDeleteUserFromGroup(
+									realm,
+									application,
+									groupId,
+								)}
 							/>
 						</Grid>
 						<Grid item xs={12} md={6}>
 							<GroupListUsers
 								realm={realm}
-								group={tempGroup}
+								group={group as Group}
 							/>
 						</Grid>
 					</Grid>
-				}
-				actions={
-					<Button color="primary" onClick={onSubmit}>
-						Enregistrer
-					</Button>
 				}
 				fullwidth
 				maxwidth="md"

@@ -252,6 +252,24 @@ export const updateGroup = (
 	return remote.putGroup(realm, application, group);
 };
 
+export const addUserToGroup = (
+	realm: string,
+	application: string,
+	groupId: string,
+	userId: string,
+) => {
+	return remote.addUserToGroup(realm, application, groupId, userId);
+};
+
+export const deleteUserFromGroup = (
+	realm: string,
+	application: string,
+	groupId: string,
+	userId: string,
+) => {
+	return remote.deleteUserFromGroup(realm, application, groupId, userId);
+};
+
 // Application function
 export const getApplications = (
 	realm: string,
@@ -292,4 +310,8 @@ export const resetPassword = (
 	return userStorage
 		? remote.resetPasswordUs(realm, userId, pcr, userStorage)
 		: remote.resetPassword(realm, userId, pcr);
+};
+
+export const getGroup = (realm: string, application: string, group: string) => {
+	return remote.getGroup(realm, application, group);
 };

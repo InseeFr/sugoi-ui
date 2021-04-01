@@ -19,6 +19,9 @@ import {
 	useDeleteGroup,
 	useUpdateGroup,
 } from '../../hooks/group';
+import useAddUserToGroup from '../../hooks/group/useAddUserToGroup';
+import useDeleteUserFromGroup from '../../hooks/group/useDeleteUserFromGroup';
+
 import { Group } from '../../model/api/group';
 import Title from '../commons/title/title';
 import ButtonCreateGroup from './ButtonCreateGroup';
@@ -34,7 +37,7 @@ export const DetailsApplication = () => {
 	);
 	const { execute: createGroup } = useCreateGroup();
 	const { execute: deleteGroup } = useDeleteGroup();
-	const { execute: updateGroup } = useUpdateGroup();
+
 	const [rowsPerPage, setRowsPerPage] = React.useState(10);
 	const [page, setPage] = React.useState(1);
 
@@ -49,14 +52,6 @@ export const DetailsApplication = () => {
 		group: Group,
 	) => {
 		createGroup(realm, applicationId, group).then(() =>
-			execute(realm, applicationId),
-		);
-	};
-
-	const handleUpdateGroup = (realm: string, applicationId: string) => (
-		group: Group,
-	) => {
-		updateGroup(realm, applicationId, group).then(() =>
 			execute(realm, applicationId),
 		);
 	};
@@ -208,13 +203,15 @@ export const DetailsApplication = () => {
 																realm={
 																	realm
 																}
-																group={
-																	group
+																groupId={
+																	group.name
 																}
-																handleUpdateGroup={handleUpdateGroup(
-																	realm,
-																	applicationId,
-																)}
+																application={
+																	applicationId
+																}
+																onClose={
+																	execute
+																}
 															/>
 															<ButtonDeleteGroup
 																group={
