@@ -69,14 +69,16 @@ export default function GroupsField({
 						{name}
 					</Typography>
 					<PopIcon helpText={helpText} />
-					<IconButton
-						aria-label="info"
-						size="small"
-						onClick={() => setEdit(!edit)}
-						color="primary"
-					>
-						<CreateIcon fontSize="inherit" />
-					</IconButton>
+					{modifiable && (
+						<IconButton
+							aria-label="info"
+							size="small"
+							onClick={() => setEdit(!edit)}
+							color="primary"
+						>
+							<CreateIcon fontSize="inherit" />
+						</IconButton>
+					)}
 				</div>
 			</Grid>
 			{modifiable && edit ? (
@@ -152,7 +154,7 @@ export default function GroupsField({
 									align="left"
 									variant="subtitle1"
 								>
-									{addTitle}
+									{deleteTitle}
 								</Typography>
 							</Grid>
 							<Grid item xs={12}>
