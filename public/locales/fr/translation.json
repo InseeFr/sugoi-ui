@@ -1,8 +1,8 @@
 {
 	"home": {
-		"title": "Service Unifié de Gestion des Openldaps Internes",
+		"title": "Service Unifié de Gestion des Openldaps de l'INSEE",
 		"landing": {
-			"title": "Service Unifié de Gestion des Openldaps Internes",
+			"title": "Service Unifié de Gestion des Openldaps de l'INSEE",
 			"description": "Rechercher permet de faire une recherche sur les contacts d'un domaine, et si vous en avez le droit de le modifier, modifier son mot de passe et supprimer les contacts retenus. Créer permet de créer un nouveau contact sur un domaine de gestion sur lequel vous êtes gestionnaire",
 			"go_button": "C'est parti"
 		},
