@@ -151,7 +151,7 @@ const userDisplayField: field[] = [
 		modifiable: true,
 	},
 	{
-		name: 'Groups',
+		name: 'Groupes',
 		helpTextTitle: 'Identifiant unique du contact',
 		helpText: "Il servira pour le rechercher à travers l'annuaire.",
 		path: 'groups',
@@ -159,10 +159,10 @@ const userDisplayField: field[] = [
 		tag: 'habilitations',
 		addTitle: 'Ajouter un groupe',
 		deleteTitle: 'Supprimer un groupe',
-		modifiable: true,
+		modifiable: false,
 	},
 	{
-		name: 'Role applicatif',
+		name: 'Rôles applicatifs',
 		helpTextTitle: 'Identifiant unique du contact',
 		helpText: "Il servira pour le rechercher à travers l'annuaire.",
 		path: 'attributes.roles',
