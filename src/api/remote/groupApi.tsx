@@ -8,9 +8,13 @@ export const getGroups = (
 ): Promise<Group[]> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.get('/realms/' + realm + '/groups', {
-				params: { application },
-			})
+			.get(
+				'/realms/' +
+					realm +
+					'/applications/' +
+					application +
+					'/groups/',
+			)
 			.then((r: any) => r.data),
 	);
 
@@ -21,9 +25,14 @@ export const getGroup = (
 ): Promise<Group> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.get('/realms/' + realm + '/groups/' + group, {
-				params: { application },
-			})
+			.get(
+				'/realms/' +
+					realm +
+					'/applications/' +
+					application +
+					'/groups/' +
+					group,
+			)
 			.then((r: any) => r.data),
 	);
 
@@ -34,9 +43,14 @@ export const postGroup = (
 ): Promise<Group> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.post('/realms/' + realm + '/groups', group, {
-				params: { application },
-			})
+			.post(
+				'/realms/' +
+					realm +
+					'/applications/' +
+					application +
+					'/groups/',
+				group,
+			)
 			.then((r: any) => r.data),
 	);
 
@@ -47,9 +61,15 @@ export const putGroup = (
 ): Promise<Group> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.put('/realms/' + realm + '/groups/' + group.name, group, {
-				params: { application },
-			})
+			.put(
+				'/realms/' +
+					realm +
+					'/applications/' +
+					application +
+					'/groups/' +
+					group.name,
+				group,
+			)
 			.then((r: any) => r.data),
 	);
 
@@ -60,9 +80,14 @@ export const deleteGroup = (
 ): Promise<string> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
-			.delete('/realms/' + realm + '/groups/' + groupId, {
-				params: { application },
-			})
+			.delete(
+				'/realms/' +
+					realm +
+					'/applications/' +
+					application +
+					'/groups/' +
+					groupId,
+			)
 			.then((r: any) => r.data),
 	);
 
@@ -77,14 +102,12 @@ export const addUserToGroup = (
 			.put(
 				'/realms/' +
 					realm +
+					'/applications/' +
+					application +
 					'/groups/' +
 					groupId +
 					'/members/' +
 					userId,
-				null,
-				{
-					params: { application },
-				},
 			)
 			.then((r: any) => r.data),
 	);
@@ -100,13 +123,12 @@ export const deleteUserFromGroup = (
 			.delete(
 				'/realms/' +
 					realm +
+					'/applications/' +
+					application +
 					'/groups/' +
 					groupId +
 					'/members/' +
 					userId,
-				{
-					params: { application },
-				},
 			)
 			.then((r: any) => r.data),
 	);
