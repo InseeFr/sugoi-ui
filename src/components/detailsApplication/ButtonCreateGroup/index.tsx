@@ -1,12 +1,13 @@
-import { Button, TextField } from '@material-ui/core';
+import { Button, Grid, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import SimpleDialog from '../../commons/popButton/Dialog';
 
 interface Props {
 	handleAddGroup: any;
+	application: any;
 }
 
-export const ButtonCreateGroup = ({ handleAddGroup }: Props) => {
+export const ButtonCreateGroup = ({ handleAddGroup, application }: Props) => {
 	const [open, setOpen] = useState(false);
 
 	const handleOpen = () => {
@@ -22,7 +23,7 @@ export const ButtonCreateGroup = ({ handleAddGroup }: Props) => {
 
 	const onSubmit = () => {
 		handleAddGroup({
-			name: groupName,
+			name: groupName + '_' + application?.name.toUpperCase(),
 			description: groupDescription,
 			users: [],
 		});
@@ -46,14 +47,38 @@ export const ButtonCreateGroup = ({ handleAddGroup }: Props) => {
 				title={'Créer un groupe'}
 				body={
 					<>
-						<TextField
-							fullWidth
-							label="Nom du groupe"
-							value={groupName}
-							onChange={(e: any) =>
-								setGroupName(e.target.value)
-							}
-						/>
+						<Grid
+							container
+							direction="row"
+							justify="center"
+							alignItems="stretch"
+							spacing={1}
+						>
+							<Grid item xs={10}>
+								<TextField
+									fullWidth
+									label="Nom du groupe"
+									value={groupName}
+									onChange={(e: any) =>
+										setGroupName(
+											e.target
+												.value,
+										)
+									}
+								/>
+							</Grid>
+							<Grid item xs={2}>
+								<TextField
+									fullWidth
+									label="Suffix"
+									value={
+										'_' +
+										application?.name.toUpperCase()
+									}
+									disabled
+								/>
+							</Grid>
+						</Grid>
 						<TextField
 							fullWidth
 							label="Description"

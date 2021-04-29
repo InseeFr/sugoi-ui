@@ -88,6 +88,7 @@ export const DetailsApplication = () => {
 									realm,
 									applicationId,
 								)}
+								application={application}
 							/>
 						</Grid>
 					</Grid>
@@ -126,7 +127,9 @@ export const DetailsApplication = () => {
 									</TableRow>
 								</TableHead>
 								<TableBody>
-									{application?.groups ? (
+									{application?.groups &&
+									application?.groups
+										.length > 0 ? (
 										application.groups
 											.slice(
 												(page -
