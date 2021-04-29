@@ -38,3 +38,10 @@ export const postApplication = (
 			.post('/realms/' + realm + '/applications', app)
 			.then((r: any) => r.data),
 	);
+
+export const deleteApplication = (realm: string, app: string): Promise<any> =>
+	getAuthClient().then((client: AxiosInstance) =>
+		client
+			.delete('/realms/' + realm + '/applications/' + app)
+			.then((r: any) => r.data),
+	);
