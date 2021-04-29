@@ -315,3 +315,7 @@ export const resetPassword = (
 export const getGroup = (realm: string, application: string, group: string) => {
 	return remote.getGroup(realm, application, group);
 };
+
+export const deleteApplication = (realm: string, appName: string) => {
+	return remote.deleteApplication(realm, appName);
+};

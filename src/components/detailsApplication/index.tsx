@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core';
 import {
 	Grid,
 	MenuItem,
@@ -12,7 +13,8 @@ import {
 } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import { useDeleteApplication } from '../../hooks/applications/useDeleteApplication';
 import { useGetApplication } from '../../hooks/applications/useGetApplication';
 import {
 	useCreateGroup,
@@ -23,6 +25,7 @@ import useAddUserToGroup from '../../hooks/group/useAddUserToGroup';
 import useDeleteUserFromGroup from '../../hooks/group/useDeleteUserFromGroup';
 
 import { Group } from '../../model/api/group';
+import LoadingButton from '../commons/loadingButton';
 import Title from '../commons/title/title';
 import ButtonCreateGroup from './ButtonCreateGroup';
 import { ButtonDeleteGroup } from './ButtonDeleteGroup';
@@ -31,12 +34,18 @@ import { ChipButton, ChipPerson } from './chip';
 
 export const DetailsApplication = () => {
 	const { realm, id: applicationId } = useParams<any>();
+	const { push } = useHistory();
 	const { application, execute, loading } = useGetApplication(
 		realm,
 		applicationId,
 	);
 	const { execute: createGroup } = useCreateGroup();
 	const { execute: deleteGroup } = useDeleteGroup();
+
+	const {
+		execute: deleteApplication,
+		loading: loadingDelete,
+	} = useDeleteApplication();
 
 	const [rowsPerPage, setRowsPerPage] = React.useState(10);
 	const [page, setPage] = React.useState(1);
@@ -46,6 +55,12 @@ export const DetailsApplication = () => {
 		value: number,
 	) => {
 		setPage(value);
+	};
+
+	const handleDeleteApp = (realm: string, applicationId: string) => {
+		deleteApplication(realm, applicationId).then(() =>
+			push('/realm/' + realm + '/applications'),
+		);
 	};
 
 	const handleCreateGroup = (realm: string, applicationId: string) => (
@@ -294,6 +309,31 @@ export const DetailsApplication = () => {
 								color="primary"
 								onChange={handleChange}
 							/>
+						</Grid>
+					</Grid>
+					<Grid item>
+						<Grid
+							container
+							direction="row"
+							justify="center"
+							alignItems="center"
+							spacing={3}
+						>
+							<Grid item>
+								<LoadingButton
+									handleClick={() =>
+										handleDeleteApp(
+											realm,
+											applicationId,
+										)
+									}
+									loading={loadingDelete}
+									color="secondary"
+									variant="contained"
+								>
+									Supprimer l'application
+								</LoadingButton>
+							</Grid>
 						</Grid>
 					</Grid>
 				</Grid>
