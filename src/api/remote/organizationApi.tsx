@@ -20,17 +20,11 @@ export const getOrganization = async (
 	realm: string,
 	id: string,
 ): Promise<Organization> => {
-	const pageable: Pageable = await getAuthClient().then(
-		(client: AxiosInstance) =>
-			client
-				.get('/realms/' + realm + '/organizations', {
-					params: {
-						identifiant: id,
-					},
-				})
-				.then((r: any) => r.data),
+	return await getAuthClient().then((client: AxiosInstance) =>
+		client
+			.get('/realms/' + realm + '/organizations/' + id)
+			.then((r: any) => r.data),
 	);
-	return pageable.results[0];
 };
 
 export const deleteOrganization = (
@@ -87,24 +81,18 @@ export const getOrganizationFromUserStorage = async (
 	us: string,
 	id: string,
 ): Promise<Organization> => {
-	const pageable: Pageable = await getAuthClient().then(
-		(client: AxiosInstance) =>
-			client
-				.get(
-					'/realms/' +
-						realm +
-						'/storages/' +
-						us +
-						'/organizations',
-					{
-						params: {
-							identifiant: id,
-						},
-					},
-				)
-				.then((r: any) => r.data),
+	return await getAuthClient().then((client: AxiosInstance) =>
+		client
+			.get(
+				'/realms/' +
+					realm +
+					'/storages/' +
+					us +
+					'/organizations/' +
+					id,
+			)
+			.then((r: any) => r.data),
 	);
-	return pageable.results[0];
 };
 
 export const deleteOrganizationFromUserStorage = (
