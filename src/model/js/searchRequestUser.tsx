@@ -3,6 +3,7 @@ export default interface searchRequestUser {
 	nomCommun?: string;
 	description?: string;
 	organisationId?: string;
+	mail?: string;
 	size?: number;
 	start?: number;
 	searchCookie?: string;
