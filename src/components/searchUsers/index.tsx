@@ -97,6 +97,16 @@ const SearchUsers = () => {
 			type: 'string',
 			modifiable: true,
 		},
+		{
+			name: t('search_user.form.field.email.name'),
+			helpTextTitle: t(
+				'search_user.form.field.email.help_text_title',
+			),
+			helpText: t('search_user.form.field.email.help_text'),
+			path: 'mail',
+			type: 'string',
+			modifiable: true,
+		},
 	];
 
 	const columns = [

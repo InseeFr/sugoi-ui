@@ -11,6 +11,7 @@ let cancelToken: any = undefined;
 export const getUsers = (
 	realm: string,
 	{
+		mail,
 		identifiant,
 		nomCommun,
 		description,
@@ -34,7 +35,15 @@ export const getUsers = (
 		return client
 			.get('/realms/' + realm + '/users', {
 				params: {
+					mail,
 					identifiant,
+					nomCommun,
+					description,
+					organisationId,
+					size,
+					start,
+					searchCookie,
+					typeRecherche,
 					habilitations,
 					application,
 				},
@@ -77,6 +86,7 @@ export const getUsersFromUserStorage = (
 	realm: string,
 	us: string,
 	{
+		mail,
 		identifiant,
 		nomCommun,
 		description,
@@ -93,6 +103,7 @@ export const getUsersFromUserStorage = (
 		client
 			.get('/realms/' + realm + '/storages/' + us + '/users', {
 				params: {
+					mail,
 					identifiant,
 					nomCommun,
 					description,

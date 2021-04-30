@@ -26,6 +26,7 @@ const useGetUsers = (realm?: string, userStorage?: string) => {
 
 	const execute = async (
 		{
+			mail,
 			identifiant,
 			nomCommun,
 			description,
@@ -46,6 +47,7 @@ const useGetUsers = (realm?: string, userStorage?: string) => {
 		await getUsers(
 			realm,
 			{
+				mail,
 				identifiant,
 				nomCommun,
 				description,
