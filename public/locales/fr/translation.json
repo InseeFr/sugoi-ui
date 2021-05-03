@@ -84,32 +84,13 @@
 			"field": {
 				"identifiant": {
 					"name": "Identifiant",
-					"help_text_title": "Identifiant de l'utilisateur",
+					"help_text_title": "Identifiant de l'organisation",
 					"help_text": "Il n'est pas obligatoire de le saisir entièrement. Le champ saisi peut être le début, le milieu ou la fin de l'identifiant recherché. L'identifiant d'un contact/d'une organisation est unique dans l'annuaire. La recherche sera plus précise."
-				},
-				"description": {
-					"name": "Description",
-					"help_text_title": "Description",
-					"help_text": "Il n'est pas obligatoire de le saisir entièrement. Le champ saisi peut être le début, le milieu ou la fin du nom commun recherché. Caractères autorisés : alphabétiques, chiffres, apostrophes, espaces, tirets"
-				},
-				"organization": {
-					"name": "Organisation d'appartenance",
-					"help_text_title": "Identifiant de l'organisation d'appartenance ",
-					"help_text": "Il n'est pas obligatoire de le saisir entièrement.  Le champ saisi doit être le début de l'identifiant recherché."
-				},
-				"commun_name": {
-					"name": "Nom commun",
-					"help_text_title": "Nom commun",
-					"help_text": "Il n'est pas obligatoire de le saisir entièrement. Le champ saisi peut être le début, le milieu ou la fin du nom commun recherché. Caractères autorisés : alphabétiques, chiffres, apostrophes, espaces, tirets"
 				},
 				"email": {
 					"name": "Adresse e-mail",
 					"help_text_title": "Adresse e-mail",
 					"help_text": "Le champ saisi peut être une portion de l'adresse mail recherchée."
-				},
-				"certificate": {
-					"name": "Certificat associé",
-					"help_text_title": "Certificat associé"
 				}
 			}
 		}

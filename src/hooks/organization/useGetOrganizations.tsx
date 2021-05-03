@@ -29,7 +29,7 @@ const useGetOrganizations = (realm?: string, userStorage?: string) => {
 
 	const execute = async (
 		realm: string,
-		{ identifiant }: searchRequestOrganization,
+		{ identifiant, mail }: searchRequestOrganization,
 		userStorage?: string,
 	) => {
 		setLoading(true);
@@ -37,7 +37,7 @@ const useGetOrganizations = (realm?: string, userStorage?: string) => {
 		setError(undefined);
 		await getOrganizations(
 			realm,
-			{ identifiant: identifiant },
+			{ identifiant: identifiant, mail: mail },
 			userStorage,
 		)
 			.then((r: any) => {

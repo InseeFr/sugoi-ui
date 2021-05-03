@@ -3,4 +3,5 @@ export default interface searchRequestOrganization {
 	application?: string;
 	role?: string;
 	property?: string;
+	mail?: string;
 }
