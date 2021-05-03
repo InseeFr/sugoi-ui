@@ -6,12 +6,24 @@ import searchRequestOrganization from '../../model/js/searchRequestOrganization'
 
 export const getOrganizations = (
 	realm: string,
-	{ identifiant, application, role, property }: searchRequestOrganization,
+	{
+		identifiant,
+		application,
+		role,
+		property,
+		mail,
+	}: searchRequestOrganization,
 ): Promise<Pageable> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
 			.get('/realms/' + realm + '/organizations', {
-				params: { identifiant, application, role, property },
+				params: {
+					identifiant,
+					application,
+					role,
+					property,
+					mail,
+				},
 			})
 			.then((r: any) => r.data),
 	);
@@ -54,7 +66,13 @@ export const updateOrganization = (
 export const getOrganizationsFromUserStorage = (
 	realm: string,
 	us: string,
-	{ identifiant, application, role, property }: searchRequestOrganization,
+	{
+		identifiant,
+		application,
+		role,
+		property,
+		mail,
+	}: searchRequestOrganization,
 ): Promise<Pageable> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
@@ -70,6 +88,7 @@ export const getOrganizationsFromUserStorage = (
 						application,
 						role,
 						property,
+						mail,
 					},
 				},
 			)

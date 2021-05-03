@@ -1,14 +1,13 @@
-import { Button, Grid, LinearProgress } from '@material-ui/core';
-import CreateIcon from '@material-ui/icons/Create';
+import { Grid, LinearProgress } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import useGetOrganizations from '../../hooks/organization/useGetOrganizations';
+import { field } from '../../model/field';
+import SearchForm from '../commons/searchFormular';
 import { SearchResults } from '../commons/searchResults';
 import Title from '../commons/title/title';
-import SearchForm from '../commons/searchFormular';
-import Organization from '../../model/api/organization';
-import { useSnackbar } from 'notistack';
 
 const SearchOrganizations = () => {
 	const { realm, userStorage } = useParams<any>();
@@ -80,6 +79,31 @@ const SearchOrganizations = () => {
 		},
 	];
 
+	const formFields: field[] = [
+		{
+			name: t('search_organization.form.field.identifiant.name'),
+			helpTextTitle: t(
+				'search_organization.form.field.identifiant.help_text_title',
+			),
+			helpText: t(
+				'search_organization.form.field.identifiant.help_text',
+			),
+			path: 'identifiant',
+			type: 'string',
+			modifiable: true,
+		},
+		{
+			name: t('search_organization.form.field.email.name'),
+			helpTextTitle: t(
+				'search_organization.form.field.email.help_text_title',
+			),
+			helpText: t('search_organization.form.field.email.help_text'),
+			path: 'mail',
+			type: 'string',
+			modifiable: true,
+		},
+	];
+
 	return (
 		<>
 			<Title title={t('search_organization.title') + realm} />
@@ -95,7 +119,7 @@ const SearchOrganizations = () => {
 						realm={realm}
 						userStorage={userStorage}
 						onSubmit={handleSearch}
-						formFields={[]}
+						formFields={formFields}
 					/>
 				</Grid>
 				<Grid item xs={12}>
