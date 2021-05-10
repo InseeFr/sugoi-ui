@@ -3,7 +3,7 @@ import CreateIcon from '@material-ui/icons/Create';
 import PeopleIcon from '@material-ui/icons/People';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useGetApplication } from '../../../../../hooks/applications/useGetApplication';
+import { useGetApplication } from '../../../../../hooks/api/applications/useGetApplication';
 import { Group } from '../../../../../model/api/group';
 import PopIcon from '../../../popIcon/popIcon';
 import AutoCompleteApplication from './autocompleteApplication';

@@ -1,7 +1,7 @@
 import { Grid, MenuItem, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useGetRealms } from '../../hooks/realm';
+import { useGetRealms } from '../../hooks/api/realm';
 import AsyncEditor from '../commons/jsonEditor';
 import Title from '../commons/title/title';
 

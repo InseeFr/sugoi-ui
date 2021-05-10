@@ -1,4 +1,3 @@
-import { useReactOidc } from '@axa-fr/react-oidc-context';
 import {
 	Avatar,
 	Box,
@@ -9,10 +8,11 @@ import {
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import useAuth from '../../../../hooks/auth/useAuth';
 
 const AccountButton = () => {
-	const { oidcUser } = useReactOidc();
 	const { t } = useTranslation();
+	const { name, email, authenticated } = useAuth();
 
 	const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
 		null,
@@ -28,7 +28,7 @@ const AccountButton = () => {
 
 	const open = Boolean(anchorEl);
 	const id = open ? 'simple-popover' : undefined;
-	return oidcUser ? (
+	return authenticated ? (
 		<>
 			<IconButton
 				color="inherit"
@@ -61,10 +61,10 @@ const AccountButton = () => {
 				>
 					<Avatar src="/static/images/avatars/avatar_6.png" />
 					<Typography color="textPrimary" variant="h6">
-						{oidcUser.profile.name}
+						{name}
 					</Typography>
 					<Typography color="textSecondary" variant="body2">
-						{oidcUser.profile.email}
+						{email}
 					</Typography>
 				</Box>
 				<Box

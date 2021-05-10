@@ -3,7 +3,7 @@ import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
-import useGetOrganizations from '../../hooks/organization/useGetOrganizations';
+import useGetOrganizations from '../../hooks/api/organization/useGetOrganizations';
 import { field } from '../../model/field';
 import SearchForm from '../commons/searchFormular';
 import { SearchResults } from '../commons/searchResults';

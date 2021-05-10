@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import { getUsers } from '../../api';
+import useAuth from '../../hooks/auth/useAuth';
 import Title from '../commons/title/title';
 
 export const RealmHome = () => {
@@ -16,6 +17,7 @@ export const RealmHome = () => {
 	const [search, setSearch] = useState<string>('');
 	const [selected, setSelected] = useState<any>();
 	const { t } = useTranslation();
+	const { access_token } = useAuth();
 	useEffect(() => {
 		if (selected) {
 			push('/realm/' + realm + '/users/' + selected.username);
@@ -24,7 +26,7 @@ export const RealmHome = () => {
 
 	useEffect(() => {
 		if (search.length > 1) {
-			getUsers(realm, {
+			getUsers(access_token)(realm, {
 				typeRecherche: 'OR',
 				identifiant: search,
 				size: 6,

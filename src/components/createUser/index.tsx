@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import useRealmConfig from '../../hooks/realm/useRealmConfig/useRealmConfig';
 import { useForms } from '../../hooks/technics/useForms';
-import usePostUser from '../../hooks/user/usePostUser';
+import usePostUser from '../../hooks/api/user/usePostUser';
 import User from '../../model/api/user';
 import DataViewer from '../commons/dataViewer/dataviewer';
 import LoadingButton from '../commons/loadingButton';

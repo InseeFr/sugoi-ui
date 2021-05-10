@@ -4,3 +4,4 @@ export * from './realmApi';
 export * from './groupApi';
 export * from './credentialApi';
 export * from './applicationApi';
+export * from './whoami';

@@ -1,4 +1,4 @@
-import { useReactOidc, withOidcSecure } from '@axa-fr/react-oidc-context';
+import { withOidcSecure } from '@axa-fr/react-oidc-context';
 import { Container } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {
@@ -7,9 +7,10 @@ import {
 	MuiThemeProvider,
 	Theme,
 } from '@material-ui/core/styles';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import useAuth from '../hooks/auth/useAuth';
 import { RootState } from './../configuration/store-configuration';
 import { DarkTheme, LightTheme } from './../material-ui-theme';
 import routes from './../routes/routes';
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const App = () => {
 	const classes = useStyles();
-	const { oidcUser } = useReactOidc();
+	const { authenticated } = useAuth();
 	const appStore = useSelector((store: RootState) => store.app);
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const handleDrawerToggle = () => {
@@ -62,12 +63,12 @@ const App = () => {
 			<div className={classes.root}>
 				<CssBaseline />
 				<Header handleDrawerToggle={handleDrawerToggle} />
-				{oidcUser ? (
+				{authenticated && (
 					<Sider
 						drawerOpen={drawerOpen}
 						handleDrawerToggle={handleDrawerToggle}
 					/>
-				) : null}
+				)}
 				<main className={classes.content}>
 					<div id="back-to-top-anchor" />
 					<div className={classes.toolbar} />

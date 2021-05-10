@@ -1,15 +1,12 @@
-import { Button, Grid, LinearProgress } from '@material-ui/core';
-import CreateIcon from '@material-ui/icons/Create';
-import React from 'react';
+import { Grid, LinearProgress } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
-import useGetUsers from '../../hooks/user/useGetUsers';
+import useGetUsers from '../../hooks/api/user/useGetUsers';
 import { field } from '../../model/field';
+import SearchForm from '../commons/searchFormular';
 import { SearchResults } from '../commons/searchResults';
 import Title from '../commons/title/title';
-import SearchForm from '../commons/searchFormular';
-import { useSnackbar } from 'notistack';
-import User from '../../model/api/user';
 
 const SearchUsers = () => {
 	const { realm, userStorage } = useParams<any>();

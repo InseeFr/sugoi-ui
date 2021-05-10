@@ -14,15 +14,15 @@ import {
 import { Pagination } from '@material-ui/lab';
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { useDeleteApplication } from '../../hooks/applications/useDeleteApplication';
-import { useGetApplication } from '../../hooks/applications/useGetApplication';
+import { useDeleteApplication } from '../../hooks/api/applications/useDeleteApplication';
+import { useGetApplication } from '../../hooks/api/applications/useGetApplication';
 import {
 	useCreateGroup,
 	useDeleteGroup,
 	useUpdateGroup,
-} from '../../hooks/group';
-import useAddUserToGroup from '../../hooks/group/useAddUserToGroup';
-import useDeleteUserFromGroup from '../../hooks/group/useDeleteUserFromGroup';
+} from '../../hooks/api/group';
+import useAddUserToGroup from '../../hooks/api/group/useAddUserToGroup';
+import useDeleteUserFromGroup from '../../hooks/api/group/useDeleteUserFromGroup';
 
 import { Group } from '../../model/api/group';
 import LoadingButton from '../commons/loadingButton';

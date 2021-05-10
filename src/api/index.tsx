@@ -10,41 +10,47 @@ import * as Utils from './../utils/object';
 import { Group } from '../model/api/group';
 import { PasswordChangeRequest } from '../model/api/passwordChangeRequest';
 import Application from '../model/api/application';
+import { Whoami } from '../model/api/whoami';
 
 // Realm function
-export const getRealms = (id?: string): Promise<Realm[]> => {
+export const getRealms = (token?: string) => (
+	id?: string,
+): Promise<Realm[]> => {
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.getRealms(id);
 	} else {
-		return remote.getRealms(id);
+		return remote.getRealms(token)(id);
 	}
 };
-export const postRealm = (realm: Realm): Promise<Realm> => {
+export const postRealm = (token?: string) => (realm: Realm): Promise<Realm> => {
 	realm = Utils.cleanObjectEntries(realm);
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.postRealm(realm);
 	} else {
-		return remote.postRealm(realm);
+		return remote.postRealm(token)(realm);
 	}
 };
-export const deleteRealm = (id?: string): Promise<any> => {
+export const deleteRealm = (token?: string) => (id?: string): Promise<any> => {
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.deleteRealm(id);
 	} else {
-		return remote.deleteRealm(id);
+		return remote.deleteRealm(token)(id);
 	}
 };
-export const updateRealm = (id: string, realm: Realm): Promise<Realm> => {
+export const updateRealm = (token?: string) => (
+	id: string,
+	realm: Realm,
+): Promise<Realm> => {
 	realm = Utils.cleanObjectEntries(realm);
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.updateRealm(id, realm);
 	} else {
-		return remote.updateRealm(id, realm);
+		return remote.updateRealm(token)(id, realm);
 	}
 };
 
 // User function
-export const getUsers = (
+export const getUsers = (token?: string) => (
 	realm: string,
 	searchRequest?: searchRequestUser,
 	userStorage?: string,
@@ -54,16 +60,16 @@ export const getUsers = (
 		return fake.getUsers(realm, searchRequest || {});
 	} else {
 		return userStorage
-			? remote.getUsersFromUserStorage(
+			? remote.getUsersFromUserStorage(token)(
 					realm,
 					userStorage,
 					searchRequest || {},
 			  )
-			: remote.getUsers(realm, searchRequest || {});
+			: remote.getUsers(token)(realm, searchRequest || {});
 	}
 };
 
-export const getUser = (
+export const getUser = (token?: string) => (
 	identifiant: string,
 	realm: string,
 	userStorage?: string,
@@ -72,16 +78,16 @@ export const getUser = (
 		return fake.getUser(realm, identifiant);
 	} else {
 		return userStorage
-			? remote.getUserFromUserStorage(
+			? remote.getUserFromUserStorage(token)(
 					realm,
 					userStorage,
 					identifiant,
 			  )
-			: remote.getUser(realm, identifiant);
+			: remote.getUser(token)(realm, identifiant);
 	}
 };
 
-export const postUser = (
+export const postUser = (token?: string) => (
 	user: User,
 	realm: string,
 	userStorage: string,
@@ -90,11 +96,15 @@ export const postUser = (
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.postUser(realm, user);
 	} else {
-		return remote.postUserFromUserStorage(realm, userStorage, user);
+		return remote.postUserFromUserStorage(token)(
+			realm,
+			userStorage,
+			user,
+		);
 	}
 };
 
-export const deleteUser = (
+export const deleteUser = (token?: string) => (
 	id: string,
 	realm: string,
 	userStorage?: string,
@@ -103,12 +113,16 @@ export const deleteUser = (
 		return fake.deleteUser(realm, id);
 	} else {
 		return userStorage
-			? remote.deleteUserFromUserStorage(realm, userStorage, id)
-			: remote.deleteUser(realm, id);
+			? remote.deleteUserFromUserStorage(token)(
+					realm,
+					userStorage,
+					id,
+			  )
+			: remote.deleteUser(token)(realm, id);
 	}
 };
 
-export const updateUser = (
+export const updateUser = (token?: string) => (
 	id: string,
 	user: User,
 	realm: string,
@@ -119,18 +133,18 @@ export const updateUser = (
 		return fake.updateUser(realm, id, user);
 	} else {
 		return userStorage
-			? remote.updateUserFromUserStorage(
+			? remote.updateUserFromUserStorage(token)(
 					realm,
 					userStorage,
 					id,
 					user,
 			  )
-			: remote.updateUser(realm, id, user);
+			: remote.updateUser(token)(realm, id, user);
 	}
 };
 
 // Organization function
-export const getOrganizations = (
+export const getOrganizations = (token?: string) => (
 	realm: string,
 	searchRequest?: searchRequestOrganization,
 	userStorage?: string,
@@ -140,16 +154,16 @@ export const getOrganizations = (
 		return fake.getOrganizations(realm, searchRequest || {});
 	} else {
 		return userStorage
-			? remote.getOrganizationsFromUserStorage(
+			? remote.getOrganizationsFromUserStorage(token)(
 					realm,
 					userStorage,
 					searchRequest || {},
 			  )
-			: remote.getOrganizations(realm, searchRequest || {});
+			: remote.getOrganizations(token)(realm, searchRequest || {});
 	}
 };
 
-export const getOrganization = (
+export const getOrganization = (token?: string) => (
 	identifiant: string,
 	realm: string,
 	userStorage?: string,
@@ -158,16 +172,16 @@ export const getOrganization = (
 		return fake.getOrganization(realm, identifiant);
 	} else {
 		return userStorage
-			? remote.getOrganizationFromUserStorage(
+			? remote.getOrganizationFromUserStorage(token)(
 					realm,
 					userStorage,
 					identifiant,
 			  )
-			: remote.getOrganization(realm, identifiant);
+			: remote.getOrganization(token)(realm, identifiant);
 	}
 };
 
-export const updateOrganization = (
+export const updateOrganization = (token?: string) => (
 	id: string,
 	organization: Organization,
 	realm: string,
@@ -178,17 +192,17 @@ export const updateOrganization = (
 		return fake.updateOrganization(realm, id, organization);
 	} else {
 		return userStorage
-			? remote.updateOrganizationFromUserStorage(
+			? remote.updateOrganizationFromUserStorage(token)(
 					realm,
 					userStorage,
 					id,
 					organization,
 			  )
-			: remote.updateOrganization(realm, id, organization);
+			: remote.updateOrganization(token)(realm, id, organization);
 	}
 };
 
-export const postOrganization = (
+export const postOrganization = (token?: string) => (
 	organization: Organization,
 	realm: string,
 	userStorage: string,
@@ -198,11 +212,15 @@ export const postOrganization = (
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.postOrganization(realm, organization);
 	} else {
-		return remote.postOrganization(realm, userStorage, organization);
+		return remote.postOrganization(token)(
+			realm,
+			userStorage,
+			organization,
+		);
 	}
 };
 
-export const deleteOrganization = (
+export const deleteOrganization = (token?: string) => (
 	id: string,
 	realm: string,
 	userStorage?: string,
@@ -211,111 +229,136 @@ export const deleteOrganization = (
 		return fake.deleteOrganization(realm, id);
 	} else {
 		return userStorage
-			? remote.deleteOrganizationFromUserStorage(
+			? remote.deleteOrganizationFromUserStorage(token)(
 					realm,
 					userStorage,
 					id,
 			  )
-			: remote.deleteOrganization(realm, id);
+			: remote.deleteOrganization(token)(realm, id);
 	}
 };
-// Group function
 
-export const getGroups = (
+// Group function
+export const getGroups = (token?: string) => (
 	realm: string,
 	application: string,
 ): Promise<Group[]> => {
-	return remote.getGroups(realm, application);
+	return remote.getGroups(token)(realm, application);
 };
 
-export const createGroup = (
+export const createGroup = (token?: string) => (
 	realm: string,
 	application: string,
 	group: Group,
 ) => {
-	return remote.postGroup(realm, application, group);
+	return remote.postGroup(token)(realm, application, group);
 };
 
-export const deleteGroup = (
+export const deleteGroup = (token?: string) => (
 	realm: string,
 	application: string,
 	groupId: string,
 ) => {
-	return remote.deleteGroup(realm, application, groupId);
+	return remote.deleteGroup(token)(realm, application, groupId);
 };
 
-export const updateGroup = (
+export const updateGroup = (token?: string) => (
 	realm: string,
 	application: string,
 	group: Group,
 ) => {
-	return remote.putGroup(realm, application, group);
+	return remote.putGroup(token)(realm, application, group);
 };
 
-export const addUserToGroup = (
+export const addUserToGroup = (token?: string) => (
 	realm: string,
 	application: string,
 	groupId: string,
 	userId: string,
 ) => {
-	return remote.addUserToGroup(realm, application, groupId, userId);
+	return remote.addUserToGroup(token)(realm, application, groupId, userId);
 };
 
-export const deleteUserFromGroup = (
+export const deleteUserFromGroup = (token?: string) => (
 	realm: string,
 	application: string,
 	groupId: string,
 	userId: string,
 ) => {
-	return remote.deleteUserFromGroup(realm, application, groupId, userId);
+	return remote.deleteUserFromGroup(token)(
+		realm,
+		application,
+		groupId,
+		userId,
+	);
 };
 
 // Application function
-export const getApplications = (
+export const getApplications = (token?: string) => (
 	realm: string,
 	name?: string,
 ): Promise<Pageable> => {
-	return remote.getApplications(realm, name);
+	return remote.getApplications(token)(realm, name);
 };
 
-export const getApplication = (realm: string, name: string) => {
-	return remote.getApplication(realm, name);
+export const getApplication = (token?: string) => (
+	realm: string,
+	name: string,
+) => {
+	return remote.getApplication(token)(realm, name);
 };
 
-export const putApplication = (realm: string, app: Application) => {
-	return remote.putApplication(realm, app);
+export const putApplication = (token?: string) => (
+	realm: string,
+	app: Application,
+) => {
+	return remote.putApplication(token)(realm, app);
 };
 
-export const createApplication = (realm: string, app: Application) => {
-	return remote.postApplication(realm, app);
+export const createApplication = (token?: string) => (
+	realm: string,
+	app: Application,
+) => {
+	return remote.postApplication(token)(realm, app);
 };
 // Credential Management
-export const sendIdentifiant = (
+export const sendIdentifiant = (token?: string) => (
 	realm: string,
 	userId: string,
 	pcr: PasswordChangeRequest,
 	userStorage?: string,
 ) => {
 	return userStorage
-		? remote.sendIdentifiantUs(realm, userId, pcr, userStorage)
-		: remote.sendIdentifiant(realm, userId, pcr);
+		? remote.sendIdentifiantUs(token)(realm, userId, pcr, userStorage)
+		: remote.sendIdentifiant(token)(realm, userId, pcr);
 };
 
-export const resetPassword = (
+export const resetPassword = (token?: string) => (
 	realm: string,
 	userId: string,
 	pcr: PasswordChangeRequest,
 	userStorage?: string,
 ): Promise<any> => {
 	return userStorage
-		? remote.resetPasswordUs(realm, userId, pcr, userStorage)
-		: remote.resetPassword(realm, userId, pcr);
+		? remote.resetPasswordUs(token)(realm, userId, pcr, userStorage)
+		: remote.resetPassword(token)(realm, userId, pcr);
 };
 
-export const getGroup = (realm: string, application: string, group: string) => {
-	return remote.getGroup(realm, application, group);
+export const getGroup = (token?: string) => (
+	realm: string,
+	application: string,
+	group: string,
+) => {
+	return remote.getGroup(token)(realm, application, group);
 };
 
-export const deleteApplication = (realm: string, appName: string) => {
-	return remote.deleteApplication(realm, appName);
+export const deleteApplication = (token?: string) => (
+	realm: string,
+	appName: string,
+) => {
+	return remote.deleteApplication(token)(realm, appName);
+};
+
+export const getWhoami = (token?: string) => (): Promise<Whoami> => {
+	return remote.getWhoami(token)();
 };

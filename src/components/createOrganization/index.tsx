@@ -3,7 +3,7 @@ import { useSnackbar } from 'notistack';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
-import usePostOrganization from '../../hooks/organization/usePostOrganization';
+import usePostOrganization from '../../hooks/api/organization/usePostOrganization';
 import useRealmConfig from '../../hooks/realm/useRealmConfig/useRealmConfig';
 import { useForms } from '../../hooks/technics/useForms';
 import Organization from '../../model/api/organization';

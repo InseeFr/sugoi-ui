@@ -3,7 +3,7 @@ import { Autocomplete } from '@material-ui/lab';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 import React from 'react';
-import { useGetApplications } from '../../../../../hooks/applications/useGetApplications';
+import { useGetApplications } from '../../../../../hooks/api/applications/useGetApplications';
 
 interface Props {
 	realm: string;

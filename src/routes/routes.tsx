@@ -9,6 +9,7 @@ import SearchOrganizations from '../components/searchOrganizations';
 import SearchUsers from '../components/searchUsers';
 import Settings from '../components/settings/settings';
 import { DetailsApplication } from '../components/detailsApplication';
+
 const IdDynamicBreadcrumb = ({ match }: any): string => {
 	return match.params['id'];
 };

@@ -11,6 +11,8 @@
 			"admin": "Administrateur SUGOI",
 			"writer": "Gestionnaire du realm ",
 			"reader": "Consultant du realm ",
+			"password": "Gestionnaire de mot de passe dans le realm ",
+			"app": "Gestionnaire de l'application  ",
 			"no_right": "Aucun droit"
 		}
 	},

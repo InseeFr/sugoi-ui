@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useResetPassword } from '../../../hooks/credential';
+import { useResetPassword } from '../../../hooks/api/credential';
 import User from '../../../model/api/user';
 import LoadingButton from '../loadingButton';
 import SimpleDialog from '../popButton/Dialog';

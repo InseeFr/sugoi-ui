@@ -1,12 +1,12 @@
 import { AxiosInstance } from 'axios';
-import { getAuthClient } from '../../configuration/axios-configuration';
+import { getClient } from '../../configuration/axios-configuration';
 import { Group } from '../../model/api/group';
 
-export const getGroups = (
+export const getGroups = (token?: string) => (
 	realm: string,
 	application: string,
 ): Promise<Group[]> =>
-	getAuthClient().then((client: AxiosInstance) =>
+	getClient().then((client: AxiosInstance) =>
 		client
 			.get(
 				'/realms/' +
@@ -14,16 +14,17 @@ export const getGroups = (
 					'/applications/' +
 					application +
 					'/groups/',
+				{ headers: { Authorization: 'bearer ' + token } },
 			)
 			.then((r: any) => r.data),
 	);
 
-export const getGroup = (
+export const getGroup = (token?: string) => (
 	realm: string,
 	application: string,
 	group: string,
 ): Promise<Group> =>
-	getAuthClient().then((client: AxiosInstance) =>
+	getClient().then((client: AxiosInstance) =>
 		client
 			.get(
 				'/realms/' +
@@ -32,16 +33,17 @@ export const getGroup = (
 					application +
 					'/groups/' +
 					group,
+				{ headers: { Authorization: 'bearer ' + token } },
 			)
 			.then((r: any) => r.data),
 	);
 
-export const postGroup = (
+export const postGroup = (token?: string) => (
 	realm: string,
 	application: string,
 	group: Group,
 ): Promise<Group> =>
-	getAuthClient().then((client: AxiosInstance) =>
+	getClient().then((client: AxiosInstance) =>
 		client
 			.post(
 				'/realms/' +
@@ -50,16 +52,17 @@ export const postGroup = (
 					application +
 					'/groups/',
 				group,
+				{ headers: { Authorization: 'bearer ' + token } },
 			)
 			.then((r: any) => r.data),
 	);
 
-export const putGroup = (
+export const putGroup = (token?: string) => (
 	realm: string,
 	application: string,
 	group: Group,
 ): Promise<Group> =>
-	getAuthClient().then((client: AxiosInstance) =>
+	getClient().then((client: AxiosInstance) =>
 		client
 			.put(
 				'/realms/' +
@@ -69,16 +72,17 @@ export const putGroup = (
 					'/groups/' +
 					group.name,
 				group,
+				{ headers: { Authorization: 'bearer ' + token } },
 			)
 			.then((r: any) => r.data),
 	);
 
-export const deleteGroup = (
+export const deleteGroup = (token?: string) => (
 	realm: string,
 	application: string,
 	groupId: string,
 ): Promise<string> =>
-	getAuthClient().then((client: AxiosInstance) =>
+	getClient().then((client: AxiosInstance) =>
 		client
 			.delete(
 				'/realms/' +
@@ -87,17 +91,18 @@ export const deleteGroup = (
 					application +
 					'/groups/' +
 					groupId,
+				{ headers: { Authorization: 'bearer ' + token } },
 			)
 			.then((r: any) => r.data),
 	);
 
-export const addUserToGroup = (
+export const addUserToGroup = (token?: string) => (
 	realm: string,
 	application: string,
 	groupId: string,
 	userId: string,
 ): Promise<string> => {
-	return getAuthClient().then((client: AxiosInstance) =>
+	return getClient().then((client: AxiosInstance) =>
 		client
 			.put(
 				'/realms/' +
@@ -108,17 +113,19 @@ export const addUserToGroup = (
 					groupId +
 					'/members/' +
 					userId,
+				null,
+				{ headers: { Authorization: 'bearer ' + token } },
 			)
 			.then((r: any) => r.data),
 	);
 };
-export const deleteUserFromGroup = (
+export const deleteUserFromGroup = (token?: string) => (
 	realm: string,
 	application: string,
 	groupId: string,
 	userId: string,
 ): Promise<string> =>
-	getAuthClient().then((client: AxiosInstance) =>
+	getClient().then((client: AxiosInstance) =>
 		client
 			.delete(
 				'/realms/' +
@@ -129,6 +136,7 @@ export const deleteUserFromGroup = (
 					groupId +
 					'/members/' +
 					userId,
+				{ headers: { Authorization: 'bearer ' + token } },
 			)
 			.then((r: any) => r.data),
 	);

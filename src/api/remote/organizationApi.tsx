@@ -1,10 +1,10 @@
 import { AxiosInstance } from 'axios';
-import { getAuthClient } from '../../configuration/axios-configuration';
+import { getClient } from '../../configuration/axios-configuration';
 import Organization from '../../model/api/organization';
 import { Pageable } from '../../model/api/pageable';
 import searchRequestOrganization from '../../model/js/searchRequestOrganization';
 
-export const getOrganizations = (
+export const getOrganizations = (token?: string) => (
 	realm: string,
 	{
 		identifiant,
@@ -14,7 +14,7 @@ export const getOrganizations = (
 		mail,
 	}: searchRequestOrganization,
 ): Promise<Pageable> =>
-	getAuthClient().then((client: AxiosInstance) =>
+	getClient().then((client: AxiosInstance) =>
 		client
 			.get('/realms/' + realm + '/organizations', {
 				params: {
@@ -24,46 +24,52 @@ export const getOrganizations = (
 					property,
 					mail,
 				},
+				headers: { Authorization: 'bearer ' + token },
 			})
 			.then((r: any) => r.data),
 	);
 
-export const getOrganization = async (
+export const getOrganization = (token?: string) => async (
 	realm: string,
 	id: string,
 ): Promise<Organization> => {
-	return await getAuthClient().then((client: AxiosInstance) =>
+	return await getClient().then((client: AxiosInstance) =>
 		client
-			.get('/realms/' + realm + '/organizations/' + id)
+			.get('/realms/' + realm + '/organizations/' + id, {
+				headers: { Authorization: 'bearer ' + token },
+			})
 			.then((r: any) => r.data),
 	);
 };
 
-export const deleteOrganization = (
+export const deleteOrganization = (token?: string) => (
 	realm: string,
 	id: string,
 ): Promise<string> =>
-	getAuthClient().then((client: AxiosInstance) =>
+	getClient().then((client: AxiosInstance) =>
 		client
-			.delete('/realms/' + realm + '/organizations/' + id)
+			.delete('/realms/' + realm + '/organizations/' + id, {
+				headers: { Authorization: 'bearer ' + token },
+			})
 			.then((r: any) => r.data),
 	);
 
-export const updateOrganization = (
+export const updateOrganization = (token?: string) => (
 	realm: string,
 	id: string,
 	organization: Organization,
 ): Promise<Organization> =>
-	getAuthClient().then((client: AxiosInstance) =>
+	getClient().then((client: AxiosInstance) =>
 		client
 			.put(
 				'/realms/' + realm + '/organizations/' + id,
 				organization,
+				{ headers: { Authorization: 'bearer ' + token } },
 			)
 			.then((r: any) => r.data),
 	);
 
-export const getOrganizationsFromUserStorage = (
+export const getOrganizationsFromUserStorage = (token?: string) => (
 	realm: string,
 	us: string,
 	{
@@ -74,7 +80,7 @@ export const getOrganizationsFromUserStorage = (
 		mail,
 	}: searchRequestOrganization,
 ): Promise<Pageable> =>
-	getAuthClient().then((client: AxiosInstance) =>
+	getClient().then((client: AxiosInstance) =>
 		client
 			.get(
 				'/realms/' +
@@ -90,17 +96,18 @@ export const getOrganizationsFromUserStorage = (
 						property,
 						mail,
 					},
+					headers: { Authorization: 'bearer ' + token },
 				},
 			)
 			.then((r: any) => r.data),
 	);
 
-export const getOrganizationFromUserStorage = async (
+export const getOrganizationFromUserStorage = (token?: string) => async (
 	realm: string,
 	us: string,
 	id: string,
 ): Promise<Organization> => {
-	return await getAuthClient().then((client: AxiosInstance) =>
+	return await getClient().then((client: AxiosInstance) =>
 		client
 			.get(
 				'/realms/' +
@@ -109,17 +116,18 @@ export const getOrganizationFromUserStorage = async (
 					us +
 					'/organizations/' +
 					id,
+				{ headers: { Authorization: 'bearer ' + token } },
 			)
 			.then((r: any) => r.data),
 	);
 };
 
-export const deleteOrganizationFromUserStorage = (
+export const deleteOrganizationFromUserStorage = (token?: string) => (
 	realm: string,
 	us: string,
 	id: string,
 ): Promise<string> =>
-	getAuthClient().then((client: AxiosInstance) =>
+	getClient().then((client: AxiosInstance) =>
 		client
 			.delete(
 				'/realms/' +
@@ -128,16 +136,17 @@ export const deleteOrganizationFromUserStorage = (
 					us +
 					'/organizations/' +
 					id,
+				{ headers: { Authorization: 'bearer ' + token } },
 			)
 			.then((r: any) => r.data),
 	);
 
-export const postOrganization = (
+export const postOrganization = (token?: string) => (
 	realm: string,
 	us: string,
 	organization: Organization,
 ): Promise<Organization> =>
-	getAuthClient().then((client: AxiosInstance) =>
+	getClient().then((client: AxiosInstance) =>
 		client
 			.post(
 				'/realms/' +
@@ -146,17 +155,18 @@ export const postOrganization = (
 					us +
 					'/organizations',
 				organization,
+				{ headers: { Authorization: 'bearer ' + token } },
 			)
 			.then((r: any) => r.data),
 	);
 
-export const updateOrganizationFromUserStorage = (
+export const updateOrganizationFromUserStorage = (token?: string) => (
 	realm: string,
 	us: string,
 	id: string,
 	organization: Organization,
 ): Promise<Organization> =>
-	getAuthClient().then((client: AxiosInstance) =>
+	getClient().then((client: AxiosInstance) =>
 		client
 			.put(
 				'/realms/' +
@@ -166,6 +176,7 @@ export const updateOrganizationFromUserStorage = (
 					'/organizations/' +
 					id,
 				organization,
+				{ headers: { Authorization: 'bearer ' + token } },
 			)
 			.then((r: any) => r.data),
 	);

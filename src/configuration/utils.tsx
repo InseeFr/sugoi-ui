@@ -4,6 +4,7 @@ const basePath = `${window.location.origin}`;
 const nameAppConfigFile = process.env.REACT_APP_NAME_APP_CONFIG_FILE
 	? process.env.REACT_APP_NAME_APP_CONFIG_FILE
 	: 'configuration.json';
+
 export const getConfigFile = async () => {
 	let client = axios.create({
 		baseURL: basePath,

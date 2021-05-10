@@ -17,8 +17,8 @@ import { Pagination } from '@material-ui/lab';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
-import { useCreateApplication } from '../../hooks/applications';
-import { useGetApplications } from '../../hooks/applications/useGetApplications';
+import { useCreateApplication } from '../../hooks/api/applications';
+import { useGetApplications } from '../../hooks/api/applications/useGetApplications';
 import Title from '../commons/title/title';
 import CreateApplicationButton from './button-create-app';
 

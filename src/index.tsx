@@ -1,60 +1,34 @@
-import React, { useEffect, useState, Suspense } from 'react';
+import React, { useState, Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import { Provider, useDispatch } from 'react-redux';
 import store from './configuration/store-configuration';
 import { BrowserRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
-import { saveConfig } from './redux/actions/app';
-import { loadUser } from './redux/actions/user';
 import {
 	AuthenticationProvider,
 	InMemoryWebStorage,
 	oidcLog,
 } from '@axa-fr/react-oidc-context';
 import { UserManagerSettings } from 'oidc-client';
-import { getConfigFile } from './configuration/utils';
 import { Loader } from './components/commons/loader/loader';
 import App from './components/app';
 import './i18n';
+import { useGetConfig } from './hooks/technics/useConfigFile';
+import { Provider } from 'react-redux';
 
 const Start = () => {
-	const [authConfiguration, setAuthConfiguration] = useState<
-		UserManagerSettings | undefined
-	>(undefined);
-	const [loading, setLoading] = useState(true);
-	const dispatch = useDispatch();
-	useEffect(() => {
-		getConfigFile().then((config) => {
-			setAuthConfiguration(config.auth);
-			dispatch(saveConfig(config));
-			setLoading(false);
-		});
-	}, [dispatch]);
-
+	const { loading, authConfig } = useGetConfig();
+	console.log('reload index');
 	return loading ? (
 		<Loader />
 	) : (
 		<AuthenticationProvider
-			configuration={authConfiguration}
-			loggerLevel={oidcLog.INFO}
+			configuration={authConfig as UserManagerSettings | undefined}
+			loggerLevel={oidcLog.DEBUG}
 			isEnabled={true}
 			callbackComponentOverride={Loader}
 			UserStore={InMemoryWebStorage}
 			authenticating={Loader}
 			sessionLostComponent={Loader}
-			customEvents={{
-				onUserLoaded: (user) => dispatch(loadUser(user)),
-				onUserUnloaded: () => console.log('onUserUnloaded'),
-				onSilentRenewError: (error) =>
-					console.log('onSilentRenewError', error),
-				onUserSignedOut: () => console.log('onUserSignedOut'),
-				onUserSessionChanged: () =>
-					console.log('onUserSessionChanged'),
-				onAccessTokenExpiring: () =>
-					console.log('onAccessTokenExpiring'),
-				onAccessTokenExpired: () =>
-					console.log('onAccessTokenExpired'),
-			}}
 		>
 			<BrowserRouter>
 				<SnackbarProvider
@@ -71,6 +45,7 @@ const Start = () => {
 		</AuthenticationProvider>
 	);
 };
+
 ReactDOM.render(
 	<Suspense fallback={<Loader />}>
 		<Provider store={store}>

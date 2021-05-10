@@ -1,13 +1,13 @@
 import { AxiosInstance } from 'axios';
-import { getAuthClient } from '../../configuration/axios-configuration';
+import { getClient } from '../../configuration/axios-configuration';
 import { PasswordChangeRequest } from '../../model/api/passwordChangeRequest';
 
-export const resetPassword = (
+export const resetPassword = (token?: string) => (
 	realm: string,
 	userId: string,
 	pcr: PasswordChangeRequest,
 ) =>
-	getAuthClient().then((client: AxiosInstance) =>
+	getClient().then((client: AxiosInstance) =>
 		client
 			.post(
 				'/realms/' +
@@ -20,18 +20,19 @@ export const resetPassword = (
 					params: {
 						sendModes: 'MAIL',
 					},
+					headers: { Authorization: 'bearer ' + token },
 				},
 			)
 			.then((r) => r.data),
 	);
 
-export const resetPasswordUs = (
+export const resetPasswordUs = (token?: string) => (
 	realm: string,
 	userId: string,
 	pcr: PasswordChangeRequest,
 	userStorage?: string,
 ) =>
-	getAuthClient().then((client: AxiosInstance) =>
+	getClient().then((client: AxiosInstance) =>
 		client
 			.post(
 				'/realms/' +
@@ -46,17 +47,18 @@ export const resetPasswordUs = (
 					params: {
 						sendModes: 'MAIL',
 					},
+					headers: { Authorization: 'bearer ' + token },
 				},
 			)
 			.then((r) => r.data),
 	);
 
-export const sendIdentifiant = (
+export const sendIdentifiant = (token?: string) => (
 	realm: string,
 	userId: string,
 	pcr: PasswordChangeRequest,
 ) =>
-	getAuthClient().then((client: AxiosInstance) =>
+	getClient().then((client: AxiosInstance) =>
 		client
 			.post(
 				'/realms/' +
@@ -69,18 +71,19 @@ export const sendIdentifiant = (
 					params: {
 						sendModes: 'MAIL',
 					},
+					headers: { Authorization: 'bearer ' + token },
 				},
 			)
 			.then((r) => r.data),
 	);
 
-export const sendIdentifiantUs = (
+export const sendIdentifiantUs = (token?: string) => (
 	realm: string,
 	userId: string,
 	pcr: PasswordChangeRequest,
 	userStorage: string,
 ) =>
-	getAuthClient().then((client: AxiosInstance) =>
+	getClient().then((client: AxiosInstance) =>
 		client
 			.post(
 				'/realms/' +
@@ -95,6 +98,7 @@ export const sendIdentifiantUs = (
 					params: {
 						sendModes: 'MAIL',
 					},
+					headers: { Authorization: 'bearer ' + token },
 				},
 			)
 			.then((r) => r.data),

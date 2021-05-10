@@ -1,9 +1,9 @@
 import { Grid, IconButton } from '@material-ui/core';
 import SettingsIcon from '@material-ui/icons/Settings';
 import React, { useState } from 'react';
-import useAddUserToGroup from '../../../hooks/group/useAddUserToGroup';
-import useDeleteUserFromGroup from '../../../hooks/group/useDeleteUserFromGroup';
-import { useGetGroup } from '../../../hooks/group/useGetGroup';
+import useAddUserToGroup from '../../../hooks/api/group/useAddUserToGroup';
+import useDeleteUserFromGroup from '../../../hooks/api/group/useDeleteUserFromGroup';
+import { useGetGroup } from '../../../hooks/api/group/useGetGroup';
 import { Group } from '../../../model/api/group';
 import SimpleDialog from '../../commons/popButton/Dialog';
 import { AddUsers } from './addUser';
