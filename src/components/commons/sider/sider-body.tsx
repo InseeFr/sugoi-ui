@@ -19,7 +19,12 @@ import Autocomplete from '@material-ui/lab/Autocomplete/Autocomplete';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { matchPath, useHistory, useLocation } from 'react-router-dom';
+import {
+	generatePath,
+	matchPath,
+	useHistory,
+	useLocation,
+} from 'react-router-dom';
 import { RootState } from '../../../configuration/store-configuration';
 import { useGetRealms } from '../../../hooks/realm/useGetRealms';
 import { saveRealms } from '../../../redux/actions/app';
@@ -53,6 +58,27 @@ const SiderBody = () => {
 
 	const { result: realms } = useGetRealms();
 
+	function pushKeepFeaturePage(
+		realm: string | undefined,
+		storage: string | undefined,
+	) {
+		const endOfUri: string | undefined = location.pathname.match(
+			'(realm/[^/]+/|realm/[^/]+/us/[^/]+/)users$|organizations$|applications$',
+		)
+			? location.pathname.split('/').pop()
+			: '';
+		push(
+			(storage
+				? generatePath('/realm/:realm/us/:userStorage/', {
+						realm: realm,
+						userStorage: storage,
+				  })
+				: generatePath('/realm/:realm/', {
+						realm: realm,
+				  })) + endOfUri,
+		);
+	}
+
 	useEffect(() => {
 		dispatch(saveRealms(realms));
 	}, [realms, dispatch]);
@@ -66,14 +92,12 @@ const SiderBody = () => {
 			setRealmSelected(realms[0].name);
 			if (realms[0].userStorages.length === 1) {
 				setStorageSelected(realms[0].userStorages[0].name);
-				push(
-					'/realm/' +
-						realms[0].name +
-						'/us/' +
-						realms[0].userStorages[0].name,
+				pushKeepFeaturePage(
+					realms[0].name,
+					realms[0].userStorages[0].name,
 				);
 			} else {
-				push('/realm/' + realms[0].name);
+				pushKeepFeaturePage(realms[0].name, undefined);
 			}
 		}
 		if (realms.length > 0 && match) {
@@ -98,7 +122,10 @@ const SiderBody = () => {
 							match?.params?.userStorage,
 						);
 					} else {
-						push('/realm/' + match?.params?.realm);
+						pushKeepFeaturePage(
+							match.params.realm,
+							undefined,
+						);
 					}
 				} else {
 					setStorageSelected(undefined);
@@ -167,25 +194,16 @@ const SiderBody = () => {
 											newRealmName ===
 											realm.name,
 									);
-									if (
+									pushKeepFeaturePage(
+										newRealmName,
 										newRealm
 											?.userStorages
 											?.length === 1
-									) {
-										push(
-											'/realm/' +
-												newRealmName +
-												'/us/' +
-												newRealm
+											? newRealm
 													?.userStorages[0]
-													.name,
-										);
-									} else {
-										push(
-											'/realm/' +
-												newRealmName,
-										);
-									}
+													.name
+											: undefined,
+									);
 								} else {
 									push('/');
 								}
@@ -220,17 +238,11 @@ const SiderBody = () => {
 								_event: any,
 								newUserStorage: string | null,
 							) => {
-								newUserStorage
-									? push(
-											'/realm/' +
-												realmSelected +
-												'/us/' +
-												newUserStorage,
-									  )
-									: push(
-											'/realm/' +
-												realmSelected,
-									  );
+								pushKeepFeaturePage(
+									realmSelected,
+									newUserStorage ||
+										undefined,
+								);
 							}}
 							renderInput={(params) => (
 								<TextField

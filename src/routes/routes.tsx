@@ -105,6 +105,13 @@ const routes: Iroutes[] = [
 		secure: true,
 	},
 	{
+		path: '/realm/:realm/us/:userStorage/applications',
+		exact: true,
+		breadcrumb: 'Application',
+		component: SearchApplications,
+		secure: true,
+	},
+	{
 		path: '/realm/:realm/applications/:id',
 		exact: true,
 		breadcrumb: IdDynamicBreadcrumb,
