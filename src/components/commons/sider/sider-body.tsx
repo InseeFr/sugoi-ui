@@ -16,7 +16,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import PersonIcon from '@material-ui/icons/Person';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Autocomplete from '@material-ui/lab/Autocomplete/Autocomplete';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { matchPath, useHistory, useLocation } from 'react-router-dom';
@@ -58,39 +58,50 @@ const SiderBody = () => {
 	}, [realms, dispatch]);
 
 	useEffect(() => {
-		const match = matchPath(location.pathname, [
-			'/realm/:realm/us/:userStorage',
-			'/realm/:realm/',
-		]);
+		const match = matchPath<{ realm: 'string'; userStorage: 'string' }>(
+			location.pathname,
+			['/realm/:realm/us/:userStorage', '/realm/:realm/'],
+		);
+		if (!match && realms.length === 1) {
+			setRealmSelected(realms[0].name);
+			if (realms[0].userStorages.length === 1) {
+				setStorageSelected(realms[0].userStorages[0].name);
+				push(
+					'/realm/' +
+						realms[0].name +
+						'/us/' +
+						realms[0].userStorages[0].name,
+				);
+			} else {
+				push('/realm/' + realms[0].name);
+			}
+		}
 		if (realms.length > 0 && match) {
 			if (
 				realms
 					.map((realm) => realm.name)
-					.includes((match?.params as any)?.realm)
+					.includes(match?.params?.realm)
 			) {
-				setRealmSelected((match?.params as any)?.realm);
-				let possibleUserStorage = realms
-					.filter(
-						(realm) =>
-							realm.name ===
-							(match?.params as any).realm,
-					)[0]
-					.userStorages.map((us) => us.name);
-				if ((match.params as any)?.userStorage) {
+				setRealmSelected(match?.params?.realm);
+				if (match.params?.userStorage) {
 					if (
-						possibleUserStorage.includes(
-							(match?.params as any)?.userStorage,
-						)
+						realms
+							.find(
+								(realm) =>
+									realm.name ===
+									match.params?.realm,
+							)
+							?.userStorages.map((us) => us.name)
+							.includes(match?.params?.userStorage)
 					) {
 						setStorageSelected(
-							(match?.params as any)?.userStorage,
+							match?.params?.userStorage,
 						);
 					} else {
-						push(
-							'/realm/' +
-								(match?.params as any)?.realm,
-						);
+						push('/realm/' + match?.params?.realm);
 					}
+				} else {
+					setStorageSelected(undefined);
 				}
 			} else {
 				push('/');
@@ -106,7 +117,7 @@ const SiderBody = () => {
 			setRealmSelected(undefined);
 			setStorageSelected(undefined);
 		}
-	}, [location.pathname, push, realms]);
+	}, [location.pathname, realms]);
 
 	return (
 		<>
@@ -148,17 +159,33 @@ const SiderBody = () => {
 							value={realmSelected || null}
 							onChange={(
 								_event: any,
-								newRealm: string | null,
+								newRealmName: string | null,
 							) => {
-								setRealmSelected(
-									newRealm || undefined,
-								);
-								setStorageSelected(undefined);
-								if (newRealm) {
-									push(
-										'/realm/' +
-											newRealm,
+								if (newRealmName) {
+									const newRealm = realms.find(
+										(realm) =>
+											newRealmName ===
+											realm.name,
 									);
+									if (
+										newRealm
+											?.userStorages
+											?.length === 1
+									) {
+										push(
+											'/realm/' +
+												newRealmName +
+												'/us/' +
+												newRealm
+													?.userStorages[0]
+													.name,
+										);
+									} else {
+										push(
+											'/realm/' +
+												newRealmName,
+										);
+									}
 								} else {
 									push('/');
 								}
@@ -193,16 +220,17 @@ const SiderBody = () => {
 								_event: any,
 								newUserStorage: string | null,
 							) => {
-								setStorageSelected(
-									newUserStorage ||
-										undefined,
-								);
-								push(
-									'/realm/' +
-										realmSelected +
-										'/us/' +
-										newUserStorage,
-								);
+								newUserStorage
+									? push(
+											'/realm/' +
+												realmSelected +
+												'/us/' +
+												newUserStorage,
+									  )
+									: push(
+											'/realm/' +
+												realmSelected,
+									  );
 							}}
 							renderInput={(params) => (
 								<TextField
