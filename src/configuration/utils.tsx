@@ -10,7 +10,6 @@ export const getConfigFile = async () => {
 		headers: {
 			'Content-Type': 'application/json',
 			Accept: 'application/json',
-			'Access-Control-Allow-Origin': '*',
 		},
 	});
 	try {
