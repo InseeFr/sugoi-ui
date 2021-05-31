@@ -18,7 +18,8 @@
     "plugins": [
         "react",
         "@typescript-eslint",
-        "prettier"
+        "prettier",
+        "unused-imports"
     ],
     "rules": {
         "prettier/prettier":"error",
