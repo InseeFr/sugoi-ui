@@ -6,6 +6,7 @@ import GithubButton from './github-button';
 import LanguageButton from './language-button';
 import LoginButton from './login-button';
 import MoreIconButton from './moreicon-button';
+import NotifButton from './notif-button';
 import { ThemeButton } from './theme-button';
 
 const GroupedIcons = () => {
@@ -17,6 +18,7 @@ const GroupedIcons = () => {
 				<GithubButton />
 				<ThemeButton />
 				<AccountButton />
+				<NotifButton />
 				<LoginButton />
 			</Hidden>
 
