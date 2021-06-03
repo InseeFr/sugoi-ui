@@ -7,7 +7,7 @@ import {
 	MuiThemeProvider,
 	Theme,
 } from '@material-ui/core/styles';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { RootState } from './../configuration/store-configuration';
@@ -19,6 +19,7 @@ import Footer from './commons/footer/footer';
 import Header from './commons/header/header';
 import ScrollTop from './commons/scroll-top/scroll-top';
 import Sider from './commons/sider';
+import Notifier from './notifications/';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -75,6 +76,7 @@ const App = () => {
 						maxWidth="xl"
 						className={classes.container}
 					>
+						<Notifier />
 						<BreadCrumbs />
 						<ErrorBoundary>
 							<Switch>

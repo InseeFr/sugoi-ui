@@ -1,5 +1,12 @@
 const initialConfigState = {
 	theme: window.localStorage.getItem('darkMode') ? 'dark' : 'light',
+	notifs: {
+		enabled_debug: window.localStorage.getItem('debug-notif-enabled')
+			? (window.localStorage.getItem(
+					'debug-notif-enabled',
+			  ) as string) === 'true'
+			: false,
+	},
 	config: {},
 	realms: [],
 };
@@ -20,6 +27,17 @@ const AppReducer = (state = initialConfigState, action: any) => {
 			nextState = {
 				...state,
 				realms: action.payload.realms,
+			};
+			return nextState;
+		}
+
+		case 'changeStatusNotifDebug': {
+			nextState = {
+				...state,
+				notifs: {
+					...state.notifs,
+					enabled_debug: action.payload.enabled,
+				},
 			};
 			return nextState;
 		}
