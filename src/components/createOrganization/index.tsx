@@ -60,40 +60,47 @@ const CreateOrganization = () => {
 					data={formValues}
 					fieldToDisplay={organizationConfig}
 					handleChange={handleChange}
-				/>
-			</Grid>
-			<Grid item xs={12}>
-				<Grid
-					container
-					direction="row"
-					justify="center"
-					spacing={3}
-				>
-					<Grid item>
-						<LoadingButton
-							handleClick={handleSubmit}
-							loading={loading}
-							color="primary"
-							variant="contained"
-						>
-							{t(
-								'create_organization.buttons.save',
-							)}
-						</LoadingButton>
-					</Grid>
+					create={true}
+					buttons={
+						<Grid item xs={12}>
+							<Grid
+								container
+								direction="row"
+								justify="center"
+								spacing={3}
+							>
+								<Grid item>
+									<LoadingButton
+										handleClick={
+											handleSubmit
+										}
+										loading={loading}
+										color="primary"
+										variant="contained"
+									>
+										{t(
+											'create_organization.buttons.save',
+										)}
+									</LoadingButton>
+								</Grid>
 
-					<Grid item>
-						<Button
-							variant="contained"
-							color="default"
-							onClick={handleReset}
-						>
-							{t(
-								'create_organization.buttons.reset',
-							)}
-						</Button>
-					</Grid>
-				</Grid>
+								<Grid item>
+									<Button
+										variant="contained"
+										color="default"
+										onClick={
+											handleReset
+										}
+									>
+										{t(
+											'create_organization.buttons.reset',
+										)}
+									</Button>
+								</Grid>
+							</Grid>
+						</Grid>
+					}
+				/>
 			</Grid>
 		</Grid>
 	);

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { addUserToGroup } from '../../api';
+import { addGroupToUser } from '../../api/remote';
 
 export const useAddUserToGroup = () => {
 	const [error, setError] = useState();
@@ -15,7 +15,7 @@ export const useAddUserToGroup = () => {
 		setLoading(true);
 		setError(undefined);
 		setResult(undefined);
-		await addUserToGroup(realm, application, group, userId)
+		await addGroupToUser(realm, application, group, userId)
 			.then((r) => setResult(r))
 			.catch((err) => setError(err))
 			.finally(() => {

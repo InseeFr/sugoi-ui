@@ -9,4 +9,5 @@ export interface field {
 	addTitle?: string;
 	textButton?: string;
 	tag?: any;
+	attribute_key?: string;
 }

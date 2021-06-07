@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { deleteUserFromGroup } from '../../api';
+import { deleteGroupToUser } from '../../api';
 
 export const useDeleteUserFromGroup = () => {
 	const [error, setError] = useState();
@@ -15,7 +15,7 @@ export const useDeleteUserFromGroup = () => {
 		setLoading(true);
 		setError(undefined);
 		setResult(undefined);
-		await deleteUserFromGroup(realm, application, group, userId)
+		await deleteGroupToUser(realm, application, group, userId)
 			.then((r) => setResult(r))
 			.catch((err) => setError(err))
 			.finally(() => {

@@ -42,33 +42,7 @@ const DetailUser = () => {
 		error: errorDelete,
 	} = useDeleteUser();
 
-	const { enqueueSnackbar } = useSnackbar();
-
 	const { t } = useTranslation();
-
-	useEffect(() => {
-		if (errorDelete) {
-			enqueueSnackbar(t('details_user.error') + errorDelete, {
-				variant: 'error',
-			});
-		}
-	}, [enqueueSnackbar, errorDelete, t]);
-
-	useEffect(() => {
-		if (errorGetUser) {
-			enqueueSnackbar(t('details_user.error') + errorGetUser, {
-				variant: 'error',
-			});
-		}
-	}, [enqueueSnackbar, errorGetUser, t]);
-
-	useEffect(() => {
-		if (errorUpdate) {
-			enqueueSnackbar(t('details_user.error') + errorUpdate, {
-				variant: 'error',
-			});
-		}
-	}, [enqueueSnackbar, errorUpdate, t]);
 
 	const {
 		formValues,
@@ -116,78 +90,89 @@ const DetailUser = () => {
 								data={formValues}
 								fieldToDisplay={userConfig}
 								handleChange={handleChange}
-							/>
-							<Grid
-								container
-								direction="row"
-								justify="center"
-								spacing={3}
-							>
-								<Grid item>
-									<SendUsernamePopup
-										realm={realm}
-										userStorage={
-											userStorage
-										}
-										user={user as User}
-									/>
-								</Grid>
+								buttons={
+									<Grid
+										container
+										direction="row"
+										justify="center"
+										spacing={3}
+									>
+										<Grid item>
+											<SendUsernamePopup
+												realm={
+													realm
+												}
+												userStorage={
+													userStorage
+												}
+												user={
+													user as User
+												}
+											/>
+										</Grid>
 
-								<Grid item>
-									<ResetPasswordPopup
-										user={user as User}
-										realm={realm}
-										userStorage={
-											userStorage
-										}
-									/>
-								</Grid>
-								<Grid item>
-									<LoadingButton
-										variant="contained"
-										color="primary"
-										loading={
-											loadingUpdate
-										}
-										handleClick={
-											handleUpdate
-										}
-									>
-										{t(
-											'detail_user.buttons.save',
-										)}
-									</LoadingButton>
-								</Grid>
-								<Grid item>
-									<LoadingButton
-										variant="contained"
-										color="secondary"
-										loading={
-											loadingDelete
-										}
-										handleClick={
-											handleDelete
-										}
-									>
-										{t(
-											'detail_user.buttons.delete',
-										)}
-									</LoadingButton>
-								</Grid>
-								<Grid item>
-									<Button
-										variant="contained"
-										color="default"
-										onClick={
-											handleReset
-										}
-									>
-										{t(
-											'detail_user.buttons.reset',
-										)}
-									</Button>
-								</Grid>
-							</Grid>
+										<Grid item>
+											<ResetPasswordPopup
+												user={
+													user as User
+												}
+												realm={
+													realm
+												}
+												userStorage={
+													userStorage
+												}
+											/>
+										</Grid>
+										<Grid item>
+											<LoadingButton
+												variant="contained"
+												color="primary"
+												loading={
+													loadingUpdate
+												}
+												handleClick={
+													handleUpdate
+												}
+											>
+												{t(
+													'detail_user.buttons.save',
+												)}
+											</LoadingButton>
+										</Grid>
+										<Grid item>
+											<LoadingButton
+												variant="contained"
+												color="secondary"
+												loading={
+													loadingDelete
+												}
+												handleClick={
+													handleDelete
+												}
+											>
+												{t(
+													'detail_user.buttons.delete',
+												)}
+											</LoadingButton>
+										</Grid>
+										<Grid item>
+											<Button
+												variant="contained"
+												color="default"
+												onClick={
+													handleReset
+												}
+											>
+												{t(
+													'detail_user.buttons.reset',
+												)}
+											</Button>
+										</Grid>
+									</Grid>
+								}
+								create={false}
+							/>
 						</>
 					) : (
 						<Typography variant="h6" gutterBottom>
