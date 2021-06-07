@@ -1,155 +1,25 @@
-import { Grid } from '@material-ui/core';
+import { Grid, Paper, Tabs, Tab } from '@material-ui/core';
 import React from 'react';
 import { field } from '../../../model/field';
 import GenerateFields from '../formular/fields/utils';
 import Panel from '../panel/panel';
+import { ContentPanel, generatePanel } from './commons';
+import MainPanel from './mainPanel';
 interface props {
 	data: any;
 	fieldToDisplay: field[];
 	handleChange: any;
+	create: boolean;
+	buttons?: any;
 }
 
-const generatePanel = (
-	title: string,
-	children: JSX.Element,
-	collapsible?: boolean,
-	description?: string,
-	elevation?: number,
-) => {
-	return (
-		<Panel
-			title={title}
-			collapsible={collapsible}
-			description={description}
-			children={children}
-			elevation={elevation}
-		/>
-	);
-};
-
-interface mainPanelProps {
-	values: any;
-	handleChange: any;
-	mainsFields: field[];
-	addressFields: field[];
-	advancedFields: field[];
-}
-
-const MainPanel = ({
-	values,
+const DataViewer = ({
+	data,
+	fieldToDisplay,
 	handleChange,
-	mainsFields,
-	addressFields,
-	advancedFields,
-}: mainPanelProps) => {
-	return (
-		<>
-			<Grid container spacing={3} direction="row">
-				{GenerateFields(values, handleChange, mainsFields).map(
-					(field, i) => (
-						<Grid
-							item
-							xs={12}
-							md={6}
-							key={'field-' + field + '-' + i}
-						>
-							{field}
-						</Grid>
-					),
-				)}
-			</Grid>
-			{addressFields.length > 0
-				? generatePanel(
-						'Adresse',
-						<Grid container spacing={3} direction="row">
-							{GenerateFields(
-								values,
-								handleChange,
-								addressFields,
-							).map((field, i) => (
-								<Grid
-									item
-									xs={12}
-									md={6}
-									key={
-										'field-' +
-										field +
-										'-' +
-										i
-									}
-								>
-									{field}
-								</Grid>
-							))}
-						</Grid>,
-						true,
-						'Information générale',
-						0,
-				  )
-				: null}
-			{advancedFields.length > 0
-				? generatePanel(
-						'Information Complémentaire',
-						<Grid container spacing={3} direction="row">
-							{GenerateFields(
-								values,
-								handleChange,
-								advancedFields,
-							).map((field, i) => (
-								<Grid
-									item
-									xs={12}
-									md={6}
-									key={
-										'field-' +
-										field +
-										'-' +
-										i
-									}
-								>
-									{field}
-								</Grid>
-							))}
-						</Grid>,
-						true,
-						'Autres infos',
-						0,
-				  )
-				: null}
-		</>
-	);
-};
-
-interface contentProps {
-	values: any;
-	handleChange: any;
-	fields: field[];
-}
-const ContentPanel = ({ values, handleChange, fields }: contentProps) => {
-	return (
-		<Grid
-			container
-			spacing={3}
-			direction="column"
-			justify="center"
-			alignItems="stretch"
-		>
-			{GenerateFields(values, handleChange, fields).map(
-				(field, i) => (
-					<Grid
-						item
-						xs={12}
-						key={'field-' + field + '-' + i}
-					>
-						{field}
-					</Grid>
-				),
-			)}
-		</Grid>
-	);
-};
-
-const DataViewer = ({ data, fieldToDisplay, handleChange }: props) => {
+	buttons,
+	create,
+}: props) => {
 	const mainsFields = fieldToDisplay.filter(
 		(field) => field.tag === 'main',
 	);
@@ -168,6 +38,15 @@ const DataViewer = ({ data, fieldToDisplay, handleChange }: props) => {
 	const propertiesFields = fieldToDisplay.filter(
 		(field) => field.tag === 'properties',
 	);
+
+	const [value, setValue] = React.useState(0);
+
+	const handleChangeTabs = (
+		event: React.ChangeEvent<{}>,
+		newValue: number,
+	) => {
+		setValue(newValue);
+	};
 	return (
 		<Grid
 			container
@@ -175,37 +54,90 @@ const DataViewer = ({ data, fieldToDisplay, handleChange }: props) => {
 			direction="row"
 			justify="center"
 			alignItems="stretch"
-			style={{ maxHeight: '70vh', overflow: 'auto' }}
 		>
 			<Grid item xs={12}>
-				{generatePanel(
-					'Information du profil',
-					<MainPanel
-						values={data}
-						handleChange={handleChange}
-						mainsFields={mainsFields}
-						addressFields={addressFields}
-						advancedFields={advancedFields}
-					/>,
-					false,
-					'Information générale',
-				)}
+				<Paper square>
+					<Tabs
+						value={value}
+						indicatorColor="primary"
+						textColor="primary"
+						onChange={handleChangeTabs}
+						aria-label="disabled tabs example"
+					>
+						<Tab label="Détails" />
+						{habilitationsFields.length > 0 && (
+							<Tab
+								label="Droits applicatifs"
+								disabled={create}
+							/>
+						)}
+					</Tabs>
+				</Paper>
 			</Grid>
-			{habilitationsFields.length > 0 ? (
+
+			{value === 0 && (
+				<>
+					<Grid item xs={12}>
+						<Panel
+							title="Information du profil"
+							collapsible={false}
+							description="Information générale"
+						>
+							<MainPanel
+								values={data}
+								handleChange={handleChange}
+								mainsFields={mainsFields}
+								addressFields={addressFields}
+								advancedFields={advancedFields}
+							/>
+						</Panel>
+					</Grid>
+					{propertiesFields.length > 0 && (
+						<Grid
+							item
+							xs={12}
+							md={
+								credentialsFields.length > 0
+									? 6
+									: 12
+							}
+						>
+							<Panel
+								title="Propriété"
+								collapsible={true}
+							>
+								<ContentPanel
+									values={data}
+									handleChange={
+										handleChange
+									}
+									fields={propertiesFields}
+								/>
+							</Panel>
+						</Grid>
+					)}
+					<Grid item xs={12}>
+						{buttons}
+					</Grid>
+				</>
+			)}
+			{value === 1 && habilitationsFields.length > 0 && (
 				<Grid item xs={12}>
-					{generatePanel(
-						'Droits applicatifs',
+					<Panel
+						title="Droits applicatifs"
+						collapsible={false}
+						description="Gestion des droits de
+						l'utilisateur"
+					>
 						<ContentPanel
 							values={data}
 							handleChange={handleChange}
 							fields={habilitationsFields}
-						/>,
-						true,
-						"Gestion des droits de l'utilisateur",
-					)}
+						/>
+					</Panel>
 				</Grid>
-			) : null}
-			{credentialsFields.length > 0 ? (
+			)}
+			{value === 2 && credentialsFields.length > 0 && (
 				<Grid
 					item
 					xs={12}
@@ -222,25 +154,7 @@ const DataViewer = ({ data, fieldToDisplay, handleChange }: props) => {
 						"Gestion des credentials de l'utilisateurs",
 					)}
 				</Grid>
-			) : null}
-			{propertiesFields.length > 0 ? (
-				<Grid
-					item
-					xs={12}
-					md={credentialsFields.length > 0 ? 6 : 12}
-				>
-					{generatePanel(
-						'Propriété',
-						<ContentPanel
-							values={data}
-							handleChange={handleChange}
-							fields={propertiesFields}
-						/>,
-						true,
-						'blabla',
-					)}
-				</Grid>
-			) : null}
+			)}
 		</Grid>
 	);
 };

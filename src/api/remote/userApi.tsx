@@ -170,3 +170,45 @@ export const updateUserFromUserStorage = (
 			)
 			.then((r: any) => r.data),
 	);
+
+export const addGroupToUser = (
+	realm: string,
+	application_id: string,
+	group_id: string,
+	id: string,
+) =>
+	getAuthClient().then((client: AxiosInstance) =>
+		client
+			.put(
+				'/realms/' +
+					realm +
+					'/applications/' +
+					application_id +
+					'/groups/' +
+					group_id +
+					'/members/' +
+					id,
+			)
+			.then((r: any) => r.data),
+	);
+
+export const deleteGroupToUser = (
+	realm: string,
+	application_id: string,
+	group_id: string,
+	id: string,
+) =>
+	getAuthClient().then((client: AxiosInstance) =>
+		client
+			.delete(
+				'/realms/' +
+					realm +
+					'/applications/' +
+					application_id +
+					'/groups/' +
+					group_id +
+					'/members/' +
+					id,
+			)
+			.then((r: any) => r.data),
+	);

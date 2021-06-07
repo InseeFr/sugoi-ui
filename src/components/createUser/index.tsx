@@ -54,35 +54,46 @@ const CreateUsers = () => {
 					data={formValues}
 					fieldToDisplay={userConfig}
 					handleChange={handleChange}
+					buttons={
+						<Grid item xs={12}>
+							<Grid
+								container
+								direction="row"
+								justify="center"
+								spacing={3}
+							>
+								<Grid item>
+									<LoadingButton
+										handleClick={
+											handleSubmit
+										}
+										loading={loading}
+										color="primary"
+										variant="contained"
+									>
+										{t(
+											'create_user.buttons.save',
+										)}
+									</LoadingButton>
+								</Grid>
+								<Grid item>
+									<Button
+										variant="contained"
+										color="default"
+										onClick={
+											handleReset
+										}
+									>
+										{t(
+											'create_user.buttons.reset',
+										)}
+									</Button>
+								</Grid>
+							</Grid>
+						</Grid>
+					}
+					create={true}
 				/>
-			</Grid>
-			<Grid item xs={12}>
-				<Grid
-					container
-					direction="row"
-					justify="center"
-					spacing={3}
-				>
-					<Grid item>
-						<LoadingButton
-							handleClick={handleSubmit}
-							loading={loading}
-							color="primary"
-							variant="contained"
-						>
-							{t('create_user.buttons.save')}
-						</LoadingButton>
-					</Grid>
-					<Grid item>
-						<Button
-							variant="contained"
-							color="default"
-							onClick={handleReset}
-						>
-							{t('create_user.buttons.reset')}
-						</Button>
-					</Grid>
-				</Grid>
 			</Grid>
 		</Grid>
 	);

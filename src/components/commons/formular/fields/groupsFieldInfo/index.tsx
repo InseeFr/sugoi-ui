@@ -1,43 +1,54 @@
-import { Chip, Divider, Grid, IconButton, Typography } from '@material-ui/core';
+import {
+	Chip,
+	Divider,
+	Grid,
+	IconButton,
+	Typography,
+	CircularProgress,
+	LinearProgress,
+} from '@material-ui/core';
 import CreateIcon from '@material-ui/icons/Create';
 import PeopleIcon from '@material-ui/icons/People';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetApplication } from '../../../../../hooks/applications/useGetApplication';
+import {
+	useAddGroupsToUser,
+	useDeleteGroupsToUser,
+} from '../../../../../hooks/user/useManageGroups';
 import { Group } from '../../../../../model/api/group';
 import PopIcon from '../../../popIcon/popIcon';
 import AutoCompleteApplication from './autocompleteApplication';
 import ManageGroup from './manageGroup';
+import useGetUser from '../../../../../hooks/user/useGetUser';
+import { Loader } from '../../../loader/loader';
 
 interface props {
-	groups: any;
 	textButton?: string;
-	helpTextTitle?: string;
 	helpText?: string;
 	name?: string;
-	handleChange: any;
-	addTitle?: string;
-	deleteTitle?: string;
 	modifiable: boolean;
 }
 
-export default function GroupsField({
-	name,
-	helpTextTitle,
-	helpText,
-	groups,
-	handleChange,
-	modifiable,
-	addTitle,
-	deleteTitle,
-}: props) {
-	const { realm } = useParams<any>();
+export default function GroupsField({ name, helpText, modifiable }: props) {
+	const { realm, userStorage, id } = useParams<any>();
+	const { user, execute: executeUser, loading: loadingUser } = useGetUser(
+		id,
+		realm,
+		userStorage,
+	);
 
 	const { application, execute: searchApplication } = useGetApplication();
 
 	const [applicationName, setApplicationName] = useState<
-		String | undefined
+		string | undefined
 	>();
+
+	const { execute: executeAdd, loading: loadingAdd } = useAddGroupsToUser();
+	const {
+		execute: executeDelete,
+		loading: loadingDelete,
+	} = useDeleteGroupsToUser();
 
 	const handleChangeOnApp = (application: string) => {
 		if (application) {
@@ -49,16 +60,19 @@ export default function GroupsField({
 	const [edit, setEdit] = useState(false);
 
 	const handleClickAdd = (group: string) => {
-		groups.push({ name: group });
-		handleChange(groups);
+		applicationName &&
+			executeAdd(realm, applicationName, group, id).finally(() => {
+				executeUser(id, realm, userStorage);
+			});
 	};
 
 	const handleClickDelete = (group: string) => {
-		handleChange(
-			groups
-				.filter((_group: any) => _group !== null)
-				.filter((_group: any) => group !== _group.name),
-		);
+		applicationName &&
+			executeDelete(realm, applicationName, group, id).finally(
+				() => {
+					executeUser(id, realm, userStorage);
+				},
+			);
 	};
 
 	return (
@@ -96,7 +110,8 @@ export default function GroupsField({
 									align="left"
 									variant="subtitle1"
 								>
-									{addTitle}
+									Ajout/Suppression de
+									groupes
 								</Typography>
 							</Grid>
 							<Grid item>
@@ -127,7 +142,8 @@ export default function GroupsField({
 												application?.groups
 											}
 											groups={
-												groups
+												user?.groups ||
+												[]
 											}
 											handleAdd={
 												handleClickAdd
@@ -154,89 +170,106 @@ export default function GroupsField({
 									align="left"
 									variant="subtitle1"
 								>
-									{deleteTitle}
+									Groupes
 								</Typography>
 							</Grid>
 							<Grid item xs={12}>
 								<Divider />
 							</Grid>
 							<Grid item xs={12}>
-								<Grid
-									container
-									direction="row"
-									justify="flex-start"
-									alignItems="stretch"
-									spacing={2}
-								>
-									{groups
-										?.filter(
-											(
-												group: Group,
-											) =>
-												group !==
-												null,
-										)
-										.map(
-											(
-												group: Group,
-												i: any,
-											) => (
-												<Grid
-													item
-												>
-													<Chip
-														key={
-															'group_' +
-															i
-														}
-														color="default"
-														size="small"
-														icon={
-															<PeopleIcon />
-														}
-														clickable={
-															false
-														}
-														label={
-															group.name
-														}
-													/>
-												</Grid>
-											),
-										)}
-								</Grid>
+								{loadingAdd ||
+								loadingDelete ||
+								loadingUser ? (
+									<CircularProgress />
+								) : (
+									<Grid
+										container
+										direction="row"
+										justify="flex-start"
+										alignItems="stretch"
+										spacing={2}
+									>
+										{user?.groups
+											?.filter(
+												(
+													group: Group,
+												) =>
+													group !==
+													null,
+											)
+											.map(
+												(
+													group: Group,
+													i: any,
+												) => (
+													<Grid
+														item
+													>
+														<Chip
+															key={
+																'group_' +
+																i
+															}
+															color="default"
+															size="small"
+															icon={
+																<PeopleIcon />
+															}
+															clickable={
+																false
+															}
+															label={
+																group.name
+															}
+														/>
+													</Grid>
+												),
+											)}
+									</Grid>
+								)}
 							</Grid>
 						</Grid>
 					</Grid>
 				</>
 			) : (
 				<Grid item xs={12}>
-					<Grid
-						container
-						direction="row"
-						justify="flex-start"
-						alignItems="stretch"
-						spacing={1}
-					>
-						{groups
-							?.filter(
-								(group: Group) =>
-									group !== null,
-							)
-							.map((group: Group, i: any) => (
-								<Grid item key={'groups_' + i}>
-									<Chip
-										color="default"
-										size="small"
-										icon={
-											<PeopleIcon />
-										}
-										clickable={false}
-										label={group.name}
-									/>
-								</Grid>
-							))}
-					</Grid>
+					{loadingUser ? (
+						<CircularProgress />
+					) : (
+						<Grid
+							container
+							direction="row"
+							justify="flex-start"
+							alignItems="stretch"
+							spacing={1}
+						>
+							{user?.groups
+								?.filter(
+									(group: Group) =>
+										group !== null,
+								)
+								.map((group: Group, i: any) => (
+									<Grid
+										item
+										key={'groups_' + i}
+									>
+										<Chip
+											color="default"
+											size="small"
+											icon={
+												<PeopleIcon />
+											}
+											clickable={
+												false
+											}
+											label={
+												group.name
+											}
+										/>
+									</Grid>
+								))}
+						</Grid>
+					)}
 				</Grid>
 			)}
 		</Grid>

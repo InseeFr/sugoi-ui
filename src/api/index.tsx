@@ -319,3 +319,44 @@ export const getGroup = (realm: string, application: string, group: string) => {
 export const deleteApplication = (realm: string, appName: string) => {
 	return remote.deleteApplication(realm, appName);
 };
+
+export const addAttribute = (
+	realm: string,
+	user: string,
+	attribute_key: string,
+	attribute_value: string,
+) => {
+	return remote.addAttributes(realm, user, attribute_key, attribute_value);
+};
+
+export const deleteAttribute = (
+	realm: string,
+	user: string,
+	attribute_key: string,
+	attribute_value: string,
+) => {
+	return remote.deleteAttributes(
+		realm,
+		user,
+		attribute_key,
+		attribute_value,
+	);
+};
+
+export const addGroupToUser = (
+	realm: string,
+	application: string,
+	groupId: string,
+	userId: string,
+) => {
+	return remote.addGroupToUser(realm, application, groupId, userId);
+};
+
+export const deleteGroupToUser = (
+	realm: string,
+	application: string,
+	groupId: string,
+	userId: string,
+) => {
+	return remote.deleteGroupToUser(realm, application, groupId, userId);
+};

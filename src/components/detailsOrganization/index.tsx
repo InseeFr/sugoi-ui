@@ -129,59 +129,62 @@ const DetailOrganization = () => {
 									organizationConfig
 								}
 								handleChange={handleChange}
+								buttons={
+									<Grid
+										container
+										direction="row"
+										justify="center"
+										spacing={3}
+									>
+										<Grid item>
+											<LoadingButton
+												variant="contained"
+												color="primary"
+												loading={
+													loadingUpdate
+												}
+												handleClick={
+													handleUpdate
+												}
+											>
+												{t(
+													'detail_organization.buttons.save',
+												)}
+											</LoadingButton>
+										</Grid>
+										<Grid item>
+											<LoadingButton
+												variant="contained"
+												color="secondary"
+												loading={
+													loadingDelete
+												}
+												handleClick={
+													handleDelete
+												}
+											>
+												{t(
+													'detail_organization.buttons.delete',
+												)}
+											</LoadingButton>
+										</Grid>
+										<Grid item>
+											<Button
+												variant="contained"
+												color="default"
+												onClick={
+													handleReset
+												}
+											>
+												{t(
+													'detail_organization.buttons.reset',
+												)}
+											</Button>
+										</Grid>
+									</Grid>
+								}
+								create={false}
 							/>
-							<Grid
-								container
-								direction="row"
-								justify="center"
-								spacing={3}
-							>
-								<Grid item>
-									<LoadingButton
-										variant="contained"
-										color="primary"
-										loading={
-											loadingUpdate
-										}
-										handleClick={
-											handleUpdate
-										}
-									>
-										{t(
-											'detail_organization.buttons.save',
-										)}
-									</LoadingButton>
-								</Grid>
-								<Grid item>
-									<LoadingButton
-										variant="contained"
-										color="secondary"
-										loading={
-											loadingDelete
-										}
-										handleClick={
-											handleDelete
-										}
-									>
-										{t(
-											'detail_organization.buttons.delete',
-										)}
-									</LoadingButton>
-								</Grid>
-								<Grid item>
-									<Button
-										variant="contained"
-										color="default"
-										onClick={
-											handleReset
-										}
-									>
-										{t(
-											'detail_organization.buttons.reset',
-										)}
-									</Button>
-								</Grid>
-							</Grid>
 						</>
 					) : (
 						<Typography variant="h6" gutterBottom>

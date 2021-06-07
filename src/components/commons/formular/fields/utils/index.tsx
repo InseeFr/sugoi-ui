@@ -6,6 +6,7 @@ import HabilitationsPopup from '../habilitationsFieldInfo';
 import ListFieldInfoButton from './../listGenericFieldInfo';
 import ListFieldInfo from './../listGenericFieldInfo/listFieldInfo';
 import TextFieldInfo from '../textFieldInfo';
+import SimpleAppManagedAttributes from '../simpleAppManageAttributes';
 
 export const GenerateFields = (
 	data: any,
@@ -66,11 +67,12 @@ export const GenerateFields = (
 						helpText={field.helpText}
 						helpTextTitle={field.helpTextTitle}
 						modifiable={field.modifiable}
-						habilitations={get(data, field.path, [])}
-						handleChange={handleChange(field.path)}
 						textButton={field.textButton}
 						addTitle={field.addTitle}
 						deleteTitle={field.deleteTitle}
+						attribute_key={
+							field.attribute_key as string
+						}
 					/>,
 				);
 				break;
@@ -80,13 +82,26 @@ export const GenerateFields = (
 					<GroupsField
 						name={field.name}
 						helpText={field.helpText}
+						modifiable={field.modifiable}
+						textButton={field.textButton}
+					/>,
+				);
+				break;
+
+			case 'simpleAppManagedAttributes':
+				generateFields.push(
+					<SimpleAppManagedAttributes
+						name={field.name}
+						helpText={field.helpText}
 						helpTextTitle={field.helpTextTitle}
 						modifiable={field.modifiable}
-						groups={get(data, field.path)}
-						handleChange={handleChange(field.path)}
+						value={field.path}
 						textButton={field.textButton}
 						addTitle={field.addTitle}
 						deleteTitle={field.deleteTitle}
+						attribute_key={
+							field.attribute_key as string
+						}
 					/>,
 				);
 				break;
