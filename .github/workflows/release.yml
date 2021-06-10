@@ -14,36 +14,38 @@ jobs:
     runs-on: ubuntu-latest
     steps:  
 
-      - uses: actions/checkout@v2
-      
       - name: Use Node.js 14
         uses: actions/setup-node@v1
         with:
           node-version: 14
           
-      - name: Git config
-        run: |
+      - run: |
           git config --global user.name "Insee - Domaine Outils Transverses"
           git config --global user.email "dg75-dsi-domaine-outils-transverses@insee.fr"  
-
-      - name: Clone repo
-        run: git clone https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{github.repository}}.git
-    
-      - name: Checkout branch
-        run: |
+          git clone https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{github.repository}}.git
+          cd sugoi-ui/
           git checkout -b release-${{ github.event.inputs.version }}
-
-      - run: ls -a
-
-      - name: Prepare current version
-        run: yarn version --new-version ${{ github.event.inputs.version }}
-
-      - name: Commit and push new change
-        run: |
+          yarn version --new-version ${{ github.event.inputs.version }}
           git add .
           git commit -sm "[REL] :rocket: prepare new version ${{ github.event.inputs.version }}"
           git push origin prepare-version-${{ github.event.inputs.version }}
           gh pr create --title "[REL] :rocket: prepare new version ${{ github.event.inputs.version }}" --body "[REL] :rocket: prepare new version ${{ github.event.inputs.version }}"
+
+
+  release:
+    name: release
+    runs-on: ubuntu-latest
+    steps:  
+      - name: Clone Deployments repo
+        uses: actions/checkout@v2
+        with:
+          repository: ${{github.repository}}
+          ref: prepare-version-${{ github.event.inputs.version }}
+
+      - name: Use Node.js 14
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
 
       - name: Install dependencies with Yarn
         run: yarn
@@ -78,16 +80,25 @@ jobs:
           asset_name: sugoi-ui-${{ github.event.inputs.version }}-distribution.zip
           asset_content_type: zip
 
-      - name: Prepare next version
-        run: yarn version --minor
 
-      - id: get_version
-        name: Get next version
-        run: echo ::set-output name=VERSION::$(node -p "require('./package.json').version")
-
-      - name: Commit and push new change
-        run: |
+  after-release:
+    name: after-release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use Node.js 14
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - run: |
+          git config --global user.name "Insee - Domaine Outils Transverses"
+          git config --global user.email "dg75-dsi-domaine-outils-transverses@insee.fr"  
+          git clone https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{github.repository}}.git
+          cd sugoi-ui/
+          git checkout release-${{ github.event.inputs.version }}
+          yarn version version --minor
+          next_version=$(echo ::set-output name=VERSION::$(node -p "require('./package.json').version"))
           git add .
-          git commit -sm "[ENH] :sparkles: prepare next version ${{ steps.get_version.outputs.VERSION }}"
+          git commit -sm "[ENH] :sparkles: prepare next version prepare new version ${next_version}"
           git push origin prepare-version-${{ github.event.inputs.version }}
+        
           
