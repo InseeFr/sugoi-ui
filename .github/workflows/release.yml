@@ -35,6 +35,7 @@ jobs:
   release:
     name: release
     runs-on: ubuntu-latest
+    needs: pre-release
     steps:  
       - name: Clone Deployments repo
         uses: actions/checkout@v2
@@ -83,6 +84,7 @@ jobs:
 
   after-release:
     name: after-release
+    needs: release
     runs-on: ubuntu-latest
     steps:
       - name: Use Node.js 14
