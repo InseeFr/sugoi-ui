@@ -1,64 +1,79 @@
 name: Release sugoi-ui
 
-on:
-  push:
-    tags:
-      - "v[0-9]+.[0-9]+.[0-9]+"
+on: workflow_dispatch
    
 
 jobs:
-  releases:
+
+  pre-release:
+    name: pre-release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - id: get_version
-        name: Get version from package.json
-        run: echo ::set-output name=VERSION::$(node -p "require('./package.json').version")
-      - name: Use Node.js 14
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14
-      - name: Install dependencies 
+      
+      - name: Checkout Branch
+        run: |
+          git config --global user.name "Insee - Domaine Outils Transverses"
+          git config --global user.email "dg75-dsi-domaine-outils-transverses@insee.fr"  
+          git checkout -b release-${APP_VERSION}
+
+      - name: Prepare current version
+        run: yarn version --new-version ${{ steps.get_version.outputs.VERSION }}
+
+      - name: Commit and push new change
+        run: |
+          git add .
+          git commit -sm "[REL] :roket: prepare new version ${APP_VERSION}"
+          git push origin prepare-version-$new_version
+          gh pr create --title "[REL] :roket: prepare new version ${APP_VERSION}" --body "[REL] :roket: prepare new version ${APP_VERSION}"
+
+      - name: Install dependencies with Yarn
         run: yarn
+
+      - name: Set version
+        run: |
+          yarn version --new-version ${{ steps.get_version.outputs.VERSION }}
+
       - run: yarn build
-        name: Create build
+        name: Build with Yarn
+        
       - uses: papeloto/action-zip@v1
         name: Zip build
         with:
           files: build/
           dest: sugoi-ui-${{ steps.get_version.outputs.VERSION }}-distribution.zip
+
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.get_version.outputs.VERSION }}
-          release_name: v${{ steps.get_version.outputs.VERSION }}
+          tag_name: ${{ needs.build.outputs.version }}
+          release_name: ${{ needs.build.outputs.version }}
           draft: false
           prerelease: false
-      - name: Add build to release
+
+      - name: Add zip to release
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: sugoi-ui-${{ steps.get_version.outputs.VERSION }}-distribution.zip
-          asset_name: sugoi-ui-${{ steps.get_version.outputs.VERSION }}-distribution.zip
+          asset_path: sugoi-ui-${{ needs.build.outputs.version }}-distribution.zip
+          asset_name: sugoi-ui-${{ needs.build.outputs.version }}-distribution.zip
           asset_content_type: zip
 
+      - name: Prepare next version
+        run: yarn version --minor
 
-  prepare_next_version:
-    runs-on: ubuntu-latest
-    needs: releases
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js 14
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14
-      - run: git config user.email "ts-ci@github.com" && git config user.name "ts-ci@github.com"
-      - name: Set next version
-        run: npm version --no-git-tag-version major 
-      - run: git add . && git commit -m "prepare next version" && git push
-        name: Push change for future release
+      - id: get_version
+        name: Get next version
+        run: echo ::set-output name=VERSION::$(node -p "require('./package.json').version")
+
+      - name: Commit and push new change
+        run: |
+          git add .
+          git commit -sm "[ENH] :sparkles: prepare next version ${{ steps.get_version.outputs.VERSION }}"
+          git push origin prepare-version-$new_version
+          
