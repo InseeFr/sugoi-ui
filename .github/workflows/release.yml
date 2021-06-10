@@ -13,6 +13,9 @@ jobs:
     name: pre-release
     runs-on: ubuntu-latest
     steps:  
+
+      - uses: actions/checkout@v2
+      
       - name: Use Node.js 14
         uses: actions/setup-node@v1
         with:
@@ -31,7 +34,7 @@ jobs:
           git checkout -b release-${{ github.event.inputs.version }}
 
       - run: ls -a
-      
+
       - name: Prepare current version
         run: yarn version --new-version ${{ github.event.inputs.version }}
 
