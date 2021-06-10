@@ -26,6 +26,7 @@ jobs:
           cd sugoi-ui/
           git checkout -b release-${{ github.event.inputs.version }}
           yarn version --new-version ${{ github.event.inputs.version }}
+          echo 'hello' > toto.txt
           git status
           git add .
           git commit -s -m "[REL] :rocket: prepare new version ${{ github.event.inputs.version }}"
