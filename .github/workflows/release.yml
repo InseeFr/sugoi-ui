@@ -1,7 +1,11 @@
 name: Release sugoi-ui
 
-on: workflow_dispatch
-   
+on: 
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'The version of the release'
+        required: true   
 
 jobs:
 
@@ -15,24 +19,20 @@ jobs:
         run: |
           git config --global user.name "Insee - Domaine Outils Transverses"
           git config --global user.email "dg75-dsi-domaine-outils-transverses@insee.fr"  
-          git checkout -b release-${APP_VERSION}
+          git checkout -b release-${{ github.event.inputs.version }}
 
       - name: Prepare current version
-        run: yarn version --new-version ${{ steps.get_version.outputs.VERSION }}
+        run: yarn version --new-version ${{ github.event.inputs.version }}
 
       - name: Commit and push new change
         run: |
           git add .
-          git commit -sm "[REL] :roket: prepare new version ${APP_VERSION}"
-          git push origin prepare-version-$new_version
-          gh pr create --title "[REL] :roket: prepare new version ${APP_VERSION}" --body "[REL] :roket: prepare new version ${APP_VERSION}"
+          git commit -sm "[REL] :rocket: prepare new version ${{ github.event.inputs.version }}"
+          git push origin prepare-version-${{ github.event.inputs.version }}
+          gh pr create --title "[REL] :rocket: prepare new version ${{ github.event.inputs.version }}" --body "[REL] :rocket: prepare new version ${{ github.event.inputs.version }}"
 
       - name: Install dependencies with Yarn
         run: yarn
-
-      - name: Set version
-        run: |
-          yarn version --new-version ${{ steps.get_version.outputs.VERSION }}
 
       - run: yarn build
         name: Build with Yarn
@@ -41,7 +41,7 @@ jobs:
         name: Zip build
         with:
           files: build/
-          dest: sugoi-ui-${{ steps.get_version.outputs.VERSION }}-distribution.zip
+          dest: sugoi-ui-${{ github.event.inputs.version }}-distribution.zip
 
       - name: Create release
         id: create_release
@@ -49,8 +49,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ needs.build.outputs.version }}
-          release_name: ${{ needs.build.outputs.version }}
+          tag_name: ${{ github.event.inputs.version }}
+          release_name: ${{ github.event.inputs.version }}
           draft: false
           prerelease: false
 
@@ -60,8 +60,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: sugoi-ui-${{ needs.build.outputs.version }}-distribution.zip
-          asset_name: sugoi-ui-${{ needs.build.outputs.version }}-distribution.zip
+          asset_path: sugoi-ui-${{ github.event.inputs.version }}-distribution.zip
+          asset_name: sugoi-ui-${{ github.event.inputs.version }}-distribution.zip
           asset_content_type: zip
 
       - name: Prepare next version
@@ -75,5 +75,5 @@ jobs:
         run: |
           git add .
           git commit -sm "[ENH] :sparkles: prepare next version ${{ steps.get_version.outputs.VERSION }}"
-          git push origin prepare-version-$new_version
+          git push origin prepare-version-${{ github.event.inputs.version }}
           
