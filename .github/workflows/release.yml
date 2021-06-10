@@ -26,10 +26,9 @@ jobs:
           cd sugoi-ui/
           git checkout -b release-${{ github.event.inputs.version }}
           yarn version --new-version ${{ github.event.inputs.version }}
-          ls -a 
-          cat package.json
+          git status
           git add .
-          git commit -sm "[REL] :rocket: prepare new version ${{ github.event.inputs.version }}"
+          git commit -s -m "[REL] :rocket: prepare new version ${{ github.event.inputs.version }}"
           git push origin prepare-version-${{ github.event.inputs.version }}
           gh pr create --title "[REL] :rocket: prepare new version ${{ github.event.inputs.version }}" --body "[REL] :rocket: prepare new version ${{ github.event.inputs.version }}"
 
