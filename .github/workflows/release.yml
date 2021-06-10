@@ -19,18 +19,15 @@ jobs:
         with:
           node-version: 14
           
-      - run: |
+      - name: Prepare
+        run: |
           git config --global user.name "Insee - Domaine Outils Transverses"
           git config --global user.email "dg75-dsi-domaine-outils-transverses@insee.fr"  
           git clone https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{github.repository}}.git
           cd sugoi-ui/
           git checkout -b release-${{ github.event.inputs.version }}
           yarn version --new-version ${{ github.event.inputs.version }}
-          echo 'hello' > toto.txt
-          git status
-          git add .
-          git commit -s -m "[REL] :rocket: prepare new version ${{ github.event.inputs.version }}"
-          git push origin prepare-version-${{ github.event.inputs.version }}
+          git push origin release-${{ github.event.inputs.version }}
           gh pr create --title "[REL] :rocket: prepare new version ${{ github.event.inputs.version }}" --body "[REL] :rocket: prepare new version ${{ github.event.inputs.version }}"
 
 
