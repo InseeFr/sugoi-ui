@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14
-
+          
       - name: Git config
         run: |
           git config --global user.name "Insee - Domaine Outils Transverses"
@@ -28,9 +28,10 @@ jobs:
     
       - name: Checkout branch
         run: |
-          cd sugoi-ui/
           git checkout -b release-${{ github.event.inputs.version }}
 
+      - run: ls -a
+      
       - name: Prepare current version
         run: yarn version --new-version ${{ github.event.inputs.version }}
 
