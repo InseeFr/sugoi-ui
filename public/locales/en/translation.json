@@ -1,3 +1,7 @@
 {
-    
+	"notif": {
+		"success": "Request done",
+		"network_error": "Service unavailable",
+		"forbidden": "This operation is forbidden"
+	}
 }

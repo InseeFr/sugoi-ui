@@ -1,9 +1,38 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { configWrapper } from './utils';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { enqueueSnackbar } from './../redux/actions/notif';
 import Store from './store-configuration';
-import { enqueueSnackbar, closeSnackbar } from './../redux/actions/notif';
-import React from 'react';
-import { Button } from '@material-ui/core';
+import { configWrapper } from './utils';
+
+const isDebugMethod = (method: string | undefined) => {
+	if (typeof method === 'undefined') {
+		return true;
+	}
+	return ![
+		'delete',
+		'DELETE',
+		// 'head',
+		// 'HEAD',
+		'post',
+		'POST',
+		'put',
+		'PUT',
+		'patch',
+		'PATCH',
+		// 'purge',
+		// 'PURGE',
+		// 'link',
+		// 'LINK',
+		// 'unlink',
+		// 'UNLINK',
+	].includes(method);
+};
+
+const isDebugError = (a: AxiosError) => {
+	if (a.message === 'Operation canceled due to new request.') {
+		return true;
+	}
+	return false;
+};
 
 export const getAuthClient = () => {
 	return configWrapper((resp: any) => {
@@ -14,7 +43,7 @@ export const getAuthClient = () => {
 			async (config: AxiosRequestConfig) => {
 				Store.dispatch(
 					enqueueSnackbar({
-						message:
+						subject:
 							'Send request ' +
 							(config.method as string).toUpperCase() +
 							' ' +
@@ -25,6 +54,7 @@ export const getAuthClient = () => {
 								Math.random(),
 							variant: 'info',
 						},
+						debug: true,
 					}),
 				);
 				config.headers.Authorization =
@@ -39,18 +69,16 @@ export const getAuthClient = () => {
 			async (response: AxiosResponse) => {
 				Store.dispatch(
 					enqueueSnackbar({
-						message:
-							"Votre demande à été prise en compte par l'api",
+						subject: response,
 						options: {
 							key:
 								new Date().getTime() +
 								Math.random(),
 							variant: 'success',
 						},
-						properties: {
-							method: response.config.method,
-							url: response.config.url,
-						},
+						debug: isDebugMethod(
+							response.config.method,
+						),
 					}),
 				);
 				return response;
@@ -58,15 +86,14 @@ export const getAuthClient = () => {
 			(err) => {
 				Store.dispatch(
 					enqueueSnackbar({
-						message:
-							"Erreur sur la requetes à l'api " +
-							err,
+						subject: err,
 						options: {
 							key:
 								new Date().getTime() +
 								Math.random(),
 							variant: 'error',
 						},
+						debug: isDebugError(err),
 					}),
 				);
 				return Promise.reject(err);

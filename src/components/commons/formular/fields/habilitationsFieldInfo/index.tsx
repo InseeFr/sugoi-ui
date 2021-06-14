@@ -269,11 +269,7 @@ const HabilitationsPopup = ({
 													<ListItem>
 														<ListItemText
 															primary={
-																habilitation.property +
-																'_' +
-																habilitation.role +
-																'_' +
-																habilitation.application
+																habilitation.id
 															}
 														/>
 														<ListItemSecondaryAction>
