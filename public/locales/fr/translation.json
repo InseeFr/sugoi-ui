@@ -150,6 +150,11 @@
 			"title": "Configuration"
 		}
 	},
+	"notif": {
+		"success": "Votre demande a été prise en compte",
+		"network_error": "Le service est actuellement indisponible",
+		"forbidden": "Vous n'avez pas le droit d'effectuer cette opération"
+	},
 	"commons": {
 		"search_forms": {
 			"title": "Ma recherche",

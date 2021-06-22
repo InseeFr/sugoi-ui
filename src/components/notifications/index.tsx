@@ -1,8 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import { removeSnackbar } from './../../redux/actions/notif';
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './../../configuration/store-configuration';
+import { removeSnackbar } from './../../redux/actions/notif';
+import TextNotification from './textNotification';
 
 let displayed: any[] = [];
 
@@ -63,36 +64,18 @@ const Notifier = () => {
 		notifications.forEach(
 			({
 				key,
-				message,
+				subject,
 				options = {},
+				debug = false,
 				dismissed = false,
-				properties = {},
 			}: any) => {
-				if (appNotifConfig.enabled_debug) {
-					processNotif(key, dismissed, message, options);
-				} else if (options?.variant === 'error') {
-					processNotif(key, dismissed, message, options);
-				} else if (
-					[
-						'delete',
-						'DELETE',
-						'head',
-						'HEAD',
-						'post',
-						'POST',
-						'put',
-						'PUT',
-						'patch',
-						'PATCH',
-						'purge',
-						'PURGE',
-						'link',
-						'LINK',
-						'unlink',
-						'UNLINK',
-					].includes(properties.method as string)
-				) {
-					processNotif(key, dismissed, message, options);
+				if (appNotifConfig.enabled_debug || !debug) {
+					processNotif(
+						key,
+						dismissed,
+						<TextNotification subject={subject} />,
+						options,
+					);
 				} else {
 					storeDisplayed(key);
 					dispatch(removeSnackbar(key));
