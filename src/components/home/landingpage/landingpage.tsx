@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
+import { Button, Box } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
@@ -77,10 +77,23 @@ const MainFeaturedPost = () => {
 						{oidcUser ? null : (
 							<Button
 								variant="contained"
-								color="primary"
 								onClick={action}
+								style={{
+									backgroundColor:
+										'#7986cb',
+									color: '#ffffff',
+								}}
 							>
-								{t('home.landing.go_button')}
+								<Box
+									fontWeight="fontWeightBold"
+									m={1}
+								>
+									<Typography>
+										{t(
+											'home.landing.go_button',
+										)}
+									</Typography>
+								</Box>
 							</Button>
 						)}
 					</div>
