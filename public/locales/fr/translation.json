@@ -20,7 +20,9 @@
 			"title": "Gestion",
 			"users": "Utilisateurs",
 			"organizations": "Organisations",
-			"applications": "Applications"
+			"applications": "Applications",
+			"realms": "Domaine de gestion",
+			"us": "Sous domaine"
 		},
 		"configuration": {
 			"title": "Configuration",
