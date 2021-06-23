@@ -76,6 +76,14 @@ const userDisplayField: field[] = [
 		tag: 'main',
 	},
 	{
+		name: 'Timbre',
+		helpTextTitle: "Timbre de l'agent",
+		path: 'attributes.insee_timbre',
+		type: 'string',
+		modifiable: true,
+		tag: 'main',
+	},
+	{
 		name: 'Dernière modification',
 		path: 'metadatas.modifyTimestamp',
 		type: 'string',
