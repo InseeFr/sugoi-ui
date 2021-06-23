@@ -11,17 +11,18 @@ import CreateIcon from '@material-ui/icons/Create';
 import PeopleIcon from '@material-ui/icons/People';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useGetApplication } from '../../../../../hooks/applications/useGetApplication';
-import {
-	useAddGroupsToUser,
-	useDeleteGroupsToUser,
-} from '../../../../../hooks/user/useManageGroups';
+
 import { Group } from '../../../../../model/api/group';
 import PopIcon from '../../../popIcon/popIcon';
 import AutoCompleteApplication from './autocompleteApplication';
 import ManageGroup from './manageGroup';
-import useGetUser from '../../../../../hooks/user/useGetUser';
 import { Loader } from '../../../loader/loader';
+import { useGetApplication } from '../../../../../hooks/api/applications';
+import useGetUser from '../../../../../hooks/api/user/useGetUser';
+import {
+	useAddGroupsToUser,
+	useDeleteGroupsToUser,
+} from '../../../../../hooks/api/user/useManageGroups';
 
 interface props {
 	textButton?: string;

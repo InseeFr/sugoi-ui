@@ -16,11 +16,11 @@ import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import useGetUser from '../../../../../hooks/user/useGetUser';
+import useGetUser from '../../../../../hooks/api/user/useGetUser';
 import {
 	useAddAttribute,
 	useDeleteAttribute,
-} from '../../../../../hooks/user/useManageAttributes';
+} from '../../../../../hooks/api/user/useManageAttributes';
 import PopIcon from '../../../../commons/popIcon/popIcon';
 import get from 'lodash.get';
 import LoadingButton from '../../../loadingButton';

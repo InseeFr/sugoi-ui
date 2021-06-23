@@ -1,15 +1,15 @@
+import Application from '../model/api/application';
+import { Group } from '../model/api/group';
 import Organization from '../model/api/organization';
 import { Pageable } from '../model/api/pageable';
+import { PasswordChangeRequest } from '../model/api/passwordChangeRequest';
 import { Realm } from '../model/api/realm';
 import User from '../model/api/user';
 import searchRequestOrganization from '../model/js/searchRequestOrganization';
 import searchRequestUser from '../model/js/searchRequestUser';
+import * as Utils from './../utils/object';
 import * as fake from './fake/';
 import * as remote from './remote/';
-import * as Utils from './../utils/object';
-import { Group } from '../model/api/group';
-import { PasswordChangeRequest } from '../model/api/passwordChangeRequest';
-import Application from '../model/api/application';
 
 // Realm function
 export const getRealms = (id?: string): Promise<Realm[]> => {
@@ -359,4 +359,8 @@ export const deleteGroupToUser = (
 	userId: string,
 ) => {
 	return remote.deleteGroupToUser(realm, application, groupId, userId);
+};
+
+export const getWhoami = () => {
+	return remote.getWhoami();
 };

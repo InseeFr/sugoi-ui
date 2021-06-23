@@ -57,8 +57,18 @@ export const getAuthClient = () => {
 						debug: true,
 					}),
 				);
+
+				await new Promise<void>((resolve, reject) => {
+					Store.getState()
+						.user.auth.updateToken(30)
+						.then(() => {
+							resolve();
+						})
+						.catch(() => reject());
+				});
+
 				config.headers.Authorization =
-					'Bearer ' + Store.getState().user.access_token;
+					'Bearer ' + Store.getState().user.auth.token;
 				return config;
 			},
 			(err) => {

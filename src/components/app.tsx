@@ -1,4 +1,3 @@
-import { useReactOidc, withOidcSecure } from '@axa-fr/react-oidc-context';
 import { Container } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {
@@ -10,9 +9,11 @@ import {
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import useAuth from '../hooks/auth/useAuth';
 import { RootState } from './../configuration/store-configuration';
 import { DarkTheme, LightTheme } from './../material-ui-theme';
 import routes from './../routes/routes';
+import { withPrivateRoute } from '../auth';
 import BreadCrumbs from './commons/breadcrumbs/breadcrumbs';
 import ErrorBoundary from './commons/error/Error';
 import Footer from './commons/footer/footer';
@@ -49,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const App = () => {
 	const classes = useStyles();
-	const { oidcUser } = useReactOidc();
+	const { authenticated } = useAuth();
 	const appStore = useSelector((store: RootState) => store.app);
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const handleDrawerToggle = () => {
@@ -63,7 +64,7 @@ const App = () => {
 			<div className={classes.root}>
 				<CssBaseline />
 				<Header handleDrawerToggle={handleDrawerToggle} />
-				{oidcUser ? (
+				{authenticated ? (
 					<Sider
 						drawerOpen={drawerOpen}
 						handleDrawerToggle={handleDrawerToggle}
@@ -80,20 +81,30 @@ const App = () => {
 						<BreadCrumbs />
 						<ErrorBoundary>
 							<Switch>
-								{routes.map((route, i) => (
-									<Route
-										key={'route_' + i}
-										exact={route.exact}
-										path={route.path}
-										component={
-											route.secure
-												? withOidcSecure(
-														route.component,
-												  )
-												: route.component
-										}
-									/>
-								))}
+								{routes.map((route, i) => {
+									console.log(route);
+									return (
+										<Route
+											key={
+												'route_' +
+												i
+											}
+											exact={
+												route.exact
+											}
+											path={
+												route.path
+											}
+											component={
+												route.secure
+													? withPrivateRoute(
+															route.component,
+													  )
+													: route.component
+											}
+										/>
+									);
+								})}
 								<Redirect to="/" />
 							</Switch>
 						</ErrorBoundary>

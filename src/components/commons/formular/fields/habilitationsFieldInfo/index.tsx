@@ -21,9 +21,9 @@ import PopIcon from '../../../popIcon/popIcon';
 import {
 	useAddAttribute,
 	useDeleteAttribute,
-} from '../../../../../hooks/user/useManageAttributes';
+} from '../../../../../hooks/api/user/useManageAttributes';
 import { useParams } from 'react-router-dom';
-import useGetUser from '../../../../../hooks/user/useGetUser';
+import useGetUser from '../../../../../hooks/api/user/useGetUser';
 import User from '../../../../../model/api/user';
 import { postUserFromUserStorage } from '../../../../../api/remote';
 import LoadingButton from '../../../loadingButton';

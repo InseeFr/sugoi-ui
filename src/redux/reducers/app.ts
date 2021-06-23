@@ -41,6 +41,7 @@ const AppReducer = (state = initialConfigState, action: any) => {
 			};
 			return nextState;
 		}
+
 		default:
 			return state;
 	}

@@ -1,8 +1,7 @@
 import Store from './../../configuration/store-configuration';
+import { KeycloakInstance } from 'keycloak-js';
 
-import { User } from 'oidc-client';
-
-export const loadUser = (user: User) => ({
-	type: 'loadUser',
-	payload: { user: user, config: Store.getState().app.config },
+export const initAuth = (keycloak: KeycloakInstance) => ({
+	type: 'initAuth',
+	payload: { keycloak },
 });

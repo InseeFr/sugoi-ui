@@ -5,8 +5,8 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { useHistory } from 'react-router-dom';
-import { useReactOidc } from '@axa-fr/react-oidc-context';
 import { useTranslation } from 'react-i18next';
+import useAuth from '../../../hooks/auth/useAuth';
 
 const useStyles = makeStyles((theme) => ({
 	mainFeaturedPost: {
@@ -38,11 +38,11 @@ const useStyles = makeStyles((theme) => ({
 const MainFeaturedPost = () => {
 	const classes = useStyles();
 	const { push } = useHistory();
-	const { oidcUser, login } = useReactOidc();
+	const { authenticated, login } = useAuth();
 	const { t } = useTranslation();
 
-	const action: any = () => {
-		if (!oidcUser) {
+	const handleLogin = () => {
+		if (!authenticated) {
 			login();
 			push('/');
 		}
@@ -74,11 +74,11 @@ const MainFeaturedPost = () => {
 						>
 							{t('home.landing.description')}
 						</Typography>
-						{oidcUser ? null : (
+						{!authenticated && (
 							<Button
 								variant="contained"
 								color="primary"
-								onClick={action}
+								onClick={handleLogin}
 							>
 								{t('home.landing.go_button')}
 							</Button>

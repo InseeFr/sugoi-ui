@@ -1,4 +1,3 @@
-import { Button } from '@material-ui/core';
 import {
 	Grid,
 	MenuItem,
@@ -14,16 +13,9 @@ import {
 import { Pagination } from '@material-ui/lab';
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { useDeleteApplication } from '../../hooks/applications/useDeleteApplication';
-import { useGetApplication } from '../../hooks/applications/useGetApplication';
-import {
-	useCreateGroup,
-	useDeleteGroup,
-	useUpdateGroup,
-} from '../../hooks/group';
-import useAddUserToGroup from '../../hooks/group/useAddUserToGroup';
-import useDeleteUserFromGroup from '../../hooks/group/useDeleteUserFromGroup';
-
+import { useDeleteApplication } from '../../hooks/api/applications/useDeleteApplication';
+import { useGetApplication } from '../../hooks/api/applications/useGetApplication';
+import { useCreateGroup, useDeleteGroup } from '../../hooks/api/group';
 import { Group } from '../../model/api/group';
 import LoadingButton from '../commons/loadingButton';
 import Title from '../commons/title/title';

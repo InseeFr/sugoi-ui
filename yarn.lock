@@ -2,21 +2,6 @@
 # yarn lockfile v1
 
 
-"@axa-fr/react-oidc-context@^3.1.6":
-  version "3.1.6"
-  resolved "https://registry.yarnpkg.com/@axa-fr/react-oidc-context/-/react-oidc-context-3.1.6.tgz#fbcd254f9d3029a51144e01fab7d8f69141d4e33"
-  integrity sha512-xG/lX+VUIP7URndf7TigVYmUjsZ97tukwAAs2d10O0RitKquPbt1ZjmK6Xulg1ztUBC94eAtjELXql16VZptWw==
-  dependencies:
-    "@axa-fr/react-oidc-core" "^3.1.6"
-    prop-types "^15.7.2"
-
-"@axa-fr/react-oidc-core@^3.1.6":
-  version "3.1.6"
-  resolved "https://registry.yarnpkg.com/@axa-fr/react-oidc-core/-/react-oidc-core-3.1.6.tgz#61d5090afb4cca246d50bc955df62c1facbadd3c"
-  integrity sha512-lYyR5kz5MlgSO903dT+AhePSXBRPa/rcFI16oUFrZCl99eVlWKeZU3RQ1uvyU0dGGslPhElL+JIZVUjFDwj3zQ==
-  dependencies:
-    prop-types "^15.7.2"
-
 "@babel/code-frame@7.10.4", "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.10.4.tgz#168da1a36e90da68ae8d49c0f1b48c7c6249213a"
@@ -3742,6 +3727,11 @@ balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
   integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
+
+base64-js@1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.3.1.tgz#58ece8cb75dd07e71ed08c736abc5fac4dbf8df1"
+  integrity sha512-mLQ4i2QO1ytvGWFWmcngKO//JXAQueZvwEKtjgQFM4jIK0kU+ytMfplL8j+n5mspOfjHwoAg+9yhb7BwAHm36g==
 
 base64-js@^1.0.2, base64-js@^1.3.0, base64-js@^1.3.1:
   version "1.5.1"
@@ -8261,6 +8251,11 @@ jmespath@^0.15.0:
   resolved "https://registry.yarnpkg.com/jmespath/-/jmespath-0.15.0.tgz#a3f222a9aae9f966f5d27c796510e28091764217"
   integrity sha1-o/Iiqarp+Wb10nx5ZRDigJF2Qhc=
 
+js-sha256@0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/js-sha256/-/js-sha256-0.9.0.tgz#0b89ac166583e91ef9123644bd3c5334ce9d0966"
+  integrity sha512-sga3MHh9sgQN2+pJ9VYZ+1LPwXOxuBJBA5nrR5/ofPfuiJBE2hnjsaN8se8JznOmGLN2p49Pe5U/ttafcs/apA==
+
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -8521,6 +8516,14 @@ jwt-decode@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-3.1.2.tgz#3fb319f3675a2df0c2895c8f5e9fa4b67b04ed59"
   integrity sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==
+
+keycloak-js@^14.0.0:
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/keycloak-js/-/keycloak-js-14.0.0.tgz#6d880eb3cd24afef39626f66ca4747d7267eef05"
+  integrity sha512-35olMBg+Fwr1b3hu3BmyYj4PBn2uoDn7OOO0C1f+4axZhaOhvv47zq7nHG8R3g2QZcHFG5SymdEU6obrahEdJQ==
+  dependencies:
+    base64-js "1.3.1"
+    js-sha256 "0.9.0"
 
 keyv@3.0.0:
   version "3.0.0"

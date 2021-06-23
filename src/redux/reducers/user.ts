@@ -1,45 +1,20 @@
 import { getRegexDomains, isAdministrator } from '../../utils/roles';
 import { getRolesFromToken } from '../../utils/token';
 
-const initialRoleState = {};
+const initialRoleState = { auth: undefined };
 
 const userReducer = (state = initialRoleState, action: any) => {
 	let nextState;
 	switch (action.type) {
-		case 'loadUser':
-			let readerDomains: string[] = getRegexDomains(
-				getRolesFromToken(
-					action.payload.user.access_token,
-					action.payload.config.auth.json_path_to_roles,
-				),
-				action.payload.config.readerRegexName,
-			);
-			let writerDomains: string[] = getRegexDomains(
-				getRolesFromToken(
-					action.payload.user.access_token,
-					action.payload.config.auth.json_path_to_roles,
-				),
-				action.payload.config.writerRegexName,
-			);
-			let admin: boolean = isAdministrator(
-				getRolesFromToken(
-					action.payload.user.access_token,
-					action.payload.config.auth.json_path_to_roles,
-				),
-				action.payload.config.adminName,
-			);
+		case 'initAuth': {
 			nextState = {
 				...state,
-				...action.payload.user,
-				role: {
-					isAdmin: admin,
-					isReader: readerDomains.length > 0,
-					readerDomains: readerDomains,
-					isWriter: writerDomains.length > 0,
-					writerDomains: writerDomains,
+				auth: {
+					...action.payload.auth,
 				},
 			};
 			return nextState;
+		}
 	}
 	return state;
 };

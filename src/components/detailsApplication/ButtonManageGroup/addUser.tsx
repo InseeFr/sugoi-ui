@@ -17,7 +17,7 @@ import AddIcon from '@material-ui/icons/Add';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import { Pagination } from '@material-ui/lab';
 import React, { useState } from 'react';
-import useGetUsers from '../../../hooks/user/useGetUsers';
+import useGetUsers from '../../../hooks/api/user/useGetUsers';
 import { Group } from '../../../model/api/group';
 import User from '../../../model/api/user';
 

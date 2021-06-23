@@ -19,3 +19,8 @@ export const saveRealms = (realms: Realm[]) => ({
 	type: 'saveRealms',
 	payload: { realms },
 });
+
+export const initAuth = (auth: any) => ({
+	type: 'initAuth',
+	payload: { auth },
+});

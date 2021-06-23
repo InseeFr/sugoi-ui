@@ -21,7 +21,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { matchPath, useHistory, useLocation } from 'react-router-dom';
 import { RootState } from '../../../configuration/store-configuration';
-import { useGetRealms } from '../../../hooks/realm/useGetRealms';
+import { useGetRealms } from '../../../hooks/api/realm/useGetRealms';
 import { saveRealms } from '../../../redux/actions/app';
 import GrainIcon from '@material-ui/icons/Grain';
 import { useSnackbar } from 'notistack';

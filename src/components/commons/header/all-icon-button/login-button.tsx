@@ -1,17 +1,17 @@
-import { useReactOidc } from '@axa-fr/react-oidc-context';
 import { IconButton } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
+import useAuth from '../../../../hooks/auth/useAuth';
 
 const LoginButton = () => {
-	const { login, logout, oidcUser } = useReactOidc();
+	const { login, logout, authenticated } = useAuth();
 	const { push } = useHistory();
 	const { t } = useTranslation();
 	const action: any = () => {
-		if (oidcUser) {
+		if (authenticated) {
 			push('/');
 			logout();
 		} else {
@@ -25,18 +25,18 @@ const LoginButton = () => {
 				color="inherit"
 				size="medium"
 				aria-label={
-					oidcUser
+					authenticated
 						? t('commons.header.buttons.logout')
 						: t('commons.header.buttons.login')
 				}
 				onClick={action}
 				title={
-					oidcUser
+					authenticated
 						? t('commons.header.buttons.logout')
 						: t('commons.header.buttons.login')
 				}
 			>
-				{oidcUser ? (
+				{authenticated ? (
 					<ExitToAppIcon />
 				) : (
 					<PowerSettingsNewIcon />
