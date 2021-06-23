@@ -4,6 +4,7 @@ import AddIcon from '@material-ui/icons/Add';
 import MUIDataTable from 'mui-datatables';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
 interface props {
 	data: any;
 	columns: any;
@@ -42,6 +43,7 @@ export const SearchResults = ({
 		customToolbar: () => {
 			return <CustomToolBar handleClick={handleClickAdd} />;
 		},
+
 		onRowClick: (rowData: any) => handleClickOnRow(rowData[0]),
 		textLabels: {
 			body: {
@@ -112,6 +114,7 @@ export const SearchResults = ({
 				),
 			},
 		},
+		selectableRowsOnClick: false,
 	};
 
 	return (

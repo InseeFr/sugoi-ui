@@ -1,4 +1,4 @@
-import { Grid, LinearProgress } from '@material-ui/core';
+import { Grid, IconButton, LinearProgress } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -8,6 +8,7 @@ import { field } from '../../model/field';
 import SearchForm from '../commons/searchFormular';
 import { SearchResults } from '../commons/searchResults';
 import Title from '../commons/title/title';
+import ZoomInOutlinedIcon from '@material-ui/icons/ZoomInOutlined';
 
 const SearchOrganizations = () => {
 	const { realm, userStorage } = useParams<any>();
@@ -75,6 +76,24 @@ const SearchOrganizations = () => {
 			label: 'Description',
 			options: {
 				customBodyRender: (value: any) => value.description,
+			},
+		},
+		{
+			name: '',
+			options: {
+				filter: false,
+				sort: false,
+				empty: true,
+				customBodyRenderLite: (
+					dataIndex: any,
+					rowIndex: any,
+				) => {
+					return (
+						<IconButton aria-label="Détail">
+							<ZoomInOutlinedIcon />
+						</IconButton>
+					);
+				},
 			},
 		},
 	];
