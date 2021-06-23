@@ -193,7 +193,9 @@ const SiderBody = () => {
 							renderInput={(params) => (
 								<TextField
 									{...params}
-									label="Realm"
+									label={t(
+										'sider.manage.realms',
+									)}
 									variant="filled"
 								/>
 							)}
@@ -235,7 +237,9 @@ const SiderBody = () => {
 							renderInput={(params) => (
 								<TextField
 									{...params}
-									label="User Storage"
+									label={t(
+										'sider.manage.us',
+									)}
 									variant="filled"
 								/>
 							)}
