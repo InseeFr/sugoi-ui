@@ -184,7 +184,8 @@
 				"logout": "Se déconnecter",
 				"more": "Voir plus",
 				"theme": "Changer le thème",
-				"notif": "Paramètre des notifications"
+				"notif": "Paramètre des notifications",
+				"help": "Accéder à la documentation"
 			}
 		},
 		"footer": {
