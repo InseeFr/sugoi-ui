@@ -360,3 +360,7 @@ export const deleteGroupToUser = (
 ) => {
 	return remote.deleteGroupToUser(realm, application, groupId, userId);
 };
+
+export const getWhoami = () => {
+	return remote.getWhoami();
+};

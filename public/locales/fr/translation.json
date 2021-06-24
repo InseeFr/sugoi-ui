@@ -11,7 +11,8 @@
 			"admin": "Administrateur SUGOI",
 			"writer": "Gestionnaire du realm ",
 			"reader": "Consultant du realm ",
-			"no_right": "Aucun droit"
+			"no_right": "Aucun droit",
+			"app": "Gestionnaire de l'application "
 		}
 	},
 	"sider": {
