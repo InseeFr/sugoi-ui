@@ -15,5 +15,7 @@
 	"adminName": "Admin_Sugoi",
 	"writerRegexName": "Writer_(.*)_Sugoi",
 	"readerRegexName": "Reader_(.*)_Sugoi",
-	"documentation_link": "https://github.com/InseeFrLab/sugoi-ui"
+	"documentation_link": "https://github.com/InseeFrLab/sugoi-ui",
+	"app_version": "dev",
+	"app_last_commit_sha": "unknown"
 }
