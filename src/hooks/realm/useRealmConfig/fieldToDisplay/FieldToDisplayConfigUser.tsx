@@ -15,7 +15,7 @@ const userDisplayField: field[] = [
 		helpTextTitle: ' Nom commun du contact ',
 		helpText:
 			" Il servira pour le rechercher à travers l'annuaire. Caractères autorisés alphabétiques chiffres apostrophes espaces tirets",
-		path: 'attributes.commun_name',
+		path: 'attributes.common_name',
 		type: 'string',
 		modifiable: true,
 		tag: 'main',
