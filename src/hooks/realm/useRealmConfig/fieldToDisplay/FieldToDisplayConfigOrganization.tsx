@@ -11,8 +11,7 @@ export default [
 	{
 		name: 'Nom commun',
 		helpTextTitle: " Nom commun de l'organisation",
-		helpText:
-			" Il servira pour la rechercher à travers l'annuaire. Caractères autorisés alphabétiques chiffres apostrophes espaces tirets",
+		helpText: " Il servira pour la rechercher à travers l'annuaire. Caractères autorisés alphabétiques chiffres apostrophes espaces tirets",
 		path: 'attributes.commun_name',
 		type: 'string',
 		modifiable: true,
@@ -30,8 +29,7 @@ export default [
 	{
 		name: 'Numéro de téléphone',
 		helpTextTitle: " Numéro de téléphone de l'organisation ",
-		helpText:
-			'Entre 1 et 25 caractères numériques, points, tirets, parenthèses, signe plus, et espaces uniquement. ',
+		helpText: 'Entre 1 et 25 caractères numériques, points, tirets, parenthèses, signe plus, et espaces uniquement. ',
 		path: 'attributes.phone_number',
 		type: 'string',
 		modifiable: true,
@@ -145,8 +143,7 @@ export default [
 	{
 		name: 'Propriétés',
 		helpTextTitle: "Propriétés de l'organisation",
-		helpText:
-			'Ajouter une propriété à saisir en cliquant sur "Ajouter un champ". Supprimer une propriété saisie en vidant le champ ou en cliquant sur la croix rouge à droite du champ. Aucune limite d\'ajout.',
+		helpText: 'Ajouter une propriété à saisir en cliquant sur "Ajouter un champ". Supprimer une propriété saisie en vidant le champ ou en cliquant sur la croix rouge à droite du champ. Aucune limite d\'ajout.',
 		path: 'attributes.properties',
 		type: 'list',
 		tag: 'properties',

@@ -9,6 +9,7 @@ import SearchForm from '../commons/searchFormular';
 import { SearchResults } from '../commons/searchResults';
 import Title from '../commons/title/title';
 import ZoomInOutlinedIcon from '@material-ui/icons/ZoomInOutlined';
+import { ButtonDescription } from '../commons/description';
 
 const SearchOrganizations = () => {
 	const { realm, userStorage } = useParams<any>();
@@ -125,7 +126,26 @@ const SearchOrganizations = () => {
 
 	return (
 		<>
-			<Title title={t('search_organization.title') + realm} />
+			<Grid
+				container
+				direction="column"
+				justify="center"
+				alignItems="stretch"
+				spacing={3}
+			>
+				<Grid
+					item
+					xs={12}
+					style={{ display: 'flex', alignItems: 'center' }}
+				>
+					<Title
+						title={
+							t('search_organization.title') + realm
+						}
+					/>
+					<ButtonDescription realmName={realm} />
+				</Grid>
+			</Grid>
 			<Grid
 				container
 				direction="column"

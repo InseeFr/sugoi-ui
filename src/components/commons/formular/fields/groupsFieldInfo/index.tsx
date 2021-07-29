@@ -32,11 +32,11 @@ interface props {
 
 export default function GroupsField({ name, helpText, modifiable }: props) {
 	const { realm, userStorage, id } = useParams<any>();
-	const { user, execute: executeUser, loading: loadingUser } = useGetUser(
-		id,
-		realm,
-		userStorage,
-	);
+	const {
+		user,
+		execute: executeUser,
+		loading: loadingUser,
+	} = useGetUser(id, realm, userStorage);
 
 	const { application, execute: searchApplication } = useGetApplication();
 
@@ -45,10 +45,8 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 	>();
 
 	const { execute: executeAdd, loading: loadingAdd } = useAddGroupsToUser();
-	const {
-		execute: executeDelete,
-		loading: loadingDelete,
-	} = useDeleteGroupsToUser();
+	const { execute: executeDelete, loading: loadingDelete } =
+		useDeleteGroupsToUser();
 
 	const handleChangeOnApp = (application: string) => {
 		if (application) {

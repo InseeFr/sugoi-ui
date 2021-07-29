@@ -52,15 +52,13 @@ const SimpleAppManagedAttributes = ({
 	const [newValue, setNewValue] = React.useState<any>();
 	const [edit, setEdit] = React.useState(false);
 	const { execute, loading: loadingAdd } = useAddAttribute(attribute_key);
+	const { execute: executeDelete, loading: loadingDelete } =
+		useDeleteAttribute(attribute_key);
 	const {
-		execute: executeDelete,
-		loading: loadingDelete,
-	} = useDeleteAttribute(attribute_key);
-	const { user, execute: executeUser, loading: loadingUser } = useGetUser(
-		id,
-		realm,
-		userStorage,
-	);
+		user,
+		execute: executeUser,
+		loading: loadingUser,
+	} = useGetUser(id, realm, userStorage);
 	console.log(value, get(user, value, []));
 	const add = () => {
 		execute(realm, id, newValue).finally(() => {

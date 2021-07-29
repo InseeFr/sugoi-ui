@@ -19,6 +19,7 @@ import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import { useCreateApplication } from '../../hooks/applications';
 import { useGetApplications } from '../../hooks/applications/useGetApplications';
+import { ButtonDescription } from '../commons/description';
 import Title from '../commons/title/title';
 import CreateApplicationButton from './button-create-app';
 
@@ -55,7 +56,6 @@ export const SearchApplications = () => {
 
 	return (
 		<>
-			<Title title={t('search_application.title') + realm} />
 			<Grid
 				container
 				direction="column"
@@ -63,6 +63,18 @@ export const SearchApplications = () => {
 				alignItems="stretch"
 				spacing={3}
 			>
+				<Grid
+					item
+					xs={12}
+					style={{ display: 'flex', alignItems: 'center' }}
+				>
+					<Title
+						title={
+							t('search_application.title') + realm
+						}
+					/>
+					<ButtonDescription realmName={realm} />
+				</Grid>
 				<Grid item xs={12}>
 					<Grid
 						container

@@ -24,11 +24,12 @@ const DetailUser = () => {
 
 	const { userConfig } = useRealmConfig(realm);
 
-	const { loading, user, error: errorGetUser, execute } = useGetUser(
-		id,
-		realm,
-		userStorage,
-	);
+	const {
+		loading,
+		user,
+		error: errorGetUser,
+		execute,
+	} = useGetUser(id, realm, userStorage);
 
 	const {
 		execute: executeUpdate,
@@ -44,12 +45,8 @@ const DetailUser = () => {
 
 	const { t } = useTranslation();
 
-	const {
-		formValues,
-		updateIFormValues,
-		handleChange,
-		handleReset,
-	} = useForms({});
+	const { formValues, updateIFormValues, handleChange, handleReset } =
+		useForms({});
 
 	useEffect(() => {
 		if (user) {
@@ -58,18 +55,15 @@ const DetailUser = () => {
 	}, [user, updateIFormValues]);
 
 	const handleDelete = () =>
-		executeDelete(
-			user?.username as string,
-			realm,
-			userStorage,
-		).then(() =>
-			push(
-				'/realm/' +
-					realm +
-					(userStorage
-						? '/us/' + userStorage + '/users'
-						: '/users'),
-			),
+		executeDelete(user?.username as string, realm, userStorage).then(
+			() =>
+				push(
+					'/realm/' +
+						realm +
+						(userStorage
+							? '/us/' + userStorage + '/users'
+							: '/users'),
+				),
 		);
 
 	const handleUpdate = () =>

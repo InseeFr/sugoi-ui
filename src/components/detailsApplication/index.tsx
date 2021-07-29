@@ -42,10 +42,8 @@ export const DetailsApplication = () => {
 	const { execute: createGroup } = useCreateGroup();
 	const { execute: deleteGroup } = useDeleteGroup();
 
-	const {
-		execute: deleteApplication,
-		loading: loadingDelete,
-	} = useDeleteApplication();
+	const { execute: deleteApplication, loading: loadingDelete } =
+		useDeleteApplication();
 
 	const [rowsPerPage, setRowsPerPage] = React.useState(10);
 	const [page, setPage] = React.useState(1);
@@ -63,21 +61,19 @@ export const DetailsApplication = () => {
 		);
 	};
 
-	const handleCreateGroup = (realm: string, applicationId: string) => (
-		group: Group,
-	) => {
-		createGroup(realm, applicationId, group).then(() =>
-			execute(realm, applicationId),
-		);
-	};
+	const handleCreateGroup =
+		(realm: string, applicationId: string) => (group: Group) => {
+			createGroup(realm, applicationId, group).then(() =>
+				execute(realm, applicationId),
+			);
+		};
 
-	const handleDeleteGroup = (realm: string, applicationId: string) => (
-		groupId: string,
-	) => {
-		deleteGroup(realm, applicationId, groupId).then(() =>
-			execute(realm, applicationId),
-		);
-	};
+	const handleDeleteGroup =
+		(realm: string, applicationId: string) => (groupId: string) => {
+			deleteGroup(realm, applicationId, groupId).then(() =>
+				execute(realm, applicationId),
+			);
+		};
 
 	return (
 		<>

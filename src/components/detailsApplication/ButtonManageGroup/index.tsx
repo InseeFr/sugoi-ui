@@ -39,28 +39,24 @@ export const ButtonManageGroup = ({
 		onClose(realm, application);
 	};
 
-	const handleAddUserToGroup = (
-		realm: string,
-		applicationId: string,
-		groupId: string,
-	) => (userId: string) => {
-		addUserToGroup(realm, applicationId, groupId, userId).then(() =>
-			getGroup(realm, applicationId, groupId),
-		);
-	};
+	const handleAddUserToGroup =
+		(realm: string, applicationId: string, groupId: string) =>
+		(userId: string) => {
+			addUserToGroup(realm, applicationId, groupId, userId).then(
+				() => getGroup(realm, applicationId, groupId),
+			);
+		};
 
-	const handleDeleteUserFromGroup = (
-		realm: string,
-		applicationId: string,
-		groupId: string,
-	) => (userId: string) => {
-		deleteUserFromGroup(
-			realm,
-			applicationId,
-			groupId,
-			userId,
-		).then(() => getGroup(realm, applicationId, groupId));
-	};
+	const handleDeleteUserFromGroup =
+		(realm: string, applicationId: string, groupId: string) =>
+		(userId: string) => {
+			deleteUserFromGroup(
+				realm,
+				applicationId,
+				groupId,
+				userId,
+			).then(() => getGroup(realm, applicationId, groupId));
+		};
 
 	return (
 		<>

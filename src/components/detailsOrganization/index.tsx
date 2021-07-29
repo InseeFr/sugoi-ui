@@ -48,12 +48,8 @@ const DetailOrganization = () => {
 		error: errorDelete,
 	} = useDeleteOrganization();
 
-	const {
-		formValues,
-		updateIFormValues,
-		handleChange,
-		handleReset,
-	} = useForms({});
+	const { formValues, updateIFormValues, handleChange, handleReset } =
+		useForms({});
 
 	useEffect(() => {
 		if (organization) {
@@ -93,8 +89,7 @@ const DetailOrganization = () => {
 
 	const handleDelete = () => {
 		executeDelete(
-			((organization as unknown) as organization)?.identifiant ||
-				'',
+			(organization as unknown as organization)?.identifiant || '',
 			realm,
 			userStorage,
 		).then(() =>

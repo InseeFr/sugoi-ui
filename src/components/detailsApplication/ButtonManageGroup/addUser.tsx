@@ -122,7 +122,9 @@ export const AddUsers = ({
 											align="right"
 										>
 											{group ? (
-												(group.users as User[])?.filter(
+												(
+													group.users as User[]
+												)?.filter(
 													(
 														_user,
 													) =>
