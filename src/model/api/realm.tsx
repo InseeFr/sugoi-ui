@@ -5,4 +5,5 @@ export interface Realm {
 	url: string;
 	appBranch: string;
 	userStorages: UserStorage[];
+	properties: any;
 }

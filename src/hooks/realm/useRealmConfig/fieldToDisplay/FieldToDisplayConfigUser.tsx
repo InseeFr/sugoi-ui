@@ -13,8 +13,7 @@ const userDisplayField: field[] = [
 	{
 		name: 'Nom commun',
 		helpTextTitle: ' Nom commun du contact ',
-		helpText:
-			" Il servira pour le rechercher à travers l'annuaire. Caractères autorisés alphabétiques chiffres apostrophes espaces tirets",
+		helpText: " Il servira pour le rechercher à travers l'annuaire. Caractères autorisés alphabétiques chiffres apostrophes espaces tirets",
 		path: 'attributes.common_name',
 		type: 'string',
 		modifiable: true,
@@ -23,8 +22,7 @@ const userDisplayField: field[] = [
 	{
 		name: 'Nom',
 		helpTextTitle: 'Nom du contact',
-		helpText:
-			'Caractères autorisés alphabétiques chiffres apostrophes espaces tirets',
+		helpText: 'Caractères autorisés alphabétiques chiffres apostrophes espaces tirets',
 		path: 'lastName',
 		type: 'string',
 		modifiable: true,
@@ -33,8 +31,7 @@ const userDisplayField: field[] = [
 	{
 		name: 'Prénom',
 		helpTextTitle: 'Prénom du contact',
-		helpText:
-			'Caractères autorisés alphabétiques chiffres apostrophes espaces tirets',
+		helpText: 'Caractères autorisés alphabétiques chiffres apostrophes espaces tirets',
 		path: 'firstName',
 		type: 'string',
 		modifiable: true,
@@ -52,8 +49,7 @@ const userDisplayField: field[] = [
 	{
 		name: 'Numéro de téléphone',
 		helpTextTitle: ' Numéro de téléphone du contact ',
-		helpText:
-			'Entre 1 et 25 caractères numériques, points, tirets, parenthèses, signe plus, et espaces uniquement. ',
+		helpText: 'Entre 1 et 25 caractères numériques, points, tirets, parenthèses, signe plus, et espaces uniquement. ',
 		path: 'attributes.phone_number',
 		type: 'string',
 		modifiable: true,
@@ -208,8 +204,7 @@ const userDisplayField: field[] = [
 	{
 		name: 'Propriétés',
 		helpTextTitle: 'Propriétés du contact',
-		helpText:
-			'Ajouter une propriété à saisir en cliquant sur "Ajouter un champ". Supprimer une propriété saisie en vidant le champ ou en cliquant sur la croix rouge à droite du champ. Aucune limite d\'ajout.',
+		helpText: 'Ajouter une propriété à saisir en cliquant sur "Ajouter un champ". Supprimer une propriété saisie en vidant le champ ou en cliquant sur la croix rouge à droite du champ. Aucune limite d\'ajout.',
 		path: 'attributes.properties',
 		type: 'list',
 		tag: 'properties',

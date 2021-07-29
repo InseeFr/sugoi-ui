@@ -46,20 +46,18 @@ const HabilitationsPopup = ({
 	attribute_key,
 }: props) => {
 	const { realm, userStorage, id } = useParams<any>();
-	const { user, execute: executeUser, loading: loadingUser } = useGetUser(
-		id,
-		realm,
-		userStorage,
-	);
+	const {
+		user,
+		execute: executeUser,
+		loading: loadingUser,
+	} = useGetUser(id, realm, userStorage);
 	const [application, setApplication] = React.useState<any>(undefined);
 	const [role, setRole] = React.useState<any>(undefined);
 	const [propriete, setPropriete] = React.useState<any>(undefined);
 	const [edit, setEdit] = React.useState(false);
 	const { execute, loading: loadingAdd } = useAddAttribute(attribute_key);
-	const {
-		execute: executeDelete,
-		loading: loadingDelete,
-	} = useDeleteAttribute(attribute_key);
+	const { execute: executeDelete, loading: loadingDelete } =
+		useDeleteAttribute(attribute_key);
 	const handleClickAdd = () => {
 		if ((application && role) || (application && role && propriete)) {
 			let prop = {

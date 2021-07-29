@@ -10,18 +10,24 @@ import Title from '../commons/title/title';
 import SearchForm from '../commons/searchFormular';
 import { useSnackbar } from 'notistack';
 import ZoomInOutlinedIcon from '@material-ui/icons/ZoomInOutlined';
+import { ButtonDescription } from '../commons/description';
+interface ParamTypes {
+	realm: string;
+	userStorage: string;
+}
 
 const SearchUsers = () => {
-	const { realm, userStorage } = useParams<any>();
+	const { realm, userStorage } = useParams<ParamTypes>();
 	const { enqueueSnackbar } = useSnackbar();
 	const { push } = useHistory();
 
 	const { t } = useTranslation();
 
-	const { users, execute: searchUsers, loading } = useGetUsers(
-		realm,
-		userStorage,
-	);
+	const {
+		users,
+		execute: searchUsers,
+		loading,
+	} = useGetUsers(realm, userStorage);
 
 	const handleSearch = (values: any) => {
 		searchUsers({ ...values }, realm, userStorage);
@@ -144,7 +150,22 @@ const SearchUsers = () => {
 
 	return (
 		<>
-			<Title title={t('search_user.title') + realm} />
+			<Grid
+				container
+				direction="column"
+				justify="center"
+				alignItems="stretch"
+				spacing={3}
+			>
+				<Grid
+					item
+					xs={12}
+					style={{ display: 'flex', alignItems: 'center' }}
+				>
+					<Title title={t('search_user.title') + realm} />
+					<ButtonDescription realmName={realm} />
+				</Grid>
+			</Grid>
 			<Grid
 				container
 				direction="column"

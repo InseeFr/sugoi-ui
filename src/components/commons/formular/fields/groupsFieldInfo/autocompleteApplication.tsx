@@ -16,10 +16,8 @@ export const AutoCompleteApplication = ({
 	application,
 	handleChangeApplication,
 }: Props) => {
-	const {
-		applications,
-		execute: searchApplications,
-	} = useGetApplications();
+	const { applications, execute: searchApplications } =
+		useGetApplications();
 
 	return (
 		<Autocomplete

@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import { getUsers } from '../../api';
+import { Description } from '../commons/description';
 import Title from '../commons/title/title';
 
 export const RealmHome = () => {
@@ -42,6 +43,9 @@ export const RealmHome = () => {
 			<Title title={t('global_search.title') + realm} />
 
 			<Grid container direction="row" spacing={2}>
+				<Grid item xs={12}>
+					<Description realmName={realm} />
+				</Grid>
 				<Grid item xs={12}>
 					<Autocomplete
 						id="combo-box-demo"
@@ -90,9 +94,10 @@ export const RealmHome = () => {
 													index
 												}
 												style={{
-													fontWeight: part.highlight
-														? 700
-														: 400,
+													fontWeight:
+														part.highlight
+															? 700
+															: 400,
 												}}
 											>
 												{

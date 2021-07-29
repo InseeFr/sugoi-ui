@@ -162,11 +162,12 @@ const SiderBody = () => {
 								newRealmName: string | null,
 							) => {
 								if (newRealmName) {
-									const newRealm = realms.find(
-										(realm) =>
-											newRealmName ===
-											realm.name,
-									);
+									const newRealm =
+										realms.find(
+											(realm) =>
+												newRealmName ===
+												realm.name,
+										);
 									if (
 										newRealm
 											?.userStorages

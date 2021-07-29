@@ -45,7 +45,9 @@ export const getAuthClient = () => {
 					enqueueSnackbar({
 						subject:
 							'Send request ' +
-							(config.method as string).toUpperCase() +
+							(
+								config.method as string
+							).toUpperCase() +
 							' ' +
 							config.url,
 						options: {

@@ -12,7 +12,7 @@ import InfoIcon from '@material-ui/icons/Info';
 
 interface props {
 	helpTextTitle?: string;
-	helpText?: string;
+	helpText?: string | JSX.Element | JSX.Element[];
 }
 
 const useStyles = makeStyles((theme: Theme) =>
