@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import usePostOrganization from '../../hooks/organization/usePostOrganization';
-import useRealmConfig from '../../hooks/realm/useRealmConfig/useRealmConfig';
+import useRealmConfig from '../../hooks/realm/useRealmConfig';
 import { useForms } from '../../hooks/technics/useForms';
 import Organization from '../../model/api/organization';
 import DataViewer from '../commons/dataViewer/dataviewer';

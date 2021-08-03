@@ -63,8 +63,4 @@ export const ButtonDescription = ({ realmName }: Props) => {
 	);
 };
 
-Description.defaultProps = {
-	closeable: false,
-};
-
 export default Description;

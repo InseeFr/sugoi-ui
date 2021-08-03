@@ -3,7 +3,7 @@ import { useSnackbar } from 'notistack';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
-import useRealmConfig from '../../hooks/realm/useRealmConfig/useRealmConfig';
+import useRealmConfig from '../../hooks/realm/useRealmConfig';
 import { useForms } from '../../hooks/technics/useForms';
 import usePostUser from '../../hooks/user/usePostUser';
 import User from '../../model/api/user';
@@ -93,6 +93,7 @@ const CreateUsers = () => {
 						</Grid>
 					}
 					create={true}
+					isUser={true}
 				/>
 			</Grid>
 		</Grid>

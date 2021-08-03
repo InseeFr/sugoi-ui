@@ -4,7 +4,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import useGetUsers from '../../hooks/user/useGetUsers';
-import { field } from '../../model/field';
+import { Field } from '../../model/field';
 import { SearchResults } from '../commons/searchResults';
 import Title from '../commons/title/title';
 import SearchForm from '../commons/searchFormular';
@@ -62,7 +62,7 @@ const SearchUsers = () => {
 		}
 	};
 
-	const formFields: field[] = [
+	const formFields: Field[] = [
 		{
 			name: t('search_user.form.field.identifiant.name'),
 			helpTextTitle: t(
@@ -72,6 +72,8 @@ const SearchUsers = () => {
 			path: 'identifiant',
 			type: 'string',
 			modifiable: true,
+			tag: '',
+			options: {},
 		},
 		{
 			name: t('search_user.form.field.description.name'),
@@ -82,6 +84,8 @@ const SearchUsers = () => {
 			path: 'description',
 			type: 'string',
 			modifiable: true,
+			tag: '',
+			options: {},
 		},
 		{
 			name: t('search_user.form.field.organization.name'),
@@ -92,6 +96,8 @@ const SearchUsers = () => {
 			type: 'string',
 			modifiable: true,
 			path: 'organizationId',
+			tag: '',
+			options: {},
 		},
 		{
 			name: t('search_user.form.field.commun_name.name'),
@@ -102,6 +108,8 @@ const SearchUsers = () => {
 			path: 'nomCommun',
 			type: 'string',
 			modifiable: true,
+			tag: '',
+			options: {},
 		},
 		{
 			name: t('search_user.form.field.email.name'),
@@ -112,6 +120,8 @@ const SearchUsers = () => {
 			path: 'mail',
 			type: 'string',
 			modifiable: true,
+			tag: '',
+			options: {},
 		},
 	];
 

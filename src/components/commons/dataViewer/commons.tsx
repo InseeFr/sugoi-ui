@@ -1,6 +1,6 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
-import { field } from '../../../model/field';
+import { Field } from '../../../model/field';
 import GenerateFields from '../formular/fields/utils';
 import Panel from '../panel/panel';
 
@@ -25,7 +25,7 @@ export const generatePanel = (
 interface contentProps {
 	values: any;
 	handleChange: any;
-	fields: field[];
+	fields: Field[];
 }
 
 export const ContentPanel = ({

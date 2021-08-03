@@ -1,6 +1,6 @@
 import get from 'lodash.get';
 import React from 'react';
-import { field } from '../../../../../model/field';
+import { Field } from '../../../../../model/field';
 import GroupsField from '../groupsFieldInfo';
 import HabilitationsPopup from '../habilitationsFieldInfo';
 import ListFieldInfoButton from './../listGenericFieldInfo';
@@ -11,10 +11,10 @@ import SimpleAppManagedAttributes from '../simpleAppManageAttributes';
 export const GenerateFields = (
 	data: any,
 	handleChange: any,
-	fields: field[],
+	fields: Field[],
 ): JSX.Element[] => {
 	const generateFields: JSX.Element[] = [];
-	fields.forEach((field: field) => {
+	fields.forEach((field: Field) => {
 		switch (field.type) {
 			case 'string':
 				generateFields.push(
@@ -37,9 +37,9 @@ export const GenerateFields = (
 						modifiable={field.modifiable}
 						value={get(data, field.path, [])}
 						handleChange={handleChange(field.path)}
-						textButton={field.textButton}
-						addTitle={field.addTitle}
-						deleteTitle={field.deleteTitle}
+						textButton={field.options.textButton}
+						addTitle={field.options.addTitle}
+						deleteTitle={field.options.deleteTitle}
 					/>,
 				);
 				break;
@@ -53,9 +53,9 @@ export const GenerateFields = (
 						modifiable={field.modifiable}
 						value={get(data, field.path, [])}
 						handleChange={handleChange(field.path)}
-						textButton={field.textButton}
-						addTitle={field.addTitle}
-						deleteTitle={field.deleteTitle}
+						textButton={field.options.textButton}
+						addTitle={field.options.addTitle}
+						deleteTitle={field.options.deleteTitle}
 					/>,
 				);
 				break;
@@ -67,11 +67,11 @@ export const GenerateFields = (
 						helpText={field.helpText}
 						helpTextTitle={field.helpTextTitle}
 						modifiable={field.modifiable}
-						textButton={field.textButton}
-						addTitle={field.addTitle}
-						deleteTitle={field.deleteTitle}
+						textButton={field.options.textButton}
+						addTitle={field.options.addTitle}
+						deleteTitle={field.options.deleteTitle}
 						attribute_key={
-							field.attribute_key as string
+							field.options.attribute_key as string
 						}
 					/>,
 				);
@@ -83,7 +83,7 @@ export const GenerateFields = (
 						name={field.name}
 						helpText={field.helpText}
 						modifiable={field.modifiable}
-						textButton={field.textButton}
+						textButton={field.options.textButton}
 					/>,
 				);
 				break;
@@ -96,11 +96,11 @@ export const GenerateFields = (
 						helpTextTitle={field.helpTextTitle}
 						modifiable={field.modifiable}
 						value={field.path}
-						textButton={field.textButton}
-						addTitle={field.addTitle}
-						deleteTitle={field.deleteTitle}
+						textButton={field.options.textButton}
+						addTitle={field.options.addTitle}
+						deleteTitle={field.options.deleteTitle}
 						attribute_key={
-							field.attribute_key as string
+							field.options.attribute_key as string
 						}
 					/>,
 				);

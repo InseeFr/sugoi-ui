@@ -13,18 +13,13 @@ const Home = () => {
 		<>
 			<Title title={t('home.title')} />
 			<MainFeaturedPost />
-			{oidcUser ? (
-				<Grid
-					container
-					direction="column"
-					justify="center"
-					spacing={5}
-				>
+			{oidcUser && (
+				<Grid container direction="column" spacing={5}>
 					<Grid item>
 						<CardRights />
 					</Grid>
 				</Grid>
-			) : null}
+			)}
 		</>
 	);
 };

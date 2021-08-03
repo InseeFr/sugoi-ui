@@ -6,7 +6,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useDeleteOrganization } from '../../hooks/organization/useDeleteOrganization';
 import useGetOrganization from '../../hooks/organization/useGetOrganization';
 import useUpdateOrganization from '../../hooks/organization/useUpdateOrganization';
-import useRealmConfig from '../../hooks/realm/useRealmConfig/useRealmConfig';
+import useRealmConfig from '../../hooks/realm/useRealmConfig';
 import { useForms } from '../../hooks/technics/useForms';
 import organization from '../../model/api/organization';
 import DataViewer from '../commons/dataViewer/dataviewer';

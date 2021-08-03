@@ -3,7 +3,7 @@ import { useSnackbar } from 'notistack';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
-import useRealmConfig from '../../hooks/realm/useRealmConfig/useRealmConfig';
+import useRealmConfig from '../../hooks/realm/useRealmConfig';
 import { useForms } from '../../hooks/technics/useForms';
 import { useDeleteUser } from '../../hooks/user/useDeleteUser';
 import useGetUser from '../../hooks/user/useGetUser';
@@ -92,33 +92,6 @@ const DetailUser = () => {
 										spacing={3}
 									>
 										<Grid item>
-											<SendUsernamePopup
-												realm={
-													realm
-												}
-												userStorage={
-													userStorage
-												}
-												user={
-													user as User
-												}
-											/>
-										</Grid>
-
-										<Grid item>
-											<ResetPasswordPopup
-												user={
-													user as User
-												}
-												realm={
-													realm
-												}
-												userStorage={
-													userStorage
-												}
-											/>
-										</Grid>
-										<Grid item>
 											<LoadingButton
 												variant="contained"
 												color="primary"
@@ -166,6 +139,7 @@ const DetailUser = () => {
 									</Grid>
 								}
 								create={false}
+								isUser={true}
 							/>
 						</>
 					) : (

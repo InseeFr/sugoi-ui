@@ -4,7 +4,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import useGetOrganizations from '../../hooks/organization/useGetOrganizations';
-import { field } from '../../model/field';
+import { Field } from '../../model/field';
 import SearchForm from '../commons/searchFormular';
 import { SearchResults } from '../commons/searchResults';
 import Title from '../commons/title/title';
@@ -99,7 +99,7 @@ const SearchOrganizations = () => {
 		},
 	];
 
-	const formFields: field[] = [
+	const formFields: Field[] = [
 		{
 			name: t('search_organization.form.field.identifiant.name'),
 			helpTextTitle: t(
@@ -111,6 +111,8 @@ const SearchOrganizations = () => {
 			path: 'identifiant',
 			type: 'string',
 			modifiable: true,
+			tag: '',
+			options: {},
 		},
 		{
 			name: t('search_organization.form.field.email.name'),
@@ -121,6 +123,8 @@ const SearchOrganizations = () => {
 			path: 'mail',
 			type: 'string',
 			modifiable: true,
+			tag: '',
+			options: {},
 		},
 	];
 

@@ -1,21 +1,21 @@
 import { Button } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 import { useResetPassword } from '../../../hooks/credential';
+import useGetUser from '../../../hooks/user/useGetUser';
 import User from '../../../model/api/user';
 import LoadingButton from '../loadingButton';
 import SimpleDialog from '../popButton/Dialog';
 import { ResetPasswordPopupContent } from './resetPasswordPopupContent';
 
-interface props {
-	user: User;
-	realm: string;
-	userStorage?: string;
-}
+export const ResetPasswordPopup = () => {
+	const { realm, id, userStorage } = useParams<any>();
 
-export const ResetPasswordPopup = ({ user, realm, userStorage }: props) => {
+	const { user, error } = useGetUser(id, realm, userStorage);
+
 	const [values, setValues] = useState({
-		email: user.mail,
+		email: user?.mail || '',
 		senderEmail: undefined,
 		signature: 'Assistance Insee',
 		nameApp: undefined,
@@ -52,9 +52,7 @@ export const ResetPasswordPopup = ({ user, realm, userStorage }: props) => {
 				assistMail: values.assistMail,
 			},
 		};
-		execute(realm, user.username as string, pcr, userStorage).then(
-			handleClose,
-		);
+		execute(realm, id, pcr, userStorage).then(handleClose);
 	};
 
 	return (
