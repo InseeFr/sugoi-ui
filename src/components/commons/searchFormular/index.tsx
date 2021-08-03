@@ -11,7 +11,7 @@ import {
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForms } from '../../../hooks/technics/useForms';
-import { field } from '../../../model/field';
+import { Field } from '../../../model/field';
 import ExpandButton from '../../commons/expandButton/expand-button';
 import TextFieldInfo from '../../commons/formular/fields/textFieldInfo';
 import GenerateFields from '../../commons/formular/fields/utils';
@@ -19,7 +19,7 @@ interface props {
 	realm: string;
 	userStorage?: string;
 	onSubmit: any;
-	formFields: field[];
+	formFields: Field[];
 }
 
 const SearchFormular = ({

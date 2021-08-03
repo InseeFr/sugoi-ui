@@ -152,9 +152,11 @@ const SiderBody = () => {
 					<ListItem className={classes.nested}>
 						<Autocomplete
 							id="realm choice"
-							options={realms.map(
-								(realm) => realm.name,
-							)}
+							options={
+								realms?.map(
+									(realm) => realm.name,
+								) || []
+							}
 							style={{ width: 300 }}
 							value={realmSelected || null}
 							onChange={(
@@ -208,15 +210,17 @@ const SiderBody = () => {
 							disabled={
 								realmSelected ? false : true
 							}
-							options={realms
-								?.filter(
-									(realm) =>
-										realm.name ===
-										realmSelected,
-								)[0]
-								?.userStorages.map(
-									(us) => us.name,
-								)}
+							options={
+								realms
+									?.filter(
+										(realm) =>
+											realm.name ===
+											realmSelected,
+									)[0]
+									?.userStorages.map(
+										(us) => us.name,
+									) || []
+							}
 							style={{ width: 300 }}
 							value={userStorageSelected || null}
 							onChange={(

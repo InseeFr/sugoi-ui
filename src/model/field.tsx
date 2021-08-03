@@ -1,13 +1,17 @@
-export interface field {
+export interface Field {
 	name: string;
-	helpText?: string;
 	helpTextTitle?: string;
+	helpText?: string;
 	path: string;
 	type: any;
 	modifiable: boolean;
+	tag: any;
+	options: OptionsFields;
+}
+
+interface OptionsFields {
 	deleteTitle?: string;
 	addTitle?: string;
 	textButton?: string;
-	tag?: any;
 	attribute_key?: string;
 }

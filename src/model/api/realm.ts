@@ -1,3 +1,4 @@
+import { Mapping } from './mapping';
 import { UserStorage } from './userStorage';
 
 export interface Realm {
@@ -6,4 +7,5 @@ export interface Realm {
 	appBranch: string;
 	userStorages: UserStorage[];
 	properties: any;
+	uiMapping: Mapping;
 }

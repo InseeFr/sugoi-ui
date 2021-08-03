@@ -1,22 +1,22 @@
 import { Button } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 import { useSendIdentifiant } from '../../../hooks/credential';
+import useGetUser from '../../../hooks/user/useGetUser';
 import User from '../../../model/api/user';
 import LoadingButton from '../loadingButton';
 import SimpleDialog from '../popButton/Dialog';
 import { SendPopupContent } from './sendPopupContent';
 
-interface props {
-	user: User;
-	realm: string;
-	userStorage?: string;
-}
+export const SendUsernameButton = () => {
+	const { realm, id, userStorage } = useParams<any>();
 
-export const SendUsernameButton = ({ user, realm, userStorage }: props) => {
+	const { user, error } = useGetUser(id, realm, userStorage);
 	const [values, setValues] = useState<any>({
 		signature: 'Assistance Insee',
 	});
+
 	const { t } = useTranslation();
 
 	const { execute, loading } = useSendIdentifiant();
@@ -48,7 +48,7 @@ export const SendUsernameButton = ({ user, realm, userStorage }: props) => {
 				assistMail: values.assistMail,
 			},
 		};
-		execute(realm, user.username || '', pcr, userStorage).then(
+		execute(realm, user?.username || '', pcr, userStorage).then(
 			handleClose,
 		);
 	};

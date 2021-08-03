@@ -1,11 +1,11 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
-import { field } from '../../../model/field';
+import { Field } from '../../../model/field';
 import GenerateFields from './fields/utils';
 
 interface props {
 	data: any;
-	fields: field[];
+	fields: Field[];
 	handleChange: () => void;
 }
 

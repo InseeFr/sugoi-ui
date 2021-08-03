@@ -1,6 +1,6 @@
 import { Grid, Paper, Tabs, Tab } from '@material-ui/core';
 import React from 'react';
-import { field } from '../../../model/field';
+import { Field } from '../../../model/field';
 import GenerateFields from '../formular/fields/utils';
 import Panel from '../panel/panel';
 import { ContentPanel, generatePanel } from './commons';
@@ -8,9 +8,9 @@ import { ContentPanel, generatePanel } from './commons';
 interface mainPanelProps {
 	values: any;
 	handleChange: any;
-	mainsFields: field[];
-	addressFields: field[];
-	advancedFields: field[];
+	mainsFields: Field[];
+	addressFields: Field[];
+	advancedFields: Field[];
 }
 
 const MainPanel = ({
