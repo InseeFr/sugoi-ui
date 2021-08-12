@@ -1,7 +1,10 @@
 export const download = (data: any, name: string, type: string) => {
-	var blob = new Blob([data], {
-		type: type,
-	});
+	var blob =
+		data instanceof Blob
+			? data
+			: new Blob([data], {
+					type: type,
+			  });
 	var url = window.URL.createObjectURL(blob);
 	const link = document.createElement('a');
 	link.href = url;

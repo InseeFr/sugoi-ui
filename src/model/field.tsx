@@ -6,7 +6,7 @@ export interface Field {
 	type: any;
 	modifiable: boolean;
 	tag: any;
-	options: OptionsFields;
+	options: OptionsFields | any;
 }
 
 interface OptionsFields {
@@ -14,4 +14,5 @@ interface OptionsFields {
 	addTitle?: string;
 	textButton?: string;
 	attribute_key?: string;
+	dropzoneText?: string;
 }

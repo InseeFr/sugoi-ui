@@ -59,7 +59,6 @@ const SimpleAppManagedAttributes = ({
 		execute: executeUser,
 		loading: loadingUser,
 	} = useGetUser(id, realm, userStorage);
-	console.log(value, get(user, value, []));
 	const add = () => {
 		execute(realm, id, newValue).finally(() => {
 			setNewValue(undefined);
@@ -75,6 +74,7 @@ const SimpleAppManagedAttributes = ({
 				},
 			);
 	};
+
 	return (
 		<Grid container spacing={3} style={{ padding: 10 }}>
 			<Grid item xs={12}>

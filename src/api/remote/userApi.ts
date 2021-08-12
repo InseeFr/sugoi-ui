@@ -1,4 +1,4 @@
-import { AxiosInstance } from 'axios';
+import { AxiosInstance, AxiosResponse } from 'axios';
 import { getAuthClient } from '../../configuration/axios-configuration';
 import { Pageable } from '../../model/api/pageable';
 import User from '../../model/api/user';
@@ -211,4 +211,60 @@ export const deleteGroupToUser = (
 					id,
 			)
 			.then((r: any) => r.data),
+	);
+
+export const putCertificate = (
+	id: string,
+	formdata: FormData,
+	realm: string,
+	userStorage?: string,
+) =>
+	getAuthClient().then((client: AxiosInstance) =>
+		client
+			.put(
+				'/realms/' +
+					realm +
+					(userStorage ? '/storages/' + userStorage : '') +
+					'/users/' +
+					id +
+					'/certificates',
+				formdata,
+			)
+			.then((r: AxiosResponse) => r.data),
+	);
+
+export const getCertificate = (
+	id: string,
+	realm: string,
+	userStorage?: string,
+) =>
+	getAuthClient().then((client: AxiosInstance) =>
+		client
+			.get(
+				'/realms/' +
+					realm +
+					(userStorage ? '/storages/' + userStorage : '') +
+					'/users/' +
+					id +
+					'/certificates',
+			)
+			.then((r: AxiosResponse) => r.data),
+	);
+
+export const deleteCertificate = (
+	id: string,
+	realm: string,
+	userStorage?: string,
+) =>
+	getAuthClient().then((client: AxiosInstance) =>
+		client
+			.delete(
+				'/realms/' +
+					realm +
+					(userStorage ? '/storages/' + userStorage : '') +
+					'/users/' +
+					id +
+					'/certificates',
+			)
+			.then((r: AxiosResponse) => r.data),
 	);

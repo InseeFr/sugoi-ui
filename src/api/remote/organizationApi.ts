@@ -1,4 +1,4 @@
-import { AxiosInstance } from 'axios';
+import { AxiosInstance, AxiosResponse } from 'axios';
 import { getAuthClient } from '../../configuration/axios-configuration';
 import Organization from '../../model/api/organization';
 import { Pageable } from '../../model/api/pageable';
@@ -168,4 +168,52 @@ export const updateOrganizationFromUserStorage = (
 				organization,
 			)
 			.then((r: any) => r.data),
+	);
+
+export const putGpgKey = (
+	id: string,
+	formdata: FormData,
+	realm: string,
+	userStorage?: string,
+) =>
+	getAuthClient().then((client: AxiosInstance) =>
+		client
+			.put(
+				'/realms/' +
+					realm +
+					(userStorage ? '/storages/' + userStorage : '') +
+					'/organization/' +
+					id +
+					'/gpg-key',
+				formdata,
+			)
+			.then((r: AxiosResponse) => r.data),
+	);
+
+export const getGpgKey = (id: string, realm: string, userStorage?: string) =>
+	getAuthClient().then((client: AxiosInstance) =>
+		client
+			.get(
+				'/realms/' +
+					realm +
+					(userStorage ? '/storages/' + userStorage : '') +
+					'/organization/' +
+					id +
+					'/gpg-key',
+			)
+			.then((r: AxiosResponse) => r.data),
+	);
+
+export const deleteGpgKey = (id: string, realm: string, userStorage?: string) =>
+	getAuthClient().then((client: AxiosInstance) =>
+		client
+			.delete(
+				'/realms/' +
+					realm +
+					(userStorage ? '/storages/' + userStorage : '') +
+					'/organization/' +
+					id +
+					'/gpg-key',
+			)
+			.then((r: AxiosResponse) => r.data),
 	);
