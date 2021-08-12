@@ -159,16 +159,40 @@ const DataViewer = ({
 			{value === 2 && (
 				<>
 					<Grid item xs={12}>
-						{generatePanel(
-							'Authentification',
-							<ContentPanel
-								values={data}
-								handleChange={handleChange}
-								fields={authentificationFields}
-							/>,
-							true,
-							'Authentification',
-						)}
+						<Panel
+							title="Credentials"
+							collapsible={true}
+							description="Gestion des crédentials"
+							collapse={true}
+						>
+							<Grid
+								container
+								spacing={3}
+								direction="row"
+								justify="flex-start"
+								alignItems="stretch"
+							>
+								{GenerateFields(
+									data,
+									handleChange,
+									authentificationFields,
+								).map((field, i) => (
+									<Grid
+										item
+										xs={12}
+										md={6}
+										key={
+											'field-' +
+											field +
+											'-' +
+											i
+										}
+									>
+										{field}
+									</Grid>
+								))}
+							</Grid>
+						</Panel>
 					</Grid>
 					{isUser && (
 						<Grid item xs={12}>
