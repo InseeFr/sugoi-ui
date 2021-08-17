@@ -204,7 +204,7 @@
 			"text": "Réinitialiser le mot de passe",
 			"send_button": "Envoyer"
 		},
-		"send_password": {
+		"send_login": {
 			"title": "Envoyer le login de ",
 			"text": "Envoyer le login",
 			"send_button": "Envoyer"

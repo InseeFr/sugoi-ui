@@ -39,16 +39,14 @@ export const SendUsernameButton = () => {
 	};
 
 	const onFinish = () => {
-		const pcr = {
+		const properties = {
 			mail: values.email,
-			properties: {
-				signature: values.signature,
-				senderEmail: values.senderEmail,
-				application: values.nameApp,
-				assistMail: values.assistMail,
-			},
+			signature: values.signature,
+			senderEmail: values.senderEmail,
+			application: values.nameApp,
+			assistMail: values.assistMail,
 		};
-		execute(realm, user?.username || '', pcr, userStorage).then(
+		execute(realm, user?.username || '', properties, userStorage).then(
 			handleClose,
 		);
 	};
@@ -60,14 +58,12 @@ export const SendUsernameButton = () => {
 				color="default"
 				variant="contained"
 			>
-				{t('commons.send_password.text')}
+				{t('commons.send_login.text')}
 			</Button>
 			<SimpleDialog
 				onClose={handleClose}
 				open={open}
-				title={
-					t('commons.send_password.title') + user?.username
-				}
+				title={t('commons.send_login.title') + user?.username}
 				body={
 					<SendPopupContent
 						user={user}
@@ -80,7 +76,7 @@ export const SendUsernameButton = () => {
 						handleClick={onFinish}
 						loading={loading}
 					>
-						{t('commons.send_password.send_button')}
+						{t('commons.send_login.send_button')}
 					</LoadingButton>
 				}
 			/>

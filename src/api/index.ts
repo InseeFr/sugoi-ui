@@ -293,12 +293,12 @@ export const createApplication = (realm: string, app: Application) => {
 export const sendIdentifiant = (
 	realm: string,
 	userId: string,
-	pcr: PasswordChangeRequest,
+	properties: any,
 	userStorage?: string,
 ) => {
 	return userStorage
-		? remote.sendIdentifiantUs(realm, userId, pcr, userStorage)
-		: remote.sendIdentifiant(realm, userId, pcr);
+		? remote.sendIdentifiantUs(realm, userId, properties, userStorage)
+		: remote.sendIdentifiant(realm, userId, properties);
 };
 
 export const resetPassword = (
