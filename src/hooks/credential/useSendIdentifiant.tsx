@@ -10,12 +10,12 @@ export const useSendIdentifiant = () => {
 	const execute = async (
 		realm: string,
 		userid: string,
-		pcr: PasswordChangeRequest,
+		properties?: any,
 		userStorage?: string,
 	) => {
 		setLoading(true);
 		setError(undefined);
-		await sendIdentifiant(realm, userid, pcr, userStorage)
+		await sendIdentifiant(realm, userid, properties, userStorage)
 			.then((r) => setResult(r))
 			.catch((err) => setError(err))
 			.finally(() => setLoading(false));
