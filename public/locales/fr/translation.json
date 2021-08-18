@@ -104,7 +104,7 @@
 			"save": "Créer",
 			"reset": "Restaurer le formulaire"
 		},
-		"error": "Erreur lors de l'envoi à l'API"
+		"error": "L'organisation n'a pas été créée"
 	},
 	"create_user": {
 		"title": "Créer un utilisateur dans le realm ",
@@ -112,7 +112,7 @@
 			"save": "Créer",
 			"reset": "Restaurer le formulaire"
 		},
-		"error": "Erreur lors de l'envoi à l'API"
+		"error": "L'utilisateur n'a pas été créé"
 	},
 	"detail_user": {
 		"title": "Détail de l'utilisateur ",

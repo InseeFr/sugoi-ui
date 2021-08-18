@@ -29,6 +29,10 @@ const TextNotification = (props: any) => {
 	} else if (isAxiosResponse(subject)) {
 		if (subject.status === 200) {
 			message = t('notif.success');
+		} else if (subject.status === 201) {
+			message = t('notif.success');
+		} else if (subject.status === 204) {
+			message = t('notif.success');
 		} else {
 			message = subject.statusText;
 		}
@@ -38,7 +42,7 @@ const TextNotification = (props: any) => {
 		} else if (subject.message === 'Network Error') {
 			message = t('notif.network_error');
 		} else {
-			message = subject.message;
+			message = subject.response?.data?.message;
 		}
 	}
 

@@ -38,7 +38,7 @@ const CreateUsers = () => {
 
 	useEffect(() => {
 		if (error) {
-			enqueueSnackbar(t('create_user.error') + error, {
+			enqueueSnackbar(t('create_user.error') /*+ error*/, {
 				variant: 'error',
 			});
 		}
