@@ -1,4 +1,4 @@
-export default interface searchRequestUser {
+export default interface SearchRequestUser {
 	identifiant?: string;
 	nomCommun?: string;
 	description?: string;

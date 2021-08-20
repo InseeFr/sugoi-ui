@@ -1,6 +1,6 @@
 import { Button, Grid, IconButton, LinearProgress } from '@material-ui/core';
 import CreateIcon from '@material-ui/icons/Create';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import useGetUsers from '../../hooks/user/useGetUsers';
@@ -11,6 +11,8 @@ import SearchForm from '../commons/searchFormular';
 import { useSnackbar } from 'notistack';
 import ZoomInOutlinedIcon from '@material-ui/icons/ZoomInOutlined';
 import { ButtonDescription } from '../commons/description';
+import { exportUser } from '../../api/remote';
+import { download } from '../../utils/downloadFile';
 interface ParamTypes {
 	realm: string;
 	userStorage: string;
@@ -21,6 +23,8 @@ const SearchUsers = () => {
 	const { enqueueSnackbar } = useSnackbar();
 	const { push } = useHistory();
 
+	const [lastSearch, setLastSearch] = useState({});
+
 	const { t } = useTranslation();
 
 	const {
@@ -30,6 +34,7 @@ const SearchUsers = () => {
 	} = useGetUsers(realm, userStorage);
 
 	const handleSearch = (values: any) => {
+		setLastSearch(values);
 		searchUsers({ ...values }, realm, userStorage);
 	};
 
@@ -60,6 +65,12 @@ const SearchUsers = () => {
 				variant: 'info',
 			});
 		}
+	};
+
+	const handleExport = () => {
+		exportUser(realm, { ...lastSearch }, userStorage).then((r) =>
+			download(r, 'export.csv', 'text/csv;charset=utf-8;'),
+		);
 	};
 
 	const formFields: Field[] = [
@@ -197,6 +208,8 @@ const SearchUsers = () => {
 						columns={columns}
 						handleClickAdd={handleCreate}
 						handleClickOnRow={handleClickOnUser}
+						handleDownload={handleExport}
+						downloadable={true}
 					/>
 					{loading ? <LinearProgress /> : null}
 				</Grid>

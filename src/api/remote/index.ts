@@ -6,3 +6,4 @@ export * from './credentialApi';
 export * from './applicationApi';
 export * from './updateSingleAttributeApi';
 export * from './whoamiApi';
+export * from './exportApi';

@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios';
 import { getAuthClient } from '../../configuration/axios-configuration';
 import { Pageable } from '../../model/api/pageable';
 import User from '../../model/api/user';
-import searchRequestUser from '../../model/js/searchRequestUser';
+import SearchRequestUser from '../../model/js/searchRequestUser';
 import axios from 'axios';
 
 //cancel previous request if new one is send before receive previous request
@@ -22,7 +22,7 @@ export const getUsers = (
 		typeRecherche,
 		habilitations,
 		application,
-	}: searchRequestUser,
+	}: SearchRequestUser,
 ): Promise<Pageable> =>
 	getAuthClient().then((client: AxiosInstance) => {
 		//Check if there are any previous pending requests
@@ -97,7 +97,7 @@ export const getUsersFromUserStorage = (
 		typeRecherche,
 		habilitations,
 		application,
-	}: searchRequestUser,
+	}: SearchRequestUser,
 ): Promise<Pageable> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
