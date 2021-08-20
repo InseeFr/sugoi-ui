@@ -1,15 +1,17 @@
 import { Button, Paper } from '@material-ui/core';
 import Tooltip from '@material-ui/core/Tooltip';
 import AddIcon from '@material-ui/icons/Add';
-import MUIDataTable from 'mui-datatables';
+import MUIDataTable, { MUIDataTableOptions } from 'mui-datatables';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-interface props {
+interface Props {
 	data: any;
 	columns: any;
 	handleClickAdd: () => void;
 	handleClickOnRow: any;
+	handleDownload?: any;
+	downloadable?: boolean;
 }
 
 const CustomToolBar = ({ handleClick }: any) => {
@@ -35,9 +37,11 @@ export const SearchResults = ({
 	columns,
 	handleClickAdd,
 	handleClickOnRow,
-}: props) => {
+	handleDownload,
+	downloadable,
+}: Props) => {
 	const { t } = useTranslation();
-	const options = {
+	const options: MUIDataTableOptions = {
 		responsive: 'simple' as any,
 		selectableRowsHideCheckboxes: true,
 		customToolbar: () => {
@@ -115,6 +119,14 @@ export const SearchResults = ({
 			},
 		},
 		selectableRowsOnClick: false,
+		downloadOptions: { filename: 'export.csv' },
+		onDownload: (buildHead, buildBody, columns, data) => {
+			handleDownload();
+			// Must return false to delegate the download to handleDownload
+			return false;
+		},
+		print: false,
+		download: downloadable,
 	};
 
 	return (
@@ -127,4 +139,8 @@ export const SearchResults = ({
 			/>
 		</Paper>
 	);
+};
+
+SearchResults.defaultProps = {
+	downloadable: false,
 };

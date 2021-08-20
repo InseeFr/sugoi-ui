@@ -364,3 +364,12 @@ export const deleteGroupToUser = (
 export const getWhoami = () => {
 	return remote.getWhoami();
 };
+
+export const exportUsers = async (
+	realm: string,
+	searchRequest: searchRequestUser,
+	userStorage?: string,
+): Promise<Pageable> => {
+	searchRequest = Utils.cleanObjectEntries(searchRequest);
+	return remote.exportUser(realm, searchRequest || {}, userStorage);
+};

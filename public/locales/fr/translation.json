@@ -227,7 +227,7 @@
 				},
 				"toolbar": {
 					"search": "Rechercher",
-					"downloadCsv": "Télécharger CSV",
+					"downloadCsv": "Exporter tout les résultats de la recherche",
 					"print": "Imprimer",
 					"viewColumns": "Afficher/masquer des colonnes",
 					"filterTable": "Filtrer le tableau"
