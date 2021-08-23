@@ -8,6 +8,6 @@ export default interface SearchRequestUser {
 	start?: number;
 	searchCookie?: string;
 	typeRecherche?: 'AND' | 'OR';
-	habilitations?: string[];
+	habilitation?: string[];
 	application?: string;
 }

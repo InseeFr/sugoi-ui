@@ -20,7 +20,7 @@ export const getUsers = (
 		start,
 		searchCookie,
 		typeRecherche,
-		habilitations,
+		habilitation,
 		application,
 	}: SearchRequestUser,
 ): Promise<Pageable> =>
@@ -44,7 +44,7 @@ export const getUsers = (
 					start,
 					searchCookie,
 					typeRecherche,
-					habilitations,
+					habilitation,
 					application,
 				},
 				cancelToken: cancelToken.token,
@@ -95,7 +95,7 @@ export const getUsersFromUserStorage = (
 		start,
 		searchCookie,
 		typeRecherche,
-		habilitations,
+		habilitation,
 		application,
 	}: SearchRequestUser,
 ): Promise<Pageable> =>
@@ -112,7 +112,7 @@ export const getUsersFromUserStorage = (
 					start,
 					searchCookie,
 					typeRecherche,
-					habilitations,
+					habilitation,
 					application,
 				},
 			})

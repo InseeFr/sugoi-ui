@@ -1,4 +1,11 @@
-import { Button, Grid, IconButton, LinearProgress } from '@material-ui/core';
+import {
+	Button,
+	Chip,
+	Grid,
+	IconButton,
+	LinearProgress,
+	Typography,
+} from '@material-ui/core';
 import CreateIcon from '@material-ui/icons/Create';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -134,20 +141,97 @@ const SearchUsers = () => {
 			tag: '',
 			options: {},
 		},
+		{
+			name: t('search_user.form.field.habilitation.name'),
+			helpTextTitle: t(
+				'search_user.form.field.habilitation.help_text_title',
+			),
+			helpText: t('search_user.form.field.habilitation.help_text'),
+			path: 'habilitation',
+			type: 'string',
+			modifiable: true,
+			tag: '',
+			options: {},
+		},
 	];
 
 	const columns = [
 		{
 			name: 'username',
-			label: 'Username',
+			label: 'Identifiant',
+		},
+		{
+			name: 'firstName',
+			label: 'Prénom',
+		},
+		{
+			name: 'lastName',
+			label: 'Nom',
 		},
 		{
 			name: 'mail',
 			label: 'Email',
 		},
 		{
-			name: 'lastName',
-			label: 'Nom commun',
+			name: 'attributes',
+			label: 'Nom Commun',
+			options: {
+				filter: false,
+				sort: true,
+				customBodyRender: (
+					value: any,
+					tableMeta: any,
+					updateValue: any,
+				) => <Typography>{value.common_name}</Typography>,
+			},
+		},
+		{
+			name: 'habilitations',
+			label: 'Habilitations',
+			options: {
+				filter: false,
+				sort: true,
+				customBodyRender: (
+					value: any,
+					tableMeta: any,
+					updateValue: any,
+				) => (
+					<Typography>
+						{value.map((v: any) => (
+							<Chip
+								key={'hab_' + v.id}
+								label={v.id}
+								size="small"
+							/>
+						))}
+					</Typography>
+				),
+			},
+		},
+		{
+			name: 'groups',
+			label: 'Groupes',
+			options: {
+				filter: false,
+				sort: true,
+				customBodyRender: (
+					value: any,
+					tableMeta: any,
+					updateValue: any,
+				) => (
+					<Typography>
+						{value
+							.filter((v: any) => v != null)
+							.map((v: any) => (
+								<Chip
+									key={'group_' + v.name}
+									label={v.name}
+									size="small"
+								/>
+							))}
+					</Typography>
+				),
+			},
 		},
 		{
 			name: '',

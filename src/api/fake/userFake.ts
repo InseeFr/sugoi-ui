@@ -13,7 +13,7 @@ export const getUsers = (
 		start,
 		searchCookie,
 		typeRecherche,
-		habilitations,
+		habilitation,
 		application,
 	}: searchRequestUser,
 ): Promise<Pageable> =>

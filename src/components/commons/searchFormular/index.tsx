@@ -33,6 +33,7 @@ const SearchFormular = ({
 	const { t } = useTranslation();
 
 	const submit = (e: any) => {
+		console.log(formValues);
 		e.preventDefault();
 		onSubmit({ ...formValues });
 	};
