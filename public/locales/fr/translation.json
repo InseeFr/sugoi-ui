@@ -74,6 +74,11 @@
 				"certificate": {
 					"name": "Certificat associé",
 					"help_text_title": "Certificat associé"
+				},
+				"habilitation": {
+					"name": "Habilitation",
+					"help_text_title": "Habilitation portée par le contact",
+					"help_text": "Le champ saisi peut être une portion de l'habilitation recherchée"
 				}
 			}
 		}
