@@ -18,13 +18,14 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import Autocomplete from '@material-ui/lab/Autocomplete/Autocomplete';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { matchPath, useHistory, useLocation } from 'react-router-dom';
-import { RootState } from '../../../configuration/store-configuration';
 import { useGetRealms } from '../../../hooks/realm/useGetRealms';
 import { saveRealms } from '../../../redux/actions/app';
 import GrainIcon from '@material-ui/icons/Grain';
 import { useSnackbar } from 'notistack';
+import { Realm } from '../../../model/api/realm';
+import { UserStorage } from '../../../model/api/userStorage';
 
 const useStyle = makeStyles((theme: Theme) =>
 	createStyles({
@@ -43,12 +44,11 @@ const SiderBody = () => {
 	const { push } = useHistory();
 	const location = useLocation();
 	const { t } = useTranslation();
-	const user = useSelector((state: RootState) => state.user);
-	const [realmSelected, setRealmSelected] = useState<string | undefined>();
+	const [realmSelected, setRealmSelected] = useState<Realm | undefined>();
 	const { enqueueSnackbar } = useSnackbar();
 
 	const [userStorageSelected, setStorageSelected] = useState<
-		string | undefined
+		UserStorage | undefined
 	>();
 
 	const { result: realms } = useGetRealms();
@@ -63,9 +63,9 @@ const SiderBody = () => {
 			['/realm/:realm/us/:userStorage', '/realm/:realm/'],
 		);
 		if (!match && realms.length === 1) {
-			setRealmSelected(realms[0].name);
+			setRealmSelected(realms[0]);
 			if (realms[0].userStorages.length === 1) {
-				setStorageSelected(realms[0].userStorages[0].name);
+				setStorageSelected(realms[0].userStorages[0]);
 				push(
 					'/realm/' +
 						realms[0].name +
@@ -82,7 +82,12 @@ const SiderBody = () => {
 					.map((realm) => realm.name)
 					.includes(match?.params?.realm)
 			) {
-				setRealmSelected(match?.params?.realm);
+				setRealmSelected(
+					realms.filter(
+						(realm) =>
+							match?.params?.realm === realm.name,
+					)[0],
+				);
 				if (match.params?.userStorage) {
 					if (
 						realms
@@ -95,7 +100,18 @@ const SiderBody = () => {
 							.includes(match?.params?.userStorage)
 					) {
 						setStorageSelected(
-							match?.params?.userStorage,
+							realms
+								.find(
+									(realm) =>
+										realm.name ===
+										match.params?.realm,
+								)
+								?.userStorages?.filter(
+									(us) =>
+										us.name ===
+										match?.params
+											?.userStorage,
+								)[0],
 						);
 					} else {
 						push('/realm/' + match?.params?.realm);
@@ -158,7 +174,7 @@ const SiderBody = () => {
 								) || []
 							}
 							style={{ width: 300 }}
-							value={realmSelected || null}
+							value={realmSelected?.name || null}
 							onChange={(
 								_event: any,
 								newRealmName: string | null,
@@ -208,21 +224,26 @@ const SiderBody = () => {
 						<Autocomplete
 							id="userStorage choice"
 							disabled={
-								realmSelected ? false : true
+								realmSelected?.name
+									? false
+									: true
 							}
 							options={
 								realms
 									?.filter(
 										(realm) =>
 											realm.name ===
-											realmSelected,
+											realmSelected?.name,
 									)[0]
 									?.userStorages.map(
 										(us) => us.name,
 									) || []
 							}
 							style={{ width: 300 }}
-							value={userStorageSelected || null}
+							value={
+								userStorageSelected?.name ||
+								null
+							}
 							onChange={(
 								_event: any,
 								newUserStorage: string | null,
@@ -230,13 +251,13 @@ const SiderBody = () => {
 								newUserStorage
 									? push(
 											'/realm/' +
-												realmSelected +
+												realmSelected?.name +
 												'/us/' +
 												newUserStorage,
 									  )
 									: push(
 											'/realm/' +
-												realmSelected,
+												realmSelected?.name,
 									  );
 							}}
 							renderInput={(params) => (
@@ -253,19 +274,21 @@ const SiderBody = () => {
 					<ListItem
 						button
 						key="search_users"
-						disabled={realmSelected ? false : true}
+						disabled={
+							realmSelected?.name ? false : true
+						}
 						onClick={() =>
 							userStorageSelected
 								? push(
 										'/realm/' +
-											realmSelected +
+											realmSelected?.name +
 											'/us/' +
-											userStorageSelected +
+											userStorageSelected?.name +
 											'/users',
 								  )
 								: push(
 										'/realm/' +
-											realmSelected +
+											realmSelected?.name +
 											'/users',
 								  )
 						}
@@ -284,19 +307,29 @@ const SiderBody = () => {
 					<ListItem
 						button
 						key="search_organizations"
-						disabled={realmSelected ? false : true}
+						disabled={
+							realmSelected?.name &&
+							realmSelected.userStorages.some(
+								(us) => us.organizationSource,
+							) &&
+							(userStorageSelected
+								? userStorageSelected.organizationSource
+								: true)
+								? false
+								: true
+						}
 						onClick={() =>
 							userStorageSelected
 								? push(
 										'/realm/' +
-											realmSelected +
+											realmSelected?.name +
 											'/us/' +
-											userStorageSelected +
+											userStorageSelected?.name +
 											'/organizations',
 								  )
 								: push(
 										'/realm/' +
-											realmSelected +
+											realmSelected?.name +
 											'/organizations',
 								  )
 						}
@@ -317,11 +350,16 @@ const SiderBody = () => {
 					<ListItem
 						button
 						key="search_application"
-						disabled={realmSelected ? false : true}
+						disabled={
+							realmSelected?.name &&
+							realmSelected?.appSource
+								? false
+								: true
+						}
 						onClick={() =>
 							push(
 								'/realm/' +
-									realmSelected +
+									realmSelected?.name +
 									'/applications',
 							)
 						}
