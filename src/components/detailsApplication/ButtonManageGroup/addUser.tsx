@@ -51,7 +51,7 @@ export const AddUsers = ({
 		execute(
 			{
 				identifiant: e.target.value,
-				nomCommun: e.target.value,
+				CommonName: e.target.value,
 				typeRecherche: 'OR',
 			},
 			realm,

@@ -123,7 +123,7 @@ const SearchUsers = () => {
 				'search_user.form.field.commun_name.help_text_title',
 			),
 			helpText: t('search_user.form.field.commun_name.help_text'),
-			path: 'nomCommun',
+			path: 'CommonName',
 			type: 'string',
 			modifiable: true,
 			tag: '',
