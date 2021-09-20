@@ -6,7 +6,7 @@ export const getUsers = (
 	realm: string,
 	{
 		identifiant,
-		nomCommun,
+		CommonName,
 		description,
 		organisationId,
 		size,

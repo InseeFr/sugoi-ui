@@ -13,7 +13,7 @@ export const getUsers = (
 	{
 		mail,
 		identifiant,
-		nomCommun,
+		CommonName,
 		description,
 		organisationId,
 		size,
@@ -37,7 +37,7 @@ export const getUsers = (
 				params: {
 					mail,
 					identifiant,
-					nomCommun,
+					CommonName,
 					description,
 					organisationId,
 					size,
@@ -88,7 +88,7 @@ export const getUsersFromUserStorage = (
 	{
 		mail,
 		identifiant,
-		nomCommun,
+		CommonName,
 		description,
 		organisationId,
 		size,
@@ -105,7 +105,7 @@ export const getUsersFromUserStorage = (
 				params: {
 					mail,
 					identifiant,
-					nomCommun,
+					CommonName,
 					description,
 					organisationId,
 					size: size ? size : 500,

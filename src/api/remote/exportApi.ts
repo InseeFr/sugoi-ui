@@ -7,7 +7,7 @@ export const exportUser = async (
 	{
 		mail,
 		identifiant,
-		nomCommun,
+		CommonName,
 		description,
 		organisationId,
 		size,
@@ -30,7 +30,7 @@ export const exportUser = async (
 					params: {
 						mail,
 						identifiant,
-						nomCommun,
+						CommonName,
 						description,
 						organisationId,
 						size,
