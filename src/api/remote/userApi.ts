@@ -2,10 +2,10 @@ import { getAuthClient } from '../../configuration/axios-configuration';
 import { Pageable } from '../../model/api/pageable';
 import User from '../../model/api/user';
 import SearchRequestUser from '../../model/js/searchRequestUser';
-import axios from 'axios';
+import axios, { CancelTokenSource } from 'axios';
 
 //cancel previous request if new one is send before receive previous request
-let cancelToken: any = undefined;
+let cancelToken: CancelTokenSource | undefined = undefined;
 
 export const getUsers = (
 	realm: string,
@@ -25,7 +25,7 @@ export const getUsers = (
 ): Promise<Pageable> => {
 	//Check if there are any previous pending requests
 	if (typeof cancelToken != typeof undefined) {
-		cancelToken.cancel('Operation canceled due to new request.');
+		cancelToken?.cancel('Operation canceled due to new request.');
 	}
 	//Save the cancel token for the current request
 	cancelToken = axios.CancelToken.source();

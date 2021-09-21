@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getUsers } from '../../api';
 import User from '../../model/api/user';
 import searchRequestUser from '../../model/js/searchRequestUser';
+
 const useGetUsers = (realm?: string, userStorage?: string) => {
 	const [result, setResult] = useState<User[]>([]);
 	const [error, setError] = useState(undefined);
