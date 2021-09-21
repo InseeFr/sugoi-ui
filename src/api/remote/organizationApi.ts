@@ -3,6 +3,9 @@ import { getAuthClient } from '../../configuration/axios-configuration';
 import Organization from '../../model/api/organization';
 import { Pageable } from '../../model/api/pageable';
 import searchRequestOrganization from '../../model/js/searchRequestOrganization';
+import axios, { CancelTokenSource } from 'axios';
+
+let cancelToken: CancelTokenSource | undefined = undefined;
 
 export const getOrganizations = (
 	realm: string,
@@ -13,8 +16,14 @@ export const getOrganizations = (
 		property,
 		mail,
 	}: searchRequestOrganization,
-): Promise<Pageable> =>
-	getAuthClient()
+): Promise<Pageable> => {
+	//Check if there are any previous pending requests
+	if (typeof cancelToken != typeof undefined) {
+		cancelToken?.cancel('Operation canceled due to new request.');
+	}
+	//Save the cancel token for the current request
+	cancelToken = axios.CancelToken.source();
+	return getAuthClient()
 		.get('/realms/' + realm + '/organizations', {
 			params: {
 				identifiant,
@@ -23,8 +32,10 @@ export const getOrganizations = (
 				property,
 				mail,
 			},
+			cancelToken: cancelToken.token,
 		})
 		.then((r: any) => r.data);
+};
 
 export const getOrganization = async (
 	realm: string,

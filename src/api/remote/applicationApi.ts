@@ -1,16 +1,27 @@
 import { getAuthClient } from '../../configuration/axios-configuration';
 import Application from '../../model/api/application';
 import { Pageable } from '../../model/api/pageable';
+import axios, { CancelTokenSource } from 'axios';
+
+let cancelToken: CancelTokenSource | undefined = undefined;
 
 export const getApplications = (
 	realm: string,
 	name?: string,
-): Promise<Pageable> =>
-	getAuthClient()
+): Promise<Pageable> => {
+	//Check if there are any previous pending requests
+	if (typeof cancelToken != typeof undefined) {
+		cancelToken?.cancel('Operation canceled due to new request.');
+	}
+	//Save the cancel token for the current request
+	cancelToken = axios.CancelToken.source();
+	return getAuthClient()
 		.get('/realms/' + realm + '/applications', {
 			params: { size: 500, name: name },
+			cancelToken: cancelToken.token,
 		})
 		.then((r: any) => r.data);
+};
 
 export const getApplication = (realm: string, name?: string): Promise<any> =>
 	getAuthClient()

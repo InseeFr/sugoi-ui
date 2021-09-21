@@ -3,4 +3,5 @@ export default interface Attributes {
 	description?: string;
 	roles?: string[];
 	common_name?: string;
+	mail?: string;
 }

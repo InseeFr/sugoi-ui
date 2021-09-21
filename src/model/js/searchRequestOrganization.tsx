@@ -4,4 +4,5 @@ export default interface searchRequestOrganization {
 	role?: string;
 	property?: string;
 	mail?: string;
+	typeRecherche?: 'AND' | 'OR';
 }

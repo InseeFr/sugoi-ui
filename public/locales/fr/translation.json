@@ -149,8 +149,11 @@
 		"error": "Erreur lors de l'envoi a l'API: "
 	},
 	"global_search": {
-		"title": "Rechercher dans le realm ",
-		"label": "Votre recherche..."
+		"title": "Rechercher rapidement dans ",
+		"title_next": " et le storage ",
+		"user_quick_search_title": "Rechercher un utilisateur",
+		"application_quick_search_title": "Rechercher une application",
+		"organization_quick_search_title": "Rechercher une organisation"
 	},
 	"settings": {
 		"title": "Paramètres",
