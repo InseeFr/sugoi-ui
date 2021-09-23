@@ -112,7 +112,6 @@ export const SearchApplications = () => {
 									</TableCell>
 								</TableRow>
 							</TableHead>
-							{loading && <LinearProgress />}
 							<TableBody>
 								{applications.length === 0 ? (
 									<TableRow key="no-data">
@@ -172,6 +171,7 @@ export const SearchApplications = () => {
 							</TableBody>
 						</Table>
 					</TableContainer>
+					{loading && <LinearProgress />}
 				</Grid>
 				<Grid item xs={12}>
 					<Grid
