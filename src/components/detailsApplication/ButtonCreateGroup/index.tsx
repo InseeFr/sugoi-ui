@@ -50,7 +50,7 @@ export const ButtonCreateGroup = ({ handleAddGroup, application }: Props) => {
 						<Grid
 							container
 							direction="row"
-							justify="center"
+							justifyContent="center"
 							alignItems="stretch"
 							spacing={1}
 						>

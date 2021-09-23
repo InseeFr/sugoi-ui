@@ -115,7 +115,7 @@ const HabilitationsPopup = ({
 						<Grid
 							container
 							direction="row"
-							justify="flex-start"
+							justifyContent="flex-start"
 							alignItems="stretch"
 							spacing={1}
 						>
@@ -156,7 +156,7 @@ const HabilitationsPopup = ({
 						<Grid
 							container
 							direction="column"
-							justify="center"
+							justifyContent="center"
 							alignItems="stretch"
 							spacing={2}
 						>
@@ -240,7 +240,7 @@ const HabilitationsPopup = ({
 							<Grid
 								container
 								direction="column"
-								justify="center"
+								justifyContent="center"
 								alignItems="stretch"
 								spacing={2}
 							>

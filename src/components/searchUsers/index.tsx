@@ -258,7 +258,7 @@ const SearchUsers = () => {
 			<Grid
 				container
 				direction="column"
-				justify="center"
+				justifyContent="center"
 				alignItems="stretch"
 				spacing={3}
 			>
@@ -274,7 +274,7 @@ const SearchUsers = () => {
 			<Grid
 				container
 				direction="column"
-				justify="center"
+				justifyContent="center"
 				alignItems="stretch"
 				spacing={3}
 			>

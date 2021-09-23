@@ -5,11 +5,10 @@ import {
 	IconButton,
 	Typography,
 	CircularProgress,
-	LinearProgress,
 } from '@material-ui/core';
 import CreateIcon from '@material-ui/icons/Create';
 import PeopleIcon from '@material-ui/icons/People';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetApplication } from '../../../../../hooks/applications/useGetApplication';
 import {
@@ -99,7 +98,7 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 						<Grid
 							container
 							direction="column"
-							justify="center"
+							justifyContent="center"
 							alignItems="stretch"
 							spacing={2}
 						>
@@ -119,7 +118,7 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 								<Grid
 									container
 									direction="column"
-									justify="center"
+									justifyContent="center"
 									alignItems="stretch"
 									spacing={1}
 								>
@@ -159,7 +158,7 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 						<Grid
 							container
 							direction="column"
-							justify="center"
+							justifyContent="center"
 							alignItems="stretch"
 							spacing={2}
 						>
@@ -183,7 +182,7 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 									<Grid
 										container
 										direction="row"
-										justify="flex-start"
+										justifyContent="flex-start"
 										alignItems="stretch"
 										spacing={2}
 									>
@@ -237,7 +236,7 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 						<Grid
 							container
 							direction="row"
-							justify="flex-start"
+							justifyContent="flex-start"
 							alignItems="stretch"
 							spacing={1}
 						>

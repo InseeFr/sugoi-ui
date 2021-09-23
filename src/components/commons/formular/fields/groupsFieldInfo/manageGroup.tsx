@@ -44,7 +44,7 @@ export const ManageGroup = ({
 		<Grid
 			container
 			direction="column"
-			justify="center"
+			justifyContent="center"
 			alignItems="stretch"
 			spacing={1}
 		>
@@ -55,13 +55,13 @@ export const ManageGroup = ({
 							<TableRow>
 								<TableCell
 									align="center"
-									padding="default"
+									padding="normal"
 								>
 									Groupes
 								</TableCell>
 								<TableCell
 									align="right"
-									padding="default"
+									padding="normal"
 								>
 									Actions
 								</TableCell>
@@ -147,7 +147,7 @@ export const ManageGroup = ({
 				<Grid
 					container
 					direction="row"
-					justify="space-between"
+					justifyContent="space-between"
 					alignItems="center"
 				>
 					<Grid item>

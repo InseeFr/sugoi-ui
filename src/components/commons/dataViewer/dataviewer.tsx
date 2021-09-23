@@ -57,7 +57,7 @@ const DataViewer = ({
 			container
 			spacing={3}
 			direction="column"
-			justify="center"
+			justifyContent="center"
 			alignItems="stretch"
 		>
 			<Grid item xs={12}>
@@ -65,7 +65,7 @@ const DataViewer = ({
 					container
 					spacing={3}
 					direction="row"
-					justify="center"
+					justifyContent="center"
 					alignItems="stretch"
 				>
 					<Grid item xs={12}>
@@ -169,7 +169,7 @@ const DataViewer = ({
 								container
 								spacing={3}
 								direction="row"
-								justify="flex-start"
+								justifyContent="flex-start"
 								alignItems="stretch"
 							>
 								{GenerateFields(
@@ -199,7 +199,7 @@ const DataViewer = ({
 							<Grid
 								container
 								direction="row"
-								justify="center"
+								justifyContent="center"
 								spacing={3}
 							>
 								<Grid item>

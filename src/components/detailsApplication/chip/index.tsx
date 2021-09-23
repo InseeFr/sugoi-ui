@@ -63,7 +63,7 @@ export const ChipButton = ({ realm, group }: ButtonProps) => {
 					<Grid
 						container
 						direction="row"
-						justify="center"
+						justifyContent="center"
 						alignItems="stretch"
 						spacing={1}
 					>

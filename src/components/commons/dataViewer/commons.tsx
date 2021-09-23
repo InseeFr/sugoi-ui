@@ -38,7 +38,7 @@ export const ContentPanel = ({
 			container
 			spacing={3}
 			direction="column"
-			justify="center"
+			justifyContent="center"
 			alignItems="stretch"
 		>
 			{GenerateFields(values, handleChange, fields).map(
