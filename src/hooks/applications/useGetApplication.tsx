@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { getApplication } from '../../api/remote';
+import Application from '../../model/api/application';
 
 export const useGetApplication = (realm?: string, name?: string) => {
-	const [result, setResult] = useState<any>();
+	const [result, setResult] = useState<Application | undefined>();
 	const [error, setError] = useState<any>(undefined);
-	const [loading, setLoading] = useState<boolean>(true);
+	const [loading, setLoading] = useState<boolean>(false);
 	const [firstSearch, setFirstSearch] = useState(
 		realm && name ? true : false,
 	);
