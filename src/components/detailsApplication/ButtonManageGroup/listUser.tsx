@@ -12,7 +12,7 @@ export const GroupListUsers = ({ group, realm }: Props) => {
 		<Grid
 			container
 			direction="row"
-			justify="center"
+			justifyContent="center"
 			alignItems="stretch"
 			spacing={1}
 		>

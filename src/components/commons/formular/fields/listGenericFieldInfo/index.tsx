@@ -33,7 +33,7 @@ export const ListFieldButton = ({
 }: props) => {
 	return (
 		<>
-			<Grid container direction="row" justify="center">
+			<Grid container direction="row" justifyContent="center">
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<Typography component="div" variant="body1">
 						{name}

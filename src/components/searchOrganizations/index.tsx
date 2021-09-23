@@ -133,7 +133,7 @@ const SearchOrganizations = () => {
 			<Grid
 				container
 				direction="column"
-				justify="center"
+				justifyContent="center"
 				alignItems="stretch"
 				spacing={3}
 			>
@@ -153,7 +153,7 @@ const SearchOrganizations = () => {
 			<Grid
 				container
 				direction="column"
-				justify="center"
+				justifyContent="center"
 				alignItems="stretch"
 				spacing={3}
 			>

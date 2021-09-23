@@ -82,7 +82,7 @@ export const DetailsApplication = () => {
 				<Grid
 					container
 					direction="column"
-					justify="center"
+					justifyContent="center"
 					alignItems="stretch"
 					spacing={3}
 				>
@@ -90,7 +90,7 @@ export const DetailsApplication = () => {
 						<Grid
 							container
 							direction="row"
-							justify="flex-end"
+							justifyContent="flex-end"
 							alignItems="center"
 							spacing={3}
 						>
@@ -113,25 +113,25 @@ export const DetailsApplication = () => {
 									<TableRow>
 										<TableCell
 											align="left"
-											padding="default"
+											padding="normal"
 										>
 											Groupe
 										</TableCell>
 										<TableCell
 											align="left"
-											padding="default"
+											padding="normal"
 										>
 											Descriptions
 										</TableCell>
 										<TableCell
 											align="left"
-											padding="default"
+											padding="normal"
 										>
 											Utilisateurs
 										</TableCell>
 										<TableCell
 											align="left"
-											padding="default"
+											padding="normal"
 										>
 											Actions
 										</TableCell>
@@ -259,7 +259,7 @@ export const DetailsApplication = () => {
 						<Grid
 							container
 							direction="row"
-							justify="space-between"
+							justifyContent="space-between"
 							alignItems="center"
 							spacing={3}
 						>
@@ -311,7 +311,7 @@ export const DetailsApplication = () => {
 						<Grid
 							container
 							direction="row"
-							justify="center"
+							justifyContent="center"
 							alignItems="center"
 							spacing={3}
 						>

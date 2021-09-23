@@ -66,7 +66,7 @@ const CreateOrganization = () => {
 							<Grid
 								container
 								direction="row"
-								justify="center"
+								justifyContent="center"
 								spacing={3}
 							>
 								<Grid item>

@@ -101,7 +101,7 @@ const SimpleAppManagedAttributes = ({
 						<Grid
 							container
 							direction="row"
-							justify="flex-start"
+							justifyContent="flex-start"
 							alignItems="stretch"
 							spacing={1}
 						>
@@ -143,7 +143,7 @@ const SimpleAppManagedAttributes = ({
 						<Grid
 							container
 							direction="column"
-							justify="center"
+							justifyContent="center"
 							alignItems="stretch"
 							spacing={2}
 						>
@@ -206,7 +206,7 @@ const SimpleAppManagedAttributes = ({
 						<Grid
 							container
 							direction="column"
-							justify="center"
+							justifyContent="center"
 							alignItems="stretch"
 							spacing={2}
 						>

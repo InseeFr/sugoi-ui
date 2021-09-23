@@ -59,7 +59,7 @@ export const SearchApplications = () => {
 			<Grid
 				container
 				direction="column"
-				justify="center"
+				justifyContent="center"
 				alignItems="stretch"
 				spacing={3}
 			>
@@ -79,7 +79,7 @@ export const SearchApplications = () => {
 					<Grid
 						container
 						direction="row"
-						justify="flex-end"
+						justifyContent="flex-end"
 						alignItems="center"
 					>
 						<CreateApplicationButton
@@ -104,7 +104,7 @@ export const SearchApplications = () => {
 								<TableRow>
 									<TableCell
 										align="center"
-										padding="default"
+										padding="normal"
 									>
 										{t(
 											'search_application.table_header',
@@ -177,7 +177,7 @@ export const SearchApplications = () => {
 					<Grid
 						container
 						direction="row"
-						justify="space-between"
+						justifyContent="space-between"
 						alignItems="center"
 					>
 						<Grid item>

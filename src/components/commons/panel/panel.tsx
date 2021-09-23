@@ -48,7 +48,7 @@ const Panel = ({
 			<Grid
 				container
 				direction="column"
-				justify="center"
+				justifyContent="center"
 				alignItems="stretch"
 				spacing={2}
 			>
