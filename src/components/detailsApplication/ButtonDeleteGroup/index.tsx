@@ -3,26 +3,37 @@ import React, { useState } from 'react';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SimpleDialog from '../../commons/popButton/Dialog';
 import { Group } from '../../../model/api/group';
+import { useDeleteGroup } from '../../../hooks/group';
 
 interface Props {
-	handleDeleteGroup: any;
 	group: Group;
+	application: string;
+	realm: string;
+	onClose: () => Promise<void>;
 }
 
-export const ButtonDeleteGroup = ({ handleDeleteGroup, group }: Props) => {
+export const ButtonDeleteGroup = ({
+	group,
+	application,
+	realm,
+	onClose,
+}: Props) => {
 	const [open, setOpen] = useState(false);
 
 	const handleOpen = () => {
 		setOpen(true);
 	};
 
+	const { execute: deleteGroup } = useDeleteGroup();
+
 	const handleClose = () => {
 		setOpen(false);
 	};
 
 	const onSubmit = () => {
-		handleDeleteGroup(group.name);
-		setOpen(false);
+		deleteGroup(realm, application, group.name)
+			.then(() => onClose())
+			.finally(() => setOpen(false));
 	};
 
 	return (

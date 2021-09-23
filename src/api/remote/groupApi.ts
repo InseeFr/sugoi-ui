@@ -1,7 +1,7 @@
 import { getAuthClient } from '../../configuration/axios-configuration';
 import { Group } from '../../model/api/group';
 
-export const getGroups = (
+export const getGroups = async (
 	realm: string,
 	application: string,
 ): Promise<Group[]> =>
@@ -15,7 +15,7 @@ export const getGroups = (
 		)
 		.then((r: any) => r.data);
 
-export const getGroup = (
+export const getGroup = async (
 	realm: string,
 	application: string,
 	group: string,
@@ -31,7 +31,7 @@ export const getGroup = (
 		)
 		.then((r: any) => r.data);
 
-export const postGroup = (
+export const postGroup = async (
 	realm: string,
 	application: string,
 	group: Group,
@@ -47,7 +47,7 @@ export const postGroup = (
 		)
 		.then((r: any) => r.data);
 
-export const putGroup = (
+export const putGroup = async (
 	realm: string,
 	application: string,
 	group: Group,
@@ -64,7 +64,7 @@ export const putGroup = (
 		)
 		.then((r: any) => r.data);
 
-export const deleteGroup = (
+export const deleteGroup = async (
 	realm: string,
 	application: string,
 	groupId: string,
@@ -80,7 +80,7 @@ export const deleteGroup = (
 		)
 		.then((r: any) => r.data);
 
-export const addUserToGroup = (
+export const addUserToGroup = async (
 	realm: string,
 	application: string,
 	groupId: string,
@@ -99,8 +99,7 @@ export const addUserToGroup = (
 		)
 		.then((r: any) => r.data);
 };
-
-export const deleteUserFromGroup = (
+export const deleteUserFromGroup = async (
 	realm: string,
 	application: string,
 	groupId: string,
@@ -115,6 +114,52 @@ export const deleteUserFromGroup = (
 				'/groups/' +
 				groupId +
 				'/members/' +
+				userId,
+		)
+		.then((r: any) => r.data);
+
+export const getManagerGroup = async (
+	realm: string,
+	application: string,
+): Promise<Group> =>
+	getAuthClient()
+		.get(
+			'/realms/' +
+				realm +
+				'/applications/' +
+				application +
+				'/group_manager',
+		)
+		.then((r: any) => r.data);
+
+export const addUserToManagerGroup = async (
+	realm: string,
+	application: string,
+	userId: string,
+): Promise<string> => {
+	return getAuthClient()
+		.put(
+			'/realms/' +
+				realm +
+				'/applications/' +
+				application +
+				'/group_manager/members/' +
+				userId,
+		)
+		.then((r: any) => r.data);
+};
+export const deleteUserFromManagerGroup = async (
+	realm: string,
+	application: string,
+	userId: string,
+): Promise<string> =>
+	getAuthClient()
+		.delete(
+			'/realms/' +
+				realm +
+				'/applications/' +
+				application +
+				'/group_manager/members/' +
 				userId,
 		)
 		.then((r: any) => r.data);

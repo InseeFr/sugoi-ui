@@ -146,7 +146,11 @@
 		"table_no_entry": "Aucune application ne correspond à votre recherche"
 	},
 	"detail_application": {
-		"error": "Erreur lors de l'envoi a l'API: "
+		"error": "Erreur lors de l'envoi a l'API: ",
+		"title": "Détails de l'application ",
+		"manager_groups_title": "Gestionnaires des droits de l'application ",
+		"groups_title": "Groupes applicatifs",
+		"button_manage_group": "Gérer le groupe"
 	},
 	"global_search": {
 		"title": "Rechercher rapidement dans ",

@@ -419,3 +419,23 @@ export const deleteGpgKey = (
 ) => {
 	return remote.deleteGpgKey(id, realm, userStorage);
 };
+
+export const getManagerGroup = (realm: string, application: string) => {
+	return remote.getManagerGroup(realm, application);
+};
+
+export const addUserToManagerGroup = (
+	realm: string,
+	application: string,
+	id: string,
+) => {
+	return remote.addUserToManagerGroup(realm, application, id);
+};
+
+export const deleteUserFromManagerGroup = (
+	realm: string,
+	application: string,
+	id: string,
+) => {
+	return remote.deleteUserFromManagerGroup(realm, application, id);
+};

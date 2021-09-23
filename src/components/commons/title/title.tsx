@@ -1,13 +1,12 @@
-import React from 'react';
-import { Box, Typography, TypographyClassKey } from '@material-ui/core';
+import { Box, Typography, TypographyTypeMap } from '@material-ui/core';
+import { Variant } from '@material-ui/core/styles/createTypography';
 interface props {
 	title: string;
-	variant?: TypographyClassKey;
+	variant: Variant;
 }
-
 const Title = ({ title, variant }: props) => {
 	return (
-		<Typography component="div" color="primary" variant="h6">
+		<Typography component="div" color="primary" variant={variant}>
 			<Box fontWeight="fontWeightBold">{title}</Box>
 		</Typography>
 	);

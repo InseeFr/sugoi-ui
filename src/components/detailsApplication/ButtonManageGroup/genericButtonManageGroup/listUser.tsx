@@ -1,11 +1,12 @@
 import { Grid } from '@material-ui/core';
-import { Group } from '../../../model/api/group';
-import User from '../../../model/api/user';
-import { ChipPerson } from '../chip';
+import { Group } from '../../../../model/api/group';
+import User from '../../../../model/api/user';
+import { ChipPerson } from '../../chip';
 interface Props {
 	group: Group;
 	realm: string;
 }
+
 export const GroupListUsers = ({ group, realm }: Props) => {
 	return (
 		<Grid
@@ -15,7 +16,7 @@ export const GroupListUsers = ({ group, realm }: Props) => {
 			alignItems="stretch"
 			spacing={1}
 		>
-			{group?.users.map((user: User, i: number) => (
+			{group?.users?.map((user: User, i: number) => (
 				<Grid item>
 					<ChipPerson
 						realm={realm}

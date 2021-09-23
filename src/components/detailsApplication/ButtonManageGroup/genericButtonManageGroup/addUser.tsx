@@ -17,9 +17,9 @@ import AddIcon from '@material-ui/icons/Add';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import { Pagination } from '@material-ui/lab';
 import React, { useState } from 'react';
-import useGetUsers from '../../../hooks/user/useGetUsers';
-import { Group } from '../../../model/api/group';
-import User from '../../../model/api/user';
+import useGetUsers from '../../../../hooks/user/useGetUsers';
+import { Group } from '../../../../model/api/group';
+import User from '../../../../model/api/user';
 
 interface Props {
 	realm: string;
@@ -52,6 +52,7 @@ export const AddUsers = ({
 			{
 				identifiant: e.target.value,
 				CommonName: e.target.value,
+				mail: e.target.value,
 				typeRecherche: 'OR',
 			},
 			realm,
@@ -123,7 +124,7 @@ export const AddUsers = ({
 										>
 											{group ? (
 												(
-													group.users as User[]
+													group?.users as User[]
 												)?.filter(
 													(
 														_user,

@@ -136,7 +136,8 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 									<Grid item xs={12}>
 										<ManageGroup
 											appGroups={
-												application?.groups
+												application?.groups ||
+												[]
 											}
 											groups={
 												user?.groups ||

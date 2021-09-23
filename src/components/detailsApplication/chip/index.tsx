@@ -54,6 +54,7 @@ export const ChipButton = ({ realm, group }: ButtonProps) => {
 				size="small"
 				label={group?.users?.length - 4 + ' de plus...'}
 				onClick={handleOpen}
+				key={'group_' + group.name}
 			/>
 			<SimpleDialog
 				onClose={handleClose}
@@ -67,14 +68,26 @@ export const ChipButton = ({ realm, group }: ButtonProps) => {
 						alignItems="stretch"
 						spacing={1}
 					>
-						{group.users.map((user: any) => (
-							<Grid item>
+						{group.users.map((user: any, i: any) => (
+							<Grid
+								item
+								key={
+									'item-group_' +
+									group.name +
+									'user_' +
+									user +
+									'-' +
+									i
+								}
+							>
 								<ChipPerson
 									key={
 										'group_' +
 										group.name +
 										'user_' +
-										user
+										user +
+										'-' +
+										i
 									}
 									realm={realm}
 									user={user}
