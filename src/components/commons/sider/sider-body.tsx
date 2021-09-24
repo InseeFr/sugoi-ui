@@ -18,10 +18,8 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import Autocomplete from '@material-ui/lab/Autocomplete/Autocomplete';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 import { matchPath, useHistory, useLocation } from 'react-router-dom';
 import { useGetRealms } from '../../../hooks/realm/useGetRealms';
-import { saveRealms } from '../../../redux/actions/app';
 import GrainIcon from '@material-ui/icons/Grain';
 import { useSnackbar } from 'notistack';
 import { Realm } from '../../../model/api/realm';
@@ -40,7 +38,6 @@ const useStyle = makeStyles((theme: Theme) =>
 
 const SiderBody = () => {
 	const classes = useStyle();
-	const dispatch = useDispatch();
 	const { push } = useHistory();
 	const location = useLocation();
 	const { t } = useTranslation();
@@ -51,18 +48,14 @@ const SiderBody = () => {
 		UserStorage | undefined
 	>();
 
-	const { result: realms } = useGetRealms();
-
-	useEffect(() => {
-		dispatch(saveRealms(realms));
-	}, [realms, dispatch]);
+	const { realms } = useGetRealms();
 
 	useEffect(() => {
 		const match = matchPath<{ realm: 'string'; userStorage: 'string' }>(
 			location.pathname,
 			['/realm/:realm/us/:userStorage', '/realm/:realm/'],
 		);
-		if (!match && realms.length === 1) {
+		if (!match && realms && realms.length === 1) {
 			setRealmSelected(realms[0]);
 			if (realms[0].userStorages.length === 1) {
 				setStorageSelected(realms[0].userStorages[0]);
@@ -76,7 +69,7 @@ const SiderBody = () => {
 				push('/realm/' + realms[0].name);
 			}
 		}
-		if (realms.length > 0 && match) {
+		if (realms && realms.length > 0 && match) {
 			if (
 				realms
 					.map((realm) => realm.name)
@@ -181,7 +174,7 @@ const SiderBody = () => {
 							) => {
 								if (newRealmName) {
 									const newRealm =
-										realms.find(
+										realms?.find(
 											(realm) =>
 												newRealmName ===
 												realm.name,
