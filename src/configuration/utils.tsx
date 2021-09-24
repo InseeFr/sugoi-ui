@@ -19,6 +19,3 @@ export const getConfigFile = async () => {
 		return console.log('Impossible de récuperer la configuration');
 	}
 };
-
-export const configWrapper = (service: any) =>
-	getConfigFile().then((resp) => service(resp));

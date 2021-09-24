@@ -1,4 +1,4 @@
-import { AxiosInstance, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import { getAuthClient } from '../../configuration/axios-configuration';
 import Organization from '../../model/api/organization';
 import { Pageable } from '../../model/api/pageable';
@@ -14,54 +14,43 @@ export const getOrganizations = (
 		mail,
 	}: searchRequestOrganization,
 ): Promise<Pageable> =>
-	getAuthClient().then((client: AxiosInstance) =>
-		client
-			.get('/realms/' + realm + '/organizations', {
-				params: {
-					identifiant,
-					application,
-					role,
-					property,
-					mail,
-				},
-			})
-			.then((r: any) => r.data),
-	);
+	getAuthClient()
+		.get('/realms/' + realm + '/organizations', {
+			params: {
+				identifiant,
+				application,
+				role,
+				property,
+				mail,
+			},
+		})
+		.then((r: any) => r.data);
 
 export const getOrganization = async (
 	realm: string,
 	id: string,
 ): Promise<Organization> => {
-	return await getAuthClient().then((client: AxiosInstance) =>
-		client
-			.get('/realms/' + realm + '/organizations/' + id)
-			.then((r: any) => r.data),
-	);
+	return await getAuthClient()
+		.get('/realms/' + realm + '/organizations/' + id)
+		.then((r: any) => r.data);
 };
 
 export const deleteOrganization = (
 	realm: string,
 	id: string,
 ): Promise<string> =>
-	getAuthClient().then((client: AxiosInstance) =>
-		client
-			.delete('/realms/' + realm + '/organizations/' + id)
-			.then((r: any) => r.data),
-	);
+	getAuthClient()
+		.delete('/realms/' + realm + '/organizations/' + id)
+		.then((r: any) => r.data);
 
 export const updateOrganization = (
 	realm: string,
 	id: string,
 	organization: Organization,
 ): Promise<Organization> =>
-	getAuthClient().then((client: AxiosInstance) =>
-		client
-			.put(
-				'/realms/' + realm + '/organizations/' + id,
-				organization,
-			)
-			.then((r: any) => r.data),
-	);
+	getAuthClient()
+		.put('/realms/' + realm + '/organizations/' + id, organization)
+		.then((r: any) => r.data);
 
 export const getOrganizationsFromUserStorage = (
 	realm: string,
@@ -74,44 +63,33 @@ export const getOrganizationsFromUserStorage = (
 		mail,
 	}: searchRequestOrganization,
 ): Promise<Pageable> =>
-	getAuthClient().then((client: AxiosInstance) =>
-		client
-			.get(
-				'/realms/' +
-					realm +
-					'/storages/' +
-					us +
-					'/organizations',
-				{
-					params: {
-						identifiant,
-						application,
-						role,
-						property,
-						mail,
-					},
-				},
-			)
-			.then((r: any) => r.data),
-	);
+	getAuthClient()
+		.get('/realms/' + realm + '/storages/' + us + '/organizations', {
+			params: {
+				identifiant,
+				application,
+				role,
+				property,
+				mail,
+			},
+		})
+		.then((r: any) => r.data);
 
 export const getOrganizationFromUserStorage = async (
 	realm: string,
 	us: string,
 	id: string,
 ): Promise<Organization> => {
-	return await getAuthClient().then((client: AxiosInstance) =>
-		client
-			.get(
-				'/realms/' +
-					realm +
-					'/storages/' +
-					us +
-					'/organizations/' +
-					id,
-			)
-			.then((r: any) => r.data),
-	);
+	return await getAuthClient()
+		.get(
+			'/realms/' +
+				realm +
+				'/storages/' +
+				us +
+				'/organizations/' +
+				id,
+		)
+		.then((r: any) => r.data);
 };
 
 export const deleteOrganizationFromUserStorage = (
@@ -119,36 +97,28 @@ export const deleteOrganizationFromUserStorage = (
 	us: string,
 	id: string,
 ): Promise<string> =>
-	getAuthClient().then((client: AxiosInstance) =>
-		client
-			.delete(
-				'/realms/' +
-					realm +
-					'/storages/' +
-					us +
-					'/organizations/' +
-					id,
-			)
-			.then((r: any) => r.data),
-	);
+	getAuthClient()
+		.delete(
+			'/realms/' +
+				realm +
+				'/storages/' +
+				us +
+				'/organizations/' +
+				id,
+		)
+		.then((r: any) => r.data);
 
 export const postOrganization = (
 	realm: string,
 	us: string,
 	organization: Organization,
 ): Promise<Organization> =>
-	getAuthClient().then((client: AxiosInstance) =>
-		client
-			.post(
-				'/realms/' +
-					realm +
-					'/storages/' +
-					us +
-					'/organizations',
-				organization,
-			)
-			.then((r: any) => r.data),
-	);
+	getAuthClient()
+		.post(
+			'/realms/' + realm + '/storages/' + us + '/organizations',
+			organization,
+		)
+		.then((r: any) => r.data);
 
 export const updateOrganizationFromUserStorage = (
 	realm: string,
@@ -156,19 +126,17 @@ export const updateOrganizationFromUserStorage = (
 	id: string,
 	organization: Organization,
 ): Promise<Organization> =>
-	getAuthClient().then((client: AxiosInstance) =>
-		client
-			.put(
-				'/realms/' +
-					realm +
-					'/storages/' +
-					us +
-					'/organizations/' +
-					id,
-				organization,
-			)
-			.then((r: any) => r.data),
-	);
+	getAuthClient()
+		.put(
+			'/realms/' +
+				realm +
+				'/storages/' +
+				us +
+				'/organizations/' +
+				id,
+			organization,
+		)
+		.then((r: any) => r.data);
 
 export const putGpgKey = (
 	id: string,
@@ -176,44 +144,38 @@ export const putGpgKey = (
 	realm: string,
 	userStorage?: string,
 ) =>
-	getAuthClient().then((client: AxiosInstance) =>
-		client
-			.put(
-				'/realms/' +
-					realm +
-					(userStorage ? '/storages/' + userStorage : '') +
-					'/organization/' +
-					id +
-					'/gpg-key',
-				formdata,
-			)
-			.then((r: AxiosResponse) => r.data),
-	);
+	getAuthClient()
+		.put(
+			'/realms/' +
+				realm +
+				(userStorage ? '/storages/' + userStorage : '') +
+				'/organization/' +
+				id +
+				'/gpg-key',
+			formdata,
+		)
+		.then((r: AxiosResponse) => r.data);
 
 export const getGpgKey = (id: string, realm: string, userStorage?: string) =>
-	getAuthClient().then((client: AxiosInstance) =>
-		client
-			.get(
-				'/realms/' +
-					realm +
-					(userStorage ? '/storages/' + userStorage : '') +
-					'/organization/' +
-					id +
-					'/gpg-key',
-			)
-			.then((r: AxiosResponse) => r.data),
-	);
+	getAuthClient()
+		.get(
+			'/realms/' +
+				realm +
+				(userStorage ? '/storages/' + userStorage : '') +
+				'/organization/' +
+				id +
+				'/gpg-key',
+		)
+		.then((r: AxiosResponse) => r.data);
 
 export const deleteGpgKey = (id: string, realm: string, userStorage?: string) =>
-	getAuthClient().then((client: AxiosInstance) =>
-		client
-			.delete(
-				'/realms/' +
-					realm +
-					(userStorage ? '/storages/' + userStorage : '') +
-					'/organization/' +
-					id +
-					'/gpg-key',
-			)
-			.then((r: AxiosResponse) => r.data),
-	);
+	getAuthClient()
+		.delete(
+			'/realms/' +
+				realm +
+				(userStorage ? '/storages/' + userStorage : '') +
+				'/organization/' +
+				id +
+				'/gpg-key',
+		)
+		.then((r: AxiosResponse) => r.data);
