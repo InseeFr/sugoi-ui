@@ -16,7 +16,6 @@ export const useGetCertificate = () => {
 		setResult(undefined);
 		return await getCertificate(id, realm, userStorage)
 			.then((r) => {
-				console.log(r);
 				setResult(r);
 				return r;
 			})

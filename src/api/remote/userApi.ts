@@ -29,7 +29,6 @@ export const getUsers = (
 		if (typeof cancelToken != typeof undefined) {
 			cancelToken.cancel('Operation canceled due to new request.');
 		}
-		console.log(cancelToken);
 		//Save the cancel token for the current request
 		cancelToken = axios.CancelToken.source();
 		return client

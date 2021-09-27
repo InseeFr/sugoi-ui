@@ -97,7 +97,6 @@ export const addUserToGroup = (
 	groupId: string,
 	userId: string,
 ): Promise<string> => {
-	console.log('ivi');
 	return getAuthClient().then((client: AxiosInstance) =>
 		client
 			.put(
