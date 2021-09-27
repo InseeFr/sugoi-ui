@@ -60,7 +60,6 @@ const ManageGpgKey = ({
 
 	const handleGet = () => {
 		executeGet(id, realm, userStorage).then((r) => {
-			console.log(r);
 			download(
 				r,
 				'clé-chiffrement-' + id + '.gpg',

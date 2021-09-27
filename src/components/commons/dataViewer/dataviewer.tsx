@@ -50,7 +50,6 @@ const DataViewer = ({
 		newValue: number,
 	) => {
 		setValue(newValue);
-		console.log(newValue);
 	};
 	return (
 		<Grid
