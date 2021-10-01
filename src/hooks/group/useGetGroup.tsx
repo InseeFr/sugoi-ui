@@ -45,7 +45,7 @@ export const useGetGroup = (
 					setFirstSearch(false);
 				});
 		}
-	}, [firstSearch, realm, application]);
+	}, [firstSearch, realm, application, groupId]);
 
 	return { group, loading, error, execute };
 };
