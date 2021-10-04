@@ -70,6 +70,12 @@ export const ChipButton = ({ realm, group }: ButtonProps) => {
 						{group.users.map((user: any) => (
 							<Grid item>
 								<ChipPerson
+									key={
+										'group_' +
+										group.name +
+										'user_' +
+										user
+									}
 									realm={realm}
 									user={user}
 								/>
