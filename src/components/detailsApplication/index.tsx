@@ -1,4 +1,3 @@
-import { Button } from '@material-ui/core';
 import {
 	Grid,
 	MenuItem,
@@ -16,13 +15,7 @@ import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDeleteApplication } from '../../hooks/applications/useDeleteApplication';
 import { useGetApplication } from '../../hooks/applications/useGetApplication';
-import {
-	useCreateGroup,
-	useDeleteGroup,
-	useUpdateGroup,
-} from '../../hooks/group';
-import useAddUserToGroup from '../../hooks/group/useAddUserToGroup';
-import useDeleteUserFromGroup from '../../hooks/group/useDeleteUserFromGroup';
+import { useCreateGroup, useDeleteGroup } from '../../hooks/group';
 
 import { Group } from '../../model/api/group';
 import LoadingButton from '../commons/loadingButton';
@@ -153,7 +146,7 @@ export const DetailsApplication = () => {
 											)
 											.map(
 												(
-													group: any,
+													group: Group,
 												) => (
 													<TableRow
 														key={
@@ -194,6 +187,12 @@ export const DetailsApplication = () => {
 																				}
 																				realm={
 																					realm
+																				}
+																				key={
+																					'group_' +
+																					group.name +
+																					'_user_' +
+																					i
 																				}
 																			/>
 																		)) ||
