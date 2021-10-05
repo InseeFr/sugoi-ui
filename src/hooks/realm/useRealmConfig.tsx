@@ -17,7 +17,7 @@ export const useRealmConfig = (realmName: string) => {
 		);
 		console.log(realm);
 		setUser(realm[0]?.uiMapping?.uiUserMapping || []);
-		setOrganization(realm[0]?.uiMapping?.uiOrganisationMapping || []);
+		setOrganization(realm[0]?.uiMapping?.uiOrganizationMapping || []);
 	}, [realmName]);
 
 	return {
