@@ -89,6 +89,7 @@
 		"eslint-plugin-react": "^7.21.4",
 		"eslint-plugin-react-hooks": "^4.1.2",
 		"prettier": "^2.2.1",
+		"react-git-info": "^2.0.0",
 		"sonarqube-scanner": "^2.7.0"
 	}
 }
