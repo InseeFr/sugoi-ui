@@ -13,7 +13,7 @@ export const useRealmConfig = (realmName: string) => {
 			[];
 		setUser(realm[0]?.uiMapping?.uiUserMapping || []);
 		setOrganization(realm[0]?.uiMapping?.uiOrganizationMapping || []);
-	}, [realmName]);
+	}, [realmName, realmsConfig]);
 
 	return {
 		userConfig: user,
