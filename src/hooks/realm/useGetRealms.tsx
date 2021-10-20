@@ -1,34 +1,18 @@
-import { useState, useEffect } from 'react';
-import { getRealms } from '../../api';
-import { Realm } from '../../model/api/realm';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../configuration/store-configuration';
+import { fetchRealms } from '../../redux/reducers/app';
 
 export const useGetRealms = () => {
-	const [result, setResult] = useState<Realm[]>([]);
-	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState();
+	const realms = useSelector((state: RootState) => state.app.realms);
+	const loading = useSelector((state: RootState) => state.app.realmLoading);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		setLoading(true);
-		getRealms()
-			.then((r) => {
-				setLoading(true);
-				setResult(r);
-			})
-			.catch((err) => setError(err))
-			.finally(() => setLoading(false));
-	}, []);
+		if (!realms && !loading) {
+			dispatch(fetchRealms());
+		}
+	}, [realms, loading, dispatch]);
 
-	const execute = async () => {
-		setLoading(true);
-		setError(undefined);
-		setResult([]);
-		await getRealms()
-			.then((r) => {
-				setLoading(true);
-				setResult(r);
-			})
-			.catch((err) => setError(err))
-			.finally(() => setLoading(false));
-	};
-	return { result, execute, loading, error };
+	return { realms, loading };
 };
