@@ -1,12 +1,11 @@
 import { Button, Grid } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import usePostOrganization from '../../hooks/organization/usePostOrganization';
 import useRealmConfig from '../../hooks/realm/useRealmConfig';
 import { useForms } from '../../hooks/technics/useForms';
-import Organization from '../../model/api/organization';
 import DataViewer from '../commons/dataViewer/dataviewer';
 import LoadingButton from '../commons/loadingButton';
 import Title from '../commons/title/title';
@@ -46,9 +45,9 @@ const CreateOrganization = () => {
 					'/us/' +
 					userStorage +
 					'/organizations/' +
-					(organization as Organization).identifiant,
+					organization.identifiant,
 			);
-	}, [organization]);
+	}, [organization, push, realm, userStorage]);
 
 	return (
 		<Grid container spacing={2} direction="column">

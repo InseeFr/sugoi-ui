@@ -32,9 +32,9 @@ const CreateUsers = () => {
 					'/us/' +
 					userStorage +
 					'/users/' +
-					(user as User).username,
+					user.username,
 			);
-	}, [user]);
+	}, [push, realm, user, userStorage]);
 
 	useEffect(() => {
 		if (error) {

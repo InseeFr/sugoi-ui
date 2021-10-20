@@ -27,39 +27,6 @@ const Notifier = () => {
 		displayed = [...displayed.filter((key) => id !== key)];
 	};
 
-	const processNotif = (
-		key: any,
-		dismissed: any,
-		message: any,
-		options: any,
-	) => {
-		if (dismissed) {
-			// dismiss snackbar using notistack
-			closeSnackbar(key);
-			return;
-		}
-
-		// do nothing if snackbar is already displayed
-		if (displayed.includes(key)) return;
-
-		// display snackbar using notistack
-		enqueueSnackbar(message, {
-			key,
-			...options,
-			onClose: (event, reason, myKey) => {
-				if (options.onClose) {
-					options.onClose(event, reason, myKey);
-				}
-			},
-			onExited: (event, myKey) => {
-				// remove this snackbar from redux store
-				dispatch(removeSnackbar(myKey));
-				removeDisplayed(myKey);
-			},
-		});
-		storeDisplayed(key);
-	};
-
 	useEffect(() => {
 		notifications.forEach(
 			({
@@ -70,12 +37,38 @@ const Notifier = () => {
 				dismissed = false,
 			}: any) => {
 				if (appNotifConfig.enabled_debug || !debug) {
-					processNotif(
-						key,
-						dismissed,
+					if (dismissed) {
+						// dismiss snackbar using notistack
+						closeSnackbar(key);
+						return;
+					}
+
+					// do nothing if snackbar is already displayed
+					if (displayed.includes(key)) return;
+
+					// display snackbar using notistack
+					enqueueSnackbar(
 						<TextNotification subject={subject} />,
-						options,
+						{
+							key,
+							...options,
+							onClose: (event, reason, myKey) => {
+								if (options.onClose) {
+									options.onClose(
+										event,
+										reason,
+										myKey,
+									);
+								}
+							},
+							onExited: (event, myKey) => {
+								// remove this snackbar from redux store
+								dispatch(removeSnackbar(myKey));
+								removeDisplayed(myKey);
+							},
+						},
 					);
+					storeDisplayed(key);
 				} else {
 					storeDisplayed(key);
 					dispatch(removeSnackbar(key));
@@ -83,7 +76,13 @@ const Notifier = () => {
 				}
 			},
 		);
-	}, [notifications, closeSnackbar, enqueueSnackbar, dispatch]);
+	}, [
+		notifications,
+		closeSnackbar,
+		enqueueSnackbar,
+		dispatch,
+		appNotifConfig.enabled_debug,
+	]);
 
 	return null;
 };

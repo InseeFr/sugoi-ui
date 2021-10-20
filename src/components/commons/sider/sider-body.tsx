@@ -126,7 +126,7 @@ const SiderBody = () => {
 			setRealmSelected(undefined);
 			setStorageSelected(undefined);
 		}
-	}, [location.pathname, realms]);
+	}, [enqueueSnackbar, location.pathname, push, realms]);
 
 	return (
 		<>
