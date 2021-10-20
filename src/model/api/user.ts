@@ -9,6 +9,7 @@ export default interface User {
 	mail?: string;
 	username?: string;
 	attributes?: Attributes;
+	certificate?: String;
 	address?: Address;
 	habilitations: Habilitation[];
 	groups: Group[];

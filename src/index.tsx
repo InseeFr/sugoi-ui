@@ -44,16 +44,12 @@ const Start = () => {
 			sessionLostComponent={Loader}
 			customEvents={{
 				onUserLoaded: (user) => dispatch(loadUser(user)),
-				onUserUnloaded: () => console.log('onUserUnloaded'),
-				onSilentRenewError: (error) =>
-					console.log('onSilentRenewError', error),
-				onUserSignedOut: () => console.log('onUserSignedOut'),
-				onUserSessionChanged: () =>
-					console.log('onUserSessionChanged'),
-				onAccessTokenExpiring: () =>
-					console.log('onAccessTokenExpiring'),
-				onAccessTokenExpired: () =>
-					console.log('onAccessTokenExpired'),
+				onUserUnloaded: () => {},
+				onSilentRenewError: (error) => {},
+				onUserSignedOut: () => {},
+				onUserSessionChanged: () => {},
+				onAccessTokenExpiring: () => {},
+				onAccessTokenExpired: () => {},
 			}}
 		>
 			<BrowserRouter>

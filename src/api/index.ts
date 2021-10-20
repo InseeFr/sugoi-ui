@@ -1,5 +1,8 @@
+import Application from '../model/api/application';
+import { Group } from '../model/api/group';
 import Organization from '../model/api/organization';
 import { Pageable } from '../model/api/pageable';
+import { PasswordChangeRequest } from '../model/api/passwordChangeRequest';
 import { Realm } from '../model/api/realm';
 import User from '../model/api/user';
 import searchRequestOrganization from '../model/js/searchRequestOrganization';
@@ -7,9 +10,6 @@ import searchRequestUser from '../model/js/searchRequestUser';
 import * as fake from './fake';
 import * as remote from './remote';
 import * as Utils from '../utils/object';
-import { Group } from '../model/api/group';
-import { PasswordChangeRequest } from '../model/api/passwordChangeRequest';
-import Application from '../model/api/application';
 
 // Realm function
 export const getRealms = (id?: string): Promise<Realm[]> => {
@@ -363,4 +363,59 @@ export const deleteGroupToUser = (
 
 export const getWhoami = () => {
 	return remote.getWhoami();
+};
+
+export const exportUsers = async (
+	realm: string,
+	searchRequest: searchRequestUser,
+	userStorage?: string,
+): Promise<Pageable> => {
+	searchRequest = Utils.cleanObjectEntries(searchRequest);
+	return remote.exportUser(realm, searchRequest || {}, userStorage);
+};
+
+export const putCertificate = (
+	id: string,
+	formdata: FormData,
+	realm: string,
+	userStorage?: string,
+) => {
+	return remote.putCertificate(id, formdata, realm, userStorage);
+};
+
+export const getCertificate = (
+	id: string,
+	realm: string,
+	userStorage?: string,
+) => {
+	return remote.getCertificate(id, realm, userStorage);
+};
+
+export const deleteCertificate = (
+	id: string,
+	realm: string,
+	userStorage?: string,
+) => {
+	return remote.deleteCertificate(id, realm, userStorage);
+};
+
+export const putGpgKey = (
+	id: string,
+	formdata: FormData,
+	realm: string,
+	userStorage?: string,
+) => {
+	return remote.putGpgKey(id, formdata, realm, userStorage);
+};
+
+export const getGpgKey = (id: string, realm: string, userStorage?: string) => {
+	return remote.getGpgKey(id, realm, userStorage);
+};
+
+export const deleteGpgKey = (
+	id: string,
+	realm: string,
+	userStorage?: string,
+) => {
+	return remote.deleteGpgKey(id, realm, userStorage);
 };

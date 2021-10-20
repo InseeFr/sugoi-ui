@@ -1,5 +1,5 @@
 import { Grid, MenuItem, TextField } from '@material-ui/core';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGetRealms } from '../../hooks/realm';
 import AsyncEditor from '../commons/jsonEditor';
@@ -7,7 +7,7 @@ import Title from '../commons/title/title';
 
 const Settings = () => {
 	const { t } = useTranslation();
-	const { result: realms } = useGetRealms();
+	const { realms } = useGetRealms();
 	const [selectedRealm, setSelectedRealm] = useState<string>('');
 
 	const handleChangeRealm = (e: any) => {
@@ -19,7 +19,7 @@ const Settings = () => {
 			<Grid
 				container
 				direction="column"
-				justify="center"
+				justifyContent="center"
 				alignItems="stretch"
 				spacing={2}
 			>
@@ -32,7 +32,7 @@ const Settings = () => {
 						fullWidth
 						onChange={handleChangeRealm}
 					>
-						{realms.map((realm) => (
+						{realms?.map((realm) => (
 							<MenuItem
 								value={realm.name}
 								key={'realm-' + realm.name}
@@ -46,7 +46,7 @@ const Settings = () => {
 					{selectedRealm !== '' ? (
 						<AsyncEditor
 							json={
-								realms.filter(
+								realms?.filter(
 									(realm) =>
 										realm.name ===
 										selectedRealm,

@@ -51,7 +51,7 @@ export const AddUsers = ({
 		execute(
 			{
 				identifiant: e.target.value,
-				nomCommun: e.target.value,
+				CommonName: e.target.value,
 				typeRecherche: 'OR',
 			},
 			realm,
@@ -62,7 +62,7 @@ export const AddUsers = ({
 		<Grid
 			container
 			direction="column"
-			justify="center"
+			justifyContent="center"
 			alignItems="stretch"
 			spacing={1}
 		>
@@ -83,13 +83,13 @@ export const AddUsers = ({
 							<TableRow>
 								<TableCell
 									align="center"
-									padding="default"
+									padding="normal"
 								>
 									Utilisateurs
 								</TableCell>
 								<TableCell
 									align="right"
-									padding="default"
+									padding="normal"
 								>
 									Action
 								</TableCell>
@@ -176,7 +176,7 @@ export const AddUsers = ({
 				<Grid
 					container
 					direction="row"
-					justify="space-between"
+					justifyContent="space-between"
 					alignItems="center"
 				>
 					<Grid item>

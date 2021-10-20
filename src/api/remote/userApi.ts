@@ -1,8 +1,8 @@
-import { AxiosInstance } from 'axios';
+import { AxiosInstance, AxiosResponse } from 'axios';
 import { getAuthClient } from '../../configuration/axios-configuration';
 import { Pageable } from '../../model/api/pageable';
 import User from '../../model/api/user';
-import searchRequestUser from '../../model/js/searchRequestUser';
+import SearchRequestUser from '../../model/js/searchRequestUser';
 import axios from 'axios';
 
 //cancel previous request if new one is send before receive previous request
@@ -13,23 +13,22 @@ export const getUsers = (
 	{
 		mail,
 		identifiant,
-		nomCommun,
+		CommonName,
 		description,
 		organisationId,
 		size,
 		start,
 		searchCookie,
 		typeRecherche,
-		habilitations,
+		habilitation,
 		application,
-	}: searchRequestUser,
+	}: SearchRequestUser,
 ): Promise<Pageable> =>
 	getAuthClient().then((client: AxiosInstance) => {
 		//Check if there are any previous pending requests
 		if (typeof cancelToken != typeof undefined) {
 			cancelToken.cancel('Operation canceled due to new request.');
 		}
-		console.log(cancelToken);
 		//Save the cancel token for the current request
 		cancelToken = axios.CancelToken.source();
 		return client
@@ -37,14 +36,14 @@ export const getUsers = (
 				params: {
 					mail,
 					identifiant,
-					nomCommun,
+					CommonName,
 					description,
 					organisationId,
 					size,
 					start,
 					searchCookie,
 					typeRecherche,
-					habilitations,
+					habilitation,
 					application,
 				},
 				cancelToken: cancelToken.token,
@@ -88,16 +87,16 @@ export const getUsersFromUserStorage = (
 	{
 		mail,
 		identifiant,
-		nomCommun,
+		CommonName,
 		description,
 		organisationId,
 		size,
 		start,
 		searchCookie,
 		typeRecherche,
-		habilitations,
+		habilitation,
 		application,
-	}: searchRequestUser,
+	}: SearchRequestUser,
 ): Promise<Pageable> =>
 	getAuthClient().then((client: AxiosInstance) =>
 		client
@@ -105,14 +104,14 @@ export const getUsersFromUserStorage = (
 				params: {
 					mail,
 					identifiant,
-					nomCommun,
+					CommonName,
 					description,
 					organisationId,
 					size: size ? size : 500,
 					start,
 					searchCookie,
 					typeRecherche,
-					habilitations,
+					habilitation,
 					application,
 				},
 			})
@@ -211,4 +210,60 @@ export const deleteGroupToUser = (
 					id,
 			)
 			.then((r: any) => r.data),
+	);
+
+export const putCertificate = (
+	id: string,
+	formdata: FormData,
+	realm: string,
+	userStorage?: string,
+) =>
+	getAuthClient().then((client: AxiosInstance) =>
+		client
+			.put(
+				'/realms/' +
+					realm +
+					(userStorage ? '/storages/' + userStorage : '') +
+					'/users/' +
+					id +
+					'/certificates',
+				formdata,
+			)
+			.then((r: AxiosResponse) => r.data),
+	);
+
+export const getCertificate = (
+	id: string,
+	realm: string,
+	userStorage?: string,
+) =>
+	getAuthClient().then((client: AxiosInstance) =>
+		client
+			.get(
+				'/realms/' +
+					realm +
+					(userStorage ? '/storages/' + userStorage : '') +
+					'/users/' +
+					id +
+					'/certificates',
+			)
+			.then((r: AxiosResponse) => r.data),
+	);
+
+export const deleteCertificate = (
+	id: string,
+	realm: string,
+	userStorage?: string,
+) =>
+	getAuthClient().then((client: AxiosInstance) =>
+		client
+			.delete(
+				'/realms/' +
+					realm +
+					(userStorage ? '/storages/' + userStorage : '') +
+					'/users/' +
+					id +
+					'/certificates',
+			)
+			.then((r: AxiosResponse) => r.data),
 	);

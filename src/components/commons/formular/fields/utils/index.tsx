@@ -7,6 +7,9 @@ import ListFieldInfoButton from './../listGenericFieldInfo';
 import ListFieldInfo from './../listGenericFieldInfo/listFieldInfo';
 import TextFieldInfo from '../textFieldInfo';
 import SimpleAppManagedAttributes from '../simpleAppManageAttributes';
+import UploadFile from '../manageCertificateField';
+import ManageCertificate from '../manageCertificateField';
+import ManageGpgKey from '../manageGpgKey';
 
 export const GenerateFields = (
 	data: any,
@@ -105,7 +108,42 @@ export const GenerateFields = (
 					/>,
 				);
 				break;
-
+			case 'manageCertificate':
+				generateFields.push(
+					<ManageCertificate
+						name={field.name}
+						helpText={field.helpText}
+						helpTextTitle={field.helpTextTitle}
+						modifiable={field.modifiable}
+						value={field.path}
+						dropZoneText={field.options.dropzoneText}
+						absentValueText={
+							field.options.absentValueText
+						}
+						presentValueText={
+							field.options.presentValueText
+						}
+					/>,
+				);
+				break;
+			case 'manageGpgKey':
+				generateFields.push(
+					<ManageGpgKey
+						name={field.name}
+						helpText={field.helpText}
+						helpTextTitle={field.helpTextTitle}
+						modifiable={field.modifiable}
+						value={field.path}
+						dropZoneText={field.options.dropzoneText}
+						absentValueText={
+							field.options.absentValueText
+						}
+						presentValueText={
+							field.options.presentValueText
+						}
+					/>,
+				);
+				break;
 			default:
 				return null;
 		}

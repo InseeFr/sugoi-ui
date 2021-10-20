@@ -1,16 +1,7 @@
-import {
-	Grid,
-	Card,
-	CardContent,
-	CardHeader,
-	IconButton,
-	Collapse,
-} from '@material-ui/core';
-import { useState } from 'react';
+import { Grid, Card, CardContent, CardHeader } from '@material-ui/core';
 import { useGetRealm } from '../../../hooks/realm';
 
 import Title from '../title/title';
-import InfoIcon from '@material-ui/icons/Info';
 import PopIcon from '../popIcon/popIcon';
 import parse from 'html-react-parser';
 
@@ -19,8 +10,7 @@ interface Props {
 }
 
 export const Description = ({ realmName }: Props) => {
-	const { result: realm } = useGetRealm(realmName);
-	const [hide, setHide] = useState(false);
+	const { realm } = useGetRealm(realmName);
 	return (
 		<Card variant="outlined">
 			<CardHeader
@@ -35,7 +25,7 @@ export const Description = ({ realmName }: Props) => {
 				<Grid
 					container
 					direction="column"
-					justify="center"
+					justifyContent="center"
 					alignItems="stretch"
 					spacing={3}
 				>
@@ -51,7 +41,7 @@ export const Description = ({ realmName }: Props) => {
 };
 
 export const ButtonDescription = ({ realmName }: Props) => {
-	const { result: realm } = useGetRealm(realmName);
+	const { realm } = useGetRealm(realmName);
 	return (
 		<PopIcon
 			helpTextTitle={'Description ' + realmName}

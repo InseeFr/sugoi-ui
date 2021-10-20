@@ -14,12 +14,13 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import PopIcon from '../popIcon/popIcon';
 
-type props = {
+type Props = {
 	title: string;
 	collapsible?: boolean;
 	children: React.ReactNode;
 	description?: string;
 	elevation?: number;
+	collapse?: boolean;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -37,16 +38,17 @@ const Panel = ({
 	collapsible,
 	description,
 	elevation,
-}: props) => {
+	collapse,
+}: Props) => {
 	const classes = useStyles();
-	const [expand, setExpand] = useState(false);
+	const [expand, setExpand] = useState(collapse);
 
 	return (
 		<Paper className={classes.paper} elevation={elevation}>
 			<Grid
 				container
 				direction="column"
-				justify="center"
+				justifyContent="center"
 				alignItems="stretch"
 				spacing={2}
 			>
@@ -90,6 +92,11 @@ const Panel = ({
 			</Grid>
 		</Paper>
 	);
+};
+
+Panel.defaultProps = {
+	collapse: false,
+	collapsible: false,
 };
 
 export default Panel;

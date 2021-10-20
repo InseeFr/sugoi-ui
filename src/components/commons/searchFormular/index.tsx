@@ -103,7 +103,7 @@ const SearchFormular = ({
 					<Grid
 						container
 						direction="row"
-						justify="flex-end"
+						justifyContent="flex-end"
 						spacing={3}
 					>
 						<Grid item>

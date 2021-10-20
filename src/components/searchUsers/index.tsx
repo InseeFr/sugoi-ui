@@ -1,6 +1,13 @@
-import { Button, Grid, IconButton, LinearProgress } from '@material-ui/core';
+import {
+	Button,
+	Chip,
+	Grid,
+	IconButton,
+	LinearProgress,
+	Typography,
+} from '@material-ui/core';
 import CreateIcon from '@material-ui/icons/Create';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import useGetUsers from '../../hooks/user/useGetUsers';
@@ -11,6 +18,8 @@ import SearchForm from '../commons/searchFormular';
 import { useSnackbar } from 'notistack';
 import ZoomInOutlinedIcon from '@material-ui/icons/ZoomInOutlined';
 import { ButtonDescription } from '../commons/description';
+import { exportUser } from '../../api/remote';
+import { download } from '../../utils/downloadFile';
 interface ParamTypes {
 	realm: string;
 	userStorage: string;
@@ -21,6 +30,8 @@ const SearchUsers = () => {
 	const { enqueueSnackbar } = useSnackbar();
 	const { push } = useHistory();
 
+	const [lastSearch, setLastSearch] = useState({});
+
 	const { t } = useTranslation();
 
 	const {
@@ -30,6 +41,7 @@ const SearchUsers = () => {
 	} = useGetUsers(realm, userStorage);
 
 	const handleSearch = (values: any) => {
+		setLastSearch(values);
 		searchUsers({ ...values }, realm, userStorage);
 	};
 
@@ -60,6 +72,12 @@ const SearchUsers = () => {
 				variant: 'info',
 			});
 		}
+	};
+
+	const handleExport = () => {
+		exportUser(realm, { ...lastSearch }, userStorage).then((r) =>
+			download(r, 'export.csv', 'text/csv;charset=utf-8;'),
+		);
 	};
 
 	const formFields: Field[] = [
@@ -105,7 +123,7 @@ const SearchUsers = () => {
 				'search_user.form.field.commun_name.help_text_title',
 			),
 			helpText: t('search_user.form.field.commun_name.help_text'),
-			path: 'nomCommun',
+			path: 'CommonName',
 			type: 'string',
 			modifiable: true,
 			tag: '',
@@ -123,20 +141,97 @@ const SearchUsers = () => {
 			tag: '',
 			options: {},
 		},
+		{
+			name: t('search_user.form.field.habilitation.name'),
+			helpTextTitle: t(
+				'search_user.form.field.habilitation.help_text_title',
+			),
+			helpText: t('search_user.form.field.habilitation.help_text'),
+			path: 'habilitation',
+			type: 'string',
+			modifiable: true,
+			tag: '',
+			options: {},
+		},
 	];
 
 	const columns = [
 		{
 			name: 'username',
-			label: 'Username',
+			label: 'Identifiant',
+		},
+		{
+			name: 'firstName',
+			label: 'Prénom',
+		},
+		{
+			name: 'lastName',
+			label: 'Nom',
 		},
 		{
 			name: 'mail',
 			label: 'Email',
 		},
 		{
-			name: 'lastName',
-			label: 'Nom commun',
+			name: 'attributes',
+			label: 'Nom Commun',
+			options: {
+				filter: false,
+				sort: true,
+				customBodyRender: (
+					value: any,
+					tableMeta: any,
+					updateValue: any,
+				) => <Typography>{value.common_name}</Typography>,
+			},
+		},
+		{
+			name: 'habilitations',
+			label: 'Habilitations',
+			options: {
+				filter: false,
+				sort: true,
+				customBodyRender: (
+					value: any,
+					tableMeta: any,
+					updateValue: any,
+				) => (
+					<Typography>
+						{value.map((v: any) => (
+							<Chip
+								key={'hab_' + v.id}
+								label={v.id}
+								size="small"
+							/>
+						))}
+					</Typography>
+				),
+			},
+		},
+		{
+			name: 'groups',
+			label: 'Groupes',
+			options: {
+				filter: false,
+				sort: true,
+				customBodyRender: (
+					value: any,
+					tableMeta: any,
+					updateValue: any,
+				) => (
+					<Typography>
+						{value
+							.filter((v: any) => v != null)
+							.map((v: any) => (
+								<Chip
+									key={'group_' + v.name}
+									label={v.name}
+									size="small"
+								/>
+							))}
+					</Typography>
+				),
+			},
 		},
 		{
 			name: '',
@@ -163,7 +258,7 @@ const SearchUsers = () => {
 			<Grid
 				container
 				direction="column"
-				justify="center"
+				justifyContent="center"
 				alignItems="stretch"
 				spacing={3}
 			>
@@ -179,7 +274,7 @@ const SearchUsers = () => {
 			<Grid
 				container
 				direction="column"
-				justify="center"
+				justifyContent="center"
 				alignItems="stretch"
 				spacing={3}
 			>
@@ -197,6 +292,8 @@ const SearchUsers = () => {
 						columns={columns}
 						handleClickAdd={handleCreate}
 						handleClickOnRow={handleClickOnUser}
+						handleDownload={handleExport}
+						downloadable={true}
 					/>
 					{loading ? <LinearProgress /> : null}
 				</Grid>

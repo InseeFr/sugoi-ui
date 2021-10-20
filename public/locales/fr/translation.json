@@ -74,6 +74,11 @@
 				"certificate": {
 					"name": "Certificat associé",
 					"help_text_title": "Certificat associé"
+				},
+				"habilitation": {
+					"name": "Habilitation",
+					"help_text_title": "Habilitation portée par le contact",
+					"help_text": "Le champ saisi peut être une portion de l'habilitation recherchée"
 				}
 			}
 		}
@@ -154,8 +159,10 @@
 		}
 	},
 	"notif": {
-		"success": "Votre demande a été prise en compte",
+		"success": "Votre demande a été effectuée",
+		"accepted": "Votre demande a été prise en compte et sera prochainement appliquée",
 		"network_error": "Le service est actuellement indisponible",
+		"server_error": "Le service ne peut pas effectuer cette demande : ",
 		"forbidden": "Vous n'avez pas le droit d'effectuer cette opération"
 	},
 	"commons": {
@@ -227,7 +234,7 @@
 				},
 				"toolbar": {
 					"search": "Rechercher",
-					"downloadCsv": "Télécharger CSV",
+					"downloadCsv": "Exporter tout les résultats de la recherche",
 					"print": "Imprimer",
 					"viewColumns": "Afficher/masquer des colonnes",
 					"filterTable": "Filtrer le tableau"

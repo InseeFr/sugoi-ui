@@ -6,14 +6,14 @@ export const getUsers = (
 	realm: string,
 	{
 		identifiant,
-		nomCommun,
+		CommonName,
 		description,
 		organisationId,
 		size,
 		start,
 		searchCookie,
 		typeRecherche,
-		habilitations,
+		habilitation,
 		application,
 	}: searchRequestUser,
 ): Promise<Pageable> =>

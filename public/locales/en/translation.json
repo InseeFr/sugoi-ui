@@ -1,7 +1,9 @@
 {
 	"notif": {
 		"success": "Request done",
+		"accepted": "Request accepted, please wait to see result",
 		"network_error": "Service unavailable",
+		"server_error": "Service can't apply this request : ",
 		"forbidden": "This operation is forbidden"
 	}
 }

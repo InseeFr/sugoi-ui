@@ -1,4 +1,16 @@
-const initialConfigState = {
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { getRealms } from '../../../src/api/index';
+import { Realm } from '../../model/api/realm';
+
+interface AppState {
+	theme: any;
+	notifs: any;
+	config: any;
+	realms: Realm[] | undefined;
+	realmLoading: boolean;
+}
+
+const initialConfigState: AppState = {
 	theme: window.localStorage.getItem('darkMode') ? 'dark' : 'light',
 	notifs: {
 		enabled_debug: window.localStorage.getItem('debug-notif-enabled')
@@ -8,11 +20,12 @@ const initialConfigState = {
 			: false,
 	},
 	config: {},
-	realms: [],
+	realms: undefined,
+	realmLoading: false,
 };
 
 const AppReducer = (state = initialConfigState, action: any) => {
-	let nextState;
+	let nextState: AppState;
 	switch (action.type) {
 		case 'saveConfig':
 			nextState = { ...state, config: { ...action.payload } };
@@ -23,10 +36,18 @@ const AppReducer = (state = initialConfigState, action: any) => {
 				theme: action.payload.nameTheme,
 			};
 			return nextState;
-		case 'saveRealms': {
+		case 'getRealms/pending': {
 			nextState = {
 				...state,
-				realms: action.payload.realms,
+				realmLoading: true,
+			};
+			return nextState;
+		}
+		case 'getRealms/fulfilled': {
+			nextState = {
+				...state,
+				realms: action.payload,
+				realmLoading: false,
 			};
 			return nextState;
 		}
@@ -45,5 +66,9 @@ const AppReducer = (state = initialConfigState, action: any) => {
 			return state;
 	}
 };
+
+export const fetchRealms = createAsyncThunk('getRealms', async () => {
+	return await getRealms();
+});
 
 export default AppReducer;

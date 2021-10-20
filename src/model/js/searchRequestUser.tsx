@@ -1,6 +1,6 @@
-export default interface searchRequestUser {
+export default interface SearchRequestUser {
 	identifiant?: string;
-	nomCommun?: string;
+	CommonName?: string;
 	description?: string;
 	organisationId?: string;
 	mail?: string;
@@ -8,6 +8,6 @@ export default interface searchRequestUser {
 	start?: number;
 	searchCookie?: string;
 	typeRecherche?: 'AND' | 'OR';
-	habilitations?: string[];
+	habilitation?: string[];
 	application?: string;
 }

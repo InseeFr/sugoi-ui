@@ -4,7 +4,7 @@ import { UserStorage } from './userStorage';
 export interface Realm {
 	name: string;
 	url: string;
-	appBranch: string;
+	appSource: string;
 	userStorages: UserStorage[];
 	properties: any;
 	uiMapping: Mapping;

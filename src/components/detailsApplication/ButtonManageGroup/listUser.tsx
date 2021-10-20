@@ -1,5 +1,4 @@
 import { Grid } from '@material-ui/core';
-import React from 'react';
 import { Group } from '../../../model/api/group';
 import User from '../../../model/api/user';
 import { ChipPerson } from '../chip';
@@ -12,13 +11,17 @@ export const GroupListUsers = ({ group, realm }: Props) => {
 		<Grid
 			container
 			direction="row"
-			justify="center"
+			justifyContent="center"
 			alignItems="stretch"
 			spacing={1}
 		>
-			{group?.users?.map((user: User) => (
+			{group?.users.map((user: User, i: number) => (
 				<Grid item>
-					<ChipPerson realm={realm} user={user} />
+					<ChipPerson
+						realm={realm}
+						user={user}
+						key={'group_' + group.name + '_user_' + i}
+					/>
 				</Grid>
 			))}
 		</Grid>

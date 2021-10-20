@@ -1,0 +1,29 @@
+import { useState } from 'react';
+import { putCertificate } from '../../api/';
+
+const useUploadCertificates = () => {
+	const [error, setError] = useState();
+	const [loading, setLoading] = useState(false);
+	const [result, setResult] = useState<any>();
+
+	const execute = async (
+		id: string,
+		realm: string,
+		formdata: FormData,
+		userStorage?: string,
+	) => {
+		setLoading(true);
+		setError(undefined);
+		setResult(undefined);
+		await putCertificate(id, formdata, realm, userStorage)
+			.then((r) => setResult(r))
+			.catch((err) => setError(err))
+			.finally(() => {
+				setLoading(false);
+			});
+	};
+
+	return { execute, loading, error, result };
+};
+
+export default useUploadCertificates;

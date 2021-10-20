@@ -63,13 +63,19 @@ export const ChipButton = ({ realm, group }: ButtonProps) => {
 					<Grid
 						container
 						direction="row"
-						justify="center"
+						justifyContent="center"
 						alignItems="stretch"
 						spacing={1}
 					>
 						{group.users.map((user: any) => (
 							<Grid item>
 								<ChipPerson
+									key={
+										'group_' +
+										group.name +
+										'user_' +
+										user
+									}
 									realm={realm}
 									user={user}
 								/>
