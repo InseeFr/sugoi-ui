@@ -109,7 +109,7 @@
 			"save": "Créer",
 			"reset": "Restaurer le formulaire"
 		},
-		"error": "Erreur lors de l'envoi à l'API"
+		"error": "L'organisation n'a pas été créée"
 	},
 	"create_user": {
 		"title": "Créer un utilisateur dans le realm ",
@@ -117,7 +117,7 @@
 			"save": "Créer",
 			"reset": "Restaurer le formulaire"
 		},
-		"error": "Erreur lors de l'envoi à l'API"
+		"error": "L'utilisateur n'a pas été créé"
 	},
 	"detail_user": {
 		"title": "Détail de l'utilisateur ",
@@ -162,8 +162,10 @@
 		}
 	},
 	"notif": {
-		"success": "Votre demande a été prise en compte",
+		"success": "Votre demande a été effectuée",
+		"accepted": "Votre demande a été prise en compte et sera prochainement appliquée",
 		"network_error": "Le service est actuellement indisponible",
+		"server_error": "Le service ne peut pas effectuer cette demande : ",
 		"forbidden": "Vous n'avez pas le droit d'effectuer cette opération"
 	},
 	"commons": {

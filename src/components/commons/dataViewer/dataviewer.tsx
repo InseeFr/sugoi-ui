@@ -90,7 +90,7 @@ const DataViewer = ({
 								authentificationFields.length >
 									0 ? (
 									<Tab
-										label="Crédentials"
+										label="Authentification"
 										disabled={create}
 										value={2}
 									/>
