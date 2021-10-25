@@ -4,7 +4,7 @@ import { sendIdentifiant } from './../../api';
 
 export const useSendIdentifiant = () => {
 	const [error, setError] = useState();
-	const [result, setResult] = useState();
+	const [result, setResult] = useState<any>();
 	const [loading, setLoading] = useState(false);
 
 	const execute = async (

@@ -55,17 +55,21 @@ export const getUser = async (realm: string, id: string): Promise<User> => {
 		.then((r: any) => r.data);
 };
 
-export const deleteUser = (realm: string, id: string) =>
+export const deleteUser = (realm: string, id: string): Promise<any> =>
 	getAuthClient()
 		.delete('/realms/' + realm + '/users/' + id)
 		.then((r) => r.data);
 
-export const postUser = (realm: string, user: User) =>
+export const postUser = (realm: string, user: User): Promise<any> =>
 	getAuthClient()
 		.post('/realms/' + realm + '/users', user)
 		.then((r: any) => r.data);
 
-export const updateUser = (realm: string, id: string, user: User) =>
+export const updateUser = (
+	realm: string,
+	id: string,
+	user: User,
+): Promise<any> =>
 	getAuthClient()
 		.put('/realms/' + realm + '/users/' + id, user)
 		.then((r) => r.data);
@@ -119,7 +123,7 @@ export const deleteUserFromUserStorage = (
 	realm: string,
 	us: string,
 	id: string,
-) =>
+): Promise<any> =>
 	getAuthClient()
 		.delete('/realms/' + realm + '/storages/' + us + '/users/' + id)
 		.then((r) => r.data);
@@ -128,7 +132,7 @@ export const postUserFromUserStorage = (
 	realm: string,
 	us: string,
 	user: User,
-) =>
+): Promise<any> =>
 	getAuthClient()
 		.post('/realms/' + realm + '/storages/' + us + '/users', user)
 		.then((r) => r.data);
@@ -138,7 +142,7 @@ export const updateUserFromUserStorage = (
 	us: string,
 	id: string,
 	user: User,
-) =>
+): Promise<any> =>
 	getAuthClient()
 		.put('/realms/' + realm + '/storages/' + us + '/users/' + id, user)
 		.then((r) => r.data);
@@ -148,7 +152,7 @@ export const addGroupToUser = (
 	application_id: string,
 	group_id: string,
 	id: string,
-) =>
+): Promise<any> =>
 	getAuthClient()
 		.put(
 			'/realms/' +
@@ -167,7 +171,7 @@ export const deleteGroupToUser = (
 	application_id: string,
 	group_id: string,
 	id: string,
-) =>
+): Promise<any> =>
 	getAuthClient()
 		.delete(
 			'/realms/' +
@@ -186,7 +190,7 @@ export const putCertificate = (
 	formdata: FormData,
 	realm: string,
 	userStorage?: string,
-) =>
+): Promise<any> =>
 	getAuthClient()
 		.put(
 			'/realms/' +
@@ -203,7 +207,7 @@ export const getCertificate = (
 	id: string,
 	realm: string,
 	userStorage?: string,
-) =>
+): Promise<any> =>
 	getAuthClient()
 		.get(
 			'/realms/' +
@@ -219,7 +223,7 @@ export const deleteCertificate = (
 	id: string,
 	realm: string,
 	userStorage?: string,
-) =>
+): Promise<any> =>
 	getAuthClient()
 		.delete(
 			'/realms/' +

@@ -361,7 +361,7 @@ export const deleteGroupToUser = (
 	return remote.deleteGroupToUser(realm, application, groupId, userId);
 };
 
-export const getWhoami = () => {
+export const getWhoami = (): Promise<any> => {
 	return remote.getWhoami();
 };
 
