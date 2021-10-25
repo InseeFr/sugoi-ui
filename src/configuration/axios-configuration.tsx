@@ -53,8 +53,10 @@ export const getAuthClient = () => {
 					debug: true,
 				}),
 			);
-			config.headers.Authorization =
-				'Bearer ' + Store.getState().user.access_token;
+			config.headers = {
+				Authorization:
+					'Bearer ' + Store.getState().user.access_token,
+			};
 			return config;
 		},
 		(err) => {

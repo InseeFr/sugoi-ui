@@ -44,11 +44,11 @@ const TextNotification = (props: any) => {
 		} else if (subject.response?.status === 500) {
 			message =
 				t('notif.server_error') +
-				subject.response?.data?.message;
+				(subject as any).response?.data?.message;
 		} else if (subject.message === 'Network Error') {
 			message = t('notif.network_error');
 		} else {
-			message = subject.response?.data?.message;
+			message = (subject as any).response?.data?.message;
 		}
 	}
 
