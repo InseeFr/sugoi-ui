@@ -204,10 +204,7 @@
 		},
 		"footer": {
 			"version": {
-				"text": "Version"
-			},
-			"commit": {
-				"text": "Commit-SHA"
+				"text": "Version "
 			}
 		},
 		"back_to_top": {
