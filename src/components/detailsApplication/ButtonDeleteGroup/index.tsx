@@ -1,9 +1,10 @@
-import { Button, IconButton } from '@material-ui/core';
-import React, { useState } from 'react';
+import { IconButton } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import SimpleDialog from '../../commons/popButton/Dialog';
-import { Group } from '../../../model/api/group';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDeleteGroup } from '../../../hooks/group';
+import { Group } from '../../../model/api/group';
+import ConfirmationPopup from '../../commons/confirmationPopUp';
 
 interface Props {
 	group: Group;
@@ -18,45 +19,37 @@ export const ButtonDeleteGroup = ({
 	realm,
 	onClose,
 }: Props) => {
-	const [open, setOpen] = useState(false);
-
-	const handleOpen = () => {
-		setOpen(true);
-	};
-
 	const { execute: deleteGroup } = useDeleteGroup();
+	const { t } = useTranslation();
 
-	const handleClose = () => {
-		setOpen(false);
-	};
-
-	const onSubmit = () => {
-		deleteGroup(realm, application, group.name)
-			.then(() => onClose())
-			.finally(() => setOpen(false));
+	const onSubmit = async () => {
+		await deleteGroup(realm, application, group.name);
+		onClose();
 	};
 
 	return (
 		<>
-			<IconButton
-				aria-label="Add"
-				size="small"
-				onClick={handleOpen}
-			>
-				<DeleteIcon color="primary" fontSize="small" />
-			</IconButton>
-			<SimpleDialog
-				onClose={handleClose}
-				open={open}
-				title={'Supprimer le groupe ' + group.name}
-				body={<></>}
-				actions={
-					<Button color="secondary" onClick={onSubmit}>
-						Supprimer
-					</Button>
+			<ConfirmationPopup
+				Icon={
+					<IconButton aria-label="Add" size="small">
+						<DeleteIcon
+							color="primary"
+							fontSize="small"
+						/>
+					</IconButton>
 				}
-				fullwidth
-				maxwidth="md"
+				title={
+					t('detail_application.group.popup.title.part1') +
+					group.name +
+					t('detail_application.group.popup.title.part2')
+				}
+				body1={t('detail_application.group.popup.body.body1')}
+				body2={t('detail_application.group.popup.body.body2')}
+				bodyBold={t(
+					'detail_application.group.popup.body.bodyBold',
+				)}
+				validation_text={group?.name}
+				handleDelete={() => onSubmit()}
 			/>
 		</>
 	);

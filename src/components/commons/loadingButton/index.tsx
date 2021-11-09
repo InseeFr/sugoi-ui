@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface props {
 	children: any;
-	handleClick: () => void;
+	handleClick?: () => void;
 	loading: boolean;
 	error?: any;
 	variant?: 'text' | 'outlined' | 'contained' | undefined;

@@ -9,6 +9,7 @@ import { useDeleteUser } from '../../hooks/user/useDeleteUser';
 import useGetUser from '../../hooks/user/useGetUser';
 import useUpdateUser from '../../hooks/user/useUpdateUser';
 import User from '../../model/api/user';
+import ConfirmationPopup from '../commons/confirmationPopUp';
 import DataViewer from '../commons/dataViewer/dataviewer';
 import ErrorBoundary from '../commons/error/Error';
 import { Loader } from '../commons/loader/loader';
@@ -108,20 +109,45 @@ const DetailUser = () => {
 											</LoadingButton>
 										</Grid>
 										<Grid item>
-											<LoadingButton
-												variant="contained"
-												color="secondary"
-												loading={
-													loadingDelete
+											<ConfirmationPopup
+												Icon={
+													<LoadingButton
+														variant="contained"
+														color="secondary"
+														loading={
+															loadingDelete
+														}
+													>
+														{t(
+															'detail_user.buttons.delete.button',
+														)}
+													</LoadingButton>
 												}
-												handleClick={
-													handleDelete
+												title={
+													t(
+														'detail_user.buttons.delete.popup.title.part1',
+													) +
+													id +
+													t(
+														'detail_user.buttons.delete.popup.title.part2',
+													)
 												}
-											>
-												{t(
-													'detail_user.buttons.delete',
+												body1={t(
+													'detail_user.buttons.delete.popup.body.body1',
 												)}
-											</LoadingButton>
+												body2={t(
+													'detail_user.buttons.delete.popup.body.body2',
+												)}
+												bodyBold={t(
+													'detail_user.buttons.delete.popup.body.bodyBold',
+												)}
+												validation_text={
+													id
+												}
+												handleDelete={() =>
+													handleDelete()
+												}
+											/>
 										</Grid>
 										<Grid item>
 											<Button
