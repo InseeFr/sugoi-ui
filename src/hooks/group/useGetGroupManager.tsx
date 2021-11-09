@@ -9,7 +9,6 @@ export const useGetGroupManager = (realm?: string, application?: string) => {
 	);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState();
-
 	const execute = async (realm: string, application: string) => {
 		setLoading(true);
 		setError(undefined);

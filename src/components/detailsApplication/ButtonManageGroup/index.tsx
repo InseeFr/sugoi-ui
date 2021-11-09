@@ -53,7 +53,7 @@ export const ButtonManageGroup = ({
 	return (
 		<GenericButtonManageGroup
 			realm={realm}
-			onClose={onClose}
+			onClose={() => onClose()}
 			group={group as Group}
 			handleAddUserToGroup={() =>
 				handleAddUserToGroup(realm, applicationName, groupName)
@@ -79,7 +79,10 @@ export const ButtonManageManagerGroup = ({
 
 	const { execute: deleteUserFromGroup } = useDeleteUserFromGroupManager();
 
-	const { execute: getGroup, group } = useGetGroupManager();
+	const { execute: getGroup, group } = useGetGroupManager(
+		realm,
+		applicationName,
+	);
 
 	const handleAddUserToGroup =
 		(realm: string, applicationId: string, groupId: string) =>
@@ -96,10 +99,6 @@ export const ButtonManageManagerGroup = ({
 				getGroup(realm, applicationId),
 			);
 		};
-
-	useEffect(() => {
-		getGroup(realm, applicationName);
-	}, [realm, applicationName, getGroup]);
 
 	return (
 		<GenericButtonManageGroup

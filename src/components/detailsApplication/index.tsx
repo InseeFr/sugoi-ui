@@ -17,6 +17,7 @@ import { useGetApplication } from '../../hooks/applications/useGetApplication';
 import { useCreateGroup } from '../../hooks/group';
 import useGetGroupManager from '../../hooks/group/useGetGroupManager';
 import { Group } from '../../model/api/group';
+import ConfirmationPopup from '../commons/confirmationPopUp';
 import LoadingButton from '../commons/loadingButton';
 import Title from '../commons/title/title';
 import ButtonCreateGroup from './ButtonCreateGroup';
@@ -49,10 +50,9 @@ export const DetailsApplication = () => {
 	const { execute: deleteApplication, loading: loadingDelete } =
 		useDeleteApplication();
 
-	const handleDeleteApp = (realm: string, applicationId: string) => {
-		deleteApplication(realm, applicationId).then(() =>
-			push('/realm/' + realm + '/applications'),
-		);
+	const handleDeleteApp = async (realm: string, applicationId: string) => {
+		await deleteApplication(realm, applicationId);
+		push('/realm/' + realm + '/applications');
 	};
 
 	const handleCreateGroup =
@@ -216,19 +216,46 @@ export const DetailsApplication = () => {
 						spacing={3}
 					>
 						<Grid item>
-							<LoadingButton
-								handleClick={() =>
+							<ConfirmationPopup
+								Icon={
+									<LoadingButton
+										loading={
+											loadingDelete
+										}
+										color="secondary"
+										variant="contained"
+									>
+										{t(
+											'detail_application.buttons.delete.button',
+										)}
+									</LoadingButton>
+								}
+								title={
+									t(
+										'detail_application.buttons.delete.popup.title.part1',
+									) +
+									applicationId +
+									t(
+										'detail_application.buttons.delete.popup.title.part2',
+									)
+								}
+								body1={t(
+									'detail_application.buttons.delete.popup.body.body1',
+								)}
+								body2={t(
+									'detail_application.buttons.delete.popup.body.body2',
+								)}
+								bodyBold={t(
+									'detail_application.buttons.delete.popup.body.bodyBold',
+								)}
+								validation_text={applicationId}
+								handleDelete={() =>
 									handleDeleteApp(
 										realm,
 										applicationId,
 									)
 								}
-								loading={loadingDelete}
-								color="secondary"
-								variant="contained"
-							>
-								Supprimer l'application
-							</LoadingButton>
+							/>
 						</Grid>
 					</Grid>
 				</Grid>

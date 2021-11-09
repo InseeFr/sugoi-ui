@@ -12,7 +12,7 @@ import { GroupListUsers } from './listUser';
 
 interface Props {
 	realm: string;
-	group: Group;
+	group: Group | undefined;
 	handleAddUserToGroup: () => void;
 	handleDeleteUserFromGroup: () => void;
 	onClose: () => Promise<void>;

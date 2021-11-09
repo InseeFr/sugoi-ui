@@ -9,6 +9,7 @@ import useUpdateOrganization from '../../hooks/organization/useUpdateOrganizatio
 import useRealmConfig from '../../hooks/realm/useRealmConfig';
 import { useForms } from '../../hooks/technics/useForms';
 import organization from '../../model/api/organization';
+import ConfirmationPopup from '../commons/confirmationPopUp';
 import DataViewer from '../commons/dataViewer/dataviewer';
 import ErrorBoundary from '../commons/error/Error';
 import { Loader } from '../commons/loader/loader';
@@ -87,19 +88,18 @@ const DetailOrganization = () => {
 		}
 	}, [enqueueSnackbar, errorGet, t]);
 
-	const handleDelete = () => {
-		executeDelete(
+	const handleDelete = async () => {
+		await executeDelete(
 			(organization as unknown as organization)?.identifiant || '',
 			realm,
 			userStorage,
-		).then(() =>
-			push(
-				'/realm/' +
-					realm +
-					(userStorage
-						? '/us/' + userStorage + '/organizations'
-						: '/organizations'),
-			),
+		);
+		push(
+			'/realm/' +
+				realm +
+				(userStorage
+					? '/us/' + userStorage + '/organizations'
+					: '/organizations'),
 		);
 	};
 
@@ -148,20 +148,45 @@ const DetailOrganization = () => {
 											</LoadingButton>
 										</Grid>
 										<Grid item>
-											<LoadingButton
-												variant="contained"
-												color="secondary"
-												loading={
-													loadingDelete
+											<ConfirmationPopup
+												Icon={
+													<LoadingButton
+														variant="contained"
+														color="secondary"
+														loading={
+															loadingDelete
+														}
+													>
+														{t(
+															'detail_organization.buttons.delete.button',
+														)}
+													</LoadingButton>
 												}
-												handleClick={
-													handleDelete
+												title={
+													t(
+														'detail_organization.buttons.delete.popup.title.part1',
+													) +
+													id +
+													t(
+														'detail_organization.buttons.delete.popup.title.part2',
+													)
 												}
-											>
-												{t(
-													'detail_organization.buttons.delete',
+												body1={t(
+													'detail_organization.buttons.delete.popup.body.body1',
 												)}
-											</LoadingButton>
+												body2={t(
+													'detail_organization.buttons.delete.popup.body.body2',
+												)}
+												bodyBold={t(
+													'detail_organization.buttons.delete.popup.body.bodyBold',
+												)}
+												validation_text={
+													id
+												}
+												handleDelete={() =>
+													handleDelete()
+												}
+											/>
 										</Grid>
 										<Grid item>
 											<Button

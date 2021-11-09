@@ -125,7 +125,20 @@
 		"user_not_found": "L'utilisateur demandé n'a pas été trouvé :(",
 		"buttons": {
 			"save": "Enregistrer les modifications",
-			"delete": "Supprimer",
+			"delete": {
+				"button": "Supprimer",
+				"popup": {
+					"title": {
+						"part1": "Suppression de l'utilisateur ",
+						"part2": ". Êtes-vous sûr ?"
+					},
+					"body": {
+						"body1": "Cette action va supprimer définitivement cet utilisateur",
+						"body2": "L'utilisateur ",
+						"bodyBold": "ne pourra plus être récupéré"
+					}
+				}
+			},
 			"reset": "Annuler les changements"
 		}
 	},
@@ -135,8 +148,57 @@
 		"organization_not_found": "L'organization demandée n'a pas été trouvé :(",
 		"buttons": {
 			"save": "Enregistrer les modifications",
-			"delete": "Supprimer",
+			"delete": {
+				"button": "Supprimer",
+				"popup": {
+					"title": {
+						"part1": "Suppression de l'organisation ",
+						"part2": ". Êtes-vous sûr ?"
+					},
+					"body": {
+						"body1": "Cette action va supprimer définitivement cette organisation",
+						"body2": "L'organisation ",
+						"bodyBold": "ne pourra plus être récupérée"
+					}
+				}
+			},
 			"reset": "Annuler les changements"
+		}
+	},
+	"detail_application": {
+		"error": "Erreur lors de l'envoi a l'API: ",
+		"title": "Détails de l'application ",
+		"manager_groups_title": "Gestionnaires des droits de l'application ",
+		"groups_title": "Groupes applicatifs",
+		"button_manage_group": "Gérer le groupe",
+		"buttons": {
+			"delete": {
+				"button": "Supprimer l'application",
+				"popup": {
+					"title": {
+						"part1": "Suppression de l'application ",
+						"part2": ". Êtes-vous sûr ?"
+					},
+					"body": {
+						"body1": "Cette action va supprimer définitivement cette application",
+						"body2": "L'application et les groupes qu'elle contient ",
+						"bodyBold": "ne pourront plus être récupérés"
+					}
+				}
+			}
+		},
+		"group": {
+			"popup": {
+				"title": {
+					"part1": "Suppression du groupe ",
+					"part2": ". Êtes-vous sûr ?"
+				},
+				"body": {
+					"body1": "Cette action va supprimer définitivement ce groupe",
+					"body2": "Le groupe",
+					"bodyBold": "ne pourra plus être récupéré"
+				}
+			}
 		}
 	},
 	"search_application": {
@@ -144,13 +206,6 @@
 		"search_field": "Votre recherche",
 		"table_header": "Application",
 		"table_no_entry": "Aucune application ne correspond à votre recherche"
-	},
-	"detail_application": {
-		"error": "Erreur lors de l'envoi a l'API: ",
-		"title": "Détails de l'application ",
-		"manager_groups_title": "Gestionnaires des droits de l'application ",
-		"groups_title": "Groupes applicatifs",
-		"button_manage_group": "Gérer le groupe"
 	},
 	"global_search": {
 		"title": "Rechercher rapidement dans ",
@@ -173,6 +228,9 @@
 		"forbidden": "Vous n'avez pas le droit d'effectuer cette opération"
 	},
 	"commons": {
+		"popup": {
+			"validationText": "Veuillez entrer le texte suivant pour confirmer:"
+		},
 		"search_forms": {
 			"title": "Ma recherche",
 			"selected_realm": "Realm selectionné",
