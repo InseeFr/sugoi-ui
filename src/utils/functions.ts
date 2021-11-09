@@ -23,5 +23,9 @@ export const realmHasOrganization: (
 };
 
 export const realmHasApplication = (realm: Realm) => {
-	return realm?.name !== undefined && realm?.appSource !== undefined;
+	return (
+		realm?.name !== undefined &&
+		realm?.appSource !== undefined &&
+		realm?.appSource !== null
+	);
 };
