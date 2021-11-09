@@ -1,9 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getRealms } from '../../../src/api/index';
 import { Realm } from '../../model/api/realm';
+import { getCurrentTheme } from '../../utils/functions';
 
 interface AppState {
-	theme: any;
+	theme: string;
 	notifs: any;
 	config: any;
 	realms: Realm[] | undefined;
@@ -11,7 +12,7 @@ interface AppState {
 }
 
 const initialConfigState: AppState = {
-	theme: window.localStorage.getItem('darkMode') ? 'dark' : 'light',
+	theme: getCurrentTheme(),
 	notifs: {
 		enabled_debug: window.localStorage.getItem('debug-notif-enabled')
 			? (window.localStorage.getItem(
@@ -35,6 +36,10 @@ const AppReducer = (state = initialConfigState, action: any) => {
 				...state,
 				theme: action.payload.nameTheme,
 			};
+			window.localStorage.setItem(
+				'theme',
+				JSON.stringify(action.payload.nameTheme),
+			);
 			return nextState;
 		case 'getRealms/pending': {
 			nextState = {
