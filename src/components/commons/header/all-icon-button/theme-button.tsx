@@ -3,35 +3,30 @@ import Brightness4Icon from '@material-ui/icons/Brightness4';
 import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
-import { useLocalStorage } from '../../../../hooks/technics/useLocalStorage';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../configuration/store-configuration';
 import { changeTheme } from '../../../../redux/actions/app';
+
 export const ThemeButton = () => {
 	const dispatch = useDispatch();
-	const [darkMode, setDarkMode] = useLocalStorage('darkMode', false);
-	const [check, setCheck] = useState(darkMode);
+	const theme = useSelector((state: RootState) => state.app.theme);
+	const [check, setCheck] = useState(theme === 'light');
 	const { t } = useTranslation();
+
+	const handleClick = () => {
+		dispatch(!check ? changeTheme('light') : changeTheme('dark'));
+		setCheck(!check);
+	};
+
 	return (
 		<IconButton
 			color="inherit"
 			size="medium"
 			aria-label="Change theme"
-			onClick={() => {
-				setCheck(!check);
-				if (check) {
-					setCheck(false);
-					setDarkMode(false);
-					dispatch(changeTheme('light'));
-				}
-				if (!check) {
-					setDarkMode(true);
-					setCheck(true);
-					dispatch(changeTheme('dark'));
-				}
-			}}
+			onClick={handleClick}
 			title={t('commons.header.buttons.theme')}
 		>
-			{check ? <Brightness4Icon /> : <BrightnessHighIcon />}
+			{check ? <BrightnessHighIcon /> : <Brightness4Icon />}
 		</IconButton>
 	);
 };

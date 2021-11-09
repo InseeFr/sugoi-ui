@@ -29,3 +29,17 @@ export const realmHasApplication = (realm: Realm) => {
 		realm?.appSource !== null
 	);
 };
+
+export const getCurrentTheme = () => {
+	const theme = window.localStorage.getItem('theme');
+
+	switch (JSON.parse(theme !== null ? theme : '""')) {
+		case 'light':
+			return 'light';
+		case 'dark':
+			return 'dark';
+		default: {
+			return 'light';
+		}
+	}
+};
