@@ -2,10 +2,17 @@ import { JsonEditor } from 'jsoneditor-react';
 import 'jsoneditor-react/es/editor.min.css';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
-import './jsonEditor.css';
 
-export default function Editor({ json, onChange, readOnly }) {
-	const jsonEditorRef = useRef(null);
+type Mode = 'tree' | 'view' | 'form' | 'code' | 'text';
+
+interface Props {
+	json: Object;
+	onChange: (o: any) => void;
+	readOnly: boolean;
+}
+
+export default function Editor({ json, onChange, readOnly }: Props) {
+	const jsonEditorRef = useRef<any>(null);
 
 	useEffect(() => {
 		if (jsonEditorRef.current !== null) {
@@ -13,7 +20,7 @@ export default function Editor({ json, onChange, readOnly }) {
 		}
 	}, [json]);
 
-	const setRef = (instance) => {
+	const setRef = (instance: any) => {
 		if (instance) {
 			jsonEditorRef.current = instance.jsonEditor;
 		} else {
@@ -21,14 +28,22 @@ export default function Editor({ json, onChange, readOnly }) {
 		}
 	};
 
+	const getAllowedModes: () => Mode[] = () => {
+		if (readOnly) {
+			return ['view'];
+		}
+		return ['code', 'tree', 'view', 'form'];
+	};
+
 	return (
 		<JsonEditor
 			ref={setRef}
 			value={json}
 			onChange={onChange}
-			onEditable={() => !readOnly}
-			mode="code"
-			allowedModes={['code', 'tree']}
+			schema={null}
+			mode={getAllowedModes()[0]}
+			allowedModes={getAllowedModes()}
+			htmlElementProps={{}}
 		/>
 	);
 }

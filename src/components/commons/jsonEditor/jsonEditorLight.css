@@ -1,0 +1,54 @@
+.jsoneditor-react-container {
+	width: 100%;
+	height: 90%;
+}
+
+div.jsoneditor-outer {
+	width: 100%;
+	height: 60vh;
+}
+
+div.jsoneditor-tree {
+	background: #ffffff;
+	color: beige;
+	border-radius: 0 0 10px 10px;
+}
+
+.jsoneditor-menu {
+	background-color: #115293;
+	border-radius: 10px 10px 0 0;
+}
+
+.jsoneditor-statusbar {
+	border-radius: 0 0 10px 10px;
+}
+
+.jsoneditor {
+	border: thin solid #000000;
+	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+		0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+	border-radius: 10px;
+}
+
+div.jsoneditor-field,
+div.jsoneditor-value,
+div.jsoneditor td,
+div.jsoneditor th,
+div.jsoneditor textarea,
+pre.jsoneditor-preview,
+.jsoneditor-schema-error,
+.jsoneditor-popover {
+	font-family: 'dejavu sans mono', 'droid sans mono', consolas, monaco,
+		'lucida console', 'courier new', courier, monospace, sans-serif;
+	font-size: 10pt;
+	color: #000000;
+}
+
+div.jsoneditor-value.jsoneditor-string {
+	color: #ff7b00;
+}
+
+div.jsoneditor-value.jsoneditor-null {
+	color: #045efa;
+}
