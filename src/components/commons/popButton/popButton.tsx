@@ -9,9 +9,18 @@ interface props {
 	text: string;
 	color?: 'primary' | 'secondary' | 'inherit' | 'default';
 	variant?: 'contained' | 'outlined' | 'text';
+	disabled?: boolean;
 }
 
-const PopButton = ({ text, title, body, actions, color, variant }: props) => {
+const PopButton = ({
+	text,
+	title,
+	body,
+	actions,
+	color,
+	variant,
+	disabled,
+}: props) => {
 	const [open, setOpen] = React.useState(false);
 
 	const handleOpen = () => {
@@ -25,7 +34,12 @@ const PopButton = ({ text, title, body, actions, color, variant }: props) => {
 	if (!variant) variant = 'text';
 	return (
 		<>
-			<Button onClick={handleOpen} color={color} variant={variant}>
+			<Button
+				onClick={handleOpen}
+				color={color}
+				variant={variant}
+				disabled={disabled}
+			>
 				{text}
 			</Button>
 			<SimpleDialog
@@ -37,6 +51,10 @@ const PopButton = ({ text, title, body, actions, color, variant }: props) => {
 			/>
 		</>
 	);
+};
+
+PopButton.defaultProps = {
+	disabled: false,
 };
 
 export default PopButton;
