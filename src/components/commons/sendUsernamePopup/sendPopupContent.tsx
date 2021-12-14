@@ -7,14 +7,19 @@ import {
 	TextField,
 	Typography,
 } from '@material-ui/core';
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { TemplateProperties } from '../../../model/api/TemplateProperties';
 import User from '../../../model/api/user';
 interface props {
 	user?: User;
-	setValues?: any;
-	values?: any;
+	changeATemplateProperty?: any;
+	templateProperties: TemplateProperties;
 }
-export const SendPopupContent = ({ user, values, setValues }: props) => {
+export const SendPopupContent = ({
+	user,
+	templateProperties,
+	changeATemplateProperty,
+}: props) => {
 	const [includeNameApp, setincludeNameApp] = useState(false);
 	const [includeAssistMail, setincludeAssistMail] = useState(false);
 
@@ -47,9 +52,12 @@ export const SendPopupContent = ({ user, values, setValues }: props) => {
 					{includeNameApp ? (
 						<TextField
 							label="Nom de l'application"
-							name="nameApp"
-							value={values?.nameApp || ''}
-							onChange={setValues}
+							name="application"
+							value={
+								templateProperties.application ||
+								''
+							}
+							onChange={changeATemplateProperty}
 						/>
 					) : null}
 				</div>
@@ -73,8 +81,11 @@ export const SendPopupContent = ({ user, values, setValues }: props) => {
 						<TextField
 							label="Mail assistance"
 							name="assistMail"
-							value={values?.assistMail || ''}
-							onChange={setValues}
+							value={
+								templateProperties.assistMail ||
+								''
+							}
+							onChange={changeATemplateProperty}
 						/>
 					) : null}
 				</div>
@@ -91,7 +102,7 @@ export const SendPopupContent = ({ user, values, setValues }: props) => {
 						identifiant
 						{includeNameApp
 							? " pour l'accès  à  l'application " +
-							  values?.nameApp +
+							  templateProperties.application +
 							  ' :'
 							: ' :'}
 					</Box>
@@ -107,8 +118,9 @@ export const SendPopupContent = ({ user, values, setValues }: props) => {
 					{includeAssistMail ? (
 						<Box m={2}>
 							Pour toute demande d'assistance, vous
-							pouvez contacter {values?.assistMail}
-							par courrier electronique.
+							pouvez contacter{' '}
+							{templateProperties.assistMail} par
+							courrier electronique.
 						</Box>
 					) : null}
 					<Box m={2}>Cordialement,</Box>
@@ -116,8 +128,11 @@ export const SendPopupContent = ({ user, values, setValues }: props) => {
 						<TextField
 							label="Signature"
 							name="signature"
-							value={values?.signature || ''}
-							onChange={setValues}
+							value={
+								templateProperties.signature ||
+								''
+							}
+							onChange={changeATemplateProperty}
 						/>
 					</Box>
 				</Typography>

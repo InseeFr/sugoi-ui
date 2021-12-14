@@ -276,7 +276,8 @@
 		"send_login": {
 			"title": "Envoyer le login de ",
 			"text": "Envoyer le login",
-			"send_button": "Envoyer"
+			"send_button": "Envoyer",
+			"default_signature": "Assistance Insee"
 		},
 		"search_result": {
 			"title": "Résultat de la recherche:",

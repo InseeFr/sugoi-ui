@@ -1,21 +1,29 @@
 import { useState } from 'react';
-import { PasswordChangeRequest } from '../../model/api/passwordChangeRequest';
+import { TemplateProperties } from '../../model/api/TemplateProperties';
 import { resetPassword } from './../../api';
+import { useConfig } from './../technics/useConfigFile';
 
 export const useResetPassword = () => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState();
 	const [result, setResult] = useState();
+	const webhooktag = useConfig('webhooktag');
 
 	const execute = async (
 		realm: string,
 		userid: string,
-		pcr: PasswordChangeRequest,
+		templateProperties: TemplateProperties,
 		userStorage?: string,
 	) => {
 		setLoading(true);
 		setError(undefined);
-		await resetPassword(realm, userid, pcr, userStorage)
+		await resetPassword(
+			realm,
+			userid,
+			templateProperties,
+			webhooktag,
+			userStorage,
+		)
 			.then((r) => setResult(r))
 			.catch((err) => setError(err))
 			.finally(() => setLoading(false));

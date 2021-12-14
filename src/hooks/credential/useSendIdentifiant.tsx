@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { PasswordChangeRequest } from '../../model/api/passwordChangeRequest';
 import { sendIdentifiant } from './../../api';
 
 export const useSendIdentifiant = () => {

@@ -1,18 +1,19 @@
 import { getAuthClient } from '../../configuration/axios-configuration';
-import { PasswordChangeRequest } from '../../model/api/passwordChangeRequest';
+import { TemplateProperties } from '../../model/api/TemplateProperties';
 
 export const resetPassword = (
 	realm: string,
 	userId: string,
-	pcr: PasswordChangeRequest,
+	templateProperties: TemplateProperties,
+	webhooktag?: string,
 ) =>
 	getAuthClient()
 		.post(
-			'/realms/' + realm + '/users/' + userId + '/reinitPassword',
-			pcr,
+			'/realms/' + realm + '/users/' + userId + '/reinit-password',
+			{ templateProperties: templateProperties },
 			{
 				params: {
-					sendModes: 'MAIL',
+					'webhook-tag': webhooktag,
 				},
 			},
 		)
@@ -21,7 +22,8 @@ export const resetPassword = (
 export const resetPasswordUs = (
 	realm: string,
 	userId: string,
-	pcr: PasswordChangeRequest,
+	templateProperties: TemplateProperties,
+	webhooktag?: string,
 	userStorage?: string,
 ) =>
 	getAuthClient()
@@ -32,11 +34,11 @@ export const resetPasswordUs = (
 				userStorage +
 				'/users/' +
 				userId +
-				'/reinitPassword',
-			pcr,
+				'/reinit-password',
+			{ templateProperties: templateProperties },
 			{
 				params: {
-					sendModes: 'MAIL',
+					'webhook-tag': webhooktag,
 				},
 			},
 		)
@@ -45,19 +47,26 @@ export const resetPasswordUs = (
 export const sendIdentifiant = (
 	realm: string,
 	userId: string,
-	properties: any,
+	properties: TemplateProperties,
 ) =>
 	getAuthClient()
 		.post(
 			'/realms/' + realm + '/users/' + userId + '/send-login',
-			properties,
+			{
+				templateProperties: properties,
+			},
+			{
+				params: {
+					'webhook-tag': 'MAIL',
+				},
+			},
 		)
 		.then((r) => r.data);
 
 export const sendIdentifiantUs = (
 	realm: string,
 	userId: string,
-	properties: any,
+	properties: TemplateProperties,
 	userStorage: string,
 ) =>
 	getAuthClient()
@@ -69,6 +78,11 @@ export const sendIdentifiantUs = (
 				'/users/' +
 				userId +
 				'/send-login',
-			properties,
+			{ templateProperties: properties },
+			{
+				params: {
+					'webhook-tag': 'MAIL',
+				},
+			},
 		)
 		.then((r) => r.data);

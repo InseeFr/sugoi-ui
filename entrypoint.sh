@@ -6,6 +6,7 @@ cat <<EOF > /usr/share/nginx/html/configuration.json
 	"adminName": "${ADMIN_ROLE}",
 	"writerRegexName": "${WRITER_PATTERN_ROLE}",
 	"readerRegexName": "${READER_PATTERN_ROLE}",
+	"webhooktag": "MAIL",
 	"auth": {
 		"client_id": "${AUTH_CLIENT_ID}",
 		"redirect_uri": "${URL_HOSTNAME}/authentication/callback",
