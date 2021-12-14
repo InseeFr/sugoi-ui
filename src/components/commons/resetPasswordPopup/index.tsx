@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { useResetPassword } from '../../../hooks/credential';
 import useGetUser from '../../../hooks/user/useGetUser';
-import User from '../../../model/api/user';
+import { TemplateProperties } from '../../../model/api/TemplateProperties';
 import LoadingButton from '../loadingButton';
 import SimpleDialog from '../popButton/Dialog';
 import { ResetPasswordPopupContent } from './resetPasswordPopupContent';
@@ -12,22 +12,19 @@ import { ResetPasswordPopupContent } from './resetPasswordPopupContent';
 export const ResetPasswordPopup = () => {
 	const { realm, id, userStorage } = useParams<any>();
 
-	const { user, error } = useGetUser(id, realm, userStorage);
-
-	const [values, setValues] = useState({
-		email: user?.mail || '',
-		senderEmail: undefined,
-		signature: 'Assistance Insee',
-		nameApp: undefined,
-		assistMail: undefined,
-	});
+	const { user } = useGetUser(id, realm, userStorage);
 	const { t } = useTranslation();
+
+	const [templateProperties, setTemplateProperties] =
+		useState<TemplateProperties>({
+			signature: t('commons.send_login.default_signature'),
+		});
 	const { execute, loading } = useResetPassword();
 
-	const handleInputChange = (e: any) => {
+	const changeATemplateProperty = (e: any) => {
 		const { name, value } = e.target;
-		setValues({
-			...values,
+		setTemplateProperties({
+			...templateProperties,
 			[name]: value,
 		});
 	};
@@ -43,16 +40,9 @@ export const ResetPasswordPopup = () => {
 	};
 
 	const onFinish = () => {
-		const pcr = {
-			mail: values.email,
-			properties: {
-				signature: values.signature,
-				senderEmail: values.senderEmail,
-				application: values.nameApp,
-				assistMail: values.assistMail,
-			},
-		};
-		execute(realm, id, pcr, userStorage).then(handleClose);
+		execute(realm, id, templateProperties, userStorage).then(
+			handleClose,
+		);
 	};
 
 	return (
@@ -72,8 +62,10 @@ export const ResetPasswordPopup = () => {
 				}
 				body={
 					<ResetPasswordPopupContent
-						values={values}
-						setValues={handleInputChange}
+						templateProperties={templateProperties}
+						changeATemplateProperty={
+							changeATemplateProperty
+						}
 					/>
 				}
 				actions={

@@ -4,27 +4,27 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { useSendIdentifiant } from '../../../hooks/credential';
 import useGetUser from '../../../hooks/user/useGetUser';
-import User from '../../../model/api/user';
+import { TemplateProperties } from '../../../model/api/TemplateProperties';
 import LoadingButton from '../loadingButton';
 import SimpleDialog from '../popButton/Dialog';
 import { SendPopupContent } from './sendPopupContent';
 
 export const SendUsernameButton = () => {
 	const { realm, id, userStorage } = useParams<any>();
-
-	const { user, error } = useGetUser(id, realm, userStorage);
-	const [values, setValues] = useState<any>({
-		signature: 'Assistance Insee',
-	});
-
 	const { t } = useTranslation();
+
+	const { user } = useGetUser(id, realm, userStorage);
+	const [templateProperties, setTemplateProperties] =
+		useState<TemplateProperties>({
+			signature: t('commons.send_login.default_signature'),
+		});
 
 	const { execute, loading } = useSendIdentifiant();
 
-	const handleInputChange = (e: any) => {
+	const changeATemplateProperty = (e: any) => {
 		const { name, value } = e.target;
-		setValues({
-			...values,
+		setTemplateProperties({
+			...templateProperties,
 			[name]: value,
 		});
 	};
@@ -39,16 +39,12 @@ export const SendUsernameButton = () => {
 	};
 
 	const onFinish = () => {
-		const properties = {
-			mail: values.email,
-			signature: values.signature,
-			senderEmail: values.senderEmail,
-			application: values.nameApp,
-			assistMail: values.assistMail,
-		};
-		execute(realm, user?.username || '', properties, userStorage).then(
-			handleClose,
-		);
+		execute(
+			realm,
+			user?.username || '',
+			templateProperties,
+			userStorage,
+		).then(handleClose);
 	};
 
 	return (
@@ -67,8 +63,10 @@ export const SendUsernameButton = () => {
 				body={
 					<SendPopupContent
 						user={user}
-						values={values}
-						setValues={handleInputChange}
+						templateProperties={templateProperties}
+						changeATemplateProperty={
+							changeATemplateProperty
+						}
 					/>
 				}
 				actions={

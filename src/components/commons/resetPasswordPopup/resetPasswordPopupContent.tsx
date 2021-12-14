@@ -7,16 +7,18 @@ import {
 	TextField,
 	Typography,
 } from '@material-ui/core';
-import React, { useState } from 'react';
-import User from '../../../model/api/user';
+import { useState } from 'react';
+import { TemplateProperties } from '../../../model/api/TemplateProperties';
 
 interface props {
-	user?: User;
-	setValues?: any;
-	values?: any;
+	changeATemplateProperty: any;
+	templateProperties: TemplateProperties;
 }
 
-export const ResetPasswordPopupContent = ({ values, setValues }: props) => {
+export const ResetPasswordPopupContent = ({
+	templateProperties,
+	changeATemplateProperty,
+}: props) => {
 	const [includeNameApp, setincludeNameApp] = useState(false);
 	const [includeAssistMail, setincludeAssistMail] = useState(false);
 	const [changeSenderMail, setChangeSenderMail] = useState(false);
@@ -31,7 +33,8 @@ export const ResetPasswordPopupContent = ({ values, setValues }: props) => {
 			<Grid item>
 				<Typography>
 					Un mail contenant le nouveau mot de passe va être
-					envoyé à l'adresse mail suivante :{values?.email}
+					envoyé à l'adresse mail suivante :{' '}
+					{templateProperties.mail}
 				</Typography>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<FormControlLabel
@@ -53,8 +56,11 @@ export const ResetPasswordPopupContent = ({ values, setValues }: props) => {
 						<TextField
 							label="Mail expéditeur"
 							name="senderEmail"
-							value={values.senderEmail || ''}
-							onChange={setValues}
+							value={
+								templateProperties.senderEmail ||
+								''
+							}
+							onChange={changeATemplateProperty}
 						/>
 					) : null}
 				</div>
@@ -77,9 +83,9 @@ export const ResetPasswordPopupContent = ({ values, setValues }: props) => {
 					{changeReceiverMail ? (
 						<TextField
 							label="Mail"
-							name="email"
-							value={values.email || ''}
-							onChange={setValues}
+							name="mail"
+							value={templateProperties.mail || ''}
+							onChange={changeATemplateProperty}
 						/>
 					) : null}
 				</div>
@@ -114,9 +120,12 @@ export const ResetPasswordPopupContent = ({ values, setValues }: props) => {
 					{includeNameApp ? (
 						<TextField
 							label="Nom de l'application"
-							name="nameApp"
-							value={values.nameApp || ''}
-							onChange={setValues}
+							name="application"
+							value={
+								templateProperties.application ||
+								''
+							}
+							onChange={changeATemplateProperty}
 						/>
 					) : null}
 				</div>
@@ -140,8 +149,11 @@ export const ResetPasswordPopupContent = ({ values, setValues }: props) => {
 						<TextField
 							label="Mail assistance"
 							name="assistMail"
-							value={values.assistMail || ''}
-							onChange={setValues}
+							value={
+								templateProperties.assistMail ||
+								''
+							}
+							onChange={changeATemplateProperty}
 						/>
 					) : null}
 				</div>
@@ -158,7 +170,7 @@ export const ResetPasswordPopupContent = ({ values, setValues }: props) => {
 						mot de passe
 						{includeNameApp
 							? " pour l'accès  à  l'application " +
-							  values.nameApp +
+							  templateProperties.application +
 							  ' :'
 							: ' :'}
 					</Box>
@@ -174,8 +186,9 @@ export const ResetPasswordPopupContent = ({ values, setValues }: props) => {
 					{includeAssistMail ? (
 						<Box m={2}>
 							Pour toute demande d'assistance, vous
-							pouvez contacter {values.assistMail}{' '}
-							par courrier electronique.
+							pouvez contacter{' '}
+							{templateProperties.assistMail} par
+							courrier electronique.
 						</Box>
 					) : null}
 					<Box m={2}>Cordialement,</Box>
@@ -183,8 +196,11 @@ export const ResetPasswordPopupContent = ({ values, setValues }: props) => {
 						<TextField
 							label="Signature"
 							name="signature"
-							value={values.signature || ''}
-							onChange={setValues}
+							value={
+								templateProperties.signature ||
+								''
+							}
+							onChange={changeATemplateProperty}
 						/>
 					</Box>
 				</Typography>

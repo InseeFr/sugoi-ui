@@ -2,7 +2,6 @@ import Application from '../model/api/application';
 import { Group } from '../model/api/group';
 import Organization from '../model/api/organization';
 import { Pageable } from '../model/api/pageable';
-import { PasswordChangeRequest } from '../model/api/passwordChangeRequest';
 import { Realm } from '../model/api/realm';
 import User from '../model/api/user';
 import searchRequestOrganization from '../model/js/searchRequestOrganization';
@@ -10,6 +9,7 @@ import searchRequestUser from '../model/js/searchRequestUser';
 import * as fake from './fake';
 import * as remote from './remote';
 import * as Utils from '../utils/object';
+import { TemplateProperties } from '../model/api/TemplateProperties';
 
 // Realm function
 export const getRealms = (id?: string): Promise<Realm[]> => {
@@ -304,12 +304,24 @@ export const sendIdentifiant = (
 export const resetPassword = (
 	realm: string,
 	userId: string,
-	pcr: PasswordChangeRequest,
+	templateProperties: TemplateProperties,
+	webhooktag?: string,
 	userStorage?: string,
 ): Promise<any> => {
 	return userStorage
-		? remote.resetPasswordUs(realm, userId, pcr, userStorage)
-		: remote.resetPassword(realm, userId, pcr);
+		? remote.resetPasswordUs(
+				realm,
+				userId,
+				templateProperties,
+				webhooktag,
+				userStorage,
+		  )
+		: remote.resetPassword(
+				realm,
+				userId,
+				templateProperties,
+				webhooktag,
+		  );
 };
 
 export const getGroup = (realm: string, application: string, group: string) => {
