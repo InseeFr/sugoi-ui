@@ -1,21 +1,21 @@
-import React, { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider, useDispatch } from 'react-redux';
-import store from './configuration/store-configuration';
+import store from 'src/lib/configuration/store-configuration';
 import { BrowserRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
-import { saveConfig } from './redux/actions/app';
-import { loadUser } from './redux/actions/user';
+import { saveConfig } from 'src/lib/redux/actions/app';
+import { loadUser } from 'src/lib/redux/actions/user';
 import {
 	AuthenticationProvider,
 	InMemoryWebStorage,
 	oidcLog,
 } from '@axa-fr/react-oidc-context';
 import { UserManagerSettings } from 'oidc-client';
-import { getConfigFile } from './configuration/utils';
-import { Loader } from './components/commons/loader/loader';
-import App from './components/app';
-import './i18n';
+import { getConfigFile } from 'src/lib/configuration/utils';
+import { Loader } from './components/shared/loader/loader';
+import App from 'src/components/app/app';
+import 'src/lib/i18n';
 
 const Start = () => {
 	const [authConfiguration, setAuthConfiguration] = useState<

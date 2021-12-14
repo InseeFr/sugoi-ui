@@ -6,7 +6,7 @@
       "dom.iterable",
       "esnext"
     ],
-    "typeRoots": [ "./src/types", "./node_modules/@types"],
+    "typeRoots": [ "src/lib/types", "./node_modules/@types","./src/lib/types"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -21,7 +21,8 @@
     "jsx": "react-jsx",
     "noFallthroughCasesInSwitch": true,
     "rootDir": ".",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "importHelpers":true
   },
   "include": [
     "src"
