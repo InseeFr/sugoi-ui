@@ -80,7 +80,7 @@ const ListFieldInfoPopup = ({
 						spacing={1}
 					>
 						{value?.map((val: any, i: any) => (
-							<Grid item>
+							<Grid item key={i}>
 								<Chip
 									key={
 										'list_' +
@@ -143,6 +143,9 @@ const ListFieldInfoPopup = ({
 										}
 									/>
 									<PopIcon
+										helpTextTitle={
+											helpTextTitle
+										}
 										helpText={helpText}
 									/>
 								</div>

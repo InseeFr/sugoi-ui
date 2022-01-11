@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { deleteCertificate } from '../../api';
 import { deleteGpgKey } from '../../api/remote';
 
 export const useDeleteGpgKey = () => {

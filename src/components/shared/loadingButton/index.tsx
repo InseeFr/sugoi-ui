@@ -31,7 +31,6 @@ export default function LoadingButton({
 	children,
 	handleClick,
 	loading,
-	error,
 	variant,
 	color,
 }: props) {

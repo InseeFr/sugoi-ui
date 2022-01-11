@@ -15,9 +15,15 @@ export const usePostOrganization = () => {
 		setLoading(true);
 		setResult(undefined);
 		setError(undefined);
-		await postOrganization(organization, realm, userStorage)
-			.then((r) => setResult(r))
-			.catch((err) => setError(err))
+		return await postOrganization(organization, realm, userStorage)
+			.then((r) => {
+				setResult(r);
+				return r;
+			})
+			.catch((err) => {
+				setError(err);
+				return undefined;
+			})
 			.finally(() => {
 				setLoading(false);
 			});

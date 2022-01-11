@@ -1,26 +1,25 @@
 import {
 	Chip,
+	CircularProgress,
 	Divider,
 	Grid,
 	IconButton,
 	Typography,
-	CircularProgress,
 } from '@material-ui/core';
 import CreateIcon from '@material-ui/icons/Create';
 import PeopleIcon from '@material-ui/icons/People';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import PopIcon from 'src/components/shared/popIcon/popIcon';
 import {
-	useGetApplication,
 	useAddGroupsToUser,
 	useDeleteGroupsToUser,
+	useGetApplication,
 } from 'src/lib/hooks/api-hooks';
+import useGetUser from 'src/lib/hooks/user/useGetUser';
 import { Group } from 'src/lib/model/api/group';
-import PopIcon from 'src/components/shared/popIcon/popIcon';
 import AutoCompleteApplication from './autocompleteApplication';
 import ManageGroup from './manageGroup';
-import useGetUser from 'src/lib/hooks/user/useGetUser';
-import { Loader } from 'src/components/shared/loader/loader';
 
 interface props {
 	textButton?: string;
@@ -202,6 +201,9 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 												) => (
 													<Grid
 														item
+														key={
+															i
+														}
 													>
 														<Chip
 															key={

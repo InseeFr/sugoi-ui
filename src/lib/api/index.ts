@@ -3,13 +3,12 @@ import { Group } from '../model/api/group';
 import Organization from '../model/api/organization';
 import { Pageable } from '../model/api/pageable';
 import { Realm } from '../model/api/realm';
+import { TemplateProperties } from '../model/api/TemplateProperties';
 import User from '../model/api/user';
 import searchRequestOrganization from '../model/js/searchRequestOrganization';
 import searchRequestUser from '../model/js/searchRequestUser';
 import * as fake from './fake';
 import * as remote from './remote';
-import * as Utils from '../utils/object';
-import { TemplateProperties } from '../model/api/TemplateProperties';
 
 // Realm function
 export const getRealms = (id?: string): Promise<Realm[]> => {
@@ -20,7 +19,7 @@ export const getRealms = (id?: string): Promise<Realm[]> => {
 	}
 };
 export const postRealm = (realm: Realm): Promise<Realm> => {
-	realm = Utils.cleanObjectEntries(realm);
+	//realm = Utils.cleanObjectEntries(realm);
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.postRealm(realm);
 	} else {
@@ -35,7 +34,7 @@ export const deleteRealm = (id?: string): Promise<any> => {
 	}
 };
 export const updateRealm = (id: string, realm: Realm): Promise<Realm> => {
-	realm = Utils.cleanObjectEntries(realm);
+	//realm = Utils.cleanObjectEntries(realm);
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.updateRealm(id, realm);
 	} else {
@@ -49,7 +48,7 @@ export const getUsers = (
 	searchRequest?: searchRequestUser,
 	userStorage?: string,
 ): Promise<Pageable> => {
-	searchRequest = Utils.cleanObjectEntries(searchRequest);
+	//searchRequest = Utils.cleanObjectEntries(searchRequest);
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.getUsers(realm, searchRequest || {});
 	} else {
@@ -86,7 +85,7 @@ export const postUser = (
 	realm: string,
 	userStorage: string,
 ): Promise<User> => {
-	user = Utils.cleanObjectEntries(user);
+	//user = Utils.cleanObjectEntries(user);
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.postUser(realm, user);
 	} else {
@@ -114,10 +113,11 @@ export const updateUser = (
 	realm: string,
 	userStorage?: string,
 ): Promise<User> => {
-	user = Utils.cleanObjectEntries(user);
+	//user = Utils.cleanObjectEntries(user);
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.updateUser(realm, id, user);
 	} else {
+		console.log(user);
 		return userStorage
 			? remote.updateUserFromUserStorage(
 					realm,
@@ -135,7 +135,7 @@ export const getOrganizations = (
 	searchRequest?: searchRequestOrganization,
 	userStorage?: string,
 ): Promise<Pageable> => {
-	searchRequest = Utils.cleanObjectEntries(searchRequest);
+	//searchRequest = Utils.cleanObjectEntries(searchRequest);
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.getOrganizations(realm, searchRequest || {});
 	} else {
@@ -173,7 +173,7 @@ export const updateOrganization = (
 	realm: string,
 	userStorage?: string,
 ): Promise<Organization> => {
-	organization = Utils.cleanObjectEntries(organization);
+	//organization = Utils.cleanObjectEntries(organization);
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.updateOrganization(realm, id, organization);
 	} else {
@@ -193,7 +193,7 @@ export const postOrganization = (
 	realm: string,
 	userStorage: string,
 ): Promise<Organization> => {
-	organization = Utils.cleanObjectEntries(organization);
+	//organization = Utils.cleanObjectEntries(organization);
 
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.postOrganization(realm, organization);
@@ -382,7 +382,7 @@ export const exportUsers = async (
 	searchRequest: searchRequestUser,
 	userStorage?: string,
 ): Promise<Pageable> => {
-	searchRequest = Utils.cleanObjectEntries(searchRequest);
+	//searchRequest = Utils.cleanObjectEntries(searchRequest);
 	return remote.exportUser(realm, searchRequest || {}, userStorage);
 };
 

@@ -40,7 +40,7 @@ export const SearchApplications = () => {
 			name: appName,
 			owner: owner,
 			groups: [],
-		}).then((r) => execute(realm));
+		}).then(() => execute(realm));
 	};
 
 	const handleSearch = (e: any) => {

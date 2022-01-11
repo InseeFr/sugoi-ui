@@ -28,7 +28,7 @@ const MyAutocomplete = ({
 			onInputChange={(
 				event: object,
 				value: string,
-				reason: string,
+				_reason: string,
 			) => {
 				inputChange(value);
 			}}

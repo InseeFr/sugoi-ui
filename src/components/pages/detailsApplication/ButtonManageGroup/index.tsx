@@ -84,7 +84,7 @@ export const ButtonManageManagerGroup = ({
 	);
 
 	const handleAddUserToGroup =
-		(realm: string, applicationId: string, groupId: string) =>
+		(realm: string, applicationId: string, _groupId: string) =>
 		(userId: string) => {
 			addUserToGroup(realm, applicationId, userId).then(() =>
 				getGroup(realm, applicationId),
@@ -92,7 +92,7 @@ export const ButtonManageManagerGroup = ({
 		};
 
 	const handleDeleteUserFromGroup =
-		(realm: string, applicationId: string, groupId: string) =>
+		(realm: string, applicationId: string, _groupId: string) =>
 		(userId: string) => {
 			deleteUserFromGroup(realm, applicationId, userId).then(() =>
 				getGroup(realm, applicationId),

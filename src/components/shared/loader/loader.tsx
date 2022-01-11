@@ -1,7 +1,7 @@
-import { Box, CircularProgress, Theme, Typography } from '@material-ui/core';
+import { Box, CircularProgress, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
 	createStyles({
 		box: {
 			position: 'absolute',

@@ -10,9 +10,9 @@ interface Props {
 }
 
 export const UpdateRealm = ({ realm, disabled }: Props) => {
-	const { execute, loading, result, error } = useUpdateRealm();
+	const { execute } = useUpdateRealm();
 	const [realmUpdated, setRealmUpdated] = useState(realm);
-	const [open, setOpen] = useState(false);
+	const [open, _setOpen] = useState(false);
 	const handleChange = (e: any) => {
 		setRealmUpdated(e);
 	};

@@ -177,11 +177,15 @@ const SearchUsers = () => {
 			options: {
 				filter: false,
 				sort: true,
-				customBodyRender: (
+				customBodyRender: function render(
 					value: any,
-					tableMeta: any,
-					updateValue: any,
-				) => <Typography>{value.common_name}</Typography>,
+					_tableMeta: any,
+					_updateValue: any,
+				) {
+					return (
+						<Typography>{value.common_name}</Typography>
+					);
+				},
 			},
 		},
 		{
@@ -190,21 +194,23 @@ const SearchUsers = () => {
 			options: {
 				filter: false,
 				sort: true,
-				customBodyRender: (
+				customBodyRender: function render(
 					value: any,
-					tableMeta: any,
-					updateValue: any,
-				) => (
-					<Typography>
-						{value.map((v: any) => (
-							<Chip
-								key={'hab_' + v.id}
-								label={v.id}
-								size="small"
-							/>
-						))}
-					</Typography>
-				),
+					_tableMeta: any,
+					_updateValue: any,
+				) {
+					return (
+						<Typography>
+							{value.map((v: any) => (
+								<Chip
+									key={'hab_' + v.id}
+									label={v.id}
+									size="small"
+								/>
+							))}
+						</Typography>
+					);
+				},
 			},
 		},
 		{
@@ -213,23 +219,28 @@ const SearchUsers = () => {
 			options: {
 				filter: false,
 				sort: true,
-				customBodyRender: (
+				customBodyRender: function render(
 					value: any,
-					tableMeta: any,
-					updateValue: any,
-				) => (
-					<Typography>
-						{value
-							.filter((v: any) => v != null)
-							.map((v: any) => (
-								<Chip
-									key={'group_' + v.name}
-									label={v.name}
-									size="small"
-								/>
-							))}
-					</Typography>
-				),
+					_tableMeta: any,
+					_updateValue: any,
+				) {
+					return (
+						<Typography>
+							{value
+								.filter((v: any) => v != null)
+								.map((v: any) => (
+									<Chip
+										key={
+											'group_' +
+											v.name
+										}
+										label={v.name}
+										size="small"
+									/>
+								))}
+						</Typography>
+					);
+				},
 			},
 		},
 		{
@@ -238,10 +249,10 @@ const SearchUsers = () => {
 				filter: false,
 				sort: false,
 				empty: true,
-				customBodyRenderLite: (
-					dataIndex: any,
-					rowIndex: any,
-				) => {
+				customBodyRenderLite: function render(
+					_dataIndex: any,
+					_rowIndex: any,
+				) {
 					return (
 						<IconButton aria-label="Détail">
 							<ZoomInOutlinedIcon />

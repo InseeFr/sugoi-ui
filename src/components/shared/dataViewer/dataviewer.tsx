@@ -2,7 +2,8 @@ import { Grid, Paper, Tab, Tabs } from '@material-ui/core';
 import React from 'react';
 import GenerateFields from 'src/components/shared/formular/fields/utils';
 import Panel from 'src/components/shared/panel/panel';
-import { Field } from 'src/lib/model/field';
+import { ErrorField, Field } from 'src/lib/model/field';
+import { extractFieldAndAddError } from 'src/lib/utils/form_utils';
 import ResetPasswordPopup from '../resetPasswordPopup';
 import SendUsernamePopup from '../sendUsernamePopup';
 import { ContentPanel } from './commons';
@@ -13,6 +14,7 @@ interface Props {
 	fieldToDisplay: Field[];
 	handleChange: any;
 	create: boolean;
+	errors?: ErrorField[];
 	buttons?: any;
 	isUser?: Boolean;
 }
@@ -21,27 +23,45 @@ const DataViewer = ({
 	data,
 	fieldToDisplay,
 	handleChange,
+	errors,
 	buttons,
 	create,
 	isUser,
 }: Props) => {
-	const mainsFields = fieldToDisplay.filter(
-		(field) => field.tag === 'main',
+	const mainsFields = extractFieldAndAddError(
+		'main',
+		fieldToDisplay,
+		errors || [],
 	);
-	const advancedFields = fieldToDisplay.filter(
-		(field) => field.tag === 'advanced',
+
+	const advancedFields = extractFieldAndAddError(
+		'advanced',
+		fieldToDisplay,
+		errors || [],
 	);
-	const addressFields = fieldToDisplay.filter(
-		(field) => field.tag === 'address',
+
+	const addressFields = extractFieldAndAddError(
+		'address',
+		fieldToDisplay,
+		errors || [],
 	);
-	const authentificationFields = fieldToDisplay.filter(
-		(field) => field.tag === 'authentification',
+
+	const authentificationFields = extractFieldAndAddError(
+		'authentication',
+		fieldToDisplay,
+		errors || [],
 	);
-	const rightsFields = fieldToDisplay.filter(
-		(field) => field.tag === 'rights',
+
+	const rightsFields = extractFieldAndAddError(
+		'rights',
+		fieldToDisplay,
+		errors || [],
 	);
-	const propertiesFields = fieldToDisplay.filter(
-		(field) => field.tag === 'properties',
+
+	const propertiesFields = extractFieldAndAddError(
+		'properties',
+		fieldToDisplay,
+		errors || [],
 	);
 
 	const [value, setValue] = React.useState(0);

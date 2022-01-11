@@ -5,7 +5,7 @@ export const realmHasOrganization: (
 	userStorage?: string | undefined,
 ) => boolean = (realm: Realm, userStorage?: string) => {
 	if (userStorage) {
-		var usCandidate = realm?.userStorages.filter(
+		const usCandidate = realm?.userStorages.filter(
 			(us) => us.name === userStorage,
 		);
 		return (

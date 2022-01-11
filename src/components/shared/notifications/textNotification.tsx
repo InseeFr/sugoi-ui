@@ -21,7 +21,7 @@ function isAxiosResponse(
 
 const TextNotification = (props: any) => {
 	const { t } = useTranslation();
-	let subject = props.subject;
+	const subject = props.subject;
 	let message = '?';
 	if (typeof subject === 'string') {
 		message = subject;

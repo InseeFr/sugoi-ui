@@ -1,10 +1,4 @@
-import {
-	createStyles,
-	Drawer,
-	makeStyles,
-	Theme,
-	useTheme,
-} from '@material-ui/core';
+import { createStyles, Drawer, makeStyles, useTheme } from '@material-ui/core';
 import SiderBody from './sider-body';
 
 interface props {
@@ -12,7 +6,7 @@ interface props {
 	handleDrawerToggle: any;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
 	createStyles({
 		drawerPaper: {
 			width: 240,

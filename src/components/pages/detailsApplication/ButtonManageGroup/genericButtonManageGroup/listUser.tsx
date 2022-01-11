@@ -17,7 +17,7 @@ export const GroupListUsers = ({ group, realm }: Props) => {
 			spacing={1}
 		>
 			{group?.users?.map((user: User, i: number) => (
-				<Grid item>
+				<Grid item key={i}>
 					<ChipPerson
 						realm={realm}
 						user={user}

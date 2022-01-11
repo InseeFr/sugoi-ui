@@ -1,53 +1,40 @@
 import { Button, Grid } from '@material-ui/core';
-import { useSnackbar } from 'notistack';
-import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import DataViewer from 'src/components/shared/dataViewer/dataviewer';
 import LoadingButton from 'src/components/shared/loadingButton';
 import Title from 'src/components/shared/title/title';
+import { usePostOrganization } from 'src/lib/hooks/api-hooks';
 import useRealmConfig from 'src/lib/hooks/realm/useRealmConfig';
 import { useForms } from 'src/lib/hooks/technics/useForms';
-import { usePostOrganization } from 'src/lib/hooks/api-hooks';
 
 const CreateOrganization = () => {
 	const { realm, userStorage } = useParams<any>();
 	const { push } = useHistory();
-	const { formValues, handleChange, handleReset } = useForms({});
+	const { formValues, handleChange, handleReset, errors, handleSubmit } =
+		useForms({});
 	const { organizationConfig } = useRealmConfig(realm);
-	const {
-		organization,
-		execute: createOrganization,
-		loading,
-		error,
-	} = usePostOrganization();
+	const { execute: createOrganization, loading } = usePostOrganization();
 
-	const { enqueueSnackbar } = useSnackbar();
 	const { t } = useTranslation();
 
-	useEffect(() => {
-		if (error) {
-			enqueueSnackbar(t('create_organization.error') + error, {
-				variant: 'error',
-			});
-		}
-	}, [enqueueSnackbar, error, t]);
+	const onSubmit = () =>
+		createOrganization(formValues, realm, userStorage).then(
+			(organization) =>
+				organization &&
+				push(
+					'/realm/' +
+						realm +
+						'/us/' +
+						userStorage +
+						'/organizations/' +
+						organization.identifiant,
+				),
+		);
 
-	const handleSubmit = () => {
-		createOrganization(formValues, realm, userStorage);
+	const handleCreate = () => {
+		handleSubmit(organizationConfig)(onSubmit);
 	};
-
-	useEffect(() => {
-		organization &&
-			push(
-				'/realm/' +
-					realm +
-					'/us/' +
-					userStorage +
-					'/organizations/' +
-					organization.identifiant,
-			);
-	}, [organization, push, realm, userStorage]);
 
 	return (
 		<Grid container spacing={2} direction="column">
@@ -60,6 +47,7 @@ const CreateOrganization = () => {
 					fieldToDisplay={organizationConfig}
 					handleChange={handleChange}
 					create={true}
+					errors={errors}
 					buttons={
 						<Grid item xs={12}>
 							<Grid
@@ -71,7 +59,7 @@ const CreateOrganization = () => {
 								<Grid item>
 									<LoadingButton
 										handleClick={
-											handleSubmit
+											handleCreate
 										}
 										loading={loading}
 										color="primary"

@@ -60,8 +60,8 @@ export const ListFieldButton = ({
 				/>
 			</Grid>
 			<List dense={true}>
-				{value.map((val: string) => (
-					<ListItem disableGutters>
+				{value.map((val: string, i: any) => (
+					<ListItem disableGutters key={i}>
 						<ListItemText primary={val} />
 					</ListItem>
 				))}

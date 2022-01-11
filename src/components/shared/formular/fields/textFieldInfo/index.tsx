@@ -1,17 +1,20 @@
+import { createStyles, makeStyles, TextField } from '@material-ui/core';
 import React, { memo } from 'react';
-import { createStyles, makeStyles, Theme, TextField } from '@material-ui/core';
 import PopIcon from 'src/components/shared/popIcon/popIcon';
 
 interface props {
 	name: string;
+	required?: boolean;
 	helpTextTitle?: string;
 	helpText?: string;
 	modifiable?: boolean;
 	value: string;
 	handleChange?: any;
+	error?: boolean;
+	errorText?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
 	createStyles({
 		root: {
 			display: 'flex',
@@ -21,16 +24,20 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 const TextFieldInfo = ({
 	name,
+	required,
 	modifiable,
 	helpTextTitle,
 	helpText,
 	value,
 	handleChange,
+	error,
+	errorText,
 }: props) => {
 	const classes = useStyles();
 	return (
 		<div className={classes.root}>
 			<TextField
+				required={required}
 				variant="outlined"
 				label={name}
 				name={name}
@@ -38,6 +45,8 @@ const TextFieldInfo = ({
 				value={value || ''}
 				fullWidth
 				onChange={(e) => handleChange(e.target.value)}
+				error={error}
+				helperText={errorText}
 			/>
 			<PopIcon helpTextTitle={helpTextTitle} helpText={helpText} />
 		</div>
@@ -45,7 +54,14 @@ const TextFieldInfo = ({
 };
 
 function textFieldPropsAreEqual(prevTextField: props, nextTextField: props) {
-	return prevTextField.value === nextTextField.value;
+	return (
+		prevTextField.value === nextTextField.value &&
+		prevTextField.error === nextTextField.error
+	);
 }
+
+TextFieldInfo.defaultProps = {
+	error: false,
+};
 
 export default memo(TextFieldInfo, textFieldPropsAreEqual);

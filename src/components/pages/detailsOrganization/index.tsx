@@ -1,94 +1,42 @@
 import { Button, Grid, Typography } from '@material-ui/core';
-import { useSnackbar } from 'notistack';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
-import {
-	useDeleteOrganization,
-	useRealmConfig,
-	useUpdateOrganization,
-	useGetOrganization,
-} from 'src/lib/hooks/api-hooks';
-import { useForms } from 'src/lib/hooks/technics/useForms';
-import organization from 'src/lib/model/api/organization';
 import ConfirmationPopup from 'src/components/shared/confirmationPopUp';
 import DataViewer from 'src/components/shared/dataViewer/dataviewer';
 import ErrorBoundary from 'src/components/shared/error/Error';
 import { Loader } from 'src/components/shared/loader/loader';
 import LoadingButton from 'src/components/shared/loadingButton';
 import Title from 'src/components/shared/title/title';
-
-interface props {
-	data: organization;
-	fieldToDisplay: any;
-	id: string;
-	dispatch: React.Dispatch<any>;
-}
+import {
+	useDeleteOrganization,
+	useGetOrganization,
+	useRealmConfig,
+	useUpdateOrganization,
+} from 'src/lib/hooks/api-hooks';
+import { useForms } from 'src/lib/hooks/technics/useForms';
+import organization from 'src/lib/model/api/organization';
 
 const DetailOrganization = () => {
 	const { realm, id, userStorage } = useParams<any>();
 	const { push } = useHistory();
-	const { organizationConfig } = useRealmConfig(realm);
-	const {
-		loading,
-		organization,
-		execute,
-		error: errorGet,
-	} = useGetOrganization(id, realm, userStorage);
-
-	const { enqueueSnackbar } = useSnackbar();
 	const { t } = useTranslation();
+	const { organizationConfig } = useRealmConfig(realm);
 
-	const {
-		execute: executeUpdate,
-		loading: loadingUpdate,
-		error: errorUpdate,
-	} = useUpdateOrganization();
+	const { loading, organization, execute } = useGetOrganization(
+		id,
+		realm,
+		userStorage,
+	);
 
-	const {
-		execute: executeDelete,
-		loading: loadingDelete,
-		error: errorDelete,
-	} = useDeleteOrganization();
+	const { formValues, handleChange, handleReset, errors, handleSubmit } =
+		useForms(organization);
 
-	const { formValues, updateIFormValues, handleChange, handleReset } =
-		useForms({});
+	const { execute: executeUpdate, loading: loadingUpdate } =
+		useUpdateOrganization();
 
-	useEffect(() => {
-		if (organization) {
-			updateIFormValues(organization);
-		}
-	}, [organization, updateIFormValues]);
-
-	useEffect(() => {
-		if (errorDelete) {
-			enqueueSnackbar(
-				t('detail_organization.error') + errorDelete,
-				{
-					variant: 'error',
-				},
-			);
-		}
-	}, [enqueueSnackbar, errorDelete, t]);
-
-	useEffect(() => {
-		if (errorUpdate) {
-			enqueueSnackbar(
-				t('detail_organization.error') + errorUpdate,
-				{
-					variant: 'error',
-				},
-			);
-		}
-	}, [enqueueSnackbar, errorUpdate, t]);
-
-	useEffect(() => {
-		if (errorGet) {
-			enqueueSnackbar(t('detail_organization.error') + errorGet, {
-				variant: 'error',
-			});
-		}
-	}, [enqueueSnackbar, errorGet, t]);
+	const { execute: executeDelete, loading: loadingDelete } =
+		useDeleteOrganization();
 
 	const handleDelete = async () => {
 		await executeDelete(
@@ -105,10 +53,13 @@ const DetailOrganization = () => {
 		);
 	};
 
-	const handleUpdate = () => {
+	const onSubmit = () =>
 		executeUpdate(id, formValues, realm, userStorage).then(() =>
 			execute(id, realm, userStorage),
 		);
+
+	const handleUpdate = () => {
+		handleSubmit(organizationConfig)(onSubmit);
 	};
 
 	return (
@@ -125,6 +76,7 @@ const DetailOrganization = () => {
 								fieldToDisplay={
 									organizationConfig
 								}
+								errors={errors}
 								handleChange={handleChange}
 								buttons={
 									<Grid

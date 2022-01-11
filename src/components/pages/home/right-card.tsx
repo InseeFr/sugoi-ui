@@ -1,4 +1,3 @@
-import React from 'react';
 import {
 	Card,
 	CardContent,
@@ -9,13 +8,10 @@ import {
 	ListItem,
 	ListItemText,
 } from '@material-ui/core';
-import { RootState } from 'src/lib/configuration/store-configuration';
-import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useWhoAmI } from 'src/lib/hooks/whoami';
 
 const CardRights = () => {
-	const user = useSelector((state: RootState) => state.user);
 	const { t } = useTranslation();
 	const { rights, loading } = useWhoAmI();
 	return (

@@ -44,7 +44,7 @@ export const SearchResults = ({
 	const options: MUIDataTableOptions = {
 		responsive: 'simple' as any,
 		selectableRowsHideCheckboxes: true,
-		customToolbar: () => {
+		customToolbar: function ToolBar() {
 			return <CustomToolBar handleClick={handleClickAdd} />;
 		},
 
@@ -120,7 +120,12 @@ export const SearchResults = ({
 		},
 		selectableRowsOnClick: false,
 		downloadOptions: { filename: 'export.csv' },
-		onDownload: (buildHead, buildBody, columns, data) => {
+		onDownload: function download(
+			_buildHead,
+			_buildBody,
+			_columns,
+			_data,
+		) {
 			handleDownload();
 			// Must return false to delegate the download to handleDownload
 			return false;

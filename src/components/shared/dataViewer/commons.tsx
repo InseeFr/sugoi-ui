@@ -15,9 +15,10 @@ export const generatePanel = (
 			title={title}
 			collapsible={collapsible}
 			description={description}
-			children={children}
 			elevation={elevation}
-		/>
+		>
+			{children}
+		</Panel>
 	);
 };
 

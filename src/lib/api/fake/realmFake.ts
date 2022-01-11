@@ -2,7 +2,7 @@ import { Realm } from '../../model/api/realm';
 
 const get = (data: any) => Promise.resolve(data);
 
-export const getRealms = (id?: string) => {
+export const getRealms = (_id?: string) => {
 	return get([{ name: 'toto' }]);
 };
 

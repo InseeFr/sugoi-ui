@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { addAttribute, deleteAttribute } from '../../api';
 import { addGroupToUser, deleteGroupToUser } from '../../api/remote';
 import User from '../../model/api/user';
 
