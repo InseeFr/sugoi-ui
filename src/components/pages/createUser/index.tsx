@@ -1,46 +1,40 @@
 import { Button, Grid } from '@material-ui/core';
-import { useSnackbar } from 'notistack';
-import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import DataViewer from 'src/components/shared/dataViewer/dataviewer';
 import LoadingButton from 'src/components/shared/loadingButton';
 import Title from 'src/components/shared/title/title';
-import { useForms } from 'src/lib/hooks/technics/useForms';
 import { usePostUser, useRealmConfig } from 'src/lib/hooks/api-hooks';
+import { useForms } from 'src/lib/hooks/technics/useForms';
+import User from 'src/lib/model/api/user';
 
 const CreateUsers = () => {
 	const { realm, userStorage } = useParams<any>();
+
 	const { push } = useHistory();
-	const { formValues, handleChange, handleReset } = useForms({});
+	const { formValues, handleChange, handleReset, errors, handleSubmit } =
+		useForms({});
 	const { userConfig } = useRealmConfig(realm);
-	const { user, execute: createUser, error, loading } = usePostUser();
-	const { enqueueSnackbar } = useSnackbar();
+	const { execute: createUser, loading } = usePostUser();
 	const { t } = useTranslation();
 
-	const handleSubmit = () => {
-		createUser(formValues, realm, userStorage);
+	const onSubmit = () =>
+		createUser(formValues, realm, userStorage).then(
+			(user: User | undefined) =>
+				user &&
+				push(
+					'/realm/' +
+						realm +
+						'/us/' +
+						userStorage +
+						'/users/' +
+						user?.username,
+				),
+		);
+
+	const handleCreate = () => {
+		handleSubmit(userConfig)(onSubmit);
 	};
-
-	useEffect(() => {
-		user &&
-			push(
-				'/realm/' +
-					realm +
-					'/us/' +
-					userStorage +
-					'/users/' +
-					user.username,
-			);
-	}, [push, realm, user, userStorage]);
-
-	useEffect(() => {
-		if (error) {
-			enqueueSnackbar(t('create_user.error') /*+ error*/, {
-				variant: 'error',
-			});
-		}
-	}, [enqueueSnackbar, error, t]);
 
 	return (
 		<Grid container spacing={2} direction="column">
@@ -52,6 +46,7 @@ const CreateUsers = () => {
 					data={formValues}
 					fieldToDisplay={userConfig}
 					handleChange={handleChange}
+					errors={errors}
 					buttons={
 						<Grid item xs={12}>
 							<Grid
@@ -63,7 +58,7 @@ const CreateUsers = () => {
 								<Grid item>
 									<LoadingButton
 										handleClick={
-											handleSubmit
+											handleCreate
 										}
 										loading={loading}
 										color="primary"

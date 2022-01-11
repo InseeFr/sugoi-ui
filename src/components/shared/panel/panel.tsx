@@ -34,11 +34,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 const Panel = ({
 	title,
-	children,
 	collapsible,
 	description,
 	elevation,
 	collapse,
+	children,
 }: Props) => {
 	const classes = useStyles();
 	const [expand, setExpand] = useState(collapse);

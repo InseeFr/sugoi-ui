@@ -7,6 +7,14 @@ export interface Field {
 	modifiable: boolean;
 	tag: any;
 	options: OptionsFields | any;
+	error?: ErrorField;
+	required?: boolean;
+}
+
+export interface ErrorField {
+	field: string;
+	error: boolean;
+	message: string;
 }
 
 interface OptionsFields {

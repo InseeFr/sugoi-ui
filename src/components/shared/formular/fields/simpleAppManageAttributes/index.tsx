@@ -1,5 +1,4 @@
 import {
-	Button,
 	Chip,
 	CircularProgress,
 	Divider,
@@ -14,13 +13,13 @@ import {
 } from '@material-ui/core';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
+import get from 'lodash.get';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import useGetUser from 'src/lib/hooks/user/useGetUser';
-import { useAddAttribute, useDeleteAttribute } from 'src/lib/hooks/api-hooks';
-import PopIcon from 'src/components/shared/popIcon/popIcon';
-import get from 'lodash.get';
 import LoadingButton from 'src/components/shared/loadingButton';
+import PopIcon from 'src/components/shared/popIcon/popIcon';
+import { useAddAttribute, useDeleteAttribute } from 'src/lib/hooks/api-hooks';
+import useGetUser from 'src/lib/hooks/user/useGetUser';
 
 interface props {
 	value: any;
@@ -107,7 +106,7 @@ const SimpleAppManagedAttributes = ({
 							) : (
 								get(user, value, [])?.map(
 									(val: any, i: any) => (
-										<Grid item>
+										<Grid item key={i}>
 											<Chip
 												key={
 													'list_' +
@@ -182,6 +181,9 @@ const SimpleAppManagedAttributes = ({
 										}
 									/>
 									<PopIcon
+										helpTextTitle={
+											helpTextTitle
+										}
 										helpText={helpText}
 									/>
 								</div>

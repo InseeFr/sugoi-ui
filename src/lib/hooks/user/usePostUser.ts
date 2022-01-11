@@ -15,10 +15,14 @@ export const usePostUser = () => {
 		setLoading(true);
 		setError(undefined);
 		setResult(undefined);
-		await postUser(user, realm, userStorage)
-			.then((r: User) => setResult(r))
+		return await postUser(user, realm, userStorage)
+			.then((r: User) => {
+				setResult(r);
+				return r;
+			})
 			.catch((err) => {
 				setError(err);
+				return undefined;
 			})
 			.finally(() => {
 				setLoading(false);

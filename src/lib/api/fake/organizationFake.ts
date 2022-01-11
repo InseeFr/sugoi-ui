@@ -4,8 +4,8 @@ import SearchRequestOrganization from '../../model/js/searchRequestOrganization'
 import Users from './data/users.json';
 
 export const getOrganizations = (
-	realm: string,
-	{ identifiant, application, role, property }: SearchRequestOrganization,
+	_realm: string,
+	_searchRequestOrganization: SearchRequestOrganization,
 ): Promise<Pageable> =>
 	Promise.resolve({
 		results: Users,
@@ -24,8 +24,8 @@ export const getOrganization = async (
 };
 
 export const deleteOrganization = (
-	realm: string,
-	id: string,
+	_realm: string,
+	_id: string,
 ): Promise<string> => Promise.resolve('');
 
 export const postOrganization = (

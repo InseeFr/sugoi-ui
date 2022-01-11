@@ -3,19 +3,8 @@ import User from '../../model/api/user';
 import searchRequestUser from '../../model/js/searchRequestUser';
 import Users from './data/users.json';
 export const getUsers = (
-	realm: string,
-	{
-		identifiant,
-		CommonName,
-		description,
-		organisationId,
-		size,
-		start,
-		searchCookie,
-		typeRecherche,
-		habilitation,
-		application,
-	}: searchRequestUser,
+	_realm: string,
+	_searchRequestUser: searchRequestUser,
 ): Promise<Pageable> =>
 	Promise.resolve({
 		results: Users,

@@ -57,7 +57,7 @@ const HabilitationsPopup = ({
 		useDeleteAttribute(attribute_key);
 	const handleClickAdd = () => {
 		if ((application && role) || (application && role && propriete)) {
-			let prop = {
+			const prop = {
 				id: propriete
 					? propriete + '_' + role + '_' + application
 					: role + '_' + application,
@@ -122,7 +122,7 @@ const HabilitationsPopup = ({
 										habilitation: Habilitation,
 										i: any,
 									) => (
-										<Grid item>
+										<Grid item key={i}>
 											<Chip
 												key={
 													'habilitation_' +
@@ -261,7 +261,11 @@ const HabilitationsPopup = ({
 													habilitation: Habilitation,
 													pos: any,
 												) => (
-													<ListItem>
+													<ListItem
+														key={
+															pos
+														}
+													>
 														<ListItemText
 															primary={
 																habilitation.id

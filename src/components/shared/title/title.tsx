@@ -1,4 +1,4 @@
-import { Box, Typography, TypographyTypeMap } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import { Variant } from '@material-ui/core/styles/createTypography';
 interface props {
 	title: string;

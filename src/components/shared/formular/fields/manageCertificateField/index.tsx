@@ -53,7 +53,7 @@ const ManageCertificate = ({
 	};
 
 	const handleSave = async (file: File) => {
-		let formData = new FormData();
+		const formData = new FormData();
 		formData.append('file', file);
 		uploadCertficate(id, realm, formData, userStorage).finally(() =>
 			getUser(id, realm, userStorage),

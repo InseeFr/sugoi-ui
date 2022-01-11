@@ -1,16 +1,15 @@
 import { Button, Grid, Link, Typography } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
 import { DropzoneArea } from 'material-ui-dropzone';
 import { useState } from 'react';
-import { download } from 'src/lib/utils/downloadFile';
+import { Loader } from 'src/components/shared/loader/loader';
 import SimpleDialog from 'src/components/shared/popButton/Dialog';
 import PopIcon from 'src/components/shared/popIcon/popIcon';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Loader } from 'src/components/shared/loader/loader';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
 	createStyles({
 		root: {
 			display: 'flex',

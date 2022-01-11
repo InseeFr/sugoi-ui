@@ -4,11 +4,10 @@ import GroupsField from '../groupsFieldInfo';
 import HabilitationsPopup from '../habilitationsFieldInfo';
 import ListFieldInfoButton from '../listGenericFieldInfo';
 import ListFieldInfo from '../listGenericFieldInfo/listFieldInfo';
-import TextFieldInfo from '../textFieldInfo';
-import SimpleAppManagedAttributes from '../simpleAppManageAttributes';
-import UploadFile from '../manageCertificateField';
 import ManageCertificate from '../manageCertificateField';
 import ManageGpgKey from '../manageGpgKey';
+import SimpleAppManagedAttributes from '../simpleAppManageAttributes';
+import TextFieldInfo from '../textFieldInfo';
 
 export const GenerateFields = (
 	data: any,
@@ -27,6 +26,9 @@ export const GenerateFields = (
 						handleChange={handleChange(field.path)}
 						value={get(data, field.path)}
 						modifiable={field.modifiable}
+						error={field.error?.error}
+						errorText={field.error?.message}
+						required={field.required}
 					/>,
 				);
 				break;

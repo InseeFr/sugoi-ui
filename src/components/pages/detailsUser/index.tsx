@@ -1,5 +1,5 @@
 import { Button, Grid, Typography } from '@material-ui/core';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import ConfirmationPopup from 'src/components/shared/confirmationPopUp';
@@ -21,35 +21,18 @@ const DetailUser = () => {
 
 	const { userConfig } = useRealmConfig(realm);
 
-	const {
-		loading,
-		user,
-		error: errorGetUser,
-		execute,
-	} = useGetUser(id, realm, userStorage);
+	const { loading, user, execute } = useGetUser(id, realm, userStorage);
 
-	const {
-		execute: executeUpdate,
-		loading: loadingUpdate,
-		error: errorUpdate,
-	} = useUpdateUser();
+	const { execute: executeUpdate, loading: loadingUpdate } =
+		useUpdateUser();
 
-	const {
-		execute: executeDelete,
-		loading: loadingDelete,
-		error: errorDelete,
-	} = useDeleteUser();
+	const { execute: executeDelete, loading: loadingDelete } =
+		useDeleteUser();
 
 	const { t } = useTranslation();
 
-	const { formValues, updateIFormValues, handleChange, handleReset } =
-		useForms({});
-
-	useEffect(() => {
-		if (user) {
-			updateIFormValues(user);
-		}
-	}, [user, updateIFormValues]);
+	const { formValues, handleChange, handleReset, errors, handleSubmit } =
+		useForms(user);
 
 	const handleDelete = () =>
 		executeDelete(user?.username as string, realm, userStorage).then(
@@ -63,10 +46,16 @@ const DetailUser = () => {
 				),
 		);
 
-	const handleUpdate = () =>
+	const onSubmit = () => {
+		console.log(formValues);
 		executeUpdate(id, formValues, realm, userStorage).then(() =>
 			execute(id, realm, userStorage),
 		);
+	};
+
+	const handleUpdate = () => {
+		handleSubmit(userConfig)(onSubmit);
+	};
 
 	return (
 		<>
@@ -75,12 +64,13 @@ const DetailUser = () => {
 				<Loader />
 			) : (
 				<ErrorBoundary>
-					{user ? (
+					{formValues ? (
 						<>
 							<DataViewer
 								data={formValues}
 								fieldToDisplay={userConfig}
 								handleChange={handleChange}
+								errors={errors}
 								buttons={
 									<Grid
 										container

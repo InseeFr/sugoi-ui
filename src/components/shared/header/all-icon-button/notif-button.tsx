@@ -28,7 +28,7 @@ const NotifButton = () => {
 	)[1];
 
 	const handleChangeStandardNotif = (
-		event: React.ChangeEvent<HTMLInputElement>,
+		_event: React.ChangeEvent<HTMLInputElement>,
 	) => {
 		setStandardNotifLocalStorage(!enabledStandardNotif);
 		dispatch(changeStatusNotifDebug(!enabledStandardNotif));

@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import set from 'lodash.set';
+import isEqual from 'lodash.isequal';
+import { ErrorField, Field } from 'src/lib/model/field';
+import { validateForm } from 'src/lib/utils/form_utils';
 
 const addProps = (obj: any, path: any, value: any) => set(obj, path, value);
 
@@ -8,6 +11,7 @@ export const useForms = (initialValues: any) => {
 	const [formValues, setFormValues] = useState(initialValues || {});
 	const [todo, setTodo] = useState<any>();
 	const [reset, setReset] = useState(false);
+	const [errors, setErrors] = useState<ErrorField[]>([]);
 
 	useEffect(() => {
 		if (todo) {
@@ -29,8 +33,11 @@ export const useForms = (initialValues: any) => {
 	}, [reset, iFormValues]);
 
 	useEffect(() => {
-		setFormValues({ ...iFormValues });
-	}, [iFormValues]);
+		if (!isEqual(initialValues, iFormValues)) {
+			setFormValues({ ...initialValues });
+			setIFormValues({ ...initialValues });
+		}
+	}, [initialValues]);
 
 	const handleChange = useCallback(
 		(path: any) => (value: any) => {
@@ -43,6 +50,15 @@ export const useForms = (initialValues: any) => {
 		setReset(true);
 	}, []);
 
+	const handleSubmit = (fields: Field[]) => (onSubmit: any) => {
+		const errors = validateForm(fields)(formValues);
+		if (errors && !errors.length) {
+			onSubmit();
+		} else {
+			setErrors(errors);
+		}
+	};
+
 	return {
 		iFormValues,
 		updateIFormValues: setIFormValues,
@@ -50,5 +66,7 @@ export const useForms = (initialValues: any) => {
 		formValues,
 		handleChange,
 		handleReset,
+		errors,
+		handleSubmit,
 	};
 };

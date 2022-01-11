@@ -24,6 +24,7 @@
 		"jsoneditor-react": "^3.1.0",
 		"jwt-decode": "^3.1.2",
 		"lodash.get": "^4.4.2",
+		"lodash.isequal": "^4.5.0",
 		"lodash.set": "^4.3.2",
 		"material-ui-dropzone": "^3.5.0",
 		"mui-datatables": "^3.7.8",
@@ -48,7 +49,9 @@
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"lint": "eslint --ext js,jsx,ts,tsx  src/**",
-		"lint-fix": "eslint --ext js,jsx,ts,tsx  src/** --fix"
+		"lint-fix": "eslint --ext js,jsx,ts,tsx  src/** --fix",
+		"check-format": "prettier src/** -c",
+		"format": "prettier src/** --write"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
@@ -71,6 +74,7 @@
 		"@types/json-editor": "^0.0.6",
 		"@types/jsoneditor-for-react": "^0.0.4",
 		"@types/lodash.get": "^4.4.6",
+		"@types/lodash.isequal": "^4.5.5",
 		"@types/lodash.set": "^4.3.6",
 		"@types/material-ui": "^0.21.12",
 		"@types/mui-datatables": "^3.7.7",
@@ -89,6 +93,7 @@
 		"eslint-plugin-prettier": "^4.0.0",
 		"eslint-plugin-react": "^7.26.1",
 		"eslint-plugin-react-hooks": "^4.2.0",
+		"eslint-plugin-unused-imports": "^2.0.0",
 		"prettier": "^2.4.1",
 		"sonarqube-scanner": "^2.7.0"
 	}

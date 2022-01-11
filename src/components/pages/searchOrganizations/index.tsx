@@ -84,10 +84,10 @@ const SearchOrganizations = () => {
 				filter: false,
 				sort: false,
 				empty: true,
-				customBodyRenderLite: (
-					dataIndex: any,
-					rowIndex: any,
-				) => {
+				customBodyRenderLite: function render(
+					_dataIndex: any,
+					_rowIndex: any,
+				) {
 					return (
 						<IconButton aria-label="Détail">
 							<ZoomInOutlinedIcon />

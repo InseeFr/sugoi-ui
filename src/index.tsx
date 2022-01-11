@@ -45,7 +45,7 @@ const Start = () => {
 			customEvents={{
 				onUserLoaded: (user) => dispatch(loadUser(user)),
 				onUserUnloaded: () => {},
-				onSilentRenewError: (error) => {},
+				onSilentRenewError: (_error) => {},
 				onUserSignedOut: () => {},
 				onUserSessionChanged: () => {},
 				onAccessTokenExpiring: () => {},

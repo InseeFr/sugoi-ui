@@ -9,7 +9,7 @@ export const useWhoAmI = () => {
 	useEffect(() => {
 		getWhoami()
 			.then((r: Whoami) => setRights(r))
-			.catch((r) =>
+			.catch(() =>
 				setRights({
 					appManager: [],
 					isAdmin: false,
