@@ -23,7 +23,10 @@ export const DetailsApplication = () => {
 	const { realm, id: applicationId } = useParams<any>();
 	const { push } = useHistory();
 	const { t } = useTranslation();
-
+	document.title =
+		t('detail_application.page_title_1') +
+		applicationId +
+		t('detail_application.page_title_2');
 	const {
 		application,
 		execute: getApplication,

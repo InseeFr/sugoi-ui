@@ -17,6 +17,7 @@ const CreateUsers = () => {
 	const { userConfig } = useRealmConfig(realm);
 	const { execute: createUser, loading } = usePostUser();
 	const { t } = useTranslation();
+	document.title = t('create_user.page_title');
 
 	const onSubmit = () =>
 		createUser(formValues, realm, userStorage).then(

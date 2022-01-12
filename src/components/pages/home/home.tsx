@@ -7,8 +7,9 @@ import CardRights from './right-card';
 import { useTranslation } from 'react-i18next';
 
 const Home = () => {
-	const { oidcUser } = useReactOidc();
 	const { t } = useTranslation();
+	document.title = t('home.page_title');
+	const { oidcUser } = useReactOidc();
 	return (
 		<>
 			<Title title={t('home.title')} />

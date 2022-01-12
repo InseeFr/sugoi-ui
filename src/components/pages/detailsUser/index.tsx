@@ -30,6 +30,8 @@ const DetailUser = () => {
 		useDeleteUser();
 
 	const { t } = useTranslation();
+	document.title =
+		t('detail_user.page_title_1') + id + t('detail_user.page_title_2');
 
 	const { formValues, handleChange, handleReset, errors, handleSubmit } =
 		useForms(user);

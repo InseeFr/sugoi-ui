@@ -43,6 +43,8 @@ export const SearchApplications = () => {
 		}).then(() => execute(realm));
 	};
 
+	document.title = t('search_application.page_title');
+
 	const handleSearch = (e: any) => {
 		setSearch(e.target.value);
 		setPage(1);

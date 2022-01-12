@@ -36,6 +36,8 @@ const CreateOrganization = () => {
 		handleSubmit(organizationConfig)(onSubmit);
 	};
 
+	document.title = t('create_organization.page_title');
+
 	return (
 		<Grid container spacing={2} direction="column">
 			<Grid item xs={12}>

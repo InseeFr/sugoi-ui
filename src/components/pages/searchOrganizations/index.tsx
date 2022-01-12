@@ -15,6 +15,7 @@ const SearchOrganizations = () => {
 	const { enqueueSnackbar } = useSnackbar();
 	const { push } = useHistory();
 	const { t } = useTranslation();
+	document.title = t('search_organization.page_title');
 
 	const {
 		organizations,
