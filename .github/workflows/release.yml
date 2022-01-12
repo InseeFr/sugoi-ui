@@ -53,7 +53,7 @@ jobs:
       - run: yarn build
         name: Build with Yarn
 
-      - uses: papeloto/action-zip@v1
+      - uses: vimtor/action-zip@v1
         name: Zip build
         with:
           files: build/
