@@ -7,7 +7,7 @@ import {
 	MuiThemeProvider,
 	Theme,
 } from '@material-ui/core/styles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { RootState } from 'src/lib/configuration/store-configuration';
@@ -20,6 +20,7 @@ import Header from 'src/components/shared/header/header';
 import Notifier from 'src/components/shared/notifications';
 import ScrollTop from 'src/components/shared/scroll-top/scroll-top';
 import Sider from 'src/components/shared/sider';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -55,6 +56,11 @@ const App = () => {
 	const handleDrawerToggle = () => {
 		setDrawerOpen(!drawerOpen);
 	};
+	const { i18n } = useTranslation();
+
+	useEffect(() => {
+		document.documentElement.lang = i18n.language;
+	}, [i18n.language]);
 
 	return (
 		<MuiThemeProvider
