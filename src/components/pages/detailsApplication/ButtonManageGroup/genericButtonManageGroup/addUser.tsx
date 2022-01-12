@@ -17,6 +17,8 @@ import AddIcon from '@material-ui/icons/Add';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import { Pagination } from '@material-ui/lab';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import Title from 'src/components/shared/title/title';
 import { useGetUsers } from 'src/lib/hooks/api-hooks';
 import { Group } from 'src/lib/model/api/group';
 import User from 'src/lib/model/api/user';
@@ -38,6 +40,7 @@ export const AddUsers = ({
 	const [page, setPage] = React.useState(1);
 	const { execute, loading, users } = useGetUsers(realm);
 	const [search, setSearch] = useState('');
+	const { t } = useTranslation();
 
 	const handlePageChange = (
 		event: React.ChangeEvent<unknown>,
@@ -70,11 +73,21 @@ export const AddUsers = ({
 			<Grid item xs={12}>
 				<TextField
 					id="application-search-textfield"
-					label="Votre recherche"
+					label={t(
+						'detail_application.manage_group_popup.search',
+					)}
 					variant="outlined"
 					onChange={handleSearchUser}
 					value={search}
 					fullWidth
+				/>
+			</Grid>
+			<Grid item xs={12}>
+				<Title
+					title={t(
+						'detail_application.manage_group_popup.available_users',
+					)}
+					variant="body1"
 				/>
 			</Grid>
 			<Grid item xs={12}>
@@ -86,13 +99,17 @@ export const AddUsers = ({
 									align="center"
 									padding="normal"
 								>
-									Utilisateurs
+									{t(
+										'detail_application.manage_group_popup.users',
+									)}
 								</TableCell>
 								<TableCell
 									align="right"
 									padding="normal"
 								>
-									Action
+									{t(
+										'detail_application.manage_group_popup.actions',
+									)}
 								</TableCell>
 							</TableRow>
 						</TableHead>
