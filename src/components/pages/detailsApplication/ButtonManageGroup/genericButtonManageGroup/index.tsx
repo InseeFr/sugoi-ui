@@ -47,7 +47,7 @@ export const GenericButtonManageGroup = ({
 				open={open}
 				title={t('detail_application.button_manage_group')}
 				body={
-					<Grid container direction="row">
+					<Grid container direction="row" spacing={2}>
 						<Grid item xs={12} md={6}>
 							<AddUsers
 								realm={realm}

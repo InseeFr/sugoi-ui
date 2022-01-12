@@ -171,6 +171,13 @@
 		"manager_groups_title": "Gestionnaires des droits de l'application ",
 		"groups_title": "Groupes applicatifs",
 		"button_manage_group": "Gérer le groupe",
+		"manage_group_popup": {
+			"search": "Votre recherche",
+			"available_users": "Utilisateurs disponibles:",
+			"group_members": "Membres du groupe:",
+			"actions": "Ajout/Retrait",
+			"users": "Utilisateurs"
+		},
 		"buttons": {
 			"delete": {
 				"button": "Supprimer l'application",
