@@ -169,7 +169,10 @@ const AutocompleteOrganizations = ({ realm, userStorage }: any) => {
 export const RealmHome = () => {
 	const { realm, userStorage } = useParams<any>();
 	const { t } = useTranslation();
-
+	document.title =
+		t('global_search.page_title_1') +
+		realm +
+		t('global_search.page_title_2');
 	const { hasApplication, hasOrganisation } = useRealmConfig(
 		realm,
 		userStorage,

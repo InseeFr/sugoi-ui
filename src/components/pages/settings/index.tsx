@@ -11,6 +11,7 @@ const Settings = () => {
 	const { t } = useTranslation();
 	const { realms } = useGetRealms();
 	const [selectedRealm, setSelectedRealm] = useState<string>('');
+	document.title = t('settings.page_title');
 
 	const handleChangeRealm = (e: any) => {
 		setSelectedRealm(e.target.value);

@@ -1,5 +1,6 @@
 {
 	"home": {
+		"page_title": "Compte utilisateur | Accueil",
 		"title": "Service Unifié de Gestion des Openldaps de l'INSEE",
 		"landing": {
 			"title": "Service Unifié de Gestion des Openldaps de l'INSEE",
@@ -39,6 +40,7 @@
 		"details": "Détails"
 	},
 	"search_user": {
+		"page_title": "Compte utilisateur | Recherche d'utilisateurs",
 		"title": "Rechercher un utilisateur dans le realm ",
 		"buttons": {
 			"edit": "Editer"
@@ -84,6 +86,7 @@
 		}
 	},
 	"search_organization": {
+		"page_title": "Compte utilisateur | Recherche d'organisation",
 		"title": "Rechercher une organisation dans le realm ",
 		"buttons": {
 			"edit": "Editer"
@@ -104,6 +107,7 @@
 		}
 	},
 	"create_organization": {
+		"page_title": "Compte utilisateur | Création d'organisation",
 		"title": "Créer une organisation dans le realm ",
 		"buttons": {
 			"save": "Créer",
@@ -112,6 +116,7 @@
 		"error": "L'organisation n'a pas été créée"
 	},
 	"create_user": {
+		"page_title": "Compte utilisateur | Création d'utilisateurs",
 		"title": "Créer un utilisateur dans le realm ",
 		"buttons": {
 			"save": "Créer",
@@ -120,6 +125,8 @@
 		"error": "L'utilisateur n'a pas été créé"
 	},
 	"detail_user": {
+		"page_title_1": "Détails utilisateur ",
+		"page_title_2": "",
 		"title": "Détail de l'utilisateur ",
 		"error": "Erreur lors de l'envoi a l'API: ",
 		"user_not_found": "L'utilisateur demandé n'a pas été trouvé :(",
@@ -143,6 +150,8 @@
 		}
 	},
 	"detail_organization": {
+		"page_title_1": "Détails organization ",
+		"page_title_2": "",
 		"title": "Détail de l'organisation ",
 		"error": "Erreur lors de l'envoi a l'API: ",
 		"organization_not_found": "L'organization demandée n'a pas été trouvé :(",
@@ -166,6 +175,8 @@
 		}
 	},
 	"detail_application": {
+		"page_title_1": "Détails application ",
+		"page_title_2": "",
 		"error": "Erreur lors de l'envoi a l'API: ",
 		"title": "Détails de l'application ",
 		"manager_groups_title": "Gestionnaires des droits de l'application ",
@@ -202,12 +213,15 @@
 		}
 	},
 	"search_application": {
+		"page_title": "Compte utilisateur | Applications",
 		"title": "Chercher des applications dans le realm ",
 		"search_field": "Votre recherche",
 		"table_header": "Application",
 		"table_no_entry": "Aucune application ne correspond à votre recherche"
 	},
 	"global_search": {
+		"page_title_1": "Realm ",
+		"page_title_2": "",
 		"title": "Rechercher rapidement dans ",
 		"title_next": " et le storage ",
 		"user_quick_search_title": "Rechercher un utilisateur",
@@ -215,6 +229,7 @@
 		"organization_quick_search_title": "Rechercher une organisation"
 	},
 	"settings": {
+		"page_title": "Compte utilisateur | Paramètres",
 		"title": "Paramètres",
 		"card": {
 			"title": "Configuration"

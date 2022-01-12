@@ -62,6 +62,11 @@ const DetailOrganization = () => {
 		handleSubmit(organizationConfig)(onSubmit);
 	};
 
+	document.title =
+		t('detail_organization.page_title_1') +
+		id +
+		t('detail_organization.page_title_2');
+
 	return (
 		<>
 			<Title title={t('detail_organization.title') + id} />

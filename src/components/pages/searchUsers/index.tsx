@@ -32,6 +32,7 @@ const SearchUsers = () => {
 	const [lastSearch, setLastSearch] = useState({});
 
 	const { t } = useTranslation();
+	document.title = t('search_user.page_title');
 
 	const {
 		users,
