@@ -1,6 +1,8 @@
 export default interface SearchRequestUser {
 	identifiant?: string;
-	CommonName?: string;
+	commonName?: string;
+	lastName?: string;
+	firstName?: string;
 	description?: string;
 	organisationId?: string;
 	mail?: string;

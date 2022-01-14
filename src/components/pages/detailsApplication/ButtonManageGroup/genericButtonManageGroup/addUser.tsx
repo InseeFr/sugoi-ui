@@ -51,7 +51,7 @@ export const AddUsers = ({
 		execute(
 			{
 				identifiant: e.target.value,
-				CommonName: e.target.value,
+				commonName: e.target.value,
 				mail: e.target.value,
 				typeRecherche: 'OR',
 			},

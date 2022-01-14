@@ -29,7 +29,9 @@ export const useGetUsers = (realm?: string, userStorage?: string) => {
 		{
 			mail,
 			identifiant,
-			CommonName,
+			commonName,
+			lastName,
+			firstName,
 			description,
 			organisationId,
 			size,
@@ -50,7 +52,9 @@ export const useGetUsers = (realm?: string, userStorage?: string) => {
 			{
 				mail,
 				identifiant,
-				CommonName,
+				commonName,
+				lastName,
+				firstName,
 				description,
 				organisationId,
 				size,
