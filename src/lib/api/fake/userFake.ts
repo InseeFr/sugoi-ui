@@ -2,6 +2,7 @@ import { Pageable } from '../../model/api/pageable';
 import User from '../../model/api/user';
 import searchRequestUser from '../../model/js/searchRequestUser';
 import Users from './data/users.json';
+
 export const getUsers = (
 	_realm: string,
 	_searchRequestUser: searchRequestUser,

@@ -66,6 +66,16 @@
 					"help_text_title": "Nom commun",
 					"help_text": "Il n'est pas obligatoire de le saisir entièrement. Le champ saisi peut être le début, le milieu ou la fin du nom commun recherché. Caractères autorisés : alphabétiques, chiffres, apostrophes, espaces, tirets"
 				},
+				"last_name": {
+					"name": "Nom",
+					"help_text_title": "Nom de l'utilisateur",
+					"help_text": "Il n'est pas obligatoire de le saisir entièrement. Le champ saisi peut être le début, le milieu ou la fin du nom commun recherché. Caractères autorisés : alphabétiques, chiffres, apostrophes, espaces, tirets"
+				},
+				"first_name": {
+					"name": "Prénom",
+					"help_text_title": "Prénom de l'utilisateur",
+					"help_text": "Il n'est pas obligatoire de le saisir entièrement. Le champ saisi peut être le début, le milieu ou la fin du nom commun recherché. Caractères autorisés : alphabétiques, chiffres, apostrophes, espaces, tirets"
+				},
 				"email": {
 					"name": "Adresse e-mail",
 					"help_text_title": "Adresse e-mail",
