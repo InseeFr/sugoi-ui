@@ -16,11 +16,11 @@ export const useForms = (initialValues: any) => {
 	useEffect(() => {
 		if (todo) {
 			const newFormValues = addProps(
-				formValues,
+				{ ...formValues },
 				todo.path,
 				todo.value,
 			);
-			setFormValues(newFormValues);
+			setFormValues({ ...newFormValues });
 			setTodo(undefined);
 		}
 	}, [todo, formValues]);
@@ -61,8 +61,6 @@ export const useForms = (initialValues: any) => {
 
 	return {
 		iFormValues,
-		updateIFormValues: setIFormValues,
-		updateFormValues: setFormValues,
 		formValues,
 		handleChange,
 		handleReset,
