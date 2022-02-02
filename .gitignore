@@ -26,3 +26,6 @@ package-lock.json
 .vscode/
 .yarn/
 .yarnrc.yml
+
+#intellij
+.idea/
