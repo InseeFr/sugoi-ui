@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { TemplateProperties } from 'src/lib/model/api/TemplateProperties';
 
 interface props {
-	changeATemplateProperty: any;
+	changeATemplateProperty: (key: string, value?: string) => void;
 	templateProperties: TemplateProperties;
 }
 
@@ -23,6 +23,10 @@ export const ResetPasswordPopupContent = ({
 	const [includeAssistMail, setincludeAssistMail] = useState(false);
 	const [changeSenderMail, setChangeSenderMail] = useState(false);
 	const [changeReceiverMail, setChangeReceiverMail] = useState(false);
+	const onTemplateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
+		changeATemplateProperty(name, value);
+	};
 	return (
 		<Grid container direction="column" spacing={3}>
 			<Grid item>
@@ -60,9 +64,11 @@ export const ResetPasswordPopupContent = ({
 								templateProperties.senderEmail ||
 								''
 							}
-							onChange={changeATemplateProperty}
+							onChange={onTemplateChange}
 						/>
-					) : null}
+					) : (
+						delete templateProperties.senderEmail
+					)}
 				</div>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<FormControlLabel
@@ -85,9 +91,11 @@ export const ResetPasswordPopupContent = ({
 							label="Mail"
 							name="mail"
 							value={templateProperties.mail || ''}
-							onChange={changeATemplateProperty}
+							onChange={onTemplateChange}
 						/>
-					) : null}
+					) : (
+						delete templateProperties.mail
+					)}
 				</div>
 			</Grid>
 			<Grid item>
@@ -125,9 +133,11 @@ export const ResetPasswordPopupContent = ({
 								templateProperties.application ||
 								''
 							}
-							onChange={changeATemplateProperty}
+							onChange={onTemplateChange}
 						/>
-					) : null}
+					) : (
+						delete templateProperties.application
+					)}
 				</div>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<FormControlLabel
@@ -153,9 +163,11 @@ export const ResetPasswordPopupContent = ({
 								templateProperties.assistMail ||
 								''
 							}
-							onChange={changeATemplateProperty}
+							onChange={onTemplateChange}
 						/>
-					) : null}
+					) : (
+						delete templateProperties.assistMail
+					)}
 				</div>
 			</Grid>
 			<Grid item>
@@ -200,7 +212,7 @@ export const ResetPasswordPopupContent = ({
 								templateProperties.signature ||
 								''
 							}
-							onChange={changeATemplateProperty}
+							onChange={onTemplateChange}
 						/>
 					</Box>
 				</Typography>

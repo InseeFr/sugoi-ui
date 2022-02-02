@@ -20,12 +20,16 @@ export const ResetPasswordPopup = () => {
 		});
 	const { execute, loading } = useResetPassword();
 
-	const changeATemplateProperty = (e: any) => {
-		const { name, value } = e.target;
-		setTemplateProperties({
-			...templateProperties,
-			[name]: value,
-		});
+	const changeATemplateProperty = (name: string, value?: string) => {
+		value
+			? setTemplateProperties({
+					...templateProperties,
+					[name]: value,
+			  })
+			: setTemplateProperties({
+					...templateProperties,
+					[name]: null,
+			  });
 	};
 
 	const [open, setOpen] = React.useState(false);
