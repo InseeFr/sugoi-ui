@@ -60,7 +60,10 @@ export const SendPopupContent = ({
 							}
 							onChange={changeATemplateProperty}
 						/>
-					) : null}
+					) : (
+						templateProperties.application &&
+						changeATemplateProperty('application')
+					)}
 				</div>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<FormControlLabel
@@ -88,7 +91,10 @@ export const SendPopupContent = ({
 							}
 							onChange={changeATemplateProperty}
 						/>
-					) : null}
+					) : (
+						templateProperties.senderEmail &&
+						changeATemplateProperty('assistMail')
+					)}
 				</div>
 			</Grid>
 			<Grid item>
