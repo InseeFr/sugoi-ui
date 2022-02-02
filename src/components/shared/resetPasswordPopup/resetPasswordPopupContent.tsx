@@ -67,7 +67,8 @@ export const ResetPasswordPopupContent = ({
 							onChange={onTemplateChange}
 						/>
 					) : (
-						delete templateProperties.senderEmail
+						templateProperties.senderEmail &&
+						changeATemplateProperty('senderEmail')
 					)}
 				</div>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
@@ -94,7 +95,8 @@ export const ResetPasswordPopupContent = ({
 							onChange={onTemplateChange}
 						/>
 					) : (
-						delete templateProperties.mail
+						templateProperties.mail &&
+						changeATemplateProperty('mail')
 					)}
 				</div>
 			</Grid>
@@ -136,7 +138,8 @@ export const ResetPasswordPopupContent = ({
 							onChange={onTemplateChange}
 						/>
 					) : (
-						delete templateProperties.application
+						templateProperties.application &&
+						changeATemplateProperty('application')
 					)}
 				</div>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
@@ -166,7 +169,8 @@ export const ResetPasswordPopupContent = ({
 							onChange={onTemplateChange}
 						/>
 					) : (
-						delete templateProperties.assistMail
+						templateProperties.assistMail &&
+						changeATemplateProperty('assistMail')
 					)}
 				</div>
 			</Grid>
