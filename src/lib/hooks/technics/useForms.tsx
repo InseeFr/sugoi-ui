@@ -3,12 +3,16 @@ import set from 'lodash.set';
 import isEqual from 'lodash.isequal';
 import { ErrorField, Field } from 'src/lib/model/field';
 import { validateForm } from 'src/lib/utils/form_utils';
-
+import cloneObject from 'src/lib/utils/clone';
 const addProps = (obj: any, path: any, value: any) => set(obj, path, value);
 
 export const useForms = (initialValues: any) => {
-	const [iFormValues, setIFormValues] = useState(initialValues || {});
-	const [formValues, setFormValues] = useState(initialValues || {});
+	const [iFormValues, setIFormValues] = useState(
+		cloneObject(initialValues || {}),
+	);
+	const [formValues, setFormValues] = useState(
+		cloneObject(initialValues || {}),
+	);
 	const [todo, setTodo] = useState<any>();
 	const [reset, setReset] = useState(false);
 	const [errors, setErrors] = useState<ErrorField[]>([]);
@@ -27,15 +31,15 @@ export const useForms = (initialValues: any) => {
 
 	useEffect(() => {
 		if (reset) {
-			setFormValues({ ...iFormValues });
+			setFormValues(cloneObject(iFormValues));
 			setReset(false);
 		}
 	}, [reset, iFormValues]);
 
 	useEffect(() => {
 		if (!isEqual(initialValues, iFormValues)) {
-			setFormValues({ ...initialValues });
-			setIFormValues({ ...initialValues });
+			setFormValues(cloneObject(initialValues));
+			setIFormValues(cloneObject(initialValues));
 		}
 	}, [iFormValues, initialValues]);
 
