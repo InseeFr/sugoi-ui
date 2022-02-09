@@ -109,8 +109,6 @@ const SiderBody = () => {
 					} else {
 						push('/realm/' + match?.params?.realm);
 					}
-				} else {
-					setStorageSelected(undefined);
 				}
 			} else {
 				push('/');
