@@ -304,6 +304,7 @@ export const sendIdentifiant = (
 export const resetPassword = (
 	realm: string,
 	userId: string,
+	forceResetPwd: boolean,
 	templateProperties: TemplateProperties,
 	webhooktag?: string,
 	userStorage?: string,
@@ -312,6 +313,7 @@ export const resetPassword = (
 		? remote.resetPasswordUs(
 				realm,
 				userId,
+				forceResetPwd,
 				templateProperties,
 				webhooktag,
 				userStorage,
@@ -319,6 +321,7 @@ export const resetPassword = (
 		: remote.resetPassword(
 				realm,
 				userId,
+				forceResetPwd,
 				templateProperties,
 				webhooktag,
 		  );
