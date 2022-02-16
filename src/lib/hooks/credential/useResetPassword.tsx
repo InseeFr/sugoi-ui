@@ -12,6 +12,7 @@ export const useResetPassword = () => {
 	const execute = async (
 		realm: string,
 		userid: string,
+		forceResetPwd: boolean,
 		templateProperties: TemplateProperties,
 		userStorage?: string,
 	) => {
@@ -20,6 +21,7 @@ export const useResetPassword = () => {
 		await resetPassword(
 			realm,
 			userid,
+			forceResetPwd,
 			templateProperties,
 			webhooktag,
 			userStorage,

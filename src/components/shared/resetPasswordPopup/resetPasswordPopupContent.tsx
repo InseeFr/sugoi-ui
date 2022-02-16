@@ -13,11 +13,15 @@ import { TemplateProperties } from 'src/lib/model/api/TemplateProperties';
 interface props {
 	changeATemplateProperty: (key: string, value?: string) => void;
 	templateProperties: TemplateProperties;
+	forceResetPwd: boolean;
+	setForceResetPwd: (t: boolean) => void;
 }
 
 export const ResetPasswordPopupContent = ({
 	templateProperties,
 	changeATemplateProperty,
+	forceResetPwd,
+	setForceResetPwd,
 }: props) => {
 	const [includeNameApp, setincludeNameApp] = useState(false);
 	const [includeAssistMail, setincludeAssistMail] = useState(false);
@@ -32,6 +36,25 @@ export const ResetPasswordPopupContent = ({
 			<Grid item>
 				<Typography>
 					Attention le mot de passe va être réinitialisé.
+				</Typography>
+			</Grid>
+			<Grid item>
+				<Typography>
+					<FormControlLabel
+						control={
+							<Checkbox
+								checked={forceResetPwd}
+								onChange={() =>
+									setForceResetPwd(
+										!forceResetPwd,
+									)
+								}
+								name="forceResetPwd"
+								color="primary"
+							/>
+						}
+						label="Forcer à choisir un mot de passe à la prochaine connexion"
+					/>
 				</Typography>
 			</Grid>
 			<Grid item>

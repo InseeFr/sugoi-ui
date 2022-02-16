@@ -31,7 +31,7 @@ export const ResetPasswordPopup = () => {
 					[name]: null,
 			  });
 	};
-
+	const [forceResetPwd, setForceResetPwd] = useState(false);
 	const [open, setOpen] = React.useState(false);
 
 	const handleOpen = () => {
@@ -43,9 +43,13 @@ export const ResetPasswordPopup = () => {
 	};
 
 	const onFinish = () => {
-		execute(realm, id, templateProperties, userStorage).then(
-			handleClose,
-		);
+		execute(
+			realm,
+			id,
+			forceResetPwd,
+			templateProperties,
+			userStorage,
+		).then(handleClose);
 	};
 
 	return (
@@ -69,6 +73,8 @@ export const ResetPasswordPopup = () => {
 						changeATemplateProperty={
 							changeATemplateProperty
 						}
+						forceResetPwd={forceResetPwd}
+						setForceResetPwd={setForceResetPwd}
 					/>
 				}
 				actions={

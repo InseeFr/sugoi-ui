@@ -4,6 +4,7 @@ import { TemplateProperties } from '../../model/api/TemplateProperties';
 export const resetPassword = (
 	realm: string,
 	userId: string,
+	forceResetPwd: boolean,
 	templateProperties: TemplateProperties,
 	webhooktag?: string,
 ) =>
@@ -14,6 +15,7 @@ export const resetPassword = (
 			{
 				params: {
 					'webhook-tag': webhooktag,
+					'change-password-reset-status': forceResetPwd,
 				},
 			},
 		)
@@ -22,6 +24,7 @@ export const resetPassword = (
 export const resetPasswordUs = (
 	realm: string,
 	userId: string,
+	forceResetPwd: boolean,
 	templateProperties: TemplateProperties,
 	webhooktag?: string,
 	userStorage?: string,
@@ -39,6 +42,7 @@ export const resetPasswordUs = (
 			{
 				params: {
 					'webhook-tag': webhooktag,
+					'change-password-reset-status': forceResetPwd,
 				},
 			},
 		)
