@@ -1,4 +1,5 @@
-import { Grid } from '@material-ui/core';
+import { Grid, TextField, IconButton } from '@material-ui/core';
+import { SearchOutlined } from '@material-ui/icons';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import ConfirmationPopup from 'src/components/shared/confirmationPopUp';
@@ -18,8 +19,9 @@ import {
 	ButtonManageManagerGroup,
 } from './ButtonManageGroup';
 import { GroupsViewer } from './groupsViewer';
-
+import { useState } from 'react';
 export const DetailsApplication = () => {
+	const [groupeApplicatif, setGroupeApplicatif] = useState('');
 	const { realm, id: applicationId } = useParams<any>();
 	const { push } = useHistory();
 	const { t } = useTranslation();
@@ -143,7 +145,7 @@ export const DetailsApplication = () => {
 						direction="column"
 						justifyContent="center"
 						alignItems="stretch"
-						spacing={2}
+						spacing={1}
 					>
 						<Grid item>
 							<Title
@@ -153,10 +155,38 @@ export const DetailsApplication = () => {
 								variant="subtitle1"
 							/>
 						</Grid>
+						<Grid item xs={5}>
+							<TextField
+								fullWidth
+								id="standard-bare"
+								label={t(
+									'detail_application.search_groups_title',
+								)}
+								variant="outlined"
+								value={groupeApplicatif}
+								onChange={(e) =>
+									setGroupeApplicatif(
+										e.target.value,
+									)
+								}
+								InputProps={{
+									endAdornment: (
+										<IconButton>
+											<SearchOutlined />
+										</IconButton>
+									),
+								}}
+							/>
+						</Grid>
 						<Grid item>
 							<GroupsViewer
 								groups={
-									application?.groups || []
+									application?.groups.filter(
+										(group) =>
+											group.name.includes(
+												groupeApplicatif,
+											),
+									) || []
 								}
 								realm={realm}
 								loading={loading}
