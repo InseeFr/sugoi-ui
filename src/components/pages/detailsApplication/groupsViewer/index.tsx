@@ -15,7 +15,6 @@ import { Pagination } from '@material-ui/lab';
 import { useState } from 'react';
 import { Group } from 'src/lib/model/api/group';
 import { ChipButton, ChipPerson } from './../chip';
-
 interface Props {
 	groups: Group[];
 	realm: string;
