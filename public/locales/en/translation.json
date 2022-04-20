@@ -1,9 +1,356 @@
 {
+	"home": {
+		"page_title": "User account | Homepage",
+		"title": "Unified OpenLDAPS Management Service of INSEE",
+		"landing": {
+			"title": "Unified OpenLDAPS Management Service of INSEE",
+			"description": "Search allows you to search the contacts of a domain, and if you have the right to modify it, modify its password and delete the selected contacts. Create allows you to create a new contact on a management domain on which you are a manager",
+			"go_button": "Log in"
+		},
+		"rights": {
+			"title": "My rights",
+			"admin": "Administrator SUGOI ",
+			"writer": "REALM Manager ",
+			"reader": "REALM Consultant ",
+			"no_right": "No right ",
+			"app": "Application Manager "
+		}
+	},
+	"sider": {
+		"home": "Homepage",
+		"manage": {
+			"title": "Management",
+			"users": "Users",
+			"organizations": "Organizations",
+			"applications": "Applications",
+			"realms": "Realms",
+			"us": "Userstorages"
+		},
+		"configuration": {
+			"title": "Configuration",
+			"settings": "Settings"
+		}
+	},
+	"breadcrumb": {
+		"home": "Homepage",
+		"users": "Users",
+		"organizations": "Organizations",
+		"settings": "Settings",
+		"create": "Create",
+		"details": "Details"
+	},
+	"search_user": {
+		"page_title": "User Account |Users search",
+		"title": "Find a user in the Realm",
+		"buttons": {
+			"edit": "Edit"
+		},
+		"info_create": "Select a userstorage first",
+		"form": {
+			"field": {
+				"identifiant": {
+					"name": "Identifier",
+					"help_text_title": "User identifier",
+					"help_text": "It is not mandatory to seize it entirely.The entered field can be the beginning, the middle or end of the desired identifier.The identifier of a contact / organization is unique in the directory.The search will be more accurate."
+				},
+				"description": {
+					"name": "Description",
+					"help_text_title": "Description",
+					"help_text": "It is not mandatory to seize it entirely.The entered field can be the beginning, the middle or end of the sought-after name.Authorized characters: alphabetics, figures, apostrophes, spaces, dashes"
+				},
+				"organization": {
+					"name": "Organization of belonging",
+					"help_text_title": "Identifier of the organization of belonging ",
+					"help_text": "It is not mandatory to seize it entirely.The entered field must be the beginning of the desired identifier."
+				},
+				"commun_name": {
+					"name": "Common name",
+					"help_text_title": "Common name",
+					"help_text": "It is not mandatory to seize it entirely.The entered field can be the beginning, the middle or end of the sought-after name.Authorized characters: alphabetics, figures, apostrophes, spaces, dashes"
+				},
+				"last_name": {
+					"name": "Last name",
+					"help_text_title": "Username",
+					"help_text": "It is not mandatory to seize it entirely.The entered field can be the beginning, the middle or end of the sought-after name.Authorized characters: alphabetics, figures, apostrophes, spaces, dashes"
+				},
+				"first_name": {
+					"name": "First name",
+					"help_text_title": "First name of the user",
+					"help_text": "It is not mandatory to seize it entirely.The entered field can be the beginning, the middle or end of the sought-after name.Authorized characters: alphabetics, figures, apostrophes, spaces, dashes"
+				},
+				"email": {
+					"name": "E-mail address",
+					"help_text_title": "E-mail address",
+					"help_text": "The entered field can be a portion of the desired mail address."
+				},
+				"certificate": {
+					"name": "Associated certificate",
+					"help_text_title": "Associated certificate"
+				},
+				"habilitation": {
+					"name": "Habilitation",
+					"help_text_title": "Enabling with contact",
+					"help_text": "The field seized can be a portion of the desired empowerment"
+				}
+			}
+		}
+	},
+	"search_organization": {
+		"page_title": "User Account |Organization search",
+		"title": "Find an organization in the Realm ",
+		"buttons": {
+			"edit": "Edit"
+		},
+		"form": {
+			"field": {
+				"identifiant": {
+					"name": "Identifier",
+					"help_text_title": "Identifier of the organization",
+					"help_text": "It is not mandatory to seize it entirely.The entered field can be the beginning, the middle or end of the desired identifier.The identifier of a contact / organization is unique in the directory.The search will be more accurate."
+				},
+				"email": {
+					"name": "E-mail address",
+					"help_text_title": "E-mail address",
+					"help_text": "The entered field can be a portion of the desired mail address."
+				}
+			}
+		}
+	},
+	"create_organization": {
+		"page_title": "User Account | Organization creation",
+		"title": "Create an organization in the Realm ",
+		"buttons": {
+			"save": "Create",
+			"reset": "Reset the form"
+		},
+		"error": "The organization has not been created"
+	},
+	"create_user": {
+		"page_title": "User Account | User creation",
+		"title": "Create a user in the Realm ",
+		"buttons": {
+			"save": "Create",
+			"reset": "Restore the form"
+		},
+		"error": "The user has not been created"
+	},
+	"detail_user": {
+		"page_title_1": "User details ",
+		"page_title_2": "",
+		"title": "User detail ",
+		"error": "Error when sending to the API: ",
+		"user_not_found": "The requested user was not found :(",
+		"buttons": {
+			"save": "Save Changes",
+			"delete": {
+				"button": "Delete",
+				"popup": {
+					"title": {
+						"part1": "Deleting the user ",
+						"part2": ". Are you sure ?"
+					},
+					"body": {
+						"body1": "This action will definitely delete this user",
+						"body2": "The user ",
+						"bodyBold": "can no longer be recovered"
+					}
+				}
+			},
+			"reset": "Cancel changes"
+		}
+	},
+	"detail_organization": {
+		"page_title_1": "Details Organization ",
+		"page_title_2": "",
+		"title": "Detail of the organization ",
+		"error": "Error when calling the API: ",
+		"organization_not_found": "The requested organization was not found :(",
+		"buttons": {
+			"save": "Save Changes",
+			"delete": {
+				"button": "Delete",
+				"popup": {
+					"title": {
+						"part1": "Suppression of the organization ",
+						"part2": ". Are you sure ?"
+					},
+					"body": {
+						"body1": "This action will definitely delete this organization",
+						"body2": "Organization ",
+						"bodyBold": "will no longer be recovered"
+					}
+				}
+			},
+			"reset": "Cancel changes"
+		}
+	},
+	"detail_application": {
+		"page_title_1": "Details Application ",
+		"page_title_2": "",
+		"error": "Error when calling the API: ",
+		"title": "Application details ",
+		"manager_groups_title": "Application Rights Managers ",
+		"groups_title": "Application groups",
+		"search_groups_title" : "Search application groups",
+		"button_manage_group": "Manage the group",
+		"manage_group_popup": {
+			"search": "Your search",
+			"available_users": "Available users:",
+			"group_members": "Group members:",
+			"actions": "Adding / withdrawal",
+			"users": "Users"
+		},
+		"buttons": {
+			"delete": {
+				"button": "Delete the application",
+				"popup": {
+					"title": {
+						"part1": "Deleting the application ",
+						"part2": ". Are you sure ?"
+					},
+					"body": {
+						"body1": "This action will definitely delete this application",
+						"body2": "The application and groups it contains ",
+						"bodyBold": "will no longer be recovered"
+					}
+				}
+			}
+		},
+		"group": {
+			"popup": {
+				"title": {
+					"part1": "Removal of the group ",
+					"part2": ". Are you sure ?"
+				},
+				"body": {
+					"body1": "This action will definitely delete this group",
+					"body2": "The group",
+					"bodyBold": "can no longer be recovered"
+				}
+			}
+		}
+	},
+	"search_application": {
+		"page_title": "User Account | Applications",
+		"title": "Search applications in the Realm ",
+		"search_field": "Your research",
+		"table_header": "Application",
+		"table_no_entry": "No application corresponds to your search"
+	},
+
+	"global_search": {
+		"page_title_1": "Realm ",
+		"page_title_2": "",
+		"title": "Find quickly in ",
+		"title_next": " and storage ",
+		"user_quick_search_title": "Search for a user",
+		"application_quick_search_title": "Search for an application",
+		"organization_quick_search_title": "Search for an organization"
+	},
+	"settings": {
+		"page_title": "User Account | Settings",
+		"title": "Settings",
+		"card": {
+			"title": "Configuration"
+		}
+	},
 	"notif": {
 		"success": "Request done",
 		"accepted": "Request accepted, please wait to see result",
 		"network_error": "Service unavailable",
 		"server_error": "Service can't apply this request : ",
 		"forbidden": "This operation is forbidden"
+	},
+	"commons": {
+		"popup": {
+			"validationText": "Please enter the following text to confirm:"
+		},
+		"search_forms": {
+			"title": "My search",
+			"selected_realm": "Realm selected",
+			"selected_userStorage": "UserStorage selected",
+			"validate": "Validate",
+			"reset": "Reset"
+		},
+		"expand_button": {
+			"show_more": "Show more",
+			"show_less": "Show less"
+		},
+		"error": {
+			"text": "An unexpected error has occurred"
+		},
+		"header": {
+			"title": "Directory Management Tools",
+			"buttons": {
+				"account": "Personal informations",
+				"language": "Change the language",
+				"github": "Contribute to the project",
+				"api": "Documentation API",
+				"login": "Log in",
+				"logout": "Log out",
+				"more": "See more",
+				"theme": "Change the theme",
+				"notif": "Notification parameter",
+				"help": "Access the documentation"
+			}
+		},
+		"footer": {
+			"version": {
+				"text": "Version "
+			}
+		},
+		"back_to_top": {
+			"text": "Top of page"
+		},
+		"reset_password": {
+			"title": "Reset the password of ",
+			"text": "Reset password",
+			"send_button": "Send"
+		},
+		"send_login": {
+			"title": "Send the login of ",
+			"text": "Send the login",
+			"send_button": "Send",
+			"default_signature": "Assistance Insee"
+		},
+		"search_result": {
+			"title": "Search result:",
+			"buttons": {
+				"add": "Add"
+			},
+			"textLabels": {
+				"body": {
+					"noMatch": "No Results for search",
+					"toolTip": "Sort"
+				},
+				"pagination": {
+					"next": "Next Page",
+					"previous": "Previous page",
+					"rowsPerPage": "Rows per page",
+					"displayRows": "of"
+				},
+				"toolbar": {
+					"search": "Search",
+					"downloadCsv": "Export all search results",
+					"print": "Print",
+					"viewColumns": "Show / Hide Columns",
+					"filterTable": "Filter the table"
+				},
+				"filter": {
+					"all": "All",
+					"title": "Filters",
+					"reset": "Reset"
+				},
+				"viewColumns": {
+					"title": "Visible columns",
+					"titleAria": "Show / Hide Columns"
+				},
+				"selectedRows": {
+					"text": "Selected line(s)",
+					"delete": "Delete",
+					"deleteAria": "Delete selected lines"
+				}
+			}
+		}
 	}
 }
