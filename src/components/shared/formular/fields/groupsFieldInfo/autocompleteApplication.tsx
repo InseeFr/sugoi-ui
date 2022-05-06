@@ -23,7 +23,9 @@ export const AutoCompleteApplication = ({
 			id="autocompleteSearchApplication"
 			options={applications.map((application) => application.name)}
 			value={application ?? ''}
-			getOptionLabel={(option: any) => option}
+			getOptionLabel={(option) => {
+				return option.label ?? option;
+			}}
 			onInputChange={(
 				_event: object,
 				appName: string,
@@ -43,26 +45,31 @@ export const AutoCompleteApplication = ({
 					fullWidth
 				/>
 			)}
-			renderOption={(option: any, { inputValue }) => {
-				const matches = match(option, inputValue);
-				const parts = parse(option, matches);
+			renderOption={(props: any, _options: any, { inputValue }) => {
+				const matches = match(props.key, inputValue);
+				const parts = parse(props.key, matches);
 
 				return (
-					<div>
-						{parts.map((part: any, index: any) => (
-							<Grid
-								component="span"
-								key={index}
-								sx={{
-									fontWeight: part.highlight
-										? 700
-										: 400,
-								}}
-							>
-								{part.text}
-							</Grid>
-						))}
-					</div>
+					<li {...props}>
+						<div>
+							{parts.map(
+								(part: any, index: any) => (
+									<Grid
+										component="span"
+										key={index}
+										sx={{
+											fontWeight:
+												part.highlight
+													? 700
+													: 400,
+										}}
+									>
+										{part.text}
+									</Grid>
+								),
+							)}
+						</div>
+					</li>
 				);
 			}}
 		/>

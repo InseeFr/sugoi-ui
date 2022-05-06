@@ -9,6 +9,7 @@ interface Props {
 	inputChange: (value: any) => void;
 	onChange: (value: any) => void;
 }
+
 const MyAutocomplete = ({
 	text,
 	options,
@@ -19,9 +20,9 @@ const MyAutocomplete = ({
 	return (
 		<Autocomplete
 			id="combo-box-demo"
-			options={options || []}
+			options={options}
 			getOptionLabel={(option) => {
-				return option?.label || '';
+				return option.label ?? option;
 			}}
 			loading={loading}
 			onInputChange={(
@@ -55,26 +56,30 @@ const MyAutocomplete = ({
 					}}
 				/>
 			)}
-			//problem here --> to solve
-			renderOption={(option: any, { inputValue }) => {
-				const matches = match(option?.label, inputValue);
-				const parts = parse(option?.label, matches);
+			renderOption={(props: any, options: any, { inputValue }) => {
+				const matches = match(props.key, inputValue);
+				const parts = parse(props.key, matches);
 				return (
-					<div>
-						{parts.map((part: any, index: any) => (
-							<Grid
-								component="span"
-								key={index}
-								sx={{
-									fontWeight: part.highlight
-										? 700
-										: 400,
-								}}
-							>
-								{part.text}
-							</Grid>
-						))}
-					</div>
+					<li {...props}>
+						<div>
+							{parts.map(
+								(part: any, index: any) => (
+									<Grid
+										component="span"
+										key={index}
+										sx={{
+											fontWeight:
+												part.highlight
+													? 700
+													: 400,
+										}}
+									>
+										{part.text}
+									</Grid>
+								),
+							)}
+						</div>
+					</li>
 				);
 			}}
 		/>
