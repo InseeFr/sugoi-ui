@@ -1,6 +1,4 @@
-import { Button, Paper } from '@material-ui/core';
-import Tooltip from '@material-ui/core/Tooltip';
-import AddIcon from '@material-ui/icons/Add';
+import { Paper } from '@material-ui/core';
 import MUIDataTable, { MUIDataTableOptions } from 'mui-datatables';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -14,28 +12,9 @@ interface Props {
 	downloadable?: boolean;
 }
 
-const CustomToolBar = ({ handleClick }: any) => {
-	const { t } = useTranslation();
-	return (
-		<Tooltip title={'Ajouter'}>
-			<Button
-				disableElevation
-				variant="contained"
-				color="default"
-				startIcon={<AddIcon />}
-				aria-label="create user"
-				onClick={handleClick}
-			>
-				{t('commons.search_result.buttons.add')}
-			</Button>
-		</Tooltip>
-	);
-};
-
 export const SearchResults = ({
 	data,
 	columns,
-	handleClickAdd,
 	handleClickOnRow,
 	handleDownload,
 	downloadable,
@@ -44,9 +23,6 @@ export const SearchResults = ({
 	const options: MUIDataTableOptions = {
 		responsive: 'simple' as any,
 		selectableRowsHideCheckboxes: true,
-		customToolbar: function ToolBar() {
-			return <CustomToolBar handleClick={handleClickAdd} />;
-		},
 
 		onRowClick: (rowData: any) => handleClickOnRow(rowData[0]),
 		textLabels: {
