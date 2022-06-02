@@ -320,6 +320,7 @@ const SearchUsers = () => {
 			>
 				<Grid item xs={12}>
 					<SearchForm
+						handleClickAdd={handleCreate}
 						realm={realm}
 						userStorage={userStorage}
 						onSubmit={handleSearch}

@@ -41,7 +41,7 @@
 	},
 	"search_user": {
 		"page_title": "Compte utilisateur | Recherche d'utilisateurs",
-		"title": "Rechercher un utilisateur dans le realm ",
+		"title": "Utilisateur dans le realm ",
 		"buttons": {
 			"edit": "Editer"
 		},
@@ -97,7 +97,7 @@
 	},
 	"search_organization": {
 		"page_title": "Compte utilisateur | Recherche d'organisation",
-		"title": "Rechercher une organisation dans le realm ",
+		"title": "Organisation dans le realm ",
 		"buttons": {
 			"edit": "Editer"
 		},
@@ -191,7 +191,7 @@
 		"title": "Détails de l'application ",
 		"manager_groups_title": "Gestionnaires des droits de l'application ",
 		"groups_title": "Groupes applicatifs",
-		"search_groups_title" : "Chercher un groupe applicatif",
+		"search_groups_title": "Chercher un groupe applicatif",
 		"button_manage_group": "Gérer le groupe",
 		"manage_group_popup": {
 			"search": "Votre recherche",
@@ -316,7 +316,7 @@
 		"search_result": {
 			"title": "Résultat de la recherche:",
 			"buttons": {
-				"add": "Ajouter"
+				"add": "Créer"
 			},
 			"textLabels": {
 				"body": {

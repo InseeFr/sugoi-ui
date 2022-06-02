@@ -24,4 +24,4 @@ jobs:
           commits: ${{ steps.get-pr-commits.outputs.commits }}
           pattern: '^\[[A-Z]+].*(\(#\d+\))?\r?\n.*$'
           flags: "gs"
-          error: "Commit messages sghould be in the form `[TYPE] message (#issuenumber)\ndescription`"
+          error: "Commit messages should be in the form `[TYPE] message (#issuenumber)\ndescription`"

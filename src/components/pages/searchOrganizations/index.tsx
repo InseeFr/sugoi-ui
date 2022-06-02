@@ -163,6 +163,7 @@ const SearchOrganizations = () => {
 						userStorage={userStorage}
 						onSubmit={handleSearch}
 						formFields={formFields}
+						handleClickAdd={handleCreate}
 					/>
 				</Grid>
 				<Grid item xs={12}>
