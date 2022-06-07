@@ -1,10 +1,11 @@
 import {
+	Box,
 	Grid,
 	List,
 	ListItem,
 	ListItemText,
 	Typography,
-} from '@material-ui/core';
+} from '@mui/material';
 import PopButton from '../../../popButton/popButton';
 import PopIcon from '../../../popIcon/popIcon';
 import ListFieldInfoPopup from './listFieldInfo';
@@ -33,7 +34,7 @@ export const ListFieldButton = ({
 	return (
 		<>
 			<Grid container direction="row" justifyContent="center">
-				<div style={{ display: 'flex', alignItems: 'center' }}>
+				<Box sx={{ display: 'flex', alignItems: 'center' }}>
 					<Typography component="div" variant="body1">
 						{name}
 					</Typography>
@@ -41,7 +42,7 @@ export const ListFieldButton = ({
 						helpTextTitle={helpTextTitle}
 						helpText={helpText}
 					/>
-				</div>
+				</Box>
 				<PopButton
 					text={textButton || ''}
 					title="Gestion habilitations"

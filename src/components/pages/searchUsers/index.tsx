@@ -4,8 +4,8 @@ import {
 	IconButton,
 	LinearProgress,
 	Typography,
-} from '@material-ui/core';
-import ZoomInOutlinedIcon from '@material-ui/icons/ZoomInOutlined';
+} from '@mui/material';
+import ZoomInOutlinedIcon from '@mui/icons-material/ZoomInOutlined';
 import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -284,7 +284,10 @@ const SearchUsers = () => {
 					_rowIndex: any,
 				) {
 					return (
-						<IconButton aria-label="Détail">
+						<IconButton
+							aria-label="Détail"
+							size="large"
+						>
 							<ZoomInOutlinedIcon />
 						</IconButton>
 					);
@@ -305,7 +308,7 @@ const SearchUsers = () => {
 				<Grid
 					item
 					xs={12}
-					style={{ display: 'flex', alignItems: 'center' }}
+					sx={{ display: 'flex', alignItems: 'center' }}
 				>
 					<Title title={t('search_user.title') + realm} />
 					<ButtonDescription realmName={realm} />

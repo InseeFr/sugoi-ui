@@ -7,7 +7,7 @@ import {
 	List,
 	ListItem,
 	ListItemText,
-} from '@material-ui/core';
+} from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useWhoAmI } from 'src/lib/hooks/whoami';
 

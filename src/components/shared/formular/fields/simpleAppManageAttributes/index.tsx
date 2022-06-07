@@ -10,9 +10,10 @@ import {
 	ListItemText,
 	TextField,
 	Typography,
-} from '@material-ui/core';
-import CreateIcon from '@material-ui/icons/Create';
-import DeleteIcon from '@material-ui/icons/Delete';
+	Box,
+} from '@mui/material';
+import CreateIcon from '@mui/icons-material/Create';
+import DeleteIcon from '@mui/icons-material/Delete';
 import get from 'lodash.get';
 import React from 'react';
 import { useParams } from 'react-router-dom';
@@ -72,9 +73,9 @@ const SimpleAppManagedAttributes = ({
 	};
 
 	return (
-		<Grid container spacing={3} style={{ padding: 10 }}>
+		<Grid container spacing={3} sx={{ padding: 10 }}>
 			<Grid item xs={12}>
-				<div style={{ display: 'flex', alignItems: 'center' }}>
+				<Box sx={{ display: 'flex', alignItems: 'center' }}>
 					<Typography variant="subtitle1">
 						{name}
 					</Typography>
@@ -87,7 +88,7 @@ const SimpleAppManagedAttributes = ({
 					>
 						<CreateIcon fontSize="inherit" />
 					</IconButton>
-				</div>
+				</Box>
 			</Grid>
 			{!edit ? (
 				<Grid item xs={12}>
@@ -155,8 +156,8 @@ const SimpleAppManagedAttributes = ({
 								<Divider />
 							</Grid>
 							<Grid item>
-								<div
-									style={{
+								<Box
+									sx={{
 										display: 'flex',
 										alignItems:
 											'center',
@@ -186,7 +187,7 @@ const SimpleAppManagedAttributes = ({
 										}
 										helpText={helpText}
 									/>
-								</div>
+								</Box>
 							</Grid>
 							<Grid item>
 								<LoadingButton
@@ -260,6 +261,7 @@ const SimpleAppManagedAttributes = ({
 															disabled={
 																loadingDelete
 															}
+															size="large"
 														>
 															<DeleteIcon />
 															{loadingDelete && (

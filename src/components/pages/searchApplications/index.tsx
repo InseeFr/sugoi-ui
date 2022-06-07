@@ -4,7 +4,6 @@ import {
 	Link,
 	MenuItem,
 	Paper,
-	Select,
 	Table,
 	TableBody,
 	TableCell,
@@ -12,8 +11,9 @@ import {
 	TableHead,
 	TableRow,
 	TextField,
-} from '@material-ui/core';
-import { Pagination } from '@material-ui/lab';
+	Select,
+	Pagination,
+} from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
@@ -70,7 +70,7 @@ export const SearchApplications = () => {
 				<Grid
 					item
 					xs={12}
-					style={{ display: 'flex', alignItems: 'center' }}
+					sx={{ display: 'flex', alignItems: 'center' }}
 				>
 					<Title
 						title={
@@ -79,7 +79,7 @@ export const SearchApplications = () => {
 					/>
 					<ButtonDescription realmName={realm} />
 				</Grid>
-				<Grid item xs={12}>
+				<Grid item xs={8}>
 					<Grid
 						container
 						direction="row"
@@ -91,7 +91,7 @@ export const SearchApplications = () => {
 						/>
 					</Grid>
 				</Grid>
-				<Grid item xs={12}>
+				<Grid item xs={8}>
 					<TextField
 						id="application-search-textfield"
 						label={t('search_application.search_field')}
@@ -101,7 +101,7 @@ export const SearchApplications = () => {
 						fullWidth
 					/>
 				</Grid>
-				<Grid item xs={12}>
+				<Grid item xs={5}>
 					<TableContainer component={Paper}>
 						<Table size="small">
 							<TableHead>
@@ -184,7 +184,7 @@ export const SearchApplications = () => {
 						justifyContent="space-between"
 						alignItems="center"
 					>
-						<Grid item>
+						<Grid item xs={2}>
 							<Select
 								value={rowsPerPage}
 								onChange={(e: any) =>
@@ -192,14 +192,15 @@ export const SearchApplications = () => {
 										e.target.value,
 									)
 								}
-								displayEmpty
 							>
 								<MenuItem value={10}>
 									10
 								</MenuItem>
+
 								<MenuItem value={20}>
 									20
 								</MenuItem>
+
 								<MenuItem value={50}>
 									50
 								</MenuItem>
@@ -214,6 +215,7 @@ export const SearchApplications = () => {
 								page={page}
 								color="primary"
 								onChange={handleChange}
+								shape="rounded"
 							/>
 						</Grid>
 					</Grid>

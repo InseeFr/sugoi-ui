@@ -1,4 +1,4 @@
-import { Hidden } from '@material-ui/core';
+import { Hidden } from '@mui/material';
 import SiderPermanent from './sider-permanent';
 import SiderTemporary from './sider-temporary';
 
@@ -18,7 +18,7 @@ export const Sider = (props: props) => {
 				/>
 			</Hidden>
 
-			<Hidden xsDown implementation="css">
+			<Hidden smDown implementation="css">
 				<SiderPermanent />
 			</Hidden>
 		</>

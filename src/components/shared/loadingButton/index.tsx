@@ -1,22 +1,6 @@
-import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		wrapper: {
-			position: 'relative',
-		},
-		buttonProgress: {
-			color: theme.palette.primary.main,
-			position: 'absolute',
-			top: '50%',
-			left: '50%',
-			marginTop: -12,
-			marginLeft: -12,
-		},
-	}),
-);
+import { Grid, useTheme } from '@mui/material';
+import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
 
 interface props {
 	children: any;
@@ -24,7 +8,7 @@ interface props {
 	loading: boolean;
 	error?: any;
 	variant?: 'text' | 'outlined' | 'contained' | undefined;
-	color?: 'inherit' | 'primary' | 'secondary' | 'default' | undefined;
+	color?: 'inherit' | 'primary' | 'secondary' | 'default' | any;
 }
 
 export default function LoadingButton({
@@ -34,10 +18,9 @@ export default function LoadingButton({
 	variant,
 	color,
 }: props) {
-	const classes = useStyles();
-
+	const theme = useTheme();
 	return (
-		<div className={classes.wrapper}>
+		<Grid sx={{ position: 'relative' }}>
 			<Button
 				variant={variant}
 				color={color}
@@ -49,9 +32,16 @@ export default function LoadingButton({
 			{loading && (
 				<CircularProgress
 					size={24}
-					className={classes.buttonProgress}
+					sx={{
+						color: theme.palette.primary.main,
+						position: 'absolute',
+						top: '50%',
+						left: '50%',
+						marginTop: -12,
+						marginLeft: -12,
+					}}
 				/>
 			)}
-		</div>
+		</Grid>
 	);
 }

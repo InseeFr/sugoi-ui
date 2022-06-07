@@ -3,7 +3,7 @@ import { Realm } from 'src/lib/model/api/realm';
 import AsyncEditor from 'src/components/shared/jsonEditor';
 import PopButton from 'src/components/shared/popButton/popButton';
 import { useEffect, useState } from 'react';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 interface Props {
 	realm: Realm;
 	disabled: boolean;

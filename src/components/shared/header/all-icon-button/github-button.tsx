@@ -1,5 +1,5 @@
-import GitHubIcon from '@material-ui/icons/GitHub';
-import { IconButton } from '@material-ui/core';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import { IconButton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 const GithubButton = () => {

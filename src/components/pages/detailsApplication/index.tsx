@@ -1,5 +1,5 @@
-import { Grid, TextField, IconButton } from '@material-ui/core';
-import { SearchOutlined } from '@material-ui/icons';
+import { Grid, TextField, IconButton } from '@mui/material';
+import { SearchOutlined } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import ConfirmationPopup from 'src/components/shared/confirmationPopUp';
@@ -157,21 +157,24 @@ export const DetailsApplication = () => {
 						</Grid>
 						<Grid item xs={5}>
 							<TextField
-								fullWidth
 								id="standard-bare"
 								label={t(
 									'detail_application.search_groups_title',
 								)}
 								variant="outlined"
 								value={groupeApplicatif}
+								inputProps={{
+									style: { fontSize: 20 },
+								}}
 								onChange={(e) =>
 									setGroupeApplicatif(
 										e.target.value,
 									)
 								}
+								// fullWidth
 								InputProps={{
 									endAdornment: (
-										<IconButton>
+										<IconButton size="large">
 											<SearchOutlined />
 										</IconButton>
 									),

@@ -6,7 +6,7 @@ import {
 	Grid,
 	TextField,
 	Typography,
-} from '@material-ui/core';
+} from '@mui/material';
 import { useState } from 'react';
 import { TemplateProperties } from '../../../lib/model/api/TemplateProperties';
 import User from 'src/lib/model/api/user';
@@ -34,7 +34,7 @@ export const SendPopupContent = ({
 					Vous pouvez personnaliser le mail d'envoi du
 					nouveau mot de passe.
 				</Typography>
-				<div style={{ display: 'flex', alignItems: 'center' }}>
+				<Box sx={{ display: 'flex', alignItems: 'center' }}>
 					<FormControlLabel
 						control={
 							<Checkbox
@@ -64,8 +64,8 @@ export const SendPopupContent = ({
 						templateProperties.application &&
 						changeATemplateProperty('application')
 					)}
-				</div>
-				<div style={{ display: 'flex', alignItems: 'center' }}>
+				</Box>
+				<Box sx={{ display: 'flex', alignItems: 'center' }}>
 					<FormControlLabel
 						control={
 							<Checkbox
@@ -95,7 +95,7 @@ export const SendPopupContent = ({
 						templateProperties.senderEmail &&
 						changeATemplateProperty('assistMail')
 					)}
-				</div>
+				</Box>
 			</Grid>
 			<Grid item>
 				<Divider />

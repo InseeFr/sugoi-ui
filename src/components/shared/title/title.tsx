@@ -1,12 +1,12 @@
-import { Box, Typography } from '@material-ui/core';
-import { Variant } from '@material-ui/core/styles/createTypography';
+import { Box, Typography } from '@mui/material';
+// import { Variant } from '@mui/styles';
 interface props {
 	title: string;
-	variant: Variant;
+	// variant: Variant;
 }
-const Title = ({ title, variant }: props) => {
+const Title = ({ title }: props) => {
 	return (
-		<Typography component="div" color="primary" variant={variant}>
+		<Typography component="div" color="primary">
 			<Box fontWeight="fontWeightBold">{title}</Box>
 		</Typography>
 	);

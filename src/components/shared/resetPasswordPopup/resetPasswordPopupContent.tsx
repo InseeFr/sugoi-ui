@@ -6,7 +6,7 @@ import {
 	Grid,
 	TextField,
 	Typography,
-} from '@material-ui/core';
+} from '@mui/material';
 import { useState } from 'react';
 import { TemplateProperties } from 'src/lib/model/api/TemplateProperties';
 
@@ -63,7 +63,7 @@ export const ResetPasswordPopupContent = ({
 					envoyé à l'adresse mail suivante :{' '}
 					{templateProperties.mail}
 				</Typography>
-				<div style={{ display: 'flex', alignItems: 'center' }}>
+				<Box sx={{ display: 'flex', alignItems: 'center' }}>
 					<FormControlLabel
 						control={
 							<Checkbox
@@ -93,8 +93,8 @@ export const ResetPasswordPopupContent = ({
 						templateProperties.senderEmail &&
 						changeATemplateProperty('senderEmail')
 					)}
-				</div>
-				<div style={{ display: 'flex', alignItems: 'center' }}>
+				</Box>
+				<Box sx={{ display: 'flex', alignItems: 'center' }}>
 					<FormControlLabel
 						control={
 							<Checkbox
@@ -121,7 +121,7 @@ export const ResetPasswordPopupContent = ({
 						templateProperties.mail &&
 						changeATemplateProperty('mail')
 					)}
-				</div>
+				</Box>
 			</Grid>
 			<Grid item>
 				<Divider />
@@ -134,7 +134,7 @@ export const ResetPasswordPopupContent = ({
 					Vous pouvez personnaliser le mail d'envoi du
 					nouveau mot de passe.
 				</Typography>
-				<div style={{ display: 'flex', alignItems: 'center' }}>
+				<Box sx={{ display: 'flex', alignItems: 'center' }}>
 					<FormControlLabel
 						control={
 							<Checkbox
@@ -164,8 +164,8 @@ export const ResetPasswordPopupContent = ({
 						templateProperties.application &&
 						changeATemplateProperty('application')
 					)}
-				</div>
-				<div style={{ display: 'flex', alignItems: 'center' }}>
+				</Box>
+				<Box sx={{ display: 'flex', alignItems: 'center' }}>
 					<FormControlLabel
 						control={
 							<Checkbox
@@ -195,7 +195,7 @@ export const ResetPasswordPopupContent = ({
 						templateProperties.assistMail &&
 						changeATemplateProperty('assistMail')
 					)}
-				</div>
+				</Box>
 			</Grid>
 			<Grid item>
 				<Divider />

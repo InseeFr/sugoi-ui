@@ -10,8 +10,8 @@ import {
 	TableContainer,
 	TableHead,
 	TableRow,
-} from '@material-ui/core';
-import { Pagination } from '@material-ui/lab';
+} from '@mui/material';
+import { Pagination } from '@mui/material';
 import { useState } from 'react';
 import { Group } from 'src/lib/model/api/group';
 import { ChipButton, ChipPerson } from './../chip';

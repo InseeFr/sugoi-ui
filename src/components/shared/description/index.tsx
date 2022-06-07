@@ -1,4 +1,4 @@
-import { Grid, Card, CardContent, CardHeader } from '@material-ui/core';
+import { Grid, Card, CardContent, CardHeader } from '@mui/material';
 import { useGetRealm } from 'src/lib/hooks/api-hooks';
 import Title from '../title/title';
 import PopIcon from '../popIcon/popIcon';

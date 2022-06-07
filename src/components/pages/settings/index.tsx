@@ -1,4 +1,4 @@
-import { Grid, MenuItem, TextField } from '@material-ui/core';
+import { Grid, MenuItem, TextField } from '@mui/material';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Realm } from 'src/lib/model/api/realm';

@@ -1,43 +1,30 @@
 import {
-	createStyles,
 	Divider,
 	List,
 	ListItem,
 	ListItemIcon,
 	ListItemText,
 	ListSubheader,
-	makeStyles,
 	TextField,
-	Theme,
 	Toolbar,
-} from '@material-ui/core';
-import BusinessIcon from '@material-ui/icons/Business';
-import HomeIcon from '@material-ui/icons/Home';
-import PersonIcon from '@material-ui/icons/Person';
-import SettingsIcon from '@material-ui/icons/Settings';
-import Autocomplete from '@material-ui/lab/Autocomplete/Autocomplete';
+	useTheme,
+} from '@mui/material';
+import BusinessIcon from '@mui/icons-material/Business';
+import HomeIcon from '@mui/icons-material/Home';
+import PersonIcon from '@mui/icons-material/Person';
+import SettingsIcon from '@mui/icons-material/Settings';
+import Autocomplete from '@mui/lab/Autocomplete/Autocomplete';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { matchPath, useHistory, useLocation } from 'react-router-dom';
 import { useGetRealms } from 'src/lib/hooks/realm/useGetRealms';
-import GrainIcon from '@material-ui/icons/Grain';
+import GrainIcon from '@mui/icons-material/Grain';
 import { useSnackbar } from 'notistack';
 import { Realm } from 'src/lib/model/api/realm';
 import { UserStorage } from 'src/lib/model/api/userStorage';
 
-const useStyle = makeStyles((theme: Theme) =>
-	createStyles({
-		nested: {
-			paddingLeft: theme.spacing(4),
-		},
-		nestedUS: {
-			paddingLeft: theme.spacing(6),
-		},
-	}),
-);
-
 const SiderBody = () => {
-	const classes = useStyle();
+	const theme = useTheme();
 	const { push } = useHistory();
 	const location = useLocation();
 	const { t } = useTranslation();
@@ -156,7 +143,11 @@ const SiderBody = () => {
 						</ListSubheader>
 					}
 				>
-					<ListItem className={classes.nested}>
+					<ListItem
+						sx={{
+							paddingLeft: theme.spacing(4),
+						}}
+					>
 						<Autocomplete
 							id="realm choice"
 							options={
@@ -164,7 +155,7 @@ const SiderBody = () => {
 									(realm) => realm.name,
 								) || []
 							}
-							style={{ width: 300 }}
+							sx={{ width: 300 }}
 							value={realmSelected?.name || null}
 							onChange={(
 								_event: any,
@@ -211,7 +202,11 @@ const SiderBody = () => {
 							)}
 						/>
 					</ListItem>
-					<ListItem className={classes.nestedUS}>
+					<ListItem
+						sx={{
+							paddingLeft: theme.spacing(6),
+						}}
+					>
 						<Autocomplete
 							id="userStorage choice"
 							disabled={
@@ -230,7 +225,7 @@ const SiderBody = () => {
 										(us) => us.name,
 									) || []
 							}
-							style={{ width: 300 }}
+							sx={{ width: 300 }}
 							value={
 								userStorageSelected?.name ||
 								null
@@ -283,7 +278,9 @@ const SiderBody = () => {
 											'/users',
 								  )
 						}
-						className={classes.nestedUS}
+						sx={{
+							paddingLeft: theme.spacing(6),
+						}}
 						selected={location.pathname.includes(
 							'/users',
 						)}
@@ -324,7 +321,9 @@ const SiderBody = () => {
 											'/organizations',
 								  )
 						}
-						className={classes.nestedUS}
+						sx={{
+							paddingLeft: theme.spacing(6),
+						}}
 						selected={location.pathname.includes(
 							'/organizations',
 						)}
@@ -354,7 +353,9 @@ const SiderBody = () => {
 									'/applications',
 							)
 						}
-						className={classes.nested}
+						sx={{
+							paddingLeft: theme.spacing(4),
+						}}
 						selected={location.pathname.includes(
 							'/applications',
 						)}
@@ -387,7 +388,9 @@ const SiderBody = () => {
 					button
 					key="parametres"
 					onClick={() => push('/settings')}
-					className={classes.nested}
+					sx={{
+						paddingLeft: theme.spacing(4),
+					}}
 					selected={location.pathname.includes('/settings')}
 				>
 					<ListItemIcon>

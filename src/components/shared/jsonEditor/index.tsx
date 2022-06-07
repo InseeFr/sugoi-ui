@@ -1,4 +1,4 @@
-import { useTheme } from '@material-ui/core';
+import { useTheme } from '@mui/material';
 import React, { Suspense, lazy } from 'react';
 import { Loader } from './../loader/loader';
 
@@ -18,14 +18,14 @@ const AsyncEditor = ({ onChange, value, readOnly }: Props) => {
 
 	return (
 		<Suspense fallback={<Loader />}>
-			{theme.palette.type === 'light' && (
+			{theme.palette.mode === 'light' && (
 				<JSONEditorLight
 					json={value}
 					onChange={onChange}
 					readOnly={readOnly}
 				/>
 			)}
-			{theme.palette.type === 'dark' && (
+			{theme.palette.mode === 'dark' && (
 				<JSONEditorDark
 					json={value}
 					onChange={onChange}
