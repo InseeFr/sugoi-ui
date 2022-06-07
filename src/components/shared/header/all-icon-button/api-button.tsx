@@ -1,5 +1,5 @@
-import { IconButton } from '@material-ui/core';
-import WebIcon from '@material-ui/icons/Web';
+import { IconButton } from '@mui/material';
+import WebIcon from '@mui/icons-material/Web';
 import { useTranslation } from 'react-i18next';
 import { useConfig } from 'src/lib/hooks/technics/useConfigFile';
 

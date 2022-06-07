@@ -1,4 +1,4 @@
-import { Button, Grid, Typography } from '@material-ui/core';
+import { Button, Grid, Typography } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
@@ -150,7 +150,6 @@ const DetailOrganization = () => {
 										<Grid item>
 											<Button
 												variant="contained"
-												color="default"
 												onClick={
 													handleReset
 												}

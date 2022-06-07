@@ -1,6 +1,6 @@
 import React from 'react';
-import Dialog from '@material-ui/core/Dialog';
-import { DialogActions, DialogContent } from '@material-ui/core';
+import Dialog from '@mui/material/Dialog';
+import { DialogActions, DialogContent } from '@mui/material';
 import DialogTitle from './DialogTitle';
 
 export interface SimpleDialogProps {

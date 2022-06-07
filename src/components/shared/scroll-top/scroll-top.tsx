@@ -1,13 +1,6 @@
 import React from 'react';
-import {
-	createStyles,
-	Fab,
-	makeStyles,
-	Theme,
-	useScrollTrigger,
-	Zoom,
-} from '@material-ui/core';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import { Fab, useScrollTrigger, Zoom, Box, useTheme } from '@mui/material';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useTranslation } from 'react-i18next';
 
 interface props {
@@ -19,19 +12,9 @@ interface props {
 	children: React.ReactElement;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		root: {
-			position: 'fixed',
-			bottom: theme.spacing(2),
-			right: theme.spacing(2),
-		},
-	}),
-);
-
 const ScrollTopUtils = (props: props) => {
+	const theme = useTheme();
 	const { children, window } = props;
-	const classes = useStyles();
 	// Note that you normally won't need to set the window ref as useScrollTrigger
 	// will default to window.
 	// This is only being set here because the demo is in an iframe.
@@ -56,13 +39,17 @@ const ScrollTopUtils = (props: props) => {
 
 	return (
 		<Zoom in={trigger}>
-			<div
+			<Box
 				onClick={handleClick}
 				role="presentation"
-				className={classes.root}
+				sx={{
+					position: 'fixed',
+					bottom: theme.spacing(2),
+					right: theme.spacing(2),
+				}}
 			>
 				{children}
-			</div>
+			</Box>
 		</Zoom>
 	);
 };

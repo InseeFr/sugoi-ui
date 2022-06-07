@@ -1,12 +1,6 @@
 import { useReactOidc } from '@axa-fr/react-oidc-context';
-import {
-	Avatar,
-	Box,
-	IconButton,
-	Popover,
-	Typography,
-} from '@material-ui/core';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { Avatar, Box, IconButton, Popover, Typography } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 

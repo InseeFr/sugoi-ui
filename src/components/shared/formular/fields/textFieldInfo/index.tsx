@@ -1,4 +1,4 @@
-import { createStyles, makeStyles, TextField } from '@material-ui/core';
+import { Box, TextField } from '@mui/material';
 import React, { memo } from 'react';
 import PopIcon from 'src/components/shared/popIcon/popIcon';
 
@@ -14,14 +14,6 @@ interface props {
 	errorText?: string;
 }
 
-const useStyles = makeStyles(() =>
-	createStyles({
-		root: {
-			display: 'flex',
-			alignItems: 'center',
-		},
-	}),
-);
 const TextFieldInfo = ({
 	name,
 	required,
@@ -33,9 +25,13 @@ const TextFieldInfo = ({
 	error,
 	errorText,
 }: props) => {
-	const classes = useStyles();
 	return (
-		<div className={classes.root}>
+		<Box
+			sx={{
+				display: 'flex',
+				alignItems: 'center',
+			}}
+		>
 			<TextField
 				required={required}
 				variant="outlined"
@@ -49,7 +45,7 @@ const TextFieldInfo = ({
 				helperText={errorText}
 			/>
 			<PopIcon helpTextTitle={helpTextTitle} helpText={helpText} />
-		</div>
+		</Box>
 	);
 };
 

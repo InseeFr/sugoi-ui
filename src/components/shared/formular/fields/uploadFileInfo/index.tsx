@@ -1,22 +1,12 @@
-import { Button, Grid, Link, Typography } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import EditIcon from '@material-ui/icons/Edit';
-import { DropzoneArea } from 'material-ui-dropzone';
+import { Box, Button, Grid, Link, Typography } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
+import { DropzoneArea } from 'react-mui-dropzone';
 import { useState } from 'react';
 import { Loader } from 'src/components/shared/loader/loader';
 import SimpleDialog from 'src/components/shared/popButton/Dialog';
 import PopIcon from 'src/components/shared/popIcon/popIcon';
-
-const useStyles = makeStyles(() =>
-	createStyles({
-		root: {
-			display: 'flex',
-			alignItems: 'center',
-		},
-	}),
-);
 
 interface Props {
 	deleteAction: any;
@@ -49,7 +39,6 @@ const UploadFile = ({
 	loading,
 	modifiable,
 }: Props) => {
-	const classes = useStyles();
 	const [open, setOpen] = useState(false);
 
 	const [files, setFiles] = useState<File[]>([]);
@@ -58,7 +47,12 @@ const UploadFile = ({
 		<>
 			<Grid container direction="column">
 				<Grid item xs={12}>
-					<div className={classes.root}>
+					<Box
+						sx={{
+							display: 'flex',
+							alignItems: 'center',
+						}}
+					>
 						<Typography align="right">
 							{title}
 						</Typography>
@@ -76,13 +70,18 @@ const UploadFile = ({
 								<EditIcon />
 							</IconButton>
 						)}
-					</div>
+					</Box>
 				</Grid>
 				<Grid item xs={12}>
 					{loading ? (
 						<Loader />
 					) : (
-						<div className={classes.root}>
+						<Box
+							sx={{
+								display: 'flex',
+								alignItems: 'center',
+							}}
+						>
 							<Typography>
 								{value ? (
 									<Link
@@ -112,7 +111,7 @@ const UploadFile = ({
 									<DeleteForeverIcon />
 								</IconButton>
 							)}
-						</div>
+						</Box>
 					)}
 				</Grid>
 			</Grid>

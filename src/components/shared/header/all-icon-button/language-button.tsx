@@ -1,12 +1,6 @@
-import {
-	Box,
-	Button,
-	ListItem,
-	ListItemText,
-	Popover,
-} from '@material-ui/core';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import TranslateIcon from '@material-ui/icons/Translate';
+import { Box, Button, ListItem, ListItemText, Popover } from '@mui/material';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import TranslateIcon from '@mui/icons-material/Translate';
 import { useState, MouseEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 

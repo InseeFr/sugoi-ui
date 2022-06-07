@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core';
+import { Grid } from '@mui/material';
 import GenerateFields from 'src/components/shared/formular/fields/utils';
 import Panel from 'src/components/shared/panel/panel';
 import { Field } from 'src/lib/model/field';

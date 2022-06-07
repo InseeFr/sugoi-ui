@@ -10,11 +10,12 @@ import {
 	ListItemText,
 	TextField,
 	Typography,
-} from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
+	Box,
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import React from 'react';
 import PopIcon from 'src/components/shared/popIcon/popIcon';
-import CreateIcon from '@material-ui/icons/Create';
+import CreateIcon from '@mui/icons-material/Create';
 interface props {
 	value: any;
 	textButton?: string;
@@ -53,9 +54,9 @@ const ListFieldInfoPopup = ({
 	};
 
 	return (
-		<Grid container spacing={3} style={{ padding: 10 }}>
+		<Grid container spacing={3} sx={{ padding: 10 }}>
 			<Grid item xs={12}>
-				<div style={{ display: 'flex', alignItems: 'center' }}>
+				<Box sx={{ display: 'flex', alignItems: 'center' }}>
 					<Typography variant="subtitle1">
 						{name}
 					</Typography>
@@ -68,7 +69,7 @@ const ListFieldInfoPopup = ({
 					>
 						<CreateIcon fontSize="inherit" />
 					</IconButton>
-				</div>
+				</Box>
 			</Grid>
 			{!edit && value.length > 0 ? (
 				<Grid item xs={12}>
@@ -120,8 +121,8 @@ const ListFieldInfoPopup = ({
 								<Divider />
 							</Grid>
 							<Grid item>
-								<div
-									style={{
+								<Box
+									sx={{
 										display: 'flex',
 										alignItems:
 											'center',
@@ -148,13 +149,13 @@ const ListFieldInfoPopup = ({
 										}
 										helpText={helpText}
 									/>
-								</div>
+								</Box>
 							</Grid>
 							<Grid item>
 								<Button
 									variant="contained"
 									color="primary"
-									style={{ float: 'right' }}
+									sx={{ float: 'right' }}
 									onClick={add}
 								>
 									Ajouter
@@ -212,6 +213,7 @@ const ListFieldInfoPopup = ({
 																pos,
 															)
 														}
+														size="large"
 													>
 														<DeleteIcon />
 													</IconButton>

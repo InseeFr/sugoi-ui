@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core';
+import { Grid } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import Title from 'src/components/shared/title/title';
 import { Group } from 'src/lib/model/api/group';

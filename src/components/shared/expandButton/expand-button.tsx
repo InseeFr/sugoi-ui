@@ -1,7 +1,7 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { Button } from '@mui/material';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useTranslation } from 'react-i18next';
 
 interface props {
@@ -13,8 +13,7 @@ const ExpandButton = ({ expand, setExpand }: props) => {
 	const { t } = useTranslation();
 	return (
 		<Button
-			variant="contained"
-			color="default"
+			variant="outlined"
 			endIcon={expand ? <ExpandLessIcon /> : <ExpandMoreIcon />}
 			onClick={() => setExpand(!expand)}
 		>

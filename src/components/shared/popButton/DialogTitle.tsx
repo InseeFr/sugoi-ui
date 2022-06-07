@@ -1,54 +1,43 @@
 import React from 'react';
-import {
-	createStyles,
-	Theme,
-	withStyles,
-	WithStyles,
-} from '@material-ui/core/styles';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import Typography from '@material-ui/core/Typography';
+import { DialogTitle as Muidialog, useTheme } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import Typography from '@mui/material/Typography';
 
-const styles = (theme: Theme) =>
-	createStyles({
-		root: {
-			margin: 0,
-			padding: theme.spacing(2),
-		},
-		closeButton: {
-			position: 'absolute',
-			right: theme.spacing(1),
-			top: theme.spacing(1),
-			color: theme.palette.grey[500],
-		},
-	});
-
-export interface DialogTitleProps extends WithStyles<typeof styles> {
+export interface DialogTitleProps {
 	title?: string;
 	onClose?: () => void;
 }
 
-const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
-	const { title, classes, onClose, ...other } = props;
+const DialogTitle = (props: DialogTitleProps) => {
+	const theme = useTheme();
+	const { title, onClose, ...other } = props;
 	return (
-		<MuiDialogTitle
-			disableTypography
-			className={classes.root}
+		<Muidialog
 			{...other}
+			sx={{
+				margin: '0',
+				padding: theme.spacing(2),
+			}}
 		>
 			<Typography variant="h6">{title}</Typography>
 			{onClose ? (
 				<IconButton
 					aria-label="close"
-					className={classes.closeButton}
+					sx={{
+						position: 'absolute',
+						right: theme.spacing(1),
+						top: theme.spacing(1),
+						color: theme.palette.grey[500],
+					}}
 					onClick={onClose}
+					size="large"
 				>
 					<CloseIcon />
 				</IconButton>
 			) : null}
-		</MuiDialogTitle>
+		</Muidialog>
 	);
-});
+};
 
 export default DialogTitle;

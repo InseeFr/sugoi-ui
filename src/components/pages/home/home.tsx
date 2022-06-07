@@ -1,6 +1,6 @@
 import React from 'react';
 import { useReactOidc } from '@axa-fr/react-oidc-context';
-import { Grid } from '@material-ui/core';
+import { Grid } from '@mui/material';
 import Title from 'src/components/shared/title/title';
 import MainFeaturedPost from './landingpage/landingpage';
 import CardRights from './right-card';

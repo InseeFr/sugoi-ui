@@ -1,17 +1,15 @@
 import {
-	createStyles,
 	Divider,
 	Grid,
-	makeStyles,
 	Paper,
-	Theme,
 	IconButton,
 	Collapse,
-} from '@material-ui/core';
+	useTheme,
+} from '@mui/material';
 import { useState } from 'react';
 import TitlePanel from './titlePanel';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PopIcon from '../popIcon/popIcon';
 
 type Props = {
@@ -23,15 +21,6 @@ type Props = {
 	collapse?: boolean;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		paper: {
-			padding: theme.spacing(2),
-			textAlign: 'center',
-			color: theme.palette.text.secondary,
-		},
-	}),
-);
 const Panel = ({
 	title,
 	collapsible,
@@ -40,11 +29,18 @@ const Panel = ({
 	collapse,
 	children,
 }: Props) => {
-	const classes = useStyles();
+	const theme = useTheme();
 	const [expand, setExpand] = useState(collapse);
 
 	return (
-		<Paper className={classes.paper} elevation={elevation}>
+		<Paper
+			sx={{
+				padding: theme.spacing(2),
+				textAlign: 'center',
+				color: theme.palette.text.secondary,
+			}}
+			elevation={elevation}
+		>
 			<Grid
 				container
 				direction="column"
@@ -55,7 +51,7 @@ const Panel = ({
 				<Grid
 					item
 					xs={12}
-					style={{
+					sx={{
 						display: 'flex',
 						alignItems: 'center',
 					}}
@@ -70,6 +66,7 @@ const Panel = ({
 							aria-label="expand paper"
 							component="span"
 							onClick={() => setExpand(!expand)}
+							size="large"
 						>
 							{expand ? (
 								<ExpandLessIcon />
@@ -79,7 +76,7 @@ const Panel = ({
 						</IconButton>
 					) : null}
 				</Grid>
-				<Grid item xs={12} style={{ padding: '9px' }}>
+				<Grid item xs={12} sx={{ padding: '9px' }}>
 					<Divider />
 				</Grid>
 				<Grid item xs={12}>

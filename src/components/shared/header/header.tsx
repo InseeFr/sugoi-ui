@@ -1,46 +1,46 @@
-import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
+import {
+	AppBar,
+	IconButton,
+	Toolbar,
+	Typography,
+	useTheme,
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import { useTranslation } from 'react-i18next';
 import GroupedIcons from './all-icon-button/grouped-buttons';
 interface props {
 	handleDrawerToggle: any;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		appBar: {
-			zIndex: theme.zIndex.drawer + 1,
-		},
-		menuButton: {
-			marginRight: theme.spacing(2),
-			[theme.breakpoints.up('sm')]: {
-				display: 'none',
-			},
-		},
-		toolbar: {
-			paddingRight: 12, // keep right padding when drawer closed
-		},
-		title: {
-			flexGrow: 12,
-		},
-	}),
-);
-
 const MyHeader = (props: props) => {
+	const theme = useTheme();
 	const { t } = useTranslation();
 	const { handleDrawerToggle } = props;
-	const classes = useStyles();
 
 	return (
-		<AppBar position="fixed" className={classes.appBar}>
-			<Toolbar className={classes.toolbar}>
+		<AppBar
+			position="fixed"
+			sx={{
+				zIndex: theme.zIndex.drawer + 1,
+			}}
+		>
+			<Toolbar
+				sx={{
+					paddingRight: 12, // keep right padding when drawer closed
+				}}
+			>
 				<IconButton
 					color="inherit"
 					aria-label="open drawer"
 					edge="start"
 					onClick={handleDrawerToggle}
-					className={classes.menuButton}
+					sx={{
+						marginRight: theme.spacing(2),
+						[theme.breakpoints.up('sm')]: {
+							display: 'none',
+						},
+					}}
+					size="large"
 				>
 					<MenuIcon />
 				</IconButton>
@@ -49,7 +49,9 @@ const MyHeader = (props: props) => {
 					variant="h6"
 					color="inherit"
 					noWrap
-					className={classes.title}
+					sx={{
+						flexGrow: 12,
+					}}
 				>
 					{t('commons.header.title')}
 				</Typography>

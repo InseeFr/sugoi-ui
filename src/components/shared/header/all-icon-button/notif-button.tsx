@@ -4,8 +4,8 @@ import {
 	IconButton,
 	Popover,
 	Switch,
-} from '@material-ui/core';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+} from '@mui/material';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';

@@ -1,13 +1,12 @@
-import { responsiveFontSizes } from '@material-ui/core/';
-import { createTheme } from '@material-ui/core/styles';
-
+import { responsiveFontSizes } from '@mui/material/';
+import { createTheme } from '@mui/material/styles';
 export const mainColor = '#3078E4';
 
 const dark = createTheme({
 	palette: {
-		type: 'dark',
+		mode: 'dark',
 		primary: { main: '#4791db' },
-		secondary: { main: '#e33371' },
+		secondary: { main: '#EB1D36' },
 		error: { main: '#e57373' },
 		warning: { main: '#ffb74d' },
 		info: { main: '#64b5f6' },
@@ -17,7 +16,7 @@ const dark = createTheme({
 
 const light = createTheme({
 	palette: {
-		type: 'light',
+		mode: 'light',
 		primary: { main: '#115293' },
 		secondary: { main: '#9a0036' },
 		error: { main: '#d32f2f' },

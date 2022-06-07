@@ -1,37 +1,14 @@
 import React from 'react';
-import {
-	createStyles,
-	makeStyles,
-	Theme,
-	IconButton,
-	Typography,
-	Box,
-	Popover,
-} from '@material-ui/core';
-import InfoIcon from '@material-ui/icons/Info';
+import { IconButton, Typography, Box, Popover, useTheme } from '@mui/material';
+import InfoIcon from '@mui/icons-material/Info';
 
 interface props {
 	helpTextTitle?: string;
 	helpText?: string | JSX.Element | JSX.Element[];
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		root: {
-			display: 'flex',
-			alignItems: 'center',
-		},
-		margin: {
-			margin: theme.spacing(1),
-		},
-		typography: {
-			padding: theme.spacing(1),
-		},
-	}),
-);
-
 const PopIcon = ({ helpTextTitle, helpText }: props) => {
-	const classes = useStyles();
+	const theme = useTheme();
 	const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
 		null,
 	);
@@ -48,7 +25,9 @@ const PopIcon = ({ helpTextTitle, helpText }: props) => {
 		<>
 			<IconButton
 				aria-label="info"
-				className={classes.margin}
+				sx={{
+					margin: theme.spacing(1),
+				}}
 				size="small"
 				onClick={handleClick}
 				color="primary"
@@ -74,7 +53,9 @@ const PopIcon = ({ helpTextTitle, helpText }: props) => {
 						<Typography
 							component="div"
 							variant="body1"
-							className={classes.typography}
+							sx={{
+								padding: theme.spacing(1),
+							}}
 						>
 							<Box fontWeight="fontWeightBold">
 								{helpTextTitle}
@@ -85,7 +66,9 @@ const PopIcon = ({ helpTextTitle, helpText }: props) => {
 						<Typography
 							component="div"
 							variant="caption"
-							className={classes.typography}
+							sx={{
+								padding: theme.spacing(1),
+							}}
 						>
 							<Box>{helpText}</Box>
 						</Typography>

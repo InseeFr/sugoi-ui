@@ -1,4 +1,4 @@
-import { Button, Grid, TextField } from '@material-ui/core';
+import { Button, Grid, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import SimpleDialog from 'src/components/shared/popButton/Dialog';
 
@@ -51,13 +51,14 @@ export const ButtonCreateGroup = ({ handleAddGroup, application }: Props) => {
 							container
 							direction="row"
 							justifyContent="center"
-							alignItems="stretch"
+							// alignItems="stretch"
 							spacing={1}
 						>
-							<Grid item xs={10}>
+							<Grid item xs={6}>
 								<TextField
 									fullWidth
 									label="Nom du groupe"
+									variant="standard"
 									value={groupName}
 									onChange={(e: any) =>
 										setGroupName(
@@ -78,17 +79,21 @@ export const ButtonCreateGroup = ({ handleAddGroup, application }: Props) => {
 									disabled
 								/>
 							</Grid>
+							<Grid item xs={6}>
+								<TextField
+									fullWidth
+									label="Description"
+									variant="standard"
+									value={groupDescription}
+									onChange={(e) =>
+										setGroupDescription(
+											e.target
+												.value,
+										)
+									}
+								/>
+							</Grid>
 						</Grid>
-						<TextField
-							fullWidth
-							label="Description"
-							value={groupDescription}
-							onChange={(e) =>
-								setGroupDescription(
-									e.target.value,
-								)
-							}
-						/>
 					</>
 				}
 				actions={

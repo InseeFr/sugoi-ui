@@ -8,7 +8,7 @@ import {
 	Typography,
 	useTheme,
 } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
+import { Add } from '@mui/icons-material';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForms } from 'src/lib/hooks/technics/useForms';
@@ -32,7 +32,7 @@ const CustomToolBar = ({ handleClick }: any) => {
 					disableElevation
 					variant="contained"
 					color="primary"
-					startIcon={<AddIcon />}
+					startIcon={<Add />}
 					aria-label="create user"
 					onClick={handleClick}
 				>

@@ -1,12 +1,7 @@
 import { useReactOidc, withOidcSecure } from '@axa-fr/react-oidc-context';
-import { Container } from '@material-ui/core';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import {
-	createStyles,
-	makeStyles,
-	MuiThemeProvider,
-	Theme,
-} from '@material-ui/core/styles';
+import { Box, Container, useTheme } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
@@ -22,40 +17,84 @@ import ScrollTop from 'src/components/shared/scroll-top/scroll-top';
 import Sider from 'src/components/shared/sider';
 import { useTranslation } from 'react-i18next';
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		root: {
-			display: 'flex',
-		},
-
-		toolbar: {
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'flex-end',
-			padding: theme.spacing(0, 1),
-			// necessary for content to be below app bar
-			...theme.mixins.toolbar,
-		},
-		content: {
-			flexGrow: 1,
-			padding: theme.spacing(3),
-		},
-
-		container: {
-			paddingTop: theme.spacing(4),
-			paddingBottom: theme.spacing(1),
-		},
-	}),
-);
-
-const App = () => {
-	const classes = useStyles();
+const ThemeWrapper = () => {
+	const theme = useTheme();
 	const { oidcUser } = useReactOidc();
-	const appStore = useSelector((store: RootState) => store.app);
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const handleDrawerToggle = () => {
 		setDrawerOpen(!drawerOpen);
 	};
+
+	return (
+		<Box
+			sx={{
+				display: 'flex',
+			}}
+		>
+			<CssBaseline />
+			<Header handleDrawerToggle={handleDrawerToggle} />
+			{oidcUser ? (
+				<Sider
+					drawerOpen={drawerOpen}
+					handleDrawerToggle={handleDrawerToggle}
+				/>
+			) : null}
+			<Box
+				sx={{
+					flexGrow: 1,
+					padding: theme.spacing(3),
+				}}
+			>
+				<Box id="back-to-top-anchor" />
+				<Box
+					sx={{
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'flex-end',
+						padding: theme.spacing(0, 1),
+						// necessary for content to be below app bar
+						...theme.mixins.toolbar,
+					}}
+				/>
+				<Container
+					maxWidth="xl"
+					sx={{
+						paddingTop: theme.spacing(4),
+						paddingBottom: theme.spacing(1),
+					}}
+				>
+					<Notifier />
+					<BreadCrumbs />
+					<ErrorBoundary>
+						<Switch>
+							{routes.map((route, i) => (
+								<Route
+									key={'route_' + i}
+									exact={route.exact}
+									path={route.path}
+									component={
+										route.secure
+											? withOidcSecure(
+													route.component,
+											  )
+											: route.component
+									}
+								/>
+							))}
+							<Redirect to="/" />
+						</Switch>
+					</ErrorBoundary>
+				</Container>
+				<ScrollTop />
+				<Footer />
+			</Box>
+		</Box>
+	);
+};
+
+const App = () => {
+	const appStore = useSelector((store: RootState) => store.app);
+
 	const { i18n } = useTranslation();
 
 	useEffect(() => {
@@ -63,52 +102,15 @@ const App = () => {
 	}, [i18n.language]);
 
 	return (
-		<MuiThemeProvider
-			theme={appStore.theme === 'dark' ? DarkTheme : LightTheme}
-		>
-			<div className={classes.root}>
-				<CssBaseline />
-				<Header handleDrawerToggle={handleDrawerToggle} />
-				{oidcUser ? (
-					<Sider
-						drawerOpen={drawerOpen}
-						handleDrawerToggle={handleDrawerToggle}
-					/>
-				) : null}
-				<main className={classes.content}>
-					<div id="back-to-top-anchor" />
-					<div className={classes.toolbar} />
-					<Container
-						maxWidth="xl"
-						className={classes.container}
-					>
-						<Notifier />
-						<BreadCrumbs />
-						<ErrorBoundary>
-							<Switch>
-								{routes.map((route, i) => (
-									<Route
-										key={'route_' + i}
-										exact={route.exact}
-										path={route.path}
-										component={
-											route.secure
-												? withOidcSecure(
-														route.component,
-												  )
-												: route.component
-										}
-									/>
-								))}
-								<Redirect to="/" />
-							</Switch>
-						</ErrorBoundary>
-					</Container>
-					<ScrollTop />
-					<Footer />
-				</main>
-			</div>
-		</MuiThemeProvider>
+		<StyledEngineProvider injectFirst>
+			<ThemeProvider
+				theme={
+					appStore.theme === 'dark' ? DarkTheme : LightTheme
+				}
+			>
+				<ThemeWrapper />
+			</ThemeProvider>
+		</StyledEngineProvider>
 	);
 };
 

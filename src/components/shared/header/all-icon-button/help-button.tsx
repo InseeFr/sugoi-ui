@@ -1,6 +1,6 @@
-import { IconButton } from '@material-ui/core';
+import { IconButton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import HelpIcon from '@material-ui/icons/Help';
+import HelpIcon from '@mui/icons-material/Help';
 import { useConfig } from 'src/lib/hooks/technics/useConfigFile';
 
 export const HelpButton = () => {
@@ -15,6 +15,7 @@ export const HelpButton = () => {
 			aria-label="Go documentation"
 			onClick={handleClick}
 			title={t('commons.header.buttons.help')}
+			size="large"
 		>
 			<HelpIcon />
 		</IconButton>

@@ -1,5 +1,5 @@
-import { TextField } from '@material-ui/core';
-import { Autocomplete } from '@material-ui/lab';
+import { TextField, Grid } from '@mui/material';
+import { Autocomplete } from '@mui/material';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 import { useGetApplications } from 'src/lib/hooks/api-hooks';
@@ -34,7 +34,7 @@ export const AutoCompleteApplication = ({
 			onChange={(_event: any, applicationSelected: String) => {
 				handleChangeApplication(applicationSelected);
 			}}
-			getOptionSelected={(option, value) => option === value}
+			isOptionEqualToValue={(option, value) => option === value}
 			renderInput={(params: any) => (
 				<TextField
 					{...params}
@@ -43,23 +43,24 @@ export const AutoCompleteApplication = ({
 					fullWidth
 				/>
 			)}
-			renderOption={(option, { inputValue }) => {
+			renderOption={(option: any, { inputValue }) => {
 				const matches = match(option, inputValue);
 				const parts = parse(option, matches);
 
 				return (
 					<div>
 						{parts.map((part: any, index: any) => (
-							<span
+							<Grid
+								component="span"
 								key={index}
-								style={{
+								sx={{
 									fontWeight: part.highlight
 										? 700
 										: 400,
 								}}
 							>
 								{part.text}
-							</span>
+							</Grid>
 						))}
 					</div>
 				);
