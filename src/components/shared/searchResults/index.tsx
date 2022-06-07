@@ -1,4 +1,4 @@
-import { Paper } from '@material-ui/core';
+import { Paper } from '@mui/material';
 import MUIDataTable, { MUIDataTableOptions } from 'mui-datatables';
 import React from 'react';
 import { useTranslation } from 'react-i18next';

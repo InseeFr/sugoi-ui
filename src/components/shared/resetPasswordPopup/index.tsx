@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
@@ -54,11 +54,7 @@ export const ResetPasswordPopup = () => {
 
 	return (
 		<>
-			<Button
-				onClick={handleOpen}
-				color="default"
-				variant="contained"
-			>
+			<Button onClick={handleOpen} variant="contained">
 				{t('commons.reset_password.text')}
 			</Button>
 			<SimpleDialog

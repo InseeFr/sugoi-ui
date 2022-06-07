@@ -1,6 +1,5 @@
-import { CircularProgress } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
-import { Autocomplete } from '@material-ui/lab';
+import TextField from '@mui/material/TextField';
+import { CircularProgress, Autocomplete, Grid } from '@mui/material';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 interface Props {
@@ -56,22 +55,24 @@ const MyAutocomplete = ({
 					}}
 				/>
 			)}
-			renderOption={(option, { inputValue }) => {
-				const matches = match(option.label, inputValue);
-				const parts = parse(option.label, matches);
+			//problem here --> to solve
+			renderOption={(option: any, { inputValue }) => {
+				const matches = match(option?.label, inputValue);
+				const parts = parse(option?.label, matches);
 				return (
 					<div>
 						{parts.map((part: any, index: any) => (
-							<span
+							<Grid
+								component="span"
 								key={index}
-								style={{
+								sx={{
 									fontWeight: part.highlight
 										? 700
 										: 400,
 								}}
 							>
 								{part.text}
-							</span>
+							</Grid>
 						))}
 					</div>
 				);

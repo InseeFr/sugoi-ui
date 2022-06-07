@@ -10,10 +10,10 @@ import {
 	TableContainer,
 	TableHead,
 	TableRow,
-} from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import { Pagination } from '@material-ui/lab';
+} from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import { Pagination } from '@mui/material';
 import React from 'react';
 import { Group } from 'src/lib/model/api/group';
 

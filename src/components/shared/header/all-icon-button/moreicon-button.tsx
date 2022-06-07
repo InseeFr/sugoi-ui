@@ -1,5 +1,5 @@
-import { Box, IconButton, Popover } from '@material-ui/core';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { Box, IconButton, Popover } from '@mui/material';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AccountButton from './account-button';
 import ApiButton from './api-button';
 import GithubButton from './github-button';

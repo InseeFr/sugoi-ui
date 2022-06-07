@@ -1,4 +1,4 @@
-import { Grid, Paper, Tab, Tabs } from '@material-ui/core';
+import { Grid, Paper, Tab, Tabs } from '@mui/material';
 import React from 'react';
 import GenerateFields from 'src/components/shared/formular/fields/utils';
 import Panel from 'src/components/shared/panel/panel';

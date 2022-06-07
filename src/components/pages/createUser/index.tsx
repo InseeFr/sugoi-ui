@@ -1,4 +1,4 @@
-import { Button, Grid } from '@material-ui/core';
+import { Button, Grid } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import DataViewer from 'src/components/shared/dataViewer/dataviewer';
@@ -73,7 +73,6 @@ const CreateUsers = () => {
 								<Grid item>
 									<Button
 										variant="contained"
-										color="default"
 										onClick={
 											handleReset
 										}

@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import React from 'react';
 import SimpleDialog from './Dialog';
 
@@ -7,7 +7,7 @@ interface props {
 	body: React.ReactNode;
 	actions?: (params: any) => React.ReactNode;
 	text: string;
-	color?: 'primary' | 'secondary' | 'inherit' | 'default';
+	color?: 'primary' | 'secondary' | 'inherit';
 	variant?: 'contained' | 'outlined' | 'text';
 	disabled?: boolean;
 	open?: boolean;

@@ -1,5 +1,5 @@
-import { IconButton } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
+import { IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDeleteGroup } from 'src/lib/hooks/api-hooks';

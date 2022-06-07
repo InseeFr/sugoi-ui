@@ -1,4 +1,6 @@
-import { createStyles, Drawer, makeStyles, useTheme } from '@material-ui/core';
+import { Drawer, useTheme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import SiderBody from './sider-body';
 
 interface props {

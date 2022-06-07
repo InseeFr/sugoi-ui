@@ -1,5 +1,5 @@
-import { Grid, IconButton, LinearProgress } from '@material-ui/core';
-import ZoomInOutlinedIcon from '@material-ui/icons/ZoomInOutlined';
+import { Grid, IconButton, LinearProgress } from '@mui/material';
+import ZoomInOutlinedIcon from '@mui/icons-material/ZoomInOutlined';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
@@ -101,7 +101,10 @@ const SearchOrganizations = () => {
 					_rowIndex: any,
 				) {
 					return (
-						<IconButton aria-label="Détail">
+						<IconButton
+							aria-label="Détail"
+							size="large"
+						>
 							<ZoomInOutlinedIcon />
 						</IconButton>
 					);
@@ -168,7 +171,7 @@ const SearchOrganizations = () => {
 				<Grid
 					item
 					xs={12}
-					style={{ display: 'flex', alignItems: 'center' }}
+					sx={{ display: 'flex', alignItems: 'center' }}
 				>
 					<Title
 						title={

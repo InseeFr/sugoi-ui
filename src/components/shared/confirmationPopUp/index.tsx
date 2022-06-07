@@ -5,10 +5,10 @@ import {
 	TextField,
 	Typography,
 	useTheme,
-} from '@material-ui/core';
+} from '@mui/material';
 import { useEffect, useState } from 'react';
 import SimpleDialog from 'src/components/shared/popButton/Dialog';
-import WarningIcon from '@material-ui/icons/Warning';
+import WarningIcon from '@mui/icons-material/Warning';
 
 interface Props {
 	title: string;
@@ -53,20 +53,20 @@ const ConfirmationPopup = ({
 	};
 
 	useEffect(() => {
-		if (theme.palette.type === 'light') {
+		if (theme.palette.mode === 'light') {
 			setColorAlert('#fcf1ef');
 			setColorHightlight('#f0f0f0');
 		} else {
 			setColorAlert('#660e00');
 			setColorHightlight('#303030');
 		}
-	}, [theme.palette.type]);
+	}, [theme.palette.mode]);
 
 	return (
 		<>
-			<div onClick={handleOpen} style={{ display: 'inline' }}>
+			<Box onClick={handleOpen} sx={{ display: 'inline' }}>
 				{Icon}
-			</div>
+			</Box>
 			<SimpleDialog
 				onClose={handleClose}
 				maxwidth="sm"
@@ -76,13 +76,13 @@ const ConfirmationPopup = ({
 					<Grid container spacing={2} direction="column">
 						<Grid item>
 							<Box
-								style={{
+								sx={{
 									backgroundColor:
 										colorAlert,
 								}}
 							>
-								<div
-									style={{
+								<Box
+									sx={{
 										display: 'flex',
 										alignItems:
 											'center',
@@ -93,20 +93,20 @@ const ConfirmationPopup = ({
 									}
 									<Typography
 										variant="body1"
-										style={{
+										sx={{
 											fontWeight: 600,
 										}}
 										display="inline"
 									>
 										{body1}
 									</Typography>
-								</div>
+								</Box>
 								<Typography display="inline">
 									{body2}
 								</Typography>
 								<Typography
 									display="inline"
-									style={{
+									sx={{
 										fontWeight: 600,
 									}}
 								>
@@ -123,8 +123,9 @@ const ConfirmationPopup = ({
 								pour confirmer:
 							</Typography>
 							<Box>
-								<span
-									style={{
+								<Grid
+									component="span"
+									sx={{
 										backgroundColor:
 											colorHighlight,
 										borderRadius: '4px',
@@ -132,7 +133,7 @@ const ConfirmationPopup = ({
 									}}
 								>
 									{validation_text}
-								</span>
+								</Grid>
 							</Box>
 						</Grid>
 						<Grid item>

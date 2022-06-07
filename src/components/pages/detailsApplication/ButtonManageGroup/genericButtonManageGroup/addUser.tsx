@@ -12,10 +12,10 @@ import {
 	TableHead,
 	TableRow,
 	TextField,
-} from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import { Pagination } from '@material-ui/lab';
+} from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import { Pagination } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Title from 'src/components/shared/title/title';

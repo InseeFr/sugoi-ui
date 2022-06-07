@@ -5,9 +5,10 @@ import {
 	Grid,
 	IconButton,
 	Typography,
-} from '@material-ui/core';
-import CreateIcon from '@material-ui/icons/Create';
-import PeopleIcon from '@material-ui/icons/People';
+	Box,
+} from '@mui/material';
+import CreateIcon from '@mui/icons-material/Create';
+import PeopleIcon from '@mui/icons-material/People';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PopIcon from 'src/components/shared/popIcon/popIcon';
@@ -72,9 +73,9 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 	};
 
 	return (
-		<Grid container spacing={3} style={{ padding: 10 }}>
+		<Grid container spacing={3} sx={{ padding: 10 }}>
 			<Grid item xs={12}>
-				<div style={{ display: 'flex', alignItems: 'center' }}>
+				<Box sx={{ display: 'flex', alignItems: 'center' }}>
 					<Typography variant="subtitle1">
 						{name}
 					</Typography>
@@ -89,7 +90,7 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 							<CreateIcon fontSize="inherit" />
 						</IconButton>
 					)}
-				</div>
+				</Box>
 			</Grid>
 			{modifiable && edit ? (
 				<>

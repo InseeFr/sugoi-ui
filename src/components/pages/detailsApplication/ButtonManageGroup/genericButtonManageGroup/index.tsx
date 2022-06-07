@@ -1,5 +1,5 @@
-import { Grid, IconButton } from '@material-ui/core';
-import SettingsIcon from '@material-ui/icons/Settings';
+import { Grid, IconButton } from '@mui/material';
+import SettingsIcon from '@mui/icons-material/Settings';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import SimpleDialog from 'src/components/shared/popButton/Dialog';

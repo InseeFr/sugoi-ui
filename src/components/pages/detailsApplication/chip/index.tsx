@@ -1,6 +1,6 @@
-import { Chip, Grid } from '@material-ui/core';
-import PermIdentityIcon from '@material-ui/icons/PermIdentity';
-import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
+import { Chip, Grid } from '@mui/material';
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import SimpleDialog from 'src/components/shared/popButton/Dialog';

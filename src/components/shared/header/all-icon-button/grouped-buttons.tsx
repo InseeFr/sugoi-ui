@@ -1,4 +1,4 @@
-import { Hidden } from '@material-ui/core';
+import { Hidden } from '@mui/material';
 import AccountButton from './account-button';
 import ApiButton from './api-button';
 import GithubButton from './github-button';
@@ -12,7 +12,7 @@ import { ThemeButton } from './theme-button';
 const GroupedIcons = () => {
 	return (
 		<>
-			<Hidden xsDown implementation="css">
+			<Hidden smDown implementation="css">
 				<LanguageButton />
 				<HelpButton />
 				<ApiButton />

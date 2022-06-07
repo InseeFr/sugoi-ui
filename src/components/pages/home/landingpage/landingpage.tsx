@@ -1,23 +1,29 @@
 import React from 'react';
-import { Button, Box } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { styled } from '@mui/material/styles';
+import { Typography, Paper, Grid, Button, Box } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import { useReactOidc } from '@axa-fr/react-oidc-context';
 import { useTranslation } from 'react-i18next';
 
-const useStyles = makeStyles((theme) => ({
-	mainFeaturedPost: {
+const PREFIX = 'MainFeaturedPost';
+
+const classes = {
+	mainFeaturedPost: `${PREFIX}-mainFeaturedPost`,
+	overlay: `${PREFIX}-overlay`,
+	mainFeaturedPostContent: `${PREFIX}-mainFeaturedPostContent`,
+};
+
+const StyledPaper = styled(Paper)(({ theme }) => ({
+	[`&.${classes.mainFeaturedPost}`]: {
 		position: 'relative',
 		backgroundColor: theme.palette.grey[800],
 		color: theme.palette.common.white,
-		marginBottom: theme.spacing(4),
+		marginBottom: theme.spacing(6),
 		backgroundSize: 'cover',
 		backgroundPosition: 'center',
 	},
-	overlay: {
+
+	[`& .${classes.overlay}`]: {
 		position: 'absolute',
 		top: 0,
 		bottom: 0,
@@ -25,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
 		left: 0,
 		backgroundColor: 'rgba(0,0,0,.3)',
 	},
-	mainFeaturedPostContent: {
+
+	[`& .${classes.mainFeaturedPostContent}`]: {
 		position: 'relative',
 		padding: theme.spacing(3),
 		[theme.breakpoints.up('md')]: {
@@ -36,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MainFeaturedPost = () => {
-	const classes = useStyles();
 	const { push } = useHistory();
 	const { oidcUser, login } = useReactOidc();
 	const { t } = useTranslation();
@@ -49,9 +55,9 @@ const MainFeaturedPost = () => {
 	};
 
 	return (
-		<Paper
+		<StyledPaper
 			className={classes.mainFeaturedPost}
-			style={{
+			sx={{
 				backgroundImage: `url(/landing.jpg)`,
 			}}
 		>
@@ -78,7 +84,7 @@ const MainFeaturedPost = () => {
 							<Button
 								variant="contained"
 								onClick={action}
-								style={{
+								sx={{
 									backgroundColor:
 										'#7986cb',
 									color: '#ffffff',
@@ -99,7 +105,7 @@ const MainFeaturedPost = () => {
 					</div>
 				</Grid>
 			</Grid>
-		</Paper>
+		</StyledPaper>
 	);
 };
 
