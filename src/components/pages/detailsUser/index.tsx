@@ -49,7 +49,6 @@ const DetailUser = () => {
 		);
 
 	const onSubmit = () => {
-		console.log(formValues);
 		executeUpdate(id, formValues, realm, userStorage).then(() =>
 			execute(id, realm, userStorage),
 		);
