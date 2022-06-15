@@ -37,7 +37,7 @@ export const useForms = (initialValues: any) => {
 			setFormValues({ ...initialValues });
 			setIFormValues({ ...initialValues });
 		}
-	}, [initialValues]);
+	}, [iFormValues, initialValues]);
 
 	const handleChange = useCallback(
 		(path: any) => (value: any) => {

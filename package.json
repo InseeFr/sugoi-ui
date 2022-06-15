@@ -92,7 +92,7 @@
 		"eslint-plugin-jsx-a11y": "^6.5.1",
 		"eslint-plugin-prettier": "^4.0.0",
 		"eslint-plugin-react": "^7.28.0",
-		"eslint-plugin-react-hooks": "^4.3.0",
+		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-unused-imports": "^2.0.0",
 		"prettier": "^2.5.1",
 		"sonarqube-scanner": "^2.8.1"

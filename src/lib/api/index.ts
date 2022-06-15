@@ -135,7 +135,6 @@ export const getOrganizations = (
 	searchRequest?: searchRequestOrganization,
 	userStorage?: string,
 ): Promise<Pageable> => {
-	//searchRequest = Utils.cleanObjectEntries(searchRequest);
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.getOrganizations(realm, searchRequest || {});
 	} else {

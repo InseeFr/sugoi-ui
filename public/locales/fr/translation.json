@@ -48,6 +48,11 @@
 		"info_create": "Selectionner un userStorage d'abord",
 		"form": {
 			"field": {
+				"global": {
+					"name": "Recherche simple",
+					"help_text_title": "Recherche simple",
+					"help_text": "Recherche sur les 3 champs id, commonName, mail"
+				},
 				"identifiant": {
 					"name": "Identifiant",
 					"help_text_title": "Identifiant de l'utilisateur",
@@ -103,6 +108,11 @@
 		},
 		"form": {
 			"field": {
+				"global": {
+					"name": "Recherche globale",
+					"help_text_title": "Recherche globale",
+					"help_text": "Recherche globale sur les 2 champs id et mail"
+				},
 				"identifiant": {
 					"name": "Identifiant",
 					"help_text_title": "Identifiant de l'organisation",
@@ -273,8 +283,8 @@
 			"reset": "Réinitialiser"
 		},
 		"expand_button": {
-			"show_more": "Voir plus",
-			"show_less": "Voir moins"
+			"show_more": "Recherche avancée",
+			"show_less": "Recherche simple"
 		},
 		"error": {
 			"text": "Une erreur imprévue est survenue"
