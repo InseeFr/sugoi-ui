@@ -2,20 +2,23 @@ import { Grid, IconButton, LinearProgress } from '@material-ui/core';
 import ZoomInOutlinedIcon from '@material-ui/icons/ZoomInOutlined';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { ButtonDescription } from 'src/components/shared/description';
 import SearchForm from 'src/components/shared/searchFormular';
 import { SearchResults } from 'src/components/shared/searchResults';
 import Title from 'src/components/shared/title/title';
 import { useGetOrganizations } from 'src/lib/hooks/api-hooks';
+import useGetCurrentRealm from 'src/lib/hooks/realm/useGetCurrentRealm';
 import { Field } from 'src/lib/model/field';
 
 const SearchOrganizations = () => {
-	const { realm, userStorage } = useParams<any>();
 	const { enqueueSnackbar } = useSnackbar();
 	const { push } = useHistory();
 	const { t } = useTranslation();
 	document.title = t('search_organization.page_title');
+	const realmSelected = useGetCurrentRealm();
+	const realm = realmSelected.currentRealm?.name || '';
+	const userStorage = realmSelected.currentUs?.name || '';
 
 	const {
 		organizations,
@@ -29,13 +32,7 @@ const SearchOrganizations = () => {
 
 	const handleCreate = () => {
 		if (userStorage) {
-			push(
-				'/realm/' +
-					realm +
-					'/us/' +
-					userStorage +
-					'/organizations/create',
-			);
+			push(realmSelected.realmUsPath + 'organizations/create');
 		} else {
 			enqueueSnackbar(t('search_user.info_create'), {
 				variant: 'info',
@@ -44,20 +41,7 @@ const SearchOrganizations = () => {
 	};
 
 	const handleClickOnOrganization = (organizationId: string) => {
-		push(
-			userStorage
-				? '/realm/' +
-						realm +
-						'/us/' +
-						userStorage +
-						'/organizations/' +
-						organizationId
-				: '/realm/' +
-						realm +
-						'/' +
-						'organizations/' +
-						organizationId,
-		);
+		push(realmSelected.realmUsPath + 'organizations/' + organizationId);
 	};
 
 	const columns = [

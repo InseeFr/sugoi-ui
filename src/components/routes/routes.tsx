@@ -9,6 +9,7 @@ import SearchOrganizations from 'src/components/pages/searchOrganizations';
 import SearchUsers from 'src/components/pages/searchUsers';
 import Settings from 'src/components/pages/settings';
 import { DetailsApplication } from 'src/components/pages/detailsApplication';
+import { BreadcrumbsRoute } from 'use-react-router-breadcrumbs';
 
 const IdDynamicBreadcrumb = ({ match }: any): string => {
 	return match.params['id'];
@@ -20,7 +21,7 @@ const RealmDynamicBreadcrumb = ({ match }: any): string => {
 const UsDynamicBreadcrumb = ({ match }: any): string => {
 	return 'UserStorage ' + match.params['userStorage'];
 };
-interface Iroutes {
+export interface Iroutes extends BreadcrumbsRoute {
 	path: string;
 	breadcrumb: any;
 	component: () => JSX.Element;

@@ -12,3 +12,8 @@ export const changeStatusNotifDebug = (enabled: boolean) => ({
 	type: 'changeStatusNotifDebug',
 	payload: { enabled },
 });
+
+export const changeCurrentRealm = (realmName?: string, usName?: string) => ({
+	type: 'changeCurrentRealm',
+	payload: { realmName, usName },
+});

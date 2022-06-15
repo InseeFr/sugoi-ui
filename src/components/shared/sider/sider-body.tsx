@@ -16,14 +16,13 @@ import HomeIcon from '@material-ui/icons/Home';
 import PersonIcon from '@material-ui/icons/Person';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Autocomplete from '@material-ui/lab/Autocomplete/Autocomplete';
-import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { matchPath, useHistory, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { changeCurrentRealm } from 'src/lib/redux/actions/app';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useGetRealms } from 'src/lib/hooks/realm/useGetRealms';
 import GrainIcon from '@material-ui/icons/Grain';
-import { useSnackbar } from 'notistack';
-import { Realm } from 'src/lib/model/api/realm';
-import { UserStorage } from 'src/lib/model/api/userStorage';
+import { useGetCurrentRealm } from 'src/lib/hooks/realm/useGetCurrentRealm';
 
 const useStyle = makeStyles((theme: Theme) =>
 	createStyles({
@@ -39,92 +38,16 @@ const useStyle = makeStyles((theme: Theme) =>
 const SiderBody = () => {
 	const classes = useStyle();
 	const { push } = useHistory();
+	const dispatch = useDispatch();
 	const location = useLocation();
 	const { t } = useTranslation();
-	const [realmSelected, setRealmSelected] = useState<Realm | undefined>();
-	const { enqueueSnackbar } = useSnackbar();
-
-	const [userStorageSelected, setStorageSelected] = useState<
-		UserStorage | undefined
-	>();
+	const realmSelected = useGetCurrentRealm();
 
 	const { realms } = useGetRealms();
 
-	useEffect(() => {
-		const match = matchPath<{ realm: 'string'; userStorage: 'string' }>(
-			location.pathname,
-			['/realm/:realm/us/:userStorage', '/realm/:realm/'],
-		);
-		if (!match && realms && realms.length === 1) {
-			setRealmSelected(realms[0]);
-			if (realms[0].userStorages.length === 1) {
-				setStorageSelected(realms[0].userStorages[0]);
-				push(
-					'/realm/' +
-						realms[0].name +
-						'/us/' +
-						realms[0].userStorages[0].name,
-				);
-			} else {
-				push('/realm/' + realms[0].name);
-			}
-		}
-		if (realms && realms.length > 0 && match) {
-			if (
-				realms
-					.map((realm) => realm.name)
-					.includes(match?.params?.realm)
-			) {
-				setRealmSelected(
-					realms.filter(
-						(realm) =>
-							match?.params?.realm === realm.name,
-					)[0],
-				);
-				if (match.params?.userStorage) {
-					if (
-						realms
-							.find(
-								(realm) =>
-									realm.name ===
-									match.params?.realm,
-							)
-							?.userStorages.map((us) => us.name)
-							.includes(match?.params?.userStorage)
-					) {
-						setStorageSelected(
-							realms
-								.find(
-									(realm) =>
-										realm.name ===
-										match.params?.realm,
-								)
-								?.userStorages?.filter(
-									(us) =>
-										us.name ===
-										match?.params
-											?.userStorage,
-								)[0],
-						);
-					} else {
-						push('/realm/' + match?.params?.realm);
-					}
-				}
-			} else {
-				push('/');
-				enqueueSnackbar("Vous n'avez pas à être la", {
-					variant: 'error',
-					anchorOrigin: {
-						vertical: 'top',
-						horizontal: 'center',
-					},
-				});
-			}
-		} else {
-			setRealmSelected(undefined);
-			setStorageSelected(undefined);
-		}
-	}, [enqueueSnackbar, location.pathname, push, realms]);
+	const pushWithRealmUs = (urlExtension: string) => {
+		push(realmSelected.realmUsPath + urlExtension);
+	};
 
 	return (
 		<>
@@ -165,40 +88,20 @@ const SiderBody = () => {
 								) || []
 							}
 							style={{ width: 300 }}
-							value={realmSelected?.name || null}
+							value={
+								realmSelected?.currentRealm
+									?.name || null
+							}
 							onChange={(
 								_event: any,
 								newRealmName: string | null,
 							) => {
-								if (newRealmName) {
-									const newRealm =
-										realms?.find(
-											(realm) =>
-												newRealmName ===
-												realm.name,
-										);
-									if (
-										newRealm
-											?.userStorages
-											?.length === 1
-									) {
-										push(
-											'/realm/' +
-												newRealmName +
-												'/us/' +
-												newRealm
-													?.userStorages[0]
-													.name,
-										);
-									} else {
-										push(
-											'/realm/' +
-												newRealmName,
-										);
-									}
-								} else {
-									push('/');
-								}
+								dispatch(
+									changeCurrentRealm(
+										newRealmName ||
+											undefined,
+									),
+								);
 							}}
 							renderInput={(params) => (
 								<TextField
@@ -215,7 +118,8 @@ const SiderBody = () => {
 						<Autocomplete
 							id="userStorage choice"
 							disabled={
-								realmSelected?.name
+								realmSelected?.currentRealm
+									?.name
 									? false
 									: true
 							}
@@ -224,7 +128,9 @@ const SiderBody = () => {
 									?.filter(
 										(realm) =>
 											realm.name ===
-											realmSelected?.name,
+											realmSelected
+												?.currentRealm
+												?.name,
 									)[0]
 									?.userStorages.map(
 										(us) => us.name,
@@ -232,24 +138,22 @@ const SiderBody = () => {
 							}
 							style={{ width: 300 }}
 							value={
-								userStorageSelected?.name ||
-								null
+								realmSelected?.currentUs
+									?.name || null
 							}
 							onChange={(
 								_event: any,
 								newUserStorage: string | null,
 							) => {
-								newUserStorage
-									? push(
-											'/realm/' +
-												realmSelected?.name +
-												'/us/' +
-												newUserStorage,
-									  )
-									: push(
-											'/realm/' +
-												realmSelected?.name,
-									  );
+								dispatch(
+									changeCurrentRealm(
+										realmSelected
+											?.currentRealm
+											?.name,
+										newUserStorage ||
+											undefined,
+									),
+								);
 							}}
 							renderInput={(params) => (
 								<TextField
@@ -266,23 +170,9 @@ const SiderBody = () => {
 						button
 						key="search_users"
 						disabled={
-							realmSelected?.name ? false : true
+							!realmSelected?.currentRealm?.name
 						}
-						onClick={() =>
-							userStorageSelected
-								? push(
-										'/realm/' +
-											realmSelected?.name +
-											'/us/' +
-											userStorageSelected?.name +
-											'/users',
-								  )
-								: push(
-										'/realm/' +
-											realmSelected?.name +
-											'/users',
-								  )
-						}
+						onClick={() => pushWithRealmUs('users')}
 						className={classes.nestedUS}
 						selected={location.pathname.includes(
 							'/users',
@@ -299,30 +189,19 @@ const SiderBody = () => {
 						button
 						key="search_organizations"
 						disabled={
-							realmSelected?.name &&
-							realmSelected.userStorages.some(
+							realmSelected?.currentRealm?.name &&
+							realmSelected.currentRealm.userStorages.some(
 								(us) => us.organizationSource,
 							) &&
-							(userStorageSelected
-								? userStorageSelected.organizationSource
+							(realmSelected?.currentUs
+								? realmSelected?.currentUs
+										?.organizationSource
 								: true)
 								? false
 								: true
 						}
 						onClick={() =>
-							userStorageSelected
-								? push(
-										'/realm/' +
-											realmSelected?.name +
-											'/us/' +
-											userStorageSelected?.name +
-											'/organizations',
-								  )
-								: push(
-										'/realm/' +
-											realmSelected?.name +
-											'/organizations',
-								  )
+							pushWithRealmUs('organizations')
 						}
 						className={classes.nestedUS}
 						selected={location.pathname.includes(
@@ -342,17 +221,13 @@ const SiderBody = () => {
 						button
 						key="search_application"
 						disabled={
-							realmSelected?.name &&
-							realmSelected?.appSource
+							realmSelected?.currentRealm?.name &&
+							realmSelected?.currentRealm?.appSource
 								? false
 								: true
 						}
 						onClick={() =>
-							push(
-								'/realm/' +
-									realmSelected?.name +
-									'/applications',
-							)
+							pushWithRealmUs('applications')
 						}
 						className={classes.nested}
 						selected={location.pathname.includes(

@@ -9,25 +9,23 @@ import ZoomInOutlinedIcon from '@material-ui/icons/ZoomInOutlined';
 import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { ButtonDescription } from 'src/components/shared/description';
 import SearchForm from 'src/components/shared/searchFormular';
 import { SearchResults } from 'src/components/shared/searchResults';
 import Title from 'src/components/shared/title/title';
 import { exportUser } from 'src/lib/api/remote';
 import { useGetUsers } from 'src/lib/hooks/api-hooks';
+import useGetCurrentRealm from 'src/lib/hooks/realm/useGetCurrentRealm';
 import { Field } from 'src/lib/model/field';
 import { download } from 'src/lib/utils/downloadFile';
 
-interface ParamTypes {
-	realm: string;
-	userStorage: string;
-}
-
 const SearchUsers = () => {
-	const { realm, userStorage } = useParams<ParamTypes>();
 	const { enqueueSnackbar } = useSnackbar();
 	const { push } = useHistory();
+	const realmSelected = useGetCurrentRealm();
+	const realm = realmSelected.currentRealm?.name || '';
+	const userStorage = realmSelected.currentUs?.name || '';
 
 	const [lastSearch, setLastSearch] = useState({});
 
@@ -46,16 +44,7 @@ const SearchUsers = () => {
 	};
 
 	const handleClickOnUser = (username: string) => {
-		push(
-			userStorage
-				? '/realm/' +
-						realm +
-						'/us/' +
-						userStorage +
-						'/users/' +
-						username
-				: '/realm/' + realm + '/' + 'users/' + username,
-		);
+		push(realmSelected.realmUsPath + 'users/' + username);
 	};
 
 	const handleCreate = () => {
