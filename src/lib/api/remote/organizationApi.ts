@@ -15,6 +15,7 @@ export const getOrganizations = (
 		role,
 		property,
 		mail,
+		typeRecherche,
 	}: searchRequestOrganization,
 ): Promise<Pageable> => {
 	//Check if there are any previous pending requests
@@ -31,6 +32,7 @@ export const getOrganizations = (
 				role,
 				property,
 				mail,
+				typeRecherche,
 			},
 			cancelToken: cancelToken.token,
 		})
@@ -72,6 +74,7 @@ export const getOrganizationsFromUserStorage = (
 		role,
 		property,
 		mail,
+		typeRecherche,
 	}: searchRequestOrganization,
 ): Promise<Pageable> =>
 	getAuthClient()
@@ -82,6 +85,7 @@ export const getOrganizationsFromUserStorage = (
 				role,
 				property,
 				mail,
+				typeRecherche,
 			},
 		})
 		.then((r: any) => r.data);

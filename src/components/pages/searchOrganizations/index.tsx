@@ -9,6 +9,7 @@ import { SearchResults } from 'src/components/shared/searchResults';
 import Title from 'src/components/shared/title/title';
 import { useGetOrganizations } from 'src/lib/hooks/api-hooks';
 import { Field } from 'src/lib/model/field';
+import searchRequestOrganization from 'src/lib/model/js/searchRequestOrganization';
 
 const SearchOrganizations = () => {
 	const { realm, userStorage } = useParams<any>();
@@ -24,7 +25,17 @@ const SearchOrganizations = () => {
 	} = useGetOrganizations(realm, userStorage);
 
 	const handleSearch = (values: any) => {
-		searchOrganizations(realm, { ...values }, userStorage);
+		let toSearch: searchRequestOrganization = {};
+		if (values?.global) {
+			toSearch = {
+				identifiant: values.global,
+				mail: values.global,
+				typeRecherche: 'OR',
+			};
+		} else {
+			toSearch = { ...values };
+		}
+		searchOrganizations(realm, { ...toSearch }, userStorage);
 	};
 
 	const handleCreate = () => {
@@ -101,6 +112,23 @@ const SearchOrganizations = () => {
 
 	const formFields: Field[] = [
 		{
+			name: t('search_organization.form.field.global.name'),
+			helpTextTitle: t(
+				'search_organization.form.field.global.help_text_title',
+			),
+			helpText: t(
+				'search_organization.form.field.global.help_text',
+			),
+			path: 'global',
+			type: 'string',
+			modifiable: true,
+			tag: '',
+			options: {},
+		},
+	];
+
+	const formFieldsAdvanced: Field[] = [
+		{
 			name: t('search_organization.form.field.identifiant.name'),
 			helpTextTitle: t(
 				'search_organization.form.field.identifiant.help_text_title',
@@ -159,11 +187,10 @@ const SearchOrganizations = () => {
 			>
 				<Grid item xs={12}>
 					<SearchForm
-						realm={realm}
-						userStorage={userStorage}
 						onSubmit={handleSearch}
 						formFields={formFields}
 						handleClickAdd={handleCreate}
+						formFieldsAdvanced={formFieldsAdvanced}
 					/>
 				</Grid>
 				<Grid item xs={12}>

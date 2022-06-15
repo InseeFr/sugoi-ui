@@ -17,6 +17,7 @@ import Title from 'src/components/shared/title/title';
 import { exportUser } from 'src/lib/api/remote';
 import { useGetUsers } from 'src/lib/hooks/api-hooks';
 import { Field } from 'src/lib/model/field';
+import SearchRequestUser from 'src/lib/model/js/searchRequestUser';
 import { download } from 'src/lib/utils/downloadFile';
 
 interface ParamTypes {
@@ -41,8 +42,19 @@ const SearchUsers = () => {
 	} = useGetUsers(realm, userStorage);
 
 	const handleSearch = (values: any) => {
-		setLastSearch(values);
-		searchUsers({ ...values }, realm, userStorage);
+		let toSearch: SearchRequestUser = {};
+		if (values?.global) {
+			toSearch = {
+				identifiant: values.global,
+				mail: values.global,
+				commonName: values.global,
+				typeRecherche: 'OR',
+			};
+		} else {
+			toSearch = { ...values };
+		}
+		setLastSearch(toSearch);
+		searchUsers({ ...toSearch }, realm, userStorage);
 	};
 
 	const handleClickOnUser = (username: string) => {
@@ -82,6 +94,21 @@ const SearchUsers = () => {
 
 	const formFields: Field[] = [
 		{
+			name: t('search_user.form.field.global.name'),
+			helpTextTitle: t(
+				'search_user.form.field.global.help_text_title',
+			),
+			helpText: t('search_user.form.field.global.help_text'),
+			path: 'global',
+			type: 'string',
+			modifiable: true,
+			tag: '',
+			options: {},
+		},
+	];
+
+	const formFieldsAdvanced: Field[] = [
+		{
 			name: t('search_user.form.field.identifiant.name'),
 			helpTextTitle: t(
 				'search_user.form.field.identifiant.help_text_title',
@@ -94,26 +121,14 @@ const SearchUsers = () => {
 			options: {},
 		},
 		{
-			name: t('search_user.form.field.description.name'),
+			name: t('search_user.form.field.email.name'),
 			helpTextTitle: t(
-				'search_user.form.field.description.help_text_title',
+				'search_user.form.field.email.help_text_title',
 			),
-			helpText: t('search_user.form.field.description.help_text'),
-			path: 'description',
+			helpText: t('search_user.form.field.email.help_text'),
+			path: 'mail',
 			type: 'string',
 			modifiable: true,
-			tag: '',
-			options: {},
-		},
-		{
-			name: t('search_user.form.field.organization.name'),
-			helpTextTitle: t(
-				'search_user.form.field.organization.help_text_title',
-			),
-			helpText: t('search_user.form.field.organization.help_text'),
-			type: 'string',
-			modifiable: true,
-			path: 'organizationId',
 			tag: '',
 			options: {},
 		},
@@ -153,15 +168,28 @@ const SearchUsers = () => {
 			tag: '',
 			options: {},
 		},
+
 		{
-			name: t('search_user.form.field.email.name'),
+			name: t('search_user.form.field.description.name'),
 			helpTextTitle: t(
-				'search_user.form.field.email.help_text_title',
+				'search_user.form.field.description.help_text_title',
 			),
-			helpText: t('search_user.form.field.email.help_text'),
-			path: 'mail',
+			helpText: t('search_user.form.field.description.help_text'),
+			path: 'description',
 			type: 'string',
 			modifiable: true,
+			tag: '',
+			options: {},
+		},
+		{
+			name: t('search_user.form.field.organization.name'),
+			helpTextTitle: t(
+				'search_user.form.field.organization.help_text_title',
+			),
+			helpText: t('search_user.form.field.organization.help_text'),
+			type: 'string',
+			modifiable: true,
+			path: 'organizationId',
 			tag: '',
 			options: {},
 		},
@@ -321,10 +349,9 @@ const SearchUsers = () => {
 				<Grid item xs={12}>
 					<SearchForm
 						handleClickAdd={handleCreate}
-						realm={realm}
-						userStorage={userStorage}
 						onSubmit={handleSearch}
 						formFields={formFields}
+						formFieldsAdvanced={formFieldsAdvanced}
 					/>
 				</Grid>
 				<Grid item xs={12}>
