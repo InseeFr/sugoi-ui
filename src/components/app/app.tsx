@@ -1,4 +1,4 @@
-import { OidcSecure, useReactOidc } from '@axa-fr/react-oidc-context';
+import { useReactOidc, OidcSecure } from '@axa-fr/react-oidc-context';
 import { Container } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {
@@ -8,16 +8,16 @@ import {
 	Theme,
 } from '@material-ui/core/styles';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	matchPath,
 	Redirect,
 	Route,
 	Switch,
-	useLocation,
 	useHistory,
+	useLocation,
 } from 'react-router-dom';
-import { RootState } from 'src/lib/configuration/store-configuration';
 import { DarkTheme, LightTheme } from 'src/components/material-ui-theme';
 import routes from 'src/components/routes/routes';
 import BreadCrumbs from 'src/components/shared/breadcrumbs/breadcrumbs';
@@ -27,9 +27,9 @@ import Header from 'src/components/shared/header/header';
 import Notifier from 'src/components/shared/notifications';
 import ScrollTop from 'src/components/shared/scroll-top/scroll-top';
 import Sider from 'src/components/shared/sider';
-import { useTranslation } from 'react-i18next';
-import { changeCurrentRealm } from 'src/lib/redux/actions/app';
+import { RootState } from 'src/lib/configuration/store-configuration';
 import useGetCurrentRealm from 'src/lib/hooks/realm/useGetCurrentRealm';
+import { changeCurrentRealm } from 'src/lib/redux/actions/app';
 
 const matchRealmAndUS = (location: string) => {
 	let matchRealmUs = matchPath<{ realm: 'string'; userStorage: 'string' }>(
@@ -53,44 +53,51 @@ const matchRealmAndUS = (location: string) => {
 	return matchRealmUs?.params;
 };
 
-const RouteOrRedirect = ({
-	component,
-	isSecure,
-}: {
-	component: () => JSX.Element;
-	isSecure: boolean;
-}): JSX.Element => {
-	const location = useLocation();
-	const realmUsState = useGetCurrentRealm();
-	const dispatch = useDispatch();
-	const { push } = useHistory();
-	const [isInitialized, setInitialized] = useState<boolean>(false);
-
-	useEffect(() => {
-		if (location && realmUsState) {
-			const match = matchRealmAndUS(location.pathname);
-			const currentRealmName = match?.realm;
-			const currentUserstorageName = match?.userStorage;
-			if (
-				currentRealmName !== realmUsState.currentRealm?.name ||
-				currentUserstorageName !== realmUsState.currentUs?.name
-			) {
-				if (isInitialized) {
-					push(realmUsState.realmUsPath);
-				} else {
-					dispatch(
-						changeCurrentRealm(
-							currentRealmName,
-							currentUserstorageName,
-						),
-					);
+const withRouteOrRedirect = (WrappedComponent: any, isSecure: boolean) => {
+	const Component = (props: any) => {
+		const location = useLocation();
+		const realmUsState = useGetCurrentRealm();
+		const dispatch = useDispatch();
+		const { push } = useHistory();
+		const [isInitialized, setInitialized] = useState<boolean>(false);
+		console.log(location);
+		useEffect(() => {
+			if (location && realmUsState) {
+				const match = matchRealmAndUS(location.pathname);
+				console.log('match: ', match);
+				console.log('store: ', realmUsState);
+				const currentRealmName = match?.realm;
+				const currentUserstorageName = match?.userStorage;
+				if (
+					currentRealmName !==
+						realmUsState.currentRealm?.name ||
+					currentUserstorageName !==
+						realmUsState.currentUs?.name
+				) {
+					if (isInitialized) {
+						push(realmUsState.realmUsPath);
+					} else {
+						dispatch(
+							changeCurrentRealm(
+								currentRealmName,
+								currentUserstorageName,
+							),
+						);
+					}
 				}
+				setInitialized(true);
 			}
-			setInitialized(true);
-		}
-	}, [location, realmUsState, isInitialized, push, dispatch]);
+		}, [location, realmUsState, isInitialized, push, dispatch]);
 
-	return isSecure ? <OidcSecure>{component()}</OidcSecure> : component();
+		return isSecure ? (
+			<OidcSecure>
+				<WrappedComponent {...props} />
+			</OidcSecure>
+		) : (
+			<WrappedComponent {...props} />
+		);
+	};
+	return Component;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -162,16 +169,11 @@ const App = () => {
 										exact={route.exact}
 										path={route.path}
 										key={i}
-									>
-										<RouteOrRedirect
-											component={
-												route.component
-											}
-											isSecure={
-												route.secure
-											}
-										/>
-									</Route>
+										component={withRouteOrRedirect(
+											route.component,
+											route.secure,
+										)}
+									/>
 								))}
 								<Redirect to="/" />
 							</Switch>
