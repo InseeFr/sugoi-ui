@@ -1,38 +1,33 @@
 {
-    "env": {
-        "browser": true,
-        "node": true
-    },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:@typescript-eslint/base",
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:prettier/recommended",
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 2020,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react",
-        "@typescript-eslint",
-        "prettier",
-        "unused-imports"
-    ],
-    "rules": {
-        "prettier/prettier": [
-            "error",
-            {
-              "endOfLine": "auto",
-            }
-        ],
-        "no-use-before-define": "off",
-        "@typescript-eslint/no-use-before-define": "warn",
+	"env": {
+		"browser": true,
+		"node": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:@typescript-eslint/base",
+		"plugin:@typescript-eslint/eslint-recommended",
+		"plugin:prettier/recommended"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 2020,
+		"sourceType": "module"
+	},
+	"plugins": ["react", "@typescript-eslint", "prettier", "unused-imports"],
+	"rules": {
+		"prettier/prettier": [
+			"error",
+			{
+				"endOfLine": "auto"
+			}
+		],
+		"no-use-before-define": "off",
+		"@typescript-eslint/no-use-before-define": "warn",
 		"arrow-body-style": 0,
 		"import/no-named-as-default": 0,
 		"import/prefer-default-export": 0,
@@ -41,22 +36,22 @@
 		"import/no-extraneous-dependencies": 0,
 		"react/forbid-prop-types": 0,
 		"react/jsx-filename-extension": 0,
-        "react/react-in-jsx-scope": "off",
-        "no-unused-vars": "off",
+		"react/react-in-jsx-scope": "off",
+		"no-unused-vars": "off",
 		"max-len": [1, { "code": 400 }],
 		"comma-dangle": 0,
 		"react/no-danger": 0,
 		"no-underscore-dangle": ["error", { "allowAfterThis": true }],
-        "react/no-unescaped-entities":0,
-        "unused-imports/no-unused-imports": "error",
-        "unused-imports/no-unused-vars": [
-        "warn",
-        {
-            "vars": "all",
-            "varsIgnorePattern": "^_",
-            "args": "after-used",
-            "argsIgnorePattern": "^_"
-        }
-        ]
-    }
+		"react/no-unescaped-entities": 0,
+		"unused-imports/no-unused-imports": "error",
+		"unused-imports/no-unused-vars": [
+			"warn",
+			{
+				"vars": "all",
+				"varsIgnorePattern": "^_",
+				"args": "after-used",
+				"argsIgnorePattern": "^_"
+			}
+		]
+	}
 }
