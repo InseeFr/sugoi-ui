@@ -1,11 +1,11 @@
-import { useReactOidc } from '@axa-fr/react-oidc-context';
+import { useOidcUser } from '@axa-fr/react-oidc';
 import { Avatar, Box, IconButton, Popover, Typography } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const AccountButton = () => {
-	const { oidcUser } = useReactOidc();
+	const { oidcUser } = useOidcUser();
 	const { t } = useTranslation();
 
 	const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -53,10 +53,10 @@ const AccountButton = () => {
 				>
 					<Avatar src="/static/images/avatars/avatar_6.png" />
 					<Typography color="textPrimary" variant="h6">
-						{oidcUser.profile.name}
+						{oidcUser.name}
 					</Typography>
 					<Typography color="textSecondary" variant="body2">
-						{oidcUser.profile.email}
+						{oidcUser.email}
 					</Typography>
 				</Box>
 				<Box

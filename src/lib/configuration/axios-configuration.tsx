@@ -55,7 +55,8 @@ export const getAuthClient = () => {
 			);
 			config.headers = {
 				Authorization:
-					'Bearer ' + Store.getState().user.access_token,
+					'Bearer ' +
+					Store.getState().user.oidcUser.accessToken,
 			};
 			return config;
 		},

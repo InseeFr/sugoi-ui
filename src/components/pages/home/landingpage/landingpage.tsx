@@ -1,9 +1,10 @@
-import React from 'react';
 import { styled } from '@mui/material/styles';
 import { Typography, Paper, Grid, Button, Box } from '@mui/material';
 import { useHistory } from 'react-router-dom';
-import { useReactOidc } from '@axa-fr/react-oidc-context';
+import { useOidc } from '@axa-fr/react-oidc';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/lib/configuration/store-configuration';
 
 const PREFIX = 'MainFeaturedPost';
 
@@ -44,11 +45,14 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 
 const MainFeaturedPost = () => {
 	const { push } = useHistory();
-	const { oidcUser, login } = useReactOidc();
+	const { login } = useOidc();
+	const isAuthenticated = useSelector(
+		(store: RootState) => store.user.isAuthenticated,
+	);
 	const { t } = useTranslation();
 
 	const action: any = () => {
-		if (!oidcUser) {
+		if (!isAuthenticated) {
 			login();
 			push('/');
 		}
@@ -80,7 +84,7 @@ const MainFeaturedPost = () => {
 						>
 							{t('home.landing.description')}
 						</Typography>
-						{oidcUser ? null : (
+						{isAuthenticated ? null : (
 							<Button
 								variant="contained"
 								onClick={action}

@@ -5,22 +5,15 @@ import store from 'src/lib/configuration/store-configuration';
 import { BrowserRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 import { saveConfig } from 'src/lib/redux/actions/app';
+import { OidcProvider } from '@axa-fr/react-oidc';
 import { loadUser } from 'src/lib/redux/actions/user';
-import {
-	AuthenticationProvider,
-	InMemoryWebStorage,
-	oidcLog,
-} from '@axa-fr/react-oidc-context';
-import { UserManagerSettings } from 'oidc-client';
 import { getConfigFile } from 'src/lib/configuration/utils';
 import { Loader } from './components/shared/loader/loader';
 import App from 'src/components/app/app';
 import 'src/lib/i18n';
 
 const Start = () => {
-	const [authConfiguration, setAuthConfiguration] = useState<
-		UserManagerSettings | undefined
-	>(undefined);
+	const [authConfiguration, setAuthConfiguration] = useState(undefined);
 	const [loading, setLoading] = useState(true);
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -34,23 +27,22 @@ const Start = () => {
 	return loading ? (
 		<Loader />
 	) : (
-		<AuthenticationProvider
+		<OidcProvider
 			configuration={authConfiguration}
-			loggerLevel={oidcLog.INFO}
-			isEnabled={true}
-			callbackComponentOverride={Loader}
-			UserStore={InMemoryWebStorage}
-			authenticating={Loader}
+			loadingComponent={Loader}
+			authenticatingComponent={Loader}
 			sessionLostComponent={Loader}
-			customEvents={{
-				onUserLoaded: (user) => dispatch(loadUser(user)),
-				onUserUnloaded: () => {},
-				onSilentRenewError: (_error) => {},
-				onUserSignedOut: () => {},
-				onUserSessionChanged: () => {},
-				onAccessTokenExpiring: () => {},
-				onAccessTokenExpired: () => {},
-			}}
+			callbackSuccessComponent={Loader}
+			onEvent={(
+				_configurationName: string,
+				name: string,
+				user: any,
+			) =>
+				(name === 'token_aquired' ||
+					name === 'token_renewed' ||
+					name === 'refreshTokensAsync_silent_end') &&
+				dispatch(loadUser(user))
+			}
 		>
 			<BrowserRouter>
 				<SnackbarProvider
@@ -64,7 +56,7 @@ const Start = () => {
 					<App />
 				</SnackbarProvider>
 			</BrowserRouter>
-		</AuthenticationProvider>
+		</OidcProvider>
 	);
 };
 
