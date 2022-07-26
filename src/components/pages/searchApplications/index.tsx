@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
 	useCreateApplication,
 	useGetApplications,
@@ -24,7 +24,7 @@ import ApplicationsViewer from './applications_viewer';
 
 export const SearchApplications = () => {
 	const { t } = useTranslation();
-	const { realm } = useParams<any>();
+	const { realm } = useParams() as { realm: string };
 	const { applications, execute, loading } = useGetApplications(
 		realm,
 		undefined,
@@ -37,7 +37,7 @@ export const SearchApplications = () => {
 
 	const { execute: createApplication } = useCreateApplication();
 	const [search, setSearch] = useState<string>('');
-	const { push } = useHistory();
+	const navigate = useNavigate();
 
 	document.title = t('search_application.page_title');
 
@@ -51,11 +51,13 @@ export const SearchApplications = () => {
 
 	const handleClickOnApp = (application: Application) => {
 		console.log(application);
-		push('/realm/' + realm + '/' + 'applications/' + application.name);
+		navigate(
+			'/realm/' + realm + '/' + 'applications/' + application.name,
+		);
 	};
 
 	const handleClickOnRow = (appname: string) => {
-		push('/realm/' + realm + '/' + 'applications/' + appname);
+		navigate('/realm/' + realm + '/' + 'applications/' + appname);
 	};
 
 	const handleSearch = (e: any) => {

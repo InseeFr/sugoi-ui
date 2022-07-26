@@ -16,7 +16,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import Autocomplete from '@mui/lab/Autocomplete/Autocomplete';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { matchPath, useHistory, useLocation } from 'react-router-dom';
+import { useMatch, useNavigate } from 'react-router-dom';
 import { useGetRealms } from 'src/lib/hooks/realm/useGetRealms';
 import GrainIcon from '@mui/icons-material/Grain';
 import { useSnackbar } from 'notistack';
@@ -25,11 +25,16 @@ import { UserStorage } from 'src/lib/model/api/userStorage';
 
 const SiderBody = () => {
 	const theme = useTheme();
-	const { push } = useHistory();
-	const location = useLocation();
+	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const [realmSelected, setRealmSelected] = useState<Realm | undefined>();
 	const { enqueueSnackbar } = useSnackbar();
+	const matchWithUs = useMatch('/realm/:realm/us/:userStorage/*');
+	const matchWitoutUs = useMatch('/realm/:realm/*');
+	const { realm: realmPath, userStorage: usPath } = matchWithUs?.params || {
+		realm: matchWitoutUs?.params.realm,
+		userStorage: undefined,
+	};
 
 	const [userStorageSelected, setStorageSelected] = useState<
 		UserStorage | undefined
@@ -38,67 +43,53 @@ const SiderBody = () => {
 	const { realms } = useGetRealms();
 
 	useEffect(() => {
-		const match = matchPath<{ realm: 'string'; userStorage: 'string' }>(
-			location.pathname,
-			['/realm/:realm/us/:userStorage', '/realm/:realm/'],
-		);
-		if (!match && realms && realms.length === 1) {
+		if (!realmPath && realms && realms.length === 1) {
 			setRealmSelected(realms[0]);
 			if (realms[0].userStorages.length === 1) {
 				setStorageSelected(realms[0].userStorages[0]);
-				push(
+				navigate(
 					'/realm/' +
 						realms[0].name +
 						'/us/' +
 						realms[0].userStorages[0].name,
 				);
 			} else {
-				push('/realm/' + realms[0].name);
+				navigate('/realm/' + realms[0].name);
 			}
 		}
-		if (realms && realms.length > 0 && match) {
-			if (
-				realms
-					.map((realm) => realm.name)
-					.includes(match?.params?.realm)
-			) {
+		if (realms && realms.length > 0 && realmPath) {
+			if (realms.map((realm) => realm.name).includes(realmPath)) {
 				setRealmSelected(
-					realms.filter(
-						(realm) =>
-							match?.params?.realm === realm.name,
-					)[0],
+					realms.find((realm) => realmPath === realm.name),
 				);
-				if (match.params?.userStorage) {
+				if (usPath) {
 					if (
 						realms
 							.find(
 								(realm) =>
-									realm.name ===
-									match.params?.realm,
+									realm.name === realmPath,
 							)
 							?.userStorages.map((us) => us.name)
-							.includes(match?.params?.userStorage)
+							.includes(usPath)
 					) {
 						setStorageSelected(
 							realms
 								.find(
 									(realm) =>
 										realm.name ===
-										match.params?.realm,
+										realmPath,
 								)
 								?.userStorages?.filter(
 									(us) =>
-										us.name ===
-										match?.params
-											?.userStorage,
+										us.name === usPath,
 								)[0],
 						);
 					} else {
-						push('/realm/' + match?.params?.realm);
+						navigate('/realm/' + realmPath);
 					}
 				}
 			} else {
-				push('/');
+				navigate('/');
 				enqueueSnackbar("Vous n'avez pas à être la", {
 					variant: 'error',
 					anchorOrigin: {
@@ -111,7 +102,7 @@ const SiderBody = () => {
 			setRealmSelected(undefined);
 			setStorageSelected(undefined);
 		}
-	}, [enqueueSnackbar, location.pathname, push, realms]);
+	}, [enqueueSnackbar, navigate, realms, realmPath, usPath]);
 
 	return (
 		<>
@@ -121,7 +112,7 @@ const SiderBody = () => {
 				<ListItem
 					button
 					key="home"
-					onClick={() => push('/')}
+					onClick={() => navigate('/')}
 					selected={location.pathname === '/'}
 				>
 					<ListItemIcon>
@@ -173,7 +164,7 @@ const SiderBody = () => {
 											?.userStorages
 											?.length === 1
 									) {
-										push(
+										navigate(
 											'/realm/' +
 												newRealmName +
 												'/us/' +
@@ -182,13 +173,13 @@ const SiderBody = () => {
 													.name,
 										);
 									} else {
-										push(
+										navigate(
 											'/realm/' +
 												newRealmName,
 										);
 									}
 								} else {
-									push('/');
+									navigate('/');
 								}
 							}}
 							renderInput={(params) => (
@@ -235,13 +226,13 @@ const SiderBody = () => {
 								newUserStorage: string | null,
 							) => {
 								newUserStorage
-									? push(
+									? navigate(
 											'/realm/' +
 												realmSelected?.name +
 												'/us/' +
 												newUserStorage,
 									  )
-									: push(
+									: navigate(
 											'/realm/' +
 												realmSelected?.name,
 									  );
@@ -265,14 +256,14 @@ const SiderBody = () => {
 						}
 						onClick={() =>
 							userStorageSelected
-								? push(
+								? navigate(
 										'/realm/' +
 											realmSelected?.name +
 											'/us/' +
 											userStorageSelected?.name +
 											'/users',
 								  )
-								: push(
+								: navigate(
 										'/realm/' +
 											realmSelected?.name +
 											'/users',
@@ -308,14 +299,14 @@ const SiderBody = () => {
 						}
 						onClick={() =>
 							userStorageSelected
-								? push(
+								? navigate(
 										'/realm/' +
 											realmSelected?.name +
 											'/us/' +
 											userStorageSelected?.name +
 											'/organizations',
 								  )
-								: push(
+								: navigate(
 										'/realm/' +
 											realmSelected?.name +
 											'/organizations',
@@ -347,7 +338,7 @@ const SiderBody = () => {
 								: true
 						}
 						onClick={() =>
-							push(
+							navigate(
 								'/realm/' +
 									realmSelected?.name +
 									'/applications',
@@ -387,7 +378,7 @@ const SiderBody = () => {
 				<ListItem
 					button
 					key="parametres"
-					onClick={() => push('/settings')}
+					onClick={() => navigate('/settings')}
 					sx={{
 						paddingLeft: theme.spacing(4),
 					}}

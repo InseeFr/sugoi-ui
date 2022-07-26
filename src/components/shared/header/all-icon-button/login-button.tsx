@@ -3,16 +3,16 @@ import { IconButton } from '@mui/material';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const LoginButton = () => {
 	const { login, logout } = useOidc();
 	const { oidcUser } = useOidcUser();
-	const { push } = useHistory();
+	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const action: any = () => {
 		if (oidcUser) {
-			push('/');
+			navigate('/');
 			logout();
 		} else {
 			login();

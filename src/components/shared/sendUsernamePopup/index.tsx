@@ -9,7 +9,11 @@ import SimpleDialog from '../popButton/Dialog';
 import { SendPopupContent } from './sendPopupContent';
 
 export const SendUsernameButton = () => {
-	const { realm, id, userStorage } = useParams<any>();
+	const { realm, id, userStorage } = useParams() as {
+		realm: string;
+		id: string;
+		userStorage?: string;
+	};
 	const { t } = useTranslation();
 
 	const { user } = useGetUser(id, realm, userStorage);

@@ -4,7 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { RootState } from 'src/lib/configuration/store-configuration';
 import { DarkTheme, LightTheme } from 'src/components/material-ui-theme';
 import routes from 'src/components/routes/routes';
@@ -68,23 +68,25 @@ const ThemeWrapper = () => {
 					<Notifier />
 					<BreadCrumbs />
 					<ErrorBoundary>
-						<Switch>
+						<Routes>
 							{routes.map((route, i) => (
 								<Route
 									key={'route_' + i}
-									exact={route.exact}
 									path={route.path}
-									component={
+									element={
 										route.secure
 											? withOidcSecure(
 													route.component,
-											  )
-											: route.component
+											  )({})
+											: route.component()
 									}
 								/>
 							))}
-							<Redirect to="/" />
-						</Switch>
+							<Route
+								path="*"
+								element={<Navigate to="/" />}
+							/>
+						</Routes>
 					</ErrorBoundary>
 				</Container>
 				<ScrollTop />

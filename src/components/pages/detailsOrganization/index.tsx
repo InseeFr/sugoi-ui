@@ -1,7 +1,6 @@
 import { Button, Grid, Typography } from '@mui/material';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ConfirmationPopup from 'src/components/shared/confirmationPopUp';
 import DataViewer from 'src/components/shared/dataViewer/dataviewer';
 import ErrorBoundary from 'src/components/shared/error/Error';
@@ -18,8 +17,12 @@ import { useForms } from 'src/lib/hooks/technics/useForms';
 import organization from 'src/lib/model/api/organization';
 
 const DetailOrganization = () => {
-	const { realm, id, userStorage } = useParams<any>();
-	const { push } = useHistory();
+	const { realm, id, userStorage } = useParams() as {
+		realm: string;
+		id: string;
+		userStorage?: string;
+	};
+	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const { organizationConfig } = useRealmConfig(realm);
 
@@ -44,7 +47,7 @@ const DetailOrganization = () => {
 			realm,
 			userStorage,
 		);
-		push(
+		navigate(
 			'/realm/' +
 				realm +
 				(userStorage

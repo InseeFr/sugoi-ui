@@ -47,7 +47,11 @@ const SimpleAppManagedAttributes = ({
 	attribute_key,
 	defaultValues,
 }: props) => {
-	const { realm, userStorage, id } = useParams<any>();
+	const { realm, userStorage, id } = useParams() as {
+		realm: string;
+		userStorage?: string;
+		id: string;
+	};
 
 	const [newValue, setNewValue] = React.useState<any>();
 	const [edit, setEdit] = React.useState(false);

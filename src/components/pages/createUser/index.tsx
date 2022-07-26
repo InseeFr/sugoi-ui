@@ -1,6 +1,6 @@
 import { Button, Grid } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import DataViewer from 'src/components/shared/dataViewer/dataviewer';
 import LoadingButton from 'src/components/shared/loadingButton';
 import Title from 'src/components/shared/title/title';
@@ -9,9 +9,12 @@ import { useForms } from 'src/lib/hooks/technics/useForms';
 import User from 'src/lib/model/api/user';
 
 const CreateUsers = () => {
-	const { realm, userStorage } = useParams<any>();
+	const { realm, userStorage } = useParams() as {
+		realm: string;
+		userStorage: string;
+	};
 
-	const { push } = useHistory();
+	const navigate = useNavigate();
 	const { formValues, handleChange, handleReset, errors, handleSubmit } =
 		useForms({});
 	const { userConfig } = useRealmConfig(realm);
@@ -23,7 +26,7 @@ const CreateUsers = () => {
 		createUser(formValues, realm, userStorage).then(
 			(user: User | undefined) =>
 				user &&
-				push(
+				navigate(
 					'/realm/' +
 						realm +
 						'/us/' +

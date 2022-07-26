@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 import { Typography, Paper, Grid, Button, Box } from '@mui/material';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useOidc } from '@axa-fr/react-oidc';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -44,7 +44,7 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 }));
 
 const MainFeaturedPost = () => {
-	const { push } = useHistory();
+	const navigate = useNavigate();
 	const { login } = useOidc();
 	const isAuthenticated = useSelector(
 		(store: RootState) => store.user.isAuthenticated,
@@ -54,7 +54,7 @@ const MainFeaturedPost = () => {
 	const action: any = () => {
 		if (!isAuthenticated) {
 			login();
-			push('/');
+			navigate('/');
 		}
 	};
 
