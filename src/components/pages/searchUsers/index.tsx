@@ -3,7 +3,7 @@ import ZoomInOutlinedIcon from '@mui/icons-material/ZoomInOutlined';
 import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ButtonDescription } from 'src/components/shared/description';
 import SearchForm from 'src/components/shared/searchFormular';
 import { SearchResults } from 'src/components/shared/searchResults';
@@ -14,15 +14,13 @@ import { Field } from 'src/lib/model/field';
 import SearchRequestUser from 'src/lib/model/js/searchRequestUser';
 import { download } from 'src/lib/utils/downloadFile';
 
-interface ParamTypes {
-	realm: string;
-	userStorage: string;
-}
-
 const SearchUsers = () => {
-	const { realm, userStorage } = useParams<ParamTypes>();
+	const { realm, userStorage } = useParams() as {
+		realm: string;
+		userStorage?: string;
+	};
 	const { enqueueSnackbar } = useSnackbar();
-	const { push } = useHistory();
+	const navigate = useNavigate();
 
 	const [lastSearch, setLastSearch] = useState({});
 
@@ -52,7 +50,7 @@ const SearchUsers = () => {
 	};
 
 	const handleClickOnUser = (username: string) => {
-		push(
+		navigate(
 			userStorage
 				? '/realm/' +
 						realm +
@@ -66,7 +64,7 @@ const SearchUsers = () => {
 
 	const handleCreate = () => {
 		if (userStorage) {
-			push(
+			navigate(
 				'/realm/' +
 					realm +
 					'/us/' +

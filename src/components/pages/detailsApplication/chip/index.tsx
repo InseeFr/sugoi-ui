@@ -2,7 +2,7 @@ import { Chip, Grid } from '@mui/material';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import SimpleDialog from 'src/components/shared/popButton/Dialog';
 import User from 'src/lib/model/api/user';
 import { UserPopover } from './UserPopover';
@@ -18,7 +18,7 @@ const ChipPerson = ({
 	handlePopoverOpen: (event: React.MouseEvent<HTMLElement>) => void;
 	handlePopoverClose: () => void;
 }) => {
-	const { push } = useHistory();
+	const navigate = useNavigate();
 	return (
 		<Chip
 			color="default"
@@ -36,7 +36,7 @@ const ChipPerson = ({
 					: true
 			}
 			onClick={() =>
-				push('/realm/' + realm + '/users/' + user.username)
+				navigate('/realm/' + realm + '/users/' + user.username)
 			}
 			onMouseEnter={handlePopoverOpen}
 			onMouseLeave={handlePopoverClose}

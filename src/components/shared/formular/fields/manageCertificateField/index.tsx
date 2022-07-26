@@ -30,7 +30,11 @@ const ManageCertificate = ({
 	absentValueText,
 	presentValueText,
 }: Props) => {
-	const { realm, userStorage, id } = useParams<any>();
+	const { realm, userStorage, id } = useParams() as {
+		realm: string;
+		userStorage?: string;
+		id: string;
+	};
 
 	const {
 		user,

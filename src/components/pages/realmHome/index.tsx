@@ -1,6 +1,6 @@
 import { Box, Grid, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
 	useGetUsers,
 	useRealmConfig,
@@ -12,7 +12,7 @@ import Title from 'src/components/shared/title/title';
 import MyAutocomplete from './my_autocomplete';
 
 const AutoCompleteUsers = ({ realm, userStorage }: any) => {
-	const { push } = useHistory();
+	const navigate = useNavigate();
 	const { t } = useTranslation();
 
 	const {
@@ -58,7 +58,7 @@ const AutoCompleteUsers = ({ realm, userStorage }: any) => {
 				}}
 				onChange={(value: any) => {
 					value &&
-						push(
+						navigate(
 							'/realm/' +
 								realm +
 								'/users/' +
@@ -78,7 +78,7 @@ const AutoCompleteApplications = ({ realm }: any) => {
 	} = useGetApplications(realm);
 
 	const { t } = useTranslation();
-	const { push } = useHistory();
+	const navigate = useNavigate();
 
 	return (
 		<>
@@ -99,7 +99,7 @@ const AutoCompleteApplications = ({ realm }: any) => {
 					getApplications(realm, value);
 				}}
 				onChange={(value: any) =>
-					push(
+					navigate(
 						'/realm/' +
 							realm +
 							'/applications/' +
@@ -118,7 +118,7 @@ const AutocompleteOrganizations = ({ realm, userStorage }: any) => {
 		execute: getOrganizations,
 	} = useGetOrganizations(realm, userStorage);
 	const { t } = useTranslation();
-	const { push } = useHistory();
+	const navigate = useNavigate();
 
 	return (
 		<>
@@ -154,7 +154,7 @@ const AutocompleteOrganizations = ({ realm, userStorage }: any) => {
 					);
 				}}
 				onChange={(value: any) =>
-					push(
+					navigate(
 						'/realm/' +
 							realm +
 							'/organizations/' +
@@ -167,7 +167,10 @@ const AutocompleteOrganizations = ({ realm, userStorage }: any) => {
 };
 
 export const RealmHome = () => {
-	const { realm, userStorage } = useParams<any>();
+	const { realm, userStorage } = useParams() as {
+		realm: string;
+		userStorage?: string;
+	};
 	const { t } = useTranslation();
 	document.title =
 		t('global_search.page_title_1') +

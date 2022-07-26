@@ -2,7 +2,7 @@ import { Grid, IconButton } from '@mui/material';
 import ZoomInOutlinedIcon from '@mui/icons-material/ZoomInOutlined';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ButtonDescription } from 'src/components/shared/description';
 import SearchForm from 'src/components/shared/searchFormular';
 import { SearchResults } from 'src/components/shared/searchResults';
@@ -12,9 +12,12 @@ import { Field } from 'src/lib/model/field';
 import searchRequestOrganization from 'src/lib/model/js/searchRequestOrganization';
 
 const SearchOrganizations = () => {
-	const { realm, userStorage } = useParams<any>();
+	const { realm, userStorage } = useParams() as {
+		realm: string;
+		userStorage?: string;
+	};
 	const { enqueueSnackbar } = useSnackbar();
-	const { push } = useHistory();
+	const navigate = useNavigate();
 	const { t } = useTranslation();
 	document.title = t('search_organization.page_title');
 
@@ -40,7 +43,7 @@ const SearchOrganizations = () => {
 
 	const handleCreate = () => {
 		if (userStorage) {
-			push(
+			navigate(
 				'/realm/' +
 					realm +
 					'/us/' +
@@ -55,7 +58,7 @@ const SearchOrganizations = () => {
 	};
 
 	const handleClickOnOrganization = (organizationId: string) => {
-		push(
+		navigate(
 			userStorage
 				? '/realm/' +
 						realm +

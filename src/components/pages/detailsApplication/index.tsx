@@ -1,7 +1,7 @@
 import { Grid, TextField, IconButton } from '@material-ui/core';
 import { SearchOutlined } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ConfirmationPopup from 'src/components/shared/confirmationPopUp';
 import LoadingButton from 'src/components/shared/loadingButton';
 import Title from 'src/components/shared/title/title';
@@ -24,8 +24,11 @@ import { ContactsManager } from './ContactsManager';
 
 export const DetailsApplication = () => {
 	const [groupeApplicatif, setGroupeApplicatif] = useState('');
-	const { realm, id: applicationId } = useParams<any>();
-	const { push } = useHistory();
+	const { realm, id: applicationId } = useParams() as {
+		realm: string;
+		id: string;
+	};
+	const navigate = useNavigate();
 	const { t } = useTranslation();
 	document.title =
 		t('detail_application.page_title_1') +
@@ -48,9 +51,9 @@ export const DetailsApplication = () => {
 	const { execute: deleteApplication, loading: loadingDelete } =
 		useDeleteApplication();
 
-	const handleDeleteApp = async (realm: string, applicationId: string) => {
+	const handleDeleteApp = async () => {
 		await deleteApplication(realm, applicationId);
-		push('/realm/' + realm + '/applications');
+		navigate('/realm/' + realm + '/applications');
 	};
 
 	const handleCreateGroup =
@@ -109,9 +112,7 @@ export const DetailsApplication = () => {
 							<GroupsViewer
 								groups={
 									groupManager
-										? [
-												groupManager as Group,
-										  ]
+										? [groupManager]
 										: []
 								}
 								paginate={false}
@@ -285,10 +286,7 @@ export const DetailsApplication = () => {
 								)}
 								validation_text={applicationId}
 								handleDelete={() =>
-									handleDeleteApp(
-										realm,
-										applicationId,
-									)
+									handleDeleteApp()
 								}
 							/>
 						</Grid>

@@ -9,7 +9,11 @@ import SimpleDialog from '../popButton/Dialog';
 import { ResetPasswordPopupContent } from './resetPasswordPopupContent';
 
 export const ResetPasswordPopup = () => {
-	const { realm, id, userStorage } = useParams<any>();
+	const { realm, id, userStorage } = useParams() as {
+		realm: string;
+		id: string;
+		userStorage?: string;
+	};
 
 	const { user } = useGetUser(id, realm, userStorage);
 	const { t } = useTranslation();

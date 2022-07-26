@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useBreadcrumbs from 'use-react-router-breadcrumbs';
 import routes from 'src/components/routes/routes';
 import ReactDOMServer from 'react-dom/server';
@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { Grid, Box, Breadcrumbs, Link } from '@mui/material';
 
 const MyBreadcrumbs = () => {
-	const history = useHistory();
+	const navigate = useNavigate();
 	const breadcrumbs = useBreadcrumbs(routes, {
 		excludePaths: ['/realm', '/realm/:realm/us'],
 	});
@@ -25,7 +25,7 @@ const MyBreadcrumbs = () => {
 					{breadcrumbs.map(({ match, breadcrumb }, i) => (
 						<Link
 							onClick={() =>
-								history.push(match.url)
+								navigate(match.pathname)
 							}
 							color="primary"
 							sx={{

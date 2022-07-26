@@ -1,7 +1,6 @@
 import { Button, Grid, Typography } from '@mui/material';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ConfirmationPopup from 'src/components/shared/confirmationPopUp';
 import DataViewer from 'src/components/shared/dataViewer/dataviewer';
 import ErrorBoundary from 'src/components/shared/error/Error';
@@ -15,9 +14,13 @@ import useGetUser from 'src/lib/hooks/user/useGetUser';
 import useUpdateUser from 'src/lib/hooks/user/useUpdateUser';
 
 const DetailUser = () => {
-	const { realm, id, userStorage } = useParams<any>();
+	const { realm, id, userStorage } = useParams() as {
+		realm: string;
+		id: string;
+		userStorage?: string;
+	};
 
-	const { push } = useHistory();
+	const navigate = useNavigate();
 
 	const { userConfig } = useRealmConfig(realm);
 
@@ -39,7 +42,7 @@ const DetailUser = () => {
 	const handleDelete = () =>
 		executeDelete(user?.username as string, realm, userStorage).then(
 			() =>
-				push(
+				navigate(
 					'/realm/' +
 						realm +
 						(userStorage
