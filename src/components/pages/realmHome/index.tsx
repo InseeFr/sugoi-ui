@@ -59,10 +59,9 @@ const AutoCompleteUsers = ({ realm, userStorage }: any) => {
 				onChange={(value: any) => {
 					value &&
 						push(
-							'/realm/' +
-								realm +
-								'/users/' +
-								value.payload.username,
+							userStorage
+								? `/realm/${realm}/us/${userStorage}/users/${value.payload.username}`
+								: `/realm/${realm}/users/${value.payload.username}`,
 						);
 				}}
 			/>
@@ -155,10 +154,9 @@ const AutocompleteOrganizations = ({ realm, userStorage }: any) => {
 				}}
 				onChange={(value: any) =>
 					push(
-						'/realm/' +
-							realm +
-							'/organizations/' +
-							value.identifiant,
+						userStorage
+							? `/realm/${realm}/us/${userStorage}/organizations`
+							: `/realm/${realm}/organizations/${value.identifiant}`,
 					)
 				}
 			/>

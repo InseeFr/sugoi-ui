@@ -9,6 +9,7 @@
         "plugin:@typescript-eslint/base",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:prettier/recommended",
+        "plugin:react-hooks/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
