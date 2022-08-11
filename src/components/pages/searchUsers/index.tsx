@@ -226,13 +226,14 @@ const SearchUsers = () => {
 				) {
 					return (
 						<Typography>
-							{value.map((v: any) => (
-								<Chip
-									key={'hab_' + v.id}
-									label={v.id}
-									size="small"
-								/>
-							))}
+							{value &&
+								value.map((v: any) => (
+									<Chip
+										key={'hab_' + v.id}
+										label={v.id}
+										size="small"
+									/>
+								))}
 						</Typography>
 					);
 				},
@@ -251,18 +252,22 @@ const SearchUsers = () => {
 				) {
 					return (
 						<Typography>
-							{value
-								.filter((v: any) => v != null)
-								.map((v: any) => (
-									<Chip
-										key={
-											'group_' +
-											v.name
-										}
-										label={v.name}
-										size="small"
-									/>
-								))}
+							{value &&
+								value
+									.filter(
+										(v: any) =>
+											v != null,
+									)
+									.map((v: any) => (
+										<Chip
+											key={
+												'group_' +
+												v.name
+											}
+											label={v.name}
+											size="small"
+										/>
+									))}
 						</Typography>
 					);
 				},

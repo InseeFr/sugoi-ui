@@ -76,14 +76,13 @@ const HabilitationsPopup = ({
 
 	const handleClickDelete = (pos: number) => {
 		user &&
+			user.habilitations &&
 			user.habilitations[pos].id &&
-			executeDelete(
-				realm,
-				id,
-				user?.habilitations[pos].id as string,
-			).finally(() => {
-				executeUser(id, realm, userStorage);
-			});
+			executeDelete(realm, id, user.habilitations[pos].id).finally(
+				() => {
+					executeUser(id, realm, userStorage);
+				},
+			);
 	};
 
 	return (
