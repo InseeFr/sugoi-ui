@@ -186,9 +186,11 @@ export const DetailsApplication = () => {
 								groups={
 									application?.groups.filter(
 										(group) =>
-											group.name.includes(
-												groupeApplicatif,
-											),
+											group.name
+												.toLowerCase()
+												.includes(
+													groupeApplicatif.toLowerCase(),
+												),
 									) || []
 								}
 								realm={realm}
