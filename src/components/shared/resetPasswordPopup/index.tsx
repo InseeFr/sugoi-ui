@@ -31,7 +31,7 @@ export const ResetPasswordPopup = () => {
 					[name]: null,
 			  });
 	};
-	const [forceResetPwd, setForceResetPwd] = useState(false);
+	const [forceResetPwd, setForceResetPwd] = useState(true);
 	const [open, setOpen] = React.useState(false);
 
 	const handleOpen = () => {
