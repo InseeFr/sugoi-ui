@@ -11,7 +11,7 @@ export default interface User {
 	attributes?: Attributes;
 	certificate?: String;
 	address?: Address;
-	habilitations: Habilitation[];
-	groups: Group[];
+	habilitations?: Habilitation[];
+	groups?: Group[];
 	metadatas?: string[];
 }
