@@ -5,7 +5,7 @@ import Application from '../../model/api/application';
 export const usePutApplication = () => {
 	const [result, setResult] = useState<any>();
 	const [error, setError] = useState<any>(undefined);
-	const [loading, setLoading] = useState<boolean>(true);
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const execute = async (realm: string, app: Application) => {
 		setLoading(true);

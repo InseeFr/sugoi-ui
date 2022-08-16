@@ -230,6 +230,51 @@ export const DetailsApplication = () => {
 						</Grid>
 					</Grid>
 				</Grid>
+				<Grid item>
+					<Grid
+						container
+						direction="column"
+						justifyContent="center"
+						alignItems="stretch"
+						spacing={2}
+					>
+						<Grid item>
+							<Title
+								title={t(
+									'detail_application.contacts_title',
+								)}
+								variant="subtitle1"
+							/>
+						</Grid>
+						<Grid item>
+							<Grid
+								container
+								direction="column"
+								justifyContent="center"
+								alignItems="stretch"
+								spacing={1}
+							>
+								{application?.attributes?.contacts?.map(
+									(contact: String, i) => (
+										<TextField
+											key={
+												'contacts' +
+												{ i }
+											}
+											inputProps={{
+												readOnly: true,
+												disabled: true,
+											}}
+											defaultValue={
+												contact
+											}
+										></TextField>
+									),
+								)}
+							</Grid>
+						</Grid>
+					</Grid>
+				</Grid>
 
 				<Grid item>
 					<Grid
