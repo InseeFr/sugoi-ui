@@ -1,4 +1,4 @@
-import { Grid, TextField, IconButton } from '@mui/material';
+import { Grid, TextField, IconButton } from '@material-ui/core';
 import { SearchOutlined } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
@@ -20,6 +20,8 @@ import {
 } from './ButtonManageGroup';
 import { GroupsViewer } from './groupsViewer';
 import { useState } from 'react';
+import { ContactsManager } from './ContactsManager';
+
 export const DetailsApplication = () => {
 	const [groupeApplicatif, setGroupeApplicatif] = useState('');
 	const { realm, id: applicationId } = useParams<any>();
@@ -174,7 +176,7 @@ export const DetailsApplication = () => {
 								// fullWidth
 								InputProps={{
 									endAdornment: (
-										<IconButton size="large">
+										<IconButton size="medium">
 											<SearchOutlined />
 										</IconButton>
 									),
@@ -235,55 +237,11 @@ export const DetailsApplication = () => {
 						</Grid>
 					</Grid>
 				</Grid>
-				<Grid item>
-					<Grid
-						container
-						direction="column"
-						justifyContent="center"
-						alignItems="stretch"
-						spacing={2}
-					>
-						<Grid item>
-							<Title
-								title={t(
-									'detail_application.contacts_title',
-								)}
-								variant="subtitle1"
-							/>
-						</Grid>
-						<Grid item>
-							<Grid
-								container
-								direction="column"
-								justifyContent="center"
-								alignItems="stretch"
-								spacing={1}
-							>
-								{application?.attributes?.contacts?.map(
-									(
-										contact: String,
-										i: any,
-									) => (
-										<TextField
-											key={
-												'contacts' +
-												{ i }
-											}
-											inputProps={{
-												readOnly: true,
-												disabled: true,
-											}}
-											defaultValue={
-												contact
-											}
-										></TextField>
-									),
-								)}
-							</Grid>
-						</Grid>
-					</Grid>
-				</Grid>
-
+				<ContactsManager
+					application={application}
+					getApplication={getApplication}
+					realm={realm}
+				/>
 				<Grid item>
 					<Grid
 						container
