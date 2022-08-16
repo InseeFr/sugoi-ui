@@ -201,6 +201,7 @@
 		"title": "Détails de l'application ",
 		"manager_groups_title": "Gestionnaires des droits de l'application ",
 		"groups_title": "Groupes applicatifs",
+		"contacts_title": "Contacts associés à l'application",
 		"search_groups_title": "Chercher un groupe applicatif",
 		"button_manage_group": "Gérer le groupe",
 		"manage_group_popup": {
