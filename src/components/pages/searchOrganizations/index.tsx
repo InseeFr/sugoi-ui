@@ -1,4 +1,4 @@
-import { Grid, IconButton, LinearProgress } from '@mui/material';
+import { Grid, IconButton } from '@mui/material';
 import ZoomInOutlinedIcon from '@mui/icons-material/ZoomInOutlined';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
@@ -177,21 +177,34 @@ const SearchOrganizations = () => {
 			</Grid>
 
 			<Grid item xs={12}>
-				<SearchForm
-					onSubmit={handleSearch}
-					formFields={formFields}
-					handleClickAdd={handleCreate}
-					formFieldsAdvanced={formFieldsAdvanced}
-				/>
-			</Grid>
-			<Grid item xs={12}>
-				<SearchResults
-					data={organizations}
-					columns={columns}
-					handleClickAdd={handleCreate}
-					handleClickOnRow={handleClickOnOrganization}
-				/>
-				{loading ? <LinearProgress /> : null}
+				<Grid
+					container
+					direction="column"
+					justifyContent="center"
+					alignItems="stretch"
+					spacing={3}
+				>
+					<Grid item xs={12}>
+						<SearchForm
+							onSubmit={handleSearch}
+							formFields={formFields}
+							handleClickAdd={handleCreate}
+							formFieldsAdvanced={
+								formFieldsAdvanced
+							}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<SearchResults
+							data={organizations}
+							columns={columns}
+							handleClickOnRow={
+								handleClickOnOrganization
+							}
+							loading={loading}
+						/>
+					</Grid>
+				</Grid>
 			</Grid>
 		</Grid>
 	);

@@ -273,8 +273,9 @@ export const deleteUserFromGroup = (
 export const getApplications = (
 	realm: string,
 	name?: string,
+	cancelable?: boolean,
 ): Promise<Pageable> => {
-	return remote.getApplications(realm, name);
+	return remote.getApplications(realm, name, cancelable);
 };
 
 export const getApplication = (realm: string, name: string) => {

@@ -246,7 +246,12 @@
 		"title": "Chercher des applications dans le realm ",
 		"search_field": "Votre recherche",
 		"table_header": "Application",
-		"table_no_entry": "Aucune application ne correspond à votre recherche"
+		"table_no_entry": "Aucune application ne correspond à votre recherche",
+		"my_apps": "Mes applications",
+		"all_apps": "Toutes les applications",
+		"app_card_button": "Gérer",
+		"no_favorite": "Vous ne gérez pas encore d'application",
+		"add_button": "Créer une application"
 	},
 
 	"global_search": {

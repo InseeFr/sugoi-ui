@@ -1,4 +1,4 @@
-import { Paper } from '@mui/material';
+import { Paper, CircularProgress } from '@mui/material';
 import MUIDataTable, { MUIDataTableOptions } from 'mui-datatables';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -6,10 +6,10 @@ import { useTranslation } from 'react-i18next';
 interface Props {
 	data: any;
 	columns: any;
-	handleClickAdd: () => void;
 	handleClickOnRow: any;
 	handleDownload?: any;
 	downloadable?: boolean;
+	loading?: boolean;
 }
 
 export const SearchResults = ({
@@ -18,17 +18,20 @@ export const SearchResults = ({
 	handleClickOnRow,
 	handleDownload,
 	downloadable,
+	loading,
 }: Props) => {
 	const { t } = useTranslation();
 	const options: MUIDataTableOptions = {
 		responsive: 'simple' as any,
 		selectableRowsHideCheckboxes: true,
-
-		onRowClick: (rowData: any) => handleClickOnRow(rowData[0]),
+		search: false,
+		onRowClick: (rowData: any) => handleClickOnRow(rowData),
 		textLabels: {
 			body: {
-				noMatch: t(
-					'commons.search_result.textLabels.body.noMatch',
+				noMatch: loading ? (
+					<CircularProgress size={20} />
+				) : (
+					t('commons.search_result.textLabels.body.noMatch')
 				),
 				toolTip: t(
 					'commons.search_result.textLabels.body.toolTip',

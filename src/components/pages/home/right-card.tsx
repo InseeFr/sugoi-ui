@@ -125,11 +125,7 @@ const CardRights = () => {
 										>
 											{t(
 												'home.rights.app',
-											) +
-												role.replace(
-													'*_*\\',
-													'',
-												)}
+											) + role}
 										</ListItemText>
 									</ListItem>
 								),
