@@ -1,10 +1,13 @@
 import { Button, Grid, TextField } from '@mui/material';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import SimpleDialog from 'src/components/shared/popButton/Dialog';
 interface Props {
 	handleCreateApp: any;
 }
 export const CreateApplicationButton = ({ handleCreateApp }: Props) => {
+	const { t } = useTranslation();
+
 	const [open, setOpen] = React.useState(false);
 	const [appName, setAppName] = useState('');
 	const [owner, setOwner] = useState('');
@@ -25,8 +28,12 @@ export const CreateApplicationButton = ({ handleCreateApp }: Props) => {
 
 	return (
 		<>
-			<Button onClick={handleOpen} variant="contained">
-				Ajouter une application
+			<Button
+				onClick={handleOpen}
+				color="primary"
+				variant="contained"
+			>
+				{t('search_application.add_button')}
 			</Button>
 			<SimpleDialog
 				onClose={handleClose}

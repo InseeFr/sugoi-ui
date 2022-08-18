@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import { getApplications } from '../../api';
 
-export const useGetApplications = (realm?: string, name?: string) => {
+export const useGetApplications = (
+	realm?: string,
+	name?: string,
+	cancelable?: boolean,
+) => {
 	const [result, setResult] = useState<any[]>([]);
 	const [error, setError] = useState(undefined);
 	const [loading, setLoading] = useState(true);
@@ -11,7 +15,7 @@ export const useGetApplications = (realm?: string, name?: string) => {
 		setLoading(true);
 		setResult([]);
 		setError(undefined);
-		await getApplications(realm, name)
+		await getApplications(realm, name, cancelable)
 			.then((r: any) => {
 				setResult(r.results);
 			})

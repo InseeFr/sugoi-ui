@@ -191,7 +191,7 @@
 		"title": "Application details ",
 		"manager_groups_title": "Application Rights Managers ",
 		"groups_title": "Application groups",
-		"search_groups_title" : "Search application groups",
+		"search_groups_title": "Search application groups",
 		"button_manage_group": "Manage the group",
 		"manage_group_popup": {
 			"search": "Your search",
@@ -235,7 +235,12 @@
 		"title": "Search applications in the Realm ",
 		"search_field": "Your research",
 		"table_header": "Application",
-		"table_no_entry": "No application corresponds to your search"
+		"table_no_entry": "No application corresponds to your search",
+		"my_apps": "My applications",
+		"all_apps": "All applications",
+		"app_card_button": "Manage",
+		"no_favorite": "You don't manage applications yet",
+		"add_button": "Create application"
 	},
 
 	"global_search": {

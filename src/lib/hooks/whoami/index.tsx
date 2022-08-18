@@ -8,7 +8,13 @@ export const useWhoAmI = () => {
 
 	useEffect(() => {
 		getWhoami()
-			.then((r: Whoami) => setRights(r))
+			.then((r: Whoami) => {
+				r.appManager = r.appManager.map((right) =>
+					right.replace('*_*\\', ''),
+				);
+
+				setRights(r);
+			})
 			.catch(() =>
 				setRights({
 					appManager: [],

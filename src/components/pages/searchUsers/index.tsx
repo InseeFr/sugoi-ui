@@ -1,10 +1,4 @@
-import {
-	Chip,
-	Grid,
-	IconButton,
-	LinearProgress,
-	Typography,
-} from '@mui/material';
+import { Chip, Grid, IconButton, Typography } from '@mui/material';
 import ZoomInOutlinedIcon from '@mui/icons-material/ZoomInOutlined';
 import { useSnackbar } from 'notistack';
 import { useState } from 'react';
@@ -361,12 +355,11 @@ const SearchUsers = () => {
 					<SearchResults
 						data={users}
 						columns={columns}
-						handleClickAdd={handleCreate}
 						handleClickOnRow={handleClickOnUser}
 						handleDownload={handleExport}
 						downloadable={true}
+						loading={loading}
 					/>
-					{loading ? <LinearProgress /> : null}
 				</Grid>
 			</Grid>
 		</>

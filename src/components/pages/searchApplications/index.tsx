@@ -1,39 +1,45 @@
 import {
+	Accordion,
+	AccordionDetails,
+	AccordionSummary,
 	Grid,
-	LinearProgress,
-	Link,
-	MenuItem,
-	Paper,
-	Table,
-	TableBody,
-	TableCell,
-	TableContainer,
-	TableHead,
-	TableRow,
 	TextField,
-	Select,
-	Pagination,
+	Box,
 } from '@mui/material';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import {
 	useCreateApplication,
 	useGetApplications,
+	useWhoAmI,
 } from 'src/lib/hooks/api-hooks';
 import { ButtonDescription } from 'src/components/shared/description';
 import Title from 'src/components/shared/title/title';
 import CreateApplicationButton from './button-create-app';
+import Application from 'src/lib/model/api/application';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ApplicationsFavoriteList from './applications_favorite_list';
+import ApplicationsViewer from './applications_viewer';
 
 export const SearchApplications = () => {
-	const { realm } = useParams<any>();
-	const { push } = useHistory();
-	const [rowsPerPage, setRowsPerPage] = React.useState(10);
-	const [page, setPage] = React.useState(1);
-	const { applications, execute, loading } = useGetApplications(realm);
 	const { t } = useTranslation();
+	const { realm } = useParams<any>();
+	const { applications, execute, loading } = useGetApplications(
+		realm,
+		undefined,
+		true,
+	);
+	const {
+		applications: applicationsForFavorite,
+		loading: loadingFavorite,
+	} = useGetApplications(realm, undefined, false);
+
 	const { execute: createApplication } = useCreateApplication();
 	const [search, setSearch] = useState<string>('');
+	const { push } = useHistory();
+
+	document.title = t('search_application.page_title');
 
 	const handleCreateApp = (appName: string, owner: string) => {
 		createApplication(realm, {
@@ -43,184 +49,157 @@ export const SearchApplications = () => {
 		}).then(() => execute(realm));
 	};
 
-	document.title = t('search_application.page_title');
+	const handleClickOnApp = (application: Application) => {
+		console.log(application);
+		push('/realm/' + realm + '/' + 'applications/' + application.name);
+	};
+
+	const handleClickOnRow = (rowData: any[]) => {
+		console.log(rowData);
+		push('/realm/' + realm + '/' + 'applications/' + rowData[0]);
+	};
 
 	const handleSearch = (e: any) => {
 		setSearch(e.target.value);
-		setPage(1);
 		execute(realm, e.target.value === '' ? undefined : e.target.value);
 	};
 
-	const handleChange = (
-		event: React.ChangeEvent<unknown>,
-		value: number,
-	) => {
-		setPage(value);
-	};
+	const { rights, loading: loadingWhoAmI } = useWhoAmI();
+
+	console.log(applications);
 
 	return (
-		<>
+		<Grid
+			container
+			direction="column"
+			justifyContent="center"
+			alignItems="stretch"
+			spacing={3}
+		>
 			<Grid
-				container
-				direction="column"
-				justifyContent="center"
-				alignItems="stretch"
-				spacing={3}
+				item
+				xs={12}
+				style={{ display: 'flex', alignItems: 'center' }}
 			>
+				<Title title={t('search_application.title') + realm} />
+				<ButtonDescription realmName={realm} />
+			</Grid>
+			<Grid item xs={12}>
 				<Grid
-					item
-					xs={12}
-					sx={{ display: 'flex', alignItems: 'center' }}
+					container
+					direction="row"
+					justifyContent="flex-end"
+					alignItems="center"
 				>
-					<Title
-						title={
-							t('search_application.title') + realm
-						}
+					<CreateApplicationButton
+						handleCreateApp={handleCreateApp}
 					/>
-					<ButtonDescription realmName={realm} />
-				</Grid>
-				<Grid item xs={8}>
-					<Grid
-						container
-						direction="row"
-						justifyContent="flex-end"
-						alignItems="center"
-					>
-						<CreateApplicationButton
-							handleCreateApp={handleCreateApp}
-						/>
-					</Grid>
-				</Grid>
-				<Grid item xs={8}>
-					<TextField
-						id="application-search-textfield"
-						label={t('search_application.search_field')}
-						variant="outlined"
-						onChange={handleSearch}
-						value={search}
-						fullWidth
-					/>
-				</Grid>
-				<Grid item xs={5}>
-					<TableContainer component={Paper}>
-						<Table size="small">
-							<TableHead>
-								<TableRow>
-									<TableCell
-										align="center"
-										padding="normal"
-									>
-										{t(
-											'search_application.table_header',
-										)}
-									</TableCell>
-								</TableRow>
-							</TableHead>
-							<TableBody>
-								{applications.length === 0 ? (
-									<TableRow key="no-data">
-										<TableCell
-											component="th"
-											scope="row"
-											align="center"
-										>
-											{t(
-												'search_application.table_no_entry',
-											)}
-										</TableCell>
-									</TableRow>
-								) : (
-									applications
-										.slice(
-											(page - 1) *
-												rowsPerPage,
-											(page - 1) *
-												rowsPerPage +
-												rowsPerPage,
-										)
-										.map(
-											(
-												application,
-											) => (
-												<TableRow
-													key={
-														application.name
-													}
-												>
-													<TableCell
-														component="th"
-														scope="row"
-														align="center"
-													>
-														<Link
-															onClick={() =>
-																push(
-																	'/realm/' +
-																		realm +
-																		'/' +
-																		'applications/' +
-																		application.name,
-																)
-															}
-														>
-															{
-																application.name
-															}
-														</Link>
-													</TableCell>
-												</TableRow>
-											),
-										)
-								)}
-							</TableBody>
-						</Table>
-					</TableContainer>
-					{loading && <LinearProgress />}
-				</Grid>
-				<Grid item xs={12}>
-					<Grid
-						container
-						direction="row"
-						justifyContent="space-between"
-						alignItems="center"
-					>
-						<Grid item xs={2}>
-							<Select
-								value={rowsPerPage}
-								onChange={(e: any) =>
-									setRowsPerPage(
-										e.target.value,
-									)
-								}
-							>
-								<MenuItem value={10}>
-									10
-								</MenuItem>
-
-								<MenuItem value={20}>
-									20
-								</MenuItem>
-
-								<MenuItem value={50}>
-									50
-								</MenuItem>
-							</Select>
-						</Grid>
-						<Grid item>
-							<Pagination
-								count={Math.ceil(
-									applications.length /
-										rowsPerPage,
-								)}
-								page={page}
-								color="primary"
-								onChange={handleChange}
-								shape="rounded"
-							/>
-						</Grid>
-					</Grid>
 				</Grid>
 			</Grid>
-		</>
+			<Grid item xs={12}>
+				<Accordion defaultExpanded={true}>
+					<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+						<Title
+							variant="subtitle1"
+							title={t(
+								'search_application.my_apps',
+							)}
+						/>
+					</AccordionSummary>
+					<AccordionDetails>
+						<Grid
+							container
+							direction="column"
+							justifyContent="center"
+							alignItems="stretch"
+							spacing={3}
+						>
+							<Grid item xs={12}>
+								<ApplicationsFavoriteList
+									applications={applicationsForFavorite.filter(
+										(application) =>
+											rights?.appManager.includes(
+												application.name.toUpperCase(),
+											),
+									)}
+									handleClickOnApp={
+										handleClickOnApp
+									}
+									loading={
+										loadingFavorite ||
+										loadingWhoAmI
+									}
+								/>
+							</Grid>
+						</Grid>
+					</AccordionDetails>
+				</Accordion>
+			</Grid>
+			<Grid item xs={12}>
+				<Accordion>
+					<AccordionSummary
+						expandIcon={<ExpandMoreIcon />}
+						aria-controls="panel1a-content"
+						id="panel1a-header"
+					>
+						<Title
+							variant="subtitle1"
+							title={t(
+								'search_application.all_apps',
+							)}
+						/>
+					</AccordionSummary>
+					<AccordionDetails>
+						<Box style={{ width: '100%' }}>
+							<Grid
+								container
+								direction="column"
+								justifyContent="center"
+								alignItems="stretch"
+								spacing={3}
+							>
+								<Grid item xs={12}>
+									<Grid
+										container
+										direction="row"
+										justifyContent="flex-end"
+										alignItems="stretch"
+										spacing={3}
+									>
+										<Grid item xs={12}>
+											<TextField
+												id="application-search-textfield"
+												label={t(
+													'search_application.search_field',
+												)}
+												variant="filled"
+												onChange={
+													handleSearch
+												}
+												value={
+													search
+												}
+												fullWidth
+											/>
+										</Grid>
+									</Grid>
+								</Grid>
+								<Grid item xs={12}>
+									<ApplicationsViewer
+										applications={
+											applications
+										}
+										loading={loading}
+										handleClickOnApp={
+											handleClickOnRow
+										}
+									/>
+								</Grid>
+							</Grid>
+						</Box>
+					</AccordionDetails>
+				</Accordion>
+			</Grid>
+		</Grid>
 	);
 };
