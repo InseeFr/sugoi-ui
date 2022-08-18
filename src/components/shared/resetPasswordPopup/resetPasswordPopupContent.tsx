@@ -64,63 +64,72 @@ export const ResetPasswordPopupContent = ({
 					{templateProperties.mail}
 				</Typography>
 				<Box sx={{ display: 'flex', alignItems: 'center' }}>
-					<FormControlLabel
-						control={
-							<Checkbox
-								checked={changeSenderMail}
-								onChange={() =>
-									setChangeSenderMail(
-										!changeSenderMail,
-									)
-								}
-								name="changeSenderMail"
-								color="primary"
-							/>
-						}
-						label="Changer adresse mail expediteur"
-					/>
-					{changeSenderMail ? (
-						<TextField
-							label="Mail expéditeur"
-							name="senderEmail"
-							value={
-								templateProperties.senderEmail ||
-								''
+					<>
+						<FormControlLabel
+							control={
+								<Checkbox
+									checked={changeSenderMail}
+									onChange={() =>
+										setChangeSenderMail(
+											!changeSenderMail,
+										)
+									}
+									name="changeSenderMail"
+									color="primary"
+								/>
 							}
-							onChange={onTemplateChange}
+							label="Changer adresse mail expediteur"
 						/>
-					) : (
-						templateProperties.senderEmail &&
-						changeATemplateProperty('senderEmail')
-					)}
+						{changeSenderMail ? (
+							<TextField
+								label="Mail expéditeur"
+								name="senderEmail"
+								value={
+									templateProperties.senderEmail ||
+									''
+								}
+								onChange={onTemplateChange}
+							/>
+						) : (
+							templateProperties.senderEmail &&
+							changeATemplateProperty('senderEmail')
+						)}
+					</>
 				</Box>
 				<Box sx={{ display: 'flex', alignItems: 'center' }}>
-					<FormControlLabel
-						control={
-							<Checkbox
-								checked={changeReceiverMail}
-								onChange={() =>
-									setChangeReceiverMail(
-										!changeReceiverMail,
-									)
-								}
-								name="email"
-								color="primary"
-							/>
-						}
-						label="Envoyer le mail a une autre adresse"
-					/>
-					{changeReceiverMail ? (
-						<TextField
-							label="Mail"
-							name="mail"
-							value={templateProperties.mail || ''}
-							onChange={onTemplateChange}
+					<>
+						<FormControlLabel
+							control={
+								<Checkbox
+									checked={
+										changeReceiverMail
+									}
+									onChange={() =>
+										setChangeReceiverMail(
+											!changeReceiverMail,
+										)
+									}
+									name="email"
+									color="primary"
+								/>
+							}
+							label="Envoyer le mail a une autre adresse"
 						/>
-					) : (
-						templateProperties.mail &&
-						changeATemplateProperty('mail')
-					)}
+						{changeReceiverMail ? (
+							<TextField
+								label="Mail"
+								name="mail"
+								value={
+									templateProperties.mail ||
+									''
+								}
+								onChange={onTemplateChange}
+							/>
+						) : (
+							templateProperties.mail &&
+							changeATemplateProperty('mail')
+						)}
+					</>
 				</Box>
 			</Grid>
 			<Grid item>
@@ -135,66 +144,72 @@ export const ResetPasswordPopupContent = ({
 					nouveau mot de passe.
 				</Typography>
 				<Box sx={{ display: 'flex', alignItems: 'center' }}>
-					<FormControlLabel
-						control={
-							<Checkbox
-								checked={includeNameApp}
-								onChange={() =>
-									setincludeNameApp(
-										!includeNameApp,
-									)
-								}
-								name="includeNameApp"
-								color="primary"
-							/>
-						}
-						label="Inclure le nom de l'application"
-					/>
-					{includeNameApp ? (
-						<TextField
-							label="Nom de l'application"
-							name="application"
-							value={
-								templateProperties.application ||
-								''
+					<>
+						<FormControlLabel
+							control={
+								<Checkbox
+									checked={includeNameApp}
+									onChange={() =>
+										setincludeNameApp(
+											!includeNameApp,
+										)
+									}
+									name="includeNameApp"
+									color="primary"
+								/>
 							}
-							onChange={onTemplateChange}
+							label="Inclure le nom de l'application"
 						/>
-					) : (
-						templateProperties.application &&
-						changeATemplateProperty('application')
-					)}
+						{includeNameApp ? (
+							<TextField
+								label="Nom de l'application"
+								name="application"
+								value={
+									templateProperties.application ||
+									''
+								}
+								onChange={onTemplateChange}
+							/>
+						) : (
+							templateProperties.application &&
+							changeATemplateProperty('application')
+						)}
+					</>
 				</Box>
 				<Box sx={{ display: 'flex', alignItems: 'center' }}>
-					<FormControlLabel
-						control={
-							<Checkbox
-								checked={includeAssistMail}
-								onChange={() =>
-									setincludeAssistMail(
-										!includeAssistMail,
-									)
-								}
-								name="includeAssistMail"
-								color="primary"
-							/>
-						}
-						label="Inclure un mail d'assistance"
-					/>
-					{includeAssistMail ? (
-						<TextField
-							label="Mail assistance"
-							name="assistMail"
-							value={
-								templateProperties.assistMail ||
-								''
+					<>
+						<FormControlLabel
+							control={
+								<Checkbox
+									checked={
+										includeAssistMail
+									}
+									onChange={() =>
+										setincludeAssistMail(
+											!includeAssistMail,
+										)
+									}
+									name="includeAssistMail"
+									color="primary"
+								/>
 							}
-							onChange={onTemplateChange}
+							label="Inclure un mail d'assistance"
 						/>
-					) : (
-						templateProperties.assistMail &&
-						changeATemplateProperty('assistMail')
-					)}
+						{includeAssistMail ? (
+							<TextField
+								label="Mail assistance"
+								name="assistMail"
+								value={
+									templateProperties.assistMail ||
+									''
+								}
+								onChange={onTemplateChange}
+							/>
+						) : (
+							templateProperties.assistMail &&
+							changeATemplateProperty('assistMail')
+						)}
+					</>
 				</Box>
 			</Grid>
 			<Grid item>

@@ -1,5 +1,5 @@
-import { useEffect, useState, Suspense } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useEffect, useState, Suspense } from 'react';
+import { createRoot } from 'react-dom/client';
 import { Provider, useDispatch } from 'react-redux';
 import store from 'src/lib/configuration/store-configuration';
 import { BrowserRouter } from 'react-router-dom';
@@ -67,11 +67,16 @@ const Start = () => {
 		</AuthenticationProvider>
 	);
 };
-ReactDOM.render(
+
+const container = document.getElementById('root');
+const root = createRoot(container!);
+root.render(
+	// <React.StrictMode>
 	<Suspense fallback={<Loader />}>
 		<Provider store={store}>
 			<Start />
 		</Provider>
 	</Suspense>,
-	document.getElementById('root'),
+	// </React.StrictMode>,
 );
+//Warning TODO Enable StrictMode break the app

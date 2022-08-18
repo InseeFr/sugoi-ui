@@ -7,7 +7,7 @@ import {
 	Paper,
 	Typography,
 	useTheme,
-} from '@material-ui/core';
+} from '@mui/material';
 import { Add } from '@mui/icons-material';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
