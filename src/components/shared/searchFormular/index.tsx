@@ -77,162 +77,199 @@ const SearchFormular = ({
 		}
 	};
 	return (
-		<>
-			<Grid
-				container
-				direction="column"
-				alignContent="flex-end"
-				spacing={2}
-			>
-				<Grid item xs={6}>
-					<CustomToolBar
-						handleClick={handleClickAdd}
-					></CustomToolBar>
+		<Grid
+			container
+			direction="column"
+			alignContent="stretch"
+			alignItems="stretch"
+			spacing={2}
+		>
+			<Grid item xs={12}>
+				<Grid
+					container
+					direction="column"
+					alignContent="flex-end"
+					spacing={2}
+				>
+					<Grid item xs={6}>
+						<CustomToolBar
+							handleClick={handleClickAdd}
+						></CustomToolBar>
+					</Grid>
 				</Grid>
 			</Grid>
-			<form onSubmit={submit}>
-				<Paper elevation={0}>
-					<fieldset
-						style={{
-							padding: '20px',
-							borderColor:
-								theme.palette.primary.main,
-							borderStyle: 'solid',
-						}}
-					>
-						<legend>
-							<Typography
-								variant="caption"
-								color="primary"
-							>
-								Ma recherche
-							</Typography>
-						</legend>
-
-						<Grid container direction="row" spacing={2}>
-							<Grid item xs={12}>
-								<Grid
-									container
-									direction="row"
-									spacing={2}
+			<Grid item xs={12}>
+				<form onSubmit={submit}>
+					<Paper elevation={0}>
+						<fieldset
+							style={{
+								padding: '20px',
+								borderColor:
+									theme.palette.primary
+										.main,
+								borderStyle: 'solid',
+							}}
+						>
+							<legend>
+								<Typography
+									variant="caption"
+									color="primary"
 								>
-									{!expand &&
-										GenerateFields(
-											formValues,
-											handleChange,
-											formFields,
-										).map(
-											(
-												field,
-												i,
-											) => {
-												return (
-													<Grid
-														item
-														xs={
-															12
-														}
-														md={
-															12
-														}
-														key={
-															'field' +
-															i
-														}
-													>
-														{
-															field
-														}
-													</Grid>
-												);
-											},
-										)}
-								</Grid>
-							</Grid>
-							<Grid item xs={12}>
-								<Collapse in={expand}>
+									Ma recherche
+								</Typography>
+							</legend>
+							<Grid
+								container
+								direction="column"
+								alignContent="stretch"
+								alignItems="stretch"
+								spacing={2}
+							>
+								<Grid item xs={12}>
 									<Grid
 										container
 										direction="row"
 										spacing={2}
 									>
-										{GenerateFields(
-											formValuesAdvanced,
-											handleChangeAdvanced,
-											formFieldsAdvanced,
-										).map(
-											(
-												field,
-												i,
-											) => {
-												return (
-													<Grid
-														item
-														xs={
-															12
-														}
-														md={
-															6
-														}
-														key={
-															'field_advanced' +
-															i
-														}
-													>
-														{
-															field
-														}
-													</Grid>
-												);
-											},
-										)}
+										<Grid item xs={12}>
+											<Grid
+												container
+												direction="row"
+												spacing={
+													2
+												}
+											>
+												{!expand &&
+													GenerateFields(
+														formValues,
+														handleChange,
+														formFields,
+													).map(
+														(
+															field,
+															i,
+														) => {
+															return (
+																<Grid
+																	item
+																	xs={
+																		12
+																	}
+																	md={
+																		12
+																	}
+																	key={
+																		'field' +
+																		i
+																	}
+																>
+																	{
+																		field
+																	}
+																</Grid>
+															);
+														},
+													)}
+											</Grid>
+										</Grid>
+										<Grid item xs={12}>
+											<Collapse
+												in={
+													expand
+												}
+											>
+												<Grid
+													container
+													direction="row"
+													spacing={
+														2
+													}
+												>
+													{GenerateFields(
+														formValuesAdvanced,
+														handleChangeAdvanced,
+														formFieldsAdvanced,
+													).map(
+														(
+															field,
+															i,
+														) => {
+															return (
+																<Grid
+																	item
+																	xs={
+																		12
+																	}
+																	md={
+																		6
+																	}
+																	key={
+																		'field_advanced' +
+																		i
+																	}
+																>
+																	{
+																		field
+																	}
+																</Grid>
+															);
+														},
+													)}
+												</Grid>
+											</Collapse>
+										</Grid>
 									</Grid>
-								</Collapse>
+								</Grid>
+								<Grid item xs={12}>
+									<Grid
+										container
+										direction="row"
+										justifyContent="flex-end"
+										spacing={3}
+									>
+										<Grid item>
+											<Button
+												variant="contained"
+												color="primary"
+												type="submit"
+											>
+												{t(
+													'commons.search_forms.validate',
+												)}
+											</Button>
+										</Grid>
+										<Grid item>
+											<Button
+												variant="contained"
+												color="secondary"
+												onClick={() => {
+													handleReset();
+													handleResetAdvanced();
+												}}
+											>
+												{t(
+													'commons.search_forms.reset',
+												)}
+											</Button>
+										</Grid>
+										<Grid item>
+											<ExpandButton
+												expand={
+													expand
+												}
+												setExpand={
+													handleExpand
+												}
+											/>
+										</Grid>
+									</Grid>
+								</Grid>
 							</Grid>
-						</Grid>
-
-						<Grid
-							container
-							direction="row"
-							justifyContent="flex-end"
-							spacing={3}
-						>
-							<Grid item>
-								<Button
-									variant="contained"
-									color="primary"
-									type="submit"
-								>
-									{t(
-										'commons.search_forms.validate',
-									)}
-								</Button>
-							</Grid>
-							<Grid item>
-								<Button
-									variant="contained"
-									color="secondary"
-									onClick={() => {
-										handleReset();
-										handleResetAdvanced();
-									}}
-								>
-									{t(
-										'commons.search_forms.reset',
-									)}
-								</Button>
-							</Grid>
-							<Grid item>
-								<ExpandButton
-									expand={expand}
-									setExpand={handleExpand}
-								/>
-							</Grid>
-						</Grid>
-					</fieldset>
-				</Paper>
-			</form>
-		</>
+						</fieldset>
+					</Paper>
+				</form>
+			</Grid>
+		</Grid>
 	);
 };
 

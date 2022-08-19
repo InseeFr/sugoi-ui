@@ -161,8 +161,9 @@ const ConfirmationPopup = ({
 				}
 				actions={
 					<Button
-						color="secondary"
+						color="primary"
 						onClick={() => handleConfirmDelete()}
+						variant="contained"
 					>
 						Confirmer
 					</Button>

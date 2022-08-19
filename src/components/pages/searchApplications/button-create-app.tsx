@@ -68,7 +68,11 @@ export const CreateApplicationButton = ({ handleCreateApp }: Props) => {
 						</Grid>
 					</Grid>
 				}
-				actions={<Button onClick={onFinish}>Créer</Button>}
+				actions={
+					<Button onClick={onFinish} variant="contained">
+						Créer
+					</Button>
+				}
 				fullwidth
 				maxwidth="md"
 			/>

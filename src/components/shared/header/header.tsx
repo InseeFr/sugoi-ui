@@ -22,6 +22,7 @@ const MyHeader = (props: props) => {
 			position="fixed"
 			sx={{
 				zIndex: theme.zIndex.drawer + 1,
+				backgroundColor: theme.palette.primary.main,
 			}}
 		>
 			<Toolbar

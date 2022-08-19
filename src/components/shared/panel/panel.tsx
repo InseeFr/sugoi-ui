@@ -19,6 +19,7 @@ type Props = {
 	description?: string;
 	elevation?: number;
 	collapse?: boolean;
+	transparent?: boolean;
 };
 
 const Panel = ({
@@ -28,6 +29,7 @@ const Panel = ({
 	elevation,
 	collapse,
 	children,
+	transparent,
 }: Props) => {
 	const theme = useTheme();
 	const [expand, setExpand] = useState(collapse);
@@ -37,7 +39,9 @@ const Panel = ({
 			sx={{
 				padding: theme.spacing(2),
 				textAlign: 'center',
-				color: theme.palette.text.secondary,
+				backgroundColor: transparent
+					? 'transparent'
+					: theme.palette.background.paper,
 			}}
 			elevation={elevation}
 		>

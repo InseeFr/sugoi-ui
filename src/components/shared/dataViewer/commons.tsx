@@ -36,7 +36,7 @@ export const ContentPanel = ({
 	return (
 		<Grid
 			container
-			spacing={3}
+			spacing={1}
 			direction="column"
 			justifyContent="center"
 			alignItems="stretch"

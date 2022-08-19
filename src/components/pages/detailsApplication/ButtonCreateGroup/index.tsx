@@ -51,10 +51,10 @@ export const ButtonCreateGroup = ({ handleAddGroup, application }: Props) => {
 							container
 							direction="row"
 							justifyContent="center"
-							// alignItems="stretch"
+							alignItems="stretch"
 							spacing={1}
 						>
-							<Grid item xs={6}>
+							<Grid item xs={10}>
 								<TextField
 									fullWidth
 									label="Nom du groupe"
@@ -79,7 +79,7 @@ export const ButtonCreateGroup = ({ handleAddGroup, application }: Props) => {
 									disabled
 								/>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item xs={12}>
 								<TextField
 									fullWidth
 									label="Description"
@@ -97,7 +97,11 @@ export const ButtonCreateGroup = ({ handleAddGroup, application }: Props) => {
 					</>
 				}
 				actions={
-					<Button color="primary" onClick={onSubmit}>
+					<Button
+						color="primary"
+						variant="contained"
+						onClick={onSubmit}
+					>
 						Ajouter
 					</Button>
 				}

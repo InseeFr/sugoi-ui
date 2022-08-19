@@ -54,7 +54,7 @@ const ListFieldInfoPopup = ({
 	};
 
 	return (
-		<Grid container spacing={3} sx={{ padding: 10 }}>
+		<Grid container spacing={3}>
 			<Grid item xs={12}>
 				<Box sx={{ display: 'flex', alignItems: 'center' }}>
 					<Typography variant="subtitle1">
