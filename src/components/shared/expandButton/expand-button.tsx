@@ -13,9 +13,11 @@ const ExpandButton = ({ expand, setExpand }: props) => {
 	const { t } = useTranslation();
 	return (
 		<Button
-			variant="outlined"
+			variant="contained"
 			endIcon={expand ? <ExpandLessIcon /> : <ExpandMoreIcon />}
 			onClick={() => setExpand(!expand)}
+			color="inherit"
+			style={{ color: '#000000' }}
 		>
 			{expand
 				? t('commons.expand_button.show_less')

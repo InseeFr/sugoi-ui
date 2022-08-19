@@ -160,53 +160,40 @@ const SearchOrganizations = () => {
 	];
 
 	return (
-		<>
+		<Grid
+			container
+			direction="column"
+			justifyContent="center"
+			alignItems="stretch"
+			spacing={3}
+		>
 			<Grid
-				container
-				direction="column"
-				justifyContent="center"
-				alignItems="stretch"
-				spacing={3}
+				item
+				xs={12}
+				sx={{ display: 'flex', alignItems: 'center' }}
 			>
-				<Grid
-					item
-					xs={12}
-					sx={{ display: 'flex', alignItems: 'center' }}
-				>
-					<Title
-						title={
-							t('search_organization.title') + realm
-						}
-					/>
-					<ButtonDescription realmName={realm} />
-				</Grid>
+				<Title title={t('search_organization.title') + realm} />
+				<ButtonDescription realmName={realm} />
 			</Grid>
-			<Grid
-				container
-				direction="column"
-				justifyContent="center"
-				alignItems="stretch"
-				spacing={3}
-			>
-				<Grid item xs={12}>
-					<SearchForm
-						onSubmit={handleSearch}
-						formFields={formFields}
-						handleClickAdd={handleCreate}
-						formFieldsAdvanced={formFieldsAdvanced}
-					/>
-				</Grid>
-				<Grid item xs={12}>
-					<SearchResults
-						data={organizations}
-						columns={columns}
-						handleClickAdd={handleCreate}
-						handleClickOnRow={handleClickOnOrganization}
-					/>
-					{loading ? <LinearProgress /> : null}
-				</Grid>
+
+			<Grid item xs={12}>
+				<SearchForm
+					onSubmit={handleSearch}
+					formFields={formFields}
+					handleClickAdd={handleCreate}
+					formFieldsAdvanced={formFieldsAdvanced}
+				/>
 			</Grid>
-		</>
+			<Grid item xs={12}>
+				<SearchResults
+					data={organizations}
+					columns={columns}
+					handleClickAdd={handleCreate}
+					handleClickOnRow={handleClickOnOrganization}
+				/>
+				{loading ? <LinearProgress /> : null}
+			</Grid>
+		</Grid>
 	);
 };
 

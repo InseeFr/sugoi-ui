@@ -6,11 +6,17 @@ const dark = createTheme({
 	palette: {
 		mode: 'dark',
 		primary: { main: '#4791db' },
-		secondary: { main: '#EB1D36' },
+		secondary: { main: '#e33371' },
 		error: { main: '#e57373' },
 		warning: { main: '#ffb74d' },
 		info: { main: '#64b5f6' },
 		success: { main: '#81c784' },
+		// grey: {
+		// 	A100: '#d5d5d5',
+		// 	A200: '#aaaaaa',
+		// 	A400: '#303030',
+		// },
+		background: { default: '#303030', paper: '#424242' },
 	},
 });
 

@@ -54,7 +54,11 @@ export const ResetPasswordPopup = () => {
 
 	return (
 		<>
-			<Button onClick={handleOpen} variant="contained">
+			<Button
+				onClick={handleOpen}
+				variant="contained"
+				color="secondary"
+			>
 				{t('commons.reset_password.text')}
 			</Button>
 			<SimpleDialog
@@ -77,6 +81,8 @@ export const ResetPasswordPopup = () => {
 					<LoadingButton
 						handleClick={onFinish}
 						loading={loading}
+						variant="contained"
+						color="primary"
 					>
 						{t('commons.reset_password.send_button')}
 					</LoadingButton>
