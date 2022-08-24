@@ -23,4 +23,5 @@ interface OptionsFields {
 	textButton?: string;
 	attribute_key?: string;
 	dropzoneText?: string;
+	default_values?: string;
 }

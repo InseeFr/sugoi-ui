@@ -11,6 +11,7 @@ import {
 	TextField,
 	Typography,
 	Box,
+	Button,
 } from '@mui/material';
 import ContactsIcon from '@mui/icons-material/Contacts';
 import CreateIcon from '@mui/icons-material/Create';
@@ -23,7 +24,9 @@ import {
 	useAddAttribute,
 	useDeleteAttribute,
 	useGetUser,
+	useWhoAmI,
 } from 'src/lib/hooks/api-hooks';
+
 import { Habilitation } from 'src/lib/model/api/habilitation';
 
 interface props {
@@ -35,6 +38,7 @@ interface props {
 	deleteTitle?: string;
 	modifiable: boolean;
 	attribute_key: string;
+	defaultValues?: string[];
 }
 
 const HabilitationsPopup = ({
@@ -42,6 +46,7 @@ const HabilitationsPopup = ({
 	helpText,
 	modifiable,
 	attribute_key,
+	defaultValues,
 }: props) => {
 	const { realm, userStorage, id } = useParams<any>();
 	const {
@@ -49,6 +54,21 @@ const HabilitationsPopup = ({
 		execute: executeUser,
 		loading: loadingUser,
 	} = useGetUser(id, realm, userStorage);
+	function GetApplicationDefault() {
+		const { rights } = useWhoAmI();
+		return rights?.appManager ?? new Array();
+	}
+
+	function isHabilitation(value: string, applicationsDefault: string[]) {
+		const compare = value.toLowerCase();
+
+		for (const application of applicationsDefault) {
+			if (compare.includes(application.toLowerCase())) {
+				return true;
+			}
+		}
+		return false;
+	}
 	const [application, setApplication] = React.useState<any>(undefined);
 	const [role, setRole] = React.useState<any>(undefined);
 	const [propriete, setPropriete] = React.useState<any>(undefined);
@@ -75,6 +95,19 @@ const HabilitationsPopup = ({
 		}
 	};
 
+	const handleClickAddDefault = (i: number) => {
+		if (defaultValues != undefined) {
+			const defaultRole: string = defaultValues[i];
+
+			execute(realm, id, defaultRole).finally(() => {
+				setApplication(undefined);
+				setPropriete(undefined);
+				setRole(undefined);
+				executeUser(id, realm, userStorage);
+			});
+		}
+	};
+
 	const handleClickDelete = (pos: number) => {
 		user &&
 			user.habilitations &&
@@ -86,6 +119,12 @@ const HabilitationsPopup = ({
 			);
 	};
 
+	const applicationsDefault: string[] = GetApplicationDefault();
+
+	const defaultValuesUtilisateur: string[] | undefined =
+		defaultValues?.filter((value) =>
+			isHabilitation(value, applicationsDefault),
+		);
 	return (
 		<Grid container spacing={3}>
 			<Grid item xs={12}>
@@ -200,6 +239,7 @@ const HabilitationsPopup = ({
 									disabled={loadingAdd}
 								/>
 							</Grid>
+
 							<Grid item>
 								<TextField
 									variant="outlined"
@@ -227,6 +267,87 @@ const HabilitationsPopup = ({
 								>
 									Ajouter
 								</LoadingButton>
+							</Grid>
+							<Grid item>
+								<Grid
+									container
+									direction="column"
+									justifyContent="left"
+									alignItems="stretch"
+									spacing={2}
+								>
+									{defaultValuesUtilisateur !=
+										undefined &&
+									defaultValuesUtilisateur.length >
+										0 ? (
+										<Grid item>
+											<Grid
+												container
+												direction="row"
+												justifyContent="left"
+												alignItems="stretch"
+												spacing={
+													2
+												}
+											>
+												<Grid
+													item
+												>
+													<p>
+														Ajouter
+														l’habilitation
+														…{' '}
+													</p>
+												</Grid>
+											</Grid>
+											<Grid item>
+												<Grid
+													container
+													direction="column"
+													justifyContent="center"
+													alignItems="stretch"
+													spacing={
+														2
+													}
+												>
+													{defaultValuesUtilisateur.map(
+														(
+															value: any,
+															i: any,
+														) => (
+															<Grid
+																item
+																key={
+																	'cadreHabilitation_' +
+																	i
+																}
+															>
+																<Button
+																	color="primary"
+																	variant="contained"
+																	key={
+																		'defaultHabilitation_' +
+																		i
+																	}
+																	onClick={() =>
+																		handleClickAddDefault(
+																			i,
+																		)
+																	}
+																>
+																	{value +
+																		' +'}
+																</Button>
+															</Grid>
+														),
+													)}
+												</Grid>
+											</Grid>
+										</Grid>
+									) : (
+										<Grid item></Grid>
+									)}
+								</Grid>
 							</Grid>
 						</Grid>
 					</Grid>

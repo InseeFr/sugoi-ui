@@ -11,6 +11,7 @@ import {
 	TextField,
 	Typography,
 	Box,
+	Button,
 } from '@mui/material';
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -32,6 +33,7 @@ interface props {
 	deleteTitle?: string;
 	modifiable: boolean;
 	attribute_key: string;
+	defaultValues?: string[];
 }
 
 const SimpleAppManagedAttributes = ({
@@ -43,6 +45,7 @@ const SimpleAppManagedAttributes = ({
 	addTitle,
 	deleteTitle,
 	attribute_key,
+	defaultValues,
 }: props) => {
 	const { realm, userStorage, id } = useParams<any>();
 
@@ -61,6 +64,17 @@ const SimpleAppManagedAttributes = ({
 			setNewValue(undefined);
 			executeUser(id, realm, userStorage);
 		});
+	};
+
+	const handleClickAddDefault = (i: number) => {
+		if (defaultValues != undefined) {
+			const defaultRole: string = defaultValues[i];
+
+			execute(realm, id, defaultRole).finally(() => {
+				setNewValue(undefined);
+				executeUser(id, realm, userStorage);
+			});
+		}
 	};
 
 	const delet = (pos: number) => {
@@ -198,6 +212,86 @@ const SimpleAppManagedAttributes = ({
 								>
 									Ajouter
 								</LoadingButton>
+							</Grid>
+							<Grid item>
+								<Grid
+									container
+									direction="column"
+									justifyContent="left"
+									alignItems="stretch"
+									spacing={2}
+								>
+									{defaultValues !=
+										undefined &&
+									defaultValues.length >
+										0 ? (
+										<Grid item>
+											<Grid
+												container
+												direction="row"
+												justifyContent="left"
+												alignItems="stretch"
+												spacing={
+													2
+												}
+											>
+												<Grid
+													item
+												>
+													<p>
+														Ajouter
+														…{' '}
+													</p>
+												</Grid>
+											</Grid>
+											<Grid item>
+												<Grid
+													container
+													direction="column"
+													justifyContent="center"
+													alignItems="stretch"
+													spacing={
+														2
+													}
+												>
+													{defaultValues.map(
+														(
+															value: any,
+															i: any,
+														) => (
+															<Grid
+																item
+																key={
+																	'cadreRole_' +
+																	i
+																}
+															>
+																<Button
+																	color="primary"
+																	variant="contained"
+																	key={
+																		'defaultRole_' +
+																		i
+																	}
+																	onClick={() =>
+																		handleClickAddDefault(
+																			i,
+																		)
+																	}
+																>
+																	{value +
+																		' +'}
+																</Button>
+															</Grid>
+														),
+													)}
+												</Grid>
+											</Grid>
+										</Grid>
+									) : (
+										<Grid item></Grid>
+									)}
+								</Grid>
 							</Grid>
 						</Grid>
 					</Grid>
