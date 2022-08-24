@@ -9,6 +9,13 @@ import ManageGpgKey from '../manageGpgKey';
 import SimpleAppManagedAttributes from '../simpleAppManageAttributes';
 import TextFieldInfo from '../textFieldInfo';
 
+function getDefaultValues(defaultValues: string) {
+	if (defaultValues == null || defaultValues == undefined) {
+		return undefined;
+	}
+	return defaultValues.split(',');
+}
+
 export const GenerateFields = (
 	data: any,
 	handleChange: any,
@@ -77,6 +84,9 @@ export const GenerateFields = (
 						attribute_key={
 							field.options.attribute_key as string
 						}
+						defaultValues={getDefaultValues(
+							field.options.default_values,
+						)}
 					/>,
 				);
 				break;
@@ -106,6 +116,9 @@ export const GenerateFields = (
 						attribute_key={
 							field.options.attribute_key as string
 						}
+						defaultValues={getDefaultValues(
+							field.options.default_values,
+						)}
 					/>,
 				);
 				break;
