@@ -77,6 +77,7 @@ export const GenerateFields = (
 						attribute_key={
 							field.options.attribute_key as string
 						}
+						defaultValues={field.defaultValues}
 					/>,
 				);
 				break;

@@ -11,6 +11,7 @@ import {
 	TextField,
 	Typography,
 	Box,
+	Button,
 } from '@mui/material';
 import ContactsIcon from '@mui/icons-material/Contacts';
 import CreateIcon from '@mui/icons-material/Create';
@@ -35,6 +36,7 @@ interface props {
 	deleteTitle?: string;
 	modifiable: boolean;
 	attribute_key: string;
+	defaultValues?: string[];
 }
 
 const HabilitationsPopup = ({
@@ -42,6 +44,7 @@ const HabilitationsPopup = ({
 	helpText,
 	modifiable,
 	attribute_key,
+	defaultValues,
 }: props) => {
 	const { realm, userStorage, id } = useParams<any>();
 	const {
@@ -67,6 +70,25 @@ const HabilitationsPopup = ({
 				property: propriete,
 			};
 			execute(realm, id, prop.id).finally(() => {
+				setApplication(undefined);
+				setPropriete(undefined);
+				setRole(undefined);
+				executeUser(id, realm, userStorage);
+			});
+		}
+	};
+
+	const handleClickAddDefault = (i: any) => {
+		if (defaultValues != undefined) {
+			const defaultRole: string = defaultValues[i];
+
+			const prop = {
+				id: defaultRole,
+				application: undefined,
+				role: undefined,
+				property: propriete,
+			};
+			execute(realm, id, defaultRole).finally(() => {
 				setApplication(undefined);
 				setPropriete(undefined);
 				setRole(undefined);
@@ -185,20 +207,79 @@ const HabilitationsPopup = ({
 								/>
 							</Grid>
 							<Grid item>
-								<TextField
-									variant="outlined"
-									label="Role"
-									name="Role"
-									value={role || ''}
-									fullWidth
-									onChange={(e) =>
-										setRole(
-											e.target
-												.value,
-										)
-									}
-									disabled={loadingAdd}
-								/>
+								<Grid
+									container
+									direction="row"
+									justifyContent="left"
+									alignItems="stretch"
+									spacing={2}
+								>
+									<Grid item>
+										<TextField
+											variant="outlined"
+											label="Role"
+											name="Role"
+											value={
+												role ||
+												''
+											}
+											fullWidth
+											onChange={(
+												e,
+											) =>
+												setRole(
+													e
+														.target
+														.value,
+												)
+											}
+											disabled={
+												loadingAdd
+											}
+										/>
+									</Grid>
+									<Grid item>
+										<Grid
+											container
+											direction="column"
+											justifyContent="center"
+											alignItems="stretch"
+											spacing={2}
+										>
+											{defaultValues?.map(
+												(
+													value: any,
+													i: any,
+												) => (
+													<Grid
+														item
+														key={
+															'cadreHabilitation_' +
+															i
+														}
+													>
+														<Button
+															color="primary"
+															variant="contained"
+															key={
+																'defaultHabilitation_' +
+																i
+															}
+															onClick={() =>
+																handleClickAddDefault(
+																	i,
+																)
+															}
+														>
+															{'ajouter le rôle ' +
+																value}
+														</Button>
+													</Grid>
+												),
+											)}
+										</Grid>
+									</Grid>
+								</Grid>
 							</Grid>
 							<Grid item>
 								<TextField

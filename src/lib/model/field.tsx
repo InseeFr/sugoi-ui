@@ -9,7 +9,7 @@ export interface Field {
 	options: OptionsFields | any;
 	error?: ErrorField;
 	required?: boolean;
-	defaultValues?: String;
+	defaultValues?: string[];
 }
 
 export interface ErrorField {
