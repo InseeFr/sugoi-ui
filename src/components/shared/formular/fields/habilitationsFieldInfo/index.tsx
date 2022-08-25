@@ -266,57 +266,69 @@ const HabilitationsPopup = ({
 							<Grid item>
 								<Grid
 									container
-									direction="row"
+									direction="column"
 									justifyContent="left"
 									alignItems="stretch"
 									spacing={2}
 								>
 									<Grid item>
-										<p>
-											Ajouter
-											l’habilitation
-											…{' '}
-										</p>
-									</Grid>
-									<Grid item>
 										<Grid
 											container
-											direction="column"
-											justifyContent="center"
+											direction="row"
+											justifyContent="left"
 											alignItems="stretch"
 											spacing={2}
 										>
-											{defaultValues?.map(
-												(
-													value: any,
-													i: any,
-												) => (
-													<Grid
-														item
-														key={
-															'cadreHabilitation_' +
-															i
-														}
-													>
-														<Button
-															color="primary"
-															variant="contained"
+											<Grid item>
+												<p>
+													Ajouter
+													l’habilitation
+													…{' '}
+												</p>
+											</Grid>
+										</Grid>
+										<Grid item>
+											<Grid
+												container
+												direction="column"
+												justifyContent="center"
+												alignItems="stretch"
+												spacing={
+													2
+												}
+											>
+												{defaultValues?.map(
+													(
+														value: any,
+														i: any,
+													) => (
+														<Grid
+															item
 															key={
-																'defaultHabilitation_' +
+																'cadreHabilitation_' +
 																i
 															}
-															onClick={() =>
-																handleClickAddDefault(
-																	i,
-																)
-															}
 														>
-															{value +
-																' +'}
-														</Button>
-													</Grid>
-												),
-											)}
+															<Button
+																color="primary"
+																variant="contained"
+																key={
+																	'defaultHabilitation_' +
+																	i
+																}
+																onClick={() =>
+																	handleClickAddDefault(
+																		i,
+																	)
+																}
+															>
+																{value +
+																	' +'}
+															</Button>
+														</Grid>
+													),
+												)}
+											</Grid>
 										</Grid>
 									</Grid>
 								</Grid>
