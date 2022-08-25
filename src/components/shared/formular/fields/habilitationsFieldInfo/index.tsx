@@ -232,47 +232,6 @@ const HabilitationsPopup = ({
 											}
 										/>
 									</Grid>
-									<Grid item>
-										<Grid
-											container
-											direction="column"
-											justifyContent="center"
-											alignItems="stretch"
-											spacing={2}
-										>
-											{defaultValues?.map(
-												(
-													value: any,
-													i: any,
-												) => (
-													<Grid
-														item
-														key={
-															'cadreHabilitation_' +
-															i
-														}
-													>
-														<Button
-															color="primary"
-															variant="contained"
-															key={
-																'defaultHabilitation_' +
-																i
-															}
-															onClick={() =>
-																handleClickAddDefault(
-																	i,
-																)
-															}
-														>
-															{'ajouter le rôle ' +
-																value}
-														</Button>
-													</Grid>
-												),
-											)}
-										</Grid>
-									</Grid>
 								</Grid>
 							</Grid>
 
@@ -318,6 +277,47 @@ const HabilitationsPopup = ({
 											l’habilitation
 											…{' '}
 										</p>
+									</Grid>
+									<Grid item>
+										<Grid
+											container
+											direction="column"
+											justifyContent="center"
+											alignItems="stretch"
+											spacing={2}
+										>
+											{defaultValues?.map(
+												(
+													value: any,
+													i: any,
+												) => (
+													<Grid
+														item
+														key={
+															'cadreHabilitation_' +
+															i
+														}
+													>
+														<Button
+															color="primary"
+															variant="contained"
+															key={
+																'defaultHabilitation_' +
+																i
+															}
+															onClick={() =>
+																handleClickAddDefault(
+																	i,
+																)
+															}
+														>
+															{'ajouter le rôle ' +
+																value}
+														</Button>
+													</Grid>
+												),
+											)}
+										</Grid>
 									</Grid>
 								</Grid>
 							</Grid>
