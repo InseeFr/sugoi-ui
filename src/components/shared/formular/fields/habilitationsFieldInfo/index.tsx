@@ -275,6 +275,7 @@ const HabilitationsPopup = ({
 									</Grid>
 								</Grid>
 							</Grid>
+
 							<Grid item>
 								<TextField
 									variant="outlined"
@@ -302,6 +303,23 @@ const HabilitationsPopup = ({
 								>
 									Ajouter
 								</LoadingButton>
+							</Grid>
+							<Grid item>
+								<Grid
+									container
+									direction="row"
+									justifyContent="left"
+									alignItems="stretch"
+									spacing={2}
+								>
+									<Grid item>
+										<p>
+											Ajouter
+											l’habilitation
+											…{' '}
+										</p>
+									</Grid>
+								</Grid>
 							</Grid>
 						</Grid>
 					</Grid>
