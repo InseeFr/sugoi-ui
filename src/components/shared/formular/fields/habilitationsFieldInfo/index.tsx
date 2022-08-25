@@ -82,12 +82,6 @@ const HabilitationsPopup = ({
 		if (defaultValues != undefined) {
 			const defaultRole: string = defaultValues[i];
 
-			const prop = {
-				id: defaultRole,
-				application: undefined,
-				role: undefined,
-				property: propriete,
-			};
 			execute(realm, id, defaultRole).finally(() => {
 				setApplication(undefined);
 				setPropriete(undefined);
