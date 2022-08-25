@@ -311,8 +311,8 @@ const HabilitationsPopup = ({
 																)
 															}
 														>
-															{'ajouter le rôle ' +
-																value}
+															{value +
+																' +'}
 														</Button>
 													</Grid>
 												),
