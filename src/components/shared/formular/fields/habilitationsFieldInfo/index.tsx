@@ -52,6 +52,19 @@ const HabilitationsPopup = ({
 		execute: executeUser,
 		loading: loadingUser,
 	} = useGetUser(id, realm, userStorage);
+	function getApplicationDefault(defaultValues?: string[]) {
+		const resultat: string[] = new Array();
+		if (defaultValues != undefined) {
+			for (const value of defaultValues) {
+				if (!resultat.includes(value)) {
+					alert(value);
+					resultat.push(value);
+				}
+			}
+		}
+		alert(resultat.length);
+		return resultat;
+	}
 	const [application, setApplication] = React.useState<any>(undefined);
 	const [role, setRole] = React.useState<any>(undefined);
 	const [propriete, setPropriete] = React.useState<any>(undefined);
@@ -102,6 +115,8 @@ const HabilitationsPopup = ({
 			);
 	};
 
+	const applicationsDefault: string[] =
+		getApplicationDefault(defaultValues);
 	return (
 		<Grid container spacing={3}>
 			<Grid item xs={12}>
@@ -406,6 +421,13 @@ const HabilitationsPopup = ({
 					</Grid>
 				</>
 			) : null}
+			<Grid item>
+				{applicationsDefault?.map(
+					(application: string, i: number) => (
+						<p key={'application' + i}>{application}</p>
+					),
+				)}
+			</Grid>
 		</Grid>
 	);
 };
