@@ -56,13 +56,16 @@ const HabilitationsPopup = ({
 		const resultat: string[] = new Array();
 		if (defaultValues != undefined) {
 			for (const value of defaultValues) {
-				if (!resultat.includes(value)) {
-					alert(value);
-					resultat.push(value);
+				const parties = value.split('_');
+				if (
+					parties.length == 2 &&
+					!resultat.includes(parties[1])
+				) {
+					resultat.push(parties[1]);
 				}
 			}
 		}
-		alert(resultat.length);
+
 		return resultat;
 	}
 	const [application, setApplication] = React.useState<any>(undefined);
