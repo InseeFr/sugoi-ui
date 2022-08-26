@@ -78,7 +78,7 @@ const HabilitationsPopup = ({
 		}
 	};
 
-	const handleClickAddDefault = (i: any) => {
+	const handleClickAddDefault = (i: number) => {
 		if (defaultValues != undefined) {
 			const defaultRole: string = defaultValues[i];
 
