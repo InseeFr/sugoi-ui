@@ -54,16 +54,29 @@ const HabilitationsPopup = ({
 		execute: executeUser,
 		loading: loadingUser,
 	} = useGetUser(id, realm, userStorage);
-	function GetApplicationDefault(defaultValues?: string[]) {
+	function GetApplicationDefault() {
 		const resultat: string[] = new Array();
 		const { rights } = useWhoAmI();
 		if (rights != undefined) {
 			for (const appUser of rights.appManager) {
-				resultat.push(appUser);
+				const tabAppUser = appUser.split('\\');
+
+				resultat.push(tabAppUser[1]);
 			}
 		}
-		alert(resultat.length);
+
 		return resultat;
+	}
+
+	function isHabilitation(value: string, applicationsDefault: string[]) {
+		const compare = value.toLowerCase();
+
+		for (const application of applicationsDefault) {
+			if (compare.includes(application.toLowerCase())) {
+				return true;
+			}
+		}
+		return false;
 	}
 	const [application, setApplication] = React.useState<any>(undefined);
 	const [role, setRole] = React.useState<any>(undefined);
@@ -115,8 +128,7 @@ const HabilitationsPopup = ({
 			);
 	};
 
-	const applicationsDefault: string[] =
-		GetApplicationDefault(defaultValues);
+	const applicationsDefault: string[] = GetApplicationDefault();
 	return (
 		<Grid container spacing={3}>
 			<Grid item xs={12}>
@@ -312,37 +324,47 @@ const HabilitationsPopup = ({
 													2
 												}
 											>
-												{defaultValues?.map(
-													(
-														value: any,
-														i: any,
-													) => (
-														<Grid
-															item
-															key={
-																'cadreHabilitation_' +
-																i
-															}
-														>
-															<Button
-																color="primary"
-																variant="contained"
+												{defaultValues
+													?.filter(
+														(
+															value,
+														) =>
+															isHabilitation(
+																value,
+																applicationsDefault,
+															),
+													)
+													.map(
+														(
+															value: any,
+															i: any,
+														) => (
+															<Grid
+																item
 																key={
-																	'defaultHabilitation_' +
+																	'cadreHabilitation_' +
 																	i
 																}
-																onClick={() =>
-																	handleClickAddDefault(
-																		i,
-																	)
-																}
 															>
-																{value +
-																	' +'}
-															</Button>
-														</Grid>
-													),
-												)}
+																<Button
+																	color="primary"
+																	variant="contained"
+																	key={
+																		'defaultHabilitation_' +
+																		i
+																	}
+																	onClick={() =>
+																		handleClickAddDefault(
+																			i,
+																		)
+																	}
+																>
+																	{value +
+																		' +'}
+																</Button>
+															</Grid>
+														),
+													)}
 											</Grid>
 										</Grid>
 									</Grid>
