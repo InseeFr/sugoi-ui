@@ -24,7 +24,9 @@ import {
 	useAddAttribute,
 	useDeleteAttribute,
 	useGetUser,
+	useWhoAmI,
 } from 'src/lib/hooks/api-hooks';
+
 import { Habilitation } from 'src/lib/model/api/habilitation';
 
 interface props {
@@ -52,20 +54,15 @@ const HabilitationsPopup = ({
 		execute: executeUser,
 		loading: loadingUser,
 	} = useGetUser(id, realm, userStorage);
-	function getApplicationDefault(defaultValues?: string[]) {
+	function GetApplicationDefault(defaultValues?: string[]) {
 		const resultat: string[] = new Array();
-		if (defaultValues != undefined) {
-			for (const value of defaultValues) {
-				const parties = value.split('_');
-				if (
-					parties.length == 2 &&
-					!resultat.includes(parties[1])
-				) {
-					resultat.push(parties[1]);
-				}
+		const { rights } = useWhoAmI();
+		if (rights != undefined) {
+			for (const appUser of rights.appManager) {
+				resultat.push(appUser);
 			}
 		}
-
+		alert(resultat.length);
 		return resultat;
 	}
 	const [application, setApplication] = React.useState<any>(undefined);
@@ -119,7 +116,7 @@ const HabilitationsPopup = ({
 	};
 
 	const applicationsDefault: string[] =
-		getApplicationDefault(defaultValues);
+		GetApplicationDefault(defaultValues);
 	return (
 		<Grid container spacing={3}>
 			<Grid item xs={12}>
