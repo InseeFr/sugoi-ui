@@ -443,13 +443,6 @@ const HabilitationsPopup = ({
 					</Grid>
 				</>
 			) : null}
-			<Grid item>
-				{applicationsDefault?.map(
-					(application: string, i: number) => (
-						<p key={'application' + i}>{application}</p>
-					),
-				)}
-			</Grid>
 		</Grid>
 	);
 };
