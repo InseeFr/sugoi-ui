@@ -260,7 +260,10 @@ export const DetailsApplication = () => {
 								spacing={1}
 							>
 								{application?.attributes?.contacts?.map(
-									(contact: String, i) => (
+									(
+										contact: String,
+										i: any,
+									) => (
 										<TextField
 											key={
 												'contacts' +

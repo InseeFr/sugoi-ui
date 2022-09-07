@@ -25,7 +25,7 @@ export const SearchResults = ({
 		responsive: 'simple' as any,
 		selectableRowsHideCheckboxes: true,
 		search: false,
-		onRowClick: (rowData: any) => handleClickOnRow(rowData),
+		onRowClick: (rowData: string[]) => handleClickOnRow(rowData[0]),
 		textLabels: {
 			body: {
 				noMatch: loading ? (

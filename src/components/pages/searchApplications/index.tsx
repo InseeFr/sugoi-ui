@@ -54,9 +54,8 @@ export const SearchApplications = () => {
 		push('/realm/' + realm + '/' + 'applications/' + application.name);
 	};
 
-	const handleClickOnRow = (rowData: any[]) => {
-		console.log(rowData);
-		push('/realm/' + realm + '/' + 'applications/' + rowData[0]);
+	const handleClickOnRow = (appname: string) => {
+		push('/realm/' + realm + '/' + 'applications/' + appname);
 	};
 
 	const handleSearch = (e: any) => {

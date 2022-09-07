@@ -10,7 +10,7 @@ const ApplicationsViewer = ({
 }: {
 	applications: Application[];
 	loading: boolean;
-	handleClickOnApp: (rowData: any[]) => void;
+	handleClickOnApp: (appname: string) => void;
 }) => {
 	const columns = [
 		{
