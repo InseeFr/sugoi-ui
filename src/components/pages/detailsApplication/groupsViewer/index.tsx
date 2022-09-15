@@ -14,7 +14,8 @@ import {
 import { Pagination } from '@mui/material';
 import { useState } from 'react';
 import { Group } from 'src/lib/model/api/group';
-import { ChipButton, ChipPerson } from './../chip';
+import User from 'src/lib/model/api/user';
+import { ChipButton, ChipPersonWithPopup } from './../chip';
 interface Props {
 	groups: Group[];
 	realm: string;
@@ -91,7 +92,7 @@ export const GroupsViewer = ({
 											rowsPerPage +
 											rowsPerPage,
 									)
-									.map((group: any, i) => (
+									.map((group, i) => (
 										<TableRow
 											key={
 												'table-body-row-' +
@@ -120,13 +121,13 @@ export const GroupsViewer = ({
 											>
 												{group?.users?.map(
 													(
-														user: any,
-														i: any,
+														user: User,
+														i,
 													) => {
 														return (
 															(i <
 																5 && (
-																<ChipPerson
+																<ChipPersonWithPopup
 																	user={
 																		user
 																	}
