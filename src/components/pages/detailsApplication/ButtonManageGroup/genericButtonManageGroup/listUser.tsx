@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Title from 'src/components/shared/title/title';
 import { Group } from 'src/lib/model/api/group';
 import User from 'src/lib/model/api/user';
-import { ChipPerson } from '../../chip';
+import { ChipPersonWithPopup } from '../../chip';
 interface Props {
 	group: Group;
 	realm: string;
@@ -45,7 +45,7 @@ export const GroupListUsers = ({ group, realm }: Props) => {
 								i
 							}
 						>
-							<ChipPerson
+							<ChipPersonWithPopup
 								realm={realm}
 								user={user}
 								key={
