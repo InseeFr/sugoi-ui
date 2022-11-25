@@ -12,6 +12,7 @@ interface Props {
 	applicationName: string;
 	groupName: string;
 	onClose: any;
+	originalGroup: Group;
 }
 
 export const ButtonManageGroup = ({
@@ -19,6 +20,7 @@ export const ButtonManageGroup = ({
 	onClose,
 	applicationName,
 	groupName,
+	originalGroup,
 }: Props) => {
 	const { execute: addUserToGroup } = useAddUserToGroup();
 
@@ -30,6 +32,11 @@ export const ButtonManageGroup = ({
 		groupName,
 	);
 
+	let currentGroup = group;
+
+	if (currentGroup?.name != originalGroup.name) {
+		currentGroup = originalGroup;
+	}
 	const handleAddUserToGroup =
 		(realm: string, applicationId: string, groupId: string) =>
 		(userId: string) => {
@@ -53,7 +60,7 @@ export const ButtonManageGroup = ({
 		<GenericButtonManageGroup
 			realm={realm}
 			onClose={() => onClose()}
-			group={group as Group}
+			group={currentGroup as Group}
 			handleAddUserToGroup={() =>
 				handleAddUserToGroup(realm, applicationName, groupName)
 			}

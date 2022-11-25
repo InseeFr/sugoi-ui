@@ -126,6 +126,9 @@ export const DetailsApplication = () => {
 										groupName={
 											_group.name
 										}
+										originalGroup={
+											_group
+										}
 										onClose={() =>
 											getGroupManager(
 												realm,
@@ -205,6 +208,9 @@ export const DetailsApplication = () => {
 										}
 										groupName={
 											_group.name
+										}
+										originalGroup={
+											_group
 										}
 										onClose={() =>
 											getApplication(
