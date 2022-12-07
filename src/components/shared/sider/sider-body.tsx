@@ -22,6 +22,7 @@ import GrainIcon from '@mui/icons-material/Grain';
 import { useSnackbar } from 'notistack';
 import { Realm } from 'src/lib/model/api/realm';
 import { UserStorage } from 'src/lib/model/api/userStorage';
+import { useWhoAmI } from 'src/lib/hooks/whoami';
 
 const SiderBody = () => {
 	const theme = useTheme();
@@ -36,6 +37,8 @@ const SiderBody = () => {
 	>();
 
 	const { realms } = useGetRealms();
+
+	const { rights } = useWhoAmI();
 
 	useEffect(() => {
 		const match = matchPath<{ realm: 'string'; userStorage: 'string' }>(
@@ -372,35 +375,41 @@ const SiderBody = () => {
 				</List>
 			</List>
 			<Divider />
-			<List
-				component="nav"
-				aria-labelledby="nested-list-subheader"
-				subheader={
-					<ListSubheader
-						component="div"
-						id="nested-list-subheader"
-					>
-						{t('sider.configuration.title')}
-					</ListSubheader>
-				}
-			>
-				<ListItem
-					button
-					key="parametres"
-					onClick={() => push('/settings')}
-					sx={{
-						paddingLeft: theme.spacing(4),
-					}}
-					selected={location.pathname.includes('/settings')}
+			{rights?.isAdmin && (
+				<List
+					component="nav"
+					aria-labelledby="nested-list-subheader"
+					subheader={
+						<ListSubheader
+							component="div"
+							id="nested-list-subheader"
+						>
+							{t('sider.configuration.title')}
+						</ListSubheader>
+					}
 				>
-					<ListItemIcon>
-						<SettingsIcon />
-					</ListItemIcon>
-					<ListItemText
-						primary={t('sider.configuration.settings')}
-					/>
-				</ListItem>
-			</List>
+					<ListItem
+						button
+						key="parametres"
+						onClick={() => push('/settings')}
+						sx={{
+							paddingLeft: theme.spacing(4),
+						}}
+						selected={location.pathname.includes(
+							'/settings',
+						)}
+					>
+						<ListItemIcon>
+							<SettingsIcon />
+						</ListItemIcon>
+						<ListItemText
+							primary={t(
+								'sider.configuration.settings',
+							)}
+						/>
+					</ListItem>
+				</List>
+			)}
 			<Divider />
 		</>
 	);
