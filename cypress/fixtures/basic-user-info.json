@@ -1,0 +1,16 @@
+{
+    "sub": "1234567890",
+    "name": "John Doe",
+    "aud": "sugoi-ui",
+    "iat": 1516239022,
+    "iss": "http://my-authority-url.com",
+    "exp": 10000000000,
+    "roles": [
+      "Admin_Sugoi"
+    ],
+    "realm_access":{
+    "roles": [
+      "Admin_Sugoi"
+    ]
+    }
+  }

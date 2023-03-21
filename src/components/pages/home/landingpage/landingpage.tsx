@@ -93,6 +93,7 @@ const MainFeaturedPost = () => {
 										'#7986cb',
 									color: '#ffffff',
 								}}
+								id="go-button"
 							>
 								<Box
 									fontWeight="fontWeightBold"
