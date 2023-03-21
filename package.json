@@ -52,7 +52,9 @@
 		"lint": "eslint --ext js,jsx,ts,tsx  src/**",
 		"lint-fix": "eslint --ext js,jsx,ts,tsx  src/** --fix",
 		"check-format": "prettier src/** -c",
-		"format": "prettier src/** --write"
+		"format": "prettier src/** --write",
+		"cypress open": "cypress open",
+		"cypress run": "cypress run"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
@@ -86,6 +88,7 @@
 		"@types/react-router-dom": "^5.3.2",
 		"@typescript-eslint/eslint-plugin": "^5.9.1",
 		"@typescript-eslint/parser": "^5.9.1",
+		"cypress": "^12.8.1",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-import": "^2.25.4",
 		"eslint-plugin-jsx-a11y": "^6.5.1",
@@ -94,6 +97,7 @@
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-unused-imports": "^2.0.0",
 		"prettier": "^2.5.1",
-		"sonarqube-scanner": "^2.8.1"
+		"sonarqube-scanner": "^2.8.1",
+		"wait-on": "^7.0.1"
 	}
 }

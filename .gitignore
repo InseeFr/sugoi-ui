@@ -29,3 +29,5 @@ package-lock.json
 
 #intellij
 .idea/
+cypress/videos/
+cypress/screenshots/

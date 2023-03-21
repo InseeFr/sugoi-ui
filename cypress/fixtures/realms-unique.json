@@ -1,0 +1,434 @@
+[
+    {
+      "name": "SSP",
+      "url": "ldap-example",
+      "port": "389",
+      "appSource": null,
+      "userStorages": [
+        {
+          "name": "ssm",
+          "userSource": "o=test,c=fr",
+          "organizationSource": null,
+          "addressSource": null,
+          "properties":null,
+          "userMappings": [],
+          "organizationMappings": null
+        }],
+      "properties": {
+        },
+      "uiMapping": {
+        "uiOrganizationMapping": [
+          {
+            "name": "Identifiant",
+            "helpTextTitle": "Identifiant de l'organisation",
+            "helpText": "Il servira pour le rechercher a travers l'annuaire. Caracteres autorises alphabetiques chiffres apostrophes espaces tirets",
+            "path": "username",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "main",
+            "order": 1,
+            "options": {}
+          },
+          {
+            "name": "Identication du destinataire",
+            "helpTextTitle": "",
+            "helpText": "",
+            "path": "address.line1",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "address",
+            "order": 1,
+            "options": {}
+          },
+          {
+            "name": "Nom commun",
+            "helpTextTitle": "Nom commun de l'organisation",
+            "helpText": " Caracteres autorises alphabetiques chiffres apostrophes espaces tirets",
+            "path": "attributes.common_name",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "main",
+            "order": 2,
+            "options": {}
+          },
+          {
+            "name": "N° appartement, boite aux lettres, étage, couloir",
+            "helpTextTitle": "",
+            "helpText": "",
+            "path": "address.line2",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "address",
+            "order": 2,
+            "options": {}
+          },
+          {
+            "name": "Adresse email",
+            "helpTextTitle": " e-mail",
+            "helpText": "Adresse de message de l'organisation, Caracteres autorises alphabetiques chiffres apostrophes espaces tirets",
+            "path": "mail",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "main",
+            "order": 3,
+            "options": {}
+          },
+          {
+            "name": "Entrée, tour, bâtiment, immeuble, résidence",
+            "helpTextTitle": "",
+            "helpText": "",
+            "path": "address.line3",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "address",
+            "order": 3,
+            "options": {}
+          },
+          {
+            "name": "Numéro de téléphone",
+            "helpTextTitle": "Numéro de téléphone de l'organisation",
+            "helpText": "",
+            "path": "attributes.phone_number",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "main",
+            "order": 4,
+            "options": {}
+          },
+          {
+            "name": "Numéro et libellé de la voie",
+            "helpTextTitle": "",
+            "helpText": "",
+            "path": "address.line4",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "address",
+            "order": 4,
+            "options": {}
+          },
+          {
+            "name": "Lieu dit ou boîte postale",
+            "helpTextTitle": "",
+            "helpText": "",
+            "path": "address.line5",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "address",
+            "order": 5,
+            "options": {}
+          },
+          {
+            "name": "Description",
+            "helpTextTitle": "Description de l'organisation",
+            "helpText": "",
+            "path": "attributes.description",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "main",
+            "order": 5,
+            "options": {}
+          },
+          {
+            "name": "Code postal et localité de destination",
+            "helpTextTitle": "",
+            "helpText": "",
+            "path": "address.line6",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "address",
+            "order": 6,
+            "options": {}
+          },
+          {
+            "name": "Organisation de rattachement",
+            "helpTextTitle": "Identifiant de l'organisation de rattachement",
+            "helpText": "",
+            "path": "attributes.organisation",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "main",
+            "order": 6,
+            "options": {}
+          },
+          {
+            "name": "Identifiant adresse",
+            "helpTextTitle": "Identifiant unique de l'adresse",
+            "helpText": "Il servira pour le rechercher dans l'annuaire",
+            "path": "address.id",
+            "type": "string",
+            "required": false,
+            "modifiable": false,
+            "tag": "advanced",
+            "order": 2147483647,
+            "options": {}
+          },
+          {
+            "name": "UserStorage",
+            "helpTextTitle": "",
+            "helpText": "",
+            "path": "metadatas.userStorage",
+            "type": "string",
+            "required": false,
+            "modifiable": false,
+            "tag": "advanced",
+            "order": 2147483647,
+            "options": {}
+          },
+          {
+            "name": "Dernière modification",
+            "helpTextTitle": "",
+            "helpText": "",
+            "path": "metadatas.modifyTimestamp",
+            "type": "string",
+            "required": false,
+            "modifiable": false,
+            "tag": "advanced",
+            "order": 2147483647,
+            "options": {}
+          },
+          {
+            "name": "Realm",
+            "helpTextTitle": "",
+            "helpText": "",
+            "path": "metadatas.realm",
+            "type": "string",
+            "required": false,
+            "modifiable": false,
+            "tag": "advanced",
+            "order": 2147483647,
+            "options": {}
+          }
+        ],
+        "uiUserMapping": [
+          {
+            "name": "Identifiant",
+            "helpTextTitle": "Identifiant de l'utilisateur",
+            "helpText": "Il servira pour le rechercher a travers l'annuaire. Caracteres autorises alphabetiques chiffres apostrophes espaces tirets",
+            "path": "username",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "main",
+            "order": 1,
+            "options": {}
+          },
+          {
+            "name": "Adresse e-mail",
+            "helpTextTitle": "Adresse e-mail de l'utilisateur",
+            "helpText": "Elle servira pour le rechercher a travers l'annuaire.",
+            "path": "mail",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "main",
+            "order": 2,
+            "options": {}
+          },
+          {
+            "name": "Nom commun",
+            "helpTextTitle": "Nom commun de l'utilisateur",
+            "helpText": "Caracteres autorises alphabetiques chiffres apostrophes espaces tirets",
+            "path": "attributes.common_name",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "main",
+            "order": 3,
+            "options": {}
+          },
+          {
+            "name": "Nom",
+            "helpTextTitle": "Nom de l'utilisateur",
+            "helpText": "Caracteres autorises alphabetiques chiffres apostrophes espaces tirets",
+            "path": "lastName",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "main",
+            "order": 4,
+            "options": {}
+          },
+          {
+            "name": "Prénom",
+            "helpTextTitle": "Prénom de l'utilisateur",
+            "helpText": "Caracteres autorises alphabetiques chiffres apostrophes espaces tirets",
+            "path": "firstName",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "main",
+            "order": 5,
+            "options": {}
+          },
+          {
+            "name": "Description",
+            "helpTextTitle": "Description de l'utilisateur",
+            "helpText": "",
+            "path": "attributes.description",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "main",
+            "order": 7,
+            "options": {}
+          },
+          {
+            "name": "Timbre",
+            "helpTextTitle": "Timbre de l'utilisateur",
+            "helpText": "",
+            "path": "attributes.insee_timbre",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "main",
+            "order": 9,
+            "options": {}
+          },
+          {
+            "name": "Timbre court",
+            "helpTextTitle": "Timbre court de l'utilisateur",
+            "helpText": "",
+            "path": "attributes.insee_timbre_court",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "main",
+            "order": 10,
+            "options": {}
+          },
+          {
+            "name": "Dernier changement de mot de passe",
+            "helpTextTitle": "Date du dernier changement de mot de passe",
+            "helpText": "",
+            "path": "metadatas.pwdChangedTime",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "authentication",
+            "order": 2147483647,
+            "options": {}
+          },
+          {
+            "name": "Groupes",
+            "helpTextTitle": "",
+            "helpText": "",
+            "path": "groups",
+            "type": "groups",
+            "required": false,
+            "modifiable": true,
+            "tag": "rights",
+            "order": 2147483647,
+            "options": {
+              "addTitle": "Ajouter un groupe",
+              "deleteTitle": "Supprimer un groupe"
+            }
+          },
+          {
+            "name": "Habilitations",
+            "helpTextTitle": "",
+            "helpText": "",
+            "path": "habilitations",
+            "type": "habilitations",
+            "required": false,
+            "modifiable": true,
+            "tag": "rights",
+            "order": 2147483647,
+            "options": {
+              "attribute_key": "inseeGroupeDefaut"
+            }
+          },
+          {
+            "name": "Organisme",
+            "helpTextTitle": "",
+            "helpText": "",
+            "path": "attributes.organisme",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "main",
+            "order": 2147483647,
+            "options": {}
+          },
+          {
+            "name": "Realm",
+            "helpTextTitle": "",
+            "helpText": "",
+            "path": "metadatas.realm",
+            "type": "string",
+            "required": false,
+            "modifiable": false,
+            "tag": "advanced",
+            "order": 2147483647,
+            "options": {}
+          },
+          {
+            "name": "UserStorage",
+            "helpTextTitle": "",
+            "helpText": "",
+            "path": "metadatas.userStorage",
+            "type": "string",
+            "required": false,
+            "modifiable": false,
+            "tag": "advanced",
+            "order": 2147483647,
+            "options": {}
+          },
+          {
+            "name": "Rôles applicatifs",
+            "helpTextTitle": "",
+            "helpText": "",
+            "path": "attributes.insee_roles_applicatifs",
+            "type": "simpleAppManagedAttributes",
+            "required": false,
+            "modifiable": true,
+            "tag": "rights",
+            "order": 2147483647,
+            "options": {
+              "attribute_key": "inseeRoleApplicatif",
+              "deleteTitle": "Supprimer un rôle"
+            }
+          },
+          {
+            "name": "Numéro de téléphone",
+            "helpTextTitle": "Numéro de téléphone de l'utilisateur",
+            "helpText": "",
+            "path": "attributes.phone_number",
+            "type": "string",
+            "required": false,
+            "modifiable": true,
+            "tag": "main",
+            "order": 2147483647,
+            "options": {}
+          },
+          {
+            "name": "Matricule",
+            "helpTextTitle": "Matricule ministériel",
+            "helpText": "",
+            "path": "attributes.matricule",
+            "type": "string",
+            "required": false,
+            "modifiable": false,
+            "tag": "advanced",
+            "order": 2147483647,
+            "options": {}
+          }
+        ]
+      },
+      "groupMappings": null,
+      "applicationMappings": null,
+      "readerType": "LdapReaderStore",
+      "writerType": "LdapWriterStore"
+    }
+  ]

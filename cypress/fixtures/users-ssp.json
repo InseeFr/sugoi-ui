@@ -1,0 +1,340 @@
+{
+	"results": [
+		{
+			"lastName": "Doa",
+			"firstName": "Johna",
+			"mail": "johna.doa@test.fr",
+			"username": "AAAAA",
+			"groups": [
+				{
+					"name": "lecteur_Test",
+					"description": null,
+					"users": null,
+					"appName": "Test"
+				}
+			],
+			"metadatas": {
+				"realm": "SSP",
+				"userStorage": "ssm",
+				"hasPassword": true,
+				"modifyTimestamp": "20230221101215Z"
+			},
+			"attributes": {
+				"common_name": "Johna Doa",
+				"organisme": "Test"
+			}
+		},
+		{
+			"lastName": "Dob",
+			"firstName": "Johnb",
+			"mail": "johnb.dob@test.fr",
+			"username": "AAAAB",
+			"metadatas": {
+				"realm": "SSP",
+				"userStorage": "ssm",
+				"hasPassword": true,
+				"modifyTimestamp": "20220802165956Z"
+			},
+			"attributes": {
+				"common_name": "Johnb Dob",
+				"organisme": "Test"
+			}
+		},
+		{
+			"lastName": "Doc",
+			"firstName": "Johnc",
+			"mail": "johnc.doc@test.fr",
+			"username": "AAAAC",
+			"metadatas": {
+				"realm": "SSP",
+				"userStorage": "ssm",
+				"hasPassword": true,
+				"modifyTimestamp": "20220802165956Z"
+			},
+			"attributes": {
+				"common_name": "Johnc Doc",
+				"organisme": "Test"
+			}
+		},
+		{
+			"lastName": "Dod",
+			"firstName": "Johnd",
+			"mail": "johnd.dod@test.fr",
+			"username": "AAAAD",
+			"metadatas": {
+				"realm": "SSP",
+				"userStorage": "ssm",
+				"hasPassword": true,
+				"modifyTimestamp": "20220802165956Z"
+			},
+			"attributes": {
+				"common_name": "Johnd Dod",
+				"organisme": "Test"
+			}
+		},
+		{
+			"lastName": "Doe",
+			"mail": "johne.doe@test.fr",
+			"username": "AAAAE",
+			"metadatas": {
+				"realm": "SSP",
+				"userStorage": "ssm",
+				"hasPassword": true,
+				"modifyTimestamp": "20220802165956Z"
+			},
+			"attributes": {
+				"common_name": "Johne Doe",
+				"organisme": "Test"
+			}
+		},
+		{
+			"lastName": "Dof",
+			"mail": "johnf.dof@test.fr",
+			"username": "AAAAF",
+			"metadatas": {
+				"realm": "SSP",
+				"userStorage": "ssm",
+				"hasPassword": true,
+				"modifyTimestamp": "20220802165956Z"
+			},
+			"attributes": {
+				"common_name": "Johnf Dof",
+				"organisme": "Test"
+			}
+		},
+		{
+			"lastName": "Dog",
+			"mail": "johng.dog@test.fr",
+			"username": "AAAAG",
+			"metadatas": {
+				"realm": "SSP",
+				"userStorage": "ssm",
+				"hasPassword": true,
+				"modifyTimestamp": "20220802165956Z"
+			},
+			"attributes": {
+				"common_name": "Johng Dog",
+				"organisme": "Test"
+			}
+		},
+		{
+			"lastName": "Doh",
+			"firstName": "Johnh",
+			"mail": "johnh.doh@test.fr",
+			"username": "AAAAH",
+			"metadatas": {
+				"realm": "SSP",
+				"userStorage": "ssm",
+				"hasPassword": true,
+				"modifyTimestamp": "20220802165956Z"
+			},
+			"attributes": {
+				"common_name": "Johnh Doh",
+				"organisme": "Test"
+			}
+		},
+		{
+			"lastName": "Doi",
+			"firstName": "Johni",
+			"mail": "johni.doi@test.fr",
+			"username": "AAAAI",
+			"metadatas": {
+				"realm": "SSP",
+				"userStorage": "ssm",
+				"hasPassword": true,
+				"modifyTimestamp": "20220802165956Z"
+			},
+			"attributes": {
+				"common_name": "Johni Doi",
+				"organisme": "Test"
+			}
+		},
+		{
+			"lastName": "Doj",
+			"firstName": "Johnj",
+			"mail": "johnj.doj@test.fr",
+			"username": "AAAAJ",
+			"metadatas": {
+				"realm": "SSP",
+				"userStorage": "ssm",
+				"hasPassword": true,
+				"modifyTimestamp": "20220802165956Z"
+			},
+			"attributes": {
+				"common_name": "Johnj Doj",
+				"organisme": "Test"
+			}
+		},
+		{
+			"lastName": "Dok",
+			"firstName": "Johnk",
+			"mail": "johnk.dok@test.fr",
+			"username": "AAAAK",
+			"metadatas": {
+				"realm": "SSP",
+				"userStorage": "ssm",
+				"hasPassword": true,
+				"modifyTimestamp": "20220802165956Z"
+			},
+			"attributes": {
+				"common_name": "Johnk Dok",
+				"organisme": "Test"
+			}
+		},
+		{
+			"lastName": "Dol",
+			"firstName": "Johnl",
+			"mail": "johnl.dol@test.fr",
+			"username": "AAAAL",
+			"metadatas": {
+				"realm": "SSP",
+				"userStorage": "ssm",
+				"hasPassword": true,
+				"modifyTimestamp": "20220802165956Z"
+			},
+			"attributes": {
+				"common_name": "Johnl Dol",
+				"organisme": "Test"
+			}
+		},
+		{
+			"lastName": "Dom",
+			"firstName": "Johnm",
+			"mail": "johnm.dom@test.fr",
+			"username": "AAAAM",
+			"metadatas": {
+				"realm": "SSP",
+				"userStorage": "ssm",
+				"hasPassword": true,
+				"modifyTimestamp": "20220802165956Z"
+			},
+			"attributes": {
+				"common_name": "Johnm Dom",
+				"organisme": "Test"
+			}
+		},
+		{
+			"lastName": "Don",
+			"mail": "johnn.don@test.fr",
+			"username": "AAAAN",
+			"metadatas": {
+				"realm": "SSP",
+				"userStorage": "ssm",
+				"hasPassword": true,
+				"modifyTimestamp": "20220802165956Z"
+			},
+			"attributes": {
+				"common_name": "Johnn Don",
+				"organisme": "Test"
+			}
+		},
+		{
+			"lastName": "Doo",
+			"firstName": "Johno",
+			"mail": "johno.doo@test.fr",
+			"username": "AAAAO",
+			"metadatas": {
+				"realm": "SSP",
+				"userStorage": "ssm",
+				"hasPassword": true,
+				"modifyTimestamp": "20220802165956Z"
+			},
+			"attributes": {
+				"common_name": "Johno Doo",
+				"organisme": "Test"
+			}
+		},
+		{
+			"lastName": "Dop",
+			"firstName": "Johnp",
+			"mail": "johnp.dop@test.fr",
+			"username": "AAAAP",
+			"groups": [
+				{
+					"name": "gestionnaire_Application",
+					"description": null,
+					"users": null,
+					"appName": "Application"
+				}
+			],
+			"metadatas": {
+				"realm": "SSP",
+				"userStorage": "ssm",
+				"hasPassword": true,
+				"modifyTimestamp": "20220802165956Z"
+			},
+			"attributes": {
+				"common_name": "Johnp Dop"
+			}
+		},
+		{
+			"lastName": "Doq",
+			"firstName": "Johnq",
+			"mail": "johnq.doq@test.fr",
+			"username": "AAAAQ",
+			"metadatas": {
+				"realm": "SSP",
+				"userStorage": "ssm",
+				"hasPassword": true,
+				"modifyTimestamp": "20220802165956Z"
+			},
+			"attributes": {
+				"common_name": "Johnq Doq",
+				"organisme": "Test"
+			}
+		},
+		{
+			"lastName": "Dor",
+			"firstName": "Johnr",
+			"mail": "johnr.dor@test.fr",
+			"username": "AAAAR",
+			"metadatas": {
+				"realm": "SSP",
+				"userStorage": "ssm",
+				"hasPassword": true,
+				"modifyTimestamp": "20220802165956Z"
+			},
+			"attributes": {
+				"common_name": "Johnr Dor",
+				"organisme": "Test"
+			}
+		},
+		{
+			"lastName": "Dos",
+			"firstName": "Johns",
+			"mail": "johns.dos@test.fr",
+			"username": "AAAAS",
+			"metadatas": {
+				"realm": "SSP",
+				"userStorage": "ssm",
+				"hasPassword": true,
+				"modifyTimestamp": "20220802165956Z"
+			},
+			"attributes": {
+				"common_name": "Johns Dos",
+				"organisme": "Test"
+			}
+		},
+		{
+			"lastName": "Dot",
+			"firstName": "Johnt",
+			"mail": "johnt.dot@test.fr",
+			"username": "AAAAT",
+			"metadatas": {
+				"realm": "SSP",
+				"userStorage": "ssm",
+				"hasPassword": true,
+				"modifyTimestamp": "20220802165956Z"
+			},
+			"attributes": {
+				"common_name": "Johnt Dot",
+				"organisme": "Test"
+			}
+		}
+	],
+	"totalElements": -1,
+	"nextStart": 0,
+	"hasMoreResult": false,
+	"pageSize": 20,
+	"searchToken": "anYAAAAAAAA="
+}

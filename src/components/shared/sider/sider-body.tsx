@@ -140,7 +140,7 @@ const SiderBody = () => {
 						}}
 					>
 						<Autocomplete
-							id="realm choice"
+							id="realm-choice"
 							options={
 								realms?.map(
 									(realm) => realm.name,
