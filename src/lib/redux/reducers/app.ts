@@ -1,26 +1,18 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getRealms } from 'src/lib/api/index';
 import { Realm } from 'src/lib/model/api/realm';
-import {
-	getCurrentTheme,
-	getCurrentRealmFavorite,
-	getCurrentUsFavorite,
-} from 'src/lib/utils/functions';
+import { getCurrentTheme } from 'src/lib/utils/functions';
 
 interface AppState {
 	theme: string;
-	favoriteRealm?: string;
-	favoriteUs?: string;
 	notifs: any;
 	config: any;
-	realms?: Realm[];
+	realms: Realm[] | undefined;
 	realmLoading: boolean;
 }
 
 const initialConfigState: AppState = {
 	theme: getCurrentTheme(),
-	favoriteRealm: getCurrentRealmFavorite(),
-	favoriteUs: getCurrentUsFavorite(),
 	notifs: {
 		enabled_debug: window.localStorage.getItem('debug-notif-enabled')
 			? (window.localStorage.getItem(
@@ -48,25 +40,6 @@ const AppReducer = (state = initialConfigState, action: any) => {
 				'theme',
 				JSON.stringify(action.payload.nameTheme),
 			);
-			return nextState;
-		case 'changeFavoriteRealm':
-			nextState = {
-				...state,
-				favoriteRealm: action.payload.realmName,
-				favoriteUs: action.payload.usName,
-			};
-			action.payload.realmName
-				? window.localStorage.setItem(
-						'favoriteRealm',
-						JSON.stringify(action.payload.realmName),
-				  )
-				: window.localStorage.removeItem('favoriteRealm');
-			action.payload.usName
-				? window.localStorage.setItem(
-						'favoriteUs',
-						JSON.stringify(action.payload.usName),
-				  )
-				: window.localStorage.removeItem('favoriteUs');
 			return nextState;
 		case 'getRealms/pending': {
 			nextState = {

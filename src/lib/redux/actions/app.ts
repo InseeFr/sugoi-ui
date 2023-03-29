@@ -8,11 +8,6 @@ export const changeTheme = (nameTheme: string) => ({
 	payload: { nameTheme },
 });
 
-export const saveFavoriteRealm = (realmName?: string, usName?: string) => ({
-	type: 'changeFavoriteRealm',
-	payload: { realmName, usName },
-});
-
 export const changeStatusNotifDebug = (enabled: boolean) => ({
 	type: 'changeStatusNotifDebug',
 	payload: { enabled },
