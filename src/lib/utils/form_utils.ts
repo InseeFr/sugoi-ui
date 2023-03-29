@@ -32,6 +32,7 @@ export const validateForm = (fields: Field[]) => (formValues: any) => {
 	const errorFields: ErrorField[] = [];
 	fields.forEach((field) => {
 		if (field.required) {
+			console.log(validateIsRequired(field, formValues));
 			if (!validateIsRequired(field, formValues)) {
 				errorFields.push({
 					field: field.name,

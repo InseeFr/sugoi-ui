@@ -13,6 +13,9 @@ interface Props {
 
 const AsyncEditor = ({ onChange, value, readOnly }: Props) => {
 	const theme = useTheme();
+
+	console.log(theme);
+
 	return (
 		<Suspense fallback={<Loader />}>
 			{theme.palette.mode === 'light' && (

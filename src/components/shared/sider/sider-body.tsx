@@ -22,8 +22,6 @@ import GrainIcon from '@mui/icons-material/Grain';
 import { useSnackbar } from 'notistack';
 import { Realm } from 'src/lib/model/api/realm';
 import { UserStorage } from 'src/lib/model/api/userStorage';
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/lib/configuration/store-configuration';
 
 const SiderBody = () => {
 	const theme = useTheme();
@@ -32,22 +30,12 @@ const SiderBody = () => {
 	const { t } = useTranslation();
 	const [realmSelected, setRealmSelected] = useState<Realm | undefined>();
 	const { enqueueSnackbar } = useSnackbar();
-	const [firstRedirect, setFirstRedirect] = useState(true);
+
 	const [userStorageSelected, setStorageSelected] = useState<
 		UserStorage | undefined
 	>();
 
-	const favoriteRealm = useSelector(
-		(state: RootState) => state.app.favoriteRealm,
-	);
-
-	const favoriteUS = useSelector(
-		(state: RootState) => state.app.favoriteUs,
-	);
-
 	const { realms } = useGetRealms();
-
-	console.log('first redirect:', firstRedirect);
 
 	useEffect(() => {
 		const match = matchPath<{ realm: 'string'; userStorage: 'string' }>(
@@ -68,33 +56,6 @@ const SiderBody = () => {
 				push('/realm/' + realms[0].name);
 			}
 		}
-
-		if (realms && realms.length > 0 && !match && firstRedirect) {
-			if (favoriteRealm) {
-				const realmFavorite = realms.find(
-					(realm) => realm.name === favoriteRealm,
-				);
-				setRealmSelected(realmFavorite);
-				if (favoriteUS) {
-					setStorageSelected(
-						realmFavorite?.userStorages?.find(
-							(us) => us?.name === favoriteUS,
-						),
-					);
-					setFirstRedirect(false);
-					push(
-						'/realm/' +
-							favoriteRealm +
-							'/us/' +
-							favoriteUS,
-					);
-				} else {
-					setFirstRedirect(false);
-					push('/realm/' + favoriteRealm);
-				}
-			}
-		}
-
 		if (realms && realms.length > 0 && match) {
 			if (
 				realms
@@ -102,10 +63,10 @@ const SiderBody = () => {
 					.includes(match?.params?.realm)
 			) {
 				setRealmSelected(
-					realms.find(
+					realms.filter(
 						(realm) =>
 							match?.params?.realm === realm.name,
-					),
+					)[0],
 				);
 				if (match.params?.userStorage) {
 					if (
@@ -125,75 +86,32 @@ const SiderBody = () => {
 										realm.name ===
 										match.params?.realm,
 								)
-								?.userStorages?.find(
+								?.userStorages?.filter(
 									(us) =>
 										us.name ===
 										match?.params
 											?.userStorage,
-								),
-						);
-						setFirstRedirect(false);
-						push(
-							'/realm/' +
-								match?.params?.realm +
-								'/us/' +
-								match?.params?.userStorage,
+								)[0],
 						);
 					} else {
-						setFirstRedirect(false);
 						push('/realm/' + match?.params?.realm);
 					}
-				} else {
-					setFirstRedirect(false);
-					push('/realm/' + match?.params?.realm);
 				}
 			} else {
-				if (favoriteRealm) {
-					const realmFavorite = realms.find(
-						(realm) => realm.name === favoriteRealm,
-					);
-					setRealmSelected(realmFavorite);
-					if (favoriteUS) {
-						setStorageSelected(
-							realmFavorite?.userStorages?.find(
-								(us) => us?.name === favoriteUS,
-							),
-						);
-						setFirstRedirect(false);
-						push(
-							'/realm/' +
-								favoriteRealm +
-								'/us/' +
-								favoriteUS,
-						);
-					} else {
-						setFirstRedirect(false);
-						push('/realm/' + favoriteRealm);
-					}
-				} else {
-					push('/');
-					enqueueSnackbar("Vous n'avez pas à être la", {
-						variant: 'error',
-						anchorOrigin: {
-							vertical: 'top',
-							horizontal: 'center',
-						},
-					});
-				}
+				push('/');
+				enqueueSnackbar("Vous n'avez pas à être la", {
+					variant: 'error',
+					anchorOrigin: {
+						vertical: 'top',
+						horizontal: 'center',
+					},
+				});
 			}
 		} else {
 			setRealmSelected(undefined);
 			setStorageSelected(undefined);
 		}
-	}, [
-		enqueueSnackbar,
-		location.pathname,
-		push,
-		realms,
-		favoriteRealm,
-		favoriteUS,
-		firstRedirect,
-	]);
+	}, [enqueueSnackbar, location.pathname, push, realms]);
 
 	return (
 		<>

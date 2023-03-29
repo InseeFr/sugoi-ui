@@ -117,6 +117,7 @@ export const updateUser = (
 	if (process.env.REACT_APP_FAKE_API === 'true') {
 		return fake.updateUser(realm, id, user);
 	} else {
+		console.log(user);
 		return userStorage
 			? remote.updateUserFromUserStorage(
 					realm,

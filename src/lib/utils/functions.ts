@@ -43,17 +43,3 @@ export const getCurrentTheme = () => {
 		}
 	}
 };
-
-export const getCurrentRealmFavorite = () => {
-	let realmFavorite = window.localStorage.getItem('favoriteRealm');
-	realmFavorite = realmFavorite !== null ? realmFavorite : '""';
-	return JSON.parse(realmFavorite) === ''
-		? undefined
-		: JSON.parse(realmFavorite);
-};
-
-export const getCurrentUsFavorite = () => {
-	let usFavorite = window.localStorage.getItem('favoriteUs');
-	usFavorite = usFavorite !== null ? usFavorite : '""';
-	return JSON.parse(usFavorite) === '' ? undefined : JSON.parse(usFavorite);
-};

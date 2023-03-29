@@ -10,7 +10,6 @@ import {
 import { Description } from 'src/components/shared/description';
 import Title from 'src/components/shared/title/title';
 import MyAutocomplete from './my_autocomplete';
-import FavoriteButton from './favorite_button';
 
 const AutoCompleteUsers = ({ realm, userStorage }: any) => {
 	const { push } = useHistory();
@@ -193,21 +192,6 @@ export const RealmHome = () => {
 			/>
 
 			<Grid container direction="row" spacing={2}>
-				<Grid item xs={12}>
-					<Grid
-						container
-						direction="row"
-						justifyContent="flex-end"
-						alignItems="center"
-					>
-						<Grid item>
-							<FavoriteButton
-								realm={realm}
-								userStorage={userStorage}
-							/>
-						</Grid>
-					</Grid>
-				</Grid>
 				<Grid item xs={12}>
 					<Description realmName={realm} />
 				</Grid>
