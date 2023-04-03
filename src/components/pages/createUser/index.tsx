@@ -48,6 +48,10 @@ const CreateUsers = () => {
 					fieldToDisplay={userConfig}
 					handleChange={handleChange}
 					errors={errors}
+					recharge={null}
+					id={null}
+					realm={realm}
+					userStorage={userStorage}
 					buttons={
 						<Grid item xs={12}>
 							<Grid

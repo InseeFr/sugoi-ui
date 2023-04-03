@@ -55,6 +55,9 @@ const DetailUser = () => {
 		);
 	};
 
+	const recharge = (id: any, realm: any, userStorage: any) => {
+		execute(id, realm, userStorage);
+	};
 	const handleUpdate = () => {
 		handleSubmit(userConfig)(onSubmit);
 	};
@@ -73,6 +76,10 @@ const DetailUser = () => {
 								fieldToDisplay={userConfig}
 								handleChange={handleChange}
 								errors={errors}
+								recharge={recharge}
+								id={id}
+								realm={realm}
+								userStorage={userStorage}
 								buttons={
 									<Grid
 										container
