@@ -64,7 +64,7 @@ const ManageGpgKey = ({
 		executeGet(id, realm, userStorage).then((r) => {
 			download(
 				r,
-				'clé-chiffrement-' + id + '.gpg',
+				'gpg-keys-' + id + '.gpg',
 				'application/octet-stream',
 			);
 		});
@@ -74,7 +74,7 @@ const ManageGpgKey = ({
 		<UploadFile
 			title={name}
 			value={get(organization, value, undefined)}
-			acceptedFiles={['.pem', '.der', '.cer']}
+			acceptedFiles={['.gpg', '.asc']}
 			dropZoneText={dropZoneText}
 			helpText={helpText}
 			helpTextTitle={helpTextTitle}
@@ -85,7 +85,7 @@ const ManageGpgKey = ({
 			saveAction={handleSave}
 			modifiable={modifiable}
 			loading={
-				!loadingDelete && !loadingUpdate && !loadingOrganization
+				loadingDelete || loadingUpdate || loadingOrganization
 			}
 		/>
 	);
