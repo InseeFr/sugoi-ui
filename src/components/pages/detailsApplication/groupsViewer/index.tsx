@@ -10,8 +10,8 @@ import {
 	TableContainer,
 	TableHead,
 	TableRow,
+	Pagination,
 } from '@mui/material';
-import { Pagination } from '@mui/material';
 import { useState } from 'react';
 import { Group } from 'src/lib/model/api/group';
 import User from 'src/lib/model/api/user';
@@ -92,11 +92,10 @@ export const GroupsViewer = ({
 											rowsPerPage +
 											rowsPerPage,
 									)
-									.map((group, i) => (
+									.map((group) => (
 										<TableRow
 											key={
-												'table-body-row-' +
-												i
+												group.name
 											}
 										>
 											<TableCell
