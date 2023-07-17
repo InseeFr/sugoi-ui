@@ -9,6 +9,7 @@ export const getApplications = (
 	realm: string,
 	name?: string,
 	cancelable?: boolean,
+	accessToken?: string,
 ): Promise<Pageable> => {
 	//Check if there are any previous pending requests
 	if (typeof cancelToken != typeof undefined) {
@@ -16,25 +17,33 @@ export const getApplications = (
 	}
 	cancelToken = axios.CancelToken.source();
 	return cancelable
-		? getAuthClient()
+		? getAuthClient(accessToken)
 				.get('/realms/' + realm + '/applications', {
 					params: { size: 500, name: name },
 					cancelToken: cancelToken.token,
 				})
 				.then((r: any) => r.data)
-		: getAuthClient()
+		: getAuthClient(accessToken)
 				.get('/realms/' + realm + '/applications', {
 					params: { size: 500, name: name },
 				})
 				.then((r: any) => r.data);
 };
-export const getApplication = (realm: string, name?: string): Promise<any> =>
-	getAuthClient()
+export const getApplication = (
+	realm: string,
+	name?: string,
+	accessToken?: string,
+): Promise<any> =>
+	getAuthClient(accessToken)
 		.get('/realms/' + realm + '/applications/' + name)
 		.then((r: any) => r.data);
 
-export const putApplication = (realm: string, app: Application): Promise<any> =>
-	getAuthClient()
+export const putApplication = (
+	realm: string,
+	app: Application,
+	accessToken?: string,
+): Promise<any> =>
+	getAuthClient(accessToken)
 		.put('/realms/' + realm + '/applications/' + app.name, app)
 
 		.then((r: any) => r.data);
@@ -42,12 +51,17 @@ export const putApplication = (realm: string, app: Application): Promise<any> =>
 export const postApplication = (
 	realm: string,
 	app: Application,
+	accessToken?: string,
 ): Promise<any> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.post('/realms/' + realm + '/applications', app)
 		.then((r: any) => r.data);
 
-export const deleteApplication = (realm: string, app: string): Promise<any> =>
-	getAuthClient()
+export const deleteApplication = (
+	realm: string,
+	app: string,
+	accessToken?: string,
+): Promise<any> =>
+	getAuthClient(accessToken)
 		.delete('/realms/' + realm + '/applications/' + app)
 		.then((r: any) => r.data);

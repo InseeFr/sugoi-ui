@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { deleteGpgKey } from '../../api/remote';
+import { useOidcAccessToken } from '@axa-fr/react-oidc';
 
 export const useDeleteGpgKey = () => {
 	const [error, setError] = useState();
 	const [loading, setLoading] = useState(false);
 	const [result, setResult] = useState<any>();
+	const accessToken = useOidcAccessToken().accessToken;
 
 	const execute = async (
 		id: string,
@@ -14,7 +16,7 @@ export const useDeleteGpgKey = () => {
 		setLoading(true);
 		setError(undefined);
 		setResult(undefined);
-		await deleteGpgKey(id, realm, userStorage)
+		await deleteGpgKey(id, realm, userStorage, accessToken)
 			.then((r) => setResult(r))
 			.catch((err) => setError(err))
 			.finally(() => {

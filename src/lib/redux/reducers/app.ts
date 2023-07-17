@@ -72,8 +72,11 @@ const AppReducer = (state = initialConfigState, action: any) => {
 	}
 };
 
-export const fetchRealms = createAsyncThunk('getRealms', async () => {
-	return await getRealms();
-});
+export const fetchRealms = createAsyncThunk(
+	'getRealms',
+	async (accessToken: string) => {
+		return await getRealms(undefined, accessToken);
+	},
+);
 
 export default AppReducer;

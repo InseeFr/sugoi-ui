@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getManagerGroup } from '../../api';
 import { Group } from '../../model/api/group';
+import { useOidcAccessToken } from '@axa-fr/react-oidc';
 
 export const useGetGroupManager = (realm?: string, application?: string) => {
 	const [group, setGroup] = useState<Group>();
@@ -9,10 +10,12 @@ export const useGetGroupManager = (realm?: string, application?: string) => {
 	);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState();
+	const accessToken = useOidcAccessToken().accessToken;
+
 	const execute = async (realm: string, application: string) => {
 		setLoading(true);
 		setError(undefined);
-		await getManagerGroup(realm, application)
+		await getManagerGroup(realm, application, accessToken)
 			.then((r) => setGroup(r))
 			.catch((err) => setError(err))
 			.finally(() => {
@@ -24,7 +27,11 @@ export const useGetGroupManager = (realm?: string, application?: string) => {
 		if (firstSearch) {
 			setLoading(true);
 			setError(undefined);
-			getManagerGroup(realm as string, application as string)
+			getManagerGroup(
+				realm as string,
+				application as string,
+				accessToken,
+			)
 				.then((r) => setGroup(r))
 				.catch((err) => setError(err))
 				.finally(() => {
@@ -32,7 +39,7 @@ export const useGetGroupManager = (realm?: string, application?: string) => {
 					setFirstSearch(false);
 				});
 		}
-	}, [firstSearch, realm, application]);
+	}, [firstSearch, realm, application, accessToken]);
 
 	return { group, loading, error, execute };
 };

@@ -19,8 +19,9 @@ export const exportUser = async (
 		application,
 	}: SearchRequestUser,
 	userStorage?: string,
+	accessToken?: string,
 ): Promise<any> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.get(
 			'/realms/' +
 				realm +

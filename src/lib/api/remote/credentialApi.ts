@@ -7,8 +7,9 @@ export const resetPassword = (
 	forceResetPwd: boolean,
 	templateProperties: TemplateProperties,
 	webhooktag?: string,
+	accessToken?: string,
 ) =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.post(
 			'/realms/' + realm + '/users/' + userId + '/reinit-password',
 			{ templateProperties: templateProperties },
@@ -28,8 +29,9 @@ export const resetPasswordUs = (
 	templateProperties: TemplateProperties,
 	webhooktag?: string,
 	userStorage?: string,
+	accessToken?: string,
 ) =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.post(
 			'/realms/' +
 				realm +
@@ -52,8 +54,9 @@ export const sendIdentifiant = (
 	realm: string,
 	userId: string,
 	properties: TemplateProperties,
+	accessToken?: string,
 ) =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.post(
 			'/realms/' + realm + '/users/' + userId + '/send-login',
 			{
@@ -72,8 +75,9 @@ export const sendIdentifiantUs = (
 	userId: string,
 	properties: TemplateProperties,
 	userStorage: string,
+	accessToken?: string,
 ) =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.post(
 			'/realms/' +
 				realm +

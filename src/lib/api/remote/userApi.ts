@@ -24,6 +24,7 @@ export const getUsers = (
 		habilitation,
 		application,
 	}: SearchRequestUser,
+	accessToken?: string,
 ): Promise<Pageable> => {
 	//Check if there are any previous pending requests
 	if (typeof cancelToken != typeof undefined) {
@@ -31,7 +32,7 @@ export const getUsers = (
 	}
 	//Save the cancel token for the current request
 	cancelToken = axios.CancelToken.source();
-	return getAuthClient()
+	return getAuthClient(accessToken)
 		.get('/realms/' + realm + '/users', {
 			params: {
 				mail,
@@ -53,19 +54,31 @@ export const getUsers = (
 		.then((r: any) => r.data);
 };
 
-export const getUser = async (realm: string, id: string): Promise<User> => {
-	return await getAuthClient()
+export const getUser = async (
+	realm: string,
+	id: string,
+	accessToken?: string,
+): Promise<User> => {
+	return await getAuthClient(accessToken)
 		.get('/realms/' + realm + '/users/' + id)
 		.then((r: any) => r.data);
 };
 
-export const deleteUser = (realm: string, id: string): Promise<any> =>
-	getAuthClient()
+export const deleteUser = (
+	realm: string,
+	id: string,
+	accessToken?: string,
+): Promise<any> =>
+	getAuthClient(accessToken)
 		.delete('/realms/' + realm + '/users/' + id)
 		.then((r) => r.data);
 
-export const postUser = (realm: string, user: User): Promise<any> =>
-	getAuthClient()
+export const postUser = (
+	realm: string,
+	user: User,
+	accessToken?: string,
+): Promise<any> =>
+	getAuthClient(accessToken)
 		.post('/realms/' + realm + '/users', user)
 		.then((r: any) => r.data);
 
@@ -73,8 +86,9 @@ export const updateUser = (
 	realm: string,
 	id: string,
 	user: User,
+	accessToken?: string,
 ): Promise<any> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.put('/realms/' + realm + '/users/' + id, user)
 		.then((r) => r.data);
 
@@ -96,8 +110,9 @@ export const getUsersFromUserStorage = (
 		habilitation,
 		application,
 	}: SearchRequestUser,
+	accessToken?: string,
 ): Promise<Pageable> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.get('/realms/' + realm + '/storages/' + us + '/users', {
 			params: {
 				mail,
@@ -121,8 +136,9 @@ export const getUserFromUserStorage = async (
 	realm: string,
 	us: string,
 	id: string,
+	accessToken?: string,
 ): Promise<User> => {
-	return await getAuthClient()
+	return await getAuthClient(accessToken)
 		.get('/realms/' + realm + '/storages/' + us + '/users/' + id)
 		.then((r: any) => r.data);
 };
@@ -131,8 +147,9 @@ export const deleteUserFromUserStorage = (
 	realm: string,
 	us: string,
 	id: string,
+	accessToken?: string,
 ): Promise<any> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.delete('/realms/' + realm + '/storages/' + us + '/users/' + id)
 		.then((r) => r.data);
 
@@ -140,8 +157,9 @@ export const postUserFromUserStorage = (
 	realm: string,
 	us: string,
 	user: User,
+	accessToken?: string,
 ): Promise<any> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.post('/realms/' + realm + '/storages/' + us + '/users', user)
 		.then((r) => r.data);
 
@@ -150,8 +168,9 @@ export const updateUserFromUserStorage = (
 	us: string,
 	id: string,
 	user: User,
+	accessToken?: string,
 ): Promise<any> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.put('/realms/' + realm + '/storages/' + us + '/users/' + id, user)
 		.then((r) => r.data);
 
@@ -160,8 +179,9 @@ export const addGroupToUser = (
 	application_id: string,
 	group_id: string,
 	id: string,
+	accessToken?: string,
 ): Promise<any> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.put(
 			'/realms/' +
 				realm +
@@ -179,8 +199,9 @@ export const deleteGroupToUser = (
 	application_id: string,
 	group_id: string,
 	id: string,
+	accessToken?: string,
 ): Promise<any> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.delete(
 			'/realms/' +
 				realm +
@@ -198,8 +219,9 @@ export const putCertificate = (
 	formdata: FormData,
 	realm: string,
 	userStorage?: string,
+	accessToken?: string,
 ): Promise<any> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.put(
 			'/realms/' +
 				realm +
@@ -215,8 +237,9 @@ export const getCertificate = (
 	id: string,
 	realm: string,
 	userStorage?: string,
+	accessToken?: string,
 ): Promise<any> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.get(
 			'/realms/' +
 				realm +
@@ -231,8 +254,9 @@ export const deleteCertificate = (
 	id: string,
 	realm: string,
 	userStorage?: string,
+	accessToken?: string,
 ): Promise<any> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.delete(
 			'/realms/' +
 				realm +

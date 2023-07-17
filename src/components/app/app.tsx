@@ -1,4 +1,4 @@
-import { withOidcSecure } from '@axa-fr/react-oidc';
+import { useOidcAccessToken, withOidcSecure } from '@axa-fr/react-oidc';
 import { Box, Container, useTheme } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
@@ -19,9 +19,7 @@ import { useTranslation } from 'react-i18next';
 
 const ThemeWrapper = () => {
 	const theme = useTheme();
-	const isAuthenticated = useSelector(
-		(store: RootState) => store.user.isAuthenticated,
-	);
+	const accessToken = useOidcAccessToken().accessToken;
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const handleDrawerToggle = () => {
 		setDrawerOpen(!drawerOpen);
@@ -35,7 +33,7 @@ const ThemeWrapper = () => {
 		>
 			<CssBaseline />
 			<Header handleDrawerToggle={handleDrawerToggle} />
-			{isAuthenticated ? (
+			{accessToken !== null ? (
 				<Sider
 					drawerOpen={drawerOpen}
 					handleDrawerToggle={handleDrawerToggle}
