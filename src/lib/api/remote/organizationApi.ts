@@ -17,6 +17,7 @@ export const getOrganizations = (
 		mail,
 		typeRecherche,
 	}: searchRequestOrganization,
+	accessToken?: string,
 ): Promise<Pageable> => {
 	//Check if there are any previous pending requests
 	if (typeof cancelToken != typeof undefined) {
@@ -24,7 +25,7 @@ export const getOrganizations = (
 	}
 	//Save the cancel token for the current request
 	cancelToken = axios.CancelToken.source();
-	return getAuthClient()
+	return getAuthClient(accessToken)
 		.get('/realms/' + realm + '/organizations', {
 			params: {
 				identifiant,
@@ -42,8 +43,9 @@ export const getOrganizations = (
 export const getOrganization = async (
 	realm: string,
 	id: string,
+	accessToken?: string,
 ): Promise<Organization> => {
-	return await getAuthClient()
+	return await getAuthClient(accessToken)
 		.get('/realms/' + realm + '/organizations/' + id)
 		.then((r: any) => r.data);
 };
@@ -51,8 +53,9 @@ export const getOrganization = async (
 export const deleteOrganization = (
 	realm: string,
 	id: string,
+	accessToken?: string,
 ): Promise<string> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.delete('/realms/' + realm + '/organizations/' + id)
 		.then((r: any) => r.data);
 
@@ -60,8 +63,9 @@ export const updateOrganization = (
 	realm: string,
 	id: string,
 	organization: Organization,
+	accessToken?: string,
 ): Promise<Organization> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.put('/realms/' + realm + '/organizations/' + id, organization)
 		.then((r: any) => r.data);
 
@@ -76,8 +80,9 @@ export const getOrganizationsFromUserStorage = (
 		mail,
 		typeRecherche,
 	}: searchRequestOrganization,
+	accessToken?: string,
 ): Promise<Pageable> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.get('/realms/' + realm + '/storages/' + us + '/organizations', {
 			params: {
 				identifiant,
@@ -94,8 +99,9 @@ export const getOrganizationFromUserStorage = async (
 	realm: string,
 	us: string,
 	id: string,
+	accessToken?: string,
 ): Promise<Organization> => {
-	return await getAuthClient()
+	return await getAuthClient(accessToken)
 		.get(
 			'/realms/' +
 				realm +
@@ -111,8 +117,9 @@ export const deleteOrganizationFromUserStorage = (
 	realm: string,
 	us: string,
 	id: string,
+	accessToken?: string,
 ): Promise<string> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.delete(
 			'/realms/' +
 				realm +
@@ -127,8 +134,9 @@ export const postOrganization = (
 	realm: string,
 	us: string,
 	organization: Organization,
+	accessToken?: string,
 ): Promise<Organization> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.post(
 			'/realms/' + realm + '/storages/' + us + '/organizations',
 			organization,
@@ -140,8 +148,9 @@ export const updateOrganizationFromUserStorage = (
 	us: string,
 	id: string,
 	organization: Organization,
+	accessToken?: string,
 ): Promise<Organization> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.put(
 			'/realms/' +
 				realm +
@@ -158,8 +167,9 @@ export const putGpgKey = (
 	formdata: FormData,
 	realm: string,
 	userStorage?: string,
+	accessToken?: string,
 ) =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.put(
 			'/realms/' +
 				realm +
@@ -171,8 +181,13 @@ export const putGpgKey = (
 		)
 		.then((r: AxiosResponse) => r.data);
 
-export const getGpgKey = (id: string, realm: string, userStorage?: string) =>
-	getAuthClient()
+export const getGpgKey = (
+	id: string,
+	realm: string,
+	userStorage?: string,
+	accessToken?: string,
+) =>
+	getAuthClient(accessToken)
 		.get(
 			'/realms/' +
 				realm +
@@ -183,8 +198,13 @@ export const getGpgKey = (id: string, realm: string, userStorage?: string) =>
 		)
 		.then((r: AxiosResponse) => r.data);
 
-export const deleteGpgKey = (id: string, realm: string, userStorage?: string) =>
-	getAuthClient()
+export const deleteGpgKey = (
+	id: string,
+	realm: string,
+	userStorage?: string,
+	accessToken?: string,
+) =>
+	getAuthClient(accessToken)
 		.delete(
 			'/realms/' +
 				realm +

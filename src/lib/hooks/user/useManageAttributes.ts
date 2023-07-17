@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { addAttribute, deleteAttribute } from '../../api';
 import User from '../../model/api/user';
+import { useOidcAccessToken } from '@axa-fr/react-oidc';
 
 export const useAddAttribute = (attribute_key: string) => {
 	const [error, setError] = useState();
 	const [loading, setLoading] = useState(false);
 	const [result, setResult] = useState<User | undefined>();
 	const attributeKey = useState<string>(attribute_key)[0];
+	const accessToken = useOidcAccessToken().accessToken;
+
 	const execute = async (
 		realm: string,
 		id: string,
@@ -15,7 +18,13 @@ export const useAddAttribute = (attribute_key: string) => {
 		setLoading(true);
 		setError(undefined);
 		setResult(undefined);
-		await addAttribute(realm, id, attributeKey, attributeValue)
+		await addAttribute(
+			realm,
+			id,
+			attributeKey,
+			attributeValue,
+			accessToken,
+		)
 			.then((r) => setResult(r))
 			.catch((err) => setError(err))
 			.finally(() => {
@@ -31,6 +40,7 @@ export const useDeleteAttribute = (attribute_key: string) => {
 	const [loading, setLoading] = useState(false);
 	const [result, setResult] = useState<User | undefined>();
 	const attributeKey = useState<string>(attribute_key)[0];
+	const accessToken = useOidcAccessToken().accessToken;
 
 	const execute = async (
 		realm: string,
@@ -40,7 +50,13 @@ export const useDeleteAttribute = (attribute_key: string) => {
 		setLoading(true);
 		setError(undefined);
 		setResult(undefined);
-		await deleteAttribute(realm, id, attributeKey, attributeValue)
+		await deleteAttribute(
+			realm,
+			id,
+			attributeKey,
+			attributeValue,
+			accessToken,
+		)
 			.then((r) => setResult(r))
 			.catch((err) => setError(err))
 			.finally(() => {

@@ -2,16 +2,18 @@ import { useEffect, useState } from 'react';
 import { getUsers } from '../../api';
 import User from '../../model/api/user';
 import searchRequestUser from '../../model/js/searchRequestUser';
+import { useOidcAccessToken } from '@axa-fr/react-oidc';
 
 export const useGetUsers = (realm?: string, userStorage?: string) => {
 	const [result, setResult] = useState<User[]>([]);
 	const [error, setError] = useState(undefined);
 	const [loading, setLoading] = useState(true);
 	const [firstSearch, setFirstSearch] = useState<any>(realm ? true : false);
+	const accessToken = useOidcAccessToken().accessToken;
 
 	useEffect(() => {
 		if (firstSearch) {
-			getUsers(realm as string, {}, userStorage)
+			getUsers(realm as string, {}, userStorage, accessToken)
 				.then((r: any) => {
 					setResult(r.results);
 				})
@@ -23,7 +25,7 @@ export const useGetUsers = (realm?: string, userStorage?: string) => {
 					setFirstSearch(false);
 				});
 		}
-	}, [firstSearch, realm, userStorage]);
+	}, [firstSearch, realm, userStorage, accessToken]);
 
 	const execute = async (
 		{
@@ -65,6 +67,7 @@ export const useGetUsers = (realm?: string, userStorage?: string) => {
 				application,
 			},
 			userStorage,
+			accessToken,
 		)
 			.then((r: any) => {
 				setResult(r.results);

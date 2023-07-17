@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getGroups } from '../../api';
 import { Group } from '../../model/api/group';
+import { useOidcAccessToken } from '@axa-fr/react-oidc';
 
 export const useGetGroups = (realm?: string, application?: string) => {
 	const [groups, setGroups] = useState<Group[]>([]);
@@ -9,11 +10,12 @@ export const useGetGroups = (realm?: string, application?: string) => {
 	);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState();
+	const accessToken = useOidcAccessToken().accessToken;
 
 	const execute = async (realm: string, application: string) => {
 		setLoading(true);
 		setError(undefined);
-		await getGroups(realm, application)
+		await getGroups(realm, application, accessToken)
 			.then((r) => setGroups(r))
 			.catch((err) => setError(err))
 			.finally(() => {
@@ -25,7 +27,7 @@ export const useGetGroups = (realm?: string, application?: string) => {
 		if (firstSearch) {
 			setLoading(true);
 			setError(undefined);
-			getGroups(realm as string, application as string)
+			getGroups(realm as string, application as string, accessToken)
 				.then((r) => setGroups(r))
 				.catch((err) => setError(err))
 				.finally(() => {
@@ -33,7 +35,7 @@ export const useGetGroups = (realm?: string, application?: string) => {
 					setFirstSearch(false);
 				});
 		}
-	}, [firstSearch, realm, application]);
+	}, [firstSearch, realm, application, accessToken]);
 
 	return { groups, loading, error, execute };
 };

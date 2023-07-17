@@ -37,7 +37,7 @@ const isDebugError = (a: AxiosError) => {
 	return false;
 };
 
-export const getAuthClient = () => {
+export const getAuthClient = (accessToken?: string) => {
 	const client = axios.create({
 		baseURL: Store.getState().app.config.api,
 	});
@@ -57,8 +57,7 @@ export const getAuthClient = () => {
 					debug: true,
 				}),
 			);
-			config.headers['Authorization'] =
-				'Bearer ' + Store.getState().user.oidcUser.accessToken;
+			config.headers['Authorization'] = 'Bearer ' + accessToken;
 			return config;
 		},
 		(err) => {

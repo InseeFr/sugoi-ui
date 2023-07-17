@@ -4,8 +4,9 @@ import { Group } from '../../model/api/group';
 export const getGroups = async (
 	realm: string,
 	application: string,
+	accessToken?: string,
 ): Promise<Group[]> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.get(
 			'/realms/' +
 				realm +
@@ -19,8 +20,9 @@ export const getGroup = async (
 	realm: string,
 	application: string,
 	group: string,
+	accessToken?: string,
 ): Promise<Group> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.get(
 			'/realms/' +
 				realm +
@@ -35,8 +37,9 @@ export const postGroup = async (
 	realm: string,
 	application: string,
 	group: Group,
+	accessToken?: string,
 ): Promise<Group> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.post(
 			'/realms/' +
 				realm +
@@ -51,8 +54,9 @@ export const putGroup = async (
 	realm: string,
 	application: string,
 	group: Group,
+	accessToken?: string,
 ): Promise<Group> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.put(
 			'/realms/' +
 				realm +
@@ -68,8 +72,9 @@ export const deleteGroup = async (
 	realm: string,
 	application: string,
 	groupId: string,
+	accessToken?: string,
 ): Promise<string> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.delete(
 			'/realms/' +
 				realm +
@@ -85,8 +90,9 @@ export const addUserToGroup = async (
 	application: string,
 	groupId: string,
 	userId: string,
+	accessToken?: string,
 ): Promise<string> => {
-	return getAuthClient()
+	return getAuthClient(accessToken)
 		.put(
 			'/realms/' +
 				realm +
@@ -104,8 +110,9 @@ export const deleteUserFromGroup = async (
 	application: string,
 	groupId: string,
 	userId: string,
+	accessToken?: string,
 ): Promise<string> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.delete(
 			'/realms/' +
 				realm +
@@ -121,8 +128,9 @@ export const deleteUserFromGroup = async (
 export const getManagerGroup = async (
 	realm: string,
 	application: string,
+	accessToken?: string,
 ): Promise<Group> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.get(
 			'/realms/' +
 				realm +
@@ -136,8 +144,9 @@ export const addUserToManagerGroup = async (
 	realm: string,
 	application: string,
 	userId: string,
+	accessToken?: string,
 ): Promise<string> => {
-	return getAuthClient()
+	return getAuthClient(accessToken)
 		.put(
 			'/realms/' +
 				realm +
@@ -152,8 +161,9 @@ export const deleteUserFromManagerGroup = async (
 	realm: string,
 	application: string,
 	userId: string,
+	accessToken?: string,
 ): Promise<string> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.delete(
 			'/realms/' +
 				realm +

@@ -6,8 +6,9 @@ export const addAttributes = (
 	id: string,
 	attribute_name: string,
 	attribute_value: string,
+	accessToken?: string,
 ): Promise<User> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.patch(
 			'/realms/' +
 				realm +
@@ -25,8 +26,9 @@ export const deleteAttributes = (
 	id: string,
 	attribute_name: string,
 	attribute_id: string,
+	accessToken?: string,
 ): Promise<User> =>
-	getAuthClient()
+	getAuthClient(accessToken)
 		.delete(
 			'/realms/' +
 				realm +

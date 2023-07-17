@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { putCertificate } from '../../api/';
+import { useOidcAccessToken } from '@axa-fr/react-oidc';
 
 export const useUploadCertificates = () => {
 	const [error, setError] = useState();
 	const [loading, setLoading] = useState(false);
 	const [result, setResult] = useState<any>();
+	const accessToken = useOidcAccessToken().accessToken;
 
 	const execute = async (
 		id: string,
@@ -15,7 +17,7 @@ export const useUploadCertificates = () => {
 		setLoading(true);
 		setError(undefined);
 		setResult(undefined);
-		await putCertificate(id, formdata, realm, userStorage)
+		await putCertificate(id, formdata, realm, userStorage, accessToken)
 			.then((r) => setResult(r))
 			.catch((err) => setError(err))
 			.finally(() => {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getOrganization } from '../../api';
 import Organization from '../../model/api/organization';
+import { useOidcAccessToken } from '@axa-fr/react-oidc';
 
 export const useGetOrganization = (
 	id?: string,
@@ -13,11 +14,17 @@ export const useGetOrganization = (
 	);
 	const [error, setError] = useState(undefined);
 	const [loading, setLoading] = useState(true);
+	const accessToken = useOidcAccessToken().accessToken;
 
 	useEffect(() => {
 		if (firstSearch) {
 			setLoading(true);
-			getOrganization(id as string, realm as string, userStorage)
+			getOrganization(
+				id as string,
+				realm as string,
+				userStorage,
+				accessToken,
+			)
 				.then((r: Organization) => {
 					setResult(r);
 				})
@@ -29,7 +36,7 @@ export const useGetOrganization = (
 					setFirstSearch(false);
 				});
 		}
-	}, [id, realm, userStorage, firstSearch]);
+	}, [id, realm, userStorage, firstSearch, accessToken]);
 
 	const execute = async (
 		id: string,
@@ -39,7 +46,7 @@ export const useGetOrganization = (
 		setLoading(true);
 		setResult(undefined);
 		setError(undefined);
-		await getOrganization(id, realm, userStorage)
+		await getOrganization(id, realm, userStorage, accessToken)
 			.then((r: Organization) => {
 				setResult(r);
 			})

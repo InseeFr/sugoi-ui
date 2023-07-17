@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { deleteUser } from '../../api';
+import { useOidcAccessToken } from '@axa-fr/react-oidc';
 
 export const useDeleteUser = () => {
 	const [loading, setloading] = useState(false);
 	const [error, setError] = useState();
 	const [result, setResult] = useState<string | undefined>();
+	const accessToken = useOidcAccessToken().accessToken;
 
 	const execute = async (
 		id: string,
@@ -14,7 +16,7 @@ export const useDeleteUser = () => {
 		setloading(true);
 		setError(undefined);
 		setResult(undefined);
-		await deleteUser(id, realm, userStorage)
+		await deleteUser(id, realm, userStorage, accessToken)
 			.then((r) => setResult(r))
 			.catch((err) => setError(err))
 			.finally(() => {

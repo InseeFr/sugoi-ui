@@ -17,6 +17,7 @@
 		"@testing-library/user-event": "^14.4.3",
 		"autosuggest-highlight": "^3.2.0",
 		"axios": "^1.4.0",
+		"copy-and-watch": "^0.1.6",
 		"html-react-parser": "^1.4.5",
 		"i18next": "^21.6.6",
 		"i18next-browser-languagedetector": "^6.1.2",
@@ -29,6 +30,7 @@
 		"lodash.set": "^4.3.2",
 		"mui-datatables": "^4.2.2",
 		"notistack": "^1.0.10",
+		"npm-build-zip": "^1.0.4",
 		"oidc-client": "^1.11.5",
 		"react": "^18.0.0",
 		"react-dom": "^18.0.0",
@@ -41,7 +43,8 @@
 		"redux-devtools-extension": "^2.13.9",
 		"redux-thunk": "^2.4.1",
 		"typescript": "^4.5.4",
-		"use-react-router-breadcrumbs": "^3.2.1"
+		"use-react-router-breadcrumbs": "^3.2.1",
+		"zip-dir": "^2.0.0"
 	},
 	"scripts": {
 		"start": "react-scripts start",
