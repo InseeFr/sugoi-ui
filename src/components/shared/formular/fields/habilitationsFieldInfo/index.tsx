@@ -90,7 +90,7 @@ const HabilitationsPopup = ({
 				role: role,
 				property: propriete,
 			};
-			execute(realm, id, prop.id).finally(() => {
+			execute(realm, id, prop.id, userStorage).finally(() => {
 				setApplication(undefined);
 				setPropriete(undefined);
 				setRole(undefined);
@@ -116,11 +116,14 @@ const HabilitationsPopup = ({
 		user &&
 			user.habilitations &&
 			user.habilitations[pos].id &&
-			executeDelete(realm, id, user.habilitations[pos].id).finally(
-				() => {
-					executeUser(id, realm, userStorage);
-				},
-			);
+			executeDelete(
+				realm,
+				id,
+				user.habilitations[pos].id,
+				userStorage,
+			).finally(() => {
+				executeUser(id, realm, userStorage);
+			});
 	};
 
 	const applicationsDefault: string[] = GetApplicationDefault();

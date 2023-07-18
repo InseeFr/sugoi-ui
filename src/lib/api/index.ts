@@ -444,15 +444,25 @@ export const addAttribute = (
 	user: string,
 	attribute_key: string,
 	attribute_value: string,
+	userStorage?: string,
 	accessToken?: string,
 ) => {
-	return remote.addAttributes(
-		realm,
-		user,
-		attribute_key,
-		attribute_value,
-		accessToken,
-	);
+	return userStorage
+		? remote.addAttributesFromUserStorage(
+				realm,
+				userStorage,
+				user,
+				attribute_key,
+				attribute_value,
+				accessToken,
+		  )
+		: remote.addAttributes(
+				realm,
+				user,
+				attribute_key,
+				attribute_value,
+				accessToken,
+		  );
 };
 
 export const deleteAttribute = (
@@ -460,15 +470,25 @@ export const deleteAttribute = (
 	user: string,
 	attribute_key: string,
 	attribute_value: string,
+	userStorage?: string,
 	accessToken?: string,
 ) => {
-	return remote.deleteAttributes(
-		realm,
-		user,
-		attribute_key,
-		attribute_value,
-		accessToken,
-	);
+	return userStorage
+		? remote.deleteAttributesFromUserStorage(
+				realm,
+				userStorage,
+				user,
+				attribute_key,
+				attribute_value,
+				accessToken,
+		  )
+		: remote.deleteAttributes(
+				realm,
+				user,
+				attribute_key,
+				attribute_value,
+				accessToken,
+		  );
 };
 
 export const addGroupToUser = (
