@@ -64,7 +64,7 @@ const SimpleAppManagedAttributes = ({
 		loading: loadingUser,
 	} = useGetUser(id, realm, userStorage);
 	const add = () => {
-		execute(realm, id, newValue).finally(() => {
+		execute(realm, id, newValue, userStorage).finally(() => {
 			setNewValue(undefined);
 			executeUser(id, realm, userStorage);
 		});
@@ -83,11 +83,14 @@ const SimpleAppManagedAttributes = ({
 
 	const delet = (pos: number) => {
 		get(user, value, [])[pos] &&
-			executeDelete(realm, id, get(user, value, [])[pos]).finally(
-				() => {
-					executeUser(id, realm, userStorage);
-				},
-			);
+			executeDelete(
+				realm,
+				id,
+				get(user, value, [])[pos],
+				userStorage,
+			).finally(() => {
+				executeUser(id, realm, userStorage);
+			});
 	};
 
 	return (

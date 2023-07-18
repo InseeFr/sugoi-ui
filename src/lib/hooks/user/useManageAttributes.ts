@@ -14,6 +14,7 @@ export const useAddAttribute = (attribute_key: string) => {
 		realm: string,
 		id: string,
 		attributeValue: string,
+		userStorage?: string,
 	) => {
 		setLoading(true);
 		setError(undefined);
@@ -23,6 +24,7 @@ export const useAddAttribute = (attribute_key: string) => {
 			id,
 			attributeKey,
 			attributeValue,
+			userStorage,
 			accessToken,
 		)
 			.then((r) => setResult(r))
@@ -46,6 +48,7 @@ export const useDeleteAttribute = (attribute_key: string) => {
 		realm: string,
 		id: string,
 		attributeValue: string,
+		userStorage?: string,
 	) => {
 		setLoading(true);
 		setError(undefined);
@@ -55,6 +58,7 @@ export const useDeleteAttribute = (attribute_key: string) => {
 			id,
 			attributeKey,
 			attributeValue,
+			userStorage,
 			accessToken,
 		)
 			.then((r) => setResult(r))
