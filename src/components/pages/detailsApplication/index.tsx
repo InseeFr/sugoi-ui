@@ -23,7 +23,7 @@ import { GroupsViewer } from './groupsViewer';
 import { useState } from 'react';
 import { ContactsManager } from './ContactsManager';
 import { ApplicationSettings } from './ApplicationSettings';
-
+import { ButtonExportGroupUsers } from './ButtonExportGroupUsers';
 export const DetailsApplication = () => {
 	const [groupeApplicatif, setGroupeApplicatif] = useState('');
 	const { realm, id: applicationId } = useParams() as {
@@ -233,6 +233,17 @@ export const DetailsApplication = () => {
 												applicationId,
 											)
 										}
+									/>
+								)}
+								exportComponent={(
+									_group: Group,
+								) => (
+									<ButtonExportGroupUsers
+										realm={realm}
+										application={
+											applicationId
+										}
+										group={_group}
 									/>
 								)}
 							/>

@@ -309,6 +309,15 @@ export const updateGroup = (
 	return remote.putGroup(realm, application, group, accessToken);
 };
 
+export const exportGroupUsers = (
+	realm: string,
+	application: string,
+	group: Group,
+	accessToken?: string,
+): Promise<any> => {
+	return remote.exportGroupUsers(realm, application, group, accessToken);
+};
+
 export const addUserToGroup = (
 	realm: string,
 	application: string,

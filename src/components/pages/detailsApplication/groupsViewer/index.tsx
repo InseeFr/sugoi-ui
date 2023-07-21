@@ -23,6 +23,7 @@ interface Props {
 	updateManageGroupSettings?: (group: Group) => JSX.Element;
 	updateManageGroupMembers?: (group: Group) => JSX.Element;
 	deleteComponent?: (group: Group) => JSX.Element;
+	exportComponent?: (group: Group) => JSX.Element;
 	paginate: boolean;
 }
 
@@ -33,6 +34,7 @@ export const GroupsViewer = ({
 	updateManageGroupSettings,
 	updateManageGroupMembers,
 	deleteComponent,
+	exportComponent,
 	paginate,
 }: Props) => {
 	const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -171,6 +173,10 @@ export const GroupsViewer = ({
 													)}
 												{deleteComponent &&
 													deleteComponent(
+														group,
+													)}
+												{exportComponent &&
+													exportComponent(
 														group,
 													)}
 											</TableCell>
