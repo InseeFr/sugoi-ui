@@ -146,8 +146,8 @@ export const AddUsers = ({
 													(
 														_user,
 													) =>
-														_user.username ===
-														user.username,
+														_user.username?.toUpperCase() ===
+														user.username?.toUpperCase(),
 												)
 													.length >
 												0 ? (
