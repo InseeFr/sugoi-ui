@@ -50,6 +50,10 @@ const CreateOrganization = () => {
 					handleChange={handleChange}
 					create={true}
 					errors={errors}
+					recharge={null}
+					id={null}
+					realm={realm}
+					userStorage={userStorage}
 					buttons={
 						<Grid item xs={12}>
 							<Grid

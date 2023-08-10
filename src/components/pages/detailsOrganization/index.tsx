@@ -83,6 +83,10 @@ const DetailOrganization = () => {
 								}
 								errors={errors}
 								handleChange={handleChange}
+								recharge={null}
+								id={null}
+								realm={realm}
+								userStorage={userStorage}
 								buttons={
 									<Grid
 										container

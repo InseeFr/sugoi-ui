@@ -17,6 +17,10 @@ interface Props {
 	errors?: ErrorField[];
 	buttons?: any;
 	isUser?: Boolean;
+	recharge: any;
+	id: any;
+	realm: any;
+	userStorage: any;
 }
 
 const DataViewer = ({
@@ -27,6 +31,10 @@ const DataViewer = ({
 	buttons,
 	create,
 	isUser,
+	recharge,
+	id,
+	realm,
+	userStorage,
 }: Props) => {
 	const mainsFields = extractFieldAndAddError(
 		'main',
@@ -99,6 +107,18 @@ const DataViewer = ({
 								<Tab
 									label="Détails"
 									value={0}
+									onClick={() => {
+										if (
+											recharge !=
+											null
+										) {
+											recharge(
+												id,
+												realm,
+												userStorage,
+											);
+										}
+									}}
 								/>
 								{rightsFields.length > 0 && (
 									<Tab
