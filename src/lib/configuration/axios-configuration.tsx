@@ -1,4 +1,8 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, {
+	AxiosError,
+	AxiosResponse,
+	InternalAxiosRequestConfig,
+} from 'axios';
 import { enqueueSnackbar } from './../redux/actions/notif';
 import Store from './store-configuration';
 
@@ -38,7 +42,7 @@ export const getAuthClient = () => {
 		baseURL: Store.getState().app.config.api,
 	});
 	client.interceptors.request.use(
-		async (config: AxiosRequestConfig) => {
+		async (config: InternalAxiosRequestConfig) => {
 			Store.dispatch(
 				enqueueSnackbar({
 					subject:
@@ -53,11 +57,8 @@ export const getAuthClient = () => {
 					debug: true,
 				}),
 			);
-			config.headers = {
-				Authorization:
-					'Bearer ' +
-					Store.getState().user.oidcUser.accessToken,
-			};
+			config.headers['Authorization'] =
+				'Bearer ' + Store.getState().user.oidcUser.accessToken;
 			return config;
 		},
 		(err) => {
