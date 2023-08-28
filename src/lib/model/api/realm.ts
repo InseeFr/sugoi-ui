@@ -6,6 +6,6 @@ export interface Realm {
 	url: string;
 	appSource: string;
 	userStorages: UserStorage[];
-	properties: any;
+	properties: Record<string, string[]>;
 	uiMapping: Mapping;
 }
