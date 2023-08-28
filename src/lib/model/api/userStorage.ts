@@ -9,6 +9,6 @@ export interface UserStorage {
 }
 
 export interface UsProperties {
-	group_filter_pattern: string;
-	group_source_pattern: string;
+	group_filter_pattern: string[];
+	group_source_pattern: string[];
 }

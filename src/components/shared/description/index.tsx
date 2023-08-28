@@ -30,7 +30,11 @@ export const Description = ({ realmName }: Props) => {
 				>
 					<Grid item xs={12}>
 						{realm?.properties.description &&
-							parse(realm?.properties.description)}
+							realm?.properties.description[0] &&
+							parse(
+								realm?.properties
+									.description[0],
+							)}
 					</Grid>
 					<Grid item xs={12}></Grid>
 				</Grid>
@@ -46,7 +50,8 @@ export const ButtonDescription = ({ realmName }: Props) => {
 			helpTextTitle={'Description ' + realmName}
 			helpText={
 				realm?.properties.description &&
-				parse(realm?.properties.description)
+				realm?.properties.description[0] &&
+				parse(realm?.properties.description[0])
 			}
 		/>
 	);
