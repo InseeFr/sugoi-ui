@@ -15,7 +15,7 @@ interface Props {
 	onClose: () => Promise<void>;
 }
 
-export const GenericButtonManageGroup = ({
+export const GenericButtonManageGroupMembers = ({
 	realm,
 	onClose,
 	handleAddUserToGroup,
@@ -45,7 +45,11 @@ export const GenericButtonManageGroup = ({
 			<SimpleDialog
 				onClose={handleClose}
 				open={open}
-				title={t('detail_application.button_manage_group')}
+				title={
+					t(
+						'detail_application.button_manage_group_members',
+					) + group?.name
+				}
 				body={
 					<Grid container direction="row" spacing={2}>
 						<Grid item xs={12} md={6}>
@@ -71,4 +75,4 @@ export const GenericButtonManageGroup = ({
 	);
 };
 
-export default GenericButtonManageGroup;
+export default GenericButtonManageGroupMembers;

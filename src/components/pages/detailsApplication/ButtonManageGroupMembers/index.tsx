@@ -5,7 +5,7 @@ import useDeleteUserFromGroupManager from 'src/lib/hooks/group/useDeleteUserFrom
 import { useGetGroup } from 'src/lib/hooks/group/useGetGroup';
 import useGetGroupManager from 'src/lib/hooks/group/useGetGroupManager';
 import { Group } from 'src/lib/model/api/group';
-import GenericButtonManageGroup from './genericButtonManageGroup';
+import GenericButtonManageGroupMembers from './genericButtonManageGroupMembers';
 
 interface Props {
 	realm: string;
@@ -14,7 +14,7 @@ interface Props {
 	onClose: any;
 }
 
-export const ButtonManageGroup = ({
+export const ButtonManageGroupMembers = ({
 	realm,
 	onClose,
 	applicationName,
@@ -50,7 +50,7 @@ export const ButtonManageGroup = ({
 		};
 
 	return (
-		<GenericButtonManageGroup
+		<GenericButtonManageGroupMembers
 			realm={realm}
 			onClose={() => onClose()}
 			group={group as Group}
@@ -68,7 +68,7 @@ export const ButtonManageGroup = ({
 	);
 };
 
-export const ButtonManageManagerGroup = ({
+export const ButtonManageManagerGroupMembers = ({
 	realm,
 	onClose,
 	applicationName,
@@ -100,7 +100,7 @@ export const ButtonManageManagerGroup = ({
 		};
 
 	return (
-		<GenericButtonManageGroup
+		<GenericButtonManageGroupMembers
 			realm={realm}
 			onClose={onClose}
 			group={group as Group}
