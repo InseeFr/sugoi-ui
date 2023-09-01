@@ -4,4 +4,5 @@ export interface Group {
 	name: string;
 	description: string;
 	users: User[];
+	isSelfManaged: boolean | null;
 }

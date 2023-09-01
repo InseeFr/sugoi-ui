@@ -46,6 +46,7 @@ export const SearchApplications = () => {
 			name: appName,
 			owner: owner,
 			groups: [],
+			isSelfManagedGroupsApp: null,
 		}).then(() => execute(realm));
 	};
 

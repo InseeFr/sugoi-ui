@@ -14,6 +14,7 @@ import {
 import { Group } from 'src/lib/model/api/group';
 import ButtonCreateGroup from './ButtonCreateGroup';
 import { ButtonDeleteGroup } from './ButtonDeleteGroup';
+import { ButtonManageGroupSettings } from './ButtonManageGroupSettings';
 import {
 	ButtonManageGroupMembers,
 	ButtonManageManagerGroupMembers,
@@ -21,6 +22,7 @@ import {
 import { GroupsViewer } from './groupsViewer';
 import { useState } from 'react';
 import { ContactsManager } from './ContactsManager';
+import { ApplicationSettings } from './ApplicationSettings';
 
 export const DetailsApplication = () => {
 	const [groupeApplicatif, setGroupeApplicatif] = useState('');
@@ -217,6 +219,17 @@ export const DetailsApplication = () => {
 										}
 									/>
 								)}
+								updateManageGroupSettings={(
+									_group: Group,
+								) => (
+									<ButtonManageGroupSettings
+										realm={realm}
+										applicationName={
+											applicationId
+										}
+										group={_group}
+									/>
+								)}
 								deleteComponent={(
 									_group: Group,
 								) => (
@@ -243,6 +256,14 @@ export const DetailsApplication = () => {
 					getApplication={getApplication}
 					realm={realm}
 				/>
+				<Grid item>
+					{application && (
+						<ApplicationSettings
+							application={application}
+							realm={realm}
+						/>
+					)}
+				</Grid>
 				<Grid item>
 					<Grid
 						container
