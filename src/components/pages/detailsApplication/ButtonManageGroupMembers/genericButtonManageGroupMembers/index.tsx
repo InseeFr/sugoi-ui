@@ -1,5 +1,5 @@
-import { Grid, IconButton } from '@mui/material';
-import SettingsIcon from '@mui/icons-material/Settings';
+import { Grid, IconButton, Tooltip } from '@mui/material';
+import PersonIcon from '@mui/icons-material/Person';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import SimpleDialog from 'src/components/shared/popButton/Dialog';
@@ -35,13 +35,19 @@ export const GenericButtonManageGroupMembers = ({
 
 	return (
 		<>
-			<IconButton
-				aria-label="Add"
-				size="small"
-				onClick={handleOpen}
+			<Tooltip
+				title={t(
+					'detail_application.button_manage_group_members',
+				)}
 			>
-				<SettingsIcon color="primary" fontSize="small" />
-			</IconButton>
+				<IconButton
+					aria-label="Add"
+					size="small"
+					onClick={handleOpen}
+				>
+					<PersonIcon color="primary" fontSize="small" />
+				</IconButton>
+			</Tooltip>
 			<SimpleDialog
 				onClose={handleClose}
 				open={open}

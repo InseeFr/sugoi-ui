@@ -204,6 +204,7 @@
 		"contacts_title": "Contacts associés à l'application",
 		"search_groups_title": "Chercher un groupe applicatif",
 		"button_manage_group_members": "Gérer les membres du groupe ",
+		"button_delete_group": "Supprimer le groupe",
 		"manage_group_popup": {
 			"search": "Votre recherche",
 			"available_users": "Utilisateurs disponibles:",
