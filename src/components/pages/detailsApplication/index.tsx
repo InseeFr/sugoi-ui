@@ -70,98 +70,68 @@ export const DetailsApplication = () => {
 			<Title
 				title={t('detail_application.title') + applicationId}
 			/>
-			<Grid
-				container
-				direction="column"
-				justifyContent="center"
-				alignItems="stretch"
-				spacing={5}
-			>
-				<Grid item>
-					<Grid
-						container
-						direction="row"
-						justifyContent="flex-end"
-						alignItems="center"
-						spacing={3}
-					>
-						<ButtonCreateGroup
-							handleAddGroup={handleCreateGroup(
-								realm,
-								applicationId,
+			<Grid container direction="column" spacing={5}>
+				<Grid container item direction="column" spacing={3}>
+					<Grid item>
+						<Title
+							title={t(
+								'detail_application.manager_groups_title',
 							)}
-							application={application}
+							variant="subtitle1"
+						/>
+					</Grid>
+					<Grid item>
+						<GroupsViewer
+							groups={
+								groupManager
+									? [groupManager]
+									: []
+							}
+							paginate={false}
+							realm={realm}
+							loading={loadingGroupManager}
+							updateManageGroupMembers={(
+								_group: Group,
+							) => (
+								<ButtonManageManagerGroupMembers
+									realm={realm}
+									applicationName={
+										applicationId
+									}
+									groupName={_group.name}
+									onClose={() =>
+										getGroupManager(
+											realm,
+											applicationId,
+										)
+									}
+								/>
+							)}
 						/>
 					</Grid>
 				</Grid>
-				<Grid item>
-					<Grid
-						container
-						direction="column"
-						justifyContent="center"
-						alignItems="stretch"
-						spacing={2}
-					>
-						<Grid item>
-							<Title
-								title={t(
-									'detail_application.manager_groups_title',
-								)}
-								variant="subtitle1"
-							/>
-						</Grid>
-						<Grid item>
-							<GroupsViewer
-								groups={
-									groupManager
-										? [groupManager]
-										: []
-								}
-								paginate={false}
-								realm={realm}
-								loading={loadingGroupManager}
-								updateManageGroupMembers={(
-									_group: Group,
-								) => (
-									<ButtonManageManagerGroupMembers
-										realm={realm}
-										applicationName={
-											applicationId
-										}
-										groupName={
-											_group.name
-										}
-										onClose={() =>
-											getGroupManager(
-												realm,
-												applicationId,
-											)
-										}
-									/>
-								)}
-							/>
-						</Grid>
-					</Grid>
-				</Grid>
 
-				<Grid item>
+				<Grid container item direction="column" spacing={2}>
+					<Grid item>
+						<Title
+							title={t(
+								'detail_application.groups_title',
+							)}
+							variant="subtitle1"
+						/>
+					</Grid>
 					<Grid
+						xs={12}
+						direction="row"
+						item
 						container
-						direction="column"
-						justifyContent="center"
+						spacing={2}
+						justifyContent="space-between"
 						alignItems="stretch"
-						spacing={1}
 					>
-						<Grid item>
-							<Title
-								title={t(
-									'detail_application.groups_title',
-								)}
-								variant="subtitle1"
-							/>
-						</Grid>
-						<Grid item xs={5}>
+						<Grid item xs={8}>
 							<TextField
+								fullWidth
 								id="standard-bare"
 								label={t(
 									'detail_application.search_groups_title',
@@ -169,14 +139,15 @@ export const DetailsApplication = () => {
 								variant="outlined"
 								value={groupeApplicatif}
 								inputProps={{
-									style: { fontSize: 20 },
+									style: {
+										fontSize: 20,
+									},
 								}}
 								onChange={(e) =>
 									setGroupeApplicatif(
 										e.target.value,
 									)
 								}
-								// fullWidth
 								InputProps={{
 									endAdornment: (
 										<IconButton size="medium">
@@ -186,7 +157,24 @@ export const DetailsApplication = () => {
 								}}
 							/>
 						</Grid>
-						<Grid item>
+						<Grid item xs={4}>
+							<ButtonCreateGroup
+								handleAddGroup={handleCreateGroup(
+									realm,
+									applicationId,
+								)}
+								application={application}
+							/>
+						</Grid>
+					</Grid>
+					<Grid
+						xs={12}
+						direction="row"
+						container
+						spacing={2}
+						item
+					>
+						<Grid item xs={12}>
 							<GroupsViewer
 								groups={
 									application?.groups.filter(
