@@ -192,7 +192,7 @@
 		"manager_groups_title": "Application Rights Managers ",
 		"groups_title": "Application groups",
 		"search_groups_title": "Search application groups",
-		"button_manage_group": "Manage the group",
+		"button_manage_group_members": "Manage the group members",
 		"manage_group_popup": {
 			"search": "Your search",
 			"available_users": "Available users:",

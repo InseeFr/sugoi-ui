@@ -203,7 +203,7 @@
 		"groups_title": "Groupes applicatifs",
 		"contacts_title": "Contacts associés à l'application",
 		"search_groups_title": "Chercher un groupe applicatif",
-		"button_manage_group": "Gérer le groupe",
+		"button_manage_group_members": "Gérer les membres du groupe ",
 		"manage_group_popup": {
 			"search": "Votre recherche",
 			"available_users": "Utilisateurs disponibles:",

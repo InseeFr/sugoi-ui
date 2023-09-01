@@ -20,7 +20,7 @@ interface Props {
 	groups: Group[];
 	realm: string;
 	loading: boolean;
-	updateComponent?: (group: Group) => JSX.Element;
+	updateManageGroupMembers?: (group: Group) => JSX.Element;
 	deleteComponent?: (group: Group) => JSX.Element;
 	paginate: boolean;
 }
@@ -29,7 +29,7 @@ export const GroupsViewer = ({
 	realm,
 	groups,
 	loading,
-	updateComponent,
+	updateManageGroupMembers,
 	deleteComponent,
 	paginate,
 }: Props) => {
@@ -159,8 +159,8 @@ export const GroupsViewer = ({
 												)}
 											</TableCell>
 											<TableCell>
-												{updateComponent &&
-													updateComponent(
+												{updateManageGroupMembers &&
+													updateManageGroupMembers(
 														group,
 													)}
 												{deleteComponent &&

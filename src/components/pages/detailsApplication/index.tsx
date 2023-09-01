@@ -15,9 +15,9 @@ import { Group } from 'src/lib/model/api/group';
 import ButtonCreateGroup from './ButtonCreateGroup';
 import { ButtonDeleteGroup } from './ButtonDeleteGroup';
 import {
-	ButtonManageGroup,
-	ButtonManageManagerGroup,
-} from './ButtonManageGroup';
+	ButtonManageGroupMembers,
+	ButtonManageManagerGroupMembers,
+} from './ButtonManageGroupMembers';
 import { GroupsViewer } from './groupsViewer';
 import { useState } from 'react';
 import { ContactsManager } from './ContactsManager';
@@ -118,10 +118,10 @@ export const DetailsApplication = () => {
 								paginate={false}
 								realm={realm}
 								loading={loadingGroupManager}
-								updateComponent={(
+								updateManageGroupMembers={(
 									_group: Group,
 								) => (
-									<ButtonManageManagerGroup
+									<ButtonManageManagerGroupMembers
 										realm={realm}
 										applicationName={
 											applicationId
@@ -198,10 +198,10 @@ export const DetailsApplication = () => {
 								}
 								realm={realm}
 								loading={loading}
-								updateComponent={(
+								updateManageGroupMembers={(
 									_group: Group,
 								) => (
-									<ButtonManageGroup
+									<ButtonManageGroupMembers
 										realm={realm}
 										applicationName={
 											applicationId
