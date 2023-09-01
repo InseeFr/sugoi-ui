@@ -6,6 +6,7 @@ export interface Application {
 	owner?: string;
 	groups: Group[];
 	attributes?: AttributesApplication;
+	isSelfManagedGroupsApp: boolean | null;
 }
 
 export default Application;

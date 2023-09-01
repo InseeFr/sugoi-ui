@@ -204,6 +204,14 @@
 		"contacts_title": "Contacts associés à l'application",
 		"search_groups_title": "Chercher un groupe applicatif",
 		"button_manage_group_members": "Gérer les membres du groupe ",
+		"button_manage_application_settings": {
+			"title": "Paramètres de l'application",
+			"selfmanaged": "Groupes auto gérés par défaut"
+		},
+		"button_manage_group_settings": {
+			"title": "Paramètres du groupe ",
+			"selfmanaged": "Groupe autogéré"
+		},
 		"button_delete_group": "Supprimer le groupe",
 		"manage_group_popup": {
 			"search": "Votre recherche",

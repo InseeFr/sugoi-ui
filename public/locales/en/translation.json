@@ -193,6 +193,14 @@
 		"groups_title": "Application groups",
 		"search_groups_title": "Search application groups",
 		"button_manage_group_members": "Manage the group members",
+		"button_manage_application_settings": {
+			"title": "Application settings",
+			"selfmanaged": "Selfmanaged group"
+		},
+		"button_manage_group_settings": {
+			"title": "Settings of group ",
+			"selfmanaged": "Selfmanaged group"
+		},
 		"button_delete_group": "Delete the group",
 		"manage_group_popup": {
 			"search": "Your search",
