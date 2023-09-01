@@ -192,6 +192,7 @@
 		"manager_groups_title": "Application Rights Managers ",
 		"groups_title": "Application groups",
 		"search_groups_title": "Search application groups",
+		"button_add_group": "Create a group",
 		"button_manage_group_members": "Manage the group members",
 		"button_manage_application_settings": {
 			"title": "Application settings",

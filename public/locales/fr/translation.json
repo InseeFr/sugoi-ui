@@ -203,6 +203,7 @@
 		"groups_title": "Groupes applicatifs",
 		"contacts_title": "Contacts associés à l'application",
 		"search_groups_title": "Chercher un groupe applicatif",
+		"button_add_group": "Créer un groupe",
 		"button_manage_group_members": "Gérer les membres du groupe ",
 		"button_manage_application_settings": {
 			"title": "Paramètres de l'application",

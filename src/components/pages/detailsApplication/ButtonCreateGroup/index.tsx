@@ -1,5 +1,6 @@
 import { Button, Grid, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import SimpleDialog from 'src/components/shared/popButton/Dialog';
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
 }
 
 export const ButtonCreateGroup = ({ handleAddGroup, application }: Props) => {
+	const { t } = useTranslation();
 	const [open, setOpen] = useState(false);
 
 	const handleOpen = () => {
@@ -35,16 +37,18 @@ export const ButtonCreateGroup = ({ handleAddGroup, application }: Props) => {
 	return (
 		<>
 			<Button
+				fullWidth
 				color="primary"
 				variant="contained"
 				onClick={handleOpen}
+				sx={{ height: '100%' }}
 			>
-				Ajouter
+				{t('detail_application.button_add_group')}
 			</Button>
 			<SimpleDialog
 				onClose={handleClose}
 				open={open}
-				title={'Créer un groupe'}
+				title={t('detail_application.button_add_group')}
 				body={
 					<>
 						<Grid
