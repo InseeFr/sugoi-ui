@@ -1,4 +1,4 @@
-import { IconButton } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -31,12 +31,18 @@ export const ButtonDeleteGroup = ({
 		<>
 			<ConfirmationPopup
 				Icon={
-					<IconButton aria-label="Add" size="small">
-						<DeleteIcon
-							color="primary"
-							fontSize="small"
-						/>
-					</IconButton>
+					<Tooltip
+						title={t(
+							'detail_application.button_delete_group',
+						)}
+					>
+						<IconButton aria-label="Add" size="small">
+							<DeleteIcon
+								color="primary"
+								fontSize="small"
+							/>
+						</IconButton>
+					</Tooltip>
 				}
 				title={
 					t('detail_application.group.popup.title.part1') +

@@ -193,6 +193,7 @@
 		"groups_title": "Application groups",
 		"search_groups_title": "Search application groups",
 		"button_manage_group_members": "Manage the group members",
+		"button_delete_group": "Delete the group",
 		"manage_group_popup": {
 			"search": "Your search",
 			"available_users": "Available users:",
