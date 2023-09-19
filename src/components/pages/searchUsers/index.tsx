@@ -13,8 +13,10 @@ import { useGetUsers } from 'src/lib/hooks/api-hooks';
 import { Field } from 'src/lib/model/field';
 import SearchRequestUser from 'src/lib/model/js/searchRequestUser';
 import { download } from 'src/lib/utils/downloadFile';
+import { useOidcAccessToken } from '@axa-fr/react-oidc';
 
 const SearchUsers = () => {
+	const accessToken = useOidcAccessToken().accessToken;
 	const { realm, userStorage } = useParams() as {
 		realm: string;
 		userStorage?: string;
@@ -79,8 +81,8 @@ const SearchUsers = () => {
 	};
 
 	const handleExport = () => {
-		exportUser(realm, { ...lastSearch }, userStorage).then((r) =>
-			download(r, 'export.csv', 'text/csv;charset=utf-8;'),
+		exportUser(realm, { ...lastSearch }, userStorage, accessToken).then(
+			(r) => download(r, 'export.csv', 'text/csv;charset=utf-8;'),
 		);
 	};
 
