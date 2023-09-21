@@ -1,4 +1,4 @@
-import { Grid, TextField, IconButton } from '@material-ui/core';
+import { Grid, TextField, IconButton } from '@mui/material';
 import { SearchOutlined } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -150,7 +150,7 @@ export const DetailsApplication = () => {
 								}
 								InputProps={{
 									endAdornment: (
-										<IconButton size="medium">
+										<IconButton size="large">
 											<SearchOutlined />
 										</IconButton>
 									),

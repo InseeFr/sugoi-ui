@@ -10,7 +10,7 @@ import {
 	List,
 	Button,
 	ListItemSecondaryAction,
-} from '@material-ui/core';
+} from '@mui/material';
 import Title from 'src/components/shared/title/title';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PopIcon from 'src/components/shared/popIcon/popIcon';
