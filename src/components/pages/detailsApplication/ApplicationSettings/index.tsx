@@ -1,6 +1,6 @@
 import Application from 'src/lib/model/api/application';
 import Title from 'src/components/shared/title/title';
-import { FormControlLabel, Switch, FormGroup } from '@material-ui/core';
+import { FormControlLabel, Switch, FormGroup } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { usePutApplication } from 'src/lib/hooks/applications';
