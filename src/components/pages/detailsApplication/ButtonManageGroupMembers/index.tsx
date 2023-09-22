@@ -40,14 +40,13 @@ export const ButtonManageGroupMembers = ({
 
 	const handleDeleteUserFromGroup =
 		(realm: string, applicationId: string, groupId: string) =>
-		(userId: string) => {
+		(userId: string) =>
 			deleteUserFromGroup(
 				realm,
 				applicationId,
 				groupId,
 				userId,
 			).then(() => getGroup(realm, applicationId, groupId));
-		};
 
 	return (
 		<GenericButtonManageGroupMembers
@@ -57,13 +56,11 @@ export const ButtonManageGroupMembers = ({
 			handleAddUserToGroup={() =>
 				handleAddUserToGroup(realm, applicationName, groupName)
 			}
-			handleDeleteUserFromGroup={() =>
-				handleDeleteUserFromGroup(
-					realm,
-					applicationName,
-					groupName,
-				)
-			}
+			handleDeleteUserFromGroup={handleDeleteUserFromGroup(
+				realm,
+				applicationName,
+				groupName,
+			)}
 		/>
 	);
 };
@@ -93,11 +90,10 @@ export const ButtonManageManagerGroupMembers = ({
 
 	const handleDeleteUserFromGroup =
 		(realm: string, applicationId: string, _groupId: string) =>
-		(userId: string) => {
+		(userId: string) =>
 			deleteUserFromGroup(realm, applicationId, userId).then(() =>
 				getGroup(realm, applicationId),
 			);
-		};
 
 	return (
 		<GenericButtonManageGroupMembers
@@ -107,13 +103,11 @@ export const ButtonManageManagerGroupMembers = ({
 			handleAddUserToGroup={() =>
 				handleAddUserToGroup(realm, applicationName, groupName)
 			}
-			handleDeleteUserFromGroup={() =>
-				handleDeleteUserFromGroup(
-					realm,
-					applicationName,
-					groupName,
-				)
-			}
+			handleDeleteUserFromGroup={handleDeleteUserFromGroup(
+				realm,
+				applicationName,
+				groupName,
+			)}
 		/>
 	);
 };

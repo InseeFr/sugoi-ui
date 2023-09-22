@@ -27,7 +27,7 @@ interface Props {
 	realm: string;
 	group: Group;
 	handleAddUser: any;
-	handleDeleteUser: any;
+	handleDeleteUser: (username: string) => void;
 }
 
 export const AddUsers = ({
@@ -146,8 +146,9 @@ export const AddUsers = ({
 													(
 														_user,
 													) =>
+														user.username &&
 														_user.username?.toUpperCase() ===
-														user.username?.toUpperCase(),
+															user.username?.toUpperCase(),
 												)
 													.length >
 												0 ? (
@@ -156,7 +157,7 @@ export const AddUsers = ({
 														size="small"
 														onClick={() =>
 															handleDeleteUser(
-																user.username,
+																user.username!,
 															)
 														}
 													>

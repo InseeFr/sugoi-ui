@@ -11,7 +11,7 @@ interface Props {
 	realm: string;
 	group: Group | undefined;
 	handleAddUserToGroup: () => void;
-	handleDeleteUserFromGroup: () => void;
+	handleDeleteUserFromGroup: (username: string) => void;
 	onClose: () => Promise<void>;
 }
 
@@ -63,13 +63,18 @@ export const GenericButtonManageGroupMembers = ({
 								realm={realm}
 								group={group as Group}
 								handleAddUser={handleAddUserToGroup()}
-								handleDeleteUser={handleDeleteUserFromGroup()}
+								handleDeleteUser={
+									handleDeleteUserFromGroup
+								}
 							/>
 						</Grid>
 						<Grid item xs={12} md={6}>
 							<GroupListUsers
 								realm={realm}
 								group={group as Group}
+								handleDeleteUser={
+									handleDeleteUserFromGroup
+								}
 							/>
 						</Grid>
 					</Grid>

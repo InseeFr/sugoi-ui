@@ -3,13 +3,14 @@ import { useTranslation } from 'react-i18next';
 import Title from 'src/components/shared/title/title';
 import { Group } from 'src/lib/model/api/group';
 import User from 'src/lib/model/api/user';
-import { ChipPersonWithPopup } from '../../chip';
+import { ChipAccount } from '../../chip';
 interface Props {
 	group: Group;
 	realm: string;
+	handleDeleteUser: (username: string) => void;
 }
 
-export const GroupListUsers = ({ group, realm }: Props) => {
+export const GroupListUsers = ({ group, realm, handleDeleteUser }: Props) => {
 	const { t } = useTranslation();
 	return (
 		<Grid
@@ -45,14 +46,17 @@ export const GroupListUsers = ({ group, realm }: Props) => {
 								i
 							}
 						>
-							<ChipPersonWithPopup
+							<ChipAccount
 								realm={realm}
-								user={user}
+								username={user.username!}
 								key={
 									'group_' +
 									group.name +
 									'_user_' +
 									i
+								}
+								handleDeleteUser={
+									handleDeleteUser
 								}
 							/>
 						</Grid>

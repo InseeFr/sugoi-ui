@@ -4,53 +4,58 @@ import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SimpleDialog from 'src/components/shared/popButton/Dialog';
-import User from 'src/lib/model/api/user';
 import { UserPopover } from './UserPopover';
 
 const ChipPerson = ({
-	user,
+	username,
 	realm,
 	handlePopoverOpen,
 	handlePopoverClose,
+	handleDelete,
 }: {
-	user: User;
+	username: string;
 	realm: string;
 	handlePopoverOpen: (event: React.MouseEvent<HTMLElement>) => void;
 	handlePopoverClose: () => void;
+	handleDelete?: () => void;
 }) => {
 	const navigate = useNavigate();
 	return (
 		<Chip
 			color="default"
 			size="small"
-			icon={
-				user.username && user.username.startsWith('appli_') ? (
-					<SettingsApplicationsIcon />
-				) : (
-					<PermIdentityIcon />
-				)
-			}
-			clickable={
-				user.username && user.username.startsWith('appli_')
-					? false
-					: true
-			}
+			icon={<PermIdentityIcon />}
 			onClick={() =>
-				navigate('/realm/' + realm + '/users/' + user.username)
+				navigate('/realm/' + realm + '/users/' + username)
 			}
+			onDelete={handleDelete}
 			onMouseEnter={handlePopoverOpen}
 			onMouseLeave={handlePopoverClose}
-			label={user.username}
+			label={username}
 		/>
 	);
 };
 
-interface Props {
-	user: User;
-	realm: string;
-}
+const ChipServiceAccount = ({ username }: { username: string }) => {
+	return (
+		<Chip
+			color="default"
+			size="small"
+			icon={<SettingsApplicationsIcon />}
+			label={username}
+		/>
+	);
+};
 
-export const ChipPersonWithPopup = ({ user, realm }: Props) => {
+const ChipPersonPopable = ({
+	username,
+	realm,
+	handleDeleteUser,
+}: {
+	username: string;
+	realm: string;
+	handleDeleteUser?: (username: string) => void;
+}) => {
 	const [anchorRef, setAnchorRef] = useState<HTMLElement | null>(null);
 
 	const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -61,17 +66,22 @@ export const ChipPersonWithPopup = ({ user, realm }: Props) => {
 		setAnchorRef(null);
 	};
 
-	if (anchorRef && user.username && !user.username.startsWith('appli_'))
+	const handleDelete = handleDeleteUser
+		? () => handleDeleteUser(username)
+		: undefined;
+
+	if (anchorRef)
 		return (
 			<>
 				<ChipPerson
-					user={user}
+					username={username}
 					realm={realm}
 					handlePopoverClose={handlePopoverClose}
 					handlePopoverOpen={handlePopoverOpen}
+					handleDelete={handleDelete}
 				></ChipPerson>
 				<UserPopover
-					user={user}
+					username={username}
 					realm={realm}
 					anchorEl={anchorRef}
 				></UserPopover>
@@ -80,12 +90,33 @@ export const ChipPersonWithPopup = ({ user, realm }: Props) => {
 	else
 		return (
 			<ChipPerson
-				user={user}
+				username={username}
 				realm={realm}
 				handlePopoverClose={handlePopoverClose}
 				handlePopoverOpen={handlePopoverOpen}
+				handleDelete={handleDelete}
 			></ChipPerson>
 		);
+};
+
+export const ChipAccount = ({
+	username,
+	realm,
+	handleDeleteUser,
+}: {
+	username: string;
+	realm: string;
+	handleDeleteUser?: (username: string) => void;
+}) => {
+	if (username && !username.startsWith('appli_'))
+		return (
+			<ChipPersonPopable
+				username={username}
+				realm={realm}
+				handleDeleteUser={handleDeleteUser}
+			/>
+		);
+	else return <ChipServiceAccount username={username} />;
 };
 
 interface ButtonProps {
@@ -137,7 +168,7 @@ export const ChipButton = ({ realm, group }: ButtonProps) => {
 									i
 								}
 							>
-								<ChipPersonWithPopup
+								<ChipPersonPopable
 									key={
 										'group_' +
 										group.name +
@@ -147,7 +178,7 @@ export const ChipButton = ({ realm, group }: ButtonProps) => {
 										i
 									}
 									realm={realm}
-									user={user}
+									username={user.username}
 								/>
 							</Grid>
 						))}
