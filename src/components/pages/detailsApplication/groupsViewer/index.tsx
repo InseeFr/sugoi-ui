@@ -15,7 +15,7 @@ import {
 import { useState } from 'react';
 import { Group } from 'src/lib/model/api/group';
 import User from 'src/lib/model/api/user';
-import { ChipButton, ChipPersonWithPopup } from './../chip';
+import { ChipButton, ChipAccount } from './../chip';
 interface Props {
 	groups: Group[];
 	realm: string;
@@ -130,9 +130,9 @@ export const GroupsViewer = ({
 														return (
 															(i <
 																5 && (
-																<ChipPersonWithPopup
-																	user={
-																		user
+																<ChipAccount
+																	username={
+																		user.username!
 																	}
 																	realm={
 																		realm

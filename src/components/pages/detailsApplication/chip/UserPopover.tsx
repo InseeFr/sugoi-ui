@@ -2,7 +2,6 @@ import { Popover, Typography } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import useGetUser from 'src/lib/hooks/user/useGetUser';
-import User from 'src/lib/model/api/user';
 
 const useStyles = makeStyles((theme: any) =>
 	createStyles({
@@ -19,16 +18,16 @@ const useStyles = makeStyles((theme: any) =>
 );
 
 export const UserPopover = ({
-	user,
+	username,
 	realm,
 	anchorEl,
 }: {
-	user: User;
+	username: string;
 	realm: string;
 	anchorEl: HTMLElement;
 }) => {
 	const classes = useStyles();
-	const userAffiche = useGetUser(user?.username, realm)?.user;
+	const userAffiche = useGetUser(username, realm)?.user;
 
 	return (
 		<Popover
