@@ -156,7 +156,7 @@ export const updateUser = (
 					user,
 					accessToken,
 			  )
-			: remote.updateUser(realm, id, user);
+			: remote.updateUser(realm, id, user, accessToken);
 	}
 };
 
