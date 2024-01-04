@@ -1,10 +1,24 @@
-export const getRegexDomains = (roles: string[], regex: string): string[] =>
-	roles
-		.filter((role: string) => role.match(RegExp(regex)))
-		.map((role: string): string => {
-			const matchingRoles = role.match(RegExp(regex));
-			return matchingRoles ? matchingRoles[1] : '';
-		});
+import { Whoami } from '../model/api/whoami';
 
-export const isAdministrator = (roles: string[], adminName: string): boolean =>
-	roles.includes(adminName);
+export const isAdmin = (user_rights: Whoami): boolean => user_rights.isAdmin;
+
+export const isWriter = (domain_name: string, user_rights: Whoami): boolean =>
+	user_rights.writerRealm
+		.map((r) => r.toUpperCase())
+		.includes(domain_name.toUpperCase()) || isAdmin(user_rights);
+
+export const isReader = (domain_name: string, user_rights: Whoami): boolean =>
+	user_rights.readerRealm
+		.map((r) => r.toUpperCase())
+		.includes(domain_name.toUpperCase()) ||
+	isWriter(domain_name, user_rights);
+
+export const isAppManager = (
+	app_name: string,
+	domain_name: string,
+	user_rights: Whoami,
+): boolean =>
+	user_rights.appManager
+		.map((r) => r.toUpperCase())
+		.includes(app_name.toUpperCase()) ||
+	isWriter(domain_name, user_rights);

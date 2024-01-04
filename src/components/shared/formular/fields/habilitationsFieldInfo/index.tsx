@@ -28,6 +28,7 @@ import {
 } from 'src/lib/hooks/api-hooks';
 
 import { Habilitation } from 'src/lib/model/api/habilitation';
+import { isAppManager } from 'src/lib/utils/roles';
 
 interface props {
 	textButton?: string;
@@ -58,21 +59,9 @@ const HabilitationsPopup = ({
 		execute: executeUser,
 		loading: loadingUser,
 	} = useGetUser(id, realm, userStorage);
-	function GetApplicationDefault() {
-		const { rights } = useWhoAmI();
-		return rights?.appManager ?? new Array();
-	}
 
-	function isHabilitation(value: string, applicationsDefault: string[]) {
-		const compare = value.toLowerCase();
+	const { rights } = useWhoAmI();
 
-		for (const application of applicationsDefault) {
-			if (compare.includes(application.toLowerCase())) {
-				return true;
-			}
-		}
-		return false;
-	}
 	const [application, setApplication] = React.useState<any>(undefined);
 	const [role, setRole] = React.useState<any>(undefined);
 	const [propriete, setPropriete] = React.useState<any>(undefined);
@@ -80,6 +69,22 @@ const HabilitationsPopup = ({
 	const { execute, loading: loadingAdd } = useAddAttribute(attribute_key);
 	const { execute: executeDelete, loading: loadingDelete } =
 		useDeleteAttribute(attribute_key);
+
+	const getApplicationFromHabilitation = (
+		habilitation_name: string,
+	): string =>
+		habilitation_name.substring(habilitation_name.lastIndexOf('_') + 1);
+
+	const defaultValuesUtilisateur: string[] | undefined =
+		rights &&
+		defaultValues?.filter((habilitation_name) =>
+			isAppManager(
+				getApplicationFromHabilitation(habilitation_name),
+				realm,
+				rights,
+			),
+		);
+
 	const handleClickAdd = () => {
 		if ((application && role) || (application && role && propriete)) {
 			const prop = {
@@ -100,8 +105,8 @@ const HabilitationsPopup = ({
 	};
 
 	const handleClickAddDefault = (i: number) => {
-		if (defaultValues != undefined) {
-			const defaultRole: string = defaultValues[i];
+		if (defaultValuesUtilisateur != undefined) {
+			const defaultRole: string = defaultValuesUtilisateur[i];
 
 			execute(realm, id, defaultRole).finally(() => {
 				setApplication(undefined);
@@ -126,12 +131,6 @@ const HabilitationsPopup = ({
 			});
 	};
 
-	const applicationsDefault: string[] = GetApplicationDefault();
-
-	const defaultValuesUtilisateur: string[] | undefined =
-		defaultValues?.filter((value) =>
-			isHabilitation(value, applicationsDefault),
-		);
 	return (
 		<Grid container spacing={3}>
 			<Grid item xs={12}>
