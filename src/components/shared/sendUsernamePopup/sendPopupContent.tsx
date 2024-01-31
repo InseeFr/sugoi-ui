@@ -105,22 +105,15 @@ export const SendPopupContent = ({
 				<Typography component="div">
 					<Box m={2}>Bonjour,</Box>
 					<Box m={2}>
-						Suite à votre demande,voici votre nouveau
+						Suite à votre demande, voici votre
 						identifiant
 						{includeNameApp
-							? " pour l'accès  à  l'application " +
+							? " pour l'accès  à " +
 							  templateProperties.application +
 							  ' :'
 							: ' :'}
 					</Box>
-					<Box fontStyle="italic" m={2}>
-						{user?.username}
-					</Box>
-					<Box m={2}>
-						Attention, vous devez respecter les
-						majuscules, minuscules et caractères
-						spéciaux.
-					</Box>
+					<Box m={2}>{user?.username}</Box>
 
 					{includeAssistMail ? (
 						<Box m={2}>
