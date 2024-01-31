@@ -220,10 +220,10 @@ export const ResetPasswordPopupContent = ({
 				<Typography component="div">
 					<Box m={2}>Bonjour,</Box>
 					<Box m={2}>
-						Suite à votre demande,voici votre nouveau
+						Suite à votre demande, voici votre nouveau
 						mot de passe
 						{includeNameApp
-							? " pour l'accès  à  l'application " +
+							? " pour l'accès  à " +
 							  templateProperties.application +
 							  ' :'
 							: ' :'}
