@@ -1,20 +1,50 @@
-import { Button, Grid, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams } from 'react-router-dom';
-import ConfirmationPopup from 'src/components/shared/confirmationPopUp';
-import DataViewer from 'src/components/shared/dataViewer/dataviewer';
-import ErrorBoundary from 'src/components/shared/error/Error';
+import { useParams } from 'react-router-dom';
 import { Loader } from 'src/components/shared/loader/loader';
-import LoadingButton from 'src/components/shared/loadingButton';
 import Title from 'src/components/shared/title/title';
-import {
-	useDeleteOrganization,
-	useGetOrganization,
-	useRealmConfig,
-	useUpdateOrganization,
-} from 'src/lib/hooks/api-hooks';
-import { useForms } from 'src/lib/hooks/technics/useForms';
-import organization from 'src/lib/model/api/organization';
+import { useGetOrganization, useRealmConfig } from 'src/lib/hooks/api-hooks';
+import DetailOrganizationContent from './detail_organization_content';
+import { Typography } from '@mui/material';
+import Organization from 'src/lib/model/api/organization';
+import { Field } from 'src/lib/model/field';
+
+const DetailOrganizationContentOrNotFound = ({
+	organization,
+	execute,
+	realm,
+	userStorage,
+	organizationConfig,
+	t,
+}: {
+	organization?: Organization;
+	execute: (
+		id: string,
+		realm: string,
+		userStorage?: string,
+	) => Promise<void>;
+	realm: string;
+	userStorage?: string;
+	organizationConfig: Field[];
+	t: any;
+}) => {
+	return (
+		<>
+			{organization ? (
+				<DetailOrganizationContent
+					organization={organization}
+					execute={execute}
+					realm={realm}
+					userStorage={userStorage}
+					organizationConfig={organizationConfig}
+				/>
+			) : (
+				<Typography variant="h6" gutterBottom>
+					{t('detail_organization.organization_not_found')}
+				</Typography>
+			)}
+		</>
+	);
+};
 
 const DetailOrganization = () => {
 	const { realm, id, userStorage } = useParams() as {
@@ -22,7 +52,6 @@ const DetailOrganization = () => {
 		id: string;
 		userStorage?: string;
 	};
-	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const { organizationConfig } = useRealmConfig(realm);
 
@@ -31,39 +60,6 @@ const DetailOrganization = () => {
 		realm,
 		userStorage,
 	);
-
-	const { formValues, handleChange, handleReset, errors, handleSubmit } =
-		useForms(organization);
-
-	const { execute: executeUpdate, loading: loadingUpdate } =
-		useUpdateOrganization();
-
-	const { execute: executeDelete, loading: loadingDelete } =
-		useDeleteOrganization();
-
-	const handleDelete = async () => {
-		await executeDelete(
-			(organization as unknown as organization)?.identifiant || '',
-			realm,
-			userStorage,
-		);
-		navigate(
-			'/realm/' +
-				realm +
-				(userStorage
-					? '/us/' + userStorage + '/organizations'
-					: '/organizations'),
-		);
-	};
-
-	const onSubmit = () =>
-		executeUpdate(id, formValues, realm, userStorage).then(() =>
-			execute(id, realm, userStorage),
-		);
-
-	const handleUpdate = () => {
-		handleSubmit(organizationConfig)(onSubmit);
-	};
 
 	document.title =
 		t('detail_organization.page_title_1') +
@@ -76,105 +72,14 @@ const DetailOrganization = () => {
 			{loading ? (
 				<Loader />
 			) : (
-				<ErrorBoundary>
-					{organization ? (
-						<>
-							<DataViewer
-								data={formValues}
-								fieldToDisplay={
-									organizationConfig
-								}
-								errors={errors}
-								handleChange={handleChange}
-								buttons={
-									<Grid
-										container
-										direction="row"
-										justifyContent="center"
-										spacing={3}
-									>
-										<Grid item>
-											<LoadingButton
-												variant="contained"
-												color="primary"
-												loading={
-													loadingUpdate
-												}
-												handleClick={
-													handleUpdate
-												}
-											>
-												{t(
-													'detail_organization.buttons.save',
-												)}
-											</LoadingButton>
-										</Grid>
-										<Grid item>
-											<ConfirmationPopup
-												Icon={
-													<LoadingButton
-														variant="contained"
-														color="secondary"
-														loading={
-															loadingDelete
-														}
-													>
-														{t(
-															'detail_organization.buttons.delete.button',
-														)}
-													</LoadingButton>
-												}
-												title={
-													t(
-														'detail_organization.buttons.delete.popup.title.part1',
-													) +
-													id +
-													t(
-														'detail_organization.buttons.delete.popup.title.part2',
-													)
-												}
-												body1={t(
-													'detail_organization.buttons.delete.popup.body.body1',
-												)}
-												body2={t(
-													'detail_organization.buttons.delete.popup.body.body2',
-												)}
-												bodyBold={t(
-													'detail_organization.buttons.delete.popup.body.bodyBold',
-												)}
-												validation_text={
-													id
-												}
-												handleDelete={() =>
-													handleDelete()
-												}
-											/>
-										</Grid>
-										<Grid item>
-											<Button
-												variant="contained"
-												onClick={
-													handleReset
-												}
-											>
-												{t(
-													'detail_organization.buttons.reset',
-												)}
-											</Button>
-										</Grid>
-									</Grid>
-								}
-								create={false}
-							/>
-						</>
-					) : (
-						<Typography variant="h6" gutterBottom>
-							{t(
-								'detail_organization.organization_not_found',
-							)}
-						</Typography>
-					)}
-				</ErrorBoundary>
+				<DetailOrganizationContentOrNotFound
+					organization={organization}
+					execute={execute}
+					realm={realm}
+					userStorage={userStorage}
+					organizationConfig={organizationConfig}
+					t={t}
+				/>
 			)}
 		</>
 	);
