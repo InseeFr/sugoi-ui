@@ -101,10 +101,10 @@ export const ManageGroup = ({
 													(
 														g: Group,
 													) =>
-														g.name,
+														g.name.toUpperCase(),
 												)
 												.includes(
-													group.name,
+													group.name.toUpperCase(),
 												) ? (
 												<IconButton
 													aria-label="Delete"
