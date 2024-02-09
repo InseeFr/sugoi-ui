@@ -1,33 +1,18 @@
 import { useCallback, useEffect, useState } from 'react';
 import set from 'lodash.set';
-import isEqual from 'lodash.isequal';
 import { ErrorField, Field } from 'src/lib/model/field';
 import { validateForm } from 'src/lib/utils/form_utils';
 import cloneObject from 'src/lib/utils/clone';
-const addProps = (obj: any, path: any, value: any) => set(obj, path, value);
+import Organization from 'src/lib/model/api/organization';
+import User from 'src/lib/model/api/user';
 
-export const useForms = (initialValues: any) => {
+export const useForms = (initialValues: User | Organization) => {
 	const [iFormValues, setIFormValues] = useState(
-		cloneObject(initialValues || {}),
+		cloneObject(initialValues),
 	);
-	const [formValues, setFormValues] = useState(
-		cloneObject(initialValues || {}),
-	);
-	const [todo, setTodo] = useState<any>();
+	const [formValues, setFormValues] = useState(cloneObject(initialValues));
 	const [reset, setReset] = useState(false);
 	const [errors, setErrors] = useState<ErrorField[]>([]);
-
-	useEffect(() => {
-		if (todo) {
-			const newFormValues = addProps(
-				{ ...formValues },
-				todo.path,
-				todo.value,
-			);
-			setFormValues({ ...newFormValues });
-			setTodo(undefined);
-		}
-	}, [todo, formValues]);
 
 	useEffect(() => {
 		if (reset) {
@@ -36,16 +21,11 @@ export const useForms = (initialValues: any) => {
 		}
 	}, [reset, iFormValues]);
 
-	useEffect(() => {
-		if (!isEqual(initialValues, iFormValues)) {
-			setFormValues(cloneObject(initialValues));
-			setIFormValues(cloneObject(initialValues));
-		}
-	}, [iFormValues, initialValues]);
-
 	const handleChange = useCallback(
 		(path: any) => (value: any) => {
-			setTodo({ path: path, value: value });
+			setFormValues((formValues) =>
+				set(cloneObject(formValues), path, value),
+			);
 		},
 		[],
 	);
@@ -57,6 +37,7 @@ export const useForms = (initialValues: any) => {
 	const handleSubmit = (fields: Field[]) => (onSubmit: any) => {
 		const errors = validateForm(fields)(formValues);
 		if (errors && !errors.length) {
+			setIFormValues(cloneObject(formValues));
 			onSubmit();
 		} else {
 			setErrors(errors);
@@ -64,7 +45,6 @@ export const useForms = (initialValues: any) => {
 	};
 
 	return {
-		iFormValues,
 		formValues,
 		handleChange,
 		handleReset,

@@ -1,17 +1,51 @@
-import { Button, Grid, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams } from 'react-router-dom';
-import ConfirmationPopup from 'src/components/shared/confirmationPopUp';
-import DataViewer from 'src/components/shared/dataViewer/dataviewer';
-import ErrorBoundary from 'src/components/shared/error/Error';
+import { useParams } from 'react-router-dom';
 import { Loader } from 'src/components/shared/loader/loader';
-import LoadingButton from 'src/components/shared/loadingButton';
 import Title from 'src/components/shared/title/title';
 import useRealmConfig from 'src/lib/hooks/realm/useRealmConfig';
-import { useForms } from 'src/lib/hooks/technics/useForms';
-import { useDeleteUser } from 'src/lib/hooks/user/useDeleteUser';
 import useGetUser from 'src/lib/hooks/user/useGetUser';
-import useUpdateUser from 'src/lib/hooks/user/useUpdateUser';
+import DetailUserContent from './detail_user_content';
+import User from 'src/lib/model/api/user';
+import { Typography } from '@mui/material';
+import { Field } from 'src/lib/model/field';
+
+const DetailUserContentOrNotFound = ({
+	user,
+	execute,
+	realm,
+	userStorage,
+	userConfig,
+	t,
+}: {
+	user?: User;
+	execute: (
+		id: string,
+		realm: string,
+		userStorage?: string,
+	) => Promise<void>;
+	realm: string;
+	userStorage?: string;
+	userConfig: Field[];
+	t: any;
+}) => {
+	return (
+		<>
+			{user ? (
+				<DetailUserContent
+					user={user}
+					execute={execute}
+					realm={realm}
+					userStorage={userStorage}
+					userConfig={userConfig}
+				/>
+			) : (
+				<Typography variant="h6" gutterBottom>
+					{t('detail_organization.organization_not_found')}
+				</Typography>
+			)}
+		</>
+	);
+};
 
 const DetailUser = () => {
 	const { realm, id, userStorage } = useParams() as {
@@ -20,47 +54,13 @@ const DetailUser = () => {
 		userStorage?: string;
 	};
 
-	const navigate = useNavigate();
-
+	const { t } = useTranslation();
 	const { userConfig } = useRealmConfig(realm);
 
 	const { loading, user, execute } = useGetUser(id, realm, userStorage);
 
-	const { execute: executeUpdate, loading: loadingUpdate } =
-		useUpdateUser();
-
-	const { execute: executeDelete, loading: loadingDelete } =
-		useDeleteUser();
-
-	const { t } = useTranslation();
 	document.title =
 		t('detail_user.page_title_1') + id + t('detail_user.page_title_2');
-
-	const { formValues, handleChange, handleReset, errors, handleSubmit } =
-		useForms(user);
-
-	const handleDelete = () =>
-		executeDelete(user?.username as string, realm, userStorage).then(
-			() =>
-				navigate(
-					'/realm/' +
-						realm +
-						(userStorage
-							? '/us/' + userStorage + '/users'
-							: '/users'),
-				),
-		);
-
-	const onSubmit = () => {
-		console.log(formValues);
-		executeUpdate(id, formValues, realm, userStorage).then(() =>
-			execute(id, realm, userStorage),
-		);
-	};
-
-	const handleUpdate = () => {
-		handleSubmit(userConfig)(onSubmit);
-	};
 
 	return (
 		<>
@@ -68,109 +68,14 @@ const DetailUser = () => {
 			{loading ? (
 				<Loader />
 			) : (
-				<ErrorBoundary>
-					{formValues ? (
-						<>
-							<DataViewer
-								data={formValues}
-								fieldToDisplay={userConfig}
-								handleChange={handleChange}
-								errors={errors}
-								buttons={
-									<Grid
-										container
-										direction="row"
-										justifyContent="center"
-										spacing={3}
-									>
-										<Grid item>
-											<LoadingButton
-												variant="contained"
-												color="primary"
-												loading={
-													loadingUpdate
-												}
-												handleClick={
-													handleUpdate
-												}
-											>
-												{t(
-													'detail_user.buttons.save',
-												)}
-											</LoadingButton>
-										</Grid>
-										<Grid item>
-											<ConfirmationPopup
-												Icon={
-													<LoadingButton
-														variant="contained"
-														color="secondary"
-														loading={
-															loadingDelete
-														}
-													>
-														{t(
-															'detail_user.buttons.delete.button',
-														)}
-													</LoadingButton>
-												}
-												title={
-													t(
-														'detail_user.buttons.delete.popup.title.part1',
-													) +
-													id +
-													t(
-														'detail_user.buttons.delete.popup.title.part2',
-													)
-												}
-												body1={t(
-													'detail_user.buttons.delete.popup.body.body1',
-												)}
-												body2={t(
-													'detail_user.buttons.delete.popup.body.body2',
-												)}
-												bodyBold={t(
-													'detail_user.buttons.delete.popup.body.bodyBold',
-												)}
-												validation_text={
-													id
-												}
-												handleDelete={() =>
-													handleDelete()
-												}
-											/>
-										</Grid>
-										<Grid item>
-											<Button
-												variant="contained"
-												sx={{
-													backgroundColor:
-														'#777B7E',
-													':hover': {
-														bgcolor: '#999DAD',
-													},
-												}}
-												onClick={
-													handleReset
-												}
-											>
-												{t(
-													'detail_user.buttons.reset',
-												)}
-											</Button>
-										</Grid>
-									</Grid>
-								}
-								create={false}
-								isUser={true}
-							/>
-						</>
-					) : (
-						<Typography variant="h6" gutterBottom>
-							{t('detail_user.user_not_found')}
-						</Typography>
-					)}
-				</ErrorBoundary>
+				<DetailUserContentOrNotFound
+					user={user}
+					execute={execute}
+					realm={realm}
+					userStorage={userStorage}
+					userConfig={userConfig}
+					t={t}
+				/>
 			)}
 		</>
 	);
