@@ -216,6 +216,12 @@ export const DetailsApplication = () => {
 											applicationId
 										}
 										group={_group}
+										refreshGroup={() =>
+											getApplication(
+												realm,
+												applicationId,
+											)
+										}
 									/>
 								)}
 								deleteComponent={(
