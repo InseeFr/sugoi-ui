@@ -1,8 +1,11 @@
 import {
+	Button,
 	FormControlLabel,
 	FormGroup,
+	Grid,
 	IconButton,
 	Switch,
+	TextField,
 	Tooltip,
 } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -16,12 +19,14 @@ interface Props {
 	realm: string;
 	group: Group;
 	applicationName: string;
+	refreshGroup: () => void;
 }
 
 export const ButtonManageGroupSettings = ({
 	realm,
 	group,
 	applicationName,
+	refreshGroup,
 }: Props) => {
 	const [open, setOpen] = useState(false);
 	const { t } = useTranslation();
@@ -29,16 +34,28 @@ export const ButtonManageGroupSettings = ({
 	const [enabledSelfManagedGroup, setEnabledSelfManagedGroup] = useState(
 		group.isSelfManaged,
 	);
+	const [description, setDescription] = useState(group.description);
 	const { execute: updateGroup } = useUpdateGroup();
 
 	const handleChangeSelfManagedGroup = (
 		_event: React.ChangeEvent<HTMLInputElement>,
 	) => {
+		setEnabledSelfManagedGroup(!enabledSelfManagedGroup);
+	};
+
+	const handleChangeDescription = (
+		_event: React.ChangeEvent<HTMLInputElement>,
+	) => {
+		setDescription(_event.target.value);
+	};
+
+	const handleSubmit = () => {
 		updateGroup(realm, applicationName, {
 			...group,
-			isSelfManaged: !enabledSelfManagedGroup,
-		});
-		setEnabledSelfManagedGroup(!enabledSelfManagedGroup);
+			isSelfManaged: enabledSelfManagedGroup,
+			description: description,
+		}).finally(refreshGroup);
+		setOpen(false);
 	};
 
 	return (
@@ -65,26 +82,60 @@ export const ButtonManageGroupSettings = ({
 					) + group.name
 				}
 				body={
-					<FormGroup>
-						<FormControlLabel
-							control={
-								<Switch
-									checked={
-										enabledSelfManagedGroup ??
-										false
-									}
-									name="selfmanaged-toggle"
-									color="primary"
+					<Grid container>
+						<Grid container flexDirection={'column'}>
+							<Grid item xs>
+								<TextField
+									label={t(
+										'detail_application.button_manage_group_settings.description',
+									)}
+									value={description}
 									onChange={
-										handleChangeSelfManagedGroup
+										handleChangeDescription
 									}
+									fullWidth
 								/>
-							}
-							label={t(
-								'detail_application.button_manage_group_settings.selfmanaged',
-							)}
-						/>
-					</FormGroup>
+							</Grid>
+							<Grid item xs>
+								<FormGroup>
+									<FormControlLabel
+										control={
+											<Switch
+												checked={
+													enabledSelfManagedGroup ??
+													false
+												}
+												name="selfmanaged-toggle"
+												color="primary"
+												onChange={
+													handleChangeSelfManagedGroup
+												}
+											/>
+										}
+										label={t(
+											'detail_application.button_manage_group_settings.selfmanaged',
+										)}
+									/>
+								</FormGroup>
+							</Grid>
+						</Grid>
+						<Grid
+							container
+							item
+							justifyContent="center"
+						>
+							<Button
+								type="submit"
+								variant="contained"
+								color="primary"
+								onClick={handleSubmit}
+							>
+								{t(
+									'detail_application.button_manage_group_settings.submit',
+								)}
+							</Button>
+						</Grid>
+					</Grid>
 				}
 				fullwidth
 				maxwidth="md"

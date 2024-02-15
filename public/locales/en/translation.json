@@ -200,7 +200,9 @@
 		},
 		"button_manage_group_settings": {
 			"title": "Settings of group ",
-			"selfmanaged": "Selfmanaged group"
+			"selfmanaged": "Selfmanaged group",
+			"description": "Description",
+			"submit": "Update"
 		},
 		"button_delete_group": "Delete the group",
 		"manage_group_popup": {
