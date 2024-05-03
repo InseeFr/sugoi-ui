@@ -210,7 +210,15 @@
 			"available_users": "Available users:",
 			"group_members": "Group members:",
 			"actions": "Adding / withdrawal",
-			"users": "Users"
+			"users": "Users",
+			"copy_info": "Users copied to clipboard",
+			"copy_tooltip": "Copy users of the group",
+			"upload": {
+				"error": "Format error for import. Each line must contain a unique alphanumeric identifier.",
+				"title": "Batch addition in the group",
+				"textfield": "Copy a list of usernames to add",
+				"tooltip": "Add each user to the group"
+			}
 		},
 		"buttons": {
 			"delete": {

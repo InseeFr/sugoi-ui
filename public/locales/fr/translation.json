@@ -221,7 +221,15 @@
 			"available_users": "Utilisateurs disponibles:",
 			"group_members": "Membres du groupe:",
 			"actions": "Ajout/Retrait",
-			"users": "Utilisateurs"
+			"users": "Utilisateurs",
+			"copy_info": "Utilisateurs copiés dans le presse-papier",
+			"copy_tooltip": "Copie les utilisateurs du groupe",
+			"upload": {
+				"error": "Erreur de format pour l'import. Chaque ligne doit contenir un unique identifiant alphanumérique.",
+				"title": "Ajout massif dans le groupe:",
+				"textfield": "Copier une liste de noms d'utilisateurs",
+				"tooltip": "Ajoute chaque utilisateur au groupe"
+			}
 		},
 		"buttons": {
 			"delete": {

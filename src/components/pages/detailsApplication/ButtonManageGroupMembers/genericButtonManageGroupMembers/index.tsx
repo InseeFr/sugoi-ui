@@ -10,7 +10,7 @@ import { GroupListUsers } from './listUser';
 interface Props {
 	realm: string;
 	group: Group | undefined;
-	handleAddUserToGroup: () => void;
+	handleAddUserToGroup: (username: string) => void;
 	handleDeleteUserFromGroup: (username: string) => void;
 	onClose: () => Promise<void>;
 }
@@ -62,7 +62,9 @@ export const GenericButtonManageGroupMembers = ({
 							<AddUsers
 								realm={realm}
 								group={group as Group}
-								handleAddUser={handleAddUserToGroup()}
+								handleAddUser={
+									handleAddUserToGroup
+								}
 								handleDeleteUser={
 									handleDeleteUserFromGroup
 								}

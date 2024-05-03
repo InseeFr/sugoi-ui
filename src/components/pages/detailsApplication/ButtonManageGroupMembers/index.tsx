@@ -53,9 +53,11 @@ export const ButtonManageGroupMembers = ({
 			realm={realm}
 			onClose={() => onClose()}
 			group={group as Group}
-			handleAddUserToGroup={() =>
-				handleAddUserToGroup(realm, applicationName, groupName)
-			}
+			handleAddUserToGroup={handleAddUserToGroup(
+				realm,
+				applicationName,
+				groupName,
+			)}
 			handleDeleteUserFromGroup={handleDeleteUserFromGroup(
 				realm,
 				applicationName,
@@ -100,9 +102,11 @@ export const ButtonManageManagerGroupMembers = ({
 			realm={realm}
 			onClose={onClose}
 			group={group as Group}
-			handleAddUserToGroup={() =>
-				handleAddUserToGroup(realm, applicationName, groupName)
-			}
+			handleAddUserToGroup={handleAddUserToGroup(
+				realm,
+				applicationName,
+				groupName,
+			)}
 			handleDeleteUserFromGroup={handleDeleteUserFromGroup(
 				realm,
 				applicationName,
