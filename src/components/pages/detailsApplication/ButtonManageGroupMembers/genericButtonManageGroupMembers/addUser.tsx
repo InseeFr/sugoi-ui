@@ -22,11 +22,12 @@ import Title from 'src/components/shared/title/title';
 import { useGetUsers } from 'src/lib/hooks/api-hooks';
 import { Group } from 'src/lib/model/api/group';
 import User from 'src/lib/model/api/user';
+import { UploadUsers } from './uploadUsers';
 
 interface Props {
 	realm: string;
 	group: Group;
-	handleAddUser: any;
+	handleAddUser: (username: string) => void;
 	handleDeleteUser: (username: string) => void;
 }
 
@@ -63,13 +64,7 @@ export const AddUsers = ({
 	};
 
 	return (
-		<Grid
-			container
-			direction="column"
-			justifyContent="center"
-			alignItems="stretch"
-			spacing={1}
-		>
+		<Grid item container spacing={1}>
 			<Grid item xs={12}>
 				<TextField
 					id="application-search-textfield"
@@ -120,6 +115,7 @@ export const AddUsers = ({
 									(page - 1) * rowsPerPage +
 										rowsPerPage,
 								)
+								.filter((u) => u.username)
 								.map((user: User) => (
 									<TableRow
 										key={user.username}
@@ -172,7 +168,7 @@ export const AddUsers = ({
 														size="small"
 														onClick={() =>
 															handleAddUser(
-																user.username,
+																user.username!,
 															)
 														}
 													>
@@ -224,6 +220,7 @@ export const AddUsers = ({
 					</Grid>
 				</Grid>
 			</Grid>
+			<UploadUsers uploadUserCall={handleAddUser} />
 		</Grid>
 	);
 };
