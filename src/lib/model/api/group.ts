@@ -5,4 +5,5 @@ export interface Group {
 	description: string;
 	users: User[];
 	isSelfManaged: boolean | null;
+	appName?: string;
 }
