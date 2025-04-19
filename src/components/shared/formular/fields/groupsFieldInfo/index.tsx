@@ -10,7 +10,7 @@ import {
 import CreateIcon from '@mui/icons-material/Create';
 import PeopleIcon from '@mui/icons-material/People';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import PopIcon from 'src/components/shared/popIcon/popIcon';
 import {
 	useAddGroupsToUser,
@@ -30,6 +30,7 @@ interface props {
 }
 
 export default function GroupsField({ name, helpText, modifiable }: props) {
+	const navigate = useNavigate();
 	const { realm, userStorage, id } = useParams() as {
 		realm: string;
 		userStorage?: string;
@@ -265,10 +266,18 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 												<PeopleIcon />
 											}
 											clickable={
-												false
+												true
 											}
 											label={
 												group.name
+											}
+											onClick={() =>
+												navigate(
+													'/realm/' +
+														realm +
+														'/applications/' +
+														group.appName,
+												)
 											}
 										/>
 									</Grid>
