@@ -1,5 +1,9 @@
 {
 	"compilerOptions": {
+    "paths": {
+      "src/*": [
+        "./src/*"]
+    },
 		"target": "es6",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"typeRoots": [

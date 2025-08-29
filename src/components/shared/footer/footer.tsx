@@ -12,7 +12,7 @@ const Footer = () => {
 					align="center"
 				>
 					{t('commons.footer.version.text')}:{' '}
-					{process.env.REACT_APP_UI_VERSION}
+					{import.meta.env.VITE_UI_VERSION}
 				</Typography>
 			</Grid>
 		</Grid>

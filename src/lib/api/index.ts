@@ -15,7 +15,7 @@ export const getRealms = (
 	id?: string,
 	accessToken?: string,
 ): Promise<Realm[]> => {
-	if (process.env.REACT_APP_FAKE_API === 'true') {
+	if (import.meta.env.VITE_FAKE_API === 'true') {
 		return fake.getRealms(id);
 	} else {
 		return remote.getRealms(id, accessToken);
@@ -26,7 +26,7 @@ export const postRealm = (
 	accessToken?: string,
 ): Promise<Realm> => {
 	//realm = Utils.cleanObjectEntries(realm);
-	if (process.env.REACT_APP_FAKE_API === 'true') {
+	if (import.meta.env.VITE_FAKE_API === 'true') {
 		return fake.postRealm(realm);
 	} else {
 		return remote.postRealm(realm, accessToken);
@@ -36,7 +36,7 @@ export const deleteRealm = (
 	id?: string,
 	accessToken?: string,
 ): Promise<any> => {
-	if (process.env.REACT_APP_FAKE_API === 'true') {
+	if (import.meta.env.VITE_FAKE_API === 'true') {
 		return fake.deleteRealm(id);
 	} else {
 		return remote.deleteRealm(id, accessToken);
@@ -48,7 +48,7 @@ export const updateRealm = (
 	accessToken?: string,
 ): Promise<Realm> => {
 	//realm = Utils.cleanObjectEntries(realm);
-	if (process.env.REACT_APP_FAKE_API === 'true') {
+	if (import.meta.env.VITE_FAKE_API === 'true') {
 		return fake.updateRealm(id, realm);
 	} else {
 		return remote.updateRealm(id, realm, accessToken);
@@ -63,7 +63,7 @@ export const getUsers = (
 	accessToken?: string,
 ): Promise<Pageable> => {
 	//searchRequest = Utils.cleanObjectEntries(searchRequest);
-	if (process.env.REACT_APP_FAKE_API === 'true') {
+	if (import.meta.env.VITE_FAKE_API === 'true') {
 		return fake.getUsers(realm, searchRequest || {});
 	} else {
 		return userStorage
@@ -83,7 +83,7 @@ export const getUser = (
 	userStorage?: string,
 	accessToken?: string,
 ): Promise<User> => {
-	if (process.env.REACT_APP_FAKE_API === 'true') {
+	if (import.meta.env.VITE_FAKE_API === 'true') {
 		return fake.getUser(realm, identifiant);
 	} else {
 		return userStorage
@@ -104,7 +104,7 @@ export const postUser = (
 	accessToken?: string,
 ): Promise<User> => {
 	//user = Utils.cleanObjectEntries(user);
-	if (process.env.REACT_APP_FAKE_API === 'true') {
+	if (import.meta.env.VITE_FAKE_API === 'true') {
 		return fake.postUser(realm, user);
 	} else {
 		return remote.postUserFromUserStorage(
@@ -122,7 +122,7 @@ export const deleteUser = (
 	userStorage?: string,
 	accessToken?: string,
 ): Promise<string> => {
-	if (process.env.REACT_APP_FAKE_API === 'true') {
+	if (import.meta.env.VITE_FAKE_API === 'true') {
 		return fake.deleteUser(realm, id);
 	} else {
 		return userStorage
@@ -144,7 +144,7 @@ export const updateUser = (
 	accessToken?: string,
 ): Promise<User> => {
 	//user = Utils.cleanObjectEntries(user);
-	if (process.env.REACT_APP_FAKE_API === 'true') {
+	if (import.meta.env.VITE_FAKE_API === 'true') {
 		return fake.updateUser(realm, id, user);
 	} else {
 		console.log(user);
@@ -167,7 +167,7 @@ export const getOrganizations = (
 	userStorage?: string,
 	accessToken?: string,
 ): Promise<Pageable> => {
-	if (process.env.REACT_APP_FAKE_API === 'true') {
+	if (import.meta.env.VITE_FAKE_API === 'true') {
 		return fake.getOrganizations(realm, searchRequest || {});
 	} else {
 		return userStorage
@@ -191,7 +191,7 @@ export const getOrganization = (
 	userStorage?: string,
 	accessToken?: string,
 ): Promise<Organization> => {
-	if (process.env.REACT_APP_FAKE_API === 'true') {
+	if (import.meta.env.VITE_FAKE_API === 'true') {
 		return fake.getOrganization(realm, identifiant);
 	} else {
 		return userStorage
@@ -213,7 +213,7 @@ export const updateOrganization = (
 	accessToken?: string,
 ): Promise<Organization> => {
 	//organization = Utils.cleanObjectEntries(organization);
-	if (process.env.REACT_APP_FAKE_API === 'true') {
+	if (import.meta.env.VITE_FAKE_API === 'true') {
 		return fake.updateOrganization(realm, id, organization);
 	} else {
 		return userStorage
@@ -241,7 +241,7 @@ export const postOrganization = (
 ): Promise<Organization> => {
 	//organization = Utils.cleanObjectEntries(organization);
 
-	if (process.env.REACT_APP_FAKE_API === 'true') {
+	if (import.meta.env.VITE_FAKE_API === 'true') {
 		return fake.postOrganization(realm, organization);
 	} else {
 		return remote.postOrganization(
@@ -259,7 +259,7 @@ export const deleteOrganization = (
 	userStorage?: string,
 	accessToken?: string,
 ): Promise<any> => {
-	if (process.env.REACT_APP_FAKE_API === 'true') {
+	if (import.meta.env.VITE_FAKE_API === 'true') {
 		return fake.deleteOrganization(realm, id);
 	} else {
 		return userStorage

@@ -3,6 +3,7 @@
 	"version": "3.3.0",
 	"license": "Apache License",
 	"private": true,
+  "type": "module",
 	"dependencies": {
 		"@axa-fr/react-oidc": "^6.19.2",
 		"@emotion/react": "^11.9.0",
@@ -38,20 +39,18 @@
 		"react-mui-dropzone": "^4.0.6",
 		"react-redux": "^8.1.2",
 		"react-router-dom": "^6.14.2",
-		"react-scripts": "^5.0.1",
 		"redux": "^4.1.2",
 		"redux-devtools-extension": "^2.13.9",
 		"redux-thunk": "^2.4.1",
 		"typescript": "^4.5.4",
 		"use-react-router-breadcrumbs": "^3.2.1",
+  
 		"zip-dir": "^2.0.0"
 	},
 	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"build-prod": "react-scripts build && copy-and-watch .ci/configuration/*.json build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject",
+    "start": "vite --open --port 3000",
+    "build": "tsc && vite build",
+		"build-prod": "tsc && vite build && copy-and-watch .ci/configuration/*.json dist",
 		"lint": "eslint --ext js,jsx,ts,tsx  src/**",
 		"lint-fix": "eslint --ext js,jsx,ts,tsx  src/** --fix",
 		"check-format": "prettier src/** -c",
@@ -92,6 +91,7 @@
 		"@typescript-eslint/eslint-plugin": "^5.9.1",
 		"@typescript-eslint/parser": "^5.9.1",
 		"cypress": "^12.8.1",
+		"eslint": "^8.50.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-import": "^2.25.4",
 		"eslint-plugin-jsx-a11y": "^6.5.1",
@@ -101,6 +101,10 @@
 		"eslint-plugin-unused-imports": "^2.0.0",
 		"prettier": "^2.5.1",
 		"sonarqube-scanner": "^2.8.1",
+		"vite": "^7.1.3",
+		"@vitejs/plugin-react": "^5.0.1",
+		"@vitejs/plugin-react-swc": "^3.8.1",
+    "vitest": "^3.0.9",
 		"wait-on": "^7.0.1"
 	}
 }
