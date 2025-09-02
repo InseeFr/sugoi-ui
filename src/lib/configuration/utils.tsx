@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const basePath = `${window.location.origin}`;
-const nameAppConfigFile = process.env.REACT_APP_NAME_APP_CONFIG_FILE
-	? process.env.REACT_APP_NAME_APP_CONFIG_FILE
+const nameAppConfigFile = import.meta.env.VITE_NAME_APP_CONFIG_FILE
+	? import.meta.env.VITE_NAME_APP_CONFIG_FILE
 	: 'configuration.json';
 export const getConfigFile = async (): Promise<any> => {
 	const client = axios.create({

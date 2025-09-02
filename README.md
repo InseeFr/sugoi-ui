@@ -21,4 +21,4 @@ yarn start
 
 ## Configuration
 
-Main configuration file is [.json](configuration.json). You can either fill it or create a `.env.local` with a env variable set to `REACT_APP_NAME_APP_CONFIG_FILE=configuration-local.json` and a `configuration-local.json` with your configuration.
+Main configuration file is [.json](configuration.json). You can either fill it or create a `.env.local` with a env variable set to `VITE_NAME_APP_CONFIG_FILE=configuration-local.json` and a `configuration-local.json` with your configuration.

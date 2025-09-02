@@ -14,29 +14,29 @@ jobs:
   install:
     runs-on: ubuntu-latest
     steps:
-      - name: Use Node.js 16
+      - name: Use Node.js 22.18.0
         uses: actions/setup-node@v1
         with:
-          node-version: 16
+          node-version: 22.18.0
       - run: yarn --frozen-lockfile
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js 16
+      - name: Use Node.js 22.18.0
         uses: actions/setup-node@v1
         with:
-          node-version: 16
+          node-version: 22.18.0
       - run: yarn
       - run: yarn lint
   cypress:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js 16
+      - name: Use Node.js 22.18.0
         uses: actions/setup-node@v1
         with:
-          node-version: 16
+          node-version: 22.18.0
       - run: yarn install
       - run: yarn start & yarn wait-on http://localhost:3000
       - run: yarn cypress run
@@ -44,17 +44,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js 16
+      - name: Use Node.js 22.18.0
         uses: actions/setup-node@v1
         with:
-          node-version: 16
+          node-version: 22.18.0
       - run: yarn
       - run: yarn build
       - name: Upload build
         uses: actions/upload-artifact@v4
         with:
-          name: build
-          path: build                
+          name: dist
+          path: dist
   docker:
     needs: build
     runs-on: ubuntu-latest
@@ -64,8 +64,8 @@ jobs:
         id: download
         uses: actions/download-artifact@v4
         with:
-          name: build
-          path: build
+          name: dist
+          path: dist
       - name: Docker meta
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1.6.0
