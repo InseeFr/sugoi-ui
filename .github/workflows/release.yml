@@ -12,15 +12,14 @@ jobs:
     name: pre-release
     runs-on: ubuntu-latest
     steps:
-      - name: Use Node.js 14
+      - name: Use Node.js 22.18.0
         uses: actions/setup-node@v1
         with:
-          node-version: 14
+          node-version: 22.18.0
 
       - name: Prepare
         run: |
-          git config --global user.name "Insee - Domaine Outils Transverses"
-          git config --global user.email "dg75-dsi-domaine-outils-transverses@insee.fr"  
+          git config --global user.name "Insee - Team sugoi"
           git clone https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{github.repository}}.git
           cd sugoi-ui/
           git checkout -b release-${{ github.event.inputs.version }}
@@ -42,10 +41,10 @@ jobs:
           repository: ${{github.repository}}
           ref: release-${{ github.event.inputs.version }}
 
-      - name: Use Node.js 14
+      - name: Use Node.js 22.18.0
         uses: actions/setup-node@v1
         with:
-          node-version: 14
+          node-version: 22.18.0
 
       - name: Install dependencies with Yarn
         run: yarn
@@ -79,13 +78,12 @@ jobs:
     needs: release
     runs-on: ubuntu-latest
     steps:
-      - name: Use Node.js 14
+      - name: Use Node.js 22.18.0
         uses: actions/setup-node@v1
         with:
-          node-version: 14
+          node-version: 22.18.0
       - run: |
-          git config --global user.name "Insee - Domaine Outils Transverses"
-          git config --global user.email "dg75-dsi-domaine-outils-transverses@insee.fr"  
+          git config --global user.name "Insee - Team sugoi"
           git clone https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{github.repository}}.git
           cd sugoi-ui/
           git pull
