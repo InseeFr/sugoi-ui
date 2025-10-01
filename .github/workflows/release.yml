@@ -20,11 +20,12 @@ jobs:
       - name: Prepare
         run: |
           git config --global user.name "Insee - Team sugoi"
+          git config --global user.email "sugoi@insee.fr"
           git clone https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{github.repository}}.git
           cd sugoi-ui/
           git checkout -b release-${{ github.event.inputs.version }}
           yarn version --no-git-tag-version --new-version ${{ github.event.inputs.version }}
-          git add package.json 
+          git add package.json
           git commit -s -m "[REL] :rocket: Release version ${{ github.event.inputs.version }}"
           git push origin release-${{ github.event.inputs.version }} -f
           echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
@@ -89,6 +90,6 @@ jobs:
           git pull
           git checkout release-${{ github.event.inputs.version }}
           yarn version --minor --no-git-tag-version --message "[ENH] :sparkles: prepare next version"
-          git add package.json 
+          git add package.json
           git commit -s -m "[ENH] :sparkles: prepare next version"
           git push origin release-${{ github.event.inputs.version }}
