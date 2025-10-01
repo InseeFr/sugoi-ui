@@ -55,7 +55,7 @@ jobs:
       - uses: vimtor/action-zip@v1
         name: Zip build
         with:
-          files: build/
+          files: dist/
           dest: sugoi-ui-${{ github.event.inputs.version }}-distribution.zip
 
       - name: Create a release
