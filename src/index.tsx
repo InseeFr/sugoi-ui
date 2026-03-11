@@ -6,7 +6,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 import { saveConfig } from 'src/lib/redux/actions/app';
 import { OidcProvider } from '@axa-fr/react-oidc';
-import { loadUser } from 'src/lib/redux/actions/user';
 import { getConfigFile } from 'src/lib/configuration/utils';
 import { Loader } from './components/shared/loader/loader';
 import App from 'src/components/app/app';
@@ -33,16 +32,6 @@ const Start = () => {
 			authenticatingComponent={Loader}
 			sessionLostComponent={Loader}
 			callbackSuccessComponent={Loader}
-			onEvent={(
-				_configurationName: string,
-				name: string,
-				user: any,
-			) =>
-				(name === 'token_aquired' ||
-					name === 'token_renewed' ||
-					name === 'refreshTokensAsync_silent_end') &&
-				dispatch(loadUser(user))
-			}
 		>
 			<BrowserRouter>
 				<SnackbarProvider

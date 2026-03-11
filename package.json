@@ -31,7 +31,6 @@
 		"mui-datatables": "^4.2.2",
 		"notistack": "^1.0.10",
 		"npm-build-zip": "^1.0.4",
-		"oidc-client": "^1.11.5",
 		"react": "^18.0.0",
 		"react-dom": "^18.0.0",
 		"react-i18next": "^11.15.3",
