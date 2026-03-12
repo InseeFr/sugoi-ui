@@ -19,7 +19,7 @@
 		"autosuggest-highlight": "^3.2.0",
 		"axios": "^1.4.0",
 		"copy-and-watch": "^0.1.6",
-		"html-react-parser": "^1.4.5",
+		"html-react-parser": "^5.2.17",
 		"i18next": "^21.6.6",
 		"i18next-browser-languagedetector": "^6.1.2",
 		"i18next-http-backend": "^3.0.2",
