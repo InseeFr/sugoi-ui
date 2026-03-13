@@ -73,7 +73,7 @@
 	"devDependencies": {
 		"@mui/types": "^7.1.5",
 		"@types/autosuggest-highlight": "^3.2.0",
-		"@types/jest": "^27.4.0",
+		"@types/jest": "^30.0.0",
 		"@types/json-editor": "^0.0.6",
 		"@types/jsoneditor-for-react": "^0.0.4",
 		"@types/lodash.get": "^4.4.6",
