@@ -47,7 +47,6 @@
 	"scripts": {
 		"start": "vite --open --port 3000",
 		"build": "tsc && vite build",
-		"build-prod": "tsc && vite build && copy-and-watch .ci/configuration/*.json dist",
 		"lint": "eslint --ext js,jsx,ts,tsx  src/**",
 		"lint-fix": "eslint --ext js,jsx,ts,tsx  src/** --fix",
 		"check-format": "prettier src/** -c",
