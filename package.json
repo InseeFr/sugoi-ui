@@ -6,7 +6,7 @@
 	"type": "module",
 	"dependencies": {
 		"@axa-fr/react-oidc": "^6.19.2",
-		"@emotion/react": "^11.9.0",
+		"@emotion/react": "^11.14.0",
 		"@emotion/styled": "^11.8.1",
 		"@mui/icons-material": "^5.8.2",
 		"@mui/lab": "^5.0.0-alpha.84",
