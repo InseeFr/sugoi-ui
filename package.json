@@ -75,7 +75,7 @@
 		"@types/jest": "^30.0.0",
 		"@types/json-editor": "^0.0.6",
 		"@types/jsoneditor-for-react": "^0.0.4",
-		"@types/lodash.get": "^4.4.6",
+		"@types/lodash.get": "^4.4.9",
 		"@types/lodash.isequal": "^4.5.8",
 		"@types/lodash.set": "^4.3.6",
 		"@types/mui-datatables": "^3.7.9",
