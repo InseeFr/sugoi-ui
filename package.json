@@ -7,7 +7,7 @@
 	"dependencies": {
 		"@axa-fr/react-oidc": "^6.19.2",
 		"@emotion/react": "^11.14.0",
-		"@emotion/styled": "^11.8.1",
+		"@emotion/styled": "^11.14.1",
 		"@mui/icons-material": "^5.8.2",
 		"@mui/lab": "^5.0.0-alpha.84",
 		"@mui/material": "^5.8.2",
