@@ -2,7 +2,7 @@ import { Grid, IconButton } from '@mui/material';
 import ZoomInOutlinedIcon from '@mui/icons-material/ZoomInOutlined';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router';
 import { ButtonDescription } from 'src/components/shared/description';
 import SearchForm from 'src/components/shared/searchFormular';
 import { SearchResults } from 'src/components/shared/searchResults';

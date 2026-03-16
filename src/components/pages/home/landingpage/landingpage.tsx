@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 import { Typography, Paper, Grid, Button, Box } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { useOidc, useOidcAccessToken } from '@axa-fr/react-oidc';
 import { useTranslation } from 'react-i18next';
 

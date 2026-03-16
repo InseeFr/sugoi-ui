@@ -2,7 +2,7 @@ import { Chip, Grid } from '@mui/material';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import SimpleDialog from 'src/components/shared/popButton/Dialog';
 import { UserPopover } from './UserPopover';
 

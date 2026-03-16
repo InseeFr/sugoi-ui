@@ -1,6 +1,6 @@
 import { Button, Grid } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import ConfirmationPopup from 'src/components/shared/confirmationPopUp';
 import DataViewer from 'src/components/shared/dataViewer/dataviewer';
 import ErrorBoundary from 'src/components/shared/error/Error';

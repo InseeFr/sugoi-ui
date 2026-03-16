@@ -2,7 +2,7 @@ import React, { useEffect, useState, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider, useDispatch } from 'react-redux';
 import store from 'src/lib/configuration/store-configuration';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router';
 import { SnackbarProvider } from 'notistack';
 import { saveConfig } from 'src/lib/redux/actions/app';
 import { OidcProvider } from '@axa-fr/react-oidc';

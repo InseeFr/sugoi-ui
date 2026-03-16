@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import useBreadcrumbs from 'use-react-router-breadcrumbs';
 import routes from 'src/components/routes/routes';
 import ReactDOMServer from 'react-dom/server';

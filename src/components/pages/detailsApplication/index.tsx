@@ -1,7 +1,7 @@
 import { Grid, TextField, IconButton } from '@mui/material';
 import { SearchOutlined } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router';
 import ConfirmationPopup from 'src/components/shared/confirmationPopUp';
 import LoadingButton from 'src/components/shared/loadingButton';
 import Title from 'src/components/shared/title/title';

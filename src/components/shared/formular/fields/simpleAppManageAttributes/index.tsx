@@ -17,7 +17,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import get from 'lodash.get';
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import LoadingButton from 'src/components/shared/loadingButton';
 import PopIcon from 'src/components/shared/popIcon/popIcon';
 import { useAddAttribute, useDeleteAttribute } from 'src/lib/hooks/api-hooks';
