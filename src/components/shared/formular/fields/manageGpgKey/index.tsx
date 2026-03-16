@@ -1,5 +1,5 @@
 import get from 'lodash.get';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import {
 	useDeleteGpgKey,
 	useGetGpgKey,

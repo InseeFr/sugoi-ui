@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import { TemplateProperties } from 'src/lib/model/api/TemplateProperties';
 import { useResetPassword, useGetUser } from 'src/lib/hooks/api-hooks';
 import LoadingButton from '../loadingButton';

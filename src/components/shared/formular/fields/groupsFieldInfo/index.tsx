@@ -10,7 +10,7 @@ import {
 import CreateIcon from '@mui/icons-material/Create';
 import PeopleIcon from '@mui/icons-material/People';
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router';
 import PopIcon from 'src/components/shared/popIcon/popIcon';
 import {
 	useAddGroupsToUser,

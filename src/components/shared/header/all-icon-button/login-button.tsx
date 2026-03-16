@@ -3,7 +3,7 @@ import { IconButton } from '@mui/material';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 const LoginButton = () => {
 	const { login, logout } = useOidc();

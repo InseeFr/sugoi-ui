@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import { Loader } from 'src/components/shared/loader/loader';
 import Title from 'src/components/shared/title/title';
 import { useGetOrganization, useRealmConfig } from 'src/lib/hooks/api-hooks';

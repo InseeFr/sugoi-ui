@@ -16,7 +16,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import Autocomplete from '@mui/lab/Autocomplete/Autocomplete';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useMatch, useNavigate } from 'react-router-dom';
+import { useMatch, useNavigate } from 'react-router';
 import { useGetRealms } from 'src/lib/hooks/realm/useGetRealms';
 import GrainIcon from '@mui/icons-material/Grain';
 import { useSnackbar } from 'notistack';
