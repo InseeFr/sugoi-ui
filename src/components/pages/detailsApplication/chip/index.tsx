@@ -140,7 +140,7 @@ export const ChipButton = ({ realm, group }: ButtonProps) => {
 				clickable
 				color="primary"
 				size="small"
-				label={group?.users?.length - 4 + ' de plus...'}
+				label={group?.users?.length - 5 + ' de plus...'}
 				onClick={handleOpen}
 				key={'group_' + group.name}
 			/>
@@ -168,7 +168,7 @@ export const ChipButton = ({ realm, group }: ButtonProps) => {
 									i
 								}
 							>
-								<ChipPersonPopable
+								<ChipAccount
 									key={
 										'group_' +
 										group.name +
