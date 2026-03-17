@@ -25,7 +25,7 @@ const TextNotification = (props: any) => {
 	let message = '?';
 	if (typeof subject === 'string') {
 		message = subject;
-	} else if (isAxiosResponse(subject)) {
+	} else if (isAxiosResponse(subject) && !isAxiosError(subject)) {
 		console.log(subject);
 		if (subject.status === 200) {
 			message = t('notif.success');
