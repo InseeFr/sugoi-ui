@@ -12,7 +12,7 @@
 		"@mui/lab": "^5.0.0-alpha.84",
 		"@mui/material": "^5.8.2",
 		"@mui/styles": "^5.18.0",
-		"@reduxjs/toolkit": "^1.9.5",
+		"@reduxjs/toolkit": "^2.11.2",
 		"@testing-library/jest-dom": "^6.9.1",
 		"@testing-library/react": "^12.1.2",
 		"@testing-library/user-event": "^14.4.3",
