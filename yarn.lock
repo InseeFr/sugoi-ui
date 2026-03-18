@@ -7,12 +7,25 @@
   resolved "https://registry.yarnpkg.com/@adobe/css-tools/-/css-tools-4.4.4.tgz#2856c55443d3d461693f32d2b96fb6ea92e1ffa9"
   integrity sha512-Elp+iwUx5rN5+Y8xLt5/GRoG20WGoDCQ/1Fb+1LiGtvwbDavuSk0jhD/eZdckHAuzcDzccnkv+rEjyWfRx18gg==
 
-"@axa-fr/react-oidc@^6.19.2":
-  version "6.19.2"
-  resolved "https://registry.yarnpkg.com/@axa-fr/react-oidc/-/react-oidc-6.19.2.tgz#f99d6e4806faf7001ef131e940315111457cd380"
-  integrity sha512-6uHzXoDy0MRk78eZohffjufeq3Zo0irrb8VTIwHQa4cHjCHKGRVrgY9rIyUQBI+nxR6VyN3c0+IfWZAh+rnHlA==
+"@axa-fr/oidc-client-service-worker@7.27.0":
+  version "7.27.0"
+  resolved "https://registry.yarnpkg.com/@axa-fr/oidc-client-service-worker/-/oidc-client-service-worker-7.27.0.tgz#0a9f073647d80099a87a17f47bce0eadab7f6b26"
+  integrity sha512-BT6wwj+TKYbnSWldHPuC0HwnBNbxaOVIjb+nvAt9iXZsB1bSkqY7TVumM5nAiwCVKCkgZL9W1DcgiSN5GKNwQg==
+
+"@axa-fr/oidc-client@7.27.0":
+  version "7.27.0"
+  resolved "https://registry.yarnpkg.com/@axa-fr/oidc-client/-/oidc-client-7.27.0.tgz#3c09162c58ebf795cb336aa928704419dc7b8bf1"
+  integrity sha512-NLIoISOnhaTshBYRUukxzWYq9soPXvPB2u6sK7vANFWo4cE9aGgx0BHLK83i91tDGCgRVIiv/fySOOgp7ZlOmQ==
   dependencies:
-    base64-js "1.5.1"
+    "@axa-fr/oidc-client-service-worker" "7.27.0"
+
+"@axa-fr/react-oidc@^7.27.0":
+  version "7.27.0"
+  resolved "https://registry.yarnpkg.com/@axa-fr/react-oidc/-/react-oidc-7.27.0.tgz#89295b9e33c4ec7a049cc8a50cf12855b5f86f5a"
+  integrity sha512-mLBfGUwSdQLsdkPuBpXdK+idvH3VhORznMcdfbRkXX3Bvfz1G8i3/Dr/LPwGbyZVo3VSiuJ018AMcGsBQ3ZNbw==
+  dependencies:
+    "@axa-fr/oidc-client" "7.27.0"
+    "@axa-fr/oidc-client-service-worker" "7.27.0"
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4":
   version "7.21.4"
@@ -2080,7 +2093,7 @@ bare-url@^2.2.2:
   dependencies:
     bare-path "^3.0.0"
 
-base64-js@1.5.1, base64-js@^1.3.1:
+base64-js@^1.3.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.5.1.tgz#1b1b440160a5bf7ad40b650f095963481903930a"
   integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
