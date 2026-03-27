@@ -350,41 +350,12 @@
 			"default_signature": "Assistance Insee"
 		},
 		"search_result": {
-			"title": "Résultat de la recherche:",
 			"buttons": {
 				"add": "Créer"
 			},
 			"textLabels": {
-				"body": {
-					"noMatch": "Aucun résultat pour la recherche",
-					"toolTip": "Trier"
-				},
-				"pagination": {
-					"next": "Page suivante",
-					"previous": "Page précédente",
-					"rowsPerPage": "Ligne par page",
-					"displayRows": "de"
-				},
 				"toolbar": {
-					"search": "Rechercher",
-					"downloadCsv": "Exporter tous les résultats de la recherche",
-					"print": "Imprimer",
-					"viewColumns": "Afficher/masquer des colonnes",
-					"filterTable": "Filtrer le tableau"
-				},
-				"filter": {
-					"all": "Tous",
-					"title": "Filtres",
-					"reset": "Réinitialiser"
-				},
-				"viewColumns": {
-					"title": "Colonnes visible",
-					"titleAria": "Afficher/masquer des colonnes"
-				},
-				"selectedRows": {
-					"text": "ligne(s) selectionnée",
-					"delete": "Supprimer",
-					"deleteAria": "Supprimer les lignes selectionnées"
+					"downloadCsv": "Exporter tous les résultats de la recherche"
 				}
 			}
 		}

@@ -1,5 +1,4 @@
-import { Grid, IconButton } from '@mui/material';
-import ZoomInOutlinedIcon from '@mui/icons-material/ZoomInOutlined';
+import { Grid } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router';
@@ -10,6 +9,7 @@ import Title from 'src/components/shared/title/title';
 import { useGetOrganizations } from 'src/lib/hooks/api-hooks';
 import { Field } from 'src/lib/model/field';
 import searchRequestOrganization from 'src/lib/model/js/searchRequestOrganization';
+import Organization from 'src/lib/model/api/organization';
 
 const SearchOrganizations = () => {
 	const { realm, userStorage } = useParams() as {
@@ -21,11 +21,8 @@ const SearchOrganizations = () => {
 	const { t } = useTranslation();
 	document.title = t('search_organization.page_title');
 
-	const {
-		organizations,
-		execute: searchOrganizations,
-		loading,
-	} = useGetOrganizations(realm, userStorage);
+	const { organizations, execute: searchOrganizations } =
+		useGetOrganizations(realm, userStorage);
 
 	const handleSearch = (values: any) => {
 		let toSearch: searchRequestOrganization = {};
@@ -57,7 +54,7 @@ const SearchOrganizations = () => {
 		}
 	};
 
-	const handleClickOnOrganization = (organizationId: string) => {
+	const handleClickOnOrganization = (organization: Organization) => {
 		navigate(
 			userStorage
 				? '/realm/' +
@@ -65,54 +62,27 @@ const SearchOrganizations = () => {
 						'/us/' +
 						userStorage +
 						'/organizations/' +
-						organizationId
+						organization.identifiant
 				: '/realm/' +
 						realm +
 						'/' +
 						'organizations/' +
-						organizationId,
+						organization.identifiant,
 		);
 	};
 
 	const columns = [
 		{
-			name: 'identifiant',
-			label: 'Identifiant',
+			accessorKey: 'identifiant',
+			header: 'Identifiant',
 		},
 		{
-			name: 'attributes',
-			label: 'Email',
-			options: {
-				customBodyRender: (value: any) => value.mail,
-			},
+			accessorKey: 'attributes.mail',
+			header: 'Email',
 		},
 		{
-			name: 'attributes',
-			label: 'Description',
-			options: {
-				customBodyRender: (value: any) => value.description,
-			},
-		},
-		{
-			name: '',
-			options: {
-				filter: false,
-				sort: false,
-				empty: true,
-				customBodyRenderLite: function render(
-					_dataIndex: any,
-					_rowIndex: any,
-				) {
-					return (
-						<IconButton
-							aria-label="Détail"
-							size="large"
-						>
-							<ZoomInOutlinedIcon />
-						</IconButton>
-					);
-				},
-			},
+			accessorKey: 'attributes.description',
+			header: 'Description',
 		},
 	];
 
@@ -204,7 +174,6 @@ const SearchOrganizations = () => {
 							handleClickOnRow={
 								handleClickOnOrganization
 							}
-							loading={loading}
 						/>
 					</Grid>
 				</Grid>

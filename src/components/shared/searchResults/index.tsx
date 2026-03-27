@@ -1,7 +1,12 @@
-import { Paper, CircularProgress } from '@mui/material';
-import MUIDataTable, { MUIDataTableOptions } from 'mui-datatables';
-import React from 'react';
+import { Paper, Box, Tooltip, IconButton } from '@mui/material';
+import { MRT_Localization_FR } from 'material-react-table/locales/fr';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import {
+	MaterialReactTable,
+	useMaterialReactTable,
+} from 'material-react-table';
+import DownloadIcon from '@mui/icons-material/Download';
 
 interface Props {
 	data: any;
@@ -9,7 +14,6 @@ interface Props {
 	handleClickOnRow: any;
 	handleDownload?: any;
 	downloadable?: boolean;
-	loading?: boolean;
 }
 
 export const SearchResults = ({
@@ -18,109 +22,42 @@ export const SearchResults = ({
 	handleClickOnRow,
 	handleDownload,
 	downloadable,
-	loading,
 }: Props) => {
 	const { t } = useTranslation();
-	const options: MUIDataTableOptions = {
-		responsive: 'simple' as any,
-		selectableRowsHideCheckboxes: true,
-		search: false,
-		onRowClick: (rowData: string[]) => handleClickOnRow(rowData[0]),
-		textLabels: {
-			body: {
-				noMatch: loading ? (
-					<CircularProgress size={20} />
-				) : (
-					t('commons.search_result.textLabels.body.noMatch')
-				),
-				toolTip: t(
-					'commons.search_result.textLabels.body.toolTip',
-				),
+
+	const columnsReactDataTable = useMemo(() => columns, [columns]);
+
+	const table = useMaterialReactTable({
+		columns: columnsReactDataTable,
+		data,
+		muiTableBodyRowProps: ({ row }: any) => ({
+			onClick: () => {
+				handleClickOnRow(row.original);
 			},
-			pagination: {
-				next: t(
-					'commons.search_result.textLabels.pagination.next',
-				),
-				previous: t(
-					'commons.search_result.textLabels.pagination.previous',
-				),
-				rowsPerPage: t(
-					'commons.search_result.textLabels.pagination.rowsPerPage',
-				),
-				displayRows: t(
-					'commons.search_result.textLabels.pagination.displayRows',
-				),
-			},
-			toolbar: {
-				search: t(
-					'commons.search_result.textLabels.toolbar.search',
-				),
-				downloadCsv: t(
-					'commons.search_result.textLabels.toolbar.downloadCsv',
-				),
-				print: t(
-					'commons.search_result.textLabels.toolbar.print',
-				),
-				viewColumns: t(
-					'commons.search_result.textLabels.toolbar.viewColumns',
-				),
-				filterTable: t(
-					'commons.search_result.textLabels.toolbar.filterTable',
-				),
-			},
-			filter: {
-				all: t('commons.search_result.textLabels.filter.all'),
-				title: t(
-					'commons.search_result.textLabels.filter.title',
-				),
-				reset: t(
-					'commons.search_result.textLabels.filter.reset',
-				),
-			},
-			viewColumns: {
-				title: t(
-					'commons.search_result.textLabels.viewColumns.title',
-				),
-				titleAria: t(
-					'commons.search_result.textLabels.viewColumns.titleAria',
-				),
-			},
-			selectedRows: {
-				text: t(
-					'commons.search_result.textLabels.selectedRows.text',
-				),
-				delete: t(
-					'commons.search_result.textLabels.selectedRows.delete',
-				),
-				deleteAria: t(
-					'commons.search_result.textLabels.selectedRows.deleteAria',
-				),
-			},
+		}),
+		localization: MRT_Localization_FR,
+		renderTopToolbarCustomActions: () => {
+			return (
+				<Box sx={{ ml: 'auto' }}>
+					{downloadable && (
+						<Tooltip
+							title={t(
+								'commons.search_result.textLabels.toolbar.downloadCsv',
+							)}
+						>
+							<IconButton onClick={handleDownload}>
+								<DownloadIcon />
+							</IconButton>
+						</Tooltip>
+					)}
+				</Box>
+			);
 		},
-		selectableRowsOnClick: false,
-		downloadOptions: { filename: 'export.csv' },
-		onDownload: function download(
-			_buildHead,
-			_buildBody,
-			_columns,
-			_data,
-		) {
-			handleDownload();
-			// Must return false to delegate the download to handleDownload
-			return false;
-		},
-		print: false,
-		download: downloadable,
-	};
+	});
 
 	return (
 		<Paper>
-			<MUIDataTable
-				title={t('commons.search_result.title')}
-				data={data}
-				columns={columns}
-				options={options}
-			/>
+			<MaterialReactTable table={table} />
 		</Paper>
 	);
 };

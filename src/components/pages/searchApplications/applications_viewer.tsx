@@ -1,90 +1,42 @@
-import { Grid, Typography, Chip, IconButton } from '@mui/material';
+import { Grid, Typography, Chip } from '@mui/material';
 import Application from 'src/lib/model/api/application';
-import ZoomInOutlinedIcon from '@mui/icons-material/ZoomInOutlined';
 import { SearchResults } from 'src/components/shared/searchResults';
 
 const ApplicationsViewer = ({
 	applications,
-	loading,
 	handleClickOnApp,
 }: {
 	applications: Application[];
-	loading: boolean;
-	handleClickOnApp: (appname: string) => void;
+	handleClickOnApp: (app: Application) => void;
 }) => {
 	const columns = [
 		{
-			name: 'name',
-			label: "Nom de l'application",
+			accessorKey: 'name',
+			header: "Nom de l'application",
 		},
 		{
-			name: 'attributes',
-			label: 'Description',
-			options: {
-				filter: false,
-				sort: true,
-				customBodyRender: function render(
-					value: any,
-					_tableMeta: any,
-					_updateValue: any,
-				) {
-					return (
-						<Typography>
-							{value?.description}
-						</Typography>
-					);
-				},
-			},
+			accessorKey: 'attributes.description',
+			header: 'Description',
 		},
 		{
-			name: 'attributes',
-			label: 'Contacts',
-			options: {
-				filter: false,
-				sort: true,
-				customBodyRender: function render(
-					value: any,
-					_tableMeta: any,
-					_updateValue: any,
-				) {
-					return (
-						<Typography>
-							{value &&
-								value?.contacts?.map(
-									(
-										contact: string,
-										i: any,
-									) => (
-										<Chip
-											key={i}
-											label={
-												contact
-											}
-											size="small"
-										/>
-									),
-								)}
-						</Typography>
-					);
-				},
-			},
-		},
-		{
-			name: '',
-			options: {
-				filter: false,
-				sort: false,
-				empty: true,
-				customBodyRenderLite: function render(
-					_dataIndex: any,
-					_rowIndex: any,
-				) {
-					return (
-						<IconButton aria-label="Détail">
-							<ZoomInOutlinedIcon />
-						</IconButton>
-					);
-				},
+			accessorKey: 'attributes.contacts',
+			header: 'Contacts',
+			Cell: ({ cell }: any) => {
+				const value = cell.getValue();
+				return (
+					<Typography>
+						{value &&
+							value.map(
+								(contact: string, i: any) => (
+									<Chip
+										key={i}
+										label={contact}
+										size="small"
+									/>
+								),
+							)}
+					</Typography>
+				);
 			},
 		},
 	];
@@ -102,7 +54,6 @@ const ApplicationsViewer = ({
 					columns={columns}
 					handleClickOnRow={handleClickOnApp}
 					downloadable={false}
-					loading={loading}
 				/>
 			</Grid>
 		</Grid>

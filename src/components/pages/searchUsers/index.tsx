@@ -1,5 +1,4 @@
-import { Chip, Grid, IconButton, Typography } from '@mui/material';
-import ZoomInOutlinedIcon from '@mui/icons-material/ZoomInOutlined';
+import { Chip, Grid, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -14,6 +13,7 @@ import { Field } from 'src/lib/model/field';
 import SearchRequestUser from 'src/lib/model/js/searchRequestUser';
 import { download } from 'src/lib/utils/downloadFile';
 import { useOidcAccessToken } from '@axa-fr/react-oidc';
+import User from 'src/lib/model/api/user';
 
 const SearchUsers = () => {
 	const accessToken = useOidcAccessToken().accessToken;
@@ -29,11 +29,7 @@ const SearchUsers = () => {
 	const { t } = useTranslation();
 	document.title = t('search_user.page_title');
 
-	const {
-		users,
-		execute: searchUsers,
-		loading,
-	} = useGetUsers(realm, userStorage);
+	const { users, execute: searchUsers } = useGetUsers(realm, userStorage);
 
 	const handleSearch = (values: any) => {
 		let toSearch: SearchRequestUser = {};
@@ -51,7 +47,7 @@ const SearchUsers = () => {
 		searchUsers({ ...toSearch }, realm, userStorage);
 	};
 
-	const handleClickOnUser = (username: string) => {
+	const handleClickOnUser = (user: User) => {
 		navigate(
 			userStorage
 				? '/realm/' +
@@ -59,8 +55,8 @@ const SearchUsers = () => {
 						'/us/' +
 						userStorage +
 						'/users/' +
-						username
-				: '/realm/' + realm + '/' + 'users/' + username,
+						user.username
+				: '/realm/' + realm + '/' + 'users/' + user.username,
 		);
 	};
 
@@ -203,117 +199,67 @@ const SearchUsers = () => {
 
 	const columns = [
 		{
-			name: 'username',
-			label: 'Identifiant',
+			accessorKey: 'username',
+			header: 'Identifiant',
 		},
 		{
-			name: 'firstName',
-			label: 'Prénom',
+			accessorKey: 'firstName',
+			header: 'Prénom',
 		},
 		{
-			name: 'lastName',
-			label: 'Nom',
+			accessorKey: 'lastName',
+			header: 'Nom',
 		},
 		{
-			name: 'mail',
-			label: 'Email',
+			accessorKey: 'mail',
+			header: 'Email',
 		},
 		{
-			name: 'attributes',
-			label: 'Nom Commun',
-			options: {
-				filter: false,
-				sort: true,
-				customBodyRender: function render(
-					value: any,
-					_tableMeta: any,
-					_updateValue: any,
-				) {
-					return (
-						<Typography>{value.common_name}</Typography>
-					);
-				},
+			accessorKey: 'attributes.common_name',
+			header: 'Nom Commun',
+			valueGetter: (cell: any) => cell.value.common_name,
+		},
+		{
+			accessorKey: 'habilitations',
+			header: 'Habilitations',
+			Cell: ({ cell }: any) => {
+				const value = cell.getValue();
+				return (
+					<Typography>
+						{value &&
+							value.map((v: any) => (
+								<Chip
+									key={'hab_' + v.id}
+									label={v.id}
+									size="small"
+								/>
+							))}
+					</Typography>
+				);
 			},
 		},
 		{
-			name: 'habilitations',
-			label: 'Habilitations',
-			options: {
-				filter: false,
-				sort: true,
-				customBodyRender: function render(
-					value: any,
-					_tableMeta: any,
-					_updateValue: any,
-				) {
-					return (
-						<Typography>
-							{value &&
-								value.map((v: any) => (
+			accessorKey: 'groups',
+			header: 'Groupes',
+			Cell: ({ cell }: any) => {
+				const value = cell.getValue();
+				return (
+					<Typography>
+						{value &&
+							value
+								.filter((v: any) => v != null)
+								.map((v: any) => (
 									<Chip
-										key={'hab_' + v.id}
-										label={v.id}
+										key={
+											'group_' +
+											v.name
+										}
+										label={v.name}
 										size="small"
 									/>
 								))}
-						</Typography>
-					);
-				},
-			},
-		},
-		{
-			name: 'groups',
-			label: 'Groupes',
-			options: {
-				filter: false,
-				sort: true,
-				customBodyRender: function render(
-					value: any,
-					_tableMeta: any,
-					_updateValue: any,
-				) {
-					return (
-						<Typography>
-							{value &&
-								value
-									.filter(
-										(v: any) =>
-											v != null,
-									)
-									.map((v: any) => (
-										<Chip
-											key={
-												'group_' +
-												v.name
-											}
-											label={v.name}
-											size="small"
-										/>
-									))}
-						</Typography>
-					);
-				},
-			},
-		},
-		{
-			name: '',
-			options: {
-				filter: false,
-				sort: false,
-				empty: true,
-				customBodyRenderLite: function render(
-					_dataIndex: any,
-					_rowIndex: any,
-				) {
-					return (
-						<IconButton
-							aria-label="Détail"
-							size="large"
-						>
-							<ZoomInOutlinedIcon />
-						</IconButton>
-					);
-				},
+					</Typography>
+				);
 			},
 		},
 	];
@@ -358,7 +304,6 @@ const SearchUsers = () => {
 						handleClickOnRow={handleClickOnUser}
 						handleDownload={handleExport}
 						downloadable={true}
-						loading={loading}
 					/>
 				</Grid>
 			</Grid>
