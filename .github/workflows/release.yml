@@ -90,7 +90,8 @@ jobs:
           cd sugoi-ui/
           git pull
           git checkout release-${{ github.event.inputs.version }}
-          yarn version --minor --no-git-tag-version --message "[ENH] :sparkles: prepare next version"
+          yarn version --minor --no-git-tag-version
+          yarn version --prerelease --no-git-tag-version
           git add package.json
           git commit -s -m "[ENH] :sparkles: prepare next version"
           git push origin release-${{ github.event.inputs.version }}
