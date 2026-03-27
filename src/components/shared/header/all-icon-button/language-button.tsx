@@ -1,4 +1,10 @@
-import { Box, Button, ListItem, ListItemText, Popover } from '@mui/material';
+import {
+	Box,
+	Button,
+	ListItemButton,
+	ListItemText,
+	Popover,
+} from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import TranslateIcon from '@mui/icons-material/Translate';
 import { useState, MouseEvent } from 'react';
@@ -60,8 +66,7 @@ const LanguageButton = () => {
 					flexDirection="column"
 				>
 					{Object.keys(languages).map((language) => (
-						<ListItem
-							button
+						<ListItemButton
 							onClick={() =>
 								changeLanguage(language)
 							}
@@ -73,7 +78,7 @@ const LanguageButton = () => {
 							<ListItemText
 								primary={languages[language]}
 							/>
-						</ListItem>
+						</ListItemButton>
 					))}
 				</Box>
 			</Popover>

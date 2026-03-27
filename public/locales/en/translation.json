@@ -339,41 +339,12 @@
 			"default_signature": "Assistance Insee"
 		},
 		"search_result": {
-			"title": "Search result:",
 			"buttons": {
 				"add": "Add"
 			},
 			"textLabels": {
-				"body": {
-					"noMatch": "No Results for search",
-					"toolTip": "Sort"
-				},
-				"pagination": {
-					"next": "Next Page",
-					"previous": "Previous page",
-					"rowsPerPage": "Rows per page",
-					"displayRows": "of"
-				},
 				"toolbar": {
-					"search": "Search",
-					"downloadCsv": "Export all search results",
-					"print": "Print",
-					"viewColumns": "Show / Hide Columns",
-					"filterTable": "Filter the table"
-				},
-				"filter": {
-					"all": "All",
-					"title": "Filters",
-					"reset": "Reset"
-				},
-				"viewColumns": {
-					"title": "Visible columns",
-					"titleAria": "Show / Hide Columns"
-				},
-				"selectedRows": {
-					"text": "Selected line(s)",
-					"delete": "Delete",
-					"deleteAria": "Delete selected lines"
+					"downloadCsv": "Export all search results"
 				}
 			}
 		}

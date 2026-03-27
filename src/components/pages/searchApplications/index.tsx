@@ -25,7 +25,7 @@ import ApplicationsViewer from './applications_viewer';
 export const SearchApplications = () => {
 	const { t } = useTranslation();
 	const { realm } = useParams() as { realm: string };
-	const { applications, execute, loading } = useGetApplications(
+	const { applications, execute } = useGetApplications(
 		realm,
 		undefined,
 		true,
@@ -57,8 +57,8 @@ export const SearchApplications = () => {
 		);
 	};
 
-	const handleClickOnRow = (appname: string) => {
-		navigate('/realm/' + realm + '/' + 'applications/' + appname);
+	const handleClickOnRow = (app: Application) => {
+		navigate('/realm/' + realm + '/' + 'applications/' + app.name);
 	};
 
 	const handleSearch = (e: any) => {
@@ -191,7 +191,6 @@ export const SearchApplications = () => {
 										applications={
 											applications
 										}
-										loading={loading}
 										handleClickOnApp={
 											handleClickOnRow
 										}

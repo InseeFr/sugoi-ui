@@ -2,6 +2,7 @@ import {
 	Divider,
 	List,
 	ListItem,
+	ListItemButton,
 	ListItemIcon,
 	ListItemText,
 	ListSubheader,
@@ -13,7 +14,7 @@ import BusinessIcon from '@mui/icons-material/Business';
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
-import Autocomplete from '@mui/lab/Autocomplete/Autocomplete';
+import Autocomplete from '@mui/material/Autocomplete';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMatch, useNavigate } from 'react-router';
@@ -109,8 +110,7 @@ const SiderBody = () => {
 			<Toolbar />
 
 			<List component="nav">
-				<ListItem
-					button
+				<ListItemButton
 					key="home"
 					onClick={() => navigate('/')}
 					selected={location.pathname === '/'}
@@ -119,7 +119,7 @@ const SiderBody = () => {
 						<HomeIcon />
 					</ListItemIcon>
 					<ListItemText primary={t('sider.home')} />
-				</ListItem>
+				</ListItemButton>
 				<Divider />
 
 				<List
@@ -254,8 +254,7 @@ const SiderBody = () => {
 							)}
 						/>
 					</ListItem>
-					<ListItem
-						button
+					<ListItemButton
 						key="search_users"
 						disabled={
 							realmSelected?.name ? false : true
@@ -288,9 +287,8 @@ const SiderBody = () => {
 						<ListItemText
 							primary={t('sider.manage.users')}
 						/>
-					</ListItem>
-					<ListItem
-						button
+					</ListItemButton>
+					<ListItemButton
 						key="search_organizations"
 						disabled={
 							realmSelected?.name &&
@@ -333,9 +331,8 @@ const SiderBody = () => {
 								'sider.manage.organizations',
 							)}
 						/>
-					</ListItem>
-					<ListItem
-						button
+					</ListItemButton>
+					<ListItemButton
 						key="search_application"
 						disabled={
 							realmSelected?.name &&
@@ -365,7 +362,7 @@ const SiderBody = () => {
 								'sider.manage.applications',
 							)}
 						/>
-					</ListItem>
+					</ListItemButton>
 				</List>
 			</List>
 			<Divider />
@@ -381,8 +378,7 @@ const SiderBody = () => {
 					</ListSubheader>
 				}
 			>
-				<ListItem
-					button
+				<ListItemButton
 					key="parametres"
 					onClick={() => navigate('/settings')}
 					sx={{
@@ -396,7 +392,7 @@ const SiderBody = () => {
 					<ListItemText
 						primary={t('sider.configuration.settings')}
 					/>
-				</ListItem>
+				</ListItemButton>
 			</List>
 			<Divider />
 		</>
