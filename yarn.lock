@@ -203,12 +203,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.27.1"
 
-"@babel/runtime@^7.12.5", "@babel/runtime@^7.17.2", "@babel/runtime@^7.18.3", "@babel/runtime@^7.19.0", "@babel/runtime@^7.20.6", "@babel/runtime@^7.20.7", "@babel/runtime@^7.23.9", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
-  version "7.28.6"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.28.6.tgz#d267a43cb1836dc4d182cce93ae75ba954ef6d2b"
-  integrity sha512-05WQkdpL9COIMz4LjTxGpPNCdlpyimKppYNoJ5Di5EUObifl8t4tuLuUBBZEpoLYOmfvIWrsp9fCl0HoPRVTdA==
-
-"@babel/runtime@^7.23.2", "@babel/runtime@^7.26.0":
+"@babel/runtime@^7.12.5", "@babel/runtime@^7.17.2", "@babel/runtime@^7.18.3", "@babel/runtime@^7.19.0", "@babel/runtime@^7.20.6", "@babel/runtime@^7.20.7", "@babel/runtime@^7.23.2", "@babel/runtime@^7.23.9", "@babel/runtime@^7.26.0", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
   version "7.29.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.29.2.tgz#9a6e2d05f4b6692e1801cd4fb176ad823930ed5e"
   integrity sha512-JiDShH45zKHWyGe4ZNVRrCjBz8Nh9TMmZG1kh4QTK8hCBTWBi8Da+i7s1fJw7/lYpM4ccepSNfqzZ/QvABBi5g==
@@ -5387,10 +5382,10 @@ react-is@^16.13.1, react-is@^16.7.0, react-is@^17.0.1, react-is@^18.3.1, react-i
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.3.1.tgz#e83557dc12eae63a99e003a46388b1dcbb44db7e"
   integrity sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==
 
-react-mui-dropzone@^4.0.6:
-  version "4.0.6"
-  resolved "https://registry.yarnpkg.com/react-mui-dropzone/-/react-mui-dropzone-4.0.6.tgz#9e98337daed53638a5ea4b0606f98ac1f5e245f0"
-  integrity sha512-1rRlI+1wVydoL1tFx5LXt7k/CSXKmWYFn7bm5TUqiq/WnBnE8VI+tShSqqG7yJwSbvncpZXAn9Lnjgrcvxvy8Q==
+react-mui-dropzone@^4.0.7:
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/react-mui-dropzone/-/react-mui-dropzone-4.0.7.tgz#85221fe36844d799d30a33466f99fe4b5ffc8274"
+  integrity sha512-9OPZZ9CxHq+rTZf8aKLDZPaGzWDhAUZ9+6aIUE8ub5fgcXFqXkHuI8GsUPRaIF7WXPaa79HFz00/Xd5ev8I5Kg==
   dependencies:
     "@babel/runtime" "^7.4.4"
     clsx "^1.0.2"

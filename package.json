@@ -33,7 +33,7 @@
 		"react": "^18.0.0",
 		"react-dom": "^18.0.0",
 		"react-i18next": "^12.3.1",
-		"react-mui-dropzone": "^4.0.6",
+		"react-mui-dropzone": "^4.0.7",
 		"react-redux": "^9.2.0",
 		"react-router": "^7.13.1",
 		"redux": "^4.1.2",
