@@ -4,8 +4,8 @@
 
 When you first launch the app, please run the following command:
 
-- `yarn` we expect to be also compatible with npm
-- `yarn start` to launch the app
+- `pnpm` we expect to be also compatible with npm
+- `pnpm start` to launch the app
 
 To configure the app we use a `configuration.json` in public folder. You can override the default configuration file used by doing the following steps:
 

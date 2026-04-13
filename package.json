@@ -42,9 +42,17 @@
 		"use-react-router-breadcrumbs": "^3.2.1",
 		"zip-dir": "^2.0.0"
 	},
-	"resolutions": {
-		"react-is": "^18.3.1",
-		"axios": "^1.15.0"
+	"pnpm": {
+		"overrides": {
+			"react-is": "^18.3.1",
+			"axios": "^1.15.0"
+		},
+		"onlyBuiltDependencies": [
+			"@axa-fr/oidc-client",
+			"@axa-fr/react-oidc",
+			"@swc/core",
+			"cypress"
+		]
 	},
 	"scripts": {
 		"start": "vite --open --port 3000",
