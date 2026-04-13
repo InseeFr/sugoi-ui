@@ -19,7 +19,7 @@
 		"autosuggest-highlight": "^3.2.0",
 		"axios": "^1.15.0",
 		"html-react-parser": "^5.2.17",
-		"i18next": "^21.6.6",
+		"i18next": "^26.0.4",
 		"i18next-browser-languagedetector": "^6.1.2",
 		"i18next-http-backend": "^3.0.2",
 		"jsoneditor": "^9.10.5",
