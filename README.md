@@ -12,11 +12,11 @@ docker run -p 8080:8080 --env API_URL_CI=https://sugoi-api.yourdomain.com inseef
 
 ### Using NodeJS
 
-We recommend using `yarn` instead of `npm` but both should work just fine.
+We recommend using `pnpm` instead of `npm` but both should work just fine.
 
 ```
-yarn
-yarn start
+pnpm
+pnpm start
 ```
 
 ## Configuration

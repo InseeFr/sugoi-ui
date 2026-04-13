@@ -1,0 +1,5 @@
+allowBuilds:
+  '@axa-fr/oidc-client': true
+  '@axa-fr/react-oidc': true
+  '@swc/core': true
+  cypress: true
