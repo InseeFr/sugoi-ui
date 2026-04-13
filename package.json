@@ -99,7 +99,7 @@
 		"eslint-plugin-react": "^7.37.5",
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-unused-imports": "^4.4.1",
-		"prettier": "^2.5.1",
+		"prettier": "^3.8.2",
 		"sonarqube-scanner": "^4.3.5",
 		"tslib": "^2.8.1",
 		"typescript": "^5.9.3",
