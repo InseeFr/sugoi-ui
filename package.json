@@ -78,7 +78,7 @@
 		"@testing-library/user-event": "^14.6.1",
 		"@types/autosuggest-highlight": "^3.2.3",
 		"@types/jest": "^30.0.0",
-		"@types/json-editor": "^0.0.6",
+		"@types/json-editor": "^0.0.10",
 		"@types/jsoneditor-for-react": "^0.0.4",
 		"@types/lodash.get": "^4.4.9",
 		"@types/lodash.isequal": "^4.5.8",
