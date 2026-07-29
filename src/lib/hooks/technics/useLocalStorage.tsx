@@ -5,7 +5,7 @@ export const useLocalStorage = (key: string, initialValue: any) => {
 		try {
 			const item = window.localStorage.getItem(key);
 			return item ? JSON.parse(item) : initialValue;
-		} catch (error) {
+		} catch {
 			return initialValue;
 		}
 	});
@@ -20,7 +20,7 @@ export const useLocalStorage = (key: string, initialValue: any) => {
 			} else {
 				window.localStorage.removeItem(key);
 			}
-		} catch (error) {
+		} catch {
 			// continue regardless of error
 		}
 	};

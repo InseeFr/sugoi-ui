@@ -17,7 +17,7 @@ const initialConfigState: AppState = {
 		enabled_debug: window.localStorage.getItem('debug-notif-enabled')
 			? (window.localStorage.getItem(
 					'debug-notif-enabled',
-			  ) as string) === 'true'
+				) as string) === 'true'
 			: false,
 	},
 	config: {},

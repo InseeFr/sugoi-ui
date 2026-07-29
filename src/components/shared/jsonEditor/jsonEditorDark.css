@@ -35,7 +35,8 @@ div.jsoneditor textarea,
 pre.jsoneditor-preview,
 .jsoneditor-schema-error,
 .jsoneditor-popover {
-	font-family: 'dejavu sans mono', 'droid sans mono', consolas, monaco,
+	font-family:
+		'dejavu sans mono', 'droid sans mono', consolas, monaco,
 		'lucida console', 'courier new', courier, monospace, sans-serif;
 	font-size: 10pt;
 	color: #ffffff;
@@ -54,7 +55,8 @@ textarea.jsoneditor-text {
 
 .jsoneditor {
 	border: thin solid #fcfcfc;
-	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+	box-shadow:
+		0px 2px 1px -1px rgba(0, 0, 0, 0.2),
 		0px 1px 1px 0px rgba(0, 0, 0, 0.14),
 		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 	border-radius: 10px;
