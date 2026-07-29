@@ -20,6 +20,11 @@
 		"sourceType": "module"
 	},
 	"plugins": ["react", "@typescript-eslint", "prettier", "unused-imports"],
+	"settings": {
+    	"react": {
+      		"version": "detect"
+    	}
+  	},
 	"rules": {
 		"prettier/prettier": [
 			"error",

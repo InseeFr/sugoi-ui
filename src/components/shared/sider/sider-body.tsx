@@ -234,11 +234,11 @@ const SiderBody = () => {
 												realmSelected?.name +
 												'/us/' +
 												newUserStorage,
-									  )
+										)
 									: navigate(
 											'/realm/' +
 												realmSelected?.name,
-									  );
+										);
 							}}
 							renderInput={(params) => (
 								<TextField
@@ -267,12 +267,12 @@ const SiderBody = () => {
 											'/us/' +
 											userStorageSelected?.name +
 											'/users',
-								  )
+									)
 								: navigate(
 										'/realm/' +
 											realmSelected?.name +
 											'/users',
-								  )
+									)
 						}
 						sx={{
 							paddingLeft: theme.spacing(6),
@@ -309,12 +309,12 @@ const SiderBody = () => {
 											'/us/' +
 											userStorageSelected?.name +
 											'/organizations',
-								  )
+									)
 								: navigate(
 										'/realm/' +
 											realmSelected?.name +
 											'/organizations',
-								  )
+									)
 						}
 						sx={{
 							paddingLeft: theme.spacing(6),

@@ -75,7 +75,7 @@ const ThemeWrapper = () => {
 										route.secure
 											? withOidcSecure(
 													route.component,
-											  )({})
+												)({})
 											: route.component()
 									}
 								/>

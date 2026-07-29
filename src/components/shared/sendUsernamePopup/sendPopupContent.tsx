@@ -109,8 +109,8 @@ export const SendPopupContent = ({
 						identifiant
 						{includeNameApp
 							? " pour l'accès  à " +
-							  templateProperties.application +
-							  ' :'
+								templateProperties.application +
+								' :'
 							: ' :'}
 					</Box>
 					<Box m={2}>{user?.username}</Box>

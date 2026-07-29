@@ -189,7 +189,7 @@ export const RealmHome = () => {
 					realm +
 					(userStorage
 						? t('global_search.title_next') +
-						  userStorage
+							userStorage
 						: '')
 				}
 			/>

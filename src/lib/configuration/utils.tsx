@@ -15,7 +15,7 @@ export const getConfigFile = async (): Promise<any> => {
 	try {
 		const resp = await client.get('/' + nameAppConfigFile);
 		return resp.data;
-	} catch (err) {
+	} catch {
 		return console.log('Impossible de récuperer la configuration');
 	}
 };

@@ -29,11 +29,11 @@ export const ResetPasswordPopup = () => {
 			? setTemplateProperties({
 					...templateProperties,
 					[name]: value,
-			  })
+				})
 			: setTemplateProperties({
 					...templateProperties,
 					[name]: null,
-			  });
+				});
 	};
 	const [forceResetPwd, setForceResetPwd] = useState(true);
 	const [open, setOpen] = React.useState(false);

@@ -224,8 +224,8 @@ export const ResetPasswordPopupContent = ({
 						mot de passe
 						{includeNameApp
 							? " pour l'accès  à " +
-							  templateProperties.application +
-							  ' :'
+								templateProperties.application +
+								' :'
 							: ' :'}
 					</Box>
 					<Box fontStyle="italic" m={2}>

@@ -72,7 +72,7 @@ export const getUsers = (
 					userStorage,
 					searchRequest || {},
 					accessToken,
-			  )
+				)
 			: remote.getUsers(realm, searchRequest || {}, accessToken);
 	}
 };
@@ -92,7 +92,7 @@ export const getUser = (
 					userStorage,
 					identifiant,
 					accessToken,
-			  )
+				)
 			: remote.getUser(realm, identifiant, accessToken);
 	}
 };
@@ -131,7 +131,7 @@ export const deleteUser = (
 					userStorage,
 					id,
 					accessToken,
-			  )
+				)
 			: remote.deleteUser(realm, id, accessToken);
 	}
 };
@@ -155,7 +155,7 @@ export const updateUser = (
 					id,
 					user,
 					accessToken,
-			  )
+				)
 			: remote.updateUser(realm, id, user, accessToken);
 	}
 };
@@ -176,12 +176,12 @@ export const getOrganizations = (
 					userStorage,
 					searchRequest || {},
 					accessToken,
-			  )
+				)
 			: remote.getOrganizations(
 					realm,
 					searchRequest || {},
 					accessToken,
-			  );
+				);
 	}
 };
 
@@ -200,7 +200,7 @@ export const getOrganization = (
 					userStorage,
 					identifiant,
 					accessToken,
-			  )
+				)
 			: remote.getOrganization(realm, identifiant, accessToken);
 	}
 };
@@ -223,13 +223,13 @@ export const updateOrganization = (
 					id,
 					organization,
 					accessToken,
-			  )
+				)
 			: remote.updateOrganization(
 					realm,
 					id,
 					organization,
 					accessToken,
-			  );
+				);
 	}
 };
 
@@ -268,7 +268,7 @@ export const deleteOrganization = (
 					userStorage,
 					id,
 					accessToken,
-			  )
+				)
 			: remote.deleteOrganization(realm, id, accessToken);
 	}
 };
@@ -398,7 +398,7 @@ export const sendIdentifiant = (
 				properties,
 				userStorage,
 				accessToken,
-		  )
+			)
 		: remote.sendIdentifiant(realm, userId, properties, accessToken);
 };
 
@@ -420,7 +420,7 @@ export const resetPassword = (
 				webhooktag,
 				userStorage,
 				accessToken,
-		  )
+			)
 		: remote.resetPassword(
 				realm,
 				userId,
@@ -428,7 +428,7 @@ export const resetPassword = (
 				templateProperties,
 				webhooktag,
 				accessToken,
-		  );
+			);
 };
 
 export const getGroup = (
@@ -464,14 +464,14 @@ export const addAttribute = (
 				attribute_key,
 				attribute_value,
 				accessToken,
-		  )
+			)
 		: remote.addAttributes(
 				realm,
 				user,
 				attribute_key,
 				attribute_value,
 				accessToken,
-		  );
+			);
 };
 
 export const deleteAttribute = (
@@ -490,14 +490,14 @@ export const deleteAttribute = (
 				attribute_key,
 				attribute_value,
 				accessToken,
-		  )
+			)
 		: remote.deleteAttributes(
 				realm,
 				user,
 				attribute_key,
 				attribute_value,
 				accessToken,
-		  );
+			);
 };
 
 export const addGroupToUser = (
