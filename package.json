@@ -42,7 +42,7 @@
 		"use-react-router-breadcrumbs": "^3.2.1",
 		"zip-dir": "^2.0.0"
 	},
-	"resolutions": {
+	"overrides": {
 		"react-is": "^18.3.1",
 		"axios": "^1.15.0"
 	},

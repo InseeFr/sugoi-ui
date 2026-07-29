@@ -12,11 +12,10 @@ jobs:
     name: pre-release
     runs-on: ubuntu-latest
     steps:
-      - name: Use Node.js
-        uses: actions/setup-node@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 24
-
+      - run: npm install -g pnpm
       - name: Prepare
         run: |
           git config --global user.name "Insee - Team sugoi"
@@ -24,7 +23,7 @@ jobs:
           git clone https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{github.repository}}.git
           cd sugoi-ui/
           git checkout -b release-${{ github.event.inputs.version }}
-          yarn version --no-git-tag-version --new-version ${{ github.event.inputs.version }}
+          pnpm version --no-git-tag-version --new-version ${{ github.event.inputs.version }}
           git add package.json
           git commit -s -m "[REL] :rocket: Release version ${{ github.event.inputs.version }}"
           git push origin release-${{ github.event.inputs.version }} -f
@@ -41,17 +40,16 @@ jobs:
         with:
           repository: ${{github.repository}}
           ref: release-${{ github.event.inputs.version }}
-
-      - name: Use Node.js
-        uses: actions/setup-node@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 24
+      - run: npm install -g pnpm
 
-      - name: Install dependencies with Yarn
-        run: yarn install --frozen-lockfile
+      - name: Install dependencies with pnpm
+        run: pnpm install --frozen-lockfile
 
-      - name: Build with Yarn 
-        run: yarn build
+      - name: Build with pnpm
+        run: pnpm build
         
 
       - uses: vimtor/action-zip@v1
@@ -80,18 +78,18 @@ jobs:
     needs: release
     runs-on: ubuntu-latest
     steps:
-      - name: Use Node.js
-        uses: actions/setup-node@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 24
+      - run: npm install -g pnpm
       - run: |
           git config --global user.name "Insee - Team sugoi"
           git clone https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{github.repository}}.git
           cd sugoi-ui/
           git pull
           git checkout release-${{ github.event.inputs.version }}
-          yarn version --minor --no-git-tag-version
-          yarn version --prerelease --no-git-tag-version
+          pnpm version --minor --no-git-tag-version
+          pnpm version --prerelease --no-git-tag-version
           git add package.json
           git commit -s -m "[ENH] :sparkles: prepare next version"
           git push origin release-${{ github.event.inputs.version }}
