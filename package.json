@@ -28,7 +28,6 @@
 		"lodash.set": "^4.3.2",
 		"material-react-table": "3.x",
 		"notistack": "3.x",
-		"npm-build-zip": "^1.0.4",
 		"prop-types": "^15.8.1",
 		"react": "^18.0.0",
 		"react-dom": "^18.0.0",
