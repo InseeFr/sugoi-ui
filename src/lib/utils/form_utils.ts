@@ -1,5 +1,5 @@
 import { ErrorField, Field } from '../model/field';
-import get from 'lodash.get';
+import get from 'lodash/get';
 
 function manageError(field: Field, errorFields: ErrorField[]): void {
 	const candidate: ErrorField[] = errorFields.filter(

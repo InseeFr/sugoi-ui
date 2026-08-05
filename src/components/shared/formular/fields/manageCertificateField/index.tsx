@@ -7,7 +7,7 @@ import {
 } from 'src/lib/hooks/api-hooks';
 import { download } from 'src/lib/utils/downloadFile';
 import UploadFile from '../uploadFileInfo';
-import get from 'lodash.get';
+import get from 'lodash/get';
 
 interface Props {
 	value: any;

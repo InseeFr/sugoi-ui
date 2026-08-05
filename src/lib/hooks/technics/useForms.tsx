@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import set from 'lodash.set';
+import set from 'lodash/set';
 import { ErrorField, Field } from 'src/lib/model/field';
 import { validateForm } from 'src/lib/utils/form_utils';
 import cloneObject from 'src/lib/utils/clone';
