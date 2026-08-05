@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
-import get from 'lodash.get';
+import get from 'lodash/get';
 import React from 'react';
 import { useParams } from 'react-router';
 import LoadingButton from 'src/components/shared/loadingButton';

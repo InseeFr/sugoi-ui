@@ -1,4 +1,4 @@
-import get from 'lodash.get';
+import get from 'lodash/get';
 import { Field } from 'src/lib/model/field';
 import GroupsField from '../groupsFieldInfo';
 import HabilitationsPopup from '../habilitationsFieldInfo';
