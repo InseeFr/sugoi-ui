@@ -5,7 +5,7 @@
 	"private": true,
 	"type": "module",
 	"dependencies": {
-		"@axa-fr/react-oidc": "^7.27.19",
+		"@axa-fr/react-oidc": "^7.29.1",
 		"@emotion/react": "^11.14.0",
 		"@emotion/styled": "^11.14.1",
 		"@mui/icons-material": "^6.0.0",
