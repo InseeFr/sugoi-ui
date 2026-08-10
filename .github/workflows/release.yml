@@ -96,8 +96,8 @@ jobs:
           git clone https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{github.repository}}.git
           cd sugoi-ui/
           git checkout release-$VERSION
-          pnpm version minor --no-git-tag-version
-          pnpm version prerelease --no-git-tag-version
+          pnpm version minor --no-git-tag-version --no-git-checks
+          pnpm version prerelease --no-git-tag-version --no-git-checks
           git add package.json
           git commit -s -m "[ENH] :sparkles: prepare next version"
           git push origin release-$VERSION
