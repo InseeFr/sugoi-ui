@@ -25,10 +25,10 @@ const Settings = () => {
 			alignItems="stretch"
 			spacing={2}
 		>
-			<Grid item>
+			<Grid>
 				<Title title={t('settings.title')} />
 			</Grid>
-			<Grid item>
+			<Grid>
 				<Grid
 					container
 					direction="column"
@@ -36,7 +36,7 @@ const Settings = () => {
 					alignItems="stretch"
 					spacing={5}
 				>
-					<Grid item>
+					<Grid>
 						<TextField
 							id="select"
 							label="Realm"
@@ -58,7 +58,7 @@ const Settings = () => {
 							))}
 						</TextField>
 					</Grid>
-					<Grid item>
+					<Grid>
 						<Grid
 							container
 							direction="row"
@@ -84,7 +84,7 @@ const Settings = () => {
 							/>
 						</Grid>
 					</Grid>
-					<Grid item>
+					<Grid>
 						{selectedRealm !== '' && (
 							<AsyncEditor
 								value={

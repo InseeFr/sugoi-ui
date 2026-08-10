@@ -84,21 +84,21 @@ const SearchFormular = ({
 			alignItems="stretch"
 			spacing={2}
 		>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<Grid
 					container
 					direction="column"
 					alignContent="flex-end"
 					spacing={2}
 				>
-					<Grid item xs={6}>
+					<Grid size={6}>
 						<CustomToolBar
 							handleClick={handleClickAdd}
 						></CustomToolBar>
 					</Grid>
 				</Grid>
 			</Grid>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<form onSubmit={submit}>
 					<Paper elevation={0}>
 						<fieldset
@@ -125,13 +125,13 @@ const SearchFormular = ({
 								alignItems="stretch"
 								spacing={2}
 							>
-								<Grid item xs={12}>
+								<Grid size={12}>
 									<Grid
 										container
 										direction="row"
 										spacing={2}
 									>
-										<Grid item xs={12}>
+										<Grid size={12}>
 											<Grid
 												container
 												direction="row"
@@ -151,17 +151,14 @@ const SearchFormular = ({
 														) => {
 															return (
 																<Grid
-																	item
-																	xs={
-																		12
-																	}
-																	md={
-																		12
-																	}
 																	key={
 																		'field' +
 																		i
 																	}
+																	size={{
+																		xs: 12,
+																		md: 12,
+																	}}
 																>
 																	{
 																		field
@@ -172,7 +169,7 @@ const SearchFormular = ({
 													)}
 											</Grid>
 										</Grid>
-										<Grid item xs={12}>
+										<Grid size={12}>
 											<Collapse
 												in={
 													expand
@@ -196,17 +193,14 @@ const SearchFormular = ({
 														) => {
 															return (
 																<Grid
-																	item
-																	xs={
-																		12
-																	}
-																	md={
-																		6
-																	}
 																	key={
 																		'field_advanced' +
 																		i
 																	}
+																	size={{
+																		xs: 12,
+																		md: 6,
+																	}}
 																>
 																	{
 																		field
@@ -220,14 +214,14 @@ const SearchFormular = ({
 										</Grid>
 									</Grid>
 								</Grid>
-								<Grid item xs={12}>
+								<Grid size={12}>
 									<Grid
 										container
 										direction="row"
 										justifyContent="flex-end"
 										spacing={3}
 									>
-										<Grid item>
+										<Grid>
 											<Button
 												variant="contained"
 												color="primary"
@@ -238,7 +232,7 @@ const SearchFormular = ({
 												)}
 											</Button>
 										</Grid>
-										<Grid item>
+										<Grid>
 											<Button
 												variant="contained"
 												color="secondary"
@@ -252,7 +246,7 @@ const SearchFormular = ({
 												)}
 											</Button>
 										</Grid>
-										<Grid item>
+										<Grid>
 											<ExpandButton
 												expand={
 													expand

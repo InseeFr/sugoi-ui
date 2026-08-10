@@ -55,7 +55,7 @@ const ListFieldInfoPopup = ({
 
 	return (
 		<Grid container spacing={3}>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<Box sx={{ display: 'flex', alignItems: 'center' }}>
 					<Typography variant="subtitle1">
 						{name}
@@ -72,7 +72,7 @@ const ListFieldInfoPopup = ({
 				</Box>
 			</Grid>
 			{!edit && value.length > 0 ? (
-				<Grid item xs={12}>
+				<Grid size={12}>
 					<Grid
 						container
 						direction="row"
@@ -81,7 +81,7 @@ const ListFieldInfoPopup = ({
 						spacing={1}
 					>
 						{value?.map((val: any, i: any) => (
-							<Grid item key={i}>
+							<Grid key={i}>
 								<Chip
 									key={
 										'list_' +
@@ -101,7 +101,12 @@ const ListFieldInfoPopup = ({
 			) : null}
 			{edit && modifiable ? (
 				<>
-					<Grid item xs={12} md={6}>
+					<Grid
+						size={{
+							xs: 12,
+							md: 6,
+						}}
+					>
 						<Grid
 							container
 							direction="column"
@@ -109,7 +114,7 @@ const ListFieldInfoPopup = ({
 							alignItems="stretch"
 							spacing={2}
 						>
-							<Grid item>
+							<Grid>
 								<Typography
 									align="left"
 									variant="subtitle2"
@@ -117,10 +122,10 @@ const ListFieldInfoPopup = ({
 									{addTitle}
 								</Typography>
 							</Grid>
-							<Grid item>
+							<Grid>
 								<Divider />
 							</Grid>
-							<Grid item>
+							<Grid>
 								<Box
 									sx={{
 										display: 'flex',
@@ -151,7 +156,7 @@ const ListFieldInfoPopup = ({
 									/>
 								</Box>
 							</Grid>
-							<Grid item>
+							<Grid>
 								<Button
 									variant="contained"
 									color="primary"
@@ -164,7 +169,12 @@ const ListFieldInfoPopup = ({
 						</Grid>
 					</Grid>
 
-					<Grid item xs={12} md={6}>
+					<Grid
+						size={{
+							xs: 12,
+							md: 6,
+						}}
+					>
 						<Grid
 							container
 							direction="column"
@@ -173,7 +183,7 @@ const ListFieldInfoPopup = ({
 							spacing={2}
 						>
 							<>
-								<Grid item>
+								<Grid>
 									<Typography
 										align="left"
 										variant="subtitle2"
@@ -181,11 +191,11 @@ const ListFieldInfoPopup = ({
 										{deleteTitle}
 									</Typography>
 								</Grid>
-								<Grid item>
+								<Grid>
 									<Divider />
 								</Grid>
 							</>
-							<Grid item>
+							<Grid>
 								<List dense={true}>
 									{value.map(
 										(

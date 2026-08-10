@@ -80,7 +80,7 @@ const DataViewer = ({
 			justifyContent="center"
 			alignItems="stretch"
 		>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<Grid
 					container
 					spacing={3}
@@ -88,7 +88,7 @@ const DataViewer = ({
 					justifyContent="center"
 					alignItems="stretch"
 				>
-					<Grid item xs={12}>
+					<Grid size={12}>
 						<Paper square>
 							<Tabs
 								value={value}
@@ -124,7 +124,7 @@ const DataViewer = ({
 
 			{value === 0 && (
 				<>
-					<Grid item xs={12}>
+					<Grid size={12}>
 						<Panel
 							title="Information du profil"
 							collapsible={false}
@@ -140,7 +140,7 @@ const DataViewer = ({
 						</Panel>
 					</Grid>
 					{propertiesFields.length > 0 && (
-						<Grid item xs={12}>
+						<Grid size={12}>
 							<Panel
 								title="Propriété"
 								collapsible={true}
@@ -155,13 +155,11 @@ const DataViewer = ({
 							</Panel>
 						</Grid>
 					)}
-					<Grid item xs={12}>
-						{buttons}
-					</Grid>
+					<Grid size={12}>{buttons}</Grid>
 				</>
 			)}
 			{value === 1 && (
-				<Grid item xs={12}>
+				<Grid size={12}>
 					<Panel
 						title="Droits applicatifs"
 						collapsible={false}
@@ -178,7 +176,7 @@ const DataViewer = ({
 			)}
 			{value === 2 && (
 				<>
-					<Grid item xs={12}>
+					<Grid size={12}>
 						<Panel
 							title="Credentials"
 							collapsible={true}
@@ -198,15 +196,16 @@ const DataViewer = ({
 									authentificationFields,
 								).map((field, i) => (
 									<Grid
-										item
-										xs={12}
-										md={6}
 										key={
 											'field-' +
 											field +
 											'-' +
 											i
 										}
+										size={{
+											xs: 12,
+											md: 6,
+										}}
 									>
 										{field}
 									</Grid>
@@ -215,18 +214,18 @@ const DataViewer = ({
 						</Panel>
 					</Grid>
 					{isUser && (
-						<Grid item xs={12}>
+						<Grid size={12}>
 							<Grid
 								container
 								direction="row"
 								justifyContent="center"
 								spacing={3}
 							>
-								<Grid item>
+								<Grid>
 									<SendUsernamePopup />
 								</Grid>
 
-								<Grid item>
+								<Grid>
 									<ResetPasswordPopup />
 								</Grid>
 							</Grid>

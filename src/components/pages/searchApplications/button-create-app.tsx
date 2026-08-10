@@ -47,7 +47,7 @@ export const CreateApplicationButton = ({ handleCreateApp }: Props) => {
 						alignItems="stretch"
 						spacing={3}
 					>
-						<Grid item>
+						<Grid>
 							<TextField
 								id="application-create-name"
 								label="Nom de l'application"
@@ -61,7 +61,7 @@ export const CreateApplicationButton = ({ handleCreateApp }: Props) => {
 								fullWidth
 							/>
 						</Grid>
-						<Grid item>
+						<Grid>
 							<TextField
 								id="application-create-owner"
 								label="Propriétaire de l'application"

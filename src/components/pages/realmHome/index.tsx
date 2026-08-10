@@ -195,17 +195,17 @@ export const RealmHome = () => {
 			/>
 
 			<Grid container direction="row" spacing={2}>
-				<Grid item xs={12}>
+				<Grid size={12}>
 					<Description realmName={realm} />
 				</Grid>
-				<Grid item xs={12}>
+				<Grid size={12}>
 					<AutoCompleteUsers
 						realm={realm}
 						userStorage={userStorage}
 					/>
 				</Grid>
 				{hasOrganisation && (
-					<Grid item xs={12}>
+					<Grid size={12}>
 						<AutocompleteOrganizations
 							realm={realm}
 							userStorage={userStorage}
@@ -213,7 +213,7 @@ export const RealmHome = () => {
 					</Grid>
 				)}
 				{hasApplication && (
-					<Grid item xs={12}>
+					<Grid size={12}>
 						<AutoCompleteApplications realm={realm} />
 					</Grid>
 				)}

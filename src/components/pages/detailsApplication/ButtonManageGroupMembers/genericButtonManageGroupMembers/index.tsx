@@ -58,7 +58,12 @@ export const GenericButtonManageGroupMembers = ({
 				}
 				body={
 					<Grid container direction="row" spacing={2}>
-						<Grid item xs={12} md={6}>
+						<Grid
+							size={{
+								xs: 12,
+								md: 6,
+							}}
+						>
 							<AddUsers
 								realm={realm}
 								group={group as Group}
@@ -70,7 +75,12 @@ export const GenericButtonManageGroupMembers = ({
 								}
 							/>
 						</Grid>
-						<Grid item xs={12} md={6}>
+						<Grid
+							size={{
+								xs: 12,
+								md: 6,
+							}}
+						>
 							<GroupListUsers
 								realm={realm}
 								group={group as Group}

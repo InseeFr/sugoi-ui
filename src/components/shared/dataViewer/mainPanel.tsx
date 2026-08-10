@@ -26,7 +26,7 @@ const MainPanel = ({
 			alignContent="center"
 			alignItems="stretch"
 		>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<Grid container spacing={3} direction="row">
 					{GenerateFields(
 						values,
@@ -34,17 +34,18 @@ const MainPanel = ({
 						mainsFields,
 					).map((field, i) => (
 						<Grid
-							item
-							xs={12}
-							md={6}
 							key={'field-' + field + '-' + i}
+							size={{
+								xs: 12,
+								md: 6,
+							}}
 						>
 							{field}
 						</Grid>
 					))}
 				</Grid>
 			</Grid>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				{addressFields.length > 0 && (
 					<Panel
 						title="Adresse"
@@ -60,15 +61,16 @@ const MainPanel = ({
 								addressFields,
 							).map((field, i) => (
 								<Grid
-									item
-									xs={12}
-									md={6}
 									key={
 										'field-' +
 										field +
 										'-' +
 										i
 									}
+									size={{
+										xs: 12,
+										md: 6,
+									}}
 								>
 									{field}
 								</Grid>
@@ -78,7 +80,7 @@ const MainPanel = ({
 				)}
 			</Grid>
 
-			<Grid item xs={12}>
+			<Grid size={12}>
 				{advancedFields.length > 0 && (
 					<Panel
 						title="Information Complémentaire"
@@ -94,15 +96,16 @@ const MainPanel = ({
 								advancedFields,
 							).map((field, i) => (
 								<Grid
-									item
-									xs={12}
-									md={6}
 									key={
 										'field-' +
 										field +
 										'-' +
 										i
 									}
+									size={{
+										xs: 12,
+										md: 6,
+									}}
 								>
 									{field}
 								</Grid>

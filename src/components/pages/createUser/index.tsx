@@ -42,24 +42,24 @@ const CreateUsers = () => {
 
 	return (
 		<Grid container spacing={2} direction="column">
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<Title title={t('create_user.title') + realm} />
 			</Grid>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<DataViewer
 					data={formValues}
 					fieldToDisplay={userConfig}
 					handleChange={handleChange}
 					errors={errors}
 					buttons={
-						<Grid item xs={12}>
+						<Grid size={12}>
 							<Grid
 								container
 								direction="row"
 								justifyContent="center"
 								spacing={3}
 							>
-								<Grid item>
+								<Grid>
 									<LoadingButton
 										handleClick={
 											handleCreate
@@ -73,7 +73,7 @@ const CreateUsers = () => {
 										)}
 									</LoadingButton>
 								</Grid>
-								<Grid item>
+								<Grid>
 									<Button
 										variant="contained"
 										onClick={

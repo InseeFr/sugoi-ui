@@ -64,8 +64,8 @@ export const AddUsers = ({
 	};
 
 	return (
-		<Grid item container spacing={1}>
-			<Grid item xs={12}>
+		<Grid container spacing={1}>
+			<Grid size={12}>
 				<TextField
 					id="application-search-textfield"
 					label={t(
@@ -77,7 +77,7 @@ export const AddUsers = ({
 					fullWidth
 				/>
 			</Grid>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<Title
 					title={t(
 						'detail_application.manage_group_popup.available_users',
@@ -85,7 +85,7 @@ export const AddUsers = ({
 					variant="body1"
 				/>
 			</Grid>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<TableContainer component={Paper}>
 					<Table size="small" aria-label="a dense table">
 						<TableHead>
@@ -187,14 +187,14 @@ export const AddUsers = ({
 					{loading && <LinearProgress />}
 				</TableContainer>
 			</Grid>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<Grid
 					container
 					direction="row"
 					justifyContent="space-between"
 					alignItems="center"
 				>
-					<Grid item>
+					<Grid>
 						<Select
 							value={rowsPerPage}
 							onChange={(e: any) =>
@@ -208,7 +208,7 @@ export const AddUsers = ({
 							<MenuItem value={50}>50</MenuItem>
 						</Select>
 					</Grid>
-					<Grid item>
+					<Grid>
 						<Pagination
 							count={Math.ceil(
 								users.length / rowsPerPage,

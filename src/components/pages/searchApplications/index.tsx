@@ -79,14 +79,13 @@ export const SearchApplications = () => {
 			spacing={3}
 		>
 			<Grid
-				item
-				xs={12}
 				style={{ display: 'flex', alignItems: 'center' }}
+				size={12}
 			>
 				<Title title={t('search_application.title') + realm} />
 				<ButtonDescription realmName={realm} />
 			</Grid>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<Grid
 					container
 					direction="row"
@@ -98,7 +97,7 @@ export const SearchApplications = () => {
 					/>
 				</Grid>
 			</Grid>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<Accordion defaultExpanded={true}>
 					<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 						<Title
@@ -116,7 +115,7 @@ export const SearchApplications = () => {
 							alignItems="stretch"
 							spacing={3}
 						>
-							<Grid item xs={12}>
+							<Grid size={12}>
 								<ApplicationsFavoriteList
 									applications={applicationsForFavorite.filter(
 										(application) =>
@@ -137,7 +136,7 @@ export const SearchApplications = () => {
 					</AccordionDetails>
 				</Accordion>
 			</Grid>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<Accordion>
 					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
@@ -160,7 +159,7 @@ export const SearchApplications = () => {
 								alignItems="stretch"
 								spacing={3}
 							>
-								<Grid item xs={12}>
+								<Grid size={12}>
 									<Grid
 										container
 										direction="row"
@@ -168,7 +167,7 @@ export const SearchApplications = () => {
 										alignItems="stretch"
 										spacing={3}
 									>
-										<Grid item xs={12}>
+										<Grid size={12}>
 											<TextField
 												id="application-search-textfield"
 												label={t(
@@ -186,7 +185,7 @@ export const SearchApplications = () => {
 										</Grid>
 									</Grid>
 								</Grid>
-								<Grid item xs={12}>
+								<Grid size={12}>
 									<ApplicationsViewer
 										applications={
 											applications

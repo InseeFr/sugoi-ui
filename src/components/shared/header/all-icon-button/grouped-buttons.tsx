@@ -1,4 +1,4 @@
-import { Hidden } from '@mui/material';
+import { Box } from '@mui/material';
 import AccountButton from './account-button';
 import ApiButton from './api-button';
 import GithubButton from './github-button';
@@ -12,7 +12,7 @@ import { ThemeButton } from './theme-button';
 const GroupedIcons = () => {
 	return (
 		<>
-			<Hidden smDown implementation="css">
+			<Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
 				<LanguageButton />
 				<HelpButton />
 				<ApiButton />
@@ -21,11 +21,11 @@ const GroupedIcons = () => {
 				<AccountButton />
 				<NotifButton />
 				<LoginButton />
-			</Hidden>
+			</Box>
 
-			<Hidden smUp implementation="css">
+			<Box sx={{ display: { xs: 'flex', sm: 'none' } }}>
 				<MoreIconButton />
-			</Hidden>
+			</Box>
 		</>
 	);
 };

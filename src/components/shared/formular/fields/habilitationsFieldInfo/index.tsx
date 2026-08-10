@@ -133,7 +133,7 @@ const HabilitationsPopup = ({
 
 	return (
 		<Grid container spacing={3}>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<Box sx={{ display: 'flex', alignItems: 'center' }}>
 					<Typography variant="subtitle1">
 						{name}
@@ -150,7 +150,7 @@ const HabilitationsPopup = ({
 				</Box>
 			</Grid>
 			{!edit && (
-				<Grid item xs={12}>
+				<Grid size={12}>
 					{loadingUser ? (
 						<CircularProgress />
 					) : (
@@ -167,7 +167,7 @@ const HabilitationsPopup = ({
 										habilitation: Habilitation,
 										i: any,
 									) => (
-										<Grid item key={i}>
+										<Grid key={i}>
 											<Chip
 												key={
 													'habilitation_' +
@@ -194,7 +194,12 @@ const HabilitationsPopup = ({
 			)}
 			{modifiable && edit ? (
 				<>
-					<Grid item xs={12} md={6}>
+					<Grid
+						size={{
+							xs: 12,
+							md: 6,
+						}}
+					>
 						<Grid
 							container
 							direction="column"
@@ -202,7 +207,7 @@ const HabilitationsPopup = ({
 							alignItems="stretch"
 							spacing={2}
 						>
-							<Grid item>
+							<Grid>
 								<Typography
 									align="left"
 									variant="subtitle1"
@@ -210,10 +215,10 @@ const HabilitationsPopup = ({
 									{name}
 								</Typography>
 							</Grid>
-							<Grid item>
+							<Grid>
 								<Divider />
 							</Grid>
-							<Grid item>
+							<Grid>
 								<TextField
 									variant="outlined"
 									label="Application"
@@ -229,7 +234,7 @@ const HabilitationsPopup = ({
 									disabled={loadingAdd}
 								/>
 							</Grid>
-							<Grid item>
+							<Grid>
 								<TextField
 									variant="outlined"
 									label="Role"
@@ -246,7 +251,7 @@ const HabilitationsPopup = ({
 								/>
 							</Grid>
 
-							<Grid item>
+							<Grid>
 								<TextField
 									variant="outlined"
 									label="Propriété"
@@ -262,7 +267,7 @@ const HabilitationsPopup = ({
 									disabled={loadingAdd}
 								/>
 							</Grid>
-							<Grid item>
+							<Grid>
 								<LoadingButton
 									variant="contained"
 									color="primary"
@@ -274,7 +279,7 @@ const HabilitationsPopup = ({
 									Ajouter
 								</LoadingButton>
 							</Grid>
-							<Grid item>
+							<Grid>
 								<Grid
 									container
 									direction="column"
@@ -286,7 +291,7 @@ const HabilitationsPopup = ({
 										undefined &&
 									defaultValuesUtilisateur.length >
 										0 ? (
-										<Grid item>
+										<Grid>
 											<Grid
 												container
 												direction="row"
@@ -296,9 +301,7 @@ const HabilitationsPopup = ({
 													2
 												}
 											>
-												<Grid
-													item
-												>
+												<Grid>
 													<p>
 														Ajouter
 														l’habilitation
@@ -306,7 +309,7 @@ const HabilitationsPopup = ({
 													</p>
 												</Grid>
 											</Grid>
-											<Grid item>
+											<Grid>
 												<Grid
 													container
 													direction="column"
@@ -322,7 +325,6 @@ const HabilitationsPopup = ({
 															i: any,
 														) => (
 															<Grid
-																item
 																key={
 																	'cadreHabilitation_' +
 																	i
@@ -351,13 +353,18 @@ const HabilitationsPopup = ({
 											</Grid>
 										</Grid>
 									) : (
-										<Grid item></Grid>
+										<Grid></Grid>
 									)}
 								</Grid>
 							</Grid>
 						</Grid>
 					</Grid>
-					<Grid item xs={12} md={6}>
+					<Grid
+						size={{
+							xs: 12,
+							md: 6,
+						}}
+					>
 						{loadingUser ? (
 							<CircularProgress />
 						) : (
@@ -368,7 +375,7 @@ const HabilitationsPopup = ({
 								alignItems="stretch"
 								spacing={2}
 							>
-								<Grid item>
+								<Grid>
 									<Typography
 										align="left"
 										variant="subtitle1"
@@ -377,10 +384,10 @@ const HabilitationsPopup = ({
 										habilitation
 									</Typography>
 								</Grid>
-								<Grid item>
+								<Grid>
 									<Divider />
 								</Grid>
-								<Grid item>
+								<Grid>
 									<List dense={true}>
 										{user &&
 											user.habilitations?.map(

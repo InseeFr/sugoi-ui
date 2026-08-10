@@ -46,7 +46,7 @@ const UploadFile = ({
 	return (
 		<>
 			<Grid container direction="column">
-				<Grid item xs={12}>
+				<Grid size={12}>
 					<Box
 						sx={{
 							display: 'flex',
@@ -72,7 +72,7 @@ const UploadFile = ({
 						)}
 					</Box>
 				</Grid>
-				<Grid item xs={12}>
+				<Grid size={12}>
 					{loading ? (
 						<Loader />
 					) : (

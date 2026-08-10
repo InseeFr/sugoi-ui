@@ -5,7 +5,7 @@ const Footer = () => {
 	const { t } = useTranslation();
 	return (
 		<Grid container direction="column" alignItems="center">
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<Typography
 					variant="body2"
 					color="textSecondary"

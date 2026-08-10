@@ -71,8 +71,8 @@ export const DetailsApplication = () => {
 				title={t('detail_application.title') + applicationId}
 			/>
 			<Grid container direction="column" spacing={5}>
-				<Grid container item direction="column" spacing={3}>
-					<Grid item>
+				<Grid container direction="column" spacing={3}>
+					<Grid>
 						<Title
 							title={t(
 								'detail_application.manager_groups_title',
@@ -80,7 +80,7 @@ export const DetailsApplication = () => {
 							variant="subtitle1"
 						/>
 					</Grid>
-					<Grid item>
+					<Grid>
 						<GroupsViewer
 							groups={
 								groupManager
@@ -111,8 +111,8 @@ export const DetailsApplication = () => {
 					</Grid>
 				</Grid>
 
-				<Grid container item direction="column" spacing={2}>
-					<Grid item>
+				<Grid container direction="column" spacing={2}>
+					<Grid>
 						<Title
 							title={t(
 								'detail_application.groups_title',
@@ -121,15 +121,14 @@ export const DetailsApplication = () => {
 						/>
 					</Grid>
 					<Grid
-						xs={12}
 						direction="row"
-						item
 						container
 						spacing={2}
 						justifyContent="space-between"
 						alignItems="stretch"
+						size={12}
 					>
-						<Grid item xs={8}>
+						<Grid size={8}>
 							<TextField
 								fullWidth
 								id="standard-bare"
@@ -157,7 +156,7 @@ export const DetailsApplication = () => {
 								}}
 							/>
 						</Grid>
-						<Grid item xs={4}>
+						<Grid size={4}>
 							<ButtonCreateGroup
 								handleAddGroup={handleCreateGroup(
 									realm,
@@ -168,13 +167,12 @@ export const DetailsApplication = () => {
 						</Grid>
 					</Grid>
 					<Grid
-						xs={12}
 						direction="row"
 						container
 						spacing={2}
-						item
+						size={12}
 					>
-						<Grid item xs={12}>
+						<Grid size={12}>
 							<GroupsViewer
 								groups={
 									application?.groups.filter(
@@ -261,7 +259,7 @@ export const DetailsApplication = () => {
 					getApplication={getApplication}
 					realm={realm}
 				/>
-				<Grid item>
+				<Grid>
 					{application && (
 						<ApplicationSettings
 							application={application}
@@ -269,7 +267,7 @@ export const DetailsApplication = () => {
 						/>
 					)}
 				</Grid>
-				<Grid item>
+				<Grid>
 					<Grid
 						container
 						direction="row"
@@ -277,7 +275,7 @@ export const DetailsApplication = () => {
 						alignItems="center"
 						spacing={3}
 					>
-						<Grid item>
+						<Grid>
 							<ConfirmationPopup
 								Icon={
 									<LoadingButton

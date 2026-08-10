@@ -79,7 +79,7 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 
 	return (
 		<Grid container spacing={3}>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<Box sx={{ display: 'flex', alignItems: 'center' }}>
 					<Typography variant="subtitle1">
 						{name}
@@ -99,7 +99,12 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 			</Grid>
 			{modifiable && edit ? (
 				<>
-					<Grid item xs={12} md={6}>
+					<Grid
+						size={{
+							xs: 12,
+							md: 6,
+						}}
+					>
 						<Grid
 							container
 							direction="column"
@@ -107,7 +112,7 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 							alignItems="stretch"
 							spacing={2}
 						>
-							<Grid item>
+							<Grid>
 								<Typography
 									align="left"
 									variant="subtitle1"
@@ -116,10 +121,10 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 									groupes
 								</Typography>
 							</Grid>
-							<Grid item>
+							<Grid>
 								<Divider />
 							</Grid>
-							<Grid item>
+							<Grid>
 								<Grid
 									container
 									direction="column"
@@ -127,7 +132,7 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 									alignItems="stretch"
 									spacing={1}
 								>
-									<Grid item xs={12}>
+									<Grid size={12}>
 										<AutoCompleteApplication
 											application={
 												applicationName
@@ -138,7 +143,7 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 											realm={realm}
 										/>
 									</Grid>
-									<Grid item xs={12}>
+									<Grid size={12}>
 										<ManageGroup
 											appGroups={
 												application?.groups ||
@@ -160,7 +165,12 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 							</Grid>
 						</Grid>
 					</Grid>
-					<Grid item xs={12} md={6}>
+					<Grid
+						size={{
+							xs: 12,
+							md: 6,
+						}}
+					>
 						<Grid
 							container
 							direction="column"
@@ -168,7 +178,7 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 							alignItems="stretch"
 							spacing={2}
 						>
-							<Grid item xs={12}>
+							<Grid size={12}>
 								<Typography
 									align="left"
 									variant="subtitle1"
@@ -176,10 +186,10 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 									Groupes
 								</Typography>
 							</Grid>
-							<Grid item xs={12}>
+							<Grid size={12}>
 								<Divider />
 							</Grid>
-							<Grid item xs={12}>
+							<Grid size={12}>
 								{loadingAdd ||
 								loadingDelete ||
 								loadingUser ? (
@@ -206,7 +216,6 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 													i: any,
 												) => (
 													<Grid
-														item
 														key={
 															i
 														}
@@ -238,7 +247,7 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 					</Grid>
 				</>
 			) : (
-				<Grid item xs={12}>
+				<Grid size={12}>
 					{loadingUser ? (
 						<CircularProgress />
 					) : (
@@ -255,10 +264,7 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 										group !== null,
 								)
 								.map((group: Group, i: any) => (
-									<Grid
-										item
-										key={'groups_' + i}
-									>
+									<Grid key={'groups_' + i}>
 										<Chip
 											color="default"
 											size="small"

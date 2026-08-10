@@ -48,7 +48,7 @@ export const ManageGroup = ({
 			alignItems="stretch"
 			spacing={1}
 		>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<TableContainer component={Paper}>
 					<Table size="small" aria-label="a dense table">
 						<TableHead>
@@ -143,14 +143,14 @@ export const ManageGroup = ({
 					</Table>
 				</TableContainer>
 			</Grid>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<Grid
 					container
 					direction="row"
 					justifyContent="space-between"
 					alignItems="center"
 				>
-					<Grid item>
+					<Grid>
 						<Select
 							value={rowsPerPage}
 							onChange={(e: any) =>
@@ -164,7 +164,7 @@ export const ManageGroup = ({
 							<MenuItem value={50}>50</MenuItem>
 						</Select>
 					</Grid>
-					<Grid item>
+					<Grid>
 						<Pagination
 							count={Math.ceil(
 								appGroups?.length / rowsPerPage,

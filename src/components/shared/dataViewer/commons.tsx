@@ -43,11 +43,7 @@ export const ContentPanel = ({
 		>
 			{GenerateFields(values, handleChange, fields).map(
 				(field, i) => (
-					<Grid
-						item
-						xs={12}
-						key={'field-' + field + '-' + i}
-					>
+					<Grid key={'field-' + field + '-' + i} size={12}>
 						{field}
 					</Grid>
 				),
