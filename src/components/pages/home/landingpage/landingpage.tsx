@@ -63,7 +63,11 @@ const MainFeaturedPost = () => {
 		>
 			<div className={classes.overlay} />
 			<Grid container>
-				<Grid item md={6}>
+				<Grid
+					size={{
+						md: 6,
+					}}
+				>
 					<div className={classes.mainFeaturedPostContent}>
 						<Typography
 							component="h1"

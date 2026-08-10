@@ -53,12 +53,11 @@ const Panel = ({
 				spacing={2}
 			>
 				<Grid
-					item
-					xs={12}
 					sx={{
 						display: 'flex',
 						alignItems: 'center',
 					}}
+					size={12}
 				>
 					<TitlePanel title={title} />
 					{description ? (
@@ -80,10 +79,10 @@ const Panel = ({
 						</IconButton>
 					) : null}
 				</Grid>
-				<Grid item xs={12} sx={{ padding: '9px' }}>
+				<Grid sx={{ padding: '9px' }} size={12}>
 					<Divider />
 				</Grid>
-				<Grid item xs={12}>
+				<Grid size={12}>
 					{collapsible ? (
 						<Collapse in={expand}>{children}</Collapse>
 					) : (

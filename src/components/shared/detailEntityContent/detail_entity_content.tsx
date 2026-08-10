@@ -88,7 +88,7 @@ const DetailEntityContent = ({
 						justifyContent="center"
 						spacing={3}
 					>
-						<Grid item>
+						<Grid>
 							<LoadingButton
 								variant="contained"
 								color="primary"
@@ -101,7 +101,7 @@ const DetailEntityContent = ({
 								)}
 							</LoadingButton>
 						</Grid>
-						<Grid item>
+						<Grid>
 							<ConfirmationPopup
 								Icon={
 									<LoadingButton
@@ -146,7 +146,7 @@ const DetailEntityContent = ({
 								}
 							/>
 						</Grid>
-						<Grid item>
+						<Grid>
 							<Button
 								variant="contained"
 								onClick={handleReset}

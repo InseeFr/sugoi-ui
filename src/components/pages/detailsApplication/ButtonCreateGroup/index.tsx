@@ -58,7 +58,7 @@ export const ButtonCreateGroup = ({ handleAddGroup, application }: Props) => {
 							alignItems="stretch"
 							spacing={1}
 						>
-							<Grid item xs={10}>
+							<Grid size={10}>
 								<TextField
 									fullWidth
 									label="Nom du groupe"
@@ -72,7 +72,7 @@ export const ButtonCreateGroup = ({ handleAddGroup, application }: Props) => {
 									}
 								/>
 							</Grid>
-							<Grid item xs={2}>
+							<Grid size={2}>
 								<TextField
 									fullWidth
 									label="Suffix"
@@ -83,7 +83,7 @@ export const ButtonCreateGroup = ({ handleAddGroup, application }: Props) => {
 									disabled
 								/>
 							</Grid>
-							<Grid item xs={12}>
+							<Grid size={12}>
 								<TextField
 									fullWidth
 									label="Description"

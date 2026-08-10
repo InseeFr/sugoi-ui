@@ -43,7 +43,7 @@ const ApplicationsFavoriteList = ({
 			alignItems="stretch"
 			spacing={3}
 		>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<Grid
 					container
 					direction="row"
@@ -61,10 +61,11 @@ const ApplicationsFavoriteList = ({
 							)
 							.map((application, i) => (
 								<Grid
-									item
-									xs={12}
-									md={3}
 									key={i}
+									size={{
+										xs: 12,
+										md: 3,
+									}}
 								>
 									<ApplicationCard
 										application={
@@ -85,14 +86,14 @@ const ApplicationsFavoriteList = ({
 					)}
 				</Grid>
 			</Grid>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<Grid
 					container
 					direction="row"
 					justifyContent="space-between"
 					alignItems="center"
 				>
-					<Grid item>
+					<Grid>
 						<Select
 							value={rowsPerPage}
 							onChange={(e: any) =>
@@ -105,7 +106,7 @@ const ApplicationsFavoriteList = ({
 							<MenuItem value={16}>16</MenuItem>
 						</Select>
 					</Grid>
-					<Grid item>
+					<Grid>
 						<Pagination
 							count={Math.ceil(
 								applications.length /

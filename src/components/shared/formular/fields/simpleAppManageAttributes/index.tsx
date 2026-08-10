@@ -95,7 +95,7 @@ const SimpleAppManagedAttributes = ({
 
 	return (
 		<Grid container spacing={3}>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<Box sx={{ display: 'flex', alignItems: 'center' }}>
 					<Typography variant="subtitle1">
 						{name}
@@ -112,7 +112,7 @@ const SimpleAppManagedAttributes = ({
 				</Box>
 			</Grid>
 			{!edit ? (
-				<Grid item xs={12}>
+				<Grid size={12}>
 					{loadingUser ? (
 						<CircularProgress />
 					) : (
@@ -128,7 +128,7 @@ const SimpleAppManagedAttributes = ({
 							) : (
 								get(user, value, [])?.map(
 									(val: any, i: any) => (
-										<Grid item key={i}>
+										<Grid key={i}>
 											<Chip
 												key={
 													'list_' +
@@ -157,7 +157,12 @@ const SimpleAppManagedAttributes = ({
 			) : null}
 			{edit && modifiable ? (
 				<>
-					<Grid item xs={12} md={6}>
+					<Grid
+						size={{
+							xs: 12,
+							md: 6,
+						}}
+					>
 						<Grid
 							container
 							direction="column"
@@ -165,7 +170,7 @@ const SimpleAppManagedAttributes = ({
 							alignItems="stretch"
 							spacing={2}
 						>
-							<Grid item>
+							<Grid>
 								<Typography
 									align="left"
 									variant="subtitle2"
@@ -173,10 +178,10 @@ const SimpleAppManagedAttributes = ({
 									{addTitle}
 								</Typography>
 							</Grid>
-							<Grid item>
+							<Grid>
 								<Divider />
 							</Grid>
-							<Grid item>
+							<Grid>
 								<Box
 									sx={{
 										display: 'flex',
@@ -210,7 +215,7 @@ const SimpleAppManagedAttributes = ({
 									/>
 								</Box>
 							</Grid>
-							<Grid item>
+							<Grid>
 								<LoadingButton
 									variant="contained"
 									color="primary"
@@ -220,7 +225,7 @@ const SimpleAppManagedAttributes = ({
 									Ajouter
 								</LoadingButton>
 							</Grid>
-							<Grid item>
+							<Grid>
 								<Grid
 									container
 									direction="column"
@@ -232,7 +237,7 @@ const SimpleAppManagedAttributes = ({
 										undefined &&
 									defaultValues.length >
 										0 ? (
-										<Grid item>
+										<Grid>
 											<Grid
 												container
 												direction="row"
@@ -242,16 +247,14 @@ const SimpleAppManagedAttributes = ({
 													2
 												}
 											>
-												<Grid
-													item
-												>
+												<Grid>
 													<p>
 														Ajouter
 														…{' '}
 													</p>
 												</Grid>
 											</Grid>
-											<Grid item>
+											<Grid>
 												<Grid
 													container
 													direction="column"
@@ -267,7 +270,6 @@ const SimpleAppManagedAttributes = ({
 															i: any,
 														) => (
 															<Grid
-																item
 																key={
 																	'cadreRole_' +
 																	i
@@ -296,14 +298,19 @@ const SimpleAppManagedAttributes = ({
 											</Grid>
 										</Grid>
 									) : (
-										<Grid item></Grid>
+										<Grid></Grid>
 									)}
 								</Grid>
 							</Grid>
 						</Grid>
 					</Grid>
 
-					<Grid item xs={12} md={6}>
+					<Grid
+						size={{
+							xs: 12,
+							md: 6,
+						}}
+					>
 						<Grid
 							container
 							direction="column"
@@ -312,7 +319,7 @@ const SimpleAppManagedAttributes = ({
 							spacing={2}
 						>
 							<>
-								<Grid item>
+								<Grid>
 									<Typography
 										align="left"
 										variant="subtitle2"
@@ -320,11 +327,11 @@ const SimpleAppManagedAttributes = ({
 										{deleteTitle}
 									</Typography>
 								</Grid>
-								<Grid item>
+								<Grid>
 									<Divider />
 								</Grid>
 							</>
-							<Grid item>
+							<Grid>
 								{loadingUser ? (
 									<CircularProgress />
 								) : (

@@ -74,7 +74,7 @@ const ConfirmationPopup = ({
 				title={title}
 				body={
 					<Grid container spacing={2} direction="column">
-						<Grid item>
+						<Grid>
 							<Box
 								sx={{
 									backgroundColor:
@@ -114,7 +114,7 @@ const ConfirmationPopup = ({
 								</Typography>
 							</Box>
 						</Grid>
-						<Grid item>
+						<Grid>
 							<Typography
 								variant="body1"
 								gutterBottom
@@ -136,7 +136,7 @@ const ConfirmationPopup = ({
 								</Grid>
 							</Box>
 						</Grid>
-						<Grid item>
+						<Grid>
 							<TextField
 								id="validation-entry-field"
 								variant="outlined"

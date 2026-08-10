@@ -55,7 +55,7 @@ export const GroupsViewer = ({
 			alignItems="stretch"
 			spacing={1}
 		>
-			<Grid item>
+			<Grid>
 				<TableContainer component={Paper}>
 					<Table size="small" aria-label="a dense table">
 						<TableHead key="table-head">
@@ -198,7 +198,7 @@ export const GroupsViewer = ({
 				</TableContainer>
 			</Grid>
 			{paginate && (
-				<Grid item>
+				<Grid>
 					<Grid
 						container
 						direction="row"
@@ -206,8 +206,8 @@ export const GroupsViewer = ({
 						alignItems="center"
 						spacing={3}
 					>
-						<Grid item>
-							<Grid item>
+						<Grid>
+							<Grid>
 								<Select
 									value={rowsPerPage}
 									onChange={(e: any) =>

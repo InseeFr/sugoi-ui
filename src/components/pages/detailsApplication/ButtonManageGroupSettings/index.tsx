@@ -84,7 +84,7 @@ export const ButtonManageGroupSettings = ({
 				body={
 					<Grid container>
 						<Grid container flexDirection={'column'}>
-							<Grid item xs>
+							<Grid size="grow">
 								<TextField
 									label={t(
 										'detail_application.button_manage_group_settings.description',
@@ -96,7 +96,7 @@ export const ButtonManageGroupSettings = ({
 									fullWidth
 								/>
 							</Grid>
-							<Grid item xs>
+							<Grid size="grow">
 								<FormGroup>
 									<FormControlLabel
 										control={
@@ -119,11 +119,7 @@ export const ButtonManageGroupSettings = ({
 								</FormGroup>
 							</Grid>
 						</Grid>
-						<Grid
-							container
-							item
-							justifyContent="center"
-						>
+						<Grid container justifyContent="center">
 							<Button
 								type="submit"
 								variant="contained"

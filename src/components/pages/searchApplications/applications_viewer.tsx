@@ -48,7 +48,7 @@ const ApplicationsViewer = ({
 			alignItems="stretch"
 			spacing={0}
 		>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<SearchResults
 					data={applications}
 					columns={columns}

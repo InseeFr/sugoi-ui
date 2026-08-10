@@ -16,7 +16,7 @@ const Home = () => {
 			<MainFeaturedPost />
 			{accessToken !== null && (
 				<Grid container direction="column" spacing={5}>
-					<Grid item>
+					<Grid>
 						<CardRights />
 					</Grid>
 				</Grid>

@@ -141,15 +141,14 @@ const SearchOrganizations = () => {
 			spacing={3}
 		>
 			<Grid
-				item
-				xs={12}
 				sx={{ display: 'flex', alignItems: 'center' }}
+				size={12}
 			>
 				<Title title={t('search_organization.title') + realm} />
 				<ButtonDescription realmName={realm} />
 			</Grid>
 
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<Grid
 					container
 					direction="column"
@@ -157,7 +156,7 @@ const SearchOrganizations = () => {
 					alignItems="stretch"
 					spacing={3}
 				>
-					<Grid item xs={12}>
+					<Grid size={12}>
 						<SearchForm
 							onSubmit={handleSearch}
 							formFields={formFields}
@@ -167,7 +166,7 @@ const SearchOrganizations = () => {
 							}
 						/>
 					</Grid>
-					<Grid item xs={12}>
+					<Grid size={12}>
 						<SearchResults
 							data={organizations}
 							columns={columns}

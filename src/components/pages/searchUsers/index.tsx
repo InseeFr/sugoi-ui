@@ -274,9 +274,8 @@ const SearchUsers = () => {
 				spacing={3}
 			>
 				<Grid
-					item
-					xs={12}
 					sx={{ display: 'flex', alignItems: 'center' }}
+					size={12}
 				>
 					<Title title={t('search_user.title') + realm} />
 					<ButtonDescription realmName={realm} />
@@ -289,7 +288,7 @@ const SearchUsers = () => {
 				alignItems="stretch"
 				spacing={3}
 			>
-				<Grid item xs={12}>
+				<Grid size={12}>
 					<SearchForm
 						handleClickAdd={handleCreate}
 						onSubmit={handleSearch}
@@ -297,7 +296,7 @@ const SearchUsers = () => {
 						formFieldsAdvanced={formFieldsAdvanced}
 					/>
 				</Grid>
-				<Grid item xs={12}>
+				<Grid size={12}>
 					<SearchResults
 						data={users}
 						columns={columns}

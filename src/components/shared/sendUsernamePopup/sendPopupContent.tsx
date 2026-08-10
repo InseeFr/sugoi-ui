@@ -26,7 +26,7 @@ export const SendPopupContent = ({
 
 	return (
 		<Grid container direction="column" spacing={3}>
-			<Grid item>
+			<Grid>
 				<Typography variant="h6">
 					Personnaliser le message
 				</Typography>
@@ -97,10 +97,10 @@ export const SendPopupContent = ({
 					)}
 				</Box>
 			</Grid>
-			<Grid item>
+			<Grid>
 				<Divider />
 			</Grid>
-			<Grid item>
+			<Grid>
 				<Typography variant="h6">Aperçu du message</Typography>
 				<Typography component="div">
 					<Box m={2}>Bonjour,</Box>

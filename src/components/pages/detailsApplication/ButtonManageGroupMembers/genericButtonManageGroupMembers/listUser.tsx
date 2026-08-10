@@ -35,7 +35,6 @@ export const GroupListUsers = ({ group, realm, handleDeleteUser }: Props) => {
 		<Grid container>
 			<Grid
 				container
-				item
 				justifyContent="space-between"
 				alignItems="center"
 			>
@@ -60,7 +59,7 @@ export const GroupListUsers = ({ group, realm, handleDeleteUser }: Props) => {
 					</IconButton>
 				</Tooltip>
 			</Grid>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<Grid
 					container
 					direction="row"
@@ -70,7 +69,6 @@ export const GroupListUsers = ({ group, realm, handleDeleteUser }: Props) => {
 				>
 					{group?.users?.map((user: User, i: number) => (
 						<Grid
-							item
 							key={
 								'group_' +
 								group.name +

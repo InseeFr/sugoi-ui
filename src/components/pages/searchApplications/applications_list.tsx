@@ -51,7 +51,7 @@ const ApplicationsList = ({
 			alignItems="stretch"
 			spacing={3}
 		>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<TableContainer component={Paper}>
 					<Table size="small">
 						<TableHead>
@@ -117,14 +117,14 @@ const ApplicationsList = ({
 				</TableContainer>
 				{loading && <LinearProgress />}
 			</Grid>
-			<Grid item xs={12}>
+			<Grid size={12}>
 				<Grid
 					container
 					direction="row"
 					justifyContent="space-between"
 					alignItems="center"
 				>
-					<Grid item>
+					<Grid>
 						<Select
 							value={rowsPerPage}
 							onChange={(e: any) =>
@@ -137,7 +137,7 @@ const ApplicationsList = ({
 							<MenuItem value={50}>50</MenuItem>
 						</Select>
 					</Grid>
-					<Grid item>
+					<Grid>
 						<Pagination
 							count={Math.ceil(
 								applications.length /

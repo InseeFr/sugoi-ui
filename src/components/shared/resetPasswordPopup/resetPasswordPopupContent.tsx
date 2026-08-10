@@ -33,12 +33,12 @@ export const ResetPasswordPopupContent = ({
 	};
 	return (
 		<Grid container direction="column" spacing={3}>
-			<Grid item>
+			<Grid>
 				<Typography>
 					Attention le mot de passe va être réinitialisé.
 				</Typography>
 			</Grid>
-			<Grid item>
+			<Grid>
 				<Typography>
 					<FormControlLabel
 						control={
@@ -57,7 +57,7 @@ export const ResetPasswordPopupContent = ({
 					/>
 				</Typography>
 			</Grid>
-			<Grid item>
+			<Grid>
 				<Typography>
 					Un mail contenant le nouveau mot de passe va être
 					envoyé à l'adresse mail suivante :{' '}
@@ -132,10 +132,10 @@ export const ResetPasswordPopupContent = ({
 					</>
 				</Box>
 			</Grid>
-			<Grid item>
+			<Grid>
 				<Divider />
 			</Grid>
-			<Grid item>
+			<Grid>
 				<Typography variant="h6">
 					Personnaliser le message
 				</Typography>
@@ -212,10 +212,10 @@ export const ResetPasswordPopupContent = ({
 					</>
 				</Box>
 			</Grid>
-			<Grid item>
+			<Grid>
 				<Divider />
 			</Grid>
-			<Grid item>
+			<Grid>
 				<Typography variant="h6">Aperçu du message</Typography>
 				<Typography component="div">
 					<Box m={2}>Bonjour,</Box>

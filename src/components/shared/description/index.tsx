@@ -28,7 +28,7 @@ export const Description = ({ realmName }: Props) => {
 					alignItems="stretch"
 					spacing={3}
 				>
-					<Grid item xs={12}>
+					<Grid size={12}>
 						{realm?.properties.description &&
 							realm?.properties.description[0] &&
 							parse(
@@ -36,7 +36,7 @@ export const Description = ({ realmName }: Props) => {
 									.description[0],
 							)}
 					</Grid>
-					<Grid item xs={12}></Grid>
+					<Grid size={12}></Grid>
 				</Grid>
 			</CardContent>
 		</Card>

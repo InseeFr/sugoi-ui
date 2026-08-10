@@ -64,7 +64,7 @@ export const ContactsManager = ({
 		maj();
 	};
 	return (
-		<Grid item>
+		<Grid>
 			<Grid
 				container
 				direction="column"
@@ -72,7 +72,7 @@ export const ContactsManager = ({
 				alignItems="stretch"
 				spacing={2}
 			>
-				<Grid item>
+				<Grid>
 					<Title
 						title={t(
 							'detail_application.contacts_title',
@@ -80,7 +80,7 @@ export const ContactsManager = ({
 						variant="subtitle1"
 					/>
 				</Grid>
-				<Grid item>
+				<Grid>
 					<Grid
 						container
 						direction="column"
@@ -124,7 +124,7 @@ export const ContactsManager = ({
 						</List>
 					</Grid>
 				</Grid>
-				<Grid item>
+				<Grid>
 					<div
 						style={{
 							display: 'flex',
@@ -147,7 +147,7 @@ export const ContactsManager = ({
 						/>
 					</div>
 				</Grid>
-				<Grid item>
+				<Grid>
 					<Button
 						variant="contained"
 						color="primary"

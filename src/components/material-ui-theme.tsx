@@ -1,4 +1,4 @@
-import { responsiveFontSizes } from '@mui/material/';
+import { responsiveFontSizes } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 export const mainColor = '#3078E4';
 

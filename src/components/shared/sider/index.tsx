@@ -1,4 +1,4 @@
-import { Hidden } from '@mui/material';
+import { Box } from '@mui/material';
 import SiderPermanent from './sider-permanent';
 import SiderTemporary from './sider-temporary';
 
@@ -11,16 +11,16 @@ export const Sider = (props: props) => {
 	const { drawerOpen, handleDrawerToggle } = props;
 	return (
 		<>
-			<Hidden smUp implementation="css">
+			<Box sx={{ display: { xs: 'block', sm: 'none' } }}>
 				<SiderTemporary
 					open={drawerOpen}
 					handleDrawerToggle={handleDrawerToggle}
 				/>
-			</Hidden>
+			</Box>
 
-			<Hidden smDown implementation="css">
+			<Box sx={{ display: { xs: 'none', sm: 'block' } }}>
 				<SiderPermanent />
-			</Hidden>
+			</Box>
 		</>
 	);
 };

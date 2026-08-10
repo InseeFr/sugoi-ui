@@ -40,15 +40,15 @@ export const UploadUsers = ({
 	};
 
 	return (
-		<Grid item container alignItems={'center'} spacing={1}>
-			<Grid item xs={12}>
+		<Grid container alignItems={'center'} spacing={1}>
+			<Grid size={12}>
 				<Title
 					title={t(
 						'detail_application.manage_group_popup.upload.title',
 					)}
 				/>
 			</Grid>
-			<Grid item xs={10}>
+			<Grid size={10}>
 				<TextField
 					fullWidth
 					label={t(
@@ -61,7 +61,7 @@ export const UploadUsers = ({
 					onChange={handleInputChange}
 				/>
 			</Grid>
-			<Grid item xs={2}>
+			<Grid size={2}>
 				<Tooltip
 					title={t(
 						'detail_application.manage_group_popup.upload.tooltip',
