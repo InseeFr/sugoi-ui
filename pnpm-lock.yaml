@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@axa-fr/react-oidc':
-        specifier: ^7.27.19
-        version: 7.27.19(react@18.3.1)
+        specifier: ^7.29.1
+        version: 7.29.1(react@18.3.1)
       '@emotion/react':
         specifier: ^11.14.0
         version: 11.14.0(@types/react@18.3.28)(react@18.3.1)
@@ -210,14 +210,14 @@ packages:
   '@adobe/css-tools@4.4.4':
     resolution: {integrity: sha512-Elp+iwUx5rN5+Y8xLt5/GRoG20WGoDCQ/1Fb+1LiGtvwbDavuSk0jhD/eZdckHAuzcDzccnkv+rEjyWfRx18gg==}
 
-  '@axa-fr/oidc-client-service-worker@7.27.19':
-    resolution: {integrity: sha512-FeCo+/Yv6Xd7cUTG59y9VkQhtRVayamol22zG2lshqNpui+/6tJuugdJJa2CBspx/TNCMtp3HOH7z/t2gVnteA==}
+  '@axa-fr/oidc-client-service-worker@7.29.1':
+    resolution: {integrity: sha512-G9HVQxC1cSDh4QZgkJs7ExPwGHxEK1EmXY/AUqdBco/RINCo9/oOwEi1vZqXM5MJzIOHGANM0nwXt0rhLLOYrg==}
 
-  '@axa-fr/oidc-client@7.27.19':
-    resolution: {integrity: sha512-MVZFMABl1eXAih4EHLx7jb59GXpSN9axxE3RHFX3e1VTBgnWNwHW5qE7PBj3ap7bemOmUqFjoc2efa8pc8F6Eg==}
+  '@axa-fr/oidc-client@7.29.1':
+    resolution: {integrity: sha512-Kca8u+CW4D7FcugyZjtzTIIgKcdMwsUH1+/Q2rTGuNeX9Nhb/eN/BoHJjuQGwifW35Vsp80XMF+UFBKGi6WDcg==}
 
-  '@axa-fr/react-oidc@7.27.19':
-    resolution: {integrity: sha512-foVjiwX1n/3fb8RAqncfnW5eKmDPkeU9YU37y4Y775gV8Kn1LK6pF5NIJuL9Qd5FxMjbA6/RUUJvqVngfce0aw==}
+  '@axa-fr/react-oidc@7.29.1':
+    resolution: {integrity: sha512-qhiB0WomfvaACw3LsZomQm+xBKIdihg9XrPW1QxagEEBzMlVp2Ip2/LpBkxKjox3ZfpWQeu5vGSS+wNvu370Dw==}
     peerDependencies:
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -3503,16 +3503,16 @@ snapshots:
 
   '@adobe/css-tools@4.4.4': {}
 
-  '@axa-fr/oidc-client-service-worker@7.27.19': {}
+  '@axa-fr/oidc-client-service-worker@7.29.1': {}
 
-  '@axa-fr/oidc-client@7.27.19':
+  '@axa-fr/oidc-client@7.29.1':
     dependencies:
-      '@axa-fr/oidc-client-service-worker': 7.27.19
+      '@axa-fr/oidc-client-service-worker': 7.29.1
 
-  '@axa-fr/react-oidc@7.27.19(react@18.3.1)':
+  '@axa-fr/react-oidc@7.29.1(react@18.3.1)':
     dependencies:
-      '@axa-fr/oidc-client': 7.27.19
-      '@axa-fr/oidc-client-service-worker': 7.27.19
+      '@axa-fr/oidc-client': 7.29.1
+      '@axa-fr/oidc-client-service-worker': 7.29.1
       react: 18.3.1
 
   '@babel/code-frame@7.29.0':
