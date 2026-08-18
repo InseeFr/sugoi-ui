@@ -75,7 +75,7 @@
 		"@types/jest": "^30.0.0",
 		"@types/json-editor": "^0.0.10",
 		"@types/lodash": "^4.17.25",
-		"@types/node": "^26.1.2",
+		"@types/node": "^26.2.0",
 		"@types/prop-types": "^15.7.15",
 		"@types/react": "^18.0.0",
 		"@types/react-dom": "^18.0.0",
