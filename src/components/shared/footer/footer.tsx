@@ -4,7 +4,14 @@ import { useTranslation } from 'react-i18next';
 const Footer = () => {
 	const { t } = useTranslation();
 	return (
-		<Grid container direction="column" alignItems="center">
+		<Grid
+			container
+			sx={{
+				flexDirection: 'column',
+
+				alignItems: 'center',
+			}}
+		>
 			<Grid size={12}>
 				<Typography
 					variant="body2"

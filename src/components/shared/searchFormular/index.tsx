@@ -27,7 +27,7 @@ const CustomToolBar = ({ handleClick }: any) => {
 	const { t } = useTranslation();
 	return (
 		<Tooltip title={'Ajouter'}>
-			<Box m={0.5} p={0.5}>
+			<Box sx={{ m: 0.5, p: 0.5 }}>
 				<Button
 					disableElevation
 					variant="contained"
@@ -79,19 +79,22 @@ const SearchFormular = ({
 	return (
 		<Grid
 			container
-			direction="column"
-			alignContent="stretch"
-			alignItems="stretch"
+			sx={{
+				flexDirection: 'column',
+				alignContent: 'stretch',
+				alignItems: 'stretch',
+			}}
 			spacing={2}
 		>
 			<Grid size={12}>
-				<Grid
-					container
-					direction="column"
-					alignContent="flex-end"
-					spacing={2}
-				>
-					<Grid size={6}>
+				<Grid container spacing={2}>
+					<Grid
+						size={12}
+						sx={{
+							display: 'flex',
+							justifyContent: 'flex-end',
+						}}
+					>
 						<CustomToolBar
 							handleClick={handleClickAdd}
 						></CustomToolBar>
@@ -120,9 +123,11 @@ const SearchFormular = ({
 							</legend>
 							<Grid
 								container
-								direction="column"
-								alignContent="stretch"
-								alignItems="stretch"
+								sx={{
+									flexDirection: 'column',
+									alignContent: 'stretch',
+									alignItems: 'stretch',
+								}}
 								spacing={2}
 							>
 								<Grid size={12}>
@@ -218,7 +223,10 @@ const SearchFormular = ({
 									<Grid
 										container
 										direction="row"
-										justifyContent="flex-end"
+										sx={{
+											justifyContent:
+												'flex-end',
+										}}
 										spacing={3}
 									>
 										<Grid>

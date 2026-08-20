@@ -152,8 +152,10 @@ export const ChipButton = ({ realm, group }: ButtonProps) => {
 					<Grid
 						container
 						direction="row"
-						justifyContent="center"
-						alignItems="stretch"
+						sx={{
+							justifyContent: 'center',
+							alignItems: 'stretch',
+						}}
 						spacing={1}
 					>
 						{group.users.map((user: any, i: any) => (

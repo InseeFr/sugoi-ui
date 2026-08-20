@@ -191,8 +191,10 @@ export const AddUsers = ({
 				<Grid
 					container
 					direction="row"
-					justifyContent="space-between"
-					alignItems="center"
+					sx={{
+						justifyContent: 'space-between',
+						alignItems: 'center',
+					}}
 				>
 					<Grid>
 						<Select

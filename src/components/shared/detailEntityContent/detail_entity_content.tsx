@@ -85,7 +85,9 @@ const DetailEntityContent = ({
 					<Grid
 						container
 						direction="row"
-						justifyContent="center"
+						sx={{
+							justifyContent: 'center',
+						}}
 						spacing={3}
 					>
 						<Grid>

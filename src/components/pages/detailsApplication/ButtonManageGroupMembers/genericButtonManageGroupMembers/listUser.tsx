@@ -35,8 +35,10 @@ export const GroupListUsers = ({ group, realm, handleDeleteUser }: Props) => {
 		<Grid container>
 			<Grid
 				container
-				justifyContent="space-between"
-				alignItems="center"
+				sx={{
+					justifyContent: 'space-between',
+					alignItems: 'center',
+				}}
 			>
 				<Title
 					title={t(
@@ -63,8 +65,10 @@ export const GroupListUsers = ({ group, realm, handleDeleteUser }: Props) => {
 				<Grid
 					container
 					direction="row"
-					justifyContent="center"
-					alignItems="stretch"
+					sx={{
+						justifyContent: 'center',
+						alignItems: 'stretch',
+					}}
 					spacing={1}
 				>
 					{group?.users?.map((user: User, i: number) => (

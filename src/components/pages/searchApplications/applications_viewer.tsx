@@ -41,13 +41,7 @@ const ApplicationsViewer = ({
 		},
 	];
 	return (
-		<Grid
-			container
-			direction="column"
-			justifyContent="center"
-			alignItems="stretch"
-			spacing={0}
-		>
+		<Grid container sx={{ flexDirection: 'column' }} spacing={0}>
 			<Grid size={12}>
 				<SearchResults
 					data={applications}

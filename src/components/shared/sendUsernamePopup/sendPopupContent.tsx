@@ -25,7 +25,7 @@ export const SendPopupContent = ({
 	const [includeAssistMail, setincludeAssistMail] = useState(false);
 
 	return (
-		<Grid container direction="column" spacing={3}>
+		<Grid container sx={{ flexDirection: 'column' }} spacing={3}>
 			<Grid>
 				<Typography variant="h6">
 					Personnaliser le message
@@ -103,8 +103,8 @@ export const SendPopupContent = ({
 			<Grid>
 				<Typography variant="h6">Aperçu du message</Typography>
 				<Typography component="div">
-					<Box m={2}>Bonjour,</Box>
-					<Box m={2}>
+					<Box sx={{ m: 2 }}>Bonjour,</Box>
+					<Box sx={{ m: 2 }}>
 						Suite à votre demande, voici votre
 						identifiant
 						{includeNameApp
@@ -113,18 +113,18 @@ export const SendPopupContent = ({
 								' :'
 							: ' :'}
 					</Box>
-					<Box m={2}>{user?.username}</Box>
+					<Box sx={{ m: 2 }}>{user?.username}</Box>
 
 					{includeAssistMail ? (
-						<Box m={2}>
+						<Box sx={{ m: 2 }}>
 							Pour toute demande d'assistance, vous
 							pouvez contacter{' '}
 							{templateProperties.assistMail} par
 							courrier electronique.
 						</Box>
 					) : null}
-					<Box m={2}>Cordialement,</Box>
-					<Box m={2}>
+					<Box sx={{ m: 2 }}>Cordialement,</Box>
+					<Box sx={{ m: 2 }}>
 						<TextField
 							label="Signature"
 							name="signature"

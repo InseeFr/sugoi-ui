@@ -1,5 +1,10 @@
 import TextField from '@mui/material/TextField';
-import { CircularProgress, Autocomplete, Grid } from '@mui/material';
+import {
+	CircularProgress,
+	Autocomplete,
+	Grid,
+	AutocompleteRenderInputParams,
+} from '@mui/material';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 interface Props {
@@ -35,24 +40,31 @@ const MyAutocomplete = ({
 			onChange={(event: any, newValue: any) => {
 				onChange(newValue);
 			}}
-			renderInput={(params: any) => (
+			renderInput={(params: AutocompleteRenderInputParams) => (
 				<TextField
 					{...params}
 					label={text}
 					variant="outlined"
-					InputProps={{
-						...params.InputProps,
-						endAdornment: (
-							<>
-								{loading ? (
-									<CircularProgress
-										color="inherit"
-										size={20}
-									/>
-								) : null}
-								{params.InputProps.endAdornment}
-							</>
-						),
+					slotProps={{
+						...params.slotProps,
+						input: {
+							...params.slotProps?.input,
+							endAdornment: (
+								<>
+									{loading ? (
+										<CircularProgress
+											color="inherit"
+											size={20}
+										/>
+									) : null}
+									{
+										params.slotProps
+											?.input
+											?.endAdornment
+									}
+								</>
+							),
+						},
 					}}
 				/>
 			)}

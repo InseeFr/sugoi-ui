@@ -70,8 +70,12 @@ export const DetailsApplication = () => {
 			<Title
 				title={t('detail_application.title') + applicationId}
 			/>
-			<Grid container direction="column" spacing={5}>
-				<Grid container direction="column" spacing={3}>
+			<Grid container sx={{ flexDirection: 'column' }} spacing={5}>
+				<Grid
+					container
+					sx={{ flexDirection: 'column' }}
+					spacing={3}
+				>
 					<Grid>
 						<Title
 							title={t(
@@ -111,7 +115,11 @@ export const DetailsApplication = () => {
 					</Grid>
 				</Grid>
 
-				<Grid container direction="column" spacing={2}>
+				<Grid
+					container
+					sx={{ flexDirection: 'column' }}
+					spacing={2}
+				>
 					<Grid>
 						<Title
 							title={t(
@@ -124,8 +132,6 @@ export const DetailsApplication = () => {
 						direction="row"
 						container
 						spacing={2}
-						justifyContent="space-between"
-						alignItems="stretch"
 						size={12}
 					>
 						<Grid size={8}>
@@ -137,9 +143,18 @@ export const DetailsApplication = () => {
 								)}
 								variant="outlined"
 								value={groupeApplicatif}
-								inputProps={{
-									style: {
-										fontSize: 20,
+								slotProps={{
+									htmlInput: {
+										style: {
+											fontSize: 20,
+										},
+									},
+									input: {
+										endAdornment: (
+											<IconButton size="large">
+												<SearchOutlined />
+											</IconButton>
+										),
 									},
 								}}
 								onChange={(e) =>
@@ -147,13 +162,6 @@ export const DetailsApplication = () => {
 										e.target.value,
 									)
 								}
-								InputProps={{
-									endAdornment: (
-										<IconButton size="large">
-											<SearchOutlined />
-										</IconButton>
-									),
-								}}
 							/>
 						</Grid>
 						<Grid size={4}>
@@ -271,8 +279,10 @@ export const DetailsApplication = () => {
 					<Grid
 						container
 						direction="row"
-						justifyContent="center"
-						alignItems="center"
+						sx={{
+							justifyContent: 'center',
+							alignItems: 'center',
+						}}
 						spacing={3}
 					>
 						<Grid>

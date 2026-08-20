@@ -83,7 +83,10 @@ export const ButtonManageGroupSettings = ({
 				}
 				body={
 					<Grid container>
-						<Grid container flexDirection={'column'}>
+						<Grid
+							container
+							sx={{ flexDirection: 'column' }}
+						>
 							<Grid size="grow">
 								<TextField
 									label={t(
@@ -119,7 +122,12 @@ export const ButtonManageGroupSettings = ({
 								</FormGroup>
 							</Grid>
 						</Grid>
-						<Grid container justifyContent="center">
+						<Grid
+							container
+							sx={{
+								justifyContent: 'center',
+							}}
+						>
 							<Button
 								type="submit"
 								variant="contained"

@@ -48,13 +48,7 @@ export const GroupsViewer = ({
 	};
 
 	return (
-		<Grid
-			container
-			direction="column"
-			justifyContent="center"
-			alignItems="stretch"
-			spacing={1}
-		>
+		<Grid container sx={{ flexDirection: 'column' }} spacing={1}>
 			<Grid>
 				<TableContainer component={Paper}>
 					<Table size="small" aria-label="a dense table">
@@ -202,8 +196,11 @@ export const GroupsViewer = ({
 					<Grid
 						container
 						direction="row"
-						justifyContent="space-between"
-						alignItems="center"
+						sx={{
+							justifyContent: 'space-between',
+							alignItems: 'center',
+						}}
+
 						spacing={3}
 					>
 						<Grid>

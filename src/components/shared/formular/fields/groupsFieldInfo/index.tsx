@@ -107,9 +107,11 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 					>
 						<Grid
 							container
-							direction="column"
-							justifyContent="center"
-							alignItems="stretch"
+							sx={{
+								flexDirection: 'column',
+								justifyContent: 'center',
+								alignItems: 'stretch',
+							}}
 							spacing={2}
 						>
 							<Grid>
@@ -127,9 +129,14 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 							<Grid>
 								<Grid
 									container
-									direction="column"
-									justifyContent="center"
-									alignItems="stretch"
+									sx={{
+										flexDirection:
+											'column',
+										justifyContent:
+											'center',
+										alignItems:
+											'stretch',
+									}}
 									spacing={1}
 								>
 									<Grid size={12}>
@@ -173,9 +180,11 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 					>
 						<Grid
 							container
-							direction="column"
-							justifyContent="center"
-							alignItems="stretch"
+							sx={{
+								flexDirection: 'column',
+								justifyContent: 'center',
+								alignItems: 'stretch',
+							}}
 							spacing={2}
 						>
 							<Grid size={12}>
@@ -198,8 +207,12 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 									<Grid
 										container
 										direction="row"
-										justifyContent="flex-start"
-										alignItems="stretch"
+										sx={{
+											justifyContent:
+												'flex-start',
+											alignItems:
+												'stretch',
+										}}
 										spacing={2}
 									>
 										{user?.groups
@@ -254,8 +267,10 @@ export default function GroupsField({ name, helpText, modifiable }: props) {
 						<Grid
 							container
 							direction="row"
-							justifyContent="flex-start"
-							alignItems="stretch"
+							sx={{
+								justifyContent: 'flex-start',
+								alignItems: 'stretch',
+							}}
 							spacing={1}
 						>
 							{user?.groups

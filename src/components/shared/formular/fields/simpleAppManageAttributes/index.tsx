@@ -119,8 +119,11 @@ const SimpleAppManagedAttributes = ({
 						<Grid
 							container
 							direction="row"
-							justifyContent="flex-start"
-							alignItems="stretch"
+							sx={{
+								justifyContent: 'flex-start',
+								alignItems: 'stretch',
+							}}
+
 							spacing={1}
 						>
 							{loadingUser ? (
@@ -165,9 +168,11 @@ const SimpleAppManagedAttributes = ({
 					>
 						<Grid
 							container
-							direction="column"
-							justifyContent="center"
-							alignItems="stretch"
+							sx={{
+								flexDirection: 'column',
+								justifyContent: 'center',
+								alignItems: 'stretch',
+							}}
 							spacing={2}
 						>
 							<Grid>
@@ -228,9 +233,14 @@ const SimpleAppManagedAttributes = ({
 							<Grid>
 								<Grid
 									container
-									direction="column"
-									justifyContent="left"
-									alignItems="stretch"
+									sx={{
+										flexDirection:
+											'column',
+										justifyContent:
+											'left',
+										alignItems:
+											'stretch',
+									}}
 									spacing={2}
 								>
 									{defaultValues !=
@@ -241,8 +251,12 @@ const SimpleAppManagedAttributes = ({
 											<Grid
 												container
 												direction="row"
-												justifyContent="left"
-												alignItems="stretch"
+												sx={{
+													justifyContent:
+														'left',
+													alignItems:
+														'stretch',
+												}}
 												spacing={
 													2
 												}
@@ -257,9 +271,14 @@ const SimpleAppManagedAttributes = ({
 											<Grid>
 												<Grid
 													container
-													direction="column"
-													justifyContent="center"
-													alignItems="stretch"
+													sx={{
+														flexDirection:
+															'column',
+														justifyContent:
+															'center',
+														alignItems:
+															'stretch',
+													}}
 													spacing={
 														2
 													}
@@ -313,9 +332,11 @@ const SimpleAppManagedAttributes = ({
 					>
 						<Grid
 							container
-							direction="column"
-							justifyContent="center"
-							alignItems="stretch"
+							sx={{
+								flexDirection: 'column',
+								justifyContent: 'center',
+								alignItems: 'stretch',
+							}}
 							spacing={2}
 						>
 							<>

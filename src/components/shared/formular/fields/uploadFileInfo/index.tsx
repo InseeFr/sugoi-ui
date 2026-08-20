@@ -45,7 +45,7 @@ const UploadFile = ({
 
 	return (
 		<>
-			<Grid container direction="column">
+			<Grid container sx={{ flexDirection: 'column' }}>
 				<Grid size={12}>
 					<Box
 						sx={{

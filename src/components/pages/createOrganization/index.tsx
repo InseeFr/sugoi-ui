@@ -42,7 +42,7 @@ const CreateOrganization = () => {
 	document.title = t('create_organization.page_title');
 
 	return (
-		<Grid container spacing={2} direction="column">
+		<Grid container spacing={2} sx={{ flexDirection: 'column' }}>
 			<Grid size={12}>
 				<Title title={t('create_organization.title') + realm} />
 			</Grid>
@@ -58,7 +58,9 @@ const CreateOrganization = () => {
 							<Grid
 								container
 								direction="row"
-								justifyContent="center"
+								sx={{
+									justifyContent: 'center',
+								}}
 								spacing={3}
 							>
 								<Grid>

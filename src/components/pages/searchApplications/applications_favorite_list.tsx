@@ -36,19 +36,15 @@ const ApplicationsFavoriteList = ({
 		setPage(1);
 	}, [applications]);
 	return (
-		<Grid
-			container
-			direction="column"
-			justifyContent="center"
-			alignItems="stretch"
-			spacing={3}
-		>
+		<Grid container sx={{ flexDirection: 'column' }} spacing={3}>
 			<Grid size={12}>
 				<Grid
 					container
 					direction="row"
-					justifyContent="center"
-					alignItems="stretch"
+					sx={{
+						justifyContent: 'center',
+						alignItems: 'stretch',
+					}}
 					spacing={3}
 				>
 					{loading ? (
@@ -90,8 +86,10 @@ const ApplicationsFavoriteList = ({
 				<Grid
 					container
 					direction="row"
-					justifyContent="space-between"
-					alignItems="center"
+					sx={{
+						justifyContent: 'space-between',
+						alignItems: 'center',
+					}}
 				>
 					<Grid>
 						<Select

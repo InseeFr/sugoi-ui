@@ -57,7 +57,12 @@ const PopIcon = ({ helpTextTitle, helpText }: props) => {
 								padding: theme.spacing(1),
 							}}
 						>
-							<Box fontWeight="fontWeightBold">
+							<Box
+								sx={{
+									fontWeight:
+										'fontWeightBold',
+								}}
+							>
 								{helpTextTitle}
 							</Box>
 						</Typography>

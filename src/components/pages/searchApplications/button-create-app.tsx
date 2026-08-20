@@ -42,9 +42,7 @@ export const CreateApplicationButton = ({ handleCreateApp }: Props) => {
 				body={
 					<Grid
 						container
-						direction="column"
-						justifyContent="center"
-						alignItems="stretch"
+						sx={{ flexDirection: 'column' }}
 						spacing={3}
 					>
 						<Grid>

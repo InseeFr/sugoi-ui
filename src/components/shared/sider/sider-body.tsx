@@ -189,9 +189,6 @@ const SiderBody = () => {
 										'sider.manage.realms',
 									)}
 									variant="filled"
-									InputLabelProps={
-										params.InputLabelProps as any
-									}
 								/>
 							)}
 						/>
@@ -247,9 +244,6 @@ const SiderBody = () => {
 										'sider.manage.us',
 									)}
 									variant="filled"
-									InputLabelProps={
-										params.InputLabelProps as any
-									}
 								/>
 							)}
 						/>

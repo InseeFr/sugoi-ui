@@ -73,7 +73,11 @@ const ConfirmationPopup = ({
 				open={open}
 				title={title}
 				body={
-					<Grid container spacing={2} direction="column">
+					<Grid
+						container
+						spacing={2}
+						sx={{ flexDirection: 'column' }}
+					>
 						<Grid>
 							<Box
 								sx={{
@@ -95,19 +99,21 @@ const ConfirmationPopup = ({
 										variant="body1"
 										sx={{
 											fontWeight: 600,
+											display: 'inline',
 										}}
-										display="inline"
 									>
 										{body1}
 									</Typography>
 								</Box>
-								<Typography display="inline">
+								<Typography
+									sx={{ display: 'inline' }}
+								>
 									{body2}
 								</Typography>
 								<Typography
-									display="inline"
 									sx={{
 										fontWeight: 600,
+										display: 'inline',
 									}}
 								>
 									{bodyBold}

@@ -7,7 +7,7 @@ interface props {
 const TitlePanel = ({ title }: props) => {
 	return (
 		<Typography component="div" variant="h6" align="left">
-			<Box fontWeight="fontWeightBold">{title}</Box>
+			<Box sx={{ fontWeight: 'fontWeightBold' }}>{title}</Box>
 		</Typography>
 	);
 };

@@ -21,7 +21,7 @@ interface props {
 const Title = ({ title, variant }: props) => {
 	return (
 		<Typography component="div" color="primary" variant={variant}>
-			<Box fontWeight="fontWeightBold">{title}</Box>
+			<Box sx={{ fontWeight: 'fontWeightBold' }}>{title}</Box>
 		</Typography>
 	);
 };

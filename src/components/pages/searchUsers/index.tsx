@@ -266,13 +266,7 @@ const SearchUsers = () => {
 
 	return (
 		<>
-			<Grid
-				container
-				direction="column"
-				justifyContent="center"
-				alignItems="stretch"
-				spacing={3}
-			>
+			<Grid container spacing={3}>
 				<Grid
 					sx={{ display: 'flex', alignItems: 'center' }}
 					size={12}
@@ -281,13 +275,7 @@ const SearchUsers = () => {
 					<ButtonDescription realmName={realm} />
 				</Grid>
 			</Grid>
-			<Grid
-				container
-				direction="column"
-				justifyContent="center"
-				alignItems="stretch"
-				spacing={3}
-			>
+			<Grid container spacing={3}>
 				<Grid size={12}>
 					<SearchForm
 						handleClickAdd={handleCreate}
