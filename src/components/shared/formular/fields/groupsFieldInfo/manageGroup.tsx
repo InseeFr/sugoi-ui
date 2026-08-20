@@ -43,9 +43,11 @@ export const ManageGroup = ({
 	return (
 		<Grid
 			container
-			direction="column"
-			justifyContent="center"
-			alignItems="stretch"
+			sx={{
+				flexDirection: 'column',
+				justifyContent: 'center',
+				alignItems: 'stretch',
+			}}
 			spacing={1}
 		>
 			<Grid size={12}>
@@ -147,8 +149,10 @@ export const ManageGroup = ({
 				<Grid
 					container
 					direction="row"
-					justifyContent="space-between"
-					alignItems="center"
+					sx={{
+						justifyContent: 'space-between',
+						alignItems: 'center',
+					}}
 				>
 					<Grid>
 						<Select

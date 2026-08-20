@@ -40,7 +40,13 @@ export const UploadUsers = ({
 	};
 
 	return (
-		<Grid container alignItems={'center'} spacing={1}>
+		<Grid
+			container
+			sx={{
+				alignItems: 'center',
+			}}
+			spacing={1}
+		>
 			<Grid size={12}>
 				<Title
 					title={t(

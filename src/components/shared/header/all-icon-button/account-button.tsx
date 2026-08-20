@@ -46,10 +46,12 @@ const AccountButton = () => {
 				onClose={handleClose}
 			>
 				<Box
-					alignItems="center"
-					display="flex"
-					flexDirection="column"
-					p={2}
+					sx={{
+						alignItems: 'center',
+						display: 'flex',
+						flexDirection: 'column',
+						p: 2,
+					}}
 				>
 					<Avatar src="/static/images/avatars/avatar_6.png" />
 					<Typography color="textPrimary" variant="h6">
@@ -60,10 +62,12 @@ const AccountButton = () => {
 					</Typography>
 				</Box>
 				<Box
-					alignItems="center"
-					display="flex"
-					flexDirection="column"
-					p={2}
+					sx={{
+						alignItems: 'center',
+						display: 'flex',
+						flexDirection: 'column',
+						p: 2,
+					}}
 				></Box>
 			</Popover>
 		</>

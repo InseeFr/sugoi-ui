@@ -45,10 +45,22 @@ const MoreIconButton = () => {
 				anchorEl={anchorEl}
 				onClose={handleClose}
 			>
-				<Box alignItems="center" display="flex" p={2}>
+				<Box
+					sx={{
+						alignItems: 'center',
+						display: 'flex',
+						p: 2,
+					}}
+				>
 					<LanguageButton />
 				</Box>
-				<Box alignItems="center" display="flex" p={2}>
+				<Box
+					sx={{
+						alignItems: 'center',
+						display: 'flex',
+						p: 2,
+					}}
+				>
 					<ApiButton />
 					<GithubButton />
 					<AccountButton />

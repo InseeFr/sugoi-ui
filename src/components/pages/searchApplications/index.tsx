@@ -71,13 +71,7 @@ export const SearchApplications = () => {
 	console.log(applications);
 
 	return (
-		<Grid
-			container
-			direction="column"
-			justifyContent="center"
-			alignItems="stretch"
-			spacing={3}
-		>
+		<Grid container sx={{ flexDirection: 'column' }} spacing={3}>
 			<Grid
 				style={{ display: 'flex', alignItems: 'center' }}
 				size={12}
@@ -89,8 +83,10 @@ export const SearchApplications = () => {
 				<Grid
 					container
 					direction="row"
-					justifyContent="flex-end"
-					alignItems="center"
+					sx={{
+						justifyContent: 'flex-end',
+						alignItems: 'center',
+					}}
 				>
 					<CreateApplicationButton
 						handleCreateApp={handleCreateApp}
@@ -110,9 +106,7 @@ export const SearchApplications = () => {
 					<AccordionDetails>
 						<Grid
 							container
-							direction="column"
-							justifyContent="center"
-							alignItems="stretch"
+							sx={{ flexDirection: 'column' }}
 							spacing={3}
 						>
 							<Grid size={12}>
@@ -154,17 +148,18 @@ export const SearchApplications = () => {
 						<Box style={{ width: '100%' }}>
 							<Grid
 								container
-								direction="column"
-								justifyContent="center"
-								alignItems="stretch"
+								sx={{
+									flexDirection: 'column',
+									justifyContent: 'center',
+									alignItems: 'stretch',
+								}}
+
 								spacing={3}
 							>
 								<Grid size={12}>
 									<Grid
 										container
 										direction="row"
-										justifyContent="flex-end"
-										alignItems="stretch"
 										spacing={3}
 									>
 										<Grid size={12}>

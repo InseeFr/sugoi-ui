@@ -37,9 +37,11 @@ export const ContentPanel = ({
 		<Grid
 			container
 			spacing={1}
-			direction="column"
-			justifyContent="center"
-			alignItems="stretch"
+			sx={{
+				flexDirection: 'column',
+				justifyContent: 'center',
+				alignItems: 'stretch',
+			}}
 		>
 			{GenerateFields(values, handleChange, fields).map(
 				(field, i) => (

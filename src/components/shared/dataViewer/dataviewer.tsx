@@ -76,17 +76,21 @@ const DataViewer = ({
 		<Grid
 			container
 			spacing={3}
-			direction="column"
-			justifyContent="center"
-			alignItems="stretch"
+			sx={{
+				flexDirection: 'column',
+				justifyContent: 'center',
+				alignItems: 'stretch',
+			}}
 		>
 			<Grid size={12}>
 				<Grid
 					container
 					spacing={3}
 					direction="row"
-					justifyContent="center"
-					alignItems="stretch"
+					sx={{
+						justifyContent: 'center',
+						alignItems: 'stretch',
+					}}
 				>
 					<Grid size={12}>
 						<Paper square>
@@ -187,8 +191,11 @@ const DataViewer = ({
 								container
 								spacing={3}
 								direction="row"
-								justifyContent="flex-start"
-								alignItems="stretch"
+								sx={{
+									justifyContent:
+										'flex-start',
+									alignItems: 'stretch',
+								}}
 							>
 								{GenerateFields(
 									data,
@@ -218,7 +225,9 @@ const DataViewer = ({
 							<Grid
 								container
 								direction="row"
-								justifyContent="center"
+								sx={{
+									justifyContent: 'center',
+								}}
 								spacing={3}
 							>
 								<Grid>

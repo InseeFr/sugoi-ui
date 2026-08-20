@@ -32,7 +32,7 @@ export const ResetPasswordPopupContent = ({
 		changeATemplateProperty(name, value);
 	};
 	return (
-		<Grid container direction="column" spacing={3}>
+		<Grid container sx={{ flexDirection: 'column' }} spacing={3}>
 			<Grid>
 				<Typography>
 					Attention le mot de passe va être réinitialisé.
@@ -218,8 +218,8 @@ export const ResetPasswordPopupContent = ({
 			<Grid>
 				<Typography variant="h6">Aperçu du message</Typography>
 				<Typography component="div">
-					<Box m={2}>Bonjour,</Box>
-					<Box m={2}>
+					<Box sx={{ m: 2 }}>Bonjour,</Box>
+					<Box sx={{ m: 2 }}>
 						Suite à votre demande, voici votre nouveau
 						mot de passe
 						{includeNameApp
@@ -228,25 +228,25 @@ export const ResetPasswordPopupContent = ({
 								' :'
 							: ' :'}
 					</Box>
-					<Box fontStyle="italic" m={2}>
+					<Box sx={{ fontStyle: 'italic', m: 2 }}>
 						Nouveau mot de passe de l'agent
 					</Box>
-					<Box m={2}>
+					<Box sx={{ m: 2 }}>
 						Attention, vous devez respecter les
 						majuscules, minuscules et caractères
 						spéciaux.
 					</Box>
 
 					{includeAssistMail ? (
-						<Box m={2}>
+						<Box sx={{ m: 2 }}>
 							Pour toute demande d'assistance, vous
 							pouvez contacter{' '}
 							{templateProperties.assistMail} par
 							courrier electronique.
 						</Box>
 					) : null}
-					<Box m={2}>Cordialement,</Box>
-					<Box m={2}>
+					<Box sx={{ m: 2 }}>Cordialement,</Box>
+					<Box sx={{ m: 2 }}>
 						<TextField
 							label="Signature"
 							name="signature"

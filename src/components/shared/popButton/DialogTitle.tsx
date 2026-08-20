@@ -13,9 +13,11 @@ const DialogTitle = (props: DialogTitleProps) => {
 	return (
 		<Muidialog {...other}>
 			<Box
-				display="flex"
-				alignItems="center"
-				justifyContent="space-between"
+				sx={{
+					display: 'flex',
+					alignItems: 'center',
+					justifyContent: 'space-between',
+				}}
 			>
 				<Typography>{title}</Typography>
 				{onClose ? (

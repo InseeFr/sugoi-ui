@@ -23,9 +23,11 @@ export const Description = ({ realmName }: Props) => {
 			<CardContent>
 				<Grid
 					container
-					direction="column"
-					justifyContent="center"
-					alignItems="stretch"
+					sx={{
+						flexDirection: 'column',
+						justifyContent: 'center',
+						alignItems: 'stretch',
+					}}
 					spacing={3}
 				>
 					<Grid size={12}>

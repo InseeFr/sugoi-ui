@@ -61,9 +61,11 @@ const LanguageButton = () => {
 				onClose={handleClose}
 			>
 				<Box
-					alignItems="center"
-					display="flex"
-					flexDirection="column"
+					sx={{
+						alignItems: 'center',
+						display: 'flex',
+						flexDirection: 'column',
+					}}
 				>
 					{Object.keys(languages).map((language) => (
 						<ListItemButton

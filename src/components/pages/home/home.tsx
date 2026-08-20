@@ -15,7 +15,11 @@ const Home = () => {
 			<Title title={t('home.title')} />
 			<MainFeaturedPost />
 			{accessToken !== null && (
-				<Grid container direction="column" spacing={5}>
+				<Grid
+					container
+					sx={{ flexDirection: 'column' }}
+					spacing={5}
+				>
 					<Grid>
 						<CardRights />
 					</Grid>

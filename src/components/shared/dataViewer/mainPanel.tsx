@@ -22,9 +22,11 @@ const MainPanel = ({
 		<Grid
 			container
 			spacing={3}
-			direction="column"
-			alignContent="center"
-			alignItems="stretch"
+			sx={{
+				flexDirection: 'column',
+				justifyContent: 'center',
+				alignItems: 'stretch',
+			}}
 		>
 			<Grid size={12}>
 				<Grid container spacing={3} direction="row">

@@ -24,7 +24,7 @@ const AutoCompleteUsers = ({ realm, userStorage }: any) => {
 	return (
 		<>
 			<Typography component="div" color="primary" variant="body1">
-				<Box fontWeight="fontWeightBold">
+				<Box sx={{ fontWeight: 'fontWeightBold' }}>
 					{t('global_search.user_quick_search_title')}
 				</Box>
 			</Typography>
@@ -83,7 +83,7 @@ const AutoCompleteApplications = ({ realm }: any) => {
 	return (
 		<>
 			<Typography component="div" color="primary" variant="body1">
-				<Box fontWeight="fontWeightBold">
+				<Box sx={{ fontWeight: 'fontWeightBold' }}>
 					{t(
 						'global_search.application_quick_search_title',
 					)}
@@ -123,7 +123,7 @@ const AutocompleteOrganizations = ({ realm, userStorage }: any) => {
 	return (
 		<>
 			<Typography component="div" color="primary" variant="body1">
-				<Box fontWeight="fontWeightBold">
+				<Box sx={{ fontWeight: 'fontWeightBold' }}>
 					{t(
 						'global_search.organization_quick_search_title',
 					)}

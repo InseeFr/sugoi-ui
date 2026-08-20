@@ -41,7 +41,7 @@ const CreateUsers = () => {
 	};
 
 	return (
-		<Grid container spacing={2} direction="column">
+		<Grid container spacing={2} sx={{ flexDirection: 'column' }}>
 			<Grid size={12}>
 				<Title title={t('create_user.title') + realm} />
 			</Grid>
@@ -56,7 +56,9 @@ const CreateUsers = () => {
 							<Grid
 								container
 								direction="row"
-								justifyContent="center"
+								sx={{
+									justifyContent: 'center',
+								}}
 								spacing={3}
 							>
 								<Grid>

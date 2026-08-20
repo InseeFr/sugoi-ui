@@ -18,22 +18,14 @@ const Settings = () => {
 	};
 
 	return (
-		<Grid
-			container
-			direction="column"
-			justifyContent="center"
-			alignItems="stretch"
-			spacing={2}
-		>
+		<Grid container sx={{ flexDirection: 'column' }} spacing={2}>
 			<Grid>
 				<Title title={t('settings.title')} />
 			</Grid>
 			<Grid>
 				<Grid
 					container
-					direction="column"
-					justifyContent="center"
-					alignItems="stretch"
+					sx={{ flexDirection: 'column' }}
 					spacing={5}
 				>
 					<Grid>
@@ -62,8 +54,10 @@ const Settings = () => {
 						<Grid
 							container
 							direction="row"
-							justifyContent="flex-end"
-							alignItems="flex-end"
+							sx={{
+								justifyContent: 'flex-end',
+								alignItems: 'flex-end',
+							}}
 							spacing={3}
 						>
 							<UpdateRealm

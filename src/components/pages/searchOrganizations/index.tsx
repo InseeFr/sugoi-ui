@@ -135,9 +135,12 @@ const SearchOrganizations = () => {
 	return (
 		<Grid
 			container
-			direction="column"
-			justifyContent="center"
-			alignItems="stretch"
+			sx={{
+				flexDirection: 'column',
+				justifyContent: 'center',
+				alignItems: 'stretch',
+			}}
+
 			spacing={3}
 		>
 			<Grid
@@ -151,9 +154,11 @@ const SearchOrganizations = () => {
 			<Grid size={12}>
 				<Grid
 					container
-					direction="column"
-					justifyContent="center"
-					alignItems="stretch"
+					sx={{
+						flexDirection: 'column',
+						justifyContent: 'center',
+						alignItems: 'stretch',
+					}}
 					spacing={3}
 				>
 					<Grid size={12}>

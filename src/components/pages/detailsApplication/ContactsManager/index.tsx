@@ -65,13 +65,7 @@ export const ContactsManager = ({
 	};
 	return (
 		<Grid>
-			<Grid
-				container
-				direction="column"
-				justifyContent="center"
-				alignItems="stretch"
-				spacing={2}
-			>
+			<Grid container sx={{ flexDirection: 'column' }} spacing={2}>
 				<Grid>
 					<Title
 						title={t(
@@ -83,9 +77,7 @@ export const ContactsManager = ({
 				<Grid>
 					<Grid
 						container
-						direction="column"
-						justifyContent="center"
-						alignItems="stretch"
+						sx={{ flexDirection: 'column' }}
 						spacing={1}
 					>
 						<List dense={true}>

@@ -54,8 +54,10 @@ export const ButtonCreateGroup = ({ handleAddGroup, application }: Props) => {
 						<Grid
 							container
 							direction="row"
-							justifyContent="center"
-							alignItems="stretch"
+							sx={{
+								justifyContent: 'center',
+								alignItems: 'stretch',
+							}}
 							spacing={1}
 						>
 							<Grid size={10}>

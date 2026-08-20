@@ -80,7 +80,7 @@ const MainFeaturedPost = () => {
 						<Typography
 							variant="h5"
 							color="inherit"
-							paragraph
+							sx={{ mb: 2 }}
 						>
 							{t('home.landing.description')}
 						</Typography>
@@ -96,8 +96,11 @@ const MainFeaturedPost = () => {
 								id="go-button"
 							>
 								<Box
-									fontWeight="fontWeightBold"
-									m={1}
+									sx={{
+										fontWeight:
+											'fontWeightBold',
+										m: 1,
+									}}
 								>
 									<Typography>
 										{t(
