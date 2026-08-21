@@ -6,7 +6,7 @@ import {
 	Typography,
 	useTheme,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import SimpleDialog from 'src/components/shared/popButton/Dialog';
 import WarningIcon from '@mui/icons-material/Warning';
 
@@ -32,8 +32,6 @@ const ConfirmationPopup = ({
 	const [text, setText] = useState('');
 	const [open, setOpen] = useState(false);
 	const [error, setError] = useState(false);
-	const [colorAlert, setColorAlert] = useState('#fcf1ef');
-	const [colorHighlight, setColorHightlight] = useState('');
 	const theme = useTheme();
 
 	const handleOpen = () => {
@@ -52,13 +50,19 @@ const ConfirmationPopup = ({
 		}
 	};
 
-	useEffect(() => {
+	const colorAlert = useMemo(() => {
 		if (theme.palette.mode === 'light') {
-			setColorAlert('#fcf1ef');
-			setColorHightlight('#f0f0f0');
+			return '#fcf1ef';
 		} else {
-			setColorAlert('#660e00');
-			setColorHightlight('#303030');
+			return '#660e00';
+		}
+	}, [theme.palette.mode]);
+
+	const colorHighlight = useMemo(() => {
+		if (theme.palette.mode === 'light') {
+			return '#f0f0f0';
+		} else {
+			return '#303030';
 		}
 	}, [theme.palette.mode]);
 

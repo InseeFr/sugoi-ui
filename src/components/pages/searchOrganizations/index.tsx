@@ -10,6 +10,7 @@ import { useGetOrganizations } from 'src/lib/hooks/api-hooks';
 import { Field } from 'src/lib/model/field';
 import searchRequestOrganization from 'src/lib/model/js/searchRequestOrganization';
 import Organization from 'src/lib/model/api/organization';
+import { useEffect } from 'react';
 
 const SearchOrganizations = () => {
 	const { realm, userStorage } = useParams() as {
@@ -19,7 +20,9 @@ const SearchOrganizations = () => {
 	const { enqueueSnackbar } = useSnackbar();
 	const navigate = useNavigate();
 	const { t } = useTranslation();
-	document.title = t('search_organization.page_title');
+	useEffect(() => {
+		document.title = t('search_organization.page_title');
+	}, [t]);
 
 	const { organizations, execute: searchOrganizations } =
 		useGetOrganizations(realm, userStorage);

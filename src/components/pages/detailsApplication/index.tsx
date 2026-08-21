@@ -20,7 +20,7 @@ import {
 	ButtonManageManagerGroupMembers,
 } from './ButtonManageGroupMembers';
 import { GroupsViewer } from './groupsViewer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ContactsManager } from './ContactsManager';
 import { ApplicationSettings } from './ApplicationSettings';
 import { ButtonExportGroupUsers } from './ButtonExportGroupUsers';
@@ -32,10 +32,14 @@ export const DetailsApplication = () => {
 	};
 	const navigate = useNavigate();
 	const { t } = useTranslation();
-	document.title =
-		t('detail_application.page_title_1') +
-		applicationId +
-		t('detail_application.page_title_2');
+
+	useEffect(() => {
+		document.title =
+			t('detail_application.page_title_1') +
+			applicationId +
+			t('detail_application.page_title_2');
+	}, [applicationId, t]);
+
 	const {
 		application,
 		execute: getApplication,

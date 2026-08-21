@@ -7,6 +7,7 @@ import DetailOrganizationContent from './detail_organization_content';
 import { Typography } from '@mui/material';
 import Organization from 'src/lib/model/api/organization';
 import { Field } from 'src/lib/model/field';
+import { useEffect } from 'react';
 
 const DetailOrganizationContentOrNotFound = ({
 	organization,
@@ -61,10 +62,12 @@ const DetailOrganization = () => {
 		userStorage,
 	);
 
-	document.title =
-		t('detail_organization.page_title_1') +
-		id +
-		t('detail_organization.page_title_2');
+	useEffect(() => {
+		document.title =
+			t('detail_organization.page_title_1') +
+			id +
+			t('detail_organization.page_title_2');
+	}, [id, t]);
 
 	return (
 		<>

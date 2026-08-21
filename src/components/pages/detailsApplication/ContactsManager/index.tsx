@@ -1,6 +1,5 @@
 import { usePutApplication } from 'src/lib/hooks/applications/usePutApplication';
 import Application from 'src/lib/model/api/application';
-import AttributesApplication from 'src/lib/model/api/attributesApplication';
 import {
 	Grid,
 	TextField,
@@ -26,42 +25,49 @@ export const ContactsManager = ({
 	realm: string;
 	getApplication: (realm: string, name: string) => Promise<void>;
 }) => {
-	const [newValue, setNewValue] = React.useState<any>();
+	const [newValue, setNewValue] = React.useState<string>();
 	const { t } = useTranslation();
 	const { execute: executeUpdate } = usePutApplication();
-	const maj = () => {
-		if (application != undefined) {
-			executeUpdate(realm, application).then(() =>
-				getApplication(realm, application?.name),
-			);
-		}
-	};
 
 	const add = () => {
-		if (newValue) {
-			if (
-				application?.attributes == undefined ||
-				application?.attributes?.contacts == undefined
-			) {
-				if (application != undefined) {
-					if (application.attributes == undefined) {
-						application.attributes =
-							{} as AttributesApplication;
-					}
-					application.attributes.contacts = [newValue];
-				}
-			} else {
-				application?.attributes?.contacts?.push(newValue);
-			}
-
-			setNewValue(undefined);
+		if (newValue && application) {
+			const applicationUpdated: Application = {
+				...application,
+				attributes: {
+					...(application.attributes ?? {}),
+					contacts: [
+						...(application.attributes?.contacts ?? []),
+						newValue,
+					],
+				},
+			};
+			executeUpdate(realm, applicationUpdated).then(() => {
+				(getApplication(realm, applicationUpdated?.name),
+					setNewValue(undefined));
+			});
 		}
-		maj();
 	};
 
 	const delet = (pos: number) => {
-		application?.attributes?.contacts?.splice(pos, 1);
-		maj();
+		if (
+			application &&
+			application.attributes &&
+			application.attributes.contacts
+		) {
+			const applicationUpdated: Application = {
+				...application,
+				attributes: {
+					...application.attributes,
+					contacts: application.attributes.contacts.filter(
+						(_, i) => i !== pos,
+					),
+				},
+			};
+
+			executeUpdate(realm, applicationUpdated).then(() =>
+				getApplication(realm, applicationUpdated?.name),
+			);
+		}
 	};
 	return (
 		<Grid>

@@ -1,6 +1,7 @@
 import js from "@eslint/js";
 import tseslint from "typescript-eslint";
 import reactPlugin from "eslint-plugin-react";
+import reactHooksPlugin from "eslint-plugin-react-hooks";
 import prettierPlugin from "eslint-plugin-prettier";
 import prettierConfig from "eslint-config-prettier";
 import unusedImports from "eslint-plugin-unused-imports";
@@ -19,7 +20,7 @@ export default defineConfig([
   },
   tseslint.configs.recommended,
   reactPlugin.configs.flat.recommended,
-  //reactHooksPlugin.configs.flat.recommended, => a remettre lors de la montee de version du plugin
+  reactHooksPlugin.configs.flat.recommended,
   prettierConfig,
   {
     plugins: {

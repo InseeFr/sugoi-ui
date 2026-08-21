@@ -15,21 +15,16 @@ import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
 import Autocomplete from '@mui/material/Autocomplete';
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMatch, useNavigate } from 'react-router';
 import { useGetRealms } from 'src/lib/hooks/realm/useGetRealms';
 import GrainIcon from '@mui/icons-material/Grain';
-import { useSnackbar } from 'notistack';
-import { Realm } from 'src/lib/model/api/realm';
-import { UserStorage } from 'src/lib/model/api/userStorage';
 
 const SiderBody = () => {
 	const theme = useTheme();
 	const navigate = useNavigate();
 	const { t } = useTranslation();
-	const [realmSelected, setRealmSelected] = useState<Realm | undefined>();
-	const { enqueueSnackbar } = useSnackbar();
 	const matchWithUs = useMatch('/realm/:realm/us/:userStorage/*');
 	const matchWitoutUs = useMatch('/realm/:realm/*');
 	const { realm: realmPath, userStorage: usPath } = matchWithUs?.params || {
@@ -37,73 +32,33 @@ const SiderBody = () => {
 		userStorage: undefined,
 	};
 
-	const [userStorageSelected, setStorageSelected] = useState<
-		UserStorage | undefined
-	>();
-
 	const { realms } = useGetRealms();
 
-	useEffect(() => {
-		if (!realmPath && realms && realms.length === 1) {
-			setRealmSelected(realms[0]);
-			if (realms[0].userStorages.length === 1) {
-				setStorageSelected(realms[0].userStorages[0]);
-				navigate(
-					'/realm/' +
-						realms[0].name +
-						'/us/' +
-						realms[0].userStorages[0].name,
-				);
-			} else {
-				navigate('/realm/' + realms[0].name);
+	const realmSelected = useMemo(() => {
+		if (realms && realms.length > 0) {
+			if (!realmPath && realms.length === 1) {
+				return realms[0];
+			}
+			if (realmPath) {
+				return realms.find((realm) => realm.name === realmPath);
 			}
 		}
-		if (realms && realms.length > 0 && realmPath) {
-			if (realms.map((realm) => realm.name).includes(realmPath)) {
-				setRealmSelected(
-					realms.find((realm) => realmPath === realm.name),
-				);
-				if (usPath) {
-					if (
-						realms
-							.find(
-								(realm) =>
-									realm.name === realmPath,
-							)
-							?.userStorages.map((us) => us.name)
-							.includes(usPath)
-					) {
-						setStorageSelected(
-							realms
-								.find(
-									(realm) =>
-										realm.name ===
-										realmPath,
-								)
-								?.userStorages?.filter(
-									(us) =>
-										us.name === usPath,
-								)[0],
-						);
-					} else {
-						navigate('/realm/' + realmPath);
-					}
-				}
-			} else {
-				navigate('/');
-				enqueueSnackbar("Vous n'avez pas à être la", {
-					variant: 'error',
-					anchorOrigin: {
-						vertical: 'top',
-						horizontal: 'center',
-					},
-				});
+		return undefined;
+	}, [realms, realmPath]);
+
+	const userStorageSelected = useMemo(() => {
+		if (realmSelected) {
+			if (realmSelected.userStorages.length === 1) {
+				return realmSelected.userStorages[0];
 			}
-		} else {
-			setRealmSelected(undefined);
-			setStorageSelected(undefined);
+			if (usPath) {
+				return realmSelected.userStorages.find(
+					(us) => us.name === usPath,
+				);
+			}
 		}
-	}, [enqueueSnackbar, navigate, realms, realmPath, usPath]);
+		return undefined;
+	}, [realmSelected, usPath]);
 
 	return (
 		<>

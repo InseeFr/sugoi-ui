@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import set from 'lodash/set';
 import { ErrorField, Field } from 'src/lib/model/field';
 import { validateForm } from 'src/lib/utils/form_utils';
@@ -11,15 +11,7 @@ export const useForms = (initialValues: User | Organization) => {
 		cloneObject(initialValues),
 	);
 	const [formValues, setFormValues] = useState(cloneObject(initialValues));
-	const [reset, setReset] = useState(false);
 	const [errors, setErrors] = useState<ErrorField[]>([]);
-
-	useEffect(() => {
-		if (reset) {
-			setFormValues(cloneObject(iFormValues));
-			setReset(false);
-		}
-	}, [reset, iFormValues]);
 
 	const handleChange = useCallback(
 		(path: any) => (value: any) => {
@@ -31,8 +23,8 @@ export const useForms = (initialValues: User | Organization) => {
 	);
 
 	const handleReset = useCallback(() => {
-		setReset(true);
-	}, []);
+		setFormValues(cloneObject(iFormValues));
+	}, [iFormValues]);
 
 	const handleSubmit = (fields: Field[]) => (onSubmit: any) => {
 		const errors = validateForm(fields)(formValues);

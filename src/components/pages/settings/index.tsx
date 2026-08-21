@@ -1,5 +1,5 @@
 import { Grid, MenuItem, TextField } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Realm } from 'src/lib/model/api/realm';
 import { useGetRealms } from 'src/lib/hooks/realm';
@@ -11,7 +11,10 @@ const Settings = () => {
 	const { t } = useTranslation();
 	const { realms } = useGetRealms();
 	const [selectedRealm, setSelectedRealm] = useState<string>('');
-	document.title = t('settings.page_title');
+
+	useEffect(() => {
+		document.title = t('settings.page_title');
+	}, [t]);
 
 	const handleChangeRealm = (e: any) => {
 		setSelectedRealm(e.target.value);
@@ -61,6 +64,7 @@ const Settings = () => {
 							spacing={3}
 						>
 							<UpdateRealm
+								key={selectedRealm}
 								disabled={
 									realms?.filter(
 										(realm) =>

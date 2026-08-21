@@ -16,7 +16,7 @@ export const AutoCompleteApplication = ({
 	handleChangeApplication,
 }: Props) => {
 	const { applications, execute: searchApplications } =
-		useGetApplications();
+		useGetApplications(realm);
 
 	return (
 		<Autocomplete

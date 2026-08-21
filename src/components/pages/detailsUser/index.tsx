@@ -8,6 +8,7 @@ import DetailUserContent from './detail_user_content';
 import User from 'src/lib/model/api/user';
 import { Typography } from '@mui/material';
 import { Field } from 'src/lib/model/field';
+import { useEffect } from 'react';
 
 const DetailUserContentOrNotFound = ({
 	user,
@@ -59,8 +60,12 @@ const DetailUser = () => {
 
 	const { loading, user, execute } = useGetUser(id, realm, userStorage);
 
-	document.title =
-		t('detail_user.page_title_1') + id + t('detail_user.page_title_2');
+	useEffect(() => {
+		document.title =
+			t('detail_user.page_title_1') +
+			id +
+			t('detail_user.page_title_2');
+	}, [id, t]);
 
 	return (
 		<>
