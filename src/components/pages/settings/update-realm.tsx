@@ -2,7 +2,7 @@ import useUpdateRealm from 'src/lib/hooks/realm/useUpdateRealm';
 import { Realm } from 'src/lib/model/api/realm';
 import AsyncEditor from 'src/components/shared/jsonEditor';
 import PopButton from 'src/components/shared/popButton/popButton';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button } from '@mui/material';
 interface Props {
 	realm: Realm;
@@ -16,10 +16,6 @@ export const UpdateRealm = ({ realm, disabled }: Props) => {
 	const handleChange = (e: any) => {
 		setRealmUpdated(e);
 	};
-
-	useEffect(() => {
-		setRealmUpdated(realm);
-	}, [realm]);
 
 	const actions = (handleClose: any) => {
 		return (

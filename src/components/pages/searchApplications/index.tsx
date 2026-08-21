@@ -6,7 +6,7 @@ import {
 	TextField,
 	Box,
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router';
 import {
@@ -39,7 +39,9 @@ export const SearchApplications = () => {
 	const [search, setSearch] = useState<string>('');
 	const navigate = useNavigate();
 
-	document.title = t('search_application.page_title');
+	useEffect(() => {
+		document.title = t('search_application.page_title');
+	}, [t]);
 
 	const handleCreateApp = (appName: string, owner: string) => {
 		createApplication(realm, {
@@ -51,7 +53,6 @@ export const SearchApplications = () => {
 	};
 
 	const handleClickOnApp = (application: Application) => {
-		console.log(application);
 		navigate(
 			'/realm/' + realm + '/' + 'applications/' + application.name,
 		);
@@ -67,8 +68,6 @@ export const SearchApplications = () => {
 	};
 
 	const { rights, loading: loadingWhoAmI } = useWhoAmI();
-
-	console.log(applications);
 
 	return (
 		<Grid container sx={{ flexDirection: 'column' }} spacing={3}>

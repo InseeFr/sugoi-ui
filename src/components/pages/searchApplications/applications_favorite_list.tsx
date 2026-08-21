@@ -6,7 +6,7 @@ import {
 	Typography,
 	Pagination,
 } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Application from 'src/lib/model/api/application';
 import ApplicationCard from 'src/components/pages/searchApplications/application_card';
 import { useTranslation } from 'react-i18next';
@@ -32,9 +32,6 @@ const ApplicationsFavoriteList = ({
 		setPage(value);
 	};
 
-	useEffect(() => {
-		setPage(1);
-	}, [applications]);
 	return (
 		<Grid container sx={{ flexDirection: 'column' }} spacing={3}>
 			<Grid size={12}>

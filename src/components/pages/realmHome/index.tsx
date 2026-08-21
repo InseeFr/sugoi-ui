@@ -10,6 +10,7 @@ import {
 import { Description } from 'src/components/shared/description';
 import Title from 'src/components/shared/title/title';
 import MyAutocomplete from './my_autocomplete';
+import { useEffect } from 'react';
 
 const AutoCompleteUsers = ({ realm, userStorage }: any) => {
 	const navigate = useNavigate();
@@ -172,10 +173,13 @@ export const RealmHome = () => {
 		userStorage?: string;
 	};
 	const { t } = useTranslation();
-	document.title =
-		t('global_search.page_title_1') +
-		realm +
-		t('global_search.page_title_2');
+	useEffect(() => {
+		document.title =
+			t('global_search.page_title_1') +
+			realm +
+			t('global_search.page_title_2');
+	}, [realm, t]);
+
 	const { hasApplication, hasOrganisation } = useRealmConfig(
 		realm,
 		userStorage,

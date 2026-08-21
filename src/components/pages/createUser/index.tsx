@@ -1,4 +1,5 @@
 import { Button, Grid } from '@mui/material';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router';
 import DataViewer from 'src/components/shared/dataViewer/dataviewer';
@@ -20,7 +21,10 @@ const CreateUsers = () => {
 	const { userConfig } = useRealmConfig(realm);
 	const { execute: createUser, loading } = usePostUser();
 	const { t } = useTranslation();
-	document.title = t('create_user.page_title');
+
+	useEffect(() => {
+		document.title = t('create_user.page_title');
+	}, [t]);
 
 	const onSubmit = () =>
 		createUser(formValues, realm, userStorage).then(

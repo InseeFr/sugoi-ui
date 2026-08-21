@@ -1,6 +1,6 @@
 import { Chip, Grid, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router';
 import { ButtonDescription } from 'src/components/shared/description';
@@ -27,7 +27,9 @@ const SearchUsers = () => {
 	const [lastSearch, setLastSearch] = useState({});
 
 	const { t } = useTranslation();
-	document.title = t('search_user.page_title');
+	useEffect(() => {
+		document.title = t('search_user.page_title');
+	}, [t]);
 
 	const { users, execute: searchUsers } = useGetUsers(realm, userStorage);
 

@@ -1,23 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getOrganizations } from '../../api';
 import Organization from '../../model/api/organization';
 import searchRequestOrganization from '../../model/js/searchRequestOrganization';
 import { useOidcAccessToken } from '@axa-fr/react-oidc';
 
-export const useGetOrganizations = (realm?: string, userStorage?: string) => {
+export const useGetOrganizations = (realm: string, userStorage?: string) => {
 	const [result, setResult] = useState<Organization[]>([]);
-	const [firstSearch, setFirstSearch] = useState<any>(realm ? true : false);
 	const [error, setError] = useState();
 	const [loading, setLoading] = useState(false);
 	const accessToken = useOidcAccessToken().accessToken;
 
-	useEffect(() => {
-		if (firstSearch) {
+	const execute = useCallback(
+		async (
+			realm: string,
+			searchRequestOrganization: searchRequestOrganization,
+			userStorage?: string,
+		) => {
 			setLoading(true);
 			setResult([]);
-			getOrganizations(
-				realm as string,
-				{},
+			setError(undefined);
+			await getOrganizations(
+				realm,
+				searchRequestOrganization,
 				userStorage,
 				accessToken,
 			)
@@ -29,35 +33,15 @@ export const useGetOrganizations = (realm?: string, userStorage?: string) => {
 				})
 				.finally(() => {
 					setLoading(false);
-					setFirstSearch(false);
 				});
-		}
-	}, [firstSearch, realm, userStorage, accessToken]);
+		},
+		[accessToken],
+	);
 
-	const execute = async (
-		realm: string,
-		searchRequestOrganization: searchRequestOrganization,
-		userStorage?: string,
-	) => {
-		setLoading(true);
-		setResult([]);
-		setError(undefined);
-		await getOrganizations(
-			realm,
-			searchRequestOrganization,
-			userStorage,
-			accessToken,
-		)
-			.then((r: any) => {
-				setResult(r.results);
-			})
-			.catch((err) => {
-				setError(err);
-			})
-			.finally(() => {
-				setLoading(false);
-			});
-	};
+	useEffect(() => {
+		// eslint-disable-next-line react-hooks/set-state-in-effect
+		execute(realm, {}, userStorage);
+	}, [execute, realm, userStorage]);
 
 	return {
 		execute,

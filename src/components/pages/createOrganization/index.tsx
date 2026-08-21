@@ -1,4 +1,5 @@
 import { Button, Grid } from '@mui/material';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router';
 import DataViewer from 'src/components/shared/dataViewer/dataviewer';
@@ -39,7 +40,9 @@ const CreateOrganization = () => {
 		handleSubmit(organizationConfig)(onSubmit);
 	};
 
-	document.title = t('create_organization.page_title');
+	useEffect(() => {
+		document.title = t('create_organization.page_title');
+	}, [t]);
 
 	return (
 		<Grid container spacing={2} sx={{ flexDirection: 'column' }}>

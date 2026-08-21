@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getApplications } from '../../api';
 import { useOidcAccessToken } from '@axa-fr/react-oidc';
 
@@ -10,29 +10,23 @@ export const useGetApplications = (
 	const [result, setResult] = useState<any[]>([]);
 	const [error, setError] = useState(undefined);
 	const [loading, setLoading] = useState(true);
-	const [firstSearch, setFirstSearch] = useState<any>(realm ? true : false);
 	const accessToken = useOidcAccessToken().accessToken;
 
-	const execute = async (realm: string, name?: string) => {
-		setLoading(true);
-		setResult([]);
-		setError(undefined);
-		await getApplications(realm, name, cancelable, accessToken)
-			.then((r: any) => {
-				setResult(r.results);
-			})
-			.catch((err) => {
-				setError(err);
-			})
-			.finally(() => {
-				setLoading(false);
-			});
-	};
-
-	useEffect(() => {
-		if (firstSearch) {
+	const execute = useCallback(
+		async (
+			realm: string,
+			name?: string,
+			customCancelable?: boolean,
+		) => {
 			setLoading(true);
-			getApplications(realm as string, name, undefined, accessToken)
+			setResult([]);
+			setError(undefined);
+			await getApplications(
+				realm,
+				name,
+				customCancelable ?? cancelable,
+				accessToken,
+			)
 				.then((r: any) => {
 					setResult(r.results);
 				})
@@ -41,10 +35,17 @@ export const useGetApplications = (
 				})
 				.finally(() => {
 					setLoading(false);
-					setFirstSearch(false);
 				});
+		},
+		[cancelable, accessToken],
+	);
+
+	useEffect(() => {
+		if (realm) {
+			// eslint-disable-next-line react-hooks/set-state-in-effect
+			execute(realm, name, false);
 		}
-	}, [firstSearch, name, realm, accessToken]);
+	}, [execute, name, realm]);
 
 	return { applications: result, error, loading, execute };
 };

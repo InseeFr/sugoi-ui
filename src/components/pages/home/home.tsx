@@ -4,10 +4,15 @@ import MainFeaturedPost from './landingpage/landingpage';
 import CardRights from './right-card';
 import { useTranslation } from 'react-i18next';
 import { useOidcAccessToken } from '@axa-fr/react-oidc';
+import { useEffect } from 'react';
 
 const Home = () => {
 	const { t } = useTranslation();
-	document.title = t('home.page_title');
+
+	useEffect(() => {
+		document.title = t('home.page_title');
+	}, [t]);
+
 	const accessToken = useOidcAccessToken().accessToken;
 
 	return (
