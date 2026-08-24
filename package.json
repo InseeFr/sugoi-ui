@@ -82,7 +82,7 @@
 		"@types/react-redux": "^7.1.34",
 		"@vitejs/plugin-react": "^6.0.5",
 		"@vitejs/plugin-react-swc": "^4.3.3",
-		"cypress": "^15.20.1",
+		"cypress": "^15.21.0",
 		"eslint": "^9.39.5",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-prettier": "^5.5.6",
