@@ -8,7 +8,7 @@
 		"@axa-fr/react-oidc": "^7.29.1",
 		"@emotion/react": "^11.14.0",
 		"@emotion/styled": "^11.14.1",
-		"@mui/icons-material": "^9.3.0",
+		"@mui/icons-material": "^9.4.0",
 		"@mui/material": "^9.4.0",
 		"@mui/system": "^9.4.0",
 		"@mui/x-date-pickers": "^9.12.0",
