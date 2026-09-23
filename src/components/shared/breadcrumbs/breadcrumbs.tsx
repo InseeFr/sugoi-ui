@@ -1,44 +1,32 @@
-import React from 'react';
-import { useNavigate } from 'react-router';
-import useBreadcrumbs from 'use-react-router-breadcrumbs';
-import routes from 'src/components/routes/routes';
-import ReactDOMServer from 'react-dom/server';
+// src/components/shared/breadcrumbs/breadcrumbs.tsx
+import { Box, Breadcrumbs, Grid, Link } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { Grid, Box, Breadcrumbs, Link } from '@mui/material';
+import { Link as RouterLink } from 'react-router';
+import routes from 'src/components/routes/routes';
+import { useBreadcrumbs } from './useBreadcrumbs';
 
 const MyBreadcrumbs = () => {
-	const navigate = useNavigate();
+	const { t } = useTranslation();
 	const breadcrumbs = useBreadcrumbs(routes, {
 		excludePaths: ['/realm', '/realm/:realm/us'],
 	});
-	const { t } = useTranslation();
 
 	return (
 		<Box>
-			<Grid
-				sx={{
-					justifyContent: 'center',
-					flexWrap: 'wrap',
-				}}
-			>
+			<Grid sx={{ justifyContent: 'center', flexWrap: 'wrap' }}>
 				<Breadcrumbs separator="›" color="primary">
 					{breadcrumbs.map(({ match, breadcrumb }, i) => (
 						<Link
-							onClick={() =>
-								navigate(match.pathname)
-							}
+							component={RouterLink}
+							to={match.pathname}
 							color="primary"
-							sx={{
-								display: 'flex',
-							}}
+							sx={{ display: 'flex' }}
 							key={'breadcrumbs_' + i}
 						>
 							{t(
-								ReactDOMServer.renderToStaticMarkup(
-									breadcrumb as React.ReactElement,
-								)
-									.replace('<span>', '')
-									.replace('</span>', ''),
+								typeof breadcrumb === 'function'
+									? breadcrumb({ match })
+									: breadcrumb,
 							)}
 						</Link>
 					))}
@@ -47,4 +35,5 @@ const MyBreadcrumbs = () => {
 		</Box>
 	);
 };
+
 export default MyBreadcrumbs;
