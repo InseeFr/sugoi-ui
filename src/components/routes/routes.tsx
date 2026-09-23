@@ -9,20 +9,28 @@ import SearchOrganizations from 'src/components/pages/searchOrganizations';
 import SearchUsers from 'src/components/pages/searchUsers';
 import Settings from 'src/components/pages/settings';
 import { DetailsApplication } from 'src/components/pages/detailsApplication';
+import {
+	BreadcrumbLabel,
+	BreadcrumbMatch,
+} from '../shared/breadcrumbs/useBreadcrumbs';
 
-const IdDynamicBreadcrumb = ({ match }: any): string => {
-	return match.params['id'];
+const IdDynamicBreadcrumb = ({ match }: { match: BreadcrumbMatch }): string => {
+	return match.params['id'] ?? '';
 };
 
-const RealmDynamicBreadcrumb = ({ match }: any): string => {
+const RealmDynamicBreadcrumb = ({
+	match,
+}: {
+	match: BreadcrumbMatch;
+}): string => {
 	return 'Realm ' + match.params['realm'];
 };
-const UsDynamicBreadcrumb = ({ match }: any): string => {
+const UsDynamicBreadcrumb = ({ match }: { match: BreadcrumbMatch }): string => {
 	return 'UserStorage ' + match.params['userStorage'];
 };
 interface Iroutes {
 	path: string;
-	breadcrumb: any;
+	breadcrumb: BreadcrumbLabel;
 	component: () => JSX.Element;
 	secure: boolean;
 }
