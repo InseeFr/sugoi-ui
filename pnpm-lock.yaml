@@ -175,8 +175,8 @@ importers:
         specifier: ^3.9.9
         version: 3.9.9
       sonarqube-scanner:
-        specifier: ^5.0.0
-        version: 5.0.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
+        specifier: ^5.0.1
+        version: 5.0.1(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
       tslib:
         specifier: ^2.8.1
         version: 2.8.1
@@ -1144,8 +1144,8 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
-  adm-zip@0.6.0:
-    resolution: {integrity: sha512-XleryMhbuksdKtofnWZ9Sk+4CUTbms4Mb/EU32SZwToAyZ5RgVos/ki8n+yr0LWHOGKuakbXTuuYNHLQjhddgg==}
+  adm-zip@0.6.1:
+    resolution: {integrity: sha512-Xwrja8nx9e5o2N1my4DsKCeKpdrnACyr1wtbPxBDgGzKzKyE9kRtBFA8mWldI+RVlD7CBZNWY/wQ2+ydwOR6kQ==}
     engines: {node: '>=14.0'}
 
   agent-base@6.0.2:
@@ -1258,9 +1258,6 @@ packages:
 
   aws4@1.13.2:
     resolution: {integrity: sha512-lHe62zvbTB5eEABUVi/AwVh0ZKY9rMMDhmm+eeyuuUQbQ3+J+fONVQOZyj+DdrvD4BY33uYniyRJ4UJIaSKAfw==}
-
-  axios@1.18.1:
-    resolution: {integrity: sha512-3nTvFlvpn9Zu/RkHUqtc7/+al4UpRW5az71ap5zccp6e8RAYEzhMTecX8Dz1wWDYrPpUoB1HAQEGEAEvUr7S9g==}
 
   axios@1.20.0:
     resolution: {integrity: sha512-r8aOh8j9cGKpgQAqpzrUHnSIc6a59Y3Xf/cv8sy1DrHCkZHzQGEuoq1tARk6qSyDdtQGSDgpb9kFlruzPvrgwg==}
@@ -2681,8 +2678,8 @@ packages:
   prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
 
-  properties-file@5.0.5:
-    resolution: {integrity: sha512-Gfi6UgMENAzww1P4hloKhLIQxqcYmUS5z+Lhm/jmFV+ushbE416NalT42oEfJbF9vd0a02B3AaLHiQGmNSQ9EA==}
+  properties-file@5.0.7:
+    resolution: {integrity: sha512-Hoae9SnNTJebHujv5gdOtb7stArj27GcKzWxerrQgjuHasE+VT7G10Q6rR2wRWTjaACkT4zRigAtqnkMOz9BIA==}
     engines: {node: '>=0.4.0'}
 
   proxy-from-env@1.0.0:
@@ -2961,8 +2958,8 @@ packages:
     resolution: {integrity: sha512-vZ7rfeehZui7wQs438JXBckYLkIIdfHOXsaVEUMyS5fHo1483l1bMdo0EDSWYclY0yZKFOipDy4KHuKs6ssvdg==}
     engines: {node: '>=8.0.0'}
 
-  sonarqube-scanner@5.0.0:
-    resolution: {integrity: sha512-kGCadeZXiF3Bh1knbK9RVMxaOKxPvLQk45Q4kk6s1hhMU0KvVptRTL9fx6wgsLEMCSubo1lEwmDDzr6icWsgTg==}
+  sonarqube-scanner@5.0.1:
+    resolution: {integrity: sha512-Qhhscl7h8lXTRVLRNcHQLBezNIVRmFq4/4SlTsAGdgVkr0RYUAAby/vR480G0qxnmPoP2tLOcdF5RFllZO/xdA==}
     engines: {node: '>=22.12.0'}
     hasBin: true
 
@@ -3075,8 +3072,8 @@ packages:
     os: [darwin, linux, win32, freebsd, openbsd, netbsd, sunos, android]
     hasBin: true
 
-  tar-stream@3.2.0:
-    resolution: {integrity: sha512-ojzvCvVaNp6aOTFmG7jaRD0meowIAuPc3cMMhSgKiVWws1GyHbGd/xvnyuRKcKlMpt3qvxx6r0hreCNITP9hIg==}
+  tar-stream@3.2.1:
+    resolution: {integrity: sha512-nqsEO8zLZJvrOMdEwkA0QdCLFbetHMn95Zqu4fKwX+hkaTWJPZZOrxx/PwtxoK0MMGQmBQNRW3CPs8IFYQz4cQ==}
 
   teex@1.0.1:
     resolution: {integrity: sha512-eYE6iEI62Ni1H8oIa7KlDU6uQBtqr4Eajni3wX7rpfXD8ysFx8z0+dri+KWEPWpBsxXfxu58x/0jvTVT1ekOSg==}
@@ -4316,7 +4313,7 @@ snapshots:
 
   acorn@8.18.0: {}
 
-  adm-zip@0.6.0: {}
+  adm-zip@0.6.1: {}
 
   agent-base@6.0.2(supports-color@8.1.1):
     dependencies:
@@ -4441,16 +4438,6 @@ snapshots:
   aws-sign2@0.7.0: {}
 
   aws4@1.13.2: {}
-
-  axios@1.18.1(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1):
-    dependencies:
-      follow-redirects: 1.16.0(debug@4.4.3(supports-color@8.1.1))
-      form-data: 4.0.6
-      https-proxy-agent: 5.0.1(supports-color@8.1.1)
-      proxy-from-env: 2.1.0
-    transitivePeerDependencies:
-      - debug
-      - supports-color
 
   axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1):
     dependencies:
@@ -5987,7 +5974,7 @@ snapshots:
       object-assign: 4.1.1
       react-is: 16.13.1
 
-  properties-file@5.0.5: {}
+  properties-file@5.0.7: {}
 
   proxy-from-env@1.0.0: {}
 
@@ -6301,18 +6288,18 @@ snapshots:
 
   slugify@1.6.9: {}
 
-  sonarqube-scanner@5.0.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1):
+  sonarqube-scanner@5.0.1(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1):
     dependencies:
-      adm-zip: 0.6.0
-      axios: 1.18.1(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
+      adm-zip: 0.6.1
+      axios: 1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
       commander: 15.0.0
       hpagent: 1.2.0
       node-forge: 1.4.0
-      properties-file: 5.0.5
+      properties-file: 5.0.7
       proxy-from-env: 2.1.0
       semver: 7.8.5
       slugify: 1.6.9
-      tar-stream: 3.2.0
+      tar-stream: 3.2.1
     transitivePeerDependencies:
       - bare-abort-controller
       - bare-buffer
@@ -6459,7 +6446,7 @@ snapshots:
 
   systeminformation@5.33.5: {}
 
-  tar-stream@3.2.0:
+  tar-stream@3.2.1:
     dependencies:
       b4a: 1.8.1
       bare-fs: 4.8.0
