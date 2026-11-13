@@ -45,8 +45,8 @@ importers:
         specifier: ^6.1.8
         version: 6.1.8(@types/react@18.3.28)(react@18.3.1)
       i18next:
-        specifier: ^26.4.2
-        version: 26.4.2(typescript@6.0.3)
+        specifier: ^27.1.0
+        version: 27.1.0(typescript@6.0.3)
       i18next-browser-languagedetector:
         specifier: ^8.2.1
         version: 8.2.1
@@ -79,7 +79,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       react-i18next:
         specifier: ^17.0.16
-        version: 17.0.16(i18next@26.4.2(typescript@6.0.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@6.0.3)
+        version: 17.0.16(i18next@27.1.0(typescript@6.0.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@6.0.3)
       react-mui-dropzone:
         specifier: ^4.0.7
         version: 4.0.7(2992e65b27747aa16f620e7a0ad2fd18)
@@ -2033,8 +2033,9 @@ packages:
     resolution: {integrity: sha512-CfdQuwIVijbrS/fmiTAQYcYyje4nMbH9aIjKYhhm5bgVmWKWLOM1F7qrA1o63Jl1JxQcRjdtWhKlvDzyqV9aPg==}
     engines: {node: '>=18'}
 
-  i18next@26.4.2:
-    resolution: {integrity: sha512-RX+R0VLg13IbvRuJSxnqykUFS9vQZTl8wYpWPCIUDWVrSGjsQywB5Y+pjzrkboxGAuYfJZVH1InFTdgBdxq6ug==}
+  i18next@27.1.0:
+    resolution: {integrity: sha512-xdjb2OXFRm33rClqknpJmmYBvrPcaoEQ7/4kur5uTrbqckqzkbRO0ns6gFFki5TDmHzbIrFYpNBXhaRafmhJ/Q==}
+    engines: {node: '>=22'}
     peerDependencies:
       typescript: ^5 || ^6 || ^7
     peerDependenciesMeta:
@@ -5352,7 +5353,7 @@ snapshots:
 
   i18next-http-backend@4.0.10: {}
 
-  i18next@26.4.2(typescript@6.0.3):
+  i18next@27.1.0(typescript@6.0.3):
     optionalDependencies:
       typescript: 6.0.3
 
@@ -6047,11 +6048,11 @@ snapshots:
       prop-types: 15.8.1
       react: 18.3.1
 
-  react-i18next@17.0.16(i18next@26.4.2(typescript@6.0.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@6.0.3):
+  react-i18next@17.0.16(i18next@27.1.0(typescript@6.0.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@6.0.3):
     dependencies:
       '@babel/runtime': 7.29.7
       html-parse-stringify: 4.0.1
-      i18next: 26.4.2(typescript@6.0.3)
+      i18next: 27.1.0(typescript@6.0.3)
       react: 18.3.1
       use-sync-external-store: 1.7.0(react@18.3.1)
     optionalDependencies:
