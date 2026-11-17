@@ -33,7 +33,7 @@
 		"react-redux": "^9.3.0",
 		"react-router": "^7.18.5",
 		"redux": "^4.1.2",
-		"redux-devtools-extension": "^2.13.9",
+		"@redux-devtools/extension": "^4.0.1",
 		"redux-thunk": "^2.4.1"
 	},
 	"overrides": {
