@@ -2,7 +2,7 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 import AppReducer from '../redux/reducers/app';
 import NotifsReducer from '../redux/reducers/notifs';
 import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools } from '@redux-devtools/extension';
 
 const rootReducer = combineReducers({
 	app: AppReducer,
